@@ -1,5 +1,6 @@
 import React from "react"
 import './RectangleContent.css'
+import { SearchOutlined } from '@ant-design/icons';
 
 const RectangleContent = (props) => {
     return (
@@ -16,4 +17,4 @@ const RectangleContent = (props) => {
     )
 }
 
-export default RectangleContent;
+export default RectangleContent
