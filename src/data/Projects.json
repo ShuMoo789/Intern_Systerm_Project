@@ -1,0 +1,122 @@
+[
+    {
+        "projectTitle": "Intern System",
+        "position": "Back-End",
+        "technology": ".Net",
+        "leader": "Alice Johnson",
+        "subLeader": "Bob Smith",
+        "mentor": "Carol Williams",
+        "startDate": "2023-01-15",
+        "releaseDate": "2023-05-30",
+        "groupZalo": "https://zalo.me/g/123456789",
+        "status": "In process"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Front-End",
+        "technology": "Reactjs",
+        "leader": "David Brown",
+        "subLeader": "Eve Davis",
+        "mentor": "Frank Miller",
+        "startDate": "2023-02-01",
+        "releaseDate": "2023-06-01",
+        "groupZalo": "https://zalo.me/g/234567890",
+        "status": "Done"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "BA",
+        "technology": "Trello",
+        "leader": "Grace Wilson",
+        "subLeader": "Hank Moore",
+        "mentor": "Ivy Taylor",
+        "startDate": "2023-03-10",
+        "releaseDate": "2023-07-20",
+        "groupZalo": "https://zalo.me/g/345678901",
+        "status": "In process"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Designs",
+        "technology": "Figma",
+        "leader": "Jack Anderson",
+        "subLeader": "Karen Thomas",
+        "mentor": "Leo Harris",
+        "startDate": "2023-04-15",
+        "releaseDate": "2023-08-25",
+        "groupZalo": "https://zalo.me/g/456789012",
+        "status": "Done"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Back-End",
+        "technology": "Java",
+        "leader": "Mia Clark",
+        "subLeader": "Noah Martinez",
+        "mentor": "Olivia Robinson",
+        "startDate": "2023-05-01",
+        "releaseDate": "2023-09-10",
+        "groupZalo": "https://zalo.me/g/567890123",
+        "status": "In process"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Front-End",
+        "technology": "Angular",
+        "leader": "Parker Young",
+        "subLeader": "Quinn Lee",
+        "mentor": "Riley King",
+        "startDate": "2023-06-10",
+        "releaseDate": "2023-10-20",
+        "groupZalo": "https://zalo.me/g/678901234",
+        "status": "Done"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "BA",
+        "technology": "Jira",
+        "leader": "Sophia Hill",
+        "subLeader": "Thomas Green",
+        "mentor": "Uma Nelson",
+        "startDate": "2023-07-15",
+        "releaseDate": "2023-11-25",
+        "groupZalo": "https://zalo.me/g/789012345",
+        "status": "In process"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Designs",
+        "technology": "Adobe XD",
+        "leader": "Violet Clark",
+        "subLeader": "Will Lopez",
+        "mentor": "Xander Baker",
+        "startDate": "2023-08-01",
+        "releaseDate": "2023-12-10",
+        "groupZalo": "https://zalo.me/g/890123456",
+        "status": "Done"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Back-End",
+        "technology": "Python",
+        "leader": "Yara Diaz",
+        "subLeader": "Zane Lewis",
+        "mentor": "Amelia Morgan",
+        "startDate": "2023-09-15",
+        "releaseDate": "2024-01-30",
+        "groupZalo": "https://zalo.me/g/901234567",
+        "status": "In process"
+      },
+      {
+        "projectTitle": "Intern System",
+        "position": "Front-End",
+        "technology": "Vue.js",
+        "leader": "Ben Phillips",
+        "subLeader": "Chloe Rivera",
+        "mentor": "Dylan Murphy",
+        "startDate": "2023-10-01",
+        "releaseDate": "2024-02-10",
+        "groupZalo": "https://zalo.me/g/012345678",
+        "status": "Done"
+      }
+    ]      

@@ -1,0 +1,107 @@
+[
+  {
+    "fullName": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "password": "P@ssw0rd1",
+    "role": "Admin"
+  },
+  {
+    "fullName": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "password": "P@ssw0rd2",
+    "role": "Admin"
+  },
+  {
+    "fullName": "Carol Williams",
+    "email": "carol.williams@example.com",
+    "password": "P@ssw0rd3",
+    "role": "HR"
+  },
+  {
+    "fullName": "David Brown",
+    "email": "david.brown@example.com",
+    "password": "P@ssw0rd4",
+    "role": "HR"
+  },
+  {
+    "fullName": "Eve Davis",
+    "email": "eve.davis@example.com",
+    "password": "P@ssw0rd5",
+    "role": "Mentor"
+  },
+  {
+    "fullName": "Frank Miller",
+    "email": "frank.miller@example.com",
+    "password": "P@ssw0rd6",
+    "role": "Mentor"
+  },
+  {
+    "fullName": "Grace Wilson",
+    "email": "grace.wilson@example.com",
+    "password": "P@ssw0rd7",
+    "role": "School"
+  },
+  {
+    "fullName": "Hank Moore",
+    "email": "hank.moore@example.com",
+    "password": "P@ssw0rd8",
+    "role": "School"
+  },
+  {
+    "fullName": "Ivy Taylor",
+    "email": "ivy.taylor@example.com",
+    "password": "P@ssw0rd9",
+    "role": "School"
+  },
+  {
+    "fullName": "Jack Anderson",
+    "email": "jack.anderson@example.com",
+    "password": "P@ssw0rd10",
+    "role": "Admin"
+  },
+  {
+    "internId": 1,
+    "fullName": "Karen Thomas",
+    "studentId": "S001",
+    "school": "Example University",
+    "email": "karen.thomas@example.com",
+    "password": "InternP@ss1",
+    "role": "Intern"
+  },
+  {
+    "internId": 2,
+    "fullName": "Leo Harris",
+    "studentId": "S002",
+    "school": "Example University",
+    "email": "leo.harris@example.com",
+    "password": "InternP@ss2",
+    "role": "Intern"
+  },
+  {
+    "internId": 3,
+    "fullName": "Mia Clark",
+    "studentId": "S003",
+    "school": "Example University",
+    "email": "mia.clark@example.com",
+    "password": "InternP@ss3",
+    "role": "Intern"
+  },
+  {
+    "internId": 4,
+    "fullName": "Noah Martinez",
+    "studentId": "S004",
+    "school": "Example University",
+    "email": "noah.martinez@example.com",
+    "password": "InternP@ss4",
+    "role": "Intern"
+  },
+  {
+    "internId": 5,
+    "fullName": "Olivia Robinson",
+    "studentId": "S005",
+    "school": "Example University",
+    "email": "olivia.robinson@example.com",
+    "password": "InternP@ss5",
+    "role": "Intern"
+  }
+]    
