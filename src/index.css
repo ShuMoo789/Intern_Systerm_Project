@@ -1,12 +1,11 @@
- :root {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light;
+  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #EEEEEE;
-
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/*a {
+a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
@@ -29,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #EEEEEE;
 }
 
 h1 {
@@ -43,7 +43,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #4889e9;
+  background-color: #ffe2e2;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -57,7 +57,7 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #8bc9ff;
     background-color: #ffffff;
   }
   a:hover {
@@ -66,4 +66,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} */
+}
