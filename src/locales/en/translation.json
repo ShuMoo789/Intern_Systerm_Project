@@ -1,0 +1,15 @@
+{
+    
+        "Reset your password": "Reset Your Password",
+        "Please provide the email address that you used when you signed up for your account.": "Please provide the email address that you used when you signed up for your account.",
+        "We will send you an email that will allow you to reset your password.": "We will send you an email that will allow you to reset your password.",
+        "Reset password": "Reset password",
+        "OTP Verification": "OTP Verification",
+        "Enter the 4 digit verification code received on your Email ID.": "Enter the 4 digit verification code received on your Email ID.",
+        "Resend OTP": "Resend OTP",
+        "Verify": "Verify",
+        "Change Password": "Change Password",
+        "New Password *": "New Password *",
+        "Confirm New Password*": "Confirm New Password*",
+        "Verification Code": "Verification Code"
+}

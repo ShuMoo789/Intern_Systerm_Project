@@ -1,0 +1,164 @@
+.container {
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    /* padding: 19px 0 80px 63px; */
+}
+
+@media (max-width: 991px) {
+    .container {
+        padding: 19px 20px 80px;
+    }
+}
+
+.logo {
+    width: 244px;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.language-flag {
+    width: 88px;
+}
+
+.language-text {
+    font-family: Inter, sans-serif;
+}
+
+.main-content {
+    align-self: center;
+    width: 100%;
+    max-width: 1775px;
+}
+
+@media (max-width: 991px) {
+    .main-content {
+        max-width: 100%;
+    }
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 991px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+}
+
+.form-column {
+    flex: 0 0 36%;
+}
+
+@media (max-width: 991px) {
+    .form-column {
+        flex: 1;
+    }
+}
+
+.change-password-form {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.form-title {
+    color: #4889e9;
+    text-align: center;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    font: 700 40px Inter, sans-serif;
+    margin: 36px;
+}
+
+@media (max-width: 991px) {
+    .form-title {
+        margin-bottom: 40px;
+    }
+}
+
+.form-label {
+    color: #344054;
+    font-family: Inter, sans-serif;
+    margin-bottom: 8px;
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid rgba(208, 213, 221, 1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 38px;
+    width: 100%; /* Updated to be flexible */
+    
+}
+
+@media (max-width: 991px) {
+    .password-input {
+        width: 100%;
+    }
+}
+
+.form-input {
+    font-family: Inter, sans-serif;
+    color: #667085;
+    font-weight: 400;
+    line-height: 150%;
+    flex: 1;
+    border: none;
+    outline: none;
+}
+
+.password-toggle {
+    width: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button {
+    font-family: Inter, sans-serif;
+    background-color: #4889e9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 60px;
+    align-self: center;
+    box-shadow: 0 4px 4px #ccc;
+    margin-top: 22px;
+    cursor: pointer;
+}
+
+@media (max-width: 991px) {
+    .submit-button {
+        margin-top: 10px;
+        padding: 12px 28px;
+    }
+}
+
+.image-column {
+    flex: 0 0 64%;
+}
+
+@media (max-width: 991px) {
+    .image-column {
+        flex: 1;
+        margin-top: 40px;
+    }
+}
+
+.illustration {
+    width: 100%;
+}

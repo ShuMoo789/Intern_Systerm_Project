@@ -1,0 +1,238 @@
+.otp-verification-page {
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    max-height: 100vh;
+    flex-direction: column;
+    margin: auto;
+    padding: 0 65px;
+    /* Set to 100vw to fill up the viewport */
+    /* width: 95vw; */
+}
+
+@media (max-width: 991px) {
+    .otp-verification-page {
+        padding: 34px 20px 80px;
+    }
+}
+
+/*.header {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    font-size: 30px;
+    color: #000;
+    font-weight: 400;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 991px) {
+    .header {
+        flex-wrap: wrap;
+    }
+}*/
+
+.logo {
+    width: 244px;
+    max-width: 100%;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.flag {
+    width: 88px;
+}
+
+.language-code {
+    font-family: Inter, sans-serif;
+}
+
+.dropdown-icon {
+    width: 25px;
+    fill: #000;
+}
+
+.main-content {
+    align-self: center;
+    margin-top: 5px;
+    width: 100%;
+    max-width: 1744px;
+}
+
+@media (max-width: 991px) {
+    .main-content {
+        max-width: 100%;
+    }
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 991px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+.verification-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    line-height: normal;
+    width: 36%;
+    margin-left: 0;
+}
+
+@media (max-width: 991px) {
+    .verification-section {
+        width: 100%;
+    }
+}
+
+.verification-title {
+    color: #4889e9;
+    text-align: center;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    font: 700 40px Inter, sans-serif;
+    margin: 36px;
+}
+
+.verification-description {
+    color: #667085;
+    margin-top: 21px;
+    font: 18px/120% Inter, sans-serif;
+}
+
+@media (max-width: 991px) {
+    .verification-description {
+        max-width: 100%;
+    }
+}
+
+.verification-actions {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 48px; */
+    gap: 20px;
+}
+
+@media (max-width: 991px) {
+    .verification-actions {
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+}
+
+.verification-code {
+    color: #000000; /* Change the color to a lighter color */
+    font-family: Inter, sans-serif;
+    /* border: 1px solid rgba(0, 0, 0, 1); */
+    flex-grow: 1;
+}
+
+.resend-section{
+    display: flex;
+    color: #000;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+.resend-otp {
+    display: flex;
+    background-color: #fff;
+    color: rgb(72, 137, 233);
+    font-family: Inter, sans-serif;
+    border: none;
+    font-weight: 600;
+    /* flex-grow: 1; */
+    align-items: center;
+    cursor: pointer;
+}
+
+.resend-otp:hover{
+    text-decoration: underline;
+}
+
+.otp-group{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 20px;
+}
+
+.otp-group input{
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    outline: none;
+    border: 5px solid #ccc;
+    border-radius: 4px;
+    color: #667085;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.verify-button {
+    font-family: Inter, sans-serif;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #4889e9;
+    margin-top: 22px;
+    color: #fff;
+    box-shadow: 0 4px 4px #ccc;
+    text-align: center;
+    padding: 12px 60px;
+}
+
+@media (max-width: 991px) {
+    .verify-button {
+        margin-top: 40px;
+        padding: 12px 20px;
+    }
+}
+
+.image-section {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 64%;
+    /* margin-left: 20px; */
+}
+
+@media (max-width: 991px) {
+    .image-section {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+.verification-image {
+    width: 100%;
+    flex-grow: 1;
+    aspect-ratio: 1.47;
+    object-fit: contain;
+}
+
+@media (max-width: 991px) {
+    .verification-image {
+        /* max-width: 100%; */
+        margin-top: 36px;
+    }
+}
