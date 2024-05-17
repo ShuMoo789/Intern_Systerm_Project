@@ -1,27 +1,24 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-// import "./App.css";
-import AccountManagement from "./pages/AccountManagement/AccountManagement";
-import PasswordReset from "./pages/PasswordReset/PasswordReset";
-import OTPVerify from "./pages/OTPVerify/OTPVerify";
-import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
-import SignUp from "./components/SignUpForm/SignUpForm";
-import First_Page from "./pages/FirstPage/FirstPage";
-import InternList from "./pages/InternList/InternList";
+import Home from "./pages/Home";
 
+import PasswordReset from "./pages/PasswordReset/PasswordReset.jsx";
+import AccountManagement from "./pages/AccountManagement";
+
+
+import "./App.css";
+import OTPVerify from "./pages/OTPVerify/OTPVerify.jsx";
+import EnterNewPass from "./pages/EnterNewPass/EnterNewPass.jsx";
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Routes>
-        <Route path="/" element={<First_Page />} />
-        <Route path="/Profie" element={<AccountManagement />} />
-        <Route path="/pwdreset" element={<PasswordReset />} />
-        <Route path="/OTPVerify" element={<OTPVerify />} />
-        <Route path="/EnterNewPass" element={<EnterNewPass />} />
-        <Route path="/register" element={<SignUp />} />
-        <Route path="/InternList" element={<InternList />} />
+        <Route path="/" element={<Home />} />
+          <Route path="/pwdreset" element={<PasswordReset />} />
+          <Route path="/OTPVerify" element={<OTPVerify />} />
+          <Route path="/EnterNewPass" element={<EnterNewPass />} />
+        <Route path="/account-management" element={<AccountManagement />}/>
+          {/*This is a comment*/}
       </Routes>
     </>
   );
