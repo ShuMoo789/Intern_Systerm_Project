@@ -315,8 +315,12 @@ function MyComponent() {
         setSelectedIntern(null);
     };
 
-    const handleSaveComment = (internID) => {
-        // Add logic to save the comment for the given internID
+    const handleSaveComment = (updatedIntern) => {
+        setInterns((prevInterns) =>
+            prevInterns.map((intern) =>
+                intern.internID === updatedIntern.internID ? updatedIntern : intern
+            )
+        );
         handleCloseCommentPopup();
     };
     
