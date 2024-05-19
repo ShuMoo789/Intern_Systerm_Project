@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import First_Page from "./pages/first_page/First_Page";
-import Menu from "./components/Menu/MenuNavigate";
-import AccountManagement from "./pages/account_management/AccountManagement";
-import "./App.css";
+// import "./App.css";
+import AccountManagement from "./pages/AccountManagement/AccountManagement";
+import PasswordReset from "./pages/PasswordReset/PasswordReset";
+import OTPVerify from "./pages/OTPVerify/OTPVerify";
+import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
+import SignUp from "./components/SignUpForm/SignUpForm";
+import First_Page from "./pages/FirstPage/FirstPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,7 +14,12 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<AccountManagement />} />
+        <Route path="/" element={<First_Page />} />
+        <Route path="/Profie" element={<AccountManagement />} />
+        <Route path="/pwdreset" element={<PasswordReset />} />
+        <Route path="/OTPVerify" element={<OTPVerify />} />
+        <Route path="/EnterNewPass" element={<EnterNewPass />} />
+        <Route path="/register" element={<SignUp />} />
       </Routes>
     </>
   );
