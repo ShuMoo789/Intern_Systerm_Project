@@ -1,24 +1,19 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-
-import PasswordReset from "./pages/PasswordReset/PasswordReset.jsx";
-import AccountManagement from "./pages/AccountManagement";
-
-
+import First_Page from "./pages/first_page/First_Page";
+import Menu from "./components/Menu/MenuNavigate";
+import AccountManagement from "./pages/account_management/AccountManagement";
 import "./App.css";
-import OTPVerify from "./pages/OTPVerify/OTPVerify.jsx";
-import EnterNewPass from "./pages/EnterNewPass/EnterNewPass.jsx";
+import "./pages/ApproveCV/ApproveCV.jsx";
+import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-          <Route path="/pwdreset" element={<PasswordReset />} />
-          <Route path="/OTPVerify" element={<OTPVerify />} />
-          <Route path="/EnterNewPass" element={<EnterNewPass />} />
-        <Route path="/account-management" element={<AccountManagement />}/>
-          {/*This is a comment*/}
+        <Route path="/" element={<AccountManagement />} />
+          <Route path="/ApproveCV" element={<ApproveCV />} />
       </Routes>
     </>
   );
