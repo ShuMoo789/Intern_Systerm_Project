@@ -327,6 +327,7 @@ function MyComponent() {
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedIntern, setSelectedIntern] = useState([]);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+    const [section, setSection] = useState(0);
 
     const totalPages = Math.ceil(interns.length / internsPerPage);
 
@@ -379,6 +380,7 @@ function MyComponent() {
 
     const handleCommentClick = (intern) => {
         setSelectedIntern(intern);
+        setSection(1);
         setCommentPopupVisible(true);
     };
 
@@ -556,6 +558,7 @@ function MyComponent() {
                 isVisible={commentPopupVisible}
                 onClose={handleCloseCommentPopup}
                 intern={selectedIntern}
+                section={section}
                 onSave={handleSaveComment}
             />
         </div>
