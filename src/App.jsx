@@ -13,7 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<AccountManagement />} />
-          <Route path="/ApproveCV" element={<ApproveCV />} />
+        <Route path="/ApproveCV" element={<ApproveCV />} />
       </Routes>
     </>
   );
