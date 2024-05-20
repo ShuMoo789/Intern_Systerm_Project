@@ -30,3 +30,42 @@
     gap: 10px;
     margin-top: 20px;
 }
+
+#section-btn > .toggle-popup-btn {
+    border: none;
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.popup-wrapper {
+    height: 60vh;
+    overflow: auto;
+}
+
+.popup-wrapper >.result-section > .field{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px 20px;  
+}
+
+.popup-wrapper > .result-section input{
+    padding: 10px 15px;
+}
+
+.popup-wrapper > .result-section h3,
+.popup-wrapper > .result-section h2{
+    color: #A03B0F;
+    margin-top: 1em;
+}
+
+.comment-popup-footer > .save-btn {
+    color: #fff;
+    background-color: #4889E9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.comment-popup-footer > .save-btn:hover {
+    background-color: #3E95FF;
+}
