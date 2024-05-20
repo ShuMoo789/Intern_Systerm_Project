@@ -1,0 +1,32 @@
+/* CommentPopup.css */
+.comment-popup-modal .ant-modal-content {
+    border-radius: 10px;
+}
+
+.comment-popup-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-popup-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-popup-row label {
+    flex: 1;
+    font-weight: bold;
+}
+
+.comment-popup-row .ant-input,
+.comment-popup-row .ant-select {
+    flex: 2;
+}
+
+.comment-popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
