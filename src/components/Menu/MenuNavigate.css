@@ -1,20 +1,21 @@
 .menu {
     width: calc(351/2705);
-    height: 860px;
-    position: absolute;
+    height: 100vh;
+    /*position: absolute;*/
     top: 0;
     left: 0;
     background-color: #fff;
     color: blue;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 0 30px 30px 0;
 }
 
 .logo-amazing {
     display: block;
     width: 192px;
-    height: 73.85px;
-    margin: 24.82px auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 24.82px;
 }
 
 .user-container {
