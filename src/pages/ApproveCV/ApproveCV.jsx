@@ -10,9 +10,22 @@ import {
     PlusOutlined,
     SettingOutlined,
     ArrowRightOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined,
+    SearchOutlined,
+    DeleteOutlined
 } from "@ant-design/icons";
+import { Input } from "antd";
+import { 
+    DatePicker,
+    Dropdown,
+    Button,
+    Menu
+} from 'antd';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import i18n from "i18next";
+
+dayjs.extend(customParseFormat);
 
 function IconTextBlock({ iconSrc, altText, text }) {
     return (
@@ -24,9 +37,23 @@ function IconTextBlock({ iconSrc, altText, text }) {
 }
 
 function MyComponent() {
-    const onChange = (date, dateString) => {
-        console.log(date, dateString);
-    };
+
+    const dateFormat = 'YYYY/MM/DD';
+
+    const menu = (
+        <Menu>
+          <Menu.Item key="0">
+            <div>Option 1</div>
+          </Menu.Item>
+          <Menu.Item key="1">
+            <div>Option 2</div>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <div>Option 3</div>
+          </Menu.Item>
+        </Menu>
+    );
+
     const interns = [
         {
             internID: "#12345128",
@@ -296,33 +323,15 @@ function MyComponent() {
         }
     ];
 
-    const internsPerPage = 7;
+    const internsPerPage = 6;
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedIntern, setSelectedIntern] = useState([]);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+
     const totalPages = Math.ceil(interns.length / internsPerPage);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
-    };
-
-    const handleCommentClick = (intern) => {
-        setSelectedIntern(intern);
-        setCommentPopupVisible(true);
-    };
-
-    const handleCloseCommentPopup = () => {
-        setCommentPopupVisible(false);
-        setSelectedIntern(null);
-    };
-
-    const handleSaveComment = (updatedIntern) => {
-        setInterns((prevInterns) =>
-            prevInterns.map((intern) =>
-                intern.internID === updatedIntern.internID ? updatedIntern : intern
-            )
-        );
-        handleCloseCommentPopup();
     };
 
     const renderInterns = () => {
@@ -344,11 +353,11 @@ function MyComponent() {
                 <td><a href="#">{intern.cvLink}</a></td>
                 <td style={{ display: "flex" }}>
                     <div className="Comments-CV">
-                        {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
+                    {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
                         <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => handleCommentClick(intern)} />
                     </div>
                     <div className="add-cmt-btn">
-                        <PlusOutlined onClick={() => handleCommentClick(intern)} />
+                        <PlusOutlined />
                     </div>
                 </td>
                 <td>
@@ -367,6 +376,26 @@ function MyComponent() {
             </tr>
         ));
     };
+
+    const handleCommentClick = (intern) => {
+        setSelectedIntern(intern);
+        setCommentPopupVisible(true);
+    };
+
+    const handleCloseCommentPopup = () => {
+        setCommentPopupVisible(false);
+        setSelectedIntern(null);
+    };
+
+    const handleSaveComment = (updatedIntern) => {
+        setInterns((prevInterns) =>
+            prevInterns.map((intern) =>
+                intern.internID === updatedIntern.internID ? updatedIntern : intern
+            )
+        );
+        handleCloseCommentPopup();
+    };
+    
 
     return (
         <div id="APRCV">
@@ -428,6 +457,49 @@ function MyComponent() {
                 </section>
 
                 <section className="filter-section">
+                    <div className="filter">
+                        <div className="fields">
+                            <Input size="large" placeholder="Enter intern's ID" />
+
+                            <Input size="large" placeholder="Enter intern's Full name" />
+
+                            <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{padding: "7px 11px", fontSize: "15px"}}/>
+
+                            <Input size="large" placeholder="Enter intern's Phone number" />
+
+                            <Dropdown overlay={menu}>
+                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
+                                    <div style={{color: "#C7BFBF"}}>Enter intern's School</div>
+                                    <DownOutlined />
+                                </Button>
+                            </Dropdown>
+
+                            <Input size="large" placeholder="Enter intern's Email" />
+
+                            <Dropdown overlay={menu}>
+                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
+                                    <div style={{color: "#C7BFBF"}}>Enter intern's Major</div>
+                                    <DownOutlined />
+                                </Button>
+                            </Dropdown>
+
+                            <Dropdown overlay={menu}>
+                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
+                                    <div style={{color: "#C7BFBF"}}>Enter intern's Position</div>
+                                    <DownOutlined />
+                                </Button>
+                            </Dropdown>
+
+                            <Input size="large" placeholder="Enter intern's Address"/>
+
+                            <DatePicker format={dateFormat} placeholder="Enter intern's Date Submitted Form" style={{padding: "7px 11px", fontSize: "15px"}}/>
+                        </div>
+                        <div className="buttons">
+                            <div className="cln-btn btn"><DeleteOutlined style={{marginRight: "10px"}}/>Clean Filter</div>
+                            <br />
+                            <div className="srch-btn btn"><SearchOutlined style={{marginRight: "10px"}}/> Search</div>
+                        </div>
+                    </div>
                     <div className="list">
                         <div className="tbl-wrapper">
                             <table>
