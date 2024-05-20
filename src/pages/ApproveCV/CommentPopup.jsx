@@ -1,19 +1,23 @@
 // CommentPopup.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Input, Select, Button } from 'antd';
 import './CommentPopup.css';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-const CommentPopup = ({ isVisible, onClose, intern, onSave, section }) => {
+const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
     const [major, setMajor] = useState(intern?.major || '');
     const [programmingLanguage, setProgrammingLanguage] = useState(intern?.programmingLanguage || '');
     const [projectOnGitHub, setProjectOnGitHub] = useState(intern?.projectOnGitHub || '');
     const [position, setPosition] = useState(intern?.position || '');
     const [rank, setRank] = useState(intern?.rank || 'Intern');
     const [comment, setComment] = useState('');
-    const [selectedOption, setSelectedOption] = useState(section || 0);
+    const [selectedOption, setSelectedOption] = useState(initialPage);
+
+    useEffect(() => {
+        setSelectedOption(initialPage)
+    },[initialPage])
 
     const handleButtonClick = (index) => {
         setSelectedOption(index);
@@ -72,6 +76,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, section }) => {
             </div>}
             visible={isVisible}
             onCancel={onClose}
+            onClose={() => setSelectedOption(0)}
             footer={null}
             className="comment-popup-modal"
             width={1200}
