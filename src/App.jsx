@@ -7,6 +7,7 @@ import OTPVerify from "./pages/OTPVerify/OTPVerify";
 import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 import SignUp from "./components/SignUpForm/SignUpForm";
 import First_Page from "./pages/FirstPage/FirstPage";
+import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,6 +21,7 @@ function App() {
         <Route path="/OTPVerify" element={<OTPVerify />} />
         <Route path="/EnterNewPass" element={<EnterNewPass />} />
         <Route path="/register" element={<SignUp />} />
+        <Route path="/ApproveCV" element={<ApproveCV />} />
       </Routes>
     </>
   );
