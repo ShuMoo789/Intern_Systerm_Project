@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import First_Page from "./pages/first_page/First_Page";
+// import First_Page from "./pages/first_page/First_Page";
 import Menu from "./components/Menu/MenuNavigate";
-import AccountManagement from "./pages/account_management/AccountManagement";
+import AccountManagement from "./pages/AccountManagement/AccountManagement";
 import "./App.css";
 import "./pages/ApproveCV/ApproveCV.jsx";
 import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
