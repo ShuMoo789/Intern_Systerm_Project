@@ -10,7 +10,7 @@ const groupButton = [
     {
         color: '#6537B1',
         name: 'Send Email',
-        icon: <MailOutlined />
+        icon: <MailOutlined />,
     },
     {
         color: '#41B137',
