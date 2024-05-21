@@ -9,6 +9,7 @@ import AccountManagement from "./pages/AccountManagement";
 import "./App.css";
 import OTPVerify from "./pages/OTPVerify/OTPVerify.jsx";
 import EnterNewPass from "./pages/EnterNewPass/EnterNewPass.jsx";
+import InternList from "./pages/InternList/InternList.jsx";
 function App() {
   return (
     <>
@@ -18,7 +19,7 @@ function App() {
           <Route path="/OTPVerify" element={<OTPVerify />} />
           <Route path="/EnterNewPass" element={<EnterNewPass />} />
         <Route path="/account-management" element={<AccountManagement />}/>
-          {/*This is a comment*/}
+          <Route path="/InternList" element={<InternList />} />
       </Routes>
     </>
   );

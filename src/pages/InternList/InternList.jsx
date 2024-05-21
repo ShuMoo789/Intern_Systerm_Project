@@ -1,16 +1,18 @@
-import React from "react"
+import React, { useState } from "react";
 import { MailOutlined, ExportOutlined, EditOutlined, DeleteOutlined, FolderAddOutlined, EyeOutlined } from '@ant-design/icons';
-import { Table, Button, Select } from "antd";
-import DataInternList from "../../data/InternList.json"
-import MenuNavigate from "../../components/Menu/MenuNavigate"
-import Navigation from "../../components/Navigation/Navigation"
-import './InternList.css'
+import { Table, Select, Button } from "antd";
+import DataInternList from "../../data/InternList.json";
+import MenuNavigate from "../../components/Menu/MenuNavigate";
+import Navigation from "../../components/Navigation/Navigation";
+import GroupButton from "../../components/GroupButton/GroupButton";
+import SendEmailPopup from './SendEmailPopup';
+import './InternList.css';
 
 const groupButton = [
     {
         color: '#6537B1',
         name: 'Send Email',
-        icon: <MailOutlined />,
+        icon: <MailOutlined />
     },
     {
         color: '#41B137',
@@ -32,7 +34,7 @@ const groupButton = [
         name: 'Add New Intern',
         icon: <FolderAddOutlined />
     },
-]
+];
 
 const optionSelect = [
     {
@@ -47,7 +49,7 @@ const optionSelect = [
         value: 'out',
         label: 'Out',
     },
-]
+];
 
 const columns = [
     {
@@ -161,20 +163,41 @@ const rowSelection = {
         name: record.name,
     }),
 };
-
 const InternList = () => {
+    const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
+    const [selectedIntern, setSelectedIntern] = useState(null);
+
+    const handleOpenEmailPopup = () => {
+        setSelectedIntern(null); // or set to a specific intern if needed
+        setEmailPopupVisible(true);
+    };
+
+    const handleCloseEmailPopup = () => {
+        setEmailPopupVisible(false);
+    };
+
+    const handleSendEmail = (emailData) => {
+        console.log('Email Data:', emailData);
+        // Handle email sending logic here
+        handleCloseEmailPopup();
+    };
+
     return (
         <div>
             <MenuNavigate />
             <div className="content-intern-list">
-                <Navigation titleName='Intern List' groupButton={groupButton} />
+                <Navigation
+                    titleName='Intern List'
+                    groupButton={<GroupButton groupButton={groupButton} onSendEmail={handleOpenEmailPopup} />}
+                />
                 <div className="group-filter-table">
                     <div className="filter">Filter</div>
                     <div className="table-intern-list">
-                        <Table rowSelection={{
-                            type: 'checkbox',
-                            ...rowSelection
-                        }}
+                        <Table
+                            rowSelection={{
+                                type: 'checkbox',
+                                ...rowSelection
+                            }}
                             columns={columns}
                             dataSource={DataInternList}
                             scroll={{ x: '2200px', y: '400px' }}
@@ -183,8 +206,16 @@ const InternList = () => {
                     </div>
                 </div>
             </div>
+            {isEmailPopupVisible && (
+                <SendEmailPopup
+                    visible={isEmailPopupVisible}
+                    onClose={handleCloseEmailPopup}
+                    onSendEmail={handleSendEmail}
+                    intern={selectedIntern}
+                />
+            )}
         </div>
-    )
+    );
 }
 
-export default InternList
+export default InternList;
