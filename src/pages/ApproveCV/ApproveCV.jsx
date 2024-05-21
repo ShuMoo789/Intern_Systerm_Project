@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ApproveCV.css";
 import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
@@ -24,6 +24,7 @@ import {
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import i18n from "i18next";
+import axios from "axios";
 
 dayjs.extend(customParseFormat);
 
@@ -39,20 +40,8 @@ function IconTextBlock({ iconSrc, altText, text }) {
 function MyComponent() {
 
     const dateFormat = 'YYYY/MM/DD';
-
-    const menu = (
-        <Menu>
-          <Menu.Item key="0">
-            <div>Option 1</div>
-          </Menu.Item>
-          <Menu.Item key="1">
-            <div>Option 2</div>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <div>Option 3</div>
-          </Menu.Item>
-        </Menu>
-    );
+    
+    
 
     const interns = [
         {
@@ -322,23 +311,36 @@ function MyComponent() {
             status: "Passed",
         }
     ];
+    
 
-    const internsPerPage = 6;
+    
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedIntern, setSelectedIntern] = useState([]);
+    const [intern, setIntern] = useState(interns);
+    const [filteredInterns, setFilteredInterns] = useState(interns);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
-
+    const internsPerPage = 6;
     const totalPages = Math.ceil(interns.length / internsPerPage);
-
+    const [filters, setFilters] = useState({
+        internID: '',
+        fullName: '',
+        dateOfBirth: null,
+        phoneNumber: '',
+        school: '',
+        email: '',
+        position: '',
+        address: '',
+        dateSubmittedForm: null,
+    });
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-
-    const renderInterns = () => {
+    
+     const renderInterns = () => {
         const startIndex = currentPage * internsPerPage;
         const endIndex = Math.min((currentPage + 1) * internsPerPage, interns.length);
-
-        return interns.slice(startIndex, endIndex).map((intern, index) => (
+        
+        return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
             <tr key={index}>
                 <td><input type={"checkbox"} /></td>
                 <td>{intern.internID}</td>
@@ -376,7 +378,47 @@ function MyComponent() {
             </tr>
         ));
     };
+    
+    const schoolNames = [...new Set(filteredInterns.map(intern => intern.school))];
+    const positionNames = [...new Set(filteredInterns.map(intern => intern.position))];
+    
+    // const [selectedSchool, setSelectedSchool] = useState(null);
+    // const [selectedPosition, setSelectedPosition] = useState(null)
+    const [selectedFilters, setSelectedFilters] = useState({
+        school: null,
+        position: null,
+    });
+    const handleMenuClick = (type, key) => {
+        setSelectedFilters(prevFilters => ({
+            ...prevFilters,
+            [type]: key,
+        }));
+    };
+    
+    const createMenu = (type, items) => (
+        <Menu onClick={({ key }) => handleMenuClick(type, key)}>
+            {items.map((item) => (
+                <Menu.Item key={item}>
+                    <div>{item}</div>
+                </Menu.Item>
+            ))}
+        </Menu>
+    );
 
+    
+    // const menu1 = (
+    //     <Menu onClick={handleMenuClick}>
+    //         {positionNames.map((position, index) => (
+    //             <Menu.Item key={position}>
+    //                 <div>{position}</div>
+    //             </Menu.Item>
+    //         ))}
+    //     </Menu>
+    // )
+        
+        
+    
+    
     const handleCommentClick = (intern) => {
         setSelectedIntern(intern);
         setCommentPopupVisible(true);
@@ -395,6 +437,42 @@ function MyComponent() {
         );
         handleCloseCommentPopup();
     };
+    const handleInputChange = (name, value) => {
+        setFilters({ ...filters, [name]: value });
+    };
+    const handleSearch = () => {
+        const filtered = interns.filter((intern) => {
+            return Object.keys(filters).every((key) => {
+                if (filters[key]) {
+                    if (key === 'dateOfBirth' || key === 'dateSubmittedForm') {
+                        return dayjs(intern[key]).isSame(filters[key], 'day');
+                    }
+                    return intern[key].toString().toLowerCase().includes(filters[key].toString().toLowerCase());
+                }
+                return true;
+            });
+        });
+        setFilteredInterns(filtered);
+        setCurrentPage(0);
+    };
+    const handleClearFilters = () => {
+        setFilters({
+            internID: '',
+            fullName: '',
+            dateOfBirth: null,
+            phoneNumber: '',
+            email: '',
+            address: '',
+            dateSubmittedForm: null,
+        });
+        setFilteredInterns(interns);
+        setCurrentPage(0);
+        setSelectedFilters({
+            school: null,
+            position: null,
+        });
+    };
+    
     
 
     return (
@@ -459,45 +537,48 @@ function MyComponent() {
                 <section className="filter-section">
                     <div className="filter">
                         <div className="fields">
-                            <Input size="large" placeholder="Enter intern's ID" />
+                            <Input size="large" placeholder="Enter intern's ID" value={filters.internID} onChange={(e) => handleInputChange('internID', e.target.value)}/>
 
-                            <Input size="large" placeholder="Enter intern's Full name" />
+                            <Input size="large" placeholder="Enter intern's Full name" value={filters.fullName} onChange={(e) => handleInputChange('fullName', e.target.value)}/>
 
-                            <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{padding: "7px 11px", fontSize: "15px"}}/>
+                            <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{padding: "7px 11px", fontSize: "15px"}} value={filters.dateOfBirth}  onChange={(date) => handleInputChange('dateOfBirth', date)}/>
 
-                            <Input size="large" placeholder="Enter intern's Phone number" />
+                            <Input size="large" placeholder="Enter intern's Phone number" value={filters.phoneNumber} onChange={(e) => handleInputChange('phoneNumber', e.target.value)}/>
 
-                            <Dropdown overlay={menu}>
-                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
-                                    <div style={{color: "#C7BFBF"}}>Enter intern's School</div>
+                            <Dropdown overlay={createMenu('school', schoolNames)} trigger={['click']}>
+                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}} value={filters.school} onChange={(e) => handleInputChange('school', e.target.value)}>
+                                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                                    <div style={{color: "#C7BFBF"}}>{selectedFilters.school ? selectedFilters.school  : "Enter intern's School"}</div>
                                     <DownOutlined />
                                 </Button>
                             </Dropdown>
 
-                            <Input size="large" placeholder="Enter intern's Email" />
+                            <Input size="large" placeholder="Enter intern's Email" value={filters.email} onChange={(e) => handleInputChange('email', e.target.value)}/>
 
-                            <Dropdown overlay={menu}>
-                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
-                                    <div style={{color: "#C7BFBF"}}>Enter intern's Major</div>
+                            <Dropdown >
+                                <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}} value={filters.position} onChange={(e) => handleInputChange('position', e.target.value)}>
+                                      <div style={{color: "#C7BFBF"}}>Enter intern's Major</div>   
                                     <DownOutlined />
                                 </Button>
+                                
                             </Dropdown>
 
-                            <Dropdown overlay={menu}>
+                            <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
                                 <Button style={{padding: "7px 11px",fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
-                                    <div style={{color: "#C7BFBF"}}>Enter intern's Position</div>
+                                    <div style={{color: "#C7BFBF"}}>{selectedFilters.position ? selectedFilters.position: "Enter intern's Position"}</div>
                                     <DownOutlined />
                                 </Button>
+                                
                             </Dropdown>
 
-                            <Input size="large" placeholder="Enter intern's Address"/>
+                            <Input size="large" placeholder="Enter intern's Address" value={filters.address} onChange={(e) => handleInputChange('address', e.target.value)}/>
 
-                            <DatePicker format={dateFormat} placeholder="Enter intern's Date Submitted Form" style={{padding: "7px 11px", fontSize: "15px"}}/>
+                            <DatePicker format={dateFormat} placeholder="Enter intern's Date Submitted Form" style={{padding: "7px 11px", fontSize: "15px"}} value={filters.dateSubmittedForm}  onChange={(date) => handleInputChange('dateSubmittedForm', date)}/>
                         </div>
                         <div className="buttons">
-                            <div className="cln-btn btn"><DeleteOutlined style={{marginRight: "10px"}}/>Clean Filter</div>
+                            <div className="cln-btn btn"><DeleteOutlined style={{marginRight: "10px"}} onClick={handleClearFilters} />Clean Filter</div>
                             <br />
-                            <div className="srch-btn btn"><SearchOutlined style={{marginRight: "10px"}}/> Search</div>
+                            <div className="srch-btn btn"><SearchOutlined style={{marginRight: "10px"}} onClick={handleSearch}/>Search</div>
                         </div>
                     </div>
                     <div className="list">
