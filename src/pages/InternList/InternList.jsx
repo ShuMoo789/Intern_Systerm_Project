@@ -57,14 +57,17 @@ const columns = [
     {
         title: 'Intern ID',
         dataIndex: 'internID',
+        width: 120,
     },
     {
         title: 'Start Date',
         dataIndex: 'startDate',
+        width: 120,
     },
     {
         title: 'Finish Date',
         dataIndex: 'finishDate',
+        width: 120,
     },
     {
         title: 'Full Name',
@@ -84,6 +87,7 @@ const columns = [
     {
         title: 'Position',
         dataIndex: 'position',
+        width: 120,
     },
     {
         title: 'School',
@@ -93,6 +97,7 @@ const columns = [
     {
         title: 'Address',
         dataIndex: 'address',
+        width: 120,
     },
     {
         title: 'Email',
@@ -102,6 +107,7 @@ const columns = [
     {
         title: 'CV',
         dataIndex: 'cv',
+        width: 120,
         render: (text) => <a style={{ color: '#000000', textDecoration: 'underline' }}>{text}</a>
     },
     {
@@ -113,6 +119,7 @@ const columns = [
     {
         title: 'Role',
         dataIndex: 'role',
+        width: 120,
     },
     {
         title: 'Project',
@@ -132,13 +139,13 @@ const columns = [
     {
         title: 'Status',
         dataIndex: 'status',
-        width: 130,
+        width: 160,
         render: (text) => {
             return (<Select
                 defaultValue={text}
                 style={{
-                    width: 120,
-                    color: 'red'
+                    width: 140,
+                    color: 'red',
                 }}
                 // onChange={handleChange}
                 options={optionSelect}
@@ -154,6 +161,8 @@ const columns = [
     {
         title: 'Button',
         dataIndex: 'button',
+        width: 120,
+        render: (text) => <Button type="primary" ghost style={{borderRadius: '100px'}}>{text}</Button>
     },
 ];
 
