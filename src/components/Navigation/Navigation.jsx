@@ -18,7 +18,7 @@ const Navigation = (props) => {
                 <div className="search-navigation">
                     Search for Information
                 </div>
-                <GroupButton groupButton={props.groupButton}/>
+                <GroupButton groupButton={props.groupButton} onSendEmail={props.onSendEmail}/>
             </div>
         </div>
     )

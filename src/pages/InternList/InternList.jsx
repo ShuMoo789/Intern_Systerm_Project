@@ -4,7 +4,6 @@ import { Table, Select, Button } from "antd";
 import DataInternList from "../../data/InternList.json";
 import MenuNavigate from "../../components/Menu/MenuNavigate";
 import Navigation from "../../components/Navigation/Navigation";
-import GroupButton from "../../components/GroupButton/GroupButton";
 import SendEmailPopup from './SendEmailPopup';
 import './InternList.css';
 
@@ -168,7 +167,7 @@ const InternList = () => {
     const [selectedIntern, setSelectedIntern] = useState(null);
 
     const handleOpenEmailPopup = () => {
-        setSelectedIntern(null); // or set to a specific intern if needed
+        setSelectedIntern(null); 
         setEmailPopupVisible(true);
     };
 
@@ -188,7 +187,9 @@ const InternList = () => {
             <div className="content-intern-list">
                 <Navigation
                     titleName='Intern List'
-                    groupButton={<GroupButton groupButton={groupButton} onSendEmail={handleOpenEmailPopup} />}
+                    // groupButton={<GroupButton groupButton={groupButton} onSendEmail={handleOpenEmailPopup} />}
+                    groupButton={groupButton}
+                    onSendEmail={handleOpenEmailPopup}
                 />
                 <div className="group-filter-table">
                     <div className="filter">Filter</div>
