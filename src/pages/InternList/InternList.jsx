@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { MailOutlined, ExportOutlined, EditOutlined, DeleteOutlined, FolderAddOutlined, EyeOutlined } from '@ant-design/icons';
 import { Table, Select, Button } from "antd";
-import DataInternList from "../../data/InternList.json";
+import DataInternList from "../../data/InternList.json";  // data of table intern list
 import MenuNavigate from "../../components/Menu/MenuNavigate";
 import Navigation from "../../components/Navigation/Navigation";
 import SendEmailPopup from './SendEmailPopup';
 import './InternList.css';
 
+// props GroupButton
 const groupButton = [
     {
         color: '#6537B1',
@@ -35,6 +36,7 @@ const groupButton = [
     },
 ];
 
+// option of status column
 const optionSelect = [
     {
         value: 'inProcess',
@@ -50,6 +52,7 @@ const optionSelect = [
     },
 ];
 
+// title of intern list table
 const columns = [
     {
         title: 'Intern ID',
@@ -154,6 +157,7 @@ const columns = [
     },
 ];
 
+// checkbox table Ant Design
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -162,6 +166,7 @@ const rowSelection = {
         name: record.name,
     }),
 };
+
 const InternList = () => {
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const [selectedIntern, setSelectedIntern] = useState(null);
@@ -183,17 +188,22 @@ const InternList = () => {
 
     return (
         <div>
+            {/* Menu left*/}
             <MenuNavigate />
+            {/* Content of InternList right */}
             <div className="content-intern-list">
+                {/* Pass props to Navigation */}
                 <Navigation
                     titleName='Intern List'
-                    // groupButton={<GroupButton groupButton={groupButton} onSendEmail={handleOpenEmailPopup} />}
                     groupButton={groupButton}
                     onSendEmail={handleOpenEmailPopup}
                 />
+                {/* Group of filter and table */}
                 <div className="group-filter-table">
+                    {/* Filter */}
                     <div className="filter">Filter</div>
                     <div className="table-intern-list">
+                        {/* use table of Ant Design */}
                         <Table
                             rowSelection={{
                                 type: 'checkbox',
@@ -207,6 +217,7 @@ const InternList = () => {
                     </div>
                 </div>
             </div>
+            {/*Render Email Popup */}
             {isEmailPopupVisible && (
                 <SendEmailPopup
                     visible={isEmailPopupVisible}

@@ -18,6 +18,7 @@ const Navigation = (props) => {
                 <div className="search-navigation">
                     Search for Information
                 </div>
+                {/* Pass props to GroupButton from InternList */}
                 <GroupButton groupButton={props.groupButton} onSendEmail={props.onSendEmail}/>
             </div>
         </div>
