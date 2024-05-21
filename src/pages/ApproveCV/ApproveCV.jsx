@@ -26,23 +26,35 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import i18n from "i18next";
 import axios from "axios";
 
+// Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
+/**
+ * The IconTextBlock component renders a block that contains an image icon
+ * and a text label next to it.
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.iconSrc - The source URL of the icon image.
+ * @param {string} props.altText - The alternative text for the icon image.
+ * @param {string} props.text - The text to be displayed next to the icon.
+ * @returns {JSX.Element} The rendered JSX for the icon-text block.
+ */
 function IconTextBlock({ iconSrc, altText, text }) {
+    // The component returns a div with a class name 'icon-text-block'
     return (
         <div className="icon-text-block">
+            {/* The image element with the source URL and alt text passed as props */}
             <img src={iconSrc} alt={altText} className="icon" />
+            {/* The span element that displays the text passed as a prop */}
             <span className="icon-text">{text}</span>
         </div>
     );
 }
 
 function MyComponent() {
-
+    // Date format for date inputs
     const dateFormat = 'YYYY/MM/DD';
-    
-    
-
+    // Mock data for interns
     const interns = [
         {
             internID: "#12345128",
@@ -311,39 +323,70 @@ function MyComponent() {
             status: "Passed",
         }
     ];
-    
 
     
+    // React useState hook to manage the current page number
     const [currentPage, setCurrentPage] = useState(0);
+
+// State to manage the currently selected intern(s)
     const [selectedIntern, setSelectedIntern] = useState([]);
+
+// State to manage the list of interns
     const [intern, setIntern] = useState(interns);
+
+// State to manage the filtered list of interns
     const [filteredInterns, setFilteredInterns] = useState(interns);
+
+// State to manage the visibility of the comment popup
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+
+// State to manage the initial page number (could be used for resetting or other purposes)
     const [initialPage, setInitialPage] = useState(0);
 
+// Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(interns.length / internsPerPage);
+
+// State to manage various filters for the interns
     const [filters, setFilters] = useState({
-        internID: '',
-        fullName: '',
-        dateOfBirth: null,
-        phoneNumber: '',
-        school: '',
-        email: '',
-        position: '',
-        address: '',
-        dateSubmittedForm: null,
+        internID: '',            // Filter by intern ID
+        fullName: '',            // Filter by full name
+        dateOfBirth: null,       // Filter by date of birth
+        phoneNumber: '',         // Filter by phone number
+        school: '',              // Filter by school
+        email: '',               // Filter by email
+        position: '',            // Filter by position
+        address: '',             // Filter by address
+        dateSubmittedForm: null, // Filter by the date the form was submitted
     });
+
+    /**
+     * Function to handle page changes.
+     * @param {number} page - The page number to switch to.
+     */
     const handlePageChange = (page) => {
-        setCurrentPage(page);
+        setCurrentPage(page); // Update the current page state with the new page number
     };
-    
-     const renderInterns = () => {
+
+    /**
+     * Function to render the list of interns for the current page.
+     * This function slices the `filteredInterns` array to get the interns for the current page
+     * and maps over them to create table rows.
+     *
+     * @returns {JSX.Element[]} An array of JSX elements representing the rows of the interns table.
+     */
+    const renderInterns = () => {
+        // Calculate the starting index of the interns for the current page
         const startIndex = currentPage * internsPerPage;
+        // Calculate the ending index of the interns for the current page, ensuring it does not exceed the total number of interns
         const endIndex = Math.min((currentPage + 1) * internsPerPage, interns.length);
-        
+
+        // Slice the filteredInterns array to get the interns for the current page
         return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
+            // Each row is a table row (<tr>) element with a unique key based on the index
             <tr key={index}>
+                {/* Checkbox for selecting the intern */}
                 <td><input type={"checkbox"} /></td>
+                {/* Display intern details in table cells (<td>) */}
                 <td>{intern.internID}</td>
                 <td>{intern.dateSubmittedForm}</td>
                 <td>{intern.fullName}</td>
@@ -353,16 +396,19 @@ function MyComponent() {
                 <td>{intern.school}</td>
                 <td>{intern.address}</td>
                 <td>{intern.email}</td>
+                {/* Link to the intern's CV */}
                 <td><a href="#">{intern.cvLink}</a></td>
+                {/* Comments section with eye icon for viewing comments and a button to add comments */}
                 <td style={{ display: "flex" }}>
                     <div className="Comments-CV">
-                    {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
-                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => {handleCommentClick(intern)}} />
+                        {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
+                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => { handleCommentClick(intern) }} />
                     </div>
                     <div className="add-cmt-btn">
                         <PlusOutlined />
                     </div>
                 </td>
+                {/* Status section with conditional styling based on the intern's status */}
                 <td>
                     <div className="Status" style={(intern.status === "Pending") ? {
                         backgroundColor: "#FFB596",
@@ -370,8 +416,11 @@ function MyComponent() {
                     } : (intern.status === "Failed") ? {
                         backgroundColor: "#F5A3B7",
                         color: "#7D0022"
-                    } : (intern.status === "Passed") ? { backgroundColor: "#B7EACB", color: "#3A7D34" } : {}}>{intern.status}<DownOutlined /></div>
+                    } : (intern.status === "Passed") ? { backgroundColor: "#B7EACB", color: "#3A7D34" } : {}}>
+                        {intern.status}<DownOutlined />
+                    </div>
                 </td>
+                {/* Action buttons for viewing intern details and feedbacks */}
                 <td style={{display: 'flex'}}>
                     <div className="view" onClick={() => handleViewClick(intern)}>View</div>
                     <div className="feedbacks">Feedbacks</div>
@@ -379,25 +428,41 @@ function MyComponent() {
             </tr>
         ));
     };
-    
+
+    // Extract unique school names from the filteredInterns array
     const schoolNames = [...new Set(filteredInterns.map(intern => intern.school))];
+
+// Extract unique position names from the filteredInterns array
     const positionNames = [...new Set(filteredInterns.map(intern => intern.position))];
-    
-    // const [selectedSchool, setSelectedSchool] = useState(null);
-    // const [selectedPosition, setSelectedPosition] = useState(null)
+
+// useState hook to manage the selected filters for school and position
     const [selectedFilters, setSelectedFilters] = useState({
-        school: null,
-        position: null,
+        school: null,   // Currently selected school filter
+        position: null, // Currently selected position filter
     });
+
+    /**
+     * Handles menu item clicks for filtering interns.
+     * @param {string} type - The type of filter (e.g., 'school' or 'position').
+     * @param {string} key - The selected filter value.
+     */
     const handleMenuClick = (type, key) => {
+        // Update the selectedFilters state with the new filter value
         setSelectedFilters(prevFilters => ({
             ...prevFilters,
             [type]: key,
         }));
     };
-    
+
+    /**
+     * Creates a menu for filtering options.
+     * @param {string} type - The type of filter (e.g., 'school' or 'position').
+     * @param {string[]} items - The list of filter values.
+     * @returns {JSX.Element} A menu component with filter options.
+     */
     const createMenu = (type, items) => (
         <Menu onClick={({ key }) => handleMenuClick(type, key)}>
+            {/* Map over the items to create menu items */}
             {items.map((item) => (
                 <Menu.Item key={item}>
                     <div>{item}</div>
@@ -406,63 +471,82 @@ function MyComponent() {
         </Menu>
     );
 
-    
-    // const menu1 = (
-    //     <Menu onClick={handleMenuClick}>
-    //         {positionNames.map((position, index) => (
-    //             <Menu.Item key={position}>
-    //                 <div>{position}</div>
-    //             </Menu.Item>
-    //         ))}
-    //     </Menu>
-    // )
-        
-        
-    
-    
+
+    /**
+     * Handles the action when the comment button is clicked.
+     * @param {Object} intern - The intern object for which the comment is being added.
+     */
     const handleCommentClick = (intern) => {
-        setSelectedIntern(intern);
-        setInitialPage(1)
-        setCommentPopupVisible(true);
+        setSelectedIntern(intern); // Set the selected intern
+        setInitialPage(1);         // Set the initial page to 1
+        setCommentPopupVisible(true); // Show the comment popup
     };
 
+    /**
+     * Handles the action when the view button is clicked.
+     * @param {Object} intern - The intern object to be viewed.
+     */
     const handleViewClick = (intern) => {
-        setSelectedIntern(intern);
-        setInitialPage(0)
-        setCommentPopupVisible(true);
+        setSelectedIntern(intern); // Set the selected intern
+        setInitialPage(0);         // Set the initial page to 0
+        setCommentPopupVisible(true); // Show the comment popup
     };
 
+    /**
+     * Handles the action to close the comment popup.
+     */
     const handleCloseCommentPopup = () => {
-        setCommentPopupVisible(false);
-        setSelectedIntern(null);
+        setCommentPopupVisible(false); // Hide the comment popup
+        setSelectedIntern(null);       // Clear the selected intern
     };
 
+    /**
+     * Handles the action to save the updated comment for an intern.
+     * @param {Object} updatedIntern - The updated intern object with comments.
+     */
     const handleSaveComment = (updatedIntern) => {
+        // Update the interns state with the updated intern object
         setInterns((prevInterns) =>
             prevInterns.map((intern) =>
                 intern.internID === updatedIntern.internID ? updatedIntern : intern
             )
         );
-        handleCloseCommentPopup();
+        handleCloseCommentPopup(); // Close the comment popup after saving
     };
+
+    /**
+     * Handles input change for filter values.
+     * @param {string} name - The name of the filter field.
+     * @param {string} value - The value of the filter field.
+     */
     const handleInputChange = (name, value) => {
-        setFilters({ ...filters, [name]: value });
+        setFilters({ ...filters, [name]: value }); // Update the filter values
     };
+
+    /**
+     * Handles the search functionality based on filter values.
+     */
     const handleSearch = () => {
         const filtered = interns.filter((intern) => {
             return Object.keys(filters).every((key) => {
                 if (filters[key]) {
                     if (key === 'dateOfBirth' || key === 'dateSubmittedForm') {
+                        // Compare dates using dayjs library
                         return dayjs(intern[key]).isSame(filters[key], 'day');
                     }
+                    // Compare other fields in a case-insensitive manner
                     return intern[key].toString().toLowerCase().includes(filters[key].toString().toLowerCase());
                 }
                 return true;
             });
         });
-        setFilteredInterns(filtered);
-        setCurrentPage(0);
+        setFilteredInterns(filtered); // Update the filtered interns state
+        setCurrentPage(0);            // Reset the current page to 0
     };
+
+    /**
+     * Handles clearing all filter values and resetting the filtered interns list.
+     */
     const handleClearFilters = () => {
         setFilters({
             internID: '',
@@ -472,18 +556,20 @@ function MyComponent() {
             email: '',
             address: '',
             dateSubmittedForm: null,
-        });
-        setFilteredInterns(interns);
-        setCurrentPage(0);
+        }); // Reset filter values to default
+        setFilteredInterns(interns); // Reset the filtered interns to the full list
+        setCurrentPage(0);           // Reset the current page to 0
         setSelectedFilters({
             school: null,
             position: null,
-        });
+        }); // Reset selected school and position filters
     };
-    
-    
-      const handleViewClose = () => {
-        setViewPopupVisible(false);
+
+    /**
+     * Handles the action to close the view popup.
+     */
+    const handleViewClose = () => {
+        setViewPopupVisible(false); // Hide the view popup
     };
     
 
