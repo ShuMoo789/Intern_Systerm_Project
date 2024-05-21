@@ -4,6 +4,7 @@ import "./ApproveCV.css";
 import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
+import ViewPopup from "./ViewPopup.jsx";
 import {
     DownOutlined,
     EyeOutlined,
@@ -403,6 +404,15 @@ function MyComponent() {
         );
         handleCloseCommentPopup();
     };
+
+    const handleViewClick = (intern) => {
+        setSelectedIntern(intern);
+        setViewPopupVisible(true);
+    };
+    
+      const handleViewClose = () => {
+        setViewPopupVisible(false);
+    };
     
 
     return (
@@ -566,6 +576,11 @@ function MyComponent() {
                 intern={selectedIntern}
                 initialPage={initialPage}
                 onSave={handleSaveComment}
+            />
+            <ViewPopup
+                isVisible={viewPopupVisible} 
+                onClose={handleViewClose}
+                intern={selectedIntern}
             />
         </div>
     );
