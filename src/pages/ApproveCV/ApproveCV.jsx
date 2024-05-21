@@ -328,7 +328,7 @@ function MyComponent() {
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedIntern, setSelectedIntern] = useState([]);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
-    const [viewPopupVisible, setViewPopupVisible] = useState(false);
+    const [initialPage, setInitialPage] = useState(0);
 
     const totalPages = Math.ceil(interns.length / internsPerPage);
 
@@ -356,7 +356,7 @@ function MyComponent() {
                 <td style={{display: "flex"}}>
                     <div className="Comments-CV">
                     {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
-                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => handleCommentClick(intern)} />
+                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => {handleCommentClick(intern)}} />
                     </div>
                     <div className="add-cmt-btn">
                         <PlusOutlined />
@@ -381,6 +381,13 @@ function MyComponent() {
 
     const handleCommentClick = (intern) => {
         setSelectedIntern(intern);
+        setInitialPage(1)
+        setCommentPopupVisible(true);
+    };
+
+    const handleViewClick = (intern) => {
+        setSelectedIntern(intern);
+        setInitialPage(0)
         setCommentPopupVisible(true);
     };
 
@@ -567,6 +574,7 @@ function MyComponent() {
                 isVisible={commentPopupVisible}
                 onClose={handleCloseCommentPopup}
                 intern={selectedIntern}
+                initialPage={initialPage}
                 onSave={handleSaveComment}
             />
             <ViewPopup
