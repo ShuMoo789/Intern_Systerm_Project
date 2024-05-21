@@ -69,3 +69,49 @@
 .comment-popup-footer > .save-btn:hover {
     background-color: #3E95FF;
 }
+/**/
+
+.detail-popup-comment {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 30px;
+    margin: 0 10px 30px 0;
+}
+
+.detail-popup-comment label {
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.view-popup-row .ant-input {
+    width: 21.125em;
+    height: 3.5em;
+    margin: 15px 0 0 0;
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
+}
+
+.view-popup-row .view-popup-link {
+    display: flex;
+    margin: 30px 20px 10px;
+    color: #333333;
+    text-decoration: underline;
+}
+
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #000000;
+    text-shadow: none;
+}
+
+.ant-tabs .ant-tabs-tab + .ant-tabs-tab {
+    margin: 0 0 0 40px;
+}
+
+.custom-tabs .ant-tabs-tab {
+    font-size: 16px;
+}
+
+.custom-tabs .ant-tabs-tab:not(.ant-tabs-tab-active) {
+    opacity: 0.5;
+}
+  

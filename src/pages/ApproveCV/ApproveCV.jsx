@@ -482,6 +482,10 @@ function MyComponent() {
     };
     
     
+      const handleViewClose = () => {
+        setViewPopupVisible(false);
+    };
+    
 
     return (
         <div id="APRCV">

@@ -76,14 +76,69 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
             </div>}
             visible={isVisible}
             onCancel={onClose}
-            onClose={() => setSelectedOption(0)}
+            // onClose={() => setSelectedOption(0)}
             footer={null}
             className="comment-popup-modal"
             width={1200}
         >
             {selectedOption === 0 && (
                 <div className="detail-popup-comment">
-                    hi
+                    <div className="view-popup-row">
+                        <label>Intern ID</label> <br />
+                        {/* <Input type="text" value={intern.internID} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Full Name</label> <br />
+                        {/* <Input type="text" value={intern.fullName} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Date Of Birth</label> <br />
+                        {/* <Input type="text" value={intern.dateOfBirth} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Phone Number</label> <br />
+                        {/* <Input type="text" value={intern.phoneNumber} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Position</label> <br />
+                        {/* <Input type="text" value={intern.position} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>School</label> <br />
+                        {/* <Input type="text" value={intern.school} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Address</label> <br />
+                        {/* <Input type="text" value={intern.address} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Email</label> <br />
+                        {/* <Input type="text" value={intern.email} /> */}
+                        <Input type="text"/>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Link CV</label>
+                        <a
+                        className="view-popup-link"
+                        // href={intern.cvLink}
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >
+                        Link
+                        </a>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Rank</label> <br />
+                        <Input type="text" value="Intern" />
+                    </div>
                 </div>
             )}
             {selectedOption === 1 && (
