@@ -319,7 +319,8 @@ function MyComponent() {
     const [intern, setIntern] = useState(interns);
     const [filteredInterns, setFilteredInterns] = useState(interns);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
-    const internsPerPage = 6;
+    const [initialPage, setInitialPage] = useState(0);
+
     const totalPages = Math.ceil(interns.length / internsPerPage);
     const [filters, setFilters] = useState({
         internID: '',
@@ -356,7 +357,7 @@ function MyComponent() {
                 <td style={{ display: "flex" }}>
                     <div className="Comments-CV">
                     {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
-                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => handleCommentClick(intern)} />
+                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => {handleCommentClick(intern)}} />
                     </div>
                     <div className="add-cmt-btn">
                         <PlusOutlined />
@@ -371,8 +372,8 @@ function MyComponent() {
                         color: "#7D0022"
                     } : (intern.status === "Passed") ? { backgroundColor: "#B7EACB", color: "#3A7D34" } : {}}>{intern.status}<DownOutlined /></div>
                 </td>
-                <td style={{ display: 'flex' }}>
-                    <div className="view">View</div>
+                <td style={{display: 'flex'}}>
+                    <div className="view" onClick={() => handleViewClick(intern)}>View</div>
                     <div className="feedbacks">Feedbacks</div>
                 </td>
             </tr>
@@ -421,6 +422,13 @@ function MyComponent() {
     
     const handleCommentClick = (intern) => {
         setSelectedIntern(intern);
+        setInitialPage(1)
+        setCommentPopupVisible(true);
+    };
+
+    const handleViewClick = (intern) => {
+        setSelectedIntern(intern);
+        setInitialPage(0)
         setCommentPopupVisible(true);
     };
 
@@ -637,6 +645,7 @@ function MyComponent() {
                 isVisible={commentPopupVisible}
                 onClose={handleCloseCommentPopup}
                 intern={selectedIntern}
+                initialPage={initialPage}
                 onSave={handleSaveComment}
             />
         </div>

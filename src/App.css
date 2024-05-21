@@ -1,0 +1,46 @@
+body {
+  overflow: hidden; /* Ngăn cuộn trang */
+} 
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white; /* Đặt màu nền trắng */
+  padding: 20px;
+  min-height: 100vh;
+  width: 100%;
+  overflow: auto; /* Cho phép cuộn nội dung bên trong app-container */
+}
+
+.content-container {
+  height: auto; /* Chuyển chiều cao thành tự động điều chỉnh theo nội dung */
+  padding: 20px;
+}
+
+.logo-image {
+  margin-right: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-right: 20px;
+  max-height: 100px; /* Đặt chiều cao tối đa cho form */
+}
+
+.sign-up-title {
+  color: #4889E9;
+  margin-left: -200px;
+}
+
+.sign-up-description {
+  margin-bottom: 20px;
+  color: black;
+}
+
+.additional-image {
+  margin-top: auto;
+}
