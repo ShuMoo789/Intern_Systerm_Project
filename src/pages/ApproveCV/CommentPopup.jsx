@@ -83,7 +83,53 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
         >
             {selectedOption === 0 && (
                 <div className="detail-popup-comment">
-                    hi
+                    <div className="view-popup-row">
+                        <label>Intern ID</label> <br />
+                        <Input type="text" value={intern.internID} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Full Name</label> <br />
+                        <Input type="text" value={intern.fullName} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Date Of Birth</label> <br />
+                        <Input type="text" value={intern.dateOfBirth} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Phone Number</label> <br />
+                        <Input type="text" value={intern.phoneNumber} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Position</label> <br />
+                        <Input type="text" value={intern.position} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>School</label> <br />
+                        <Input type="text" value={intern.school} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Address</label> <br />
+                        <Input type="text" value={intern.address} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Email</label> <br />
+                        <Input type="text" value={intern.email} />
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Link CV</label>
+                        <a
+                        className="view-popup-link"
+                        href={intern.cvLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >
+                        Link
+                        </a>
+                    </div>
+                    <div className="view-popup-row">
+                        <label>Rank</label> <br />
+                        <Input type="text" value="Intern" />
+                    </div>
                 </div>
             )}
             {selectedOption === 1 && (
