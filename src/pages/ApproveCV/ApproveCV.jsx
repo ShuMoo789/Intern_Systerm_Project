@@ -4,6 +4,7 @@ import "./ApproveCV.css";
 import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
+import ViewPopup from "./ViewPopup.jsx";
 import {
     DownOutlined,
     EyeOutlined,
@@ -327,6 +328,7 @@ function MyComponent() {
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedIntern, setSelectedIntern] = useState([]);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+    const [viewPopupVisible, setViewPopupVisible] = useState(false);
 
     const totalPages = Math.ceil(interns.length / internsPerPage);
 
@@ -370,7 +372,7 @@ function MyComponent() {
                     } : (intern.status === "Passed") ? {backgroundColor: "#B7EACB", color: "#3A7D34"} : {}}>{intern.status}<DownOutlined /></div>
                 </td>
                 <td style={{display: 'flex'}}>
-                    <div className="view">View</div>
+                    <div className="view" onClick={() => handleViewClick(intern)}>View</div>
                     <div className="feedbacks">Feedbacks</div>
                 </td>
             </tr>
@@ -394,6 +396,15 @@ function MyComponent() {
             )
         );
         handleCloseCommentPopup();
+    };
+
+    const handleViewClick = (intern) => {
+        setSelectedIntern(intern);
+        setViewPopupVisible(true);
+    };
+    
+      const handleViewClose = () => {
+        setViewPopupVisible(false);
     };
     
 
@@ -557,6 +568,11 @@ function MyComponent() {
                 onClose={handleCloseCommentPopup}
                 intern={selectedIntern}
                 onSave={handleSaveComment}
+            />
+            <ViewPopup
+                isVisible={viewPopupVisible} 
+                onClose={handleViewClose}
+                intern={selectedIntern}
             />
         </div>
     );
