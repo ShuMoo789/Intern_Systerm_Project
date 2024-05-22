@@ -324,6 +324,8 @@ function MyComponent() {
         }
     ];
 
+    // Number of interns per page
+    const internsPerPage = 6;
     
     // React useState hook to manage the current page number
     const [currentPage, setCurrentPage] = useState(0);
@@ -346,6 +348,7 @@ function MyComponent() {
 // Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(interns.length / internsPerPage);
 
+    
 // State to manage various filters for the interns
     const [filters, setFilters] = useState({
         internID: '',            // Filter by intern ID
