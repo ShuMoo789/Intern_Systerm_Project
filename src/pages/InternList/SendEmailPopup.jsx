@@ -7,7 +7,7 @@ import './SendEmailPopup.css';
 const { Option } = Select;
 const { TextArea } = Input;
 
-const SendEmailPopup = ({ isVisible, onClose, onSend }) => {
+const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
     const [emailType, setEmailType] = useState('');
     const [emailContent, setEmailContent] = useState('');
 
@@ -22,7 +22,7 @@ const SendEmailPopup = ({ isVisible, onClose, onSend }) => {
     return (
         <Modal
             title="Send Email"
-            visible={isVisible}
+            open={openPopup}
             onCancel={onClose}
             footer={null}
             className="send-email-popup-modal"

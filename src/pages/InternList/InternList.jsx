@@ -162,7 +162,7 @@ const columns = [
         title: 'Button',
         dataIndex: 'button',
         width: 120,
-        render: (text) => <Button type="primary" ghost style={{borderRadius: '100px'}}>{text}</Button>
+        render: (text) => <Button type="primary" ghost style={{ borderRadius: '100px' }}>{text}</Button>
     },
 ];
 
@@ -177,12 +177,14 @@ const rowSelection = {
 };
 
 const InternList = () => {
+    
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const [selectedIntern, setSelectedIntern] = useState(null);
 
     const handleOpenEmailPopup = () => {
-        setSelectedIntern(null); 
+        setSelectedIntern(null);
         setEmailPopupVisible(true);
+        console.log('open popup');
     };
 
     const handleCloseEmailPopup = () => {
@@ -227,14 +229,12 @@ const InternList = () => {
                 </div>
             </div>
             {/*Render Email Popup */}
-            {isEmailPopupVisible && (
-                <SendEmailPopup
-                    visible={isEmailPopupVisible}
-                    onClose={handleCloseEmailPopup}
-                    onSendEmail={handleSendEmail}
-                    intern={selectedIntern}
-                />
-            )}
+            <SendEmailPopup
+                onClose={handleCloseEmailPopup}
+                onSendEmail={handleSendEmail}
+                // intern={selectedIntern}
+                openPopup={isEmailPopupVisible}
+            />
         </div>
     );
 }
