@@ -105,6 +105,9 @@ body {
     gap: 1.2em;
     flex-wrap: wrap;
 }
+.filter-search{
+    display: inline;
+}
 
 .button {
     display: flex;
