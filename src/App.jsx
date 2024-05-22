@@ -41,6 +41,8 @@ function App() {
 
           <Route path="/ApproveCV" element={<ApproveCV />} />
           {/* Route to the CV approval page, rendering the ApproveCV component */}
+          {/* <Route path="/shedule" element={<Sheldule />} /> */}
+          {/* Route to the CV approval page, rendering the ApproveCV component */}
         </Routes>
       </>
   );

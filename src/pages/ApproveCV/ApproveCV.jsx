@@ -4,6 +4,7 @@ import "./ApproveCV.css";
 import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
+import Sheldule from "./Schedule.jsx";
 import {
     DownOutlined,
     EyeOutlined,
@@ -326,7 +327,7 @@ function MyComponent() {
 
     // Number of interns per page
     const internsPerPage = 6;
-    
+
     // React useState hook to manage the current page number
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -348,7 +349,6 @@ function MyComponent() {
 // Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(interns.length / internsPerPage);
 
-    
 // State to manage various filters for the interns
     const [filters, setFilters] = useState({
         internID: '',            // Filter by intern ID
@@ -603,10 +603,7 @@ function MyComponent() {
                     <h2 className="section-title">Search for Information</h2>
                     <div className="button-group">
                         <button className="button button-schedule">
-                            <img
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/df9311da8cede04c8358b213f39485de98001c308664cf2bf10daff525cb7286?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                alt="Schedule Icon" className="button-icon" />
-                            <span>Schedule Interview</span>
+                        <Sheldule />
                         </button>
                         <button className="button button-export">
                             <img
