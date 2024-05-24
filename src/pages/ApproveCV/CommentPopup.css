@@ -115,3 +115,7 @@
     opacity: 0.5;
 }
   
+.comment-popup-modal .ant-modal-body {
+    max-height: 80vh; /* Giới hạn chiều cao tối đa */
+    overflow: auto; /* Thêm thanh cuộn khi nội dung vượt quá kích thước */
+  }
