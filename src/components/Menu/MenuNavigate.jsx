@@ -6,12 +6,11 @@ import Icon, {
   SettingOutlined,
   TeamOutlined,
   ProjectOutlined,
-  SettingTwoTone,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import logo from "../../assets/Logo.png";
-import userImage from "../../assets/user_image.png";
 import AccountSetting from "../AccountSetting/AccountSetting";
+import { useNavigate } from 'react-router-dom'
 
 const ZaloSvg = () => (
   <svg
@@ -154,11 +153,17 @@ const items = [
 ];
 
 const MenuNavigate = () => {
+  const navigate = useNavigate()
+  const onClick = (value) => {
+    navigate('/' + value.key)
+    console.log(value.key);
+  }
+
   return (
     <div className="menu">
       <img src={logo} alt="Logo" className="logo-amazing" />
       <Menu
-        //onClick={onClick}
+        onClick={onClick}
         style={{
           width: '100%',
         }}

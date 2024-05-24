@@ -33,3 +33,24 @@
     border-radius: 34px;
     margin: 0 auto;
 }
+
+.group-filter-table .filter {
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 20px 0 20px;
+}
+
+.group-filter-table .filter .filter-group {
+    width: 23%;
+}
+
+.filter-button {
+    padding: 10px;
+}
+
+.search-button {
+    padding: 10px;
+}
