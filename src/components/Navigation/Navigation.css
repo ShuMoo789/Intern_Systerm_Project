@@ -1,0 +1,44 @@
+.content {
+    width: 100%;
+    right: 0;
+    top: 0;
+    margin: 20px auto;
+}
+
+.content .header-navigation {
+    width: 92%;
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.content .header-navigation .title-name {
+    color: #280559;
+    font-size: 20px;
+}
+
+.content .header-navigation .account-setting {
+    width: 226px;
+    bottom: 0;
+    margin-right: 50px;
+}
+
+.content .navigation {
+    width: 92%;
+    height: 60px;
+    background-color: #FFFFFF;
+    border-radius: 34px;
+    position: relative;
+    margin: auto;
+}
+
+.navigation .search-navigation {
+    width: 18.4%;
+    height: 100%;
+    padding: 15px;
+    align-items: center;
+    color: #92929D;
+}
