@@ -6,7 +6,7 @@ import image7 from "../../assets/image 7.png"; // Import the additional image
 import { Link } from "react-router-dom";
 
 const URL = "https://65f40c0f105614e654a1c922.mockapi.io/tRgis";
-const App = () => {
+const SignUpFormIntern = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
@@ -170,4 +170,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default SignUpFormIntern;
