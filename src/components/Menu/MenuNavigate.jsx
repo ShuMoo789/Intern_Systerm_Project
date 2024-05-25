@@ -4,6 +4,7 @@ import Icon, { AppstoreOutlined, AuditOutlined, SettingOutlined, TeamOutlined, P
 import { Menu } from 'antd';
 import logo from '../../assets/Logo.png'
 import userImage from '../../assets/user_image.png'
+import AccountSetting from '../AccountSetting/AccountSetting.jsx'
 
 const ZaloSvg = () => (
     <svg width="1em" height="1em" viewBox="0 0 26 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,21 +111,14 @@ const MenuNavigate = () => {
             <Menu
                 //onClick={onClick}
                 style={{
-                    width: 256,
+                    width: '100%',
                 }}
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"
                 items={items}
             />
-            <div className="user-container">
-                <img src={userImage} alt="user image" className="user-image" />
-                <div className="user-info">
-                    <div className="user-name">Natalie Brogan</div>
-                    <div className="user-role">Admin</div>
-                </div>
-                <SettingTwoTone twoToneColor="#DB0D4B" />
-            </div>
+            <AccountSetting/>
         </div>
     )
 }

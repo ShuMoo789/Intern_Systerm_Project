@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 // Importing necessary components and pages for the application routing
-import AccountManagement from "./pages/AccountManagement/AccountManagement";
+import AccountManagement from "./pages/AccountManagement/AccountManagement.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 import PasswordReset from "./pages/PasswordReset/PasswordReset";

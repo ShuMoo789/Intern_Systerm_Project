@@ -14,12 +14,12 @@
 }
 
 .rectangle-content .content1 {
-    height: 250px;
+    height: 200px;
 }
 
 .rectangle-content .content1 .sub-title {
-    padding: 0 24px;
-    width: 70%;
+    padding: 24px 24px 0 24px;
+    width: 100%;
 }
 
 .rectangle-content .content1 .sub-content {
