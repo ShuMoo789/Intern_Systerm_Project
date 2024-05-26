@@ -105,6 +105,7 @@ body {
     gap: 1.2em;
     flex-wrap: wrap;
 }
+
 .filter-search{
     display: inline;
 }
@@ -365,4 +366,5 @@ input[type="checkbox"]:checked {
 #APRCV > .content > .filter-section > .list::-webkit-scrollbar-thumb:hover {
     background: #555; /* Background color of the thumb on hover */
     cursor: pointer;
+
 }

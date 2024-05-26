@@ -1,4 +1,6 @@
-
+/* body {
+  overflow: hidden; /* Ngăn cuộn trang 
+}  */
 
 .app-container {
   display: flex;
