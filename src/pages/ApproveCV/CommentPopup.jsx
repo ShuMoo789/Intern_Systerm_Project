@@ -1,3 +1,6 @@
+
+// CommentPopup.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Modal, Input, Select, Button } from 'antd';
 import './CommentPopup.css';
@@ -5,9 +8,11 @@ import './CommentPopup.css';
 const { TextArea } = Input;
 const { Option } = Select;
 
+
 // CommentPopup component
 const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
     // State variables for various fields
+
     const [major, setMajor] = useState(intern?.major || '');
     const [programmingLanguage, setProgrammingLanguage] = useState(intern?.programmingLanguage || '');
     const [projectOnGitHub, setProjectOnGitHub] = useState(intern?.projectOnGitHub || '');
@@ -16,17 +21,23 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
     const [comment, setComment] = useState('');
     const [selectedOption, setSelectedOption] = useState(initialPage);
 
+
     // Effect to set selected option when initial page changes
+
     useEffect(() => {
         setSelectedOption(initialPage)
     },[initialPage])
 
+
     // Function to handle button click and change selected option
+
     const handleButtonClick = (index) => {
         setSelectedOption(index);
     };
 
+
     // Function to handle save action
+
     const handleSave = () => {
         const updatedIntern = {
             ...intern,
@@ -42,6 +53,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
 
     return (
         <Modal
+
             title={
                 <div id="section-btn">
                     {/* Buttons to toggle between different sections */}
@@ -81,28 +93,37 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 </div>}
             visible={isVisible}
             onCancel={onClose}
+
             footer={null}
             className="comment-popup-modal"
             width={1200}
         >
+
             {/* Different sections based on selected option */}
             {selectedOption === 0 && (
                 <div className="detail-popup-comment">
                     {/* Input fields for details of intern */}
+
                 </div>
             )}
             {selectedOption === 1 && (
                 <div className="comment-section">
+
                     {/* Input fields for comments */}
+
                 </div>
             )}
             {selectedOption === 2 && (
                 <div className="popup-wrapper">
+
                     {/* Input fields for interview results */}
                 </div>
             )}
+
         </Modal>
     );
 };
 
 export default CommentPopup;
+
+
