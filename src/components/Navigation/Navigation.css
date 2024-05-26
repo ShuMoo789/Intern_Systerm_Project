@@ -8,7 +8,7 @@
 .content .header-navigation {
     width: 92%;
     height: 60px;
-    position: relative;
+    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,8 +22,9 @@
 
 .content .header-navigation .account-setting {
     width: 226px;
-    bottom: 0;
+    height: 100%;
     margin-right: 50px;
+    position: relative;
 }
 
 .content .navigation {

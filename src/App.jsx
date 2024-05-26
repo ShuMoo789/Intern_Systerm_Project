@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 // Importing necessary components and pages for the application routing
-import AccountManagement from "./pages/AccountManagement/AccountManagement";
+import AccountManagement from "./pages/AccountManagement/AccountManagement.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 import PasswordReset from "./pages/PasswordReset/PasswordReset";
@@ -11,6 +11,7 @@ import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage";
 import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
+import InternList from "./pages/InternList/InternList.jsx";
 
 // Define the main App component
 function App() {
@@ -32,7 +33,7 @@ function App() {
         <Route path="/SignUp" element={<SignUpPage />} />
         {/* Route to the SignUpPage, rendering the SignUp_Page component */}
 
-        <Route path="/Profie" element={<AccountManagement />} />
+        <Route path="/Profile" element={<AccountManagement />} />
         {/* Route to the account management page, rendering the AccountManagement component 
             Note: There seems to be a typo in the path "/Profie". It should likely be "/Profile". */}
 
@@ -50,6 +51,9 @@ function App() {
 
         <Route path="/ApproveCV" element={<ApproveCV />} />
         {/* Route to the CV approval page, rendering the ApproveCV component */}
+
+        <Route path="/internList" element={<InternList />} />
+        {/* Route to the intern list page, rendering the InternList component */}
       </Routes>
     </>
   );

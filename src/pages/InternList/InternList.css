@@ -8,7 +8,7 @@
 } */
 
 .content-intern-list {
-    width: 82%;
+    width: 100%;
     height: 860px;
     position: absolute;
     top: 0;
@@ -17,11 +17,11 @@
 
 .content-intern-list .group-filter-table {
     max-width: 92%;
-    height: 710px;
+    /* height: 710px; */
     /* right: 0;
     top: 120px; */
     /* float: right; */
-    margin: 150px auto 0;
+    margin: 0 auto;
     background-color: #FFFFFF;
     border-radius: 34px;
 }
