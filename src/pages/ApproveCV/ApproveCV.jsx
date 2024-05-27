@@ -568,12 +568,7 @@ function MyComponent() {
         }); // Reset selected school and position filters
     };
 
-    /**
-     * Handles the action to close the view popup.
-     */
-    const handleViewClose = () => {
-        setViewPopupVisible(false); // Hide the view popup
-    };
+    
     
 
     return (

@@ -10,6 +10,7 @@ import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage";
 import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
+import InternList from "./pages/InternList/InternList.jsx";
 
 // Define the main App component
 function App() {
@@ -49,6 +50,8 @@ function App() {
 
         <Route path="/ApproveCV" element={<ApproveCV />} />
         {/* Route to the CV approval page, rendering the ApproveCV component */}
+
+        <Route path="/InternList" element={<InternList />} />
       </Routes>
     </>
   );
