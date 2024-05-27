@@ -11,6 +11,8 @@ import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage";
 import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import GroupList from "./pages/GroupList/GroupList.jsx";
 
 // Define the main App component
 function App() {
@@ -50,6 +52,12 @@ function App() {
 
         <Route path="/ApproveCV" element={<ApproveCV />} />
         {/* Route to the CV approval page, rendering the ApproveCV component */}
+
+        <Route path="/Dashboard" element={<Dashboard />} />
+        {/* Route to the CV approval page, rendering the Dashboard component */}
+
+        <Route path="/GroupList" element={<GroupList />} />
+        {/* Route to the CV approval page, rendering the GroupList component */}
       </Routes>
     </>
   );
