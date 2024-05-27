@@ -86,7 +86,7 @@ function ResetPasswordForm() {
 // Main component that includes the header and the reset password form
 function MyComponent() {
     return (
-        <div className="container">
+        <div className="password-reset">
             <Header />  {/* Header component */}
             <main className="main-content">
                 <div className="content-wrapper">

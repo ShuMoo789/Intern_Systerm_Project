@@ -108,7 +108,7 @@ function ChangePasswordForm() {
 // Main component for the "Enter New Password" page
 function MyPass() {
     return (
-        <div className="container">
+        <div className="enter-new-pass">
             <Header />  {/* Header component */}
             <main className="main-content">
                 <div className="content-wrapper">

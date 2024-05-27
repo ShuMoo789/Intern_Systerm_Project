@@ -36,7 +36,7 @@ function App() {
         {/* Route to the account management page, rendering the AccountManagement component 
             Note: There seems to be a typo in the path "/Profie". It should likely be "/Profile". */}
 
-        <Route path="/pwdreset" element={<PasswordReset />} />
+        <Route path="/PasswordReset" element={<PasswordReset />} />
         {/* Route to the password reset page, rendering the PasswordReset component */}
 
         <Route path="/OTPVerify" element={<OTPVerify />} />

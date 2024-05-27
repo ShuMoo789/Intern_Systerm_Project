@@ -125,6 +125,7 @@ const OTPVerify = () => {
                                         onFocus={e => e.target.select()}
                                         onKeyDown={handleKeyDown}
                                         onChange={handleOtpChange}
+                                        style={{height:"50px", width:"50px"}}
                                     />
                                     /* OTP input fields */
                                 ))}
