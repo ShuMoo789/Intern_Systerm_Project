@@ -11,7 +11,12 @@ import {
   Typography,
   Select,
 } from "antd";
-import { FilterOutlined, SearchOutlined } from "@ant-design/icons";
+
+import {
+  FilterOutlined,
+  SearchOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
 
 const { Title } = Typography;
 import userImage from "../../assets/user_image.png";
@@ -342,7 +347,10 @@ const GroupList = () => {
             <Row>
               <Col span={1}></Col>
               <Col>
-                <SearchBar />
+                <SearchBar
+                  customeIcon={<UsergroupAddOutlined />}
+                  customButton="Create groups"
+                />
               </Col>
             </Row>
             <Row>

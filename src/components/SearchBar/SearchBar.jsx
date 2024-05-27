@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({ customeIcon, customButton }) => {
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
@@ -140,7 +140,7 @@ const SearchBar = () => {
         ></Input>
         <Space size={"large"}>
           <Button
-            icon={<UsergroupAddOutlined />}
+            icon={customeIcon}
             style={{
               minWidth: 150,
               backgroundColor: "#7d3c98",
@@ -149,7 +149,7 @@ const SearchBar = () => {
             }}
             onClick={showModal2}
           >
-            Create Group
+            {customButton}
           </Button>
           <Button
             icon={<FileExcelOutlined />}
