@@ -1,191 +1,159 @@
+import { Flex, Form, Input, Button, Modal } from "antd";
 import React, { useState } from "react";
-import { Image, Tabs, Form, Input, Button, Row, Col } from "antd";
-import "antd/dist/reset.css"; // Reset Ant Design styles
-import Logo from "../../assets/Logo.png";
-import image7 from "../../assets/image 7.png"; // Import the additional image
+import axios from "axios";
 import { Link } from "react-router-dom";
-const { TabPane } = Tabs;
-const URL = "https://65f40c0f105614e654a1c922.mockapi.io/tRgis";
-const items = [
-  {
-    key: "1",
-    label: "Admin",
-  },
-  {
-    key: "2",
-    label: "Human resources",
-  },
-  {
-    key: "3",
-    label: "Mentor",
-  },
-  {
-    key: "4",
-    label: "School",
-  },
-  {
-    key: "5",
-    label: "Intern",
-  },
-];
+import { CheckCircleOutlined } from "@ant-design/icons";
 
-const onChange = (key) => {
-  console.log(key);
-};
+const SignUpForm = ({ role, dataSet }) => {
+  const [wrong, setWrong] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-const App = () => {
-  const [loading, setLoading] = useState(false);
+  const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
 
-  const onFinish = async (values) => {
-    setLoading(true);
+  const handleSignUp = async (values) => {
+    const { fullName, email, password, repassword } = values;
+
+    if (password !== repassword) {
+      setWrong(true);
+      setEmailExists(false);
+      return;
+    }
+
     try {
-      // Check if password length is at least 5 characters
-      if (values.password.length < 5) {
-        throw new Error("Password must be at least 5 characters long.");
+      const { data: users } = await axios.get(API_URL + dataSet);
+      const emailAlreadyExists = users.some((user) => user.email === email);
+
+      if (emailAlreadyExists) {
+        setEmailExists(true);
+        setWrong(false);
+        return;
       }
 
-      const response = await fetch(URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+      const response = await axios.post(API_URL + dataSet, {
+        fullName,
+        email,
+        password,
+        role,
       });
-      if (!response.ok) {
-        throw new Error("Failed to add user.");
-      }
-      alert("Account added successfully!");
+
+      setIsModalVisible(true);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+
+      return response.data;
     } catch (error) {
-      console.error("Error adding user:", error.message);
-      alert("Failed to add user. " + error.message);
-    } finally {
-      setLoading(false);
+      console.error("Error signing up:", error);
+      throw error;
     }
   };
 
   return (
-    <div className="app-container">
-      <Row justify="center" align="top" style={{ height: "100px" }}>
-        <Col span={12}>
-          <div className="content-container">
-            <div style={{ marginTop: "-20px" }}>
-              <Image width={200} src={Logo} className="logo-image" />
-            </div>
-            <div className="form-container">
-              <Tabs items={items} onChange={onChange} />
-              <h2 className="sign-up-title">Sign Up</h2>
-              <p className="sign-up-description">
-                Please fill your detail to create your account.
-              </p>
-              <Form layout="vertical" onFinish={onFinish}>
-                <Form.Item
-                  label="Full Name"
-                  name="fullname"
-                  rules={[
-                    { required: true, message: "Please enter your full name!" },
-                  ]}
-                >
-                  <Input placeholder="Enter your full name" />
-                </Form.Item>
-                <Form.Item
-                  label="Student’s ID"
-                  name="studentID"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter your student ID!",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Enter your student’s ID" />
-                </Form.Item>
-                <Form.Item
-                  label="School"
-                  name="school"
-                  rules={[
-                    { required: true, message: "Please enter your school!" },
-                  ]}
-                >
-                  <Input placeholder="Enter your school" />
-                </Form.Item>
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[
-                    {
-                      type: "email",
-                      message: "The input is not valid E-mail!",
-                    },
-                    { required: true, message: "Please enter your email!" },
-                  ]}
-                >
-                  <Input placeholder="youremail@example.com" />
-                </Form.Item>
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Please enter your password!" },
-                    {
-                      min: 5,
-                      message: "Password must be at least 5 characters long.",
-                    },
-                  ]}
-                >
-                  <Input.Password placeholder="••••••••" />
-                </Form.Item>
-                <Form.Item
-                  label="Re-type Password"
-                  name="confirm"
-                  dependencies={["password"]}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please re-enter your password!",
-                    },
-                    ({ getFieldValue }) => ({
-                      validator(_, value) {
-                        if (!value || getFieldValue("password") === value) {
-                          return Promise.resolve();
-                        }
-                        return Promise.reject(
-                          new Error(
-                            "The two passwords that you entered do not match!"
-                          )
-                        );
-                      },
-                    }),
-                  ]}
-                >
-                  <Input.Password placeholder="Re-enter your password" />
-                </Form.Item>
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    block
-                    loading={loading}
-                  >
-                    Sign Up
-                  </Button>
-                  Already have an account? <Link to="/login">Sign in</Link>
-                </Form.Item>
-              </Form>
-            </div>
-          </div>
-        </Col>
-        <Col span={12}>
-          <div className="image-container">
-            <Image
-              src={image7}
-              className="additional-image"
-              style={{ marginTop: "240px", width: "80%" }}
-            />
-          </div>
-        </Col>
-      </Row>
+    <div>
+      <Flex vertical align="center">
+        <Flex vertical>
+          <h1
+            style={{
+              fontSize: "30px",
+              color: "#1890ff",
+              marginBottom: "-1px",
+            }}
+          >
+            Sign Up
+          </h1>
+          <span>Please fill your details to create your account</span>
+
+          <Form
+            name="a"
+            initialValues={{ remember: true }}
+            layout="vertical"
+            style={{ marginTop: "40px" }}
+            onFinish={handleSignUp}
+          >
+            <Form.Item
+              label="Full Name"
+              name="fullName"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your full name!",
+                },
+              ]}
+            >
+              <Input placeholder="Enter your full name" allowClear />
+            </Form.Item>
+
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input placeholder="youremail@example.com" allowClear />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password placeholder="**********" />
+            </Form.Item>
+
+            <Form.Item
+              label="Re-type password"
+              name="repassword"
+              rules={[
+                {
+                  required: true,
+                  message: "Please re-type your password!",
+                },
+              ]}
+            >
+              <Input.Password placeholder="Re-enter your password" />
+            </Form.Item>
+            {wrong && (
+              <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
+                Passwords don't match!
+              </div>
+            )}
+            {emailExists && (
+              <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
+                Email already existed!
+              </div>
+            )}
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" block>
+                Sign in
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Flex vertical align="center">
+                <div>
+                  <span>Already have an account?</span>{" "}
+                  <Link to="/">Sign in</Link>
+                </div>
+              </Flex>
+            </Form.Item>
+          </Form>
+        </Flex>
+      </Flex>
+
+      <Modal open={isModalVisible} footer={null} closable={false} centered>
+        <div style={{ textAlign: "center" }}>
+          <CheckCircleOutlined style={{ fontSize: "48px", color: "#52c41a" }} />
+          <h2>Signed up successfully</h2>
+        </div>
+      </Modal>
     </div>
   );
 };
 
-export default App;
+export default SignUpForm;

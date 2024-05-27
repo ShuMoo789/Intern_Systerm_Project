@@ -1,12 +1,14 @@
-.container {
+.enter-new-pass {
     background-color: rgba(255, 255, 255, 1);
     display: flex;
     flex-direction: column;
     /* padding: 19px 0 80px 63px; */
+    height: 100vh;
+    padding: 0 65px;
 }
 
 @media (max-width: 991px) {
-    .container {
+    .enter-new-pass {
         padding: 19px 20px 80px;
     }
 }
@@ -57,6 +59,7 @@
 
 .form-column {
     flex: 0 0 36%;
+    justify-content: center;
 }
 
 @media (max-width: 991px) {

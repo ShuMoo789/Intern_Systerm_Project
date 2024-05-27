@@ -1,10 +1,4 @@
-/* html, body {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-  
+
 .container-1 {
     display: flex;
     flex-direction: column;

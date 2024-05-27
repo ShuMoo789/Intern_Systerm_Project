@@ -1,3 +1,10 @@
+.content {
+    width: 1206px;
+    right: 0;
+    top: 50px;
+    position: absolute;
+}
+
 .content .welcome,
 .content .user-gmail {
     color: #000000;
@@ -8,11 +15,10 @@
     padding-bottom: 24px;
 }
 
-.ava-image {
+.user-image {
     border-radius: 50%;
     width: 165px;
     height: 165px;
-    margin-left: 42%;
 }
 
 .rectangle-content-group {
@@ -21,4 +27,4 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 48px;
-}    
+}
