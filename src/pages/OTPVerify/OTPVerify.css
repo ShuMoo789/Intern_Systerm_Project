@@ -7,6 +7,7 @@
     padding: 0 65px;
     /* Set to 100vw to fill up the viewport */
     /* width: 95vw; */
+    height: 100vh;
 }
 
 @media (max-width: 991px) {
@@ -84,7 +85,7 @@
 .verification-section {
     display: flex;
     flex-direction: column;
-    justify-content: baseline;
+    justify-content: center;
     line-height: normal;
     width: 36%;
     margin-left: 0;
@@ -169,8 +170,6 @@
 }
 
 .otp-group input{
-    height: 50px;
-    width: 50px;
     padding: 5px;
     font-size: 25px;
     font-weight: 500;

@@ -5,6 +5,7 @@ import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
 import Sheldule from "./Schedule.jsx";
+import FeedbackModel from "../../components/FeedbackModal/FeedbackModel.jsx";
 import {
     DownOutlined,
     EyeOutlined,
@@ -566,13 +567,6 @@ function MyComponent() {
             school: null,
             position: null,
         }); // Reset selected school and position filters
-    };
-
-    /**
-     * Handles the action to close the view popup.
-     */
-    const handleViewClose = () => {
-        setViewPopupVisible(false); // Hide the view popup
     };
     
 
