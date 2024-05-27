@@ -1,17 +1,12 @@
 import React from "react";
 import userImage from "../../assets/user_image.png";
 import { SettingTwoTone } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import "./AccountSetting.css";
 
 const AccountSetting = () => {
-  const navigate = useNavigate()
-  const handleClickUserImage = () => {
-    navigate('/profile')
-  }
   return (
     <div className="user-container">
-      <img onClick={handleClickUserImage} src={userImage} alt="user image" className="user-image" />
+      <img src={userImage} alt="user image" className="user-image" />
       <div className="user-info">
         <div className="user-name">Natalie Brogan</div>
         <div className="user-role">Admin</div>
