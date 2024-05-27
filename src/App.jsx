@@ -8,7 +8,7 @@ import PasswordReset from "./pages/PasswordReset/PasswordReset";
 import OTPVerify from "./pages/OTPVerify/OTPVerify";
 import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 
-import SignUp from "./components/SignUpForm/SignUpForm";
+// import SignUp from "./components/SignUpForm/SignUpForm";
 import ConfirmCV from "./pages/ConfirmCV/ConfirmCV";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage";
