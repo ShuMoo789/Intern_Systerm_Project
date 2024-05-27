@@ -9,8 +9,9 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-      <Row style={{ margin: "50px 0px" }}>
-        <Col span={12}>
+      <Row style={{ margin: "50px 30px 20px 30px" }}>
+        <Col span={1}></Col>
+        <Col span={8}>
           <div>
             <Tabs
               defaultActiveKey="1"
@@ -63,14 +64,14 @@ const LoginPage = () => {
           </div>
         </Col>
 
-        <Col span={11}>
+        <Col>
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/769194cc6b501f03568e57e28b6c0656e834e905ae2d3de0cdbbcf291c9e53b3?apiKey=41832340d6f545c2a0509736ad9e1693&"
-            style={{ height: "600px" }}
+            style={{ height: "700px" }}
           />
         </Col>
 
-        <Col span={1}></Col>
+        <Col></Col>
       </Row>
       ;
     </>
