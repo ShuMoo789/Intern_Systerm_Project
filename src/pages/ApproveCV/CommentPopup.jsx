@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Input, Select, Button } from 'antd';
 import './CommentPopup.css';
+import FeedBackModal from '../../components/FeedbackModal/FeedbackModel';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -26,7 +27,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
 
     useEffect(() => {
         setSelectedOption(initialPage)
-    },[initialPage])
+    }, [initialPage])
 
 
     // Function to handle button click and change selected option
@@ -51,6 +52,11 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
         onSave(updatedIntern);
     };
 
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+
+    const handleCloseFeedbackModal = () => {
+        setShowFeedbackModal(false);
+    };
     return (
         <Modal
 
@@ -117,6 +123,10 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 <div className="popup-wrapper">
 
                     {/* Input fields for interview results */}
+                    <div>
+                        <FeedBackModal />
+
+                    </div>
                 </div>
             )}
 
