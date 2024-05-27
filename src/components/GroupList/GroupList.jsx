@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Input, Modal, Select, Table, message } from 'antd';
-import PeopleIcon from '@mui/icons-material/People';
+// import PeopleIcon from '@mui/icons-material/People';
 import MenuNavigate from '../Menu/MenuNavigate';
 import "../GroupList/GroupList.css";
 

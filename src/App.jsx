@@ -21,7 +21,7 @@ function App() {
         <Route path="/OTPVerify" element={<OTPVerify />} />
         <Route path="/EnterNewPass" element={<EnterNewPass />} />
         <Route path="/register" element={<SignUp />} />
-        <Route path="/creategrp" element={<GroupList/>}/>
+        {/* <Route path="/creategrp"  element={<GroupList/>}/> */}
         <Route path="/confirmCV" element={<ConfirmCV/>}/>
       </Routes>
     </>

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import "./ConfirmCV.css";
-import { Table, Checkbox, Button, Select } from 'antd'; // Import Select from antd
+import { Table, Checkbox, Button, Select, Modal, Row, Col } from 'antd'; // Import Select from antd
 import MenuNavigate from '../../components/Menu/MenuNavigate';
 import User_Img from "../../assets/user_image.png";
+import SendMailButton from '../../components/SendMailButton/SendMailButton';
+import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton"
+import MailOutlined from "@ant-design/icons/MailOutlined"
 import {
     DownOutlined,
     EyeOutlined,
@@ -21,7 +24,7 @@ import {
 } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker;
 const { Option } = Select; // Destructure Option from Select
 dayjs.extend(customParseFormat);
 function IconTextBlock({ iconSrc, altText, text }) {
@@ -51,7 +54,7 @@ const interns = [
         address: "District 9",
         email: "abc@gmail.com",
         cvLink: "Link",
-        commentsCV: "1 comment",
+        commentsCV: "1",
         confirmEmail: "Yes",
         interviewer: "Ajmal Abdul",
         status: "Passed",
@@ -69,7 +72,7 @@ const interns = [
         address: "District 1",
         email: "john.doe@gmail.com",
         cvLink: "Link",
-        commentsCV: "2 comments",
+        commentsCV: "2 ",
         confirmEmail: "No",
         interviewer: "Jane Smith",
         status: "Pending",
@@ -87,7 +90,7 @@ const interns = [
         address: "District 1",
         email: "john.doe@gmail.com",
         cvLink: "Link",
-        commentsCV: "2 comments",
+        commentsCV: "2 ",
         confirmEmail: "No",
         interviewer: "Jane Smith",
         status: "Failed",
@@ -105,7 +108,7 @@ const interns = [
         address: "District 1",
         email: "john.doe@gmail.com",
         cvLink: "Link",
-        commentsCV: "2 comments",
+        commentsCV: "2 ",
         confirmEmail: "No",
         interviewer: "Jane Smith",
         status: "Pending",
@@ -134,7 +137,7 @@ const ConfirmCV = () => {
 
     // Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(interns.length / internsPerPage);
-
+    const [commentPopupVisible, setCommentPopupVisible] = useState(false);
     // State to manage various filters for the interns
     // const [filters, setFilters] = useState({
     //     internID: '',            // Filter by intern ID
@@ -222,8 +225,9 @@ const ConfirmCV = () => {
                 </td>
                 {/* Action buttons for viewing intern details and feedbacks */}
                 <td style={{ display: 'flex' }}>
-                    <div className="view" onClick={() => handleViewClick(intern)}>View</div>
-
+                    <div className="view" onClick={() => {
+                        handleViewClick(intern);// Set the modal visibility to true
+                    }}>View</div>
                 </td>
             </tr>
         ));
@@ -420,7 +424,19 @@ const ConfirmCV = () => {
     const handleViewClose = () => {
         setViewPopupVisible(false); // Hide the view popup
     };
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
 
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setSelectedIntern(null);
+        setCommentPopupVisible(false);
+    };
     return (
         <div id="APRCV">
 
@@ -429,7 +445,7 @@ const ConfirmCV = () => {
 
             <main className="content">
                 <header className="content-header">
-                    <h1 className="content-title">Approve CV</h1>
+                    <h1 className="content-title"><b>Confirm CV</b></h1>
                     <div className="user-info">
                         <img loading="lazy"
                             src={User_Img}
@@ -450,6 +466,7 @@ const ConfirmCV = () => {
                         {/* <button className="button button-schedule">
                             <Sheldule />
                         </button> */}
+                        <SendMailButton />
                         <button className="button button-export">
                             <img
                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
@@ -592,6 +609,7 @@ const ConfirmCV = () => {
                             </table>
                         </div>
                     </div>
+
                     <div className="pagination">
                         <button
                             className="pagination-button"
@@ -615,10 +633,212 @@ const ConfirmCV = () => {
                             <ArrowRightOutlined />
                         </button>
                     </div>
-                </section>
-            </main>
 
-        </div>
+                </section>
+                {selectedIntern && (
+                    <Modal
+                        title="View details of Intern"
+                        visible={commentPopupVisible}
+                        onCancel={handleCancel}
+                        width={900}
+                        footer={null}
+                    >
+                        <Row gutter={[16, 16]}>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Intern ID:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {selectedIntern.internID}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Date Interview:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.dateInterView}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Time Interview:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.timeinterview}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Full Name:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.fullName}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Date Of Birth:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.dateOfBirth}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Phone Number:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.phoneNumber}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Position:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.position}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>School:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {selectedIntern.school}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Address:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.address}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Email:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    <a href={`mailto:${selectedIntern.email}`}>
+                                        {selectedIntern.email}
+                                    </a>
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>CV Link:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    <a
+                                        href={selectedIntern.cvLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Link
+                                    </a>
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p>
+                                    <strong>Interviewer:</strong>
+                                </p>
+                                <p
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                    }}
+                                >
+                                    {" "}
+                                    {selectedIntern.interviewer}
+                                </p>
+                            </Col>
+                        </Row>
+
+                    </Modal>
+                )}
+
+            </main >
+
+
+        </div >
     );
 };
 

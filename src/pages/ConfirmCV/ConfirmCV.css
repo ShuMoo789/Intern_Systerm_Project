@@ -17,6 +17,9 @@ body {
 .content {
     padding: 20px 20px 0 20px;
     overflow-x: hidden;
+    position: absolute;
+    top: 0px;   
+    transform: translateX(-40px);
 }
 
 .content-header {
@@ -113,7 +116,7 @@ body {
     align-items: center;
     padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -132,6 +135,15 @@ body {
 
 .button-schedule:hover {
     background-color: #5b2c6f;
+}
+
+.button-email {
+    background-color: #6537B1;
+    color: #fff;
+}
+
+.button-email:hover {
+    background-color: #523286;
 }
 
 .button-export {
@@ -365,3 +377,15 @@ input[type="checkbox"]:checked {
     background: #555; /* Background color of the thumb on hover */
     cursor: pointer;
 }
+.table-container {
+    width: 76%; /* Adjust this value to your desired width */
+    margin: 0 auto; /* Centers the table container */
+    margin-right: 60px;
+    margin-top: 200px;
+  }
+  
+  .ant-table {
+    width: 100%; /* Ensures the table takes up the full width of the container */
+    max-width: 100%; /* Prevents the table from exceeding the container's width */
+    overflow-x: auto; /* Allows horizontal scrolling if necessary */
+  }
