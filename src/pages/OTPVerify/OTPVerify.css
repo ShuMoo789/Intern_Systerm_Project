@@ -49,7 +49,7 @@
 }
 
 .language-code {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
 }
 
 .dropdown-icon {
@@ -102,14 +102,15 @@
     text-align: center;
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    font: 700 40px Inter, sans-serif;
+    font: 700 40px Quicksand, sans-serif;
     margin: 36px;
+    text-shadow: 2px 2px 4px rgba(154, 149, 149, 0.87);
 }
 
 .verification-description {
     color: #667085;
     margin-top: 21px;
-    font: 18px/120% Inter, sans-serif;
+    font: 18px/120% Quicksand, sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -134,7 +135,7 @@
 
 .verification-code {
     color: #000000; /* Change the color to a lighter color */
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     /* border: 1px solid rgba(0, 0, 0, 1); */
     flex-grow: 1;
 }
@@ -150,7 +151,7 @@
     display: flex;
     background-color: #fff;
     color: rgb(72, 137, 233);
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     border: none;
     font-weight: 600;
     /* flex-grow: 1; */
@@ -178,6 +179,7 @@
     border: 5px solid #ccc;
     border-radius: 4px;
     color: #667085;
+    font-family: Quicksand, sans-serif;
 }
 
 input::-webkit-inner-spin-button,
@@ -187,7 +189,7 @@ input::-webkit-outer-spin-button{
 }
 
 .verify-button {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     border: none;
     justify-content: center;
     align-items: center;
@@ -234,4 +236,12 @@ input::-webkit-outer-spin-button{
         /* max-width: 100%; */
         margin-top: 36px;
     }
+}
+
+.resend-section{
+    font-family: 'Quicksand', sans-serif;
+}
+
+p{
+    font-family: 'Quicksand', sans-serif;
 }
