@@ -1,0 +1,12 @@
+.table-container {
+    width: 76%; /* Adjust this value to your desired width */
+    margin: 0 auto; /* Centers the table container */
+    margin-right: 60px;
+    margin-top: 200px;
+  }
+  
+  .ant-table {
+    width: 100%; /* Ensures the table takes up the full width of the container */
+    max-width: 100%; /* Prevents the table from exceeding the container's width */
+    overflow-x: auto; /* Allows horizontal scrolling if necessary */
+  }
