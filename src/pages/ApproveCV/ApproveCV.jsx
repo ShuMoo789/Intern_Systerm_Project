@@ -515,10 +515,10 @@ function ApproveCV() {
                                     }}
                                     columns={columns}
                                     dataSource={DataApproveList}
-                                    scroll={{ x: '2200px', y: '360px' }}
+                                    scroll={{ x: '2200px', y: '470px' }}
                                     style={{ maxWidth: '100%', minHeight: '100%' }}
                                     pagination={{
-                                        pageSize: 6,
+                                        pageSize: 8,
                                     }}
                                 />
                         </div>
