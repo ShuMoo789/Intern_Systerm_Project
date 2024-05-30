@@ -7,7 +7,6 @@
     left: 0; */
     position: relative;
     background-color: #fff;
-    color: blue;
     align-items: center;
     border-radius: 0 30px 30px 0;
 }
@@ -18,4 +17,20 @@
     height: auto;
     margin: 0 auto;
     padding: 24.82px;
+}
+
+.menu .button-collapsed {
+    position: absolute;
+    width: 15px;
+    height: 70px;
+    right: -15px;
+    top: 50%;
+    background-color: #FFFFFF;
+    z-index: 10;
+    border-radius: 0 45px 45px 0;
+    display: flex;
+}
+
+.menu .button-collapsed:hover {
+    cursor: pointer;
 }
