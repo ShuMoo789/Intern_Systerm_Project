@@ -4,9 +4,9 @@ import "./ApproveCV.css";
 import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
-import DataApproveList from "../../data/ApproveCV.json"
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json"
+import MainLayout from "../../MainLayout/MainLayout.jsx";
 import {
     DownOutlined,
     EyeOutlined,

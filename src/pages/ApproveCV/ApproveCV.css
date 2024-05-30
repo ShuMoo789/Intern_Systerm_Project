@@ -193,7 +193,6 @@ div.approve-btns {
 }
 
 div.approve-btns > div.view, 
-div.approve-btns > div.feedbacks {
 div.approve-btns {
     display: flex;
 }
@@ -210,7 +209,6 @@ div.approve-btns > div.feedbacks {
 }
 
 div.approve-btns > div.view:hover, 
-div.approve-btns > div.feedbacks:hover{
 div.approve-btns > div.view:hover, 
 div.approve-btns > div.feedbacks:hover{
     color: #ffffff;
@@ -239,7 +237,7 @@ input[type="checkbox"]:checked {
 }
 
 
-#APRCV .content > .filter-section > .filter {
+
 #APRCV .content > .filter-section > .filter {
     display: flex;
     gap: 10px;
@@ -247,25 +245,25 @@ input[type="checkbox"]:checked {
     margin-bottom: 1em;
 }
 
-#APRCV .content > .filter-section > .filter > .fields {
+
 #APRCV .content > .filter-section > .filter > .fields {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
 }
 
-#APRCV .content > .filter-section > .filter > .fields > input {
+
 #APRCV .content > .filter-section > .filter > .fields > input {
     width: 20em;
     background-color: #fff;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons {
+
 #APRCV .content > .filter-section > .filter > .buttons {
     gap: 5px;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons > .btn {
+
 #APRCV .content > .filter-section > .filter > .buttons > .btn {
     padding: 15px 20px;
     text-align: center;
@@ -273,25 +271,25 @@ input[type="checkbox"]:checked {
     cursor: pointer;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
+
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
     border: 1px solid #CBD2DC;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons > .cln-btn:hover {
+
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn:hover {
     color: #fff;
     background-color: #6d6d6d;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
+
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
     background-color: #4889E9;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
+
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
     border: 1px solid #4889E9;
     color: #4889E9;
