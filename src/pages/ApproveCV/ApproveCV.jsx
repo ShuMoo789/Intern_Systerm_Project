@@ -5,7 +5,9 @@ import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
 import DataApproveList from "../../data/ApproveCV.json"
-import Modal from '../../components/FeedbackModal/FeedbackModel.jsx';
+import Sheldule from "./Schedule.jsx";
+import MainLayout from "../../MainLayout/MainLayout.jsx";
+
 import {
     DownOutlined,
     EyeOutlined,
@@ -17,7 +19,7 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
-import {
+import { 
     DatePicker,
     Dropdown,
     Button,
@@ -67,25 +69,25 @@ function ApproveCV() {
     // React useState hook to manage the current page number
     const [currentPage, setCurrentPage] = useState(0);
 
-    // State to manage the currently selected intern(s)
+// State to manage the currently selected intern(s)
     const [selectedIntern, setSelectedIntern] = useState([]);
 
     // State to manage the list of interns
-    const [intern, setIntern] = useState([DataApproveList]);
+    const [intern, setIntern] = useState(DataApproveList);
 
     // State to manage the filtered list of interns
     const [filteredInterns, setFilteredInterns] = useState(DataApproveList);
 
-    // State to manage the visibility of the comment popup
+// State to manage the visibility of the comment popup
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
 
-    // State to manage the initial page number (could be used for resetting or other purposes)
+// State to manage the initial page number (could be used for resetting or other purposes)
     const [initialPage, setInitialPage] = useState(0);
 
     // Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(DataApproveList.length / internsPerPage);
 
-    // State to manage various filters for the interns
+// State to manage various filters for the interns
     const [filters, setFilters] = useState({
         internID: '',            // Filter by intern ID
         dateSubmittedForm: null, // Filter by the date the form was submitted
@@ -106,75 +108,13 @@ function ApproveCV() {
         setCurrentPage(page); // Update the current page state with the new page number
     };
 
-    /**
-     * Function to render the list of interns for the current page.
-     * This function slices the `filteredInterns` array to get the interns for the current page
-     * and maps over them to create table rows.
-     *
-     * @returns {JSX.Element[]} An array of JSX elements representing the rows of the interns table.
-     */
-    const renderInterns = () => {
-        // Calculate the starting index of the interns for the current page
-        const startIndex = currentPage * internsPerPage;
-        // Calculate the ending index of the interns for the current page, ensuring it does not exceed the total number of interns
-        const endIndex = Math.min((currentPage + 1) * internsPerPage, interns.length);
-
-        // Slice the filteredInterns array to get the interns for the current page
-        return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
-            // Each row is a table row (<tr>) element with a unique key based on the index
-            <tr key={index}>
-                {/* Checkbox for selecting the intern */}
-                <td><input type={"checkbox"} /></td>
-                {/* Display intern details in table cells (<td>) */}
-                <td>{intern.internID}</td>
-                <td>{intern.dateSubmittedForm}</td>
-                <td>{intern.fullName}</td>
-                <td>{intern.dateOfBirth}</td>
-                <td>{intern.phoneNumber}</td>
-                <td>{intern.position}</td>
-                <td>{intern.school}</td>
-                <td>{intern.address}</td>
-                <td>{intern.email}</td>
-                {/* Link to the intern's CV */}
-                <td><a href="#">{intern.cvLink}</a></td>
-                {/* Comments section with eye icon for viewing comments and a button to add comments */}
-                <td style={{ display: "flex" }}>
-                    <div className="Comments-CV">
-                        {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
-                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => { handleCommentClick(intern) }} />
-                    </div>
-                    <div className="add-cmt-btn">
-                        <PlusOutlined />
-                    </div>
-                </td>
-                {/* Status section with conditional styling based on the intern's status */}
-                <td>
-                    <div className="Status" style={(intern.status === "Pending") ? {
-                        backgroundColor: "#FFB596",
-                        color: "#E5731C"
-                    } : (intern.status === "Failed") ? {
-                        backgroundColor: "#F5A3B7",
-                        color: "#7D0022"
-                    } : (intern.status === "Passed") ? { backgroundColor: "#B7EACB", color: "#3A7D34" } : {}}>
-                        {intern.status}<DownOutlined />
-                    </div>
-                </td>
-                {/* Action buttons for viewing intern details and feedbacks */}
-                <td style={{ display: 'flex' }}>
-                    <div className="view" onClick={() => handleViewClick(intern)}>View</div>
-                    <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>Feedbacks</div>
-                </td>
-            </tr>
-        ));
-    };
-
     // Extract unique school names from the filteredInterns array
     const schoolNames = [...new Set(filteredInterns.map(intern => intern.school))];
 
-    // Extract unique position names from the filteredInterns array
+// Extract unique position names from the filteredInterns array
     const positionNames = [...new Set(filteredInterns.map(intern => intern.position))];
 
-    // useState hook to manage the selected filters for school and position
+// useState hook to manage the selected filters for school and position
     const [selectedFilters, setSelectedFilters] = useState({
         school: null,   // Currently selected school filter
         major: null, // currently selected major filter
@@ -231,11 +171,13 @@ function ApproveCV() {
         setInitialPage(0);         // Set the initial page to 0
         setCommentPopupVisible(true); // Show the comment popup
     };
+
     const handleViewFeedback = (intern) => {
         setSelectedIntern(intern); // Set the selected intern
-        setInitialPage(2);         // Set the initial page to 2
+        setInitialPage(2);         // Set the initial page to 0
         setCommentPopupVisible(true); // Show the comment popup
-    }
+    };
+
     /**
      * Handles the action to close the comment popup.
      */
@@ -301,7 +243,7 @@ function ApproveCV() {
             address: '',
             dateSubmittedForm: null,
         }); // Reset filter values to default
-        setFilteredInterns(interns); // Reset the filtered interns to the full list
+        setFilteredInterns(intern); // Reset the filtered interns to the full list
         setCurrentPage(0);           // Reset the current page to 0
         setSelectedFilters({
             school: null,
@@ -365,46 +307,46 @@ function ApproveCV() {
             title: 'Phone Number',
             dataIndex: 'phoneNumber',
             width: 120,
-            // filteredValue: [filters.phoneNumber],
-            // onFilter: (value, record) => {
-            //     return record.phoneNumber.includes(value)
-            // }
+            filteredValue: [filters.phoneNumber],
+            onFilter: (value, record) => {
+                return record.phoneNumber.includes(value)
+            }
         },
         {
             title: 'Position',
             dataIndex: 'position',
             width: 120,
-            // filteredValue: [filters.position],
-            // onFilter: (value, record) => {
-            //     return record.position.includes(value)
-            // }
+            filteredValue: [filters.position],
+            onFilter: (value, record) => {
+                return record.position.includes(value)
+            }
         },
         {
             title: 'School',
             dataIndex: 'school',
             width: 160,
-            // filteredValue: [filters.school],
-            // onFilter: (value, record) => {
-            //     return record.school.includes(value)
-            // }
+            filteredValue: [filters.school],
+            onFilter: (value, record) => {
+                return record.school.includes(value)
+            }
         },
         {
             title: 'Address',
             dataIndex: 'address',
             width: 120,
-            // filteredValue: [filters.address],
-            // onFilter: (value, record) => {
-            //     return record.address.includes(value)
-            // }
+            filteredValue: [filters.address],
+            onFilter: (value, record) => {
+                return record.address.includes(value)
+            }
         },
         {
             title: 'Email',
             dataIndex: 'email',
             width: 180,
-            // filteredValue: [filters.email],
-            // onFilter: (value, record) => {
-            //     return record.email.includes(value)
-            // }
+            filteredValue: [filters.email],
+            onFilter: (value, record) => {
+                return record.email.includes(value)
+            }
         },
         {
             title: 'CV',
@@ -442,7 +384,8 @@ function ApproveCV() {
         {
             title: 'Button',
             width: 120,
-            render:() => <div className="approve-btns">
+            render:() => 
+                    <div className="approve-btns">
                         <div className="view" onClick={() => handleViewClick(intern)}>View</div>
                         <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>Feedbacks</div>
                     </div>
@@ -467,137 +410,128 @@ function ApproveCV() {
 
     return (
         <div id="APRCV">
-            <Row>
-                <Col span={4}>
-                    <MenuNavigate />
-                </Col>
-
-                <Col span={20}>
-                    <main className="content">
-                        <header className="content-header">
-                            <h1 className="content-title">Approve CV</h1>
-                            <div className="user-info">
-                                <img loading="lazy"
-                                    src={User_Img}
-                                    alt="User Profile" className="user-profile-small" />
-                                <div className="user-details">
-                                    <span className="user-name">Natalie Brogan</span>
-                                    <span className="user-role">Admin</span>
-                                </div>
-                                <div className="account-setting">
-                                    <SettingOutlined style={{ color: "#DB0D4B" }} />
-                                </div>
+           <MainLayout>
+                <main className="content">
+                    <header className="content-header">
+                        <h1 className="content-title">Approve CV</h1>
+                        <div className="user-info">
+                            <img loading="lazy"
+                                src={User_Img}
+                                alt="User Profile" className="user-profile-small" />
+                            <div className="user-details">
+                                <span className="user-name">Natalie Brogan</span>
+                                <span className="user-role">Admin</span>
                             </div>
-                        </header>
-
-                        <section className="content-section">
-                            <h2 className="section-title">Search for Information</h2>
-                            <div className="button-group">
-                                <button className="button button-schedule">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/df9311da8cede04c8358b213f39485de98001c308664cf2bf10daff525cb7286?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Schedule Icon" className="button-icon" />
-                                    <span>Schedule Interview</span>
-                                </button>
-                                <button className="button button-export">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Export Icon" className="button-icon" />
-                                    <span>Export Excel</span>
-                                </button>
-                                <button className="button button-edit">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Edit Icon" className="button-icon" />
-                                    <span>Edit</span>
-                                </button>
-                                <button className="button button-delete">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Delete Icon" className="button-icon" />
-                                    <span>Delete</span>
-                                </button>
-                                <button className="button button-add-intern">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Add Intern Icon" className="button-icon" />
-                                    <span>Add New Intern</span>
-                                </button>
+                            <div className="account-setting">
+                                <SettingOutlined style={{ color: "#DB0D4B" }} />
                             </div>
-                        </section>
+                        </div>
+                    </header>
 
-                        <section className="filter-section">
-                            <div className="filter">
-                                <div className="fields">
-                                    <Input size="large" placeholder="Enter intern's ID" value={filters.internID} onChange={(e) => handleInputChange('internID', e.target.value)} />
+            <section className="content-section">
+                <h2 className="section-title">Search for Information</h2>
+                <div className="button-group">
+                    <button className="button button-schedule">
+                        <Sheldule />
+                    </button>
+                    <button className="button button-export">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Export Icon" className="button-icon" />
+                        <span>Export Excel</span>
+                    </button>
+                    <button className="button button-edit">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Edit Icon" className="button-icon" />
+                        <span>Edit</span>
+                    </button>
+                    <button className="button button-delete">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Delete Icon" className="button-icon" />
+                        <span>Delete</span>
+                    </button>
+                    <button className="button button-add-intern">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Add Intern Icon" className="button-icon" />
+                        <span>Add New Intern</span>
+                    </button>
+                </div>
+            </section>
 
-                                    <Input size="large" placeholder="Enter intern's Full name" value={filters.fullName} onChange={(e) => handleInputChange('fullName', e.target.value)} />
+                    <section className="filter-section">
+                        <div className="filter">
+                            <div className="fields">
+                                <Input size="large" placeholder="Enter intern's ID" value={filters.internID} onChange={(e) => handleInputChange('internID', e.target.value)} />
 
-                                    <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{ padding: "7px 11px", fontSize: "15px" }} value={filters.dateOfBirth} onChange={(date) => handleInputChange('dateOfBirth', date)} />
+                                <Input size="large" placeholder="Enter intern's Full name" value={filters.fullName} onChange={(e) => handleInputChange('fullName', e.target.value)} />
 
-                                    <Input size="large" placeholder="Enter intern's Phone number" value={filters.phoneNumber} onChange={(e) => handleInputChange('phoneNumber', e.target.value)} />
+                                <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{ padding: "7px 11px", fontSize: "15px" }} value={filters.dateOfBirth} onChange={(date) => handleInputChange('dateOfBirth', date)} />
 
-                                    <Dropdown overlay={createMenu('school', schoolNames)} trigger={['click']}>
-                                        <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }} value={filters.school} onChange={(e) => handleInputChange('school', e.target.value)}>
-                                            {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                            <div style={{ color: "#C7BFBF" }}>{selectedFilters.school ? selectedFilters.school : "Enter intern's School"}</div>
-                                            <DownOutlined />
-                                        </Button>
-                                    </Dropdown>
+                                <Input size="large" placeholder="Enter intern's Phone number" value={filters.phoneNumber} onChange={(e) => handleInputChange('phoneNumber', e.target.value)} />
 
-                                    <Input size="large" placeholder="Enter intern's Email" value={filters.email} onChange={(e) => handleInputChange('email', e.target.value)} />
+                                <Dropdown overlay={createMenu('school', schoolNames)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }} value={filters.school} onChange={(e) => handleInputChange('school', e.target.value)}>
+                                        {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                                        <div style={{ color: "#C7BFBF" }}>{selectedFilters.school ? selectedFilters.school : "Enter intern's School"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
 
-                                    {/* sửa thành major, majorNames khi data có major */}
-                                    {/* <Dropdown overlay={createMenu('major', majorNames)} trigger={['click']}> 
-                                        <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                            <div style={{ color: "#C7BFBF" }}>{selectedFilters.major ? selectedFilters.major : "Enter intern's Major"}</div>
-                                            <DownOutlined />
-                                        </Button>
-                                    </Dropdown> */}
+                                <Input size="large" placeholder="Enter intern's Email" value={filters.email} onChange={(e) => handleInputChange('email', e.target.value)} />
 
-                                    <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
-                                        <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                            <div style={{ color: "#C7BFBF" }}>{selectedFilters.position ? selectedFilters.position : "Enter intern's Position"}</div>
-                                            <DownOutlined />
-                                        </Button>
-                                    </Dropdown>
+                                {/* sửa thành major, majorNames khi data có major */}
+                                {/* <Dropdown overlay={createMenu('major', majorNames)} trigger={['click']}> 
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: "#C7BFBF" }}>{selectedFilters.major ? selectedFilters.major : "Enter intern's Major"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown> */}
 
-                                    <Input size="large" placeholder="Enter intern's Address" value={filters.address} onChange={(e) => handleInputChange('address', e.target.value)} />
+                                <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: "#C7BFBF" }}>{selectedFilters.position ? selectedFilters.position : "Enter intern's Position"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
 
-                                    <DatePicker format={dateFormat} placeholder="Enter intern's Date Submitted Form" style={{ padding: "7px 11px", fontSize: "15px" }} value={filters.dateSubmittedForm} onChange={(date) => handleInputChange('dateSubmittedForm', date)} />
-                                </div>
-                                <div className="buttons">
-                                    <div className="cln-btn btn"><DeleteOutlined style={{ marginRight: "10px" }} onClick={handleClearFilters} />Clean Filter</div>
-                                    <br />
-                                    <div className="srch-btn btn"><SearchOutlined style={{ marginRight: "10px" }} onClick={handleSearch} />Search</div>
-                                </div>
+                                <Input size="large" placeholder="Enter intern's Address" value={filters.address} onChange={(e) => handleInputChange('address', e.target.value)} />
+
+                                <DatePicker format={dateFormat} placeholder="Enter intern's Date Submitted Form" style={{ padding: "7px 11px", fontSize: "15px" }} value={filters.dateSubmittedForm} onChange={(date) => handleInputChange('dateSubmittedForm', date)} />
                             </div>
-                            <div className="list">
-                                    <Table
-                                        rowSelection={{
-                                            type: 'checkbox',
-                                            ...rowSelection
-                                        }}
-                                        columns={columns}
-                                        dataSource={DataApproveList}
-                                        scroll={{ x: '2200px', y: '360px' }}
-                                        style={{ maxWidth: '100%', minHeight: '100%' }}
-                                        pagination={{
-                                            pageSize: 6,
-                                        }}
-                                    />
+                            <div className="buttons">
+                                <div className="cln-btn btn"><DeleteOutlined style={{ marginRight: "10px" }} onClick={handleClearFilters} />Clean Filter</div>
+                                <br />
+                                <div className="srch-btn btn"><SearchOutlined style={{ marginRight: "10px" }} onClick={handleSearch} />Search</div>
                             </div>
-                        </section>
-                    </main>
-                    <CommentPopup
-                        isVisible={commentPopupVisible}
-                        onClose={handleCloseCommentPopup}
-                        intern={selectedIntern}
-                        initialPage={initialPage}
-                        onSave={handleSaveComment}
-                    />
-                </Col>
-            </Row>
+                        </div>
+                        <div className="list">
+                                <Table
+                                    rowSelection={{
+                                        type: 'checkbox',
+                                        ...rowSelection
+                                    }}
+                                    columns={columns}
+                                    dataSource={DataApproveList}
+                                    scroll={{ x: '2200px', y: '360px' }}
+                                    style={{ maxWidth: '100%', minHeight: '100%' }}
+                                    pagination={{
+                                        pageSize: 6,
+                                    }}
+                                />
+                        </div>
+                    </section>
+                </main>
+                <CommentPopup
+                    isVisible={commentPopupVisible}
+                    onClose={handleCloseCommentPopup}
+                    intern={selectedIntern}
+                    initialPage={initialPage}
+                    onSave={handleSaveComment}
+                />
+           </MainLayout>
         </div>
     );
 }
