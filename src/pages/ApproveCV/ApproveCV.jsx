@@ -233,6 +233,12 @@ function ApproveCV() {
         setCommentPopupVisible(true); // Show the comment popup
     };
 
+    const handleViewFeedback = (intern) => {
+        setSelectedIntern(intern); // Set the selected intern
+        setInitialPage(2);         // Set the initial page to 0
+        setCommentPopupVisible(true); // Show the comment popup
+    };
+
     /**
      * Handles the action to close the comment popup.
      */
