@@ -1,23 +1,25 @@
+
+
 .container-1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.AvaCurent{
-    margin: 0 35%;
+.AvaCurent {
+  margin: 0 35%;
 }
 
 .UsernameCurent {
-    text-align: center; 
+  text-align: center;
 }
 
-.ManageAccount{
-    border: 2px solid rgb(41, 13, 143);
-    border-radius: 14px;
-    font-size: medium;
-    padding: 0px 40px 10px 40px;
-    font-weight: 600;
+.ManageAccount {
+  border: 2px solid rgb(41, 13, 143);
+  border-radius: 14px;
+  font-size: medium;
+  padding: 0px 40px 10px 40px;
+  font-weight: 600;
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import userImage from "../../assets/user_image.png";
 import { SettingTwoTone } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import "./AccountSetting.css";
+
 
 const AccountSetting = (props) => {
   const navigate = useNavigate()

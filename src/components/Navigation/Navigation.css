@@ -9,6 +9,7 @@
     width: 92%;
     height: 60px;
     /* position: relative; */
+
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -10,6 +10,7 @@ const OTPVerify = () => {
     const navigate = useNavigate();  // Initialize navigate hook
     const [otpCode, setOtpCode] = useState(["", "", "", ""]);  // State for the OTP code input fields
     const [timeRemaining, setTimeRemaining] = useState(60);  // State for the countdown timer
+    const [error, setError] = useState('');  // State for error messages
     const timerRef = useRef(null);  // Reference to store the interval timer
 
     // useEffect to handle the countdown timer
@@ -65,11 +66,22 @@ const OTPVerify = () => {
     // Function to handle resending the OTP
     const handleResendOTP = () => {
         setTimeRemaining(60);  // Reset the countdown timer
+        // Optionally, you can also update the mock OTP in localStorage if required.
     };
 
     // Function to handle OTP verification
     const handleVerify = () => {
-        navigate("/EnterNewPass");  // Navigate to the EnterNewPass page
+        const enteredOtp = otpCode.join('');  // Combine the OTP fields to a single string
+        const storedOtp = localStorage.getItem('mockOtp');  // Get the mock OTP from localStorage
+
+        if (enteredOtp.length !== 4) {
+            setError(t("Please enter the complete 4-digit OTP"));
+        } else if (enteredOtp === storedOtp) {
+            setError('');
+            navigate("/EnterNewPass");  // Navigate to the EnterNewPass page
+        } else {
+            setError(t("Incorrect OTP"));
+        }
     };
 
     // Function to format the countdown timer
@@ -113,11 +125,13 @@ const OTPVerify = () => {
                                         onFocus={e => e.target.select()}
                                         onKeyDown={handleKeyDown}
                                         onChange={handleOtpChange}
+                                        style={{height:"50px", width:"50px"}}
                                     />
-                                /* OTP input fields */
-                                    ))}
+                                    /* OTP input fields */
+                                ))}
                             </div>
                         </div>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
                         <button className="verify-button" onClick={handleVerify}>
                             {t("Verify")}
                         </button>

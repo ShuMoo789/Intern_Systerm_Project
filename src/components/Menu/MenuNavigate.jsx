@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import "./MenuNavigate.css";
 import Icon, {
   AppstoreOutlined,
@@ -113,6 +114,7 @@ const items = [
     }
 ];
 
+
 const MenuNavigate = ({buttonClick}) => {
   const navigate = useNavigate()
   const onClick = (value) => {
@@ -152,6 +154,5 @@ const MenuNavigate = ({buttonClick}) => {
     </div>
   );
 };
-
 
 export default MenuNavigate;

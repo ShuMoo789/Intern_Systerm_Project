@@ -121,7 +121,6 @@ const Sheldule = () => {
       borderRadius: '10px',
       padding: '8px',
       border: '1px solid #ccc',
-      borderRadius: '10px',
       boxSizing: 'border-box', // Add this line
       fontSize: '14px', // Adjust font size if needed
     }}
@@ -257,7 +256,6 @@ const Sheldule = () => {
               borderRadius: '10px',
               padding: '8px',
               border: '1px solid #ccc',
-              borderRadius: '10px',
               boxSizing: 'border-box', // Add this line
               fontSize: '14px', // Adjust font size if needed
             }}

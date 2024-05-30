@@ -1,368 +1,124 @@
-/* ApproveCV.css */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-#APRCV{
-    min-height: 100vh;
-    height: fit-content;
-    display: flex;
-    width: 100%;
-}
-
-.content {
-    padding: 20px 20px 0 20px;
-    width: 100%;
-    overflow-x: hidden;
-}
-
-.content-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+/* CommentPopup.css */
+.comment-popup-modal .ant-modal-content {
     border-radius: 10px;
-    margin-bottom: 20px;
 }
 
-.content-title {
-    margin: 0;
-    font-size: 24px;
-    color: #2c3e50;
-}
-
-.user-info {
-    width: 25%;
-    display: grid;
-    grid-template-columns: min-content auto min-content;
-    align-items: center;
-    cursor: pointer;
-}
-
-#APRCV > .content > .content-header > .user-info > .account-setting {
+.comment-popup-footer {
     display: flex;
-    justify-content: center;
-    transition: 0.3s ease;
-}
-
-#APRCV > .content > .content-header > .user-info > .account-setting:hover {
-    rotate: 90deg;
-}
-
-.user-profile-small {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
-}
-
-.user-details {
-    text-align: left;
-}
-
-.user-name {
-    font-weight: bold;
-    display: block;
-    color: black;
-}
-
-.user-role {
-    font-size: 12px;
-    color: #7f8c8d;
-}
-
-.content-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: 20px;
-    /* margin-bottom: 10px; */
-    color: #92929D;
-}
-
-#APRCV > .content > .filter-section {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* overflow-x: hidden; */
-}
-
-.button-group {
-    display: flex;
-    gap: 1.2em;
-    flex-wrap: wrap;
-}
-.filter-search{
-    display: inline;
-}
-
-.button {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.button-schedule {
-    background-color: #7d3c98;
-    color: #fff;
-}
-
-.button-schedule:hover {
-    background-color: #5b2c6f;
-}
-
-.button-export {
-    background-color: #27ae60;
-    color: #fff;
-}
-
-.button-export:hover {
-    background-color: #1e8449;
-}
-
-.button-edit {
-    background-color: #e67e22;
-    color: #fff;
-}
-
-.button-edit:hover {
-    background-color: #d35400;
-}
-
-.button-delete {
-    background-color: #c0392b;
-    color: #fff;
-}
-
-.button-delete:hover {
-    background-color: #a93226;
-}
-
-.button-add-intern {
-    background-color: #3498db;
-    color: #fff;
-}
-
-.button-add-intern:hover {
-    background-color: #2980b9;
-}
-
-#APRCV > .content > .filter-section > .list {
-    font-family: Arial, sans-serif;
-    width: 100%;
-    margin-bottom: 20px;
-    overflow-x: auto;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper {
-    width: max-content;
-}
-
-#APRCV > .content > .filter-section > .pagination {
-    display: flex;
-    justify-content: center;
-    color: #000;
-    gap: 1em;
-}
-
-#APRCV > .content > .filter-section > .pagination > .pagination-button {
-    height: 40px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #CBD2DC;
-    box-shadow: 0 2px 4px #CBD2DC;
-}
-
-#APRCV > .content > .filter-section > .pagination > .pagination-button:hover {
-    box-shadow: 0 0 8px #888d94;
-}
-
-#APRCV > .content > .filter-section > .pagination > .pagination-info{
-    display: flex;
-    align-items: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: black;
-}
-
-th, td {
-    border: 1px solid #fff;
-    padding: 8px;
-    text-align: left;
-
-}
-
-th {
-    background-color: #fff;
-}
-
-div.view, div.feedbacks {
-    margin-right: 5px;
-    padding: 5px 10px;
-    color: #4889E9;
-    background-color: #ffffff;
-    border: 1px solid #4889E9;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-div.view:hover, div.feedbacks:hover{
-    color: #ffffff;
-    background-color: #4889E9;
-    border: 1px solid #4889E9;
-}
-
-/* Style for the checkbox */
-input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 16px; /* Adjust size as needed */
-    height: 16px; /* Adjust size as needed */
-    background-color: white; /* Set the background color to white */
-    border: 1px solid #999; /* Add a border for visual clarity */
-    outline: none; /* Remove default outline */
-    cursor: pointer; /* Change cursor on hover */
-    border-radius: 5px;
-}
-
-/* Style for the checkbox when checked */
-input[type="checkbox"]:checked {
-    background-color: #007bff; /* Set the background color to white when checked */
-    border-color: #007bff; /* Change border color when checked */
-}
-
-
-#APRCV > .content > .filter-section > .filter {
-    display: flex;
+    justify-content: flex-end;
     gap: 10px;
+    margin-top: 20px;
 }
 
-#APRCV > .content > .filter-section > .filter > .fields {
+#section-btn > .toggle-popup-btn {
+    border: none;
+    background-color: #fff;
+    font-weight: 600;
+}
+
+/*detail popup section*/
+
+.detail-popup-comment {
     display: grid;
     grid-template-columns: auto auto auto;
-    gap: 5px;
+    gap:  25px 20px;
+    margin: 0 10px 30px 0;
 }
 
-#APRCV > .content > .filter-section > .filter > .fields > input {
-    width: 20em;
-    background-color: #fff;
+.detail-popup-comment label {
+    margin: 10px 0;
+    font-weight: 600;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons {
-    gap: 5px;
+.view-popup-row .ant-input {
+    width: 100%;
+    height: 3.5em;
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .btn {
-    padding: 15px 20px;
-    text-align: center;
-    border-radius: 15px;
-    cursor: pointer;
+.view-popup-row .view-popup-link {
+    display: flex;
+    margin: 30px 20px 10px;
+    color: #333333;
+    text-decoration: underline;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .cln-btn {
-    color: #000;
-    border: 1px solid #CBD2DC;
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #000000;
+    text-shadow: none;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .cln-btn:hover {
-    color: #fff;
-    background-color: #6d6d6d;
+.ant-tabs .ant-tabs-tab + .ant-tabs-tab {
+    margin: 0 0 0 40px;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .srch-btn {
+.custom-tabs .ant-tabs-tab {
+    font-size: 16px;
+}
+
+.custom-tabs .ant-tabs-tab:not(.ant-tabs-tab-active) {
+    opacity: 0.5;
+}
+
+/*comment popup section*/
+
+.comment-popup-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px 20px;
+}
+
+.comment-popup-row .ant-input {
+    width: 100%;
+    height: 3.5em;
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
+}
+
+/* result popup section*/
+
+.result-popup-section {
+    height: 60vh;
+    overflow: auto;
+}
+
+.result-popup-section >.result-section > .field{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px 20px;  
+}
+
+.result-popup-section label {
+    font-weight: 600;
+    margin-bottom: 0 0 15px 0;
+}
+
+.result-popup-section > .result-section input{
+    padding: 10px 15px;
+}
+
+.result-popup-section > .result-section h3,
+.result-popup-section > .result-section h2{
+    color: #A03B0F;
+    margin-top: 1em;
+}
+
+.comment-popup-footer > .save-btn {
     color: #fff;
     background-color: #4889E9;
-}
-
-#APRCV > .content > .filter-section > .filter > .buttons > .srch-btn:hover {
-    border: 1px solid #4889E9;
-    color: #4889E9;
-    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.Comments-CV {
+.comment-popup-footer > .save-btn:hover {
+    background-color: #3E95FF;
+}
+
+.result-popup-section >.result-section > .field .ant-input {
     width: 100%;
-    padding: 5px 8px;
-    border: 2px solid #CBD2DC;
-    border-radius: 0.8em;
-    margin-right: 5px;
-    display: flex;
-    justify-content: space-between;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.add-cmt-btn{
-    display: flex; 
-    justify-content: center;
-    transition: 0.3s ease;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.add-cmt-btn:hover{
-    rotate: 90deg;
-    color: #007bff;
-    cursor: pointer;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.Status{
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    padding: 8px;
-    border-radius: 12px;
-    text-align: center;
-}
-
-/* The entire scrollbar */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar {
-    height: 8px; /* Height of the scrollbar */
-}
-
-/* The scrollbar track */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Background color of the track */
-    border-radius: 10px; /* Rounded corners of the track */
-}
-
-/* The scrollbar thumb */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar-thumb {
-    background: #888; /* Background color of the thumb */
-    border-radius: 10px; /* Rounded corners of the thumb */
-}
-
-/* The scrollbar thumb on hover */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Background color of the thumb on hover */
-    cursor: pointer;
+    height: 3.5em;
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
 }
