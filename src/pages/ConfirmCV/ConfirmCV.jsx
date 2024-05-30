@@ -138,18 +138,6 @@ const ConfirmCV = () => {
     // Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(interns.length / internsPerPage);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
-    // State to manage various filters for the interns
-    // const [filters, setFilters] = useState({
-    //     internID: '',            // Filter by intern ID
-    //     fullName: '',            // Filter by full name
-    //     dateOfBirth: null,       // Filter by date of birth
-    //     phoneNumber: '',         // Filter by phone number
-    //     school: '',              // Filter by school
-    //     email: '',               // Filter by email
-    //     position: '',            // Filter by position
-    //     address: '',             // Filter by address
-    //     dateSubmittedForm: null, // Filter by the date the form was submitted
-    // });
 
     /**
      * Function to handle page changes.
@@ -252,7 +240,7 @@ const ConfirmCV = () => {
     const dateInterviewChoice = [...new Set(filteredInterns.map(intern => intern.dateInterView))]
     // useState hook to manage the selected filters for school and position
     const [selectedFilters, setSelectedFilters] = useState({
-        school: null,   // Currently selected school filter
+        school: '',   // Currently selected school filter
         position: null, // Currently selected position filter
         internID: null,
         phoneNumber: null,
@@ -261,7 +249,7 @@ const ConfirmCV = () => {
         address: null,
         timeInterView: null,
         dateOfBirth: null,
-        searchText: '',
+        email: '',
     });
 
     /**
@@ -342,12 +330,12 @@ const ConfirmCV = () => {
      * @param {string} name - The name of the filter field.
      * @param {string} value - The value of the filter field.
      */
-    const handleInputChange = (e) => {
+    const handleInputChange = (type, value) => {
         setSelectedFilters(prevFilters => ({
             ...prevFilters,
-            searchText: e.target.value,
+            [type]: value,
         }));
-    }
+    };
 
     const handleDateChange = (type, dates) => {
         setSelectedFilters(prevFilters => ({
@@ -382,12 +370,11 @@ const ConfirmCV = () => {
         if (selectedFilters.address) {
             results = results.filter(intern => intern.address === selectedFilters.address);
         }
-        if (selectedFilters.searchText) {
-            const searchText = selectedFilters.searchText.toLowerCase();
-            results = results.filter(intern =>
-                intern.email.toLowerCase().includes(searchText) ||
-                intern.school.toLowerCase().includes(searchText)
-            );
+        if (selectedFilters.school) {
+            results = results.filter(intern => intern.school.toLowerCase().includes(searchText))
+        }
+        if (selectedFilters.email) {
+            results = results.filter(intern => intern.email.toLowerCase().includes(searchText))
         }
         if (selectedFilters.dateOfBirth) {
             results = results.filter(intern =>
@@ -499,8 +486,7 @@ const ConfirmCV = () => {
                         <div className="fields">
                             <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.internID ? selectedFilters.internID : "Enter intern's ID"}</div>
+                                    <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || "Enter intern's ID"}</div>
                                     <DownOutlined />
                                 </Button>
                             </Dropdown>
@@ -508,7 +494,7 @@ const ConfirmCV = () => {
                             <Dropdown overlay={createMenu('fullName', fullNameChoice)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
                                     {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.fullName ? selectedFilters.fullName : "Enter intern's Full name"}</div>
+                                    <div style={{ color: selectedFilters.fullName ? "#000000" : "#C7BFBF" }}>{selectedFilters.fullName || "Enter intern's Full name"}</div>
                                     <DownOutlined />
                                 </Button>
                             </Dropdown>
@@ -522,15 +508,14 @@ const ConfirmCV = () => {
                             <Dropdown overlay={createMenu('phoneNumber', phoneNumberChoice)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
                                     {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.phoneNumber ? selectedFilters.phoneNumber : "Enter intern's Phone number"}</div>
+                                    <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF" }}>{selectedFilters.phoneNumber || "Enter intern's Phone number"}</div>
                                     <DownOutlined />
                                 </Button>
                             </Dropdown>
 
                             <Dropdown overlay={createMenu('address', addressName)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.address ? selectedFilters.address : "Enter intern's Address"}</div>
+                                    <div style={{ color: selectedFilters.address ? "#000000" : "#C7BFBF" }}>{selectedFilters.address || "Enter intern's Address"}</div>
                                     <DownOutlined />
                                 </Button>
                             </Dropdown>
@@ -538,13 +523,13 @@ const ConfirmCV = () => {
                             <Input
                                 size="large"
                                 placeholder="Enter intern's Email"
-                                value={selectedFilters.searchText}
+                                value={selectedFilters.email}
                                 onChange={handleInputChange}
                             />
 
                             <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.position ? selectedFilters.position : "Enter intern's Position"}</div>
+                                    <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF" }}>{selectedFilters.position || "Enter intern's Position"}</div>
                                     <DownOutlined />
                                 </Button>
 
@@ -553,13 +538,13 @@ const ConfirmCV = () => {
                             <Input
                                 size="large"
                                 placeholder="Enter intern's School"
-                                value={selectedFilters.searchText}
+                                value={selectedFilters.school}
                                 onChange={handleInputChange}
                             />
 
                             <Dropdown overlay={createMenu('dateInterView', dateInterviewChoice)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.dateInterView ? selectedFilters.dateInterView : "Enter Date Interview"}</div>
+                                    <div style={{ color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.dateInterView || "Enter Date Interview"}</div>
                                     <DownOutlined />
                                 </Button>
 
@@ -567,7 +552,7 @@ const ConfirmCV = () => {
 
                             <Dropdown overlay={createMenu('timeInterView', timeInterviewChoice)} trigger={['click']}>
                                 <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: "#C7BFBF" }}>{selectedFilters.timeInterView ? selectedFilters.timeInterView : "Enter Time Interview"}</div>
+                                    <div style={{ color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.timeInterView || "Enter Time Interview"}</div>
                                     <DownOutlined />
                                 </Button>
 

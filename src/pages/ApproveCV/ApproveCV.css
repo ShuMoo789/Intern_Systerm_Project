@@ -1,21 +1,14 @@
 /* ApproveCV.css */
 
 body {
-    font-family: Quicksand, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
-#APRCV{
-    min-height: 100vh;
-    height: fit-content;
-    display: flex;
-    width: 100%;
-}
-
 .content {
     padding: 20px 20px 0 20px;
+    min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
 }
@@ -43,13 +36,13 @@ body {
     cursor: pointer;
 }
 
-#APRCV > .content > .content-header > .user-info > .account-setting {
+#APRCV .content > .content-header > .user-info > .account-setting {
     display: flex;
     justify-content: center;
     transition: 0.3s ease;
 }
 
-#APRCV > .content > .content-header > .user-info > .account-setting:hover {
+#APRCV .content > .content-header > .user-info > .account-setting:hover {
     rotate: 90deg;
 }
 
@@ -92,12 +85,12 @@ body {
     color: #92929D;
 }
 
-#APRCV > .content > .filter-section {
+#APRCV .content > .filter-section {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 
 .button-group {
@@ -175,39 +168,6 @@ body {
     font-family: Quicksand, sans-serif;
     width: 100%;
     margin-bottom: 20px;
-    overflow-x: auto;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper {
-    width: max-content;
-}
-
-#APRCV > .content > .filter-section > .pagination {
-    display: flex;
-    justify-content: center;
-    color: #000;
-    gap: 1em;
-}
-
-#APRCV > .content > .filter-section > .pagination > .pagination-button {
-    height: 40px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #CBD2DC;
-    box-shadow: 0 2px 4px #CBD2DC;
-}
-
-#APRCV > .content > .filter-section > .pagination > .pagination-button:hover {
-    box-shadow: 0 0 8px #888d94;
-}
-
-#APRCV > .content > .filter-section > .pagination > .pagination-info{
-    display: flex;
-    align-items: center;
 }
 
 table {
@@ -227,7 +187,12 @@ th {
     background-color: #fff;
 }
 
-div.view, div.feedbacks {
+div.approve-btns {
+    display: flex;
+}
+
+div.approve-btns > div.view, 
+div.approve-btns > div.feedbacks {
     margin-right: 5px;
     padding: 5px 10px;
     color: #4889E9;
@@ -237,7 +202,8 @@ div.view, div.feedbacks {
     cursor: pointer;
 }
 
-div.view:hover, div.feedbacks:hover{
+div.approve-btns > div.view:hover, 
+div.approve-btns > div.feedbacks:hover{
     color: #ffffff;
     background-color: #4889E9;
     border: 1px solid #4889E9;
@@ -264,105 +230,52 @@ input[type="checkbox"]:checked {
 }
 
 
-#APRCV > .content > .filter-section > .filter {
+#APRCV .content > .filter-section > .filter {
     display: flex;
     gap: 10px;
+    margin-bottom: 1em;
 }
 
-#APRCV > .content > .filter-section > .filter > .fields {
+#APRCV .content > .filter-section > .filter > .fields {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
 }
 
-#APRCV > .content > .filter-section > .filter > .fields > input {
+#APRCV .content > .filter-section > .filter > .fields > input {
     width: 20em;
     background-color: #fff;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons {
+#APRCV .content > .filter-section > .filter > .buttons {
     gap: 5px;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .btn {
+#APRCV .content > .filter-section > .filter > .buttons > .btn {
     padding: 15px 20px;
     text-align: center;
     border-radius: 15px;
     cursor: pointer;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .cln-btn {
+#APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
     border: 1px solid #CBD2DC;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .cln-btn:hover {
+#APRCV .content > .filter-section > .filter > .buttons > .cln-btn:hover {
     color: #fff;
     background-color: #6d6d6d;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .srch-btn {
+#APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
     background-color: #4889E9;
 }
 
-#APRCV > .content > .filter-section > .filter > .buttons > .srch-btn:hover {
+#APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
     border: 1px solid #4889E9;
     color: #4889E9;
     background-color: #fff;
-    cursor: pointer;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.Comments-CV {
-    width: 100%;
-    padding: 5px 8px;
-    border: 2px solid #CBD2DC;
-    border-radius: 0.8em;
-    margin-right: 5px;
-    display: flex;
-    justify-content: space-between;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.add-cmt-btn{
-    display: flex; 
-    justify-content: center;
-    transition: 0.3s ease;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.add-cmt-btn:hover{
-    rotate: 90deg;
-    color: #007bff;
-    cursor: pointer;
-}
-
-#APRCV > .content > .filter-section > .list > .tbl-wrapper > table > tbody > tr > td > div.Status{
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    padding: 8px;
-    border-radius: 12px;
-    text-align: center;
-}
-
-/* The entire scrollbar */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar {
-    height: 8px; /* Height of the scrollbar */
-}
-
-/* The scrollbar track */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Background color of the track */
-    border-radius: 10px; /* Rounded corners of the track */
-}
-
-/* The scrollbar thumb */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar-thumb {
-    background: #888; /* Background color of the thumb */
-    border-radius: 10px; /* Rounded corners of the thumb */
-}
-
-/* The scrollbar thumb on hover */
-#APRCV > .content > .filter-section > .list::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Background color of the thumb on hover */
     cursor: pointer;
 }
