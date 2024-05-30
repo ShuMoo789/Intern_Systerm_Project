@@ -664,14 +664,21 @@ const InternList = () => {
               </div>
               <div className="filter-group">
                 <div className="filter-button">
-                  <Button onClick={handleCleanFilterButton}>
+                  <Button
+                    style={{ width: "100%" }}
+                    onClick={handleCleanFilterButton}
+                  >
                     {" "}
                     <FilterOutlined />
                     Clean Filters{" "}
                   </Button>
                 </div>
                 <div className="search-button">
-                  <Button type="primary" onClick={handleSearch}>
+                  <Button
+                    type="primary"
+                    style={{ width: "100%" }}
+                    onClick={handleSearch}
+                  >
                     {" "}
                     <SearchOutlined />
                     Search
