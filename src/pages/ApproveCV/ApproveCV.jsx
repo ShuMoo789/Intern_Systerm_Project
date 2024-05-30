@@ -5,7 +5,8 @@ import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from './CommentPopup.jsx';
 import DataApproveList from "../../data/ApproveCV.json"
-import Modal from '../../components/FeedbackModal/FeedbackModel.jsx';
+import Sheldule from "./Schedule.jsx";
+
 import {
     DownOutlined,
     EyeOutlined,
@@ -17,7 +18,7 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
-import {
+import { 
     DatePicker,
     Dropdown,
     Button,
@@ -67,7 +68,7 @@ function ApproveCV() {
     // React useState hook to manage the current page number
     const [currentPage, setCurrentPage] = useState(0);
 
-    // State to manage the currently selected intern(s)
+// State to manage the currently selected intern(s)
     const [selectedIntern, setSelectedIntern] = useState([]);
 
     // State to manage the list of interns
@@ -76,16 +77,16 @@ function ApproveCV() {
     // State to manage the filtered list of interns
     const [filteredInterns, setFilteredInterns] = useState(DataApproveList);
 
-    // State to manage the visibility of the comment popup
+// State to manage the visibility of the comment popup
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
 
-    // State to manage the initial page number (could be used for resetting or other purposes)
+// State to manage the initial page number (could be used for resetting or other purposes)
     const [initialPage, setInitialPage] = useState(0);
 
     // Calculate the total number of pages based on the number of interns and interns per page
     const totalPages = Math.ceil(DataApproveList.length / internsPerPage);
 
-    // State to manage various filters for the interns
+// State to manage various filters for the interns
     const [filters, setFilters] = useState({
         internID: '',            // Filter by intern ID
         dateSubmittedForm: null, // Filter by the date the form was submitted
@@ -160,9 +161,9 @@ function ApproveCV() {
                     </div>
                 </td>
                 {/* Action buttons for viewing intern details and feedbacks */}
-                <td style={{ display: 'flex' }}>
+                <td style={{display: 'flex'}}>
                     <div className="view" onClick={() => handleViewClick(intern)}>View</div>
-                    <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>Feedbacks</div>
+                    <div className="feedbacks">Feedbacks</div>
                 </td>
             </tr>
         ));
@@ -171,10 +172,10 @@ function ApproveCV() {
     // Extract unique school names from the filteredInterns array
     const schoolNames = [...new Set(filteredInterns.map(intern => intern.school))];
 
-    // Extract unique position names from the filteredInterns array
+// Extract unique position names from the filteredInterns array
     const positionNames = [...new Set(filteredInterns.map(intern => intern.position))];
 
-    // useState hook to manage the selected filters for school and position
+// useState hook to manage the selected filters for school and position
     const [selectedFilters, setSelectedFilters] = useState({
         school: null,   // Currently selected school filter
         major: null, // currently selected major filter
@@ -231,11 +232,7 @@ function ApproveCV() {
         setInitialPage(0);         // Set the initial page to 0
         setCommentPopupVisible(true); // Show the comment popup
     };
-    const handleViewFeedback = (intern) => {
-        setSelectedIntern(intern); // Set the selected intern
-        setInitialPage(2);         // Set the initial page to 2
-        setCommentPopupVisible(true); // Show the comment popup
-    }
+
     /**
      * Handles the action to close the comment popup.
      */
@@ -490,41 +487,38 @@ function ApproveCV() {
                             </div>
                         </header>
 
-                        <section className="content-section">
-                            <h2 className="section-title">Search for Information</h2>
-                            <div className="button-group">
-                                <button className="button button-schedule">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/df9311da8cede04c8358b213f39485de98001c308664cf2bf10daff525cb7286?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Schedule Icon" className="button-icon" />
-                                    <span>Schedule Interview</span>
-                                </button>
-                                <button className="button button-export">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Export Icon" className="button-icon" />
-                                    <span>Export Excel</span>
-                                </button>
-                                <button className="button button-edit">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Edit Icon" className="button-icon" />
-                                    <span>Edit</span>
-                                </button>
-                                <button className="button button-delete">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Delete Icon" className="button-icon" />
-                                    <span>Delete</span>
-                                </button>
-                                <button className="button button-add-intern">
-                                    <img
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                        alt="Add Intern Icon" className="button-icon" />
-                                    <span>Add New Intern</span>
-                                </button>
-                            </div>
-                        </section>
+                <section className="content-section">
+                    <h2 className="section-title">Search for Information</h2>
+                    <div className="button-group">
+                        <button className="button button-schedule">
+                        <Sheldule />
+                        </button>
+                        <button className="button button-export">
+                            <img
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                alt="Export Icon" className="button-icon" />
+                            <span>Export Excel</span>
+                        </button>
+                        <button className="button button-edit">
+                            <img
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                alt="Edit Icon" className="button-icon" />
+                            <span>Edit</span>
+                        </button>
+                        <button className="button button-delete">
+                            <img
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                alt="Delete Icon" className="button-icon" />
+                            <span>Delete</span>
+                        </button>
+                        <button className="button button-add-intern">
+                            <img
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                alt="Add Intern Icon" className="button-icon" />
+                            <span>Add New Intern</span>
+                        </button>
+                    </div>
+                </section>
 
                         <section className="filter-section">
                             <div className="filter">

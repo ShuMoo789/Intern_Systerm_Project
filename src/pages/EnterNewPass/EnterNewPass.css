@@ -31,7 +31,7 @@
 }
 
 .language-text {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
 }
 
 .main-content {
@@ -80,7 +80,7 @@
     text-align: center;
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    font: 700 40px Inter, sans-serif;
+    font: 700 40px Quicksand, sans-serif;
     margin: 36px;
 }
 
@@ -92,7 +92,7 @@
 
 .form-label {
     color: #344054;
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     margin-bottom: 8px;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .form-input {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     color: #667085;
     font-weight: 400;
     line-height: 150%;
@@ -132,7 +132,7 @@
 }
 
 .submit-button {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     background-color: #4889e9;
     color: #fff;
     border: none;
