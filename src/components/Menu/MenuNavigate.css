@@ -5,7 +5,6 @@
     top: 0;
     left: 0;
     background-color: #fff;
-    color: blue;
     align-items: center;
     border-radius: 0 30px 30px 0;
 }
@@ -18,39 +17,20 @@
     padding: 24.82px;
 }
 
-.user-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 15px;
+
+.menu .button-collapsed {
     position: absolute;
-    bottom: 0;
-    width: 226px;
+    width: 15px;
+    height: 70px;
+    right: -15px;
+    top: 50%;
+    background-color: #FFFFFF;
+    z-index: 10;
+    border-radius: 0 45px 45px 0;
+    display: flex;
 }
 
-.user-container .user-image {
-    display: block;
-    border-radius: 50%;
-    width: 55px;
-    height: 55px;
-}
+.menu .button-collapsed:hover {
+    cursor: pointer;
 
-.user-container .user-info .user-name {
-    font-family: Poppins;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 27px;
-    letter-spacing: 0.12600000202655792px;
-    text-align: left;
-    color: #000000;
-}
-
-.user-container .user-info .user-role {
-    font-family: Poppins;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0.09799999743700027px;
-    text-align: left;
-    color: #AAABAF;
 }
