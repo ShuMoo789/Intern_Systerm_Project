@@ -1,9 +1,22 @@
 import React from "react";
-import './MenuNavigate.css'
-import Icon, { AppstoreOutlined, AuditOutlined, SettingOutlined, TeamOutlined, ProjectOutlined, SettingTwoTone } from '@ant-design/icons';
-import { Menu } from 'antd';
-import logo from '../../assets/Logo.png'
-import userImage from '../../assets/user_image.png'
+
+
+import "./MenuNavigate.css";
+import Icon, {
+  AppstoreOutlined,
+  AuditOutlined,
+  SettingOutlined,
+  TeamOutlined,
+  ProjectOutlined,
+  LeftOutlined,
+  RightOutlined
+} from "@ant-design/icons";
+import { Menu, Button } from "antd";
+import logo from "../../assets/Logo.png";
+import AccountSetting from "../AccountSetting/AccountSetting";
+import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
+
 
 const ZaloSvg = () => (
     <svg width="1em" height="1em" viewBox="0 0 26 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,32 +114,45 @@ const items = [
     }
 ];
 
-const MenuNavigate = () => {
-    return (
-        <div className="menu">
-            {/* <div className="logo"> */}
-                <img src={logo} alt="Logo" className="logo-amazing"/>
-            {/* </div> */}
-            <Menu
-                //onClick={onClick}
-                style={{
-                    width: 256,
-                }}
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                mode="inline"
-                items={items}
-            />
-            <div className="user-container">
-                <img src={userImage} alt="user image" className="user-image" />
-                <div className="user-info">
-                    <div className="user-name">Natalie Brogan</div>
-                    <div className="user-role">Admin</div>
-                </div>
-                <SettingTwoTone twoToneColor="#DB0D4B" />
-            </div>
-        </div>
-    )
-}
+
+const MenuNavigate = ({buttonClick}) => {
+  const navigate = useNavigate()
+  const onClick = (value) => {
+    navigate('/' + value.key)
+    console.log(value.key);
+  }
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [hideAccountSetting, setHideAccountSetting] = useState(false)
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+    buttonClick()
+    setHideAccountSetting(!hideAccountSetting)
+  };
+
+  return (
+    <div className="menu">
+      <img src={logo} alt="Logo" className="logo-amazing" />
+      <Menu
+        onClick={onClick}
+        style={{
+          width: '100%',
+        }}
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        mode="inline"
+        items={items}
+        inlineCollapsed={collapsed}
+      />
+      <div onClick={toggleCollapsed} className="button-collapsed">
+        {/* <Button type="text" style={{width: '100%'}}> */}
+            {collapsed ? <RightOutlined /> : <LeftOutlined />}
+        {/* </Button> */}
+      </div>
+      <AccountSetting disabled={hideAccountSetting}/>
+    </div>
+  );
+};
 
 export default MenuNavigate;

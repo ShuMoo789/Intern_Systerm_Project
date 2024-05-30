@@ -5,7 +5,7 @@
     margin: 20px 15px;
     position: absolute;
     bottom: 0;
-    width: 226px;
+    width: 90%;
 }
 
 .user-container .user-image {
@@ -13,6 +13,12 @@
     border-radius: 50%;
     width: 55px;
     height: 55px;
+}
+
+.user-container .user-info {
+    display: block;
+    width: 100%;
+    margin-left: 10px;
 }
 
 .user-container .user-info .user-name {
