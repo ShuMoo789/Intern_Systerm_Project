@@ -1,5 +1,4 @@
 {
-    
         "Reset your password": "Reset Your Password",
         "Please provide the email address that you used when you signed up for your account.": "Please provide the email address that you used when you signed up for your account.",
         "We will send you an email that will allow you to reset your password.": "We will send you an email that will allow you to reset your password.",
@@ -11,5 +10,6 @@
         "Change Password": "Change Password",
         "New Password *": "New Password *",
         "Confirm New Password*": "Confirm New Password*",
-        "Verification Code": "Verification Code"
+        "Verification Code": "Verification Code",
+        "Re-enter your password": "Re-enter your password"
 }
