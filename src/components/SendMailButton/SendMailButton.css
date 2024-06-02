@@ -1,0 +1,67 @@
+.desc {
+    margin-top: 25px;
+    font: 16px;
+    font-weight: 600;
+}
+
+.ant-modal-content {
+    border-radius: 34px !important;
+}
+
+.ant-modal-title {
+    font-size: 24px !important;
+    font-weight: 500;
+}
+
+.ant-modal-close-x {
+    font-size: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.ant-select-selector {
+    border-radius: 15px !important;
+}
+
+.type-email{
+    height: 50px;
+    width: 100%;
+}
+
+.type-email label {
+    font-size: 15px;
+    padding: 14px 0;
+}
+
+.textarea{
+    font-size: 16px;
+    height: 200px !important;
+    border-radius: 15px !important;
+}
+
+
+.send-email-btn{
+    /* margin: 0% 150px; */
+    background-color: #6537b1;
+    color: #ffff;
+    width: 140px;
+    height: 45px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.send-email-btn:hover{
+    background-color: #6537b1;
+}
+
+.send-email-modal{
+    /* margin: 0% 150px; */
+    background-color: #6537b1;
+    
+    color: #ffff;
+    width: 150px;
+    height: 45px;
+    border-radius: 15px;
+    font-size: 16px;
+    
+}
