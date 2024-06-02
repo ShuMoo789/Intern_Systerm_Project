@@ -1,8 +1,12 @@
 import React from "react";
 import "./GroupButton.css";
 import { Button } from "antd";
+import useViewport from "../../hooks/useViewport";
 
 const GroupButton = ({ groupButton, onSendEmail }) => {
+    const viewPort = useViewport()
+    const isMobile = viewPort.width <= 1024
+
     // function handle Send Mail when click button Send Mail
     const handleSendMailClick = () => {
         onSendEmail();
@@ -52,7 +56,8 @@ const GroupButton = ({ groupButton, onSendEmail }) => {
                     onClick={() => handleButtonClick(prop.name)}
                     style={{ minWidth: '15%', backgroundColor: prop.color, fontSize: '10px', color: '#FFFFFF' }}
                 >
-                    {prop.icon}{prop.name}
+                    {isMobile ? prop.icon : <span>{prop.icon} {prop.name}</span>}
+                    {/* {prop.icon}{prop.name} */}
                 </Button>
             ))}
         </div>

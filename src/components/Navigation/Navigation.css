@@ -21,7 +21,7 @@
 }
 
 .content-navigation .header-navigation .account-setting {
-    width: 226px;
+    width: 266px;
     height: 100%;
     margin-right: 50px;
     position: relative;
@@ -32,6 +32,7 @@
     height: 60px;
     background-color: #FFFFFF;
     border-radius: 15px;
+    border-radius: 15px;
     position: relative;
     margin: auto;
 }
@@ -39,7 +40,7 @@
 .navigation .search-navigation {
     width: 18.4%;
     height: 100%;
-    padding: 15px;
+    padding: 20px;
     align-items: center;
     color: #92929D;
 }
