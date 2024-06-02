@@ -1,12 +1,12 @@
-.content {
-    width: 100%;
+.content-navigation {
+    max-width: 92%;
     right: 0;
     top: 0;
     margin: 20px auto;
 }
 
-.content .header-navigation {
-    width: 92%;
+.content-navigation .header-navigation {
+    width: 100%;
     height: 60px;
     /* position: relative; */
     display: flex;
@@ -15,23 +15,23 @@
     margin: 0 auto;
 }
 
-.content .header-navigation .title-name {
+.content-navigation .header-navigation .title-name {
     color: #280559;
     font-size: 20px;
 }
 
-.content .header-navigation .account-setting {
-    width: 226px;
+.content-navigation .header-navigation .account-setting {
+    width: 266px;
     height: 100%;
     margin-right: 50px;
     position: relative;
 }
 
-.content .navigation {
-    width: 92%;
+.content-navigation .navigation {
+    width: 100%;
     height: 60px;
     background-color: #FFFFFF;
-    border-radius: 34px;
+    border-radius: 15px;
     position: relative;
     margin: auto;
 }
@@ -39,7 +39,7 @@
 .navigation .search-navigation {
     width: 18.4%;
     height: 100%;
-    padding: 15px;
+    padding: 20px;
     align-items: center;
     color: #92929D;
 }
