@@ -22,7 +22,7 @@ const SignUpFormIntern = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values), 
+        body: JSON.stringify(values),
       });
       if (!response.ok) {
         throw new Error("Failed to add user.");
@@ -45,7 +45,6 @@ const SignUpFormIntern = () => {
               fontSize: "30px",
               color: "#1890ff",
               marginBottom: "-1px",
-            
             }}
           >
             Sign Up
@@ -84,9 +83,7 @@ const SignUpFormIntern = () => {
             <Form.Item
               label="School"
               name="school"
-              rules={[
-                { required: true, message: "Please enter your school!" },
-              ]}
+              rules={[{ required: true, message: "Please enter your school!" }]}
             >
               <Input placeholder="Enter your school" />
             </Form.Item>
@@ -155,16 +152,12 @@ const SignUpFormIntern = () => {
               <Flex vertical align="center">
                 <div>
                   <span>Already have an account?</span>{" "}
-                  <Link to="/">Sign in</Link>
+                  <Link to="/SignIn">Sign in</Link>
                 </div>
               </Flex>
             </Form.Item>
-
-
           </Form>
-
         </Flex>
-
       </Flex>
     </div>
   );
