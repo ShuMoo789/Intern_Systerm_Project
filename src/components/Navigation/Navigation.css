@@ -1,14 +1,10 @@
 .content-navigation {
     max-width: 92%;
-.content-navigation {
-    max-width: 92%;
     right: 0;
     top: 0;
     margin: 20px auto;
 }
 
-.content-navigation .header-navigation {
-    width: 100%;
 .content-navigation .header-navigation {
     width: 100%;
     height: 60px;
@@ -19,7 +15,6 @@
     margin: 0 auto;
 }
 
-.content-navigation .header-navigation .title-name {
 .content-navigation .header-navigation .title-name {
     color: #280559;
     font-size: 20px;
@@ -32,8 +27,6 @@
     position: relative;
 }
 
-.content-navigation .navigation {
-    width: 100%;
 .content-navigation .navigation {
     width: 100%;
     height: 60px;

@@ -16,7 +16,7 @@ import SendEmailPopup from "./SendEmailPopup";
 import ReportProcessModal from "./ReportProcessPopup";
 import ViewButton from "./ViewButton";
 import './InternList.css';
-import MainLayout from "../../components/MainLayout/MainLayout";
+import MainLayout from "../../MainLayout/MainLayout";
 import useViewport from "../../hooks/useViewport";
 
 // props GroupButton
