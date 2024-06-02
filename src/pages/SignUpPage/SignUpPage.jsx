@@ -2,7 +2,7 @@ import { Tabs, Col, Row } from "antd";
 import React from "react";
 import Header from "../../components/header/Header";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
-
+import SignUpFormIntern from "../../components/SignUpForm_Intern/SignUpForm";
 const { TabPane } = Tabs;
 
 const SignUpPage = () => {
@@ -32,7 +32,7 @@ const SignUpPage = () => {
                 <SignUpForm role="School" dataSet="Schools" />
               </TabPane>
               <TabPane tab="Intern" key="5">
-                <SignUpForm role="Intern" dataSet="Interns" />
+                <SignUpFormIntern role="Intern" dataSet="Interns" />
               </TabPane>
             </Tabs>
           </div>

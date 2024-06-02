@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";  // Import the useTranslation ho
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
 
 // PasswordInput component for input fields with show/hide password functionality
-function PasswordInput({ id, label, placeholder, value, onChange }) {
+function PasswordInput({ id, label, placeholder, value, onChange, error }) {
     const [showPassword, setShowPassword] = React.useState(false);  // State to manage password visibility
 
     // Function to toggle password visibility
@@ -19,7 +19,7 @@ function PasswordInput({ id, label, placeholder, value, onChange }) {
             <label htmlFor={id} className="form-label">
                 {label}
             </label>
-            <div className="password-input">
+            <div className={`password-input ${error ? 'password-input-error' : ''}`}>
                 <input
                     type={showPassword ? "text" : "password"}  // Toggle between text and password type
                     id={id}
@@ -86,6 +86,7 @@ function ChangePasswordForm() {
                 placeholder="••••••••"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}  // Update new password state
+                error={error && newPassword && validatePassword(newPassword)}
             />
             {/* Show error message if new password validation fails */}
             {error && newPassword && validatePassword(newPassword) && <p style={{ color: 'red' }}>{validatePassword(newPassword)}</p>}
@@ -95,6 +96,7 @@ function ChangePasswordForm() {
                 placeholder={t("Re-enter your password")}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}  // Update confirm password state
+                error={error && confirmPassword && newPassword !== confirmPassword}
             />
             {/* Show error message if passwords do not match */}
             {error && confirmPassword && newPassword !== confirmPassword && <p style={{ color: 'red' }}>{t("Passwords do not match")}</p>}
