@@ -104,8 +104,6 @@ function ApproveCV() {
         email: '',               // Filter by email
         position: null,            // Filter by position
         address: '',             // Filter by address
-        dateSubmittedForm: null, // Filter by the date the form was submitted
-
     });
 
     /**
