@@ -1,0 +1,28 @@
+.tbl-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tbl-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl-wrapper th, .tbl-wrapper td {
+    border: 1px solid #ddd;
+    padding: 12px 8px; /* Adjust the padding to add more space */
+    text-align: left;
+}
+
+.tbl-wrapper th {
+    background-color: #f2f2f2;
+}
+
+.tbl-wrapper tr {
+    margin-bottom: 10px; /* Add margin between rows */
+}
+
+.tbl-wrapper input[type="checkbox"] {
+    margin: 0;
+    vertical-align: middle;
+}
