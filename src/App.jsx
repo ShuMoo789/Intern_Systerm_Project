@@ -9,9 +9,11 @@ import PasswordReset from "./pages/PasswordReset/PasswordReset";
 import OTPVerify from "./pages/OTPVerify/OTPVerify";
 import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 
+
 // import SignUp from "./components/SignUpForm/SignUpForm";
 import ConfirmCV from "./pages/ConfirmCV/ConfirmCV";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
+
 import FirstPage from "./pages/FirstPage/FirstPage";
 import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
@@ -51,6 +53,7 @@ function App() {
 
         <Route path="/EnterNewPass" element={<EnterNewPass />} />
         {/* Route to the page for entering a new password, rendering the EnterNewPass component */}
+
 
         <Route path="/register" element={<SignUp />} />
 
