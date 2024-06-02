@@ -1,5 +1,5 @@
-import React from "react"
-import './Navigation.css'
+import React from "react";
+import "./Navigation.css";
 import GroupButton from "../GroupButton/GroupButton";
 import AccountSetting from "../AccountSetting/AccountSetting";
 import useViewport from "../../hooks/useViewport";
@@ -28,4 +28,4 @@ const Navigation = (props) => {
     )
 }
 
-export default Navigation
+export default Navigation;

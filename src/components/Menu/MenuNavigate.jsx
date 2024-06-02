@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import "./MenuNavigate.css";
 import Icon, {
     AppstoreOutlined,
@@ -170,6 +171,5 @@ const MenuNavigate = ({ buttonClick }) => {
         </div>
     );
 };
-
 
 export default MenuNavigate;

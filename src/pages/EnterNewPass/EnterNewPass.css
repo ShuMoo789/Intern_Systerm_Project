@@ -1,12 +1,14 @@
-.container {
+.enter-new-pass {
     background-color: rgba(255, 255, 255, 1);
     display: flex;
     flex-direction: column;
     /* padding: 19px 0 80px 63px; */
+    height: 100vh;
+    padding: 0 65px;
 }
 
 @media (max-width: 991px) {
-    .container {
+    .enter-new-pass {
         padding: 19px 20px 80px;
     }
 }
@@ -29,7 +31,7 @@
 }
 
 .language-text {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
 }
 
 .main-content {
@@ -57,6 +59,7 @@
 
 .form-column {
     flex: 0 0 36%;
+    justify-content: center;
 }
 
 @media (max-width: 991px) {
@@ -77,7 +80,7 @@
     text-align: center;
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    font: 700 40px Inter, sans-serif;
+    font: 700 40px Quicksand, sans-serif;
     margin: 36px;
 }
 
@@ -89,7 +92,7 @@
 
 .form-label {
     color: #344054;
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     margin-bottom: 8px;
 }
 
@@ -112,7 +115,7 @@
 }
 
 .form-input {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     color: #667085;
     font-weight: 400;
     line-height: 150%;
@@ -129,7 +132,7 @@
 }
 
 .submit-button {
-    font-family: Inter, sans-serif;
+    font-family: Quicksand, sans-serif;
     background-color: #4889e9;
     color: #fff;
     border: none;
@@ -161,4 +164,10 @@
 
 .illustration {
     width: 100%;
+}
+
+.password-input-error {
+    border: 1px solid red;
+    padding: 4px; /* Adjust padding to maintain spacing */
+    border-radius: 4px; /* Add border-radius to match input style */
 }

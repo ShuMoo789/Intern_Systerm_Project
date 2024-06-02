@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Row } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./AccountManagement.css";
 import RectangleContent from "../../components/RectangleContent/RectangleContent";
@@ -30,16 +29,12 @@ const data = [
   {
     title: "What are you looking for? ",
     content: [
-      <div style={{ marginBottom: 7 }}>
+      <div>
         {" "}
         <SearchOutlined /> Search Intern System Account
       </div>,
-      <div style={{ marginBottom: 7 }}>
-        See Help Options
-      </div>,
-      <div style={{ marginBottom: 7 }}>
-        Send Feedback
-      </div>,
+      "See Help Options",
+      "Send Feedback",
     ],
     instruction: "",
   },
@@ -48,62 +43,55 @@ const data = [
 // AccountManagement functional component
 const AccountManagement = () => {
   return (
-    <>
-      <Row>
+      <>
         {/* Render the MenuNavigate component */}
-        <Col span={4}>
-          <MenuNavigate />
-        </Col>
+        <MenuNavigate />
 
-        <Col span={20}>
-          {/* Main content container */}
-          <div className="content">
+        {/* Main content container */}
+        <div className="content">
 
-            {/* User image */}
-            <img src={userImage} alt="user image" className="ava-image" />
+          {/* User image */}
+          <img src={userImage} alt="user image" className="ava-image" />
 
-            {/* Welcome message */}
-            <div className="welcome">Hello Natalie Brogan!</div>
+          {/* Welcome message */}
+          <div className="welcome">Hello Natalie Brogan!</div>
 
-            {/* User email */}
-            <div className="user-gmail">nataliebrogan@gmail.com</div>
+          {/* User email */}
+          <div className="user-gmail">nataliebrogan@gmail.com</div>
 
-            {/* First group of RectangleContent components */}
-            <div className="rectangle-content-group">
-              <RectangleContent
+          {/* First group of RectangleContent components */}
+          <div className="rectangle-content-group">
+            <RectangleContent
                 title={data[0].title}
                 content={data[0].content}
                 instruction={data[0].instruction}
-              />
-              <RectangleContent
+            />
+            <RectangleContent
                 title={data[1].title}
                 content={data[1].content}
                 instruction={data[1].instruction}
-              />
-            </div>
+            />
+          </div>
 
-            {/* Second group of RectangleContent components */}
-            <div className="rectangle-content-group">
-              <RectangleContent
+          {/* Second group of RectangleContent components */}
+          <div className="rectangle-content-group">
+            <RectangleContent
                 title={data[2].title}
                 content={data[2].content}
                 instruction={data[2].instruction}
-              />
-            </div>
+            />
+          </div>
 
-            {/* Third group of RectangleContent components */}
-            <div className="rectangle-content-group">
-              <RectangleContent
+          {/* Third group of RectangleContent components */}
+          <div className="rectangle-content-group">
+            <RectangleContent
                 title={data[3].title}
                 content={data[3].content}
                 instruction={data[3].instruction}
-              />
-            </div>
+            />
           </div>
-        </Col>
-
-      </Row>
-    </>
+        </div>
+      </>
   );
 };
 

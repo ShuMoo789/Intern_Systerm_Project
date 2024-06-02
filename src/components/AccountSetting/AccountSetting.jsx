@@ -1,6 +1,7 @@
 import React from "react";
 import userImage from "../../assets/user_image.png";
 import { SettingTwoTone } from "@ant-design/icons";
+import "./AccountSetting.css";
 import { useNavigate } from "react-router-dom";
 import "./AccountSetting.css";
 import useViewport from "../../hooks/useViewport";
