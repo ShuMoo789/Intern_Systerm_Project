@@ -17,6 +17,7 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
+import DataConfirmCV from "../../data/ConfirmCV.json"
 import {
     DatePicker,
     Dropdown,
@@ -42,96 +43,7 @@ function IconTextBlock({ iconSrc, altText, text }) {
 
 
 const interns = [
-    {
-        key: '1',
-        internID: "#12345128",
-        dateInterView: "2 Jan 2023",
-        timeinterview: "10:50:00 AM",
-        fullName: "Esther Eden",
-        dateOfBirth: "2001/07/16",
-        phoneNumber: "0376782528",
-        position: "Back-End",
-        school: "FPT University",
-        address: "District 9",
-        email: "abc@gmail.com",
-        cvLink: "Link",
-        commentsCV: "1",
-        confirmEmail: "Yes",
-        interviewer: "Ajmal Abdul",
-        status: "Passed",
-    },
-    {
-        key: '2',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "2 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Pending",
-    },
-    {
-        key: '3',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "2 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Failed",
-    },
-    {
-        key: '4',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "2 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Pending",
-    },
-    {
-        key: '5',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "1 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Pending",
-    },
+    
 
 ];
 const dateFormat = 'YYYY/MM/DD';
@@ -146,16 +58,16 @@ const ConfirmCV = () => {
     const [selectedIntern, setSelectedIntern] = useState([]);
 
     // State to manage the list of interns
-    const [intern, setIntern] = useState(interns);
+    const [intern, setIntern] = useState(DataConfirmCV);
 
     // State to manage the filtered list of interns
-    const [filteredInterns, setFilteredInterns] = useState(interns);
+    const [filteredInterns, setFilteredInterns] = useState(DataConfirmCV);
 
     // State to manage the initial page number (could be used for resetting or other purposes)
     const [initialPage, setInitialPage] = useState(0);
 
     // Calculate the total number of pages based on the number of interns and interns per page
-    const totalPages = Math.ceil(interns.length / internsPerPage);
+    const totalPages = Math.ceil(DataConfirmCV.length / internsPerPage);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
 
     /**
@@ -204,7 +116,10 @@ const ConfirmCV = () => {
                         {/* Hiển thị số lượng bình luận */}
                         {renderComments(intern)}
                         {/* Hiển thị biểu tượng mắt và gán sự kiện onClick */}
-                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => handleCommentClick(intern)} />
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <span style={{ marginRight: '5px' }}>{/* Thêm một khoảng cách giữa văn bản và biểu tượng */}</span>
+                            <EyeOutlined style={{ cursor: 'pointer' }} onClick={() => handleCommentClick(intern)} />
+                        </div>
                     </div>
                     <div className="add-cmt-btn">
                         {/* Biểu tượng Plus */}
@@ -262,14 +177,14 @@ const ConfirmCV = () => {
     // useState hook to manage the selected filters for school and position
     const [selectedFilters, setSelectedFilters] = useState({
         school: '',   // Currently selected school filter
-        position: null, // Currently selected position filter
-        internID: null,
-        phoneNumber: null,
-        dateInterView: null,
-        fullName: null,
-        address: null,
-        timeInterView: null,
-        dateOfBirth: null,
+        position: '', // Currently selected position filter
+        internID: '',
+        phoneNumber: '',
+        dateInterView: '',
+        fullName: '',
+        address: '',
+        timeInterView: '',
+        dateOfBirth: '',
         email: '',
     });
 
@@ -388,7 +303,7 @@ const ConfirmCV = () => {
      * Handles the search functionality based on filter values.
      */
     const handleSearch = () => {
-        let results = interns;
+        let results = DataConfirmCV;
         if (selectedFilters.internID) {
             results = results.filter(intern => intern.internID === selectedFilters.internID);
         }
@@ -429,7 +344,7 @@ const ConfirmCV = () => {
      * Handles clearing all filter values and resetting the filtered interns list.
      */
     const handleClearFilters = () => {
-        setFilteredInterns(interns); // Reset the filtered interns to the full list
+        setFilteredInterns(DataConfirmCV); // Reset the filtered interns to the full list
         setCurrentPage(0);           // Reset the current page to 0
         setSelectedFilters({
             school: null,
@@ -512,54 +427,61 @@ const ConfirmCV = () => {
             title: 'Intern ID',
             dataIndex: 'internID',
             key: 'internID',
+            filteredValue: [selectedFilters.internID],
         },
         {
             title: 'Date Interview',
             dataIndex: 'dateInterView',
             key: 'dateInterView',
+            filteredValue: [selectedFilters.dateInterView]
         },
         {
             title: 'Time Interview',
             dataIndex: 'timeinterview',
             key: 'timeinterview',
+            filteredValue: [selectedFilters.timeInterView]
         },
         {
             title: 'Full Name',
             dataIndex: 'fullName',
             key: 'fullName',
+            filteredValue: [selectedFilters.fullName]
         },
         {
             title: 'Date Of Birth',
             dataIndex: 'dateOfBirth',
             key: 'dateOfBirth',
+            filteredValue: [selectedFilters.dateOfBirth]
         },
         {
             title: 'Phone Number',
             dataIndex: 'phoneNumber',
             key: 'phoneNumber',
+            filteredValue: [selectedFilters.phoneNumber]
         },
         {
             title: 'Position',
             dataIndex: 'position',
             key: 'position',
+            filteredValue: [selectedFilters.position]
         },
         {
             title: 'School',
             dataIndex: 'school',
             key: 'school',
+            filteredValue: [selectedFilters.school]
         },
         {
             title: 'Address',
             dataIndex: 'address',
             key: 'address',
+            filteredValue: [selectedFilters.address]
         },
         {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
-            render: (email) => (
-                <a href={`mailto:${email}`} style={{ color: "black" }}>{email}</a>
-            ),
+            filteredValue: [selectedFilters.email]
         },
         {
             title: 'CV',
@@ -571,7 +493,13 @@ const ConfirmCV = () => {
             title: 'Comments CV',
             dataIndex: 'commentsCV',
             key: 'commentsCV',
-            render: (text, record) => renderComments(record), // Pass the intern record to renderComments
+            render: (text, record) => (
+                <span>
+                    {/* Hiển thị số lượng bình luận */}
+                    {renderComments(record)}
+                    {/* Hiển thị biểu tượng mắt và gán sự kiện onClick */}
+                    <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => handleCommentClick(record)} />
+                </span>)
         },
 
         {
@@ -593,6 +521,7 @@ const ConfirmCV = () => {
             title: 'Interviewer',
             dataIndex: 'interviewer',
             key: 'interviewer',
+            filteredValue: [selectedFilters.dateInterView]
         },
         {
             title: 'Status',
@@ -765,16 +694,16 @@ const ConfirmCV = () => {
                                 </Dropdown>
                             </div>
                             <div className="buttons">
-                                <div className="cln-btn btn"><DeleteOutlined style={{ marginRight: "10px" }} onClick={handleClearFilters} />Clean Filter</div>
+                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }}/>Clean Filter</div>
                                 <br />
-                                <div className="srch-btn btn"><SearchOutlined style={{ marginRight: "10px" }} onClick={handleSearch} />Search</div>
+                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }}/>Search</div>
                             </div>
                         </div>
                         <div className="list">
                             <div className="tbl-wrapper">
                                 <Table
                                     columns={columns}
-                                    dataSource={interns}
+                                    dataSource={filteredInterns}
                                     rowKey="internId"
                                     pagination={{ pageSize: 4 }}
                                     scroll={{ x: 'max-content' }}
