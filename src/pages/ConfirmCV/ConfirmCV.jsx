@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./ConfirmCV.css";
 import { Table, Checkbox, Button, Select, Modal, Row, Col } from 'antd'; // Import Select from antd
-import MenuNavigate from '../../components/Menu/MenuNavigate';
+import MainLayout from '../../MainLayout/MainLayout';
 import User_Img from "../../assets/user_image.png";
 import SendMailButton from '../../components/SendMailButton/SendMailButton';
 import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton"
@@ -17,6 +17,7 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
+import DataConfirmCV from "../../data/ConfirmCV.json"
 import {
     DatePicker,
     Dropdown,
@@ -40,79 +41,9 @@ function IconTextBlock({ iconSrc, altText, text }) {
 }
 
 
+
 const interns = [
-    {
-        key: '1',
-        internID: "#12345128",
-        dateInterView: "2 Jan 2023",
-        timeinterview: "10:50:00 AM",
-        fullName: "Esther Eden",
-        dateOfBirth: "2001/07/16",
-        phoneNumber: "0376782528",
-        position: "Back-End",
-        school: "FPT University",
-        address: "District 9",
-        email: "abc@gmail.com",
-        cvLink: "Link",
-        commentsCV: "1",
-        confirmEmail: "Yes",
-        interviewer: "Ajmal Abdul",
-        status: "Passed",
-    },
-    {
-        key: '2',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "2 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Pending",
-    },
-    {
-        key: '3',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "2 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Failed",
-    },
-    {
-        key: '4',
-        internID: "#12345129",
-        dateInterView: "3 Jan 2023",
-        timeinterview: "11:00:00 AM",
-        fullName: "John Doe",
-        dateOfBirth: "15/08/2000",
-        phoneNumber: "0123456789",
-        position: "Front-End",
-        school: "XYZ University",
-        address: "District 1",
-        email: "john.doe@gmail.com",
-        cvLink: "Link",
-        commentsCV: "2 ",
-        confirmEmail: "No",
-        interviewer: "Jane Smith",
-        status: "Pending",
-    },
+    
 
 ];
 const dateFormat = 'YYYY/MM/DD';
@@ -127,16 +58,16 @@ const ConfirmCV = () => {
     const [selectedIntern, setSelectedIntern] = useState([]);
 
     // State to manage the list of interns
-    const [intern, setIntern] = useState(interns);
+    const [intern, setIntern] = useState(DataConfirmCV);
 
     // State to manage the filtered list of interns
-    const [filteredInterns, setFilteredInterns] = useState(interns);
+    const [filteredInterns, setFilteredInterns] = useState(DataConfirmCV);
 
     // State to manage the initial page number (could be used for resetting or other purposes)
     const [initialPage, setInitialPage] = useState(0);
 
     // Calculate the total number of pages based on the number of interns and interns per page
-    const totalPages = Math.ceil(interns.length / internsPerPage);
+    const totalPages = Math.ceil(DataConfirmCV.length / internsPerPage);
     const [commentPopupVisible, setCommentPopupVisible] = useState(false);
 
     /**
@@ -182,14 +113,19 @@ const ConfirmCV = () => {
                 {/* Comments section with eye icon for viewing comments and a button to add comments */}
                 <td style={{ display: "flex" }}>
                     <div className="Comments-CV">
-                        {intern.commentsCV === "1" ? `${intern.commentsCV} Comment` : `${intern.commentsCV} Comments`}
-                        <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => { handleCommentClick(intern) }} />
+                        {/* Hiển thị số lượng bình luận */}
+                        {renderComments(intern)}
+                        {/* Hiển thị biểu tượng mắt và gán sự kiện onClick */}
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <span style={{ marginRight: '5px' }}>{/* Thêm một khoảng cách giữa văn bản và biểu tượng */}</span>
+                            <EyeOutlined style={{ cursor: 'pointer' }} onClick={() => handleCommentClick(intern)} />
+                        </div>
                     </div>
                     <div className="add-cmt-btn">
+                        {/* Biểu tượng Plus */}
                         <PlusOutlined />
                     </div>
                 </td>
-
                 <td>
                     <div className="Status" style={(intern.confirmEmail === "No") ? {
                         backgroundColor: "#F5A3B7",
@@ -213,7 +149,7 @@ const ConfirmCV = () => {
                 </td>
                 {/* Action buttons for viewing intern details and feedbacks */}
                 <td style={{ display: 'flex' }}>
-                    <div className="view" onClick={() => {
+                    <div className="view" style={{ border: "1px solid #4889E9", padding: "05px", borderRadius: "20px", color: "#4889E9", cursor: "pointer" }} onClick={() => {
                         handleViewClick(intern);// Set the modal visibility to true
                     }}>View</div>
                 </td>
@@ -241,14 +177,14 @@ const ConfirmCV = () => {
     // useState hook to manage the selected filters for school and position
     const [selectedFilters, setSelectedFilters] = useState({
         school: '',   // Currently selected school filter
-        position: null, // Currently selected position filter
-        internID: null,
-        phoneNumber: null,
-        dateInterView: null,
-        fullName: null,
-        address: null,
-        timeInterView: null,
-        dateOfBirth: null,
+        position: '', // Currently selected position filter
+        internID: '',
+        phoneNumber: '',
+        dateInterView: '',
+        fullName: '',
+        address: '',
+        timeInterView: '',
+        dateOfBirth: '',
         email: '',
     });
 
@@ -297,11 +233,11 @@ const ConfirmCV = () => {
      * Handles the action when the view button is clicked.
      * @param {Object} intern - The intern object to be viewed.
      */
-    const handleViewClick = (intern) => {
-        setSelectedIntern(intern); // Set the selected intern
-        setInitialPage(0);         // Set the initial page to 0
-        setCommentPopupVisible(true); // Show the comment popup
-    };
+    // const handleViewClick = (intern) => {
+    //     setSelectedIntern(intern); // Set the selected intern
+    //     setInitialPage(0);         // Set the initial page to 0
+    //     setCommentPopupVisible(true); // Show the comment popup
+    // };
 
     /**
      * Handles the action to close the comment popup.
@@ -310,6 +246,25 @@ const ConfirmCV = () => {
         setCommentPopupVisible(false); // Hide the comment popup
         setSelectedIntern(null);       // Clear the selected intern
     };
+    const renderComments = (record) => {
+        console.log('Rendering Comments for intern:', record);
+        console.log('CommentsCV value:', record.commentsCV);
+
+        if (record.commentsCV !== undefined && record.commentsCV !== null) {
+            if (record.commentsCV == 1) {
+                console.log('Rendering Comment');
+                return "1 Comment";
+            } else {
+                console.log(`Rendering ${record.commentsCV} Comments`);
+                return `${record.commentsCV} Comments`;
+            }
+        } else {
+            console.log('CommentsCV is undefined or null');
+            return "No Comments";
+        }
+    };
+
+
 
     /**
      * Handles the action to save the updated comment for an intern.
@@ -348,7 +303,7 @@ const ConfirmCV = () => {
      * Handles the search functionality based on filter values.
      */
     const handleSearch = () => {
-        let results = interns;
+        let results = DataConfirmCV;
         if (selectedFilters.internID) {
             results = results.filter(intern => intern.internID === selectedFilters.internID);
         }
@@ -389,7 +344,7 @@ const ConfirmCV = () => {
      * Handles clearing all filter values and resetting the filtered interns list.
      */
     const handleClearFilters = () => {
-        setFilteredInterns(interns); // Reset the filtered interns to the full list
+        setFilteredInterns(DataConfirmCV); // Reset the filtered interns to the full list
         setCurrentPage(0);           // Reset the current page to 0
         setSelectedFilters({
             school: null,
@@ -424,403 +379,566 @@ const ConfirmCV = () => {
         setSelectedIntern(null);
         setCommentPopupVisible(false);
     };
+    const [statusMap, setStatusMap] = useState(interns.reduce((acc, intern) => {
+        acc[intern.internId] = false; // Initialize all checkboxes to unchecked
+        return acc;
+    }, {}));
+    const handleChange = (checked, internId) => {
+        const newStatusMap = { ...statusMap, [internId]: checked };
+        setStatusMap(newStatusMap);
+    };
+
+    const handleAllCheckedChange = (e) => {
+        const isChecked = e.target.checked;
+        const newStatusMap = {};
+        for (const internId in statusMap) {
+            newStatusMap[internId] = isChecked;
+        }
+        setStatusMap(newStatusMap);
+    };
+    const [modalVisible, setModalVisible] = useState(false);
+    // const [selectedIntern, setSelectedIntern] = useState(null);
+    // const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+    // const [initialPage, setInitialPage] = useState(0); // Assuming you have initial page state
+    const handleViewClick = (intern) => {
+        setSelectedIntern(intern);
+        setInitialPage(0);
+        setCommentPopupVisible(true);
+        setModalVisible(true);
+    };
+    const handleModalCancel = () => {
+        setModalVisible(false);
+    };
+
+    const [allChecked, setAllChecked] = useState(false);
+    const columns = [
+        {
+            title: <Checkbox onChange={handleAllCheckedChange} />,
+            dataIndex: 'checkbox',
+            key: 'checkbox',
+            render: (text, record) => (
+                <Checkbox
+                    checked={statusMap[record.internId]}
+                    onChange={(e) => handleChange(e.target.checked, record.internId)}
+                />
+            ),
+        },
+        {
+            title: 'Intern ID',
+            dataIndex: 'internID',
+            key: 'internID',
+            filteredValue: [selectedFilters.internID],
+        },
+        {
+            title: 'Date Interview',
+            dataIndex: 'dateInterView',
+            key: 'dateInterView',
+            filteredValue: [selectedFilters.dateInterView]
+        },
+        {
+            title: 'Time Interview',
+            dataIndex: 'timeinterview',
+            key: 'timeinterview',
+            filteredValue: [selectedFilters.timeInterView]
+        },
+        {
+            title: 'Full Name',
+            dataIndex: 'fullName',
+            key: 'fullName',
+            filteredValue: [selectedFilters.fullName]
+        },
+        {
+            title: 'Date Of Birth',
+            dataIndex: 'dateOfBirth',
+            key: 'dateOfBirth',
+            filteredValue: [selectedFilters.dateOfBirth]
+        },
+        {
+            title: 'Phone Number',
+            dataIndex: 'phoneNumber',
+            key: 'phoneNumber',
+            filteredValue: [selectedFilters.phoneNumber]
+        },
+        {
+            title: 'Position',
+            dataIndex: 'position',
+            key: 'position',
+            filteredValue: [selectedFilters.position]
+        },
+        {
+            title: 'School',
+            dataIndex: 'school',
+            key: 'school',
+            filteredValue: [selectedFilters.school]
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+            filteredValue: [selectedFilters.address]
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+            filteredValue: [selectedFilters.email]
+        },
+        {
+            title: 'CV',
+            dataIndex: 'cvLink',
+            key: 'cvLink',
+            render: () => <a style={{ textDecoration: "underline", color: "black" }} onClick={() => window.location.href = '/'}>Link</a>,
+        },
+        {
+            title: 'Comments CV',
+            dataIndex: 'commentsCV',
+            key: 'commentsCV',
+            render: (text, record) => (
+                <span>
+                    {/* Hiển thị số lượng bình luận */}
+                    {renderComments(record)}
+                    {/* Hiển thị biểu tượng mắt và gán sự kiện onClick */}
+                    <EyeOutlined style={{ marginLeft: '5px', cursor: 'pointer' }} onClick={() => handleCommentClick(record)} />
+                </span>)
+        },
+
+        {
+            title: 'Confirm Email',
+            dataIndex: 'confirmEmail',
+            key: 'confirmEmail',
+            render: (confirmEmail, record) => (
+                <Select
+                    defaultValue={confirmEmail}
+                    style={{ width: 120 }}
+                    onChange={(value) => handleChange(value, record)}
+                >
+                    <Option value="Yes" >Confirmed</Option>
+                    <Option value="No" >Not Confirmed</Option>
+                </Select>
+            ),
+        },
+        {
+            title: 'Interviewer',
+            dataIndex: 'interviewer',
+            key: 'interviewer',
+            filteredValue: [selectedFilters.dateInterView]
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            render: (text, record) => (
+                <Select
+                    defaultValue={text}
+
+                    onChange={(value) => handleChange(value, record.internId)}
+                    style={{ width: 120 }}
+                >
+                    <Option value="Pending">Pending</Option>
+                    <Option value="Failed">Failed</Option>
+                    <Option value="Passed">Passed</Option>
+                </Select>
+            ),
+        },
+        {
+            title: 'Button',
+            dataIndex: 'button',
+            key: 'button',
+            render: (text, record) => (
+                <Button type="primary" onClick={() => handleViewClick(record)}
+                    style={{
+                        backgroundColor: "white",
+                        color: "#4889E9",
+                        border: "2px solid #4889E9",
+                        borderRadius: "20px"
+
+
+                    }}>View</Button>),
+            width: 100,
+        },
+    ]
+
     return (
         <div id="APRCV">
 
-            <MenuNavigate />
 
 
-            <main className="content">
-                <header className="content-header">
-                    <h1 className="content-title"><b>Confirm CV</b></h1>
-                    <div className="user-info">
-                        <img loading="lazy"
-                            src={User_Img}
-                            alt="User Profile" className="user-profile-small" />
-                        <div className="user-details">
-                            <span className="user-name">Natalie Brogan</span>
-                            <span className="user-role">Admin</span>
+            <MainLayout>
+
+                <main className="content">
+                    <header className="content-header">
+                        <h1 className="content-title"><b>Confirm CV</b></h1>
+                        <div className="user-info">
+                            <img loading="lazy"
+                                src={User_Img}
+                                alt="User Profile" className="user-profile-small" />
+                            <div className="user-details">
+                                <span className="user-name">Natalie Brogan</span>
+                                <span className="user-role">Admin</span>
+                            </div>
+                            <div className="account-setting">
+                                <SettingOutlined style={{ color: "#DB0D4B" }} />
+                            </div>
                         </div>
-                        <div className="account-setting">
-                            <SettingOutlined style={{ color: "#DB0D4B" }} />
+                    </header>
+
+                    <section className="content-section">
+                        <h2 className="section-title">Search for Information</h2>
+                        <div className="button-group">
+                            {/* <button className="button button-schedule">
+                                <Sheldule />
+                            </button> */}
+                            <SendMailButton />
+                            <button className="button button-export">
+                                <img
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                    alt="Export Icon" className="button-icon" />
+                                <span>Export Excel</span>
+                            </button>
+                            <button className="button button-edit">
+                                <img
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                    alt="Edit Icon" className="button-icon" />
+                                <span>Edit</span>
+                            </button>
+                            <button className="button button-delete">
+                                <img
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                    alt="Delete Icon" className="button-icon" />
+                                <span>Delete</span>
+                            </button>
+                            <button className="button button-add-intern">
+                                <img
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                                    alt="Add Intern Icon" className="button-icon" />
+                                <span>Add New Intern</span>
+                            </button>
                         </div>
-                    </div>
-                </header>
+                    </section>
 
-                <section className="content-section">
-                    <h2 className="section-title">Search for Information</h2>
-                    <div className="button-group">
-                        {/* <button className="button button-schedule">
-                            <Sheldule />
-                        </button> */}
-                        <SendMailButton />
-                        <button className="button button-export">
-                            <img
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                alt="Export Icon" className="button-icon" />
-                            <span>Export Excel</span>
-                        </button>
-                        <button className="button button-edit">
-                            <img
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                alt="Edit Icon" className="button-icon" />
-                            <span>Edit</span>
-                        </button>
-                        <button className="button button-delete">
-                            <img
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                alt="Delete Icon" className="button-icon" />
-                            <span>Delete</span>
-                        </button>
-                        <button className="button button-add-intern">
-                            <img
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                alt="Add Intern Icon" className="button-icon" />
-                            <span>Add New Intern</span>
-                        </button>
-                    </div>
-                </section>
+                    <section className="filter-section">
+                        <div className="filter">
+                            <div className="fields">
+                                <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || "Enter intern's ID"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
 
-                <section className="filter-section">
-                    <div className="filter">
-                        <div className="fields">
-                            <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || "Enter intern's ID"}</div>
-                                    <DownOutlined />
-                                </Button>
-                            </Dropdown>
+                                <Dropdown overlay={createMenu('fullName', fullNameChoice)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                                        <div style={{ color: selectedFilters.fullName ? "#000000" : "#C7BFBF" }}>{selectedFilters.fullName || "Enter intern's Full name"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
 
-                            <Dropdown overlay={createMenu('fullName', fullNameChoice)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                    <div style={{ color: selectedFilters.fullName ? "#000000" : "#C7BFBF" }}>{selectedFilters.fullName || "Enter intern's Full name"}</div>
-                                    <DownOutlined />
-                                </Button>
-                            </Dropdown>
+                                {/* <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{ padding: "7px 11px", fontSize: "15px" }} onChange={(dates) => handleDateChange('dateOfBirth', dates)} /> */}
+                                <DatePicker
+                                    onChange={(date) => handleDateChange('dateOfBirth', date)}
+                                    style={{ marginLeft: 10 }}
+                                    placeholder={["Enter intern's D.O.B"]}
+                                />
+                                <Dropdown overlay={createMenu('phoneNumber', phoneNumberChoice)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                                        <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF" }}>{selectedFilters.phoneNumber || "Enter intern's Phone number"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
 
-                            {/* <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{ padding: "7px 11px", fontSize: "15px" }} onChange={(dates) => handleDateChange('dateOfBirth', dates)} /> */}
-                            <DatePicker
-                                onChange={(date) => handleDateChange('dateOfBirth', date)}
-                                style={{ marginLeft: 10 }}
-                                placeholder={["Enter intern's D.O.B"]}
-                            />
-                            <Dropdown overlay={createMenu('phoneNumber', phoneNumberChoice)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                    <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF" }}>{selectedFilters.phoneNumber || "Enter intern's Phone number"}</div>
-                                    <DownOutlined />
-                                </Button>
-                            </Dropdown>
+                                <Dropdown overlay={createMenu('address', addressName)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: selectedFilters.address ? "#000000" : "#C7BFBF" }}>{selectedFilters.address || "Enter intern's Address"}</div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
 
-                            <Dropdown overlay={createMenu('address', addressName)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: selectedFilters.address ? "#000000" : "#C7BFBF" }}>{selectedFilters.address || "Enter intern's Address"}</div>
-                                    <DownOutlined />
-                                </Button>
-                            </Dropdown>
+                                <Input
+                                    size="large"
+                                    placeholder="Enter intern's Email"
+                                    value={selectedFilters.email}
+                                    onChange={handleInputChange}
+                                />
 
-                            <Input
-                                size="large"
-                                placeholder="Enter intern's Email"
-                                value={selectedFilters.email}
-                                onChange={handleInputChange}
-                            />
+                                <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF" }}>{selectedFilters.position || "Enter intern's Position"}</div>
+                                        <DownOutlined />
+                                    </Button>
 
-                            <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF" }}>{selectedFilters.position || "Enter intern's Position"}</div>
-                                    <DownOutlined />
-                                </Button>
+                                </Dropdown>
 
-                            </Dropdown>
+                                <Input
+                                    size="large"
+                                    placeholder="Enter intern's School"
+                                    value={selectedFilters.school}
+                                    onChange={handleInputChange}
+                                />
 
-                            <Input
-                                size="large"
-                                placeholder="Enter intern's School"
-                                value={selectedFilters.school}
-                                onChange={handleInputChange}
-                            />
+                                <Dropdown overlay={createMenu('dateInterView', dateInterviewChoice)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.dateInterView || "Enter Date Interview"}</div>
+                                        <DownOutlined />
+                                    </Button>
 
-                            <Dropdown overlay={createMenu('dateInterView', dateInterviewChoice)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.dateInterView || "Enter Date Interview"}</div>
-                                    <DownOutlined />
-                                </Button>
+                                </Dropdown>
 
-                            </Dropdown>
+                                <Dropdown overlay={createMenu('timeInterView', timeInterviewChoice)} trigger={['click']}>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                        <div style={{ color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.timeInterView || "Enter Time Interview"}</div>
+                                        <DownOutlined />
+                                    </Button>
 
-                            <Dropdown overlay={createMenu('timeInterView', timeInterviewChoice)} trigger={['click']}>
-                                <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                    <div style={{ color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.timeInterView || "Enter Time Interview"}</div>
-                                    <DownOutlined />
-                                </Button>
-
-                            </Dropdown>
+                                </Dropdown>
+                            </div>
+                            <div className="buttons">
+                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }}/>Clean Filter</div>
+                                <br />
+                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }}/>Search</div>
+                            </div>
                         </div>
-                        <div className="buttons">
-                            <div className="cln-btn btn"><DeleteOutlined style={{ marginRight: "10px" }} onClick={handleClearFilters} />Clean Filter</div>
-                            <br />
-                            <div className="srch-btn btn"><SearchOutlined style={{ marginRight: "10px" }} onClick={handleSearch} />Search</div>
-                        </div>
-                    </div>
-                    <div className="list">
-                        <div className="tbl-wrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th><input type={"checkbox"} /></th>
-                                        <th>Intern ID</th>
-                                        <th>Date Interview</th>
-                                        <th>Time Interview</th>
-                                        <th>Full Name</th>
-                                        <th>Date Of Birth</th>
-                                        <th>Phone Number</th>
-                                        <th>Position</th>
-                                        <th>School</th>
-                                        <th>Address</th>
-                                        <th>Email</th>
-                                        <th>CV</th>
-                                        <th>Comments CV</th>
-                                        <th>Confirm Email</th>
-                                        <th>Interviewer</th>
-                                        <th>Status</th>
-                                        <th>Buttons</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {renderInterns()}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        <div className="list">
+                            <div className="tbl-wrapper">
+                                <Table
+                                    columns={columns}
+                                    dataSource={filteredInterns}
+                                    rowKey="internId"
+                                    pagination={{ pageSize: 4 }}
+                                    scroll={{ x: 'max-content' }}
+                                />
 
-                    <div className="pagination">
-                        <button
-                            className="pagination-button"
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 0}
-                            style={{ color: currentPage === 0 ? '#92929D' : 'black' }}
+                            </div>
+                        </div>
+
+                        {/* <div className="pagination">
+                            <button
+                                className="pagination-button"
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                disabled={currentPage === 0}
+                                style={{ color: currentPage === 0 ? '#92929D' : 'black' }}
+                            >
+                                <ArrowLeftOutlined />
+                            </button>
+
+                            <span className="pagination-info">
+                                {currentPage + 1} of {totalPages}
+                            </span>
+
+                            <button
+                                className="pagination-button"
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                disabled={currentPage + 1 === totalPages}
+                                style={{ color: currentPage + 1 === totalPages ? '#92929D' : 'black' }}
+                            >
+                                <ArrowRightOutlined />
+                            </button>
+                        </div> */}
+
+                    </section>
+                    {selectedIntern && (
+                        <Modal
+                            title="View details of Intern"
+                            visible={commentPopupVisible}
+                            onCancel={handleCancel}
+                            width={900}
+                            footer={null}
                         >
-                            <ArrowLeftOutlined />
-                        </button>
-
-                        <span className="pagination-info">
-                            {currentPage + 1} of {totalPages}
-                        </span>
-
-                        <button
-                            className="pagination-button"
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage + 1 === totalPages}
-                            style={{ color: currentPage + 1 === totalPages ? '#92929D' : 'black' }}
-                        >
-                            <ArrowRightOutlined />
-                        </button>
-                    </div>
-
-                </section>
-                {selectedIntern && (
-                    <Modal
-                        title="View details of Intern"
-                        visible={commentPopupVisible}
-                        onCancel={handleCancel}
-                        width={900}
-                        footer={null}
-                    >
-                        <Row gutter={[16, 16]}>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Intern ID:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {selectedIntern.internID}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Date Interview:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.dateInterView}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Time Interview:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.timeinterview}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Full Name:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.fullName}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Date Of Birth:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.dateOfBirth}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Phone Number:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.phoneNumber}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Position:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.position}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>School:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {selectedIntern.school}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Address:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.address}
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Email:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    <a href={`mailto:${selectedIntern.email}`}>
-                                        {selectedIntern.email}
-                                    </a>
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>CV Link:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    <a
-                                        href={selectedIntern.cvLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                            <Row gutter={[16, 16]}>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Intern ID:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
                                     >
-                                        Link
-                                    </a>
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <p>
-                                    <strong>Interviewer:</strong>
-                                </p>
-                                <p
-                                    style={{
-                                        border: "2px solid #12345129",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    {" "}
-                                    {selectedIntern.interviewer}
-                                </p>
-                            </Col>
-                        </Row>
+                                        {selectedIntern.internID}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Date Interview:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.dateInterView}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Time Interview:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.timeinterview}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Full Name:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.fullName}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Date Of Birth:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.dateOfBirth}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Phone Number:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.phoneNumber}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Position:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.position}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>School:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {selectedIntern.school}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Address:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.address}
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Email:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        <a href={`mailto:${selectedIntern.email}`}>
+                                            {selectedIntern.email}
+                                        </a>
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>CV Link:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        <a
+                                            href={selectedIntern.cvLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Link
+                                        </a>
+                                    </p>
+                                </Col>
+                                <Col span={8}>
+                                    <p>
+                                        <strong>Interviewer:</strong>
+                                    </p>
+                                    <p
+                                        style={{
+                                            border: "2px solid #12345129",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {selectedIntern.interviewer}
+                                    </p>
+                                </Col>
+                            </Row>
 
-                    </Modal>
-                )}
+                        </Modal>
+                    )}
 
-            </main >
+                </main >
+            </MainLayout>
 
 
         </div >
