@@ -216,28 +216,6 @@ div.approve-btns > div.feedbacks:hover{
     border: 1px solid #4889E9;
 }
 
-/* Style for the checkbox */
-input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 16px; /* Adjust size as needed */
-    height: 16px; /* Adjust size as needed */
-    background-color: white; /* Set the background color to white */
-    border: 1px solid #999; /* Add a border for visual clarity */
-    outline: none; /* Remove default outline */
-    cursor: pointer; /* Change cursor on hover */
-    border-radius: 5px;
-}
-
-/* Style for the checkbox when checked */
-input[type="checkbox"]:checked {
-    background-color: #007bff; /* Set the background color to white when checked */
-    border-color: #007bff; /* Change border color when checked */
-}
-
-
-
 #APRCV .content > .filter-section > .filter {
     display: flex;
     gap: 10px;
