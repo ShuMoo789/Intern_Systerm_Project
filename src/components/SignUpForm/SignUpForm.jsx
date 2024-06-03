@@ -138,7 +138,7 @@ const SignUpForm = ({ role, dataSet }) => {
               <Flex vertical align="center">
                 <div>
                   <span>Already have an account?</span>{" "}
-                  <Link to="/">Sign in</Link>
+                  <Link to="/SignIn">Sign in</Link>
                 </div>
               </Flex>
             </Form.Item>

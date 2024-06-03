@@ -1,35 +1,28 @@
 import React, { useEffect, useState } from "react";
-import {
-  Layout,
-  Row,
-  Col,
-  Input,
-  Button,
-  Table,
-  Checkbox,
-  Space,
-  Typography,
-  Select,
-} from "antd";
+import { Row, Col, Input, Button, Table, Checkbox, Space, Select } from "antd";
 
 import {
+  UsergroupAddOutlined,
+  ExportOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  FolderAddOutlined,
   FilterOutlined,
   SearchOutlined,
-  UsergroupAddOutlined,
 } from "@ant-design/icons";
 
-const { Title } = Typography;
-import userImage from "../../assets/user_image.png";
 import jsonData from "../../data/GroupList.json";
-import MenuNavigate from "../../components/Menu/MenuNavigate";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import MainLayout from "../../MainLayout/MainLayout";
+import Navigation from "../../components/Navigation/Navigation";
+import useViewport from "../../hooks/useViewport";
 
-const { Header, Sider, Content } = Layout;
 const { Option } = Select;
 
 const GroupList = () => {
   const [data, setData] = useState(jsonData);
   const [filteredData, setFilteredData] = useState(jsonData);
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
   const [filters, setFilters] = useState({
     InternId: "",
     FullName: "",
@@ -44,7 +37,7 @@ const GroupList = () => {
     Project: "",
     GroupZalo: "",
   });
-  const inputStyle = { width: "300px" };
+  const inputStyle = { width: isMobile ? "100%" : "300px" };
 
   useEffect(() => {
     setData(jsonData);
@@ -119,19 +112,47 @@ const GroupList = () => {
     { label: "Pending", value: "Pending", color: "red" },
   ];
 
+  const groupButton = [
+    {
+      color: "#6537B1",
+      name: "Create Group",
+      icon: <UsergroupAddOutlined />,
+    },
+    {
+      color: "#41B137",
+      name: "Export Excel",
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: "Edit",
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: "Delete",
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: "Add New Intern",
+      icon: <FolderAddOutlined />,
+    },
+  ];
+
+  const handleOpenCreateGroup = () => {};
+
   const columns = [
     {
       title: "",
       dataIndex: "select",
       render: (_, record) => <Checkbox />,
-      fixed: "left",
       width: 50,
     },
     {
       title: "Intern ID",
       dataIndex: "InternId",
       key: "InternId",
-      fixed: "left",
       width: 140,
     },
     {
@@ -273,7 +294,6 @@ const GroupList = () => {
     {
       title: "Button",
       key: "Button",
-      fixed: "right",
       width: 200,
 
       render: (_, record) => (
@@ -303,61 +323,24 @@ const GroupList = () => {
 
   return (
     <>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider
-          width={256}
-          style={{
-            borderRadius: "25px",
-            overflow: "hidden",
-            backgroundColor: "#fff",
-            maxHeight: "93vh",
-          }}
-        >
-          <MenuNavigate />
-        </Sider>
-        <Layout>
-          <Header style={{ padding: 0, background: "transparent" }}>
+      <div>
+        <MainLayout>
+          <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
+            <Navigation
+              titleName="GROUP LIST"
+              groupButton={groupButton}
+              onSendEmail={handleOpenCreateGroup}
+            />
+          </div>
+          <div>
             <Row>
               <Col span={1}></Col>
-              <Col span={6}>
-                <Title style={{ marginTop: "18px" }}>Group List</Title>
-              </Col>
-              <Col span={6}></Col>
-              <Col span={6}>
-                <Space>
-                  <img
-                    src={userImage}
-                    style={{
-                      display: "block",
-                      borderRadius: "50%",
-                      width: "55px",
-                      height: "55px",
-                      marginRight: "20px",
-                    }}
-                  />
-                  <Space direction="vertical">
-                    <div style={{ fontWeight: "bold" }}>Natalie Brogan</div>
-                    <div style={{ marginTop: "-45px" }}>Admin</div>
-                  </Space>
-                </Space>
-              </Col>
-            </Row>
-          </Header>
-          <Content style={{ background: "transparent" }}>
-            <Row>
-              <Col span={1}></Col>
-              <Col>
-                <SearchBar
-                  customeIcon={<UsergroupAddOutlined />}
-                  customButton="Create groups"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col span={1}></Col>
-              <Col>
+              <Col style={{ padding: isMobile ? "0 0 0 20px" : "0" }}>
                 <Space
-                  style={{ marginBottom: 25, maxWidth: "930px" }}
+                  style={{
+                    marginBottom: 25,
+                    width: isMobile ? "100%" : "930px",
+                  }}
                   size={[8, 8]}
                   wrap
                 >
@@ -446,10 +429,16 @@ const GroupList = () => {
                     onChange={handleFilterChange}
                   />
                 </Space>
-                <Space direction="vertical">
+                <Space
+                  direction="vertical"
+                  style={{
+                    width: isMobile ? "96%" : "0",
+                    marginBottom: isMobile ? "20px" : 0,
+                  }}
+                >
                   <Button
                     style={{
-                      minWidth: 120,
+                      width: isMobile ? "100%" : 120,
                     }}
                     icon={<FilterOutlined />}
                     onClick={handleClearFilters}
@@ -458,9 +447,9 @@ const GroupList = () => {
                   </Button>
                   <Button
                     style={{
-                      backgroundColor: "#3498db",
+                      backgroundColor: "#4889E9",
                       color: "white",
-                      minWidth: 120,
+                      width: isMobile ? "100%" : 120,
                     }}
                     icon={<SearchOutlined />}
                     onClick={handleSearch}
@@ -481,13 +470,14 @@ const GroupList = () => {
                     dataSource={filteredData}
                     scroll={{ x: 1500 }}
                     pagination={{ pageSize: 8 }}
+                    style={{ width: isMobile ? "96%" : "100%" }}
                   />
                 </div>
               </Col>
             </Row>
-          </Content>
-        </Layout>
-      </Layout>
+          </div>
+        </MainLayout>
+      </div>
     </>
   );
 };
