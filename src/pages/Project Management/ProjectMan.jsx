@@ -17,8 +17,10 @@ import {
 
 } from 'antd';
 import './ProjectMan.css';
+import NewProjectModal from './NewProjectModal.jsx';
 import MainLayout from "../../MainLayout/MainLayout.jsx";
 import ProjectMana from "../../data/ProjectMana.json";
+import dayjs from 'dayjs'
 
 const { Header, Sider, Content } = Layout;
 
@@ -48,27 +50,22 @@ function ManagementItem({ icon, title }) {
 
 function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues }) {
 
-
     // option of status column
     const optionSelect = [
         {
-            value: 'pending',
-            label: 'Pending',
-        },
-        {
-            value: 'inProcess',
-            label: 'In Process',
-        },
-        {
-            value: 'finished',
-            label: 'Finished',
+            value: 'inProcessed',
+            label: 'In processed',
         },
     ];
 
+    const formatDate = (date) => {
+        return dayjs(date).format('DD MMM YYYY');
+    };
+    
     return (
         <Card
             className="project-card"
-            title={title}
+            title={title} 
             extra={
             <span className="status">
                 <Select defaultValue={status} options={optionSelect}/>
@@ -81,8 +78,8 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
                 <p><b>Mentor: </b>{mentor}</p>
                 <p><b>Group Zalo: <a href="#">Link</a></b></p>
                 <div className="project-deadline">
-                    <p style={{color: "#5DF400"}}><b>Start Date: {startDate}</b></p>
-                    <p style={{color: "#D62222"}}><b>Release Date: {releaseDate}</b></p>
+                    <p style={{color: "#5DF400"}}><b>Start Date: {formatDate(startDate)}</b></p>
+                    <p style={{color: "#D62222"}}><b>Release Date: {formatDate(releaseDate)}</b></p>
                 </div>
                 <div className="project-footer">
                     <div className="members">
@@ -99,6 +96,7 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
 }
 
 function ProjectManagement() {
+    const [openModal, setOpenModal] = useState(false); // Move modal state inside component
     const [projects, setProjects] = useState(ProjectMana.projects);
     const [filteredProjects, setFilteredProjects] = useState(ProjectMana.projects);
     const [selectedFilters, setSelectedFilters] = useState({
@@ -161,6 +159,14 @@ function ProjectManagement() {
             mentor: '',
             releaseDate: null,
         });
+    };
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
     };
 
     const handleFilterChange = (type, value) => {
@@ -261,19 +267,23 @@ function ProjectManagement() {
                     <Button icon={<FileExcelOutlined />} className="export">Export Excel</Button>
                     <Button icon={<EditOutlined />} className="edit">Edit</Button>
                     <Button icon={<DeleteOutlined />} className="delete">Delete</Button>
-                    <Button type="primary" icon={<PlusOutlined />} className="add">Add New Project</Button>
+                    <Button type="primary" icon={<PlusOutlined />} className="add" onClick={handleOpenModal}>Add New Project</Button>
                 </Space>
 
                 <Row gutter={[16, 16]} className="project-list">
                     {filteredProjects.map((project, index) => (
                         <Col span={8} key={index}>
-                            <ProjectCard {...project} />
+                            <ProjectCard {...project} onClick={() => handleOpenModal(project)} />
                         </Col>
                     ))}
                 </Row>
 
                 <Pagination className="pagination" total={filteredProjects.length} showTotal={total => `1 - ${filteredProjects.length} of ${total}`} />
             </Content>
+            <NewProjectModal
+                open={openModal}
+                onClose={handleCloseModal} 
+            />
         </Layout>
     );
 }
