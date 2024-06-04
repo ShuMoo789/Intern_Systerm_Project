@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu, Avatar, Button, Input, Card, Pagination, Space, Row, Col, Form, Select } from 'antd';
 import {
     UserOutlined,
@@ -11,7 +11,9 @@ import {
     CopyOutlined
 } from '@ant-design/icons';
 import './ProjectMan.css';
+import NewProjectModal from './NewProjectModal.jsx';
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import dayjs from 'dayjs'
 
 const { Header, Sider, Content } = Layout;
 
@@ -39,29 +41,25 @@ function ManagementItem({ icon, title }) {
     );
 }
 
-function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues }) {
-    
+function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues, onClick }) {
     
     // option of status column
     const optionSelect = [
         {
-            value: 'passed',
-            label: 'Passed',
-        },
-        {
-            value: 'failed',
-            label: 'Failed',
-        },
-        {
-            value: 'pending',
-            label: 'Pending',
+            value: 'inProcessed',
+            label: 'In processed',
         },
     ];
 
+    const formatDate = (date) => {
+        return dayjs(date).format('DD MMM YYYY');
+    };
+    
     return (
         <Card 
             className="project-card"
             title={title} 
+            onClick={onClick}
             extra={
             <span className="status">
                 <Select defaultValue={status} options={optionSelect}/>
@@ -74,8 +72,8 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
                 <p><b>Mentor: </b>{mentor}</p>
                 <p><b>Group Zalo: <a href="#">Link</a></b></p>
                 <div className="project-deadline">
-                    <p style={{color: "#5DF400"}}><b>Start Date: {startDate}</b></p>
-                    <p style={{color: "#D62222"}}><b>Release Date: {releaseDate}</b></p>
+                    <p style={{color: "#5DF400"}}><b>Start Date: {formatDate(startDate)}</b></p>
+                    <p style={{color: "#D62222"}}><b>Release Date: {formatDate(releaseDate)}</b></p>
                 </div>
                 <div className="project-footer">
                     <div className="members">
@@ -92,6 +90,10 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
 }
 
 function ProjectManagement() {
+
+    const [openModal, setOpenModal] = useState(false); // Move modal state inside component
+    const [selectedProject, setSelectedProject] = useState(null); // State to manage the currently selected Project
+
     const projects = [
         {
             title: "Intern System",
@@ -101,8 +103,8 @@ function ProjectManagement() {
             leader: "Leader Name",
             subLeader: "Sub Leader Name",
             mentor: "Mentor Name",
-            startDate: "05 Jan 2023",
-            releaseDate: "05 Apr 2023",
+            startDate: dayjs("05 Jan 2023", 'DD MMM YYYY'),
+            releaseDate: dayjs("05 Apr 2023", 'DD MMM YYYY'),
             issues: 14
         },
         {
@@ -113,8 +115,8 @@ function ProjectManagement() {
             leader: "Leader Name",
             subLeader: "Sub Leader Name",
             mentor: "Mentor Name",
-            startDate: "05 Jan 2023",
-            releaseDate: "05 Apr 2023",
+            startDate: dayjs("05 Jan 2023", 'DD MMM YYYY').toDate(),
+            releaseDate: dayjs("05 Apr 2023", 'DD MMM YYYY').toDate(),
             issues: 14
         },
         {
@@ -125,11 +127,16 @@ function ProjectManagement() {
             leader: "Leader Name",
             subLeader: "Sub Leader Name",
             mentor: "Mentor Name",
-            startDate: "05 Jan 2023",
-            releaseDate: "05 Apr 2023",
+            startDate: dayjs("05 Jan 2023", 'DD MMM YYYY').toDate(),
+            releaseDate: dayjs("05 Apr 2023", 'DD MMM YYYY').toDate(),
             issues: 14
         },
     ];
+
+    const handleOpenModal = (project) => {
+        setOpenModal(true);
+        setSelectedProject(project);
+    };
 
     return (
         <Layout className="project-management-section">
@@ -187,13 +194,18 @@ function ProjectManagement() {
                 <Row gutter={[16, 16]} className="project-list">
                     {projects.map((project, index) => (
                         <Col span={8} key={index}>
-                            <ProjectCard {...project} />
+                            <ProjectCard {...project} onClick={() => handleOpenModal(project)} />
                         </Col>
                     ))}
                 </Row>
 
                 <Pagination className="pagination" total={56} showTotal={total => `1 - 6 of ${total}`} />
             </Content>
+            <NewProjectModal
+                open={openModal}
+                project={selectedProject}
+                onClose={() => setOpenModal(false)} // Ensure you handle closing the modal
+            />
         </Layout>
     );
 }
