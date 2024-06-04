@@ -3,7 +3,7 @@ import { Modal, Input, DatePicker, Select, Button } from 'antd';
 import dayjs from 'dayjs';
 import "./NewProjectModal.css";
 
-const NewProjectModal = ({ open, onClose, create, project }) => {
+const NewProjectModal = ({ open, onClose, create }) => {
 
     // option of status column
     const optionSelect = [
@@ -44,21 +44,6 @@ const NewProjectModal = ({ open, onClose, create, project }) => {
         }));
         console.log(date)
     }
-
-    useEffect(() => {
-        setProjectInfo({
-            title:          project?.title                      || '',
-            position:       project?.position                   || '',
-            technology:     project?.technology                 || '',
-            leader:         project?.leader                     || '',
-            subLeader :     project?.subLeader                  || '', 
-            mentor:         project?.mentor                     || '',
-            startDate:      dayjs(project?.startDate).toDate()  || null,
-            releaseDate:    dayjs(project?.releaseDate).toDate()|| null,
-            groupZalo:      project?.groupZalo                  || '',
-            status:         project?.status                     || '',
-        });
-    },[project])
 
     return (
         <Modal

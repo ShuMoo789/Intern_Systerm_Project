@@ -50,7 +50,6 @@ function ManagementItem({ icon, title }) {
 
 function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues }) {
 
-
     // option of status column
     const optionSelect = [
         {
@@ -67,7 +66,6 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
         <Card
             className="project-card"
             title={title} 
-            onClick={onClick}
             extra={
             <span className="status">
                 <Select defaultValue={status} options={optionSelect}/>
@@ -99,7 +97,6 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
 
 function ProjectManagement() {
     const [openModal, setOpenModal] = useState(false); // Move modal state inside component
-    const [selectedProject, setSelectedProject] = useState(null); // State to manage the currently selected Project
     const [projects, setProjects] = useState(ProjectMana.projects);
     const [filteredProjects, setFilteredProjects] = useState(ProjectMana.projects);
     const [selectedFilters, setSelectedFilters] = useState({
@@ -164,9 +161,12 @@ function ProjectManagement() {
         });
     };
 
-    const handleOpenModal = (project) => {
+    const handleOpenModal = () => {
         setOpenModal(true);
-        setSelectedProject(project);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
     };
 
     const handleFilterChange = (type, value) => {
@@ -267,7 +267,7 @@ function ProjectManagement() {
                     <Button icon={<FileExcelOutlined />} className="export">Export Excel</Button>
                     <Button icon={<EditOutlined />} className="edit">Edit</Button>
                     <Button icon={<DeleteOutlined />} className="delete">Delete</Button>
-                    <Button type="primary" icon={<PlusOutlined />} className="add">Add New Project</Button>
+                    <Button type="primary" icon={<PlusOutlined />} className="add" onClick={handleOpenModal}>Add New Project</Button>
                 </Space>
 
                 <Row gutter={[16, 16]} className="project-list">
@@ -282,8 +282,7 @@ function ProjectManagement() {
             </Content>
             <NewProjectModal
                 open={openModal}
-                project={selectedProject}
-                onClose={() => setOpenModal(false)} // Ensure you handle closing the modal
+                onClose={handleCloseModal} 
             />
         </Layout>
     );
