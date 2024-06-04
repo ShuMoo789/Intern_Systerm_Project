@@ -21,6 +21,7 @@ import NewProjectModal from './NewProjectModal.jsx';
 import MainLayout from "../../MainLayout/MainLayout.jsx";
 import ProjectMana from "../../data/ProjectMana.json";
 import dayjs from 'dayjs'
+import Sheldule from "../ApproveCV/Schedule.jsx";
 
 const { Header, Sider, Content } = Layout;
 
@@ -48,13 +49,17 @@ function ManagementItem({ icon, title }) {
     );
 }
 
-function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues }) {
+function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues, onClick }) {
 
     // option of status column
     const optionSelect = [
         {
             value: 'inProcessed',
             label: 'In processed',
+        },
+        {
+            value: 'completed',
+            label: 'Completed',
         },
     ];
 
@@ -178,79 +183,106 @@ function ProjectManagement() {
 
     return (
         <Layout className="project-management-section">
-            <Header className="header-section">
+            <header className="header-section">
                 <h1 className="header-title">Project Management</h1>
-                <UserInfo name="Natalie Brogan" role="Admin" avatarSrc="user-avatar-url" />
-            </Header>
-
-            <Content className="main-content">
+                <UserInfo name="Natalie Brogan" role="Admin" avatarSrc="user-avatar-url"/>
+            </header>
+            <section className="content-section">
+                <h2 className="section-title">Search for Information</h2>
+                <div className="button-group">
+                    <button className="button button-export">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Export Icon" className="button-icon"/>
+                        <span>Export Excel</span>
+                    </button>
+                    <button className="button button-edit">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Edit Icon" className="button-icon"/>
+                        <span>Edit</span>
+                    </button>
+                    <button className="button button-delete">
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Delete Icon" className="button-icon"/>
+                        <span>Delete</span>
+                    </button>
+                    <button className="button button-add-intern" onClick={handleOpenModal}>
+                        <img
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                            alt="Add Intern Icon" className="button-icon"/>
+                        <span>Add New Project</span>
+                    </button>
+                </div>
+            </section>
+            <main className="main-grid">
                 <Form className="search-form" layout="inline">
                     <Form.Item>
-                        <Input placeholder="Search for Information" prefix={<SearchOutlined />} className="search-input" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" icon={<SearchOutlined />} className="search-button">Search</Button>
-                    </Form.Item>
+                        <Button type="primary" icon={<SearchOutlined/>} className="search-button">Search</Button>
+                    </Form.Item><Form.Item>
+                    <Button type="primary" icon={<DeleteOutlined/>} className="clean-filters-button">Clean Filters</Button>
+                </Form.Item>
                 </Form>
 
                 <Row gutter={[16, 16]} className="filter-box">
                     <Col span={6}>
                         <Select
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Name of Project"
                             value={selectedFilters.title || undefined}
                             onChange={(value) => handleFilterChange('title', value)}
-                            options={titleOptions.map(title => ({ value: title, label: title }))}
+                            options={titleOptions.map(title => ({value: title, label: title}))}
                         />
                     </Col>
                     <Col span={6}>
                         <Select
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Position"
                             value={selectedFilters.position || undefined}
                             onChange={(value) => handleFilterChange('position', value)}
-                            options={positionOptions.map(position => ({ value: position, label: position }))}
+                            options={positionOptions.map(position => ({value: position, label: position}))}
                         />
                     </Col>
                     <Col span={6}>
                         <Select
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Technology"
                             value={selectedFilters.technology || undefined}
                             onChange={(value) => handleFilterChange('technology', value)}
-                            options={technologyOptions.map(technology => ({ value: technology, label: technology }))}
+                            options={technologyOptions.map(technology => ({value: technology, label: technology}))}
                         />
                     </Col>
                     <Col span={6}>
                         <Select
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Leader"
                             value={selectedFilters.leader || undefined}
                             onChange={(value) => handleFilterChange('leader', value)}
-                            options={leaderOptions.map(leader => ({ value: leader, label: leader }))}
+                            options={leaderOptions.map(leader => ({value: leader, label: leader}))}
                         />
                     </Col>
                     <Col span={6}>
                         <Select
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Sub Leader"
                             value={selectedFilters.subLeader || undefined}
                             onChange={(value) => handleFilterChange('subLeader', value)}
-                            options={subLeaderOptions.map(subLeader => ({ value: subLeader, label: subLeader }))}
+                            options={subLeaderOptions.map(subLeader => ({value: subLeader, label: subLeader}))}
                         />
                     </Col>
                     <Col span={6}>
                         <Select
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Mentor"
                             value={selectedFilters.mentor || undefined}
                             onChange={(value) => handleFilterChange('mentor', value)}
-                            options={mentorOptions.map(mentor => ({ value: mentor, label: mentor }))}
+                            options={mentorOptions.map(mentor => ({value: mentor, label: mentor}))}
                         />
                     </Col>
                     <Col span={6}>
                         <DatePicker
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Enter Release Date"
                             value={selectedFilters.releaseDate}
                             onChange={(date) => handleFilterChange('releaseDate', date)}
@@ -258,31 +290,20 @@ function ProjectManagement() {
                     </Col>
                 </Row>
 
-                <Space className="buttons-section">
-                    <Button icon={<FileExcelOutlined />} className="clean-filters-button" onClick={handleClearFilters}>Clean Filters</Button>
-                    <Button type="primary" icon={<SearchOutlined />} className="search-button" onClick={handleSearch}>Search</Button>
-                </Space>
-
-                <Space className="action-buttons">
-                    <Button icon={<FileExcelOutlined />} className="export">Export Excel</Button>
-                    <Button icon={<EditOutlined />} className="edit">Edit</Button>
-                    <Button icon={<DeleteOutlined />} className="delete">Delete</Button>
-                    <Button type="primary" icon={<PlusOutlined />} className="add" onClick={handleOpenModal}>Add New Project</Button>
-                </Space>
-
                 <Row gutter={[16, 16]} className="project-list">
                     {filteredProjects.map((project, index) => (
                         <Col span={8} key={index}>
-                            <ProjectCard {...project} onClick={() => handleOpenModal(project)} />
+                            <ProjectCard {...project} onClick={() => handleOpenModal(project)}/>
                         </Col>
                     ))}
                 </Row>
 
-                <Pagination className="pagination" total={filteredProjects.length} showTotal={total => `1 - ${filteredProjects.length} of ${total}`} />
-            </Content>
+                <Pagination className="pagination" total={filteredProjects.length}
+                            showTotal={total => `1 - ${filteredProjects.length} of ${total}`}/>
+            </main>
             <NewProjectModal
                 open={openModal}
-                onClose={handleCloseModal} 
+                onClose={handleCloseModal}
             />
         </Layout>
     );
@@ -291,7 +312,7 @@ function ProjectManagement() {
 export default function MyComponent() {
     return (
         <MainLayout>
-            <ProjectManagement />
+            <ProjectManagement/>
         </MainLayout>
     );
 }
