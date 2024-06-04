@@ -14,10 +14,11 @@ import {
 import {
     DatePicker,
     Dropdown,
-    
+
 } from 'antd';
 import './ProjectMan.css';
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import ProjectMana from "../../data/ProjectMana.json";
 
 const { Header, Sider, Content } = Layout;
 
@@ -46,33 +47,33 @@ function ManagementItem({ icon, title }) {
 }
 
 function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues }) {
-    
-    
+
+
     // option of status column
     const optionSelect = [
-        {
-            value: 'passed',
-            label: 'Passed',
-        },
-        {
-            value: 'failed',
-            label: 'Failed',
-        },
         {
             value: 'pending',
             label: 'Pending',
         },
+        {
+            value: 'inProcess',
+            label: 'In Process',
+        },
+        {
+            value: 'finished',
+            label: 'Finished',
+        },
     ];
 
     return (
-        <Card 
+        <Card
             className="project-card"
-            title={title} 
+            title={title}
             extra={
             <span className="status">
                 <Select defaultValue={status} options={optionSelect}/>
                 <input type="checkbox" />
-            </span>} 
+            </span>}
             >
                 <p><b>Position: </b>{position}</p>
                 <p><b>Technology: </b>{technology}</p>
@@ -98,72 +99,8 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
 }
 
 function ProjectManagement() {
-    const projects = [
-        {
-            title: "Intern System",
-            status: "In process",
-            position: "Back-End, Front-End, BA, Design",
-            technology: ".NET, ReactJS, Trello",
-            leader: "Leader Name",
-            subLeader: "Sub Leader Name",
-            mentor: "Mentor Name",
-            startDate: "05 Jan 2023",
-            releaseDate: "05 Apr 2023",
-            issues: 14
-        },
-        {
-            title: "HRM System",
-            status: "In process",
-            position: "Back-End, Front-End, BA, Design",
-            technology: ".NET, ReactJS, Trello",
-            leader: "Ronaldo",
-            subLeader: "Sub Leader Name",
-            mentor: "Mentor Name",
-            startDate: "05 Jan 2023",
-            releaseDate: "05 Apr 2023",
-            issues: 14
-        },
-        {
-            title: "Intern System",
-            status: "In process",
-            position: "Back-End, Front-End, BA, Design",
-            technology: ".NET, ReactJS, Trello",
-            leader: "Messi",
-            subLeader: "Sub Leader Name",
-            mentor: "Mentor Name",
-            startDate: "05 Jan 2023",
-            releaseDate: "05 Apr 2023",
-            issues: 14
-        },
-    ];
-    const [filteredProjects, setFilteredProjects] = useState(projects)
-    
-    const [selectedProjects, setSelectedProjects] = useState([]);
-    
-    const titleName = [...new Set(filteredProjects.map(title => title.title))];
-
-    const statusChange = [...new Set(filteredProjects.map(projects => projects.status))];
-
-    const positionNames = [...new Set(filteredProjects.map(projects => projects.position))];
-
-    const technologyName = [...new Set(filteredProjects.map(projects => projects.technology))];
-
-    const leaderName = [...new Set(filteredProjects.map(projects => projects.leader))];
-
-    const subLeaderName = [...new Set(filteredProjects.map(projects => projects.subLeader))];
-
-    const mentorName = [...new Set(filteredProjects.map(projects => projects.mentor))];
-
-    const releaseDateChoice = [...new Set(filteredProjects.map(projects => projects.releaseDate))];
-
-    const handleDateChange = (date) => {
-        setSelectedFilters(prevFilters => ({
-            ...prevFilters,
-            releaseDate: date,
-        }));
-    };
-
-
+    const [projects, setProjects] = useState(ProjectMana.projects);
+    const [filteredProjects, setFilteredProjects] = useState(ProjectMana.projects);
     const [selectedFilters, setSelectedFilters] = useState({
         title: '',
         status: '',
@@ -173,56 +110,44 @@ function ProjectManagement() {
         subLeader: '',
         mentor: '',
         releaseDate: null,
-    })
-    
-    const createMenu = (type, items) => (
-        <Menu onClick={({ key }) => handleMenuClick(type, key)}>
-            {/* Map over the items to create menu items */}
-            {items.map((item) => (
-                <Menu.Item key={item}>
-                    <div>{item}</div>
-                </Menu.Item>
-            ))}
-        </Menu>
-    );
+    });
 
-    const handleMenuClick = (type, key) => {
-        // Update the selectedFilters state with the new filter value
-        setSelectedFilters(prevFilters => ({
-            ...prevFilters,
-            [type]: key,
-        }));
-    };
+    const titleOptions = [...new Set(projects.map(project => project.title))];
+    const statusOptions = [...new Set(projects.map(project => project.status))];
+    const positionOptions = [...new Set(projects.map(project => project.position))];
+    const technologyOptions = [...new Set(projects.map(project => project.technology))];
+    const leaderOptions = [...new Set(projects.map(project => project.leader))];
+    const subLeaderOptions = [...new Set(projects.map(project => project.subLeader))];
+    const mentorOptions = [...new Set(projects.map(project => project.mentor))];
 
     const handleSearch = () => {
         let results = projects;
         if (selectedFilters.title) {
-            results = results.filter(projects => projects.title === selectedFilters.title)
+            results = results.filter(project => project.title === selectedFilters.title);
         }
         if (selectedFilters.position) {
-            results = results.filter(projects => projects.position === selectedFilters.position)
+            results = results.filter(project => project.position === selectedFilters.position);
         }
         if (selectedFilters.status) {
-            results = results.filter(projects => projects.status === selectedFilters.status)
+            results = results.filter(project => project.status === selectedFilters.status);
         }
         if (selectedFilters.technology) {
-            results = results.filter(projects => projects.technology === selectedFilters.technology)
+            results = results.filter(project => project.technology === selectedFilters.technology);
         }
         if (selectedFilters.leader) {
-            results = results.filter(projects => projects.leader === selectedFilters.leader)
+            results = results.filter(project => project.leader === selectedFilters.leader);
         }
         if (selectedFilters.subLeader) {
-            results = results.filter(projects => projects.subLeader === selectedFilters.subLeader)
+            results = results.filter(project => project.subLeader === selectedFilters.subLeader);
         }
         if (selectedFilters.mentor) {
-            results = results.filter(projects => projects.mentor === selectedFilters.mentor)
+            results = results.filter(project => project.mentor === selectedFilters.mentor);
         }
         if (selectedFilters.releaseDate) {
-            results = results.filter(projects => 
-                moment (projects.releaseDate).isSame(selectedFilters.releaseDate, 'day'))
+            results = results.filter(project => new Date(project.releaseDate).toLocaleDateString() === selectedFilters.releaseDate.toLocaleDateString());
         }
-        setFilteredProjects(results)
-    }
+        setFilteredProjects(results);
+    };
 
     const handleClearFilters = () => {
         setFilteredProjects(projects);
@@ -235,14 +160,22 @@ function ProjectManagement() {
             subLeader: '',
             mentor: '',
             releaseDate: null,
-        })
-    }
+        });
+    };
+
+    const handleFilterChange = (type, value) => {
+        setSelectedFilters(prevFilters => ({
+            ...prevFilters,
+            [type]: value,
+        }));
+    };
+
     return (
         <Layout className="project-management-section">
-            <header className="header-section">
+            <Header className="header-section">
                 <h1 className="header-title">Project Management</h1>
-                <UserInfo name="Natalie Brogan" role="Admin" avatarSrc="user-avatar-url" notificationSrc="notification-icon-url" />
-            </header>
+                <UserInfo name="Natalie Brogan" role="Admin" avatarSrc="user-avatar-url" />
+            </Header>
 
             <Content className="main-content">
                 <Form className="search-form" layout="inline">
@@ -257,99 +190,66 @@ function ProjectManagement() {
                 <Row gutter={[16, 16]} className="filter-box">
                     <Col span={6}>
                         <Select
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                marginTop: 5,
-                                fontSize: 5
-                            }}
+                            style={{ width: '100%' }}
                             placeholder="Enter Name of Project"
                             value={selectedFilters.title || undefined}
-                            onSelect={(value) => handleMenuClick('title', value)}
-                            options={titleName.map(title => ({ value: title, label: title }))}
+                            onChange={(value) => handleFilterChange('title', value)}
+                            options={titleOptions.map(title => ({ value: title, label: title }))}
                         />
                     </Col>
                     <Col span={6}>
-                    <Select
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                marginTop: 5,
-                                fontSize: 5
-                            }}
-                            placeholder="Enter Postion"
+                        <Select
+                            style={{ width: '100%' }}
+                            placeholder="Enter Position"
                             value={selectedFilters.position || undefined}
-                            onSelect={(value) => handleMenuClick('position', value)}
-                            options={positionNames.map(position => ({ value: position, label: position }))}
+                            onChange={(value) => handleFilterChange('position', value)}
+                            options={positionOptions.map(position => ({ value: position, label: position }))}
                         />
                     </Col>
                     <Col span={6}>
-                    <Select
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                marginTop: 5,
-                                fontSize: 5
-                            }}
+                        <Select
+                            style={{ width: '100%' }}
                             placeholder="Enter Technology"
                             value={selectedFilters.technology || undefined}
-                            onSelect={(value) => handleMenuClick('technology', value)}
-                            options={technologyName.map(technology => ({ value: technology, label: technology }))}
+                            onChange={(value) => handleFilterChange('technology', value)}
+                            options={technologyOptions.map(technology => ({ value: technology, label: technology }))}
                         />
                     </Col>
                     <Col span={6}>
-                    <Select
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                marginTop: 5,
-                                fontSize: 5
-                            }}
+                        <Select
+                            style={{ width: '100%' }}
                             placeholder="Enter Leader"
                             value={selectedFilters.leader || undefined}
-                            onSelect={(value) => handleMenuClick('leader', value)}
-                            options={leaderName.map(leader => ({ value: leader, label: leader }))}
+                            onChange={(value) => handleFilterChange('leader', value)}
+                            options={leaderOptions.map(leader => ({ value: leader, label: leader }))}
                         />
                     </Col>
                     <Col span={6}>
-                    <Select
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                marginTop: 5,
-                                fontSize: 5
-                            }}
+                        <Select
+                            style={{ width: '100%' }}
                             placeholder="Enter Sub Leader"
                             value={selectedFilters.subLeader || undefined}
-                            onSelect={(value) => handleMenuClick('subLeader', value)}
-                            options={subLeaderName.map(subLeader => ({ value: subLeader, label: subLeader }))}
+                            onChange={(value) => handleFilterChange('subLeader', value)}
+                            options={subLeaderOptions.map(subLeader => ({ value: subLeader, label: subLeader }))}
                         />
                     </Col>
                     <Col span={6}>
-                    <Select
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                marginTop: 5,
-                                fontSize: 5
-                            }}
+                        <Select
+                            style={{ width: '100%' }}
                             placeholder="Enter Mentor"
                             value={selectedFilters.mentor || undefined}
-                            onSelect={(value) => handleMenuClick('mentor', value)}
-                            options={mentorName.map(mentor => ({ value: mentor, label: mentor }))}
-                    />
+                            onChange={(value) => handleFilterChange('mentor', value)}
+                            options={mentorOptions.map(mentor => ({ value: mentor, label: mentor }))}
+                        />
                     </Col>
-                    <DatePicker
-                    style={{
-                        width: '30%',
-                        height: '100%',
-                        marginTop: 5,
-                        fontSize: 5
-                    }}
-                    placeholder="Enter Release Date"
-                    value={selectedFilters.releaseDate}
-                    onChange={handleDateChange}
-                />
+                    <Col span={6}>
+                        <DatePicker
+                            style={{ width: '100%' }}
+                            placeholder="Enter Release Date"
+                            value={selectedFilters.releaseDate}
+                            onChange={(date) => handleFilterChange('releaseDate', date)}
+                        />
+                    </Col>
                 </Row>
 
                 <Space className="buttons-section">
@@ -372,7 +272,7 @@ function ProjectManagement() {
                     ))}
                 </Row>
 
-                <Pagination className="pagination" total={56} showTotal={total => `1 - 6 of ${total}`} />
+                <Pagination className="pagination" total={filteredProjects.length} showTotal={total => `1 - ${filteredProjects.length} of ${total}`} />
             </Content>
         </Layout>
     );

@@ -10,13 +10,11 @@
 .user-info > .avatar-section {
     display: flex;
     align-items: center;
-    /* margin-bottom: 10px; */
+    margin-right: 5px;
 }
 
 .user-info > .avatar-section > .user-details {
-    display: flex;
-    flex-direction: column;
-    margin: 0 3em;  
+    margin-left: 5px;
 }
 
 .user-info > .avatar-section > .user-details > .username {
@@ -34,13 +32,18 @@
 .user-info > .notification-icon {
     font-size: 20px;
     color: #db0d4b;
+    margin-left: 10px;
 }
 
 .project-management-section > .header-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
+    padding: 0 24px;
+    background-color: white; /* Set header background to white */
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 20px; /* Rounded corners */
+    margin: 16px; /* Optional: Add margin to separate from the top and sides */
 }
 
 .project-management-section > .header-section > .header-title {
