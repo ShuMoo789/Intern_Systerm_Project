@@ -14,6 +14,7 @@ import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
+import GroupZaloManagementDetails from "./pages/GroupZaloManagementDetails/GroupZaloManagementDetails.jsx";
 
 // Define the main App component
 function App() {
@@ -57,7 +58,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         {/* Route to the CV approval page, rendering the Dashboard component */}
 
-        <Route path="/GroupList" element={<GroupList />} />
+        <Route path="/GroupList" element={<GroupZaloManagementDetails />} />
         {/* Route to the CV approval page, rendering the GroupList component */}
 
         <Route path="/InternList" element={<InternList />} />
