@@ -16,7 +16,7 @@
     display: flex;
     width: 54.3%;
     height: 60px;
-    position: absolute;
+    position: relative;
     left: 30px;
     top: 0;
 }
@@ -58,4 +58,14 @@
     border-radius: 15px;
     position: relative;
     margin: auto;
+}
+
+.sub-content-technology-management {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.technology-list-container {
+    padding: 5px 20px;
 }

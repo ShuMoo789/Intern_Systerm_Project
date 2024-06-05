@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import './TechnologyManagement.css'
 import MainLayout from '../../MainLayout/MainLayout'
 import Navigation from "../../components/Navigation/Navigation";
+import TechNavigation from "../../components/TechNavigation/TechNavigation";
+import TechnologyList from "../../components/TechnologyList/TechnologyList";
 import {
   ExportOutlined,
   EditOutlined,
@@ -35,7 +37,17 @@ const groupButton = [
   },
 ];
 
+
+
+
 const TechnologyManagement = () => {
+  const [activeTab, setActiveTab] = useState('Back-End');
+
+  // Hàm xử lý khi chuyển tab
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <MainLayout>
       <div className="content-technology-management">
@@ -49,7 +61,9 @@ const TechnologyManagement = () => {
             </div>
           </div>
           <div className="navigation-technology-management">
-            {/* code tab ở đây */}
+            <div className="nav-container" style={{ paddingLeft: 30 }}>
+              <TechNavigation activeTab={activeTab} onTabClick={handleTabClick} />
+            </div>
           </div>
         </div>
 
@@ -57,8 +71,9 @@ const TechnologyManagement = () => {
           <div className="group-button-technology-management">
             <GroupButton groupButton={groupButton} />
           </div>
-          <div className="table-intern-list">
 
+          <div className="technology-list-container">
+            <TechnologyList activeTab={activeTab} />
           </div>
         </div>
       </div>
