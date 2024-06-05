@@ -8,10 +8,9 @@ body {
 
 .content {
     padding: 20px 20px 0 20px;
-    min-height: 100vh;
-    min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
+    height: 100vh;
+    overflow-x: auto;
+    
 }
 
 .content-header {
@@ -78,6 +77,10 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+.ant-table-container{
+    font-family: 'Quicksand', sans-serif;
 }
 
 .section-title {

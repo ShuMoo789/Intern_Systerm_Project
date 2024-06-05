@@ -4,67 +4,97 @@
       "title": "Intern System",
       "position": "Back-End, Front-End, BA, Design",
       "technology": ".NET, ReactJS, Trello",
-      "leader": "Alice Johnson",
-      "subLeader": "Bob Smith",
-      "mentor": "Charlie Brown",
+      "leader": {"name": "Alice Johnson", "avatar": "avatar-url-1"},
+      "subLeader": {"name": "Bob Smith", "avatar": "avatar-url-1"},
+      "mentor": {"name": "Charlie Brown", "avatar": "avatar-url-1"},
       "startDate": "2023-01-05",
       "releaseDate": "2023-04-05",
-      "groupZalo": "https://zalo.me/group1"
+      "groupZalo": "https://zalo.me/group1",
+      "issues": 14,
+      "teamMembers": [
+        { "name": "Alice", "avatar": "avatar-url-1" },
+        { "name": "Bob", "avatar": "avatar-url-2" }
+      ]
     },
     {
       "title": "HRM System",
       "position": "Back-End, Front-End, BA, Design",
       "technology": ".NET, ReactJS, Trello",
-      "leader": "David Wilson",
-      "subLeader": "Eva Adams",
-      "mentor": "Frank White",
+      "leader": {"name":"David Wilson", "avatar": "avatar-url-1"},
+      "subLeader": {"name":"Eva Adams", "avatar": "avatar-url-1"},
+      "mentor": {"name":"Frank White", "avatar": "avatar-url-1"},
       "startDate": "2023-02-10",
       "releaseDate": "2023-05-10",
-      "groupZalo": "https://zalo.me/group2"
+      "groupZalo": "https://zalo.me/group2",
+      "issues": 14,
+      "teamMembers": [
+        { "name": "Alice", "avatar": "avatar-url-1" },
+        { "name": "Bob", "avatar": "avatar-url-2" }
+      ]
     },
     {
       "title": "E-Commerce Platform",
       "position": "Full-Stack, DevOps, Design",
       "technology": "Node.js, Angular, AWS",
-      "leader": "George Martin",
-      "subLeader": "Hannah Lee",
-      "mentor": "Irene Green",
+      "leader": {"name": "George Martin", "avatar": "avatar-url-1"},
+      "subLeader": {"name": "Hannah Lee", "avatar": "avatar-url-1"},
+      "mentor": {"name": "Irene Green", "avatar": "avatar-url-1"},
       "startDate": "2023-03-15",
       "releaseDate": "2023-06-15",
-      "groupZalo": "https://zalo.me/group3"
+      "groupZalo": "https://zalo.me/group3",
+      "issues": 14,
+      "teamMembers": [
+        { "name": "Alice", "avatar": "avatar-url-1" },
+        { "name": "Bob", "avatar": "avatar-url-2" }
+      ]
     },
     {
       "title": "Mobile Banking App",
       "position": "Back-End, Front-End, BA",
       "technology": "Java, Swift, Docker",
-      "leader": "Jack Davis",
-      "subLeader": "Kelly Brown",
-      "mentor": "Laura Wilson",
+      "leader": {"name": "Jack Davis", "avatar": "avatar-url-1"},
+      "subLeader": {"name": "Kelly Brown", "avatar": "avatar-url-1"},
+      "mentor": {"name": "Laura Wilson", "avatar": "avatar-url-1"},
       "startDate": "2023-04-20",
       "releaseDate": "2023-07-20",
-      "groupZalo": "https://zalo.me/group4"
+      "groupZalo": "https://zalo.me/group4",
+      "issues": 14,
+      "teamMembers": [
+        { "name": "Alice", "avatar": "avatar-url-1" },
+        { "name": "Bob", "avatar": "avatar-url-2" }
+      ]
     },
     {
       "title": "Social Media Analytics",
       "position": "Data Science, Back-End, Design",
       "technology": "Python, Django, Tableau",
-      "leader": "Michael Scott",
-      "subLeader": "Nina Williams",
-      "mentor": "Oscar Martinez",
+      "leader": {"name": "Michael Scott", "avatar": "avatar-url-1"},
+      "subLeader": {"name": "Nina Williams", "avatar": "avatar-url-1"},
+      "mentor": {"name": "Oscar Martinez", "avatar": "avatar-url-1"},
       "startDate": "2023-05-25",
       "releaseDate": "2023-08-25",
-      "groupZalo": "https://zalo.me/group5"
+      "groupZalo": "https://zalo.me/group5",
+      "issues": 14,
+      "teamMembers": [
+        { "name": "Alice", "avatar": "avatar-url-1" },
+        { "name": "Bob", "avatar": "avatar-url-2" }
+      ]
     },
     {
       "title": "Online Learning Platform",
       "position": "Full-Stack, Design, QA",
       "technology": "Ruby on Rails, Vue.js, Jenkins",
-      "leader": "Paul Anderson",
-      "subLeader": "Quincy Blake",
-      "mentor": "Rachel Green",
+      "leader": {"name": "Paul Anderson", "avatar": "avatar-url-1"},
+      "subLeader": {"name": "Quincy Blake", "avatar": "avatar-url-1"},
+      "mentor": {"name": "Rachel Green", "avatar": "avatar-url-1" },
       "startDate": "2023-06-30",
       "releaseDate": "2023-09-30",
-      "groupZalo": "https://zalo.me/group6"
+      "groupZalo": "https://zalo.me/group6",
+      "issues": 14,
+      "teamMembers": [
+        { "name": "Alice", "avatar": "avatar-url-1" },
+        { "name": "Bob", "avatar": "avatar-url-2" }
+      ]
     }
   ]
 }
