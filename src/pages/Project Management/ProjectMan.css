@@ -171,6 +171,11 @@
     justify-content: space-between;
 }
 
+.project-card .project-deadline p{
+    line-height: 1em;
+    height: 2em;
+}
+
 .project-header {
     display: flex;
     justify-content: space-between;
