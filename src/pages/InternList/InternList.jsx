@@ -673,7 +673,7 @@ const InternList = () => {
                                             <FilterOutlined /> {isMobile ? '' : 'Clean Filters'}
                                         </Button>
                                     </div>
-                                    <div className="search-button">
+                                    <div className="search-button-internlist">
                                         <Button type="primary" onClick={handleSearch} style={{ width: '100%' }}>
                                             <SearchOutlined /> {isMobile ? '' : 'Search'}
                                         </Button>
@@ -846,7 +846,7 @@ const InternList = () => {
                                                 {isMobile ? '' : <FilterOutlined />} Clean Filters
                                             </Button>
                                         </div>
-                                        <div className="search-button">
+                                        <div className="search-button-internlist">
                                             <Button type="primary" onClick={handleSearch} style={{ width: '100%' }}>
                                                 {isMobile ? '' : <SearchOutlined />} Search
                                             </Button>
