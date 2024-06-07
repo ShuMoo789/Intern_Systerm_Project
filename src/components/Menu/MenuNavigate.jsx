@@ -17,7 +17,7 @@ import AccountSetting from "../AccountSetting/AccountSetting";
 import { useNavigate } from 'react-router-dom'
 import { useState } from "react";
 import useViewport from "../../hooks/useViewport";
-
+import miniLogo from "../../assets/chibi-logo.png";
 
 const ZaloSvg = () => (
     <svg width="1em" height="1em" viewBox="0 0 26 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +167,7 @@ const MenuNavigate = ({ buttonClick }) => {
                     inlineCollapsed={true}
                 />
             </div>)}
-            
+
         </div>
     );
 };

@@ -4,7 +4,7 @@ import Header from "../../components/header/Header.jsx";  // Import the Header c
 import "./EnterNewPass.css";  // Import the CSS file for styling
 import { useTranslation } from "react-i18next";  // Import the useTranslation hook for internationalization
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
-
+import { Modal } from "antd";
 // PasswordInput component for input fields with show/hide password functionality
 function PasswordInput({ id, label, placeholder, value, onChange, error }) {
     const [showPassword, setShowPassword] = React.useState(false);  // State to manage password visibility
@@ -71,12 +71,17 @@ function ChangePasswordForm() {
             setError(t("Passwords do not match"));  // Set error if passwords do not match
             return;
         }
-        // Handle successful password change logic here (e.g., API call)
-        // For demonstration, we'll show a success message and navigate to SignIn page
-        alert(t("Password has been successfully changed"));
-        navigate("/signin");  // Navigate to SignIn page
+        success();
     };
 
+    const success = () => {
+        Modal.success({
+            content: t("Password has been successfully changed"),
+            afterClose: () => navigate("/signin"), // Navigate to SignIn page
+            centered: true,
+        });
+    };
+    
     return (
         <form className="change-password-form" onSubmit={handleSubmit}>
             <h1 className="form-title">{t("Change Password")}</h1>

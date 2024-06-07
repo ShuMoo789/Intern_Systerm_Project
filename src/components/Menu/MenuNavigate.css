@@ -12,11 +12,19 @@
     min-height: 100vh;
 }
 
+.ant-menu-title-content{
+    font-family: 'Quicksand', sans-serif;
+}
+
 .logo-amazing {
     width: 90%;
     height: auto;
     margin: 0 auto;
     padding: 24.82px;
+}
+
+.smaller-logo{
+    width: auto;
 }
 
 .menu .button-collapsed {
