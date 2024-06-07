@@ -2,7 +2,7 @@ import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import "./AccountManagement.css";
 import RectangleContent from "../../components/RectangleContent/RectangleContent";
-import MenuNavigate from "../../components/Menu/MenuNavigate";
+import MainLayout from "../../MainLayout/MainLayout";
 import userImage from "../../assets/user_image.png";
 
 // Data array containing information to be displayed in the RectangleContent components
@@ -43,55 +43,48 @@ const data = [
 // AccountManagement functional component
 const AccountManagement = () => {
   return (
-      <>
-        {/* Render the MenuNavigate component */}
-        <MenuNavigate />
-
+    <>
+      <MainLayout>
         {/* Main content container */}
         <div className="content">
-
           {/* User image */}
           <img src={userImage} alt="user image" className="ava-image" />
-
           {/* Welcome message */}
           <div className="welcome">Hello Natalie Brogan!</div>
-
           {/* User email */}
           <div className="user-gmail">nataliebrogan@gmail.com</div>
-
           {/* First group of RectangleContent components */}
           <div className="rectangle-content-group">
             <RectangleContent
-                title={data[0].title}
-                content={data[0].content}
-                instruction={data[0].instruction}
+              title={data[0].title}
+              content={data[0].content}
+              instruction={data[0].instruction}
             />
             <RectangleContent
-                title={data[1].title}
-                content={data[1].content}
-                instruction={data[1].instruction}
+              title={data[1].title}
+              content={data[1].content}
+              instruction={data[1].instruction}
             />
           </div>
-
           {/* Second group of RectangleContent components */}
           <div className="rectangle-content-group">
             <RectangleContent
-                title={data[2].title}
-                content={data[2].content}
-                instruction={data[2].instruction}
+              title={data[2].title}
+              content={data[2].content}
+              instruction={data[2].instruction}
             />
           </div>
-
           {/* Third group of RectangleContent components */}
           <div className="rectangle-content-group">
             <RectangleContent
-                title={data[3].title}
-                content={data[3].content}
-                instruction={data[3].instruction}
+              title={data[3].title}
+              content={data[3].content}
+              instruction={data[3].instruction}
             />
           </div>
         </div>
-      </>
+      </MainLayout>
+    </>
   );
 };
 

@@ -15,6 +15,8 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
 import TechnologyManagement from "./pages/TechnologyManagement/TechnologyManagement.jsx";
+import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx";
+
 
 // Define the main App component
 function App() {
@@ -62,10 +64,15 @@ function App() {
         {/* Route to the CV approval page, rendering the GroupList component */}
 
         <Route path="/InternList" element={<InternList />} />
+
         {/* Route to the CV approval page, rendering the InternList component */}
 
         <Route path="/TechnologyManagement" element={<TechnologyManagement />} />
         {/* Route to the CV approval page, rendering the InternList component */}
+
+        {/* Route to the CV approval page, rendering the GroupList component */}
+        <Route path="/confirmCV" element={<ConfirmCV />} />
+
       </Routes>
     </>
   );
