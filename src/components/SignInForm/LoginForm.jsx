@@ -73,9 +73,9 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             <Form.Item>
               <Flex justify="space-between">
                 <Checkbox>Remember me</Checkbox>
-                <a href="" style={{ color: "red" }}>
+                <Link to="/pwdreset" style={{ color: "red" }}>
                   Forgot password?
-                </a>
+                </Link>
               </Flex>
             </Form.Item>
             <Form.Item>
