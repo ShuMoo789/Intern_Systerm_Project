@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button,Input } from "antd";
+import { Button,Input,Col } from "antd";
 
 
 const Question = () => {
@@ -24,9 +24,9 @@ const Question = () => {
 
   return (
     <div className="tab-content">
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
         {questions.map((question) => (
-          <div key={question.id} style={{ marginBottom: '20px' }}>
+          <div key={question.id} style={{ marginBottom: '20px' , marginLeft:"20px",marginRight:"20px"}}>
             <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
               Question {question.id}
             </label>
@@ -43,7 +43,7 @@ const Question = () => {
         ))}
       </div>
 
-      <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
+      <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' ,    marginLeft:"20px"}}>
         Add Question
       </label>
       <Button
@@ -54,6 +54,7 @@ const Question = () => {
           fontSize: '20px',
           background: 'gray',
           opacity: '0.4',
+          marginLeft:"20px"
         }}
         onClick={handleAddQuestion}
       >
