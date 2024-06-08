@@ -33,3 +33,69 @@
     transition: transform 0.3s, box-shadow 0.3s;
     /* thêm transition */
 }
+
+@media (max-width: 768px) {
+    .nav-tabs {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .dropdown-toggle {
+        display: none;
+    }
+}
+
+.dropdown-toggle {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+.dropdown-container {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .dropdown-container {
+        display: block;
+    }
+}
+
+.custom-dropdown-trigger {
+    border-radius: 8px;
+}
+
+.custom-dropdown-trigger {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.custom-dropdown-trigger:hover {
+    background-color: #e6e6e6;
+}
+
+.custom-dropdown-trigger {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
