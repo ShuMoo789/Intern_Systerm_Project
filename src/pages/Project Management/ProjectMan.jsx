@@ -151,6 +151,14 @@ function ProjectManagement() {
         }));
     };
 
+    const handleNameChange = (type, value) => {
+        setSelectedFilters(prevFilters => ({
+            ...prevFilters,
+            [type]:  {name : value, avatar: prevFilters.leader.avatar}
+            
+        }));
+    };
+
     return (
         <Layout className="project-management-section">
             <header className="header-section">
@@ -221,17 +229,17 @@ function ProjectManagement() {
                             style={{ width: '100%' }}
                             placeholder="Enter Leader"
                             value={selectedFilters.leader || undefined}
-                            onChange={(value) => handleFilterChange('leader', value)}
-                            options={projects.map(project => ({ value: project.leader, label: project.leader }))}
+                            onChange={(e) => handleNameChange('leader', e.target.value)}
+                            options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
                         />
                     </Col>
-                    <Col span={6}>
+                   <Col span={6}>
                         <Select
                             style={{ width: '100%' }}
                             placeholder="Enter Sub Leader"
                             value={selectedFilters.subLeader || undefined}
-                            onChange={(value) => handleFilterChange('subLeader', value)}
-                            options={projects.map(project => ({ value: project.subLeader, label: project.subLeader }))}
+                            onChange={(e) => handleNameChange('subLeader', e.target.value)}
+                            options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
                         />
                     </Col>
                     <Col span={6}>
@@ -239,8 +247,8 @@ function ProjectManagement() {
                             style={{ width: '100%' }}
                             placeholder="Enter Mentor"
                             value={selectedFilters.mentor || undefined}
-                            onChange={(value) => handleFilterChange('mentor', value)}
-                            options={projects.map(project => ({ value: project.mentor, label: project.mentor }))}
+                            onChange={(e) => handleNameChange('mentor', e.target.value)}
+                            options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
                         />
                     </Col>
                     <Col span={6}>
