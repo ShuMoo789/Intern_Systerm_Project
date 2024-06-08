@@ -5,7 +5,10 @@ import "./EnterNewPass.css";  // Import the CSS file for styling
 import { useTranslation } from "react-i18next";  // Import the useTranslation hook for internationalization
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
 import { Modal } from "antd";
+
 import {t} from "i18next";
+
+
 // PasswordInput component for input fields with show/hide password functionality
 function PasswordInput({ id, label, placeholder, value, onChange, error, warning }) {
     const [showPassword, setShowPassword] = React.useState(false);  // State to manage password visibility

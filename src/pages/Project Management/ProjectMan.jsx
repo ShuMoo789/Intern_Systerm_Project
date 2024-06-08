@@ -243,7 +243,9 @@ function ProjectManagement() {
                             placeholder="Enter Leader"
                             value={selectedFilters.leader || undefined}
                             onChange={(value) => handleFilterChange('leader', value)}
+
                             options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
+
                         />
                     </Col>
                     <Col span={6}>
@@ -252,7 +254,9 @@ function ProjectManagement() {
                             placeholder="Enter Sub Leader"
                             value={selectedFilters.subLeader || undefined}
                             onChange={(value) => handleFilterChange('subLeader', value)}
+
                             options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
+
                         />
                     </Col>
                     <Col span={6}>
@@ -261,7 +265,9 @@ function ProjectManagement() {
                             placeholder="Enter Mentor"
                             value={selectedFilters.mentor || undefined}
                             onChange={(value) => handleFilterChange('mentor', value)}
+
                             options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
+
                         />
                     </Col>
                     <Col span={6}>
