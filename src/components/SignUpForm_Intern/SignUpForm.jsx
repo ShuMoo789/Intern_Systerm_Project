@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, Tabs, Input, Button, Row, Col, Flex, Form } from "antd";
 // import "antd/dist/reset.css"; // Reset Ant Design styles
 import Logo from "../../assets/Logo.png";
 import image7 from "../../assets/image 7.png"; // Import the additional image
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../../translation/LanguageContext";
 const URL = "https://65f40c0f105614e654a1c922.mockapi.io/tRgis";
 const SignUpFormIntern = () => {
   const [loading, setLoading] = useState(false);
-
+  const { t , i18n } = useTranslation()
+  const [form] = Form.useForm()
+  const currentLanguage = useLanguage()
   const onFinish = async (values) => {
     setLoading(true);
     try {
@@ -35,7 +38,34 @@ const SignUpFormIntern = () => {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    form.setFields([
+      {
+        name: 'fullName',
+        errors: form.getFieldError('fullName').map(() => t("Please input your full name!")),
+      },
+      { 
+        name: 'studentID',
+        errors: form.getFieldError('studentID').map(() => t("Please enter your student ID!")),
+      },
+      {
+        name: 'school',
+        errors: form.getFieldError('school').map(() => t("Please enter your school!")),
+      },
+      {
+        name: 'email',
+        errors: form.getFieldError('email').map(() => t("Please enter your email!")),
+      },
+      {
+        name: 'password',
+        errors: form.getFieldError('password').map(() => t("Please enter your password!")),
+      },
+      {
+        name: 'confirm',
+        errors: form.getFieldError('confirm').map(() => t("Please re-enter your password!")),
+      },
+    ]);
+  }, [currentLanguage, t]);
   return (
     <div>
       <Flex vertical align="center">
@@ -47,45 +77,45 @@ const SignUpFormIntern = () => {
               marginBottom: "-1px",
             }}
           >
-            Sign Up
+            {t('Sign Up')}
           </h1>
-          <span>Please fill your details to create your account</span>
+          <span>{t('Please fill your details to create your account')}</span>
 
-          <Form layout="vertical" onFinish={onFinish}>
+          <Form layout="vertical" onFinish={onFinish} form={form}>
             <Form.Item
-              label="Full Name"
+              label={t("Full Name")}
               name="fullName"
               initialValues={{ remember: true }}
               style={{ marginTop: "40px" }}
               rules={[
                 {
                   required: true,
-                  message: "Please input your full name!",
+                  message: t("Please input your full name!"),
                 },
               ]}
             >
-              <Input placeholder="Enter your full name" allowClear />
+              <Input placeholder={t("Enter your full name")} allowClear />
             </Form.Item>
 
             <Form.Item
-              label="Student’s ID"
+              label={t("Student’s ID")}
               name="studentID"
               rules={[
                 {
                   required: true,
-                  message: "Please enter your student ID!",
+                  message: t("Please enter your student ID!"),
                 },
               ]}
             >
-              <Input placeholder="Enter your student’s ID" />
+              <Input placeholder={t("Enter your student’s ID")} />
             </Form.Item>
 
             <Form.Item
-              label="School"
+              label={t("School")}
               name="school"
-              rules={[{ required: true, message: "Please enter your school!" }]}
+              rules={[{ required: true, message: t("Please enter your school!") }]}
             >
-              <Input placeholder="Enter your school" />
+              <Input placeholder={t("Enter your school")} />
             </Form.Item>
 
             <Form.Item
@@ -94,22 +124,22 @@ const SignUpFormIntern = () => {
               rules={[
                 {
                   type: "email",
-                  message: "The input is not valid E-mail!",
+                  message: t("The input is not valid E-mail!"),
                 },
-                { required: true, message: "Please enter your email!" },
+                { required: true, message: t("Please enter your email!") },
               ]}
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label={t("Password")}
               name="password"
               rules={[
-                { required: true, message: "Please enter your password!" },
+                { required: true, message: t("Please enter your password!") },
                 {
                   min: 8,
-                  message: "Password must be at least 8 characters long.",
+                  message: t("Password must be at least 8 characters long."),
                 },
               ]}
             >
@@ -117,13 +147,13 @@ const SignUpFormIntern = () => {
             </Form.Item>
 
             <Form.Item
-              label="Re-type Password"
+              label={t("Re-type password")}
               name="confirm"
               dependencies={["password"]}
               rules={[
                 {
                   required: true,
-                  message: "Please re-enter your password!",
+                  message: t("Please re-enter your password!"),
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
@@ -132,27 +162,27 @@ const SignUpFormIntern = () => {
                     }
                     return Promise.reject(
                       new Error(
-                        "The two passwords that you entered do not match!"
+                        t("The two passwords that you entered do not match!")
                       )
                     );
                   },
                 }),
               ]}
             >
-              <Input.Password placeholder="Re-enter your password" />
+              <Input.Password placeholder={t("Re-enter your password")} />
             </Form.Item>
 
             <Form.Item>
               <Button type="primary" htmlType="submit" block>
-                Sign up
+                {t('Sign Up')}
               </Button>
             </Form.Item>
 
             <Form.Item>
               <Flex vertical align="center">
                 <div>
-                  <span>Already have an account?</span>{" "}
-                  <Link to="/SignIn">Sign in</Link>
+                  <span>{t('Already have an account?')}</span>{" "}
+                  <Link to="/SignIn">{t('Sign In')}</Link>
                 </div>
               </Flex>
             </Form.Item>
