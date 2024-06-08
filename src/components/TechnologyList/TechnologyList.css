@@ -59,3 +59,16 @@
     display: flex;
     justify-content: flex-end;
 }
+
+/* View Question */
+
+.ant-tabs-nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .ant-tabs-tab {
+    width: 50%;
+    justify-content: center;
+  }

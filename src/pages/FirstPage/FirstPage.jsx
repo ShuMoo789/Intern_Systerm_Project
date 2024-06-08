@@ -1,37 +1,97 @@
 import * as React from "react";
-import "./FirstPage.css";  // Import the CSS file for styling
-import { Avatar, Button } from "antd";  // Import Ant Design components for Avatar and Button
-import userImage from "../../assets/user_image.png";  // Import a user image
+import "./FirstPage.css"; // Import the CSS file for styling
+import { Avatar, Button, Row, Col } from "antd"; // Import Ant Design components for Avatar and Button
+import userImage from "../../assets/user_image.png"; // Import a user image
+import { DownOutlined, UpOutlined, PlusOutlined } from "@ant-design/icons"; // Import the icons from Ant Design
+import { Link } from "react-router-dom";
 
-// First_Page component
+const accounts = [
+  {
+    name: "Francis Sam",
+    email: "LWZoO@example.com",
+    avatar: userImage,
+  },
+  {
+    name: "Francis Sam2",
+    email: "AL4sA@example.com",
+    avatar: userImage,
+  },
+  {
+    name: "Francis Sam3",
+    email: "Zt5q8@example.com",
+    avatar: userImage,
+  },
+];
+
 const First_Page = ({ Accounts }) => {
-    const [dataAccounts, setAccounts] = React.useState([]);  // Initialize state to store account data
+  const [isCollapsed, setIsCollapsed] = React.useState(true); // Initialize state for menu collapse
 
-    // useEffect hook with an empty dependency array, which runs only once after the initial render
-    React.useEffect(() => {
-        // This useEffect currently does nothing, but you might want to fetch accounts data here in the future
-    }, []);
+  const toggleMenu = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
-    return (
-        <>
-            <div className="container-1">  {/* Fixed typo: changed 'classname' to 'className' */}
-                <Avatar
-                    className="AvaCurent"
-                    shape="square"
-                    size={64}
-                    src={userImage}
-                />
-                {/* Display user avatar using Ant Design's Avatar component */}
-                <h3 className="UsernameCurent">Natlie Brogan</h3>
-                {/* Display username */}
-                <Button className="ManageAccount">Manage Your Account</Button>
-                {/* Button to manage account */}
+  return (
+    <>
+      <Row className="container-background">
+        <Col span={9}></Col>
+        <Col span={4.5}>
+          <div className="avatar">
+            <Avatar
+              className="AvaCurent"
+              shape="square"
+              size={200}
+              src={userImage}
+            />
+          </div>
+          <h3 className="UsernameCurent">Natalie Brogan</h3>
+          <Link to="/profile">
+            <Button className="ManageAccount">Manage Your Account</Button>
+          </Link>
+
+          <div className="container-cover">
+            <div className="container-1">
+              <Button type="text" className="btn-hide-acc" onClick={toggleMenu}>
+                <span className="btn-text showandhide">
+                  {isCollapsed ? "Show accounts" : "Hide accounts"}
+                </span>
+                <span className="btn-icon icon-large">
+                  {isCollapsed ? <DownOutlined /> : <UpOutlined />}
+                </span>
+              </Button>
+              {!isCollapsed && (
+                <div className="custom-menu" style={{ width: 400 }}>
+                  {accounts.map((account, index) => (
+                    <div key={index} className="account-item">
+                      <Avatar
+                        className="account-avatar"
+                        src={account.avatar}
+                        style={{ width: 60, height: 60, margin: 10 }}
+                      />
+                      <div>
+                        <div className="account-name">{account.name}</div>
+                        <div className="account-email">{account.email}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className="account-buttons">
+                <Link to="/SignIn">
+                  <Button className="btn-add-account" icon={<PlusOutlined />}>
+                    Add account
+                  </Button>
+                </Link>
+                <Button className="btn-signout" icon={<PlusOutlined />}>
+                  Sign out
+                </Button>
+              </div>
             </div>
-            <div className="container-1">  {/* Fixed typo: changed 'classname' to 'className' */}
-                {/* Another container, currently empty, can be used for additional content or layout */}
-            </div>
-        </>
-    );
+          </div>
+        </Col>
+        <Col span={9}></Col>
+      </Row>
+    </>
+  );
 };
 
-export default First_Page;  // Export the First_Page component as default
+export default First_Page;
