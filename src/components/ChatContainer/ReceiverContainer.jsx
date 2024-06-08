@@ -31,6 +31,7 @@ const ReceiverContainer = ({ message }) => {
           borderRadius: 20,
           maxWidth: "60%",
           wordWrap: "break-word",
+          fontSize: "20px",
         }}
         onClick={handleEmojiClick}
       >

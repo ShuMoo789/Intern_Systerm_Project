@@ -8,12 +8,30 @@ const { TabPane } = Tabs;
 const LoginPage = () => {
   return (
     <>
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .responsive-image {
+              display: none;
+            }
+            .tabs-container {
+              margin: 0 auto;
+              float: none;
+            }
+            .tabs-column {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+            }
+          }
+        `}
+      </style>
       <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
         <Header />
         <Row style={{ margin: "50px 30px 20px 30px" }}>
           <Col span={1}></Col>
-          <Col span={8}>
-            <div>
+          <Col className="tabs-column">
+            <div className="tabs-container">
               <Tabs
                 defaultActiveKey="1"
                 centered
@@ -67,6 +85,7 @@ const LoginPage = () => {
           <Col>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/769194cc6b501f03568e57e28b6c0656e834e905ae2d3de0cdbbcf291c9e53b3?apiKey=41832340d6f545c2a0509736ad9e1693&"
+              className="responsive-image"
               style={{ height: "700px" }}
             />
           </Col>

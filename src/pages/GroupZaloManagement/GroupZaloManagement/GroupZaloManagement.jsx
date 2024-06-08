@@ -11,7 +11,7 @@ import {
 import { Col, Row, Input, Typography } from "antd";
 import MainLayout from "../../../MainLayout/MainLayout";
 import Navigation from "../../../components/Navigation/Navigation";
-import MyComponent from "../../../components/GroupOnPage/GroupOnPage";
+import MyComponent from "../../SelectFilter/SelectFilter";
 
 const GroupZaloManagement = () => {
   const groupButton = [
@@ -53,7 +53,7 @@ const GroupZaloManagement = () => {
         />
         <Row>
           <Col span={1}></Col>
-          <Col>
+          <Col style={{ margin: "0 0 0 60px" }}>
             <MyComponent />
           </Col>
         </Row>

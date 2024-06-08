@@ -1,147 +1,137 @@
 /* =============================== Main Content ================================ */
 .container-group {
-    background: #ffffff;
-    width: 100%;
-    height: 100%; /* Kích thước của Container */
-    border-radius: 34px;
-    padding: 64px 71px 200px;
+  background: #ffffff;
+  width: auto;
+  height: 100%; /* Kích thước của Container */
+  border-radius: 34px;
+  padding: 0 46px;
 }
 
 .main-content-group {
-    overflow: hidden;
-    height: 100%;
-    max-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-content-group .list-items {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .row-custom {
-    height: 100%;
 }
 
 /* Arrow Button */
 .cta-btn {
-    margin-top: 45px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .arrow-btn {
-    border: 1px solid #6937b1;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
+  border: 1px solid #6937b1;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
 }
 
 /* ============ Avatar Group ============ */
 .avatar-group {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 5.7%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 5.7%;
 }
 
 .avatar-group .ant-avatar {
-    margin-right: -10px;
-    border: 1px solid #ffff;
+  margin-right: -10px;
+  border: 1px solid #ffff;
 }
 
 .my-avatar {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .avatar-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    color: #000000;
-    background-color: #fde3cf;
-    border-radius: 50%;
-    border: 1px solid #ffff;
-    font-size: 24px;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #000000;
+  background-color: #fde3cf;
+  border-radius: 50%;
+  border: 1px solid #ffff;
+  font-size: 24px;
+  z-index: 1;
 }
 
 /* ================= Item Group ================= */
 .group-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 1300px; /* Kích thước của Item */
-    padding: 48px 65px;
-    background-color: #ececec;
-    border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 1300px; /* Kích thước của Item */
+  padding: 48px 65px;
+  background-color: #ececec;
+  border-radius: 40px;
 }
 
 .group-item .group-box {
-    display: flex;
-    align-items: center;
-    gap: 39px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 39px;
+  width: 100%;
 }
 
 .group-item .title-group {
-    display: flex;
-    flex-direction: column;
-    min-width: 35%;
+  display: flex;
+  flex-direction: column;
+  min-width: 35%;
 }
 
 .group-item .title-name {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .group-item .click-view {
-    font-size: 20px;
-    color: #000000;
-    text-decoration: none;
+  font-size: 20px;
+  color: #000000;
+  text-decoration: none;
 }
 
 /* ========== Drop Down Button ========== */
 .custom-dropdown-button {
-    height: 100%;
-    width: 20px;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  width: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-dropdown-button .anticon {
-    font-size: 90px;
-    transform: rotate(90deg); /* Rotate the dots to make them vertical */
+  font-size: 90px;
+  transform: rotate(90deg); /* Rotate the dots to make them vertical */
 }
 
-.filter-container{
-    width: 100%;
-    top: 30px;
-    display: flex;
-    justify-content: flex-end;
+.filter-container {
+  width: 98%;
+  display: flex;
+  justify-content: flex-end;
 }
 
-  
 .filter-select .ant-select-selector {
-    transition: border-color 0.3s ease;
-    border-radius: 25px;
-    border-color: #6537B1 !important;
-    border-width: 2px !important;
-  }
-
-
-
-  
-
+  transition: border-color 0.3s ease;
+  border-radius: 25px;
+  border-color: #6537b1 !important;
+  border-width: 2px !important;
+}

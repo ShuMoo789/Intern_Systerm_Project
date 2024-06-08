@@ -113,6 +113,10 @@ const GroupZaloManagementDetails = () => {
                 </div>
               </Flex>
 
+              <SenderContainer
+                message="Are you done with the work? Reply soon"
+                avatar="https://picsum.photos/200/300"
+              />
               {messages.map((message, index) => (
                 <div key={index}>
                   <ReceiverContainer message={message.text} />

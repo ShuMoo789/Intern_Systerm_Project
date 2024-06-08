@@ -1,5 +1,5 @@
 import { Avatar, Image } from "antd";
-import React from "react";
+import React, { useState } from "react";
 
 const emojis = ["❤️", "👍", "😆", "😮"];
 
@@ -47,6 +47,7 @@ const SenderContainer = ({ avatar, message }) => {
           borderRadius: 10,
           maxWidth: "60%",
           marginLeft: 10,
+          fontSize: "20px",
         }}
         onClick={handleEmojiClick}
       >
