@@ -27,11 +27,6 @@
     position: relative;
 }
 
-.content-navigation .header-navigation .group-header-navigation {
-    display: flex;
-    height: 100%;
-}
-
 .content-navigation .navigation {
     width: 100%;
     height: 60px;

@@ -124,8 +124,6 @@ const MenuNavigate = ({ buttonClick }) => {
         console.log(value.key);
     }
 
-    console.log('menu mount');
-
     const [collapsed, setCollapsed] = useState(false);
     const [hideAccountSetting, setHideAccountSetting] = useState(false)
 
@@ -155,7 +153,7 @@ const MenuNavigate = ({ buttonClick }) => {
                     {collapsed ? <RightOutlined /> : <LeftOutlined />}
                     {/* </Button> */}
                 </div>
-                {/* <AccountSetting disabled={hideAccountSetting} /> */}
+                <AccountSetting disabled={hideAccountSetting} />
             </div>) : (<div>
                 <Menu
                     onClick={onClick}
