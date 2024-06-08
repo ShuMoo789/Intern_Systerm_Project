@@ -1,0 +1,74 @@
+.technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.technology-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.technology-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.technology-show-questions {
+    font-size: 14px;
+    color: #666;
+}
+
+.card-img-top {
+    width: 100%;
+    max-height: 192px;
+}
+
+/* src/TechnologyList.css */
+.technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.technology-item {
+    margin: 10px;
+}
+
+.card-custom {
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+
+}
+
+.card-body {
+    border-top: 1px solid #ffffff;
+    width: 100%;
+
+    padding: 7px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* View Question */
+
+.ant-tabs-nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .ant-tabs-tab {
+    width: 50%;
+    justify-content: center;
+  }

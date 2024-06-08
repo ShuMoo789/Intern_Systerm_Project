@@ -44,3 +44,12 @@
     align-items: center;
     color: #92929D;
 }
+
+.navigation .group-button-navigation {
+    display: flex;
+    width: 54.3%;
+    height: 100%;
+    position: absolute;
+    right: 30px;
+    top: 0;
+}
