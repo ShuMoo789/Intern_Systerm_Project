@@ -1,3 +1,4 @@
+
 {
         "Reset your password": "Reset Your Password",
         "Please provide the email address that you used when you signed up for your account.": "Please provide the email address that you used when you signed up for your account.",
@@ -53,5 +54,7 @@
         "HR Login": "HR Login",
         "Mentor Login": "Mentor Login",
         "School Login": "School Login",
-        "Intern Login": "Intern Login"
+        "Intern Login": "Intern Login",
+        "Search for Information": "Search for Information"
+        
 }

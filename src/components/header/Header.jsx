@@ -7,16 +7,6 @@ import { useState, useEffect } from "react";
 const { useToken } = theme;
 
 function Header() {
-    // const { i18n } = useTranslation();
-    
-    // const handleLanguageChange = (language) => {
-    //     i18n.changeLanguage(language);
-    // }
-    // const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-
-    // const handleLanguageSwtich = (value) => {
-    //     setSelectedLanguage(value);
-    // };
     const { i18n } = useTranslation();
     const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
     const getCurrentLang = () => i18n.language;
@@ -36,7 +26,7 @@ function Header() {
             key: '1',
             label: (
                 <button onClick={(e) => handleLanguageChange(e.target.value)}>
-                    <option value="en">English</option>
+                    <option  value="en">English</option>
                 </button>
             ),
         },
@@ -53,13 +43,21 @@ function Header() {
     ];
     const { token } = useToken();
     const contentStyle = {
-        backgroundColor: token.colorBgElevated,
-        borderRadius: token.borderRadiusLG,
-        boxShadow: token.boxShadowSecondary,
+        backgroundColor: '#f0f0f0', // Màu nền
+        borderRadius: '8px', // Góc bo tròn
+        boxShadow: '0 4px 12px rgba(0,0,0,0.15)', // Đổ bóng
+        padding: '8px', // Khoảng cách bên trong
     };
     const menuStyle = {
         boxShadow: 'none',
     };
+    const itemStyle = {
+        padding: '8px 16px', // Khoảng cách bên trong của từng mục
+        borderRadius: '8px', // Góc bo tròn của từng mục
+        margin: '4px 0', // Khoảng cách giữa các mục
+        backgroundColor: '#E6E6FA', // Màu nền của từng mục
+        transition: 'background-color 0.3s', // Hiệu ứng chuyển màu nền
+      };
     const languageData = {
         en: {
             flag: "https://cdn.builder.io/api/v1/image/assets/TEMP/ed3550ad056d60b4375fcbb86733c2b3eb54425ccccc2358fcad0c028c501dc1?apiKey=41832340d6f545c2a0509736ad9e1693&",
@@ -81,7 +79,7 @@ function Header() {
                 dropdownRender={(menu) => (
                     <div style={contentStyle}>
                         {React.cloneElement(menu, {
-                            style: menuStyle,
+                            style: itemStyle,
                         })}
 
                     </div>

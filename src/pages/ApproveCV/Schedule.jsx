@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DatePicker, Button, Modal,Dropdown,TimePicker,Form,Input } from 'antd';
 import { ClockCircleOutlined ,DownOutlined } from '@ant-design/icons';
-
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -14,7 +14,7 @@ const items = [
           rel="noopener noreferrer"
           href="https://www.antgroup.com"
         >
-          Email interview
+          Email Interview
         </a>
       ),
     },
@@ -26,7 +26,7 @@ const items = [
           rel="noopener noreferrer"
           href="https://www.aliyun.com"
         >
-          Email result
+          Email Result
         </a>
       ),
     },
@@ -38,13 +38,14 @@ const items = [
           rel="noopener noreferrer"
           href="https://www.luohanacademy.com"
         >
-          Internship information
+          Internship Information
         </a>
       ),
     },
   ];
 
 const Sheldule = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState('');
@@ -86,12 +87,12 @@ const Sheldule = () => {
     <>
       <Button  type="primary" onClick={showModal} style={{ background: "#7d3c98"}}>
       <ClockCircleOutlined/>
-        Schedule interview
+        {t("Schedule interview")}
       </Button>
 
       <Modal
         open={open}
-        title="Schedule interview for Intern's ID: xxxx"
+        title={t("Schedule interview for Intern's ID: xxxx")}
         onOk={handleOk}
         onCancel={handleCancel}
         width={1125}
@@ -100,7 +101,7 @@ const Sheldule = () => {
       
             <Button type="primary" style={{ background: "#6537B1"}}>
             <ClockCircleOutlined/>
-              Set Schedule
+              {t("Set Schedule")}
             </Button>
         
         ]}
@@ -108,7 +109,7 @@ const Sheldule = () => {
                  <form onSubmit={handleSubmit}>
                  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
                  <div style={{ marginBottom: '20px', marginRight: '10px' }}>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Date</label>
+  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Date")}</label>
  
   <input
     type="text"
@@ -128,7 +129,7 @@ const Sheldule = () => {
 </div>
 
   <div style={{ marginBottom: '20px', marginRight: '10px' }}>
-    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Start Time</label>
+    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Start Time")}</label>
    
      <TimePicker 
     style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
@@ -136,7 +137,7 @@ const Sheldule = () => {
   </div>
 
   <div style={{ marginBottom: '20px'}}>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px',opacity: 0.5}}>Time Duration</label>
+  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px',opacity: 0.5}}>{t("Time Duration")}</label>
   <select
     value={timeDuration}
     onChange={(e) => setTimeDuration(e.target.value)}
@@ -158,7 +159,7 @@ const Sheldule = () => {
 
         
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Types of Interviews</label>
+          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Types of Interviews")}</label>
           <select
             value={interviewType}
             onChange={(e) => setInterviewType(e.target.value)}
@@ -171,7 +172,7 @@ const Sheldule = () => {
 
         {/* INTERVIEWER */}
         <div>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Interviewer</label>
+  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Interviewer")}</label>
   <div style={{ position: 'relative', width: '322px', height: '57px' }}>
     <select 
       style={{ 
@@ -187,7 +188,7 @@ const Sheldule = () => {
         color:"white"
       }}
     >
-      <option value="" disabled selected>Position</option>
+      <option value="" disabled selected>{t("Position")}</option>
       <option value="back-end">Back-End</option>
       <option value="front-end">Front-End</option>
       <option value="ba">BA</option>
@@ -219,7 +220,7 @@ const Sheldule = () => {
 
         {/* LINK GOOGLE MEET */}
         <div style={{ marginBottom: '20px' }}>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Link Google Meet/Address</label>
+  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Link Google Meet/Address")}</label>
   <input
     type="text"
     value={date}
@@ -244,7 +245,7 @@ const Sheldule = () => {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
 
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Send Email</label>
+          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Send Email")}</label>
           <select
             value={interviewType}
             
@@ -267,7 +268,7 @@ const Sheldule = () => {
         </div>
         
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Rank</label>
+          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Rank")}</label>
           <select
              style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
           >
@@ -286,12 +287,12 @@ const Sheldule = () => {
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
 
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>To:</label>
+          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("To:")}</label>
           <input
             type="email"
             value={to}
             onChange={(e) => setTo(e.target.value)}
-            placeholder="Enter email addresses"
+            placeholder={t("Enter email address")}
             style={{ width: '465px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
           />
         </div>
@@ -301,7 +302,7 @@ const Sheldule = () => {
             type="email"
             value={bcc}
             onChange={(e) => setBcc(e.target.value)}
-            placeholder="Enter email addresses"
+            placeholder= {t("Enter email address")}
             style={{ width: '465px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
           />
         </div>
@@ -311,13 +312,13 @@ const Sheldule = () => {
           {/* type of email */}
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
   <div style={{ marginBottom: '20px' }}>
-    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Choose types of Email</label>
+    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Choose types of Email")}</label>
     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
       <select style={{ width: '260px', height: '57px', padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}>
-        <option value="" disabled selected>Please select an option</option>
-        <option value=""  >Email interview</option>
-        <option value=""  >Email Result</option>
-        <option value=""  >internship information</option>
+        <option value="" disabled selected>{t("Please select an option")}</option>
+        <option value=""  >{t("Email Interview")}</option>
+        <option value=""  >{t("Email Result")}</option>
+        <option value=""  >{t("Internship Information")}</option>
 
        
       </select>
@@ -327,7 +328,7 @@ const Sheldule = () => {
   <div style={{ marginBottom: '20px' }}>
 
 
-  <textarea  placeholder="Enter your email"
+  <textarea  placeholder={t("Enter your email")}
     style={{
       width: '759px',
       height: '196px',

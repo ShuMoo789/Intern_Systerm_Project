@@ -7,6 +7,7 @@ import CommentPopup from "./CommentPopup.jsx";
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import Header from "../../components/header/Header.jsx";
 import {
   DownOutlined,
   EyeOutlined,
@@ -30,8 +31,7 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import i18n from "i18next";
-import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
@@ -388,6 +388,9 @@ function ApproveCV() {
     setViewPopupVisible(false); // Hide the view popup
   };
 
+  const { t,i18n } = useTranslation();
+  const [optionChoose, setOptionChoose] = useState([]);
+
   // checkbox table Ant Design
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -405,7 +408,7 @@ function ApproveCV() {
   // title of apprve list table
   const columns = [
     {
-      title: "Intern ID",
+      title: t("Intern ID"),
       dataIndex: "internID",
       width: 80,
       filteredValue: [selectedFilters.internID],
@@ -414,12 +417,12 @@ function ApproveCV() {
       // }
     },
     {
-      title: "Date Submitted Form",
+      title: t("Date Submitted Form"),
       dataIndex: "dateSubmittedForm",
       width: 140,
     },
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "fullName",
       width: 150,
       filteredValue: [selectedFilters.fullName],
@@ -428,7 +431,7 @@ function ApproveCV() {
       // }
     },
     {
-      title: "Date Of Birth",
+      title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
       width: 110,
       // filteredValue: [selectedFilters.dateOfBirth],
@@ -437,7 +440,7 @@ function ApproveCV() {
       // }
     },
     {
-      title: "Phone Number",
+      title: t("Phone Number"),
       dataIndex: "phoneNumber",
       width: 120,
       // filteredValue: [selectedFilters.phoneNumber],
@@ -446,7 +449,7 @@ function ApproveCV() {
       // }
     },
     {
-      title: "Position",
+      title: t("Position"),
       dataIndex: "position",
       width: 120,
       // filteredValue: [selectedFilters.position],
@@ -455,7 +458,7 @@ function ApproveCV() {
       // }
     },
     {
-      title: "School",
+      title: t("School"),
       dataIndex: "school",
       width: 160,
       // filteredValue: [selectedFilters.school],
@@ -464,7 +467,7 @@ function ApproveCV() {
       // }
     },
     {
-      title: "Address",
+      title: t("Address"),
       dataIndex: "address",
       width: 120,
       // filteredValue: [selectedFilters.address],
@@ -495,7 +498,7 @@ function ApproveCV() {
       ),
     },
     {
-      title: "Comments",
+      title: t("Comments"),
       dataIndex: "commentsCV",
       width: 130,
       render: (text) => (
@@ -509,7 +512,7 @@ function ApproveCV() {
       ),
     },
     {
-      title: "Status",
+      title: t("Status"),
       dataIndex: "status",
       width: 100,
       render: (text) => {
@@ -519,7 +522,7 @@ function ApproveCV() {
             style={{
               width: 100,
             }}
-            options={optionSelect}
+            options={optionChoose}
           />
         );
       },
@@ -530,10 +533,10 @@ function ApproveCV() {
       render: () => (
         <div className="approve-btns">
           <div className="view" onClick={() => handleViewClick(intern)}>
-            View
+            {t("View")}
           </div>
           <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>
-            Feedbacks
+            {t("Feedbacks")}
           </div>
         </div>
       ),
@@ -541,27 +544,30 @@ function ApproveCV() {
   ];
 
   // option of status column
+  useEffect(() => {
   const optionSelect = [
     {
       value: "passed",
-      label: "Passed",
+      label: t("Passed"),
     },
     {
       value: "failed",
-      label: "Failed",
+      label: t("Failed"),
     },
     {
       value: "pending",
-      label: "Pending",
+      label: t("Pending"),
     },
   ];
-
+  setOptionChoose(optionSelect)
+}, [t])
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
           <header className="content-header">
             <h1 className="content-title">Approve CV</h1>
+            <Header/>
             <div className="user-info">
               <img
                 loading="lazy"
@@ -580,7 +586,7 @@ function ApproveCV() {
           </header>
 
           <section className="content-section">
-            <h2 className="section-title">Search for Information</h2>
+            <h2 className="section-title">{t("Search for Information")}</h2>
             <div className="button-group">
               <button className="button button-schedule">
                 <Sheldule />
@@ -591,7 +597,7 @@ function ApproveCV() {
                   alt="Export Icon"
                   className="button-icon"
                 />
-                <span>Export Excel</span>
+                <span>{t("Export Excel")}</span>
               </button>
               <button className="button button-edit">
                 <img
@@ -599,7 +605,7 @@ function ApproveCV() {
                   alt="Edit Icon"
                   className="button-icon"
                 />
-                <span>Edit</span>
+                <span>{t("Edit")}</span>
               </button>
               <button className="button button-delete">
                 <img
@@ -607,7 +613,7 @@ function ApproveCV() {
                   alt="Delete Icon"
                   className="button-icon"
                 />
-                <span>Delete</span>
+                <span>{t("Delete")}</span>
               </button>
               <button className="button button-add-intern">
                 <img
@@ -615,7 +621,7 @@ function ApproveCV() {
                   alt="Add Intern Icon"
                   className="button-icon"
                 />
-                <span>Add New Intern</span>
+                <span>{t("Add New Intern")}</span>
               </button>
             </div>
           </section>
@@ -625,7 +631,7 @@ function ApproveCV() {
               <div className="fields">
                 <Input
                   size="large"
-                  placeholder="Enter intern's ID"
+                  placeholder={t("Enter intern's ID")}
                   value={selectedFilters.internID}
                   onChange={(e) =>
                     handleInputChange("internID", e.target.value)
@@ -634,7 +640,7 @@ function ApproveCV() {
 
                 <Input
                   size="large"
-                  placeholder="Enter intern's Full name"
+                  placeholder={t("Enter intern's Full name")}
                   value={selectedFilters.fullName}
                   onChange={(e) =>
                     handleInputChange("fullName", e.target.value)
@@ -643,14 +649,14 @@ function ApproveCV() {
 
                 <DatePicker
                   format={dateFormat}
-                  placeholder="Enter intern's D.O.B"
+                  placeholder={t("Enter intern's D.O.B")}
                   style={{ padding: "7px 11px", fontSize: "15px" }}
                   onChange={(date) => handleDateChange("dateOfBirth", date)}
                 />
 
                 <Input
                   size="large"
-                  placeholder="Enter intern's Phone number"
+                  placeholder={t("Enter intern's Phone number")}
                   value={selectedFilters.phoneNumber}
                   onChange={(e) =>
                     handleInputChange("phoneNumber", e.target.value)
@@ -678,7 +684,7 @@ function ApproveCV() {
                         color: selectedFilters.school ? "#000000" : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.school || "Enter intern's School"}
+                      {selectedFilters.school || t("Enter intern's School")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -686,7 +692,7 @@ function ApproveCV() {
 
                 <Input
                   size="large"
-                  placeholder="Enter intern's Email"
+                  placeholder={t("Enter intern's Email")}
                   value={selectedFilters.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                 />
@@ -711,7 +717,7 @@ function ApproveCV() {
                         color: selectedFilters.position ? "#000000" : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.position || "Enter intern's Position"}
+                      {selectedFilters.position || t("Enter intern's Position")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -719,14 +725,14 @@ function ApproveCV() {
 
                 <Input
                   size="large"
-                  placeholder="Enter intern's Address"
+                  placeholder={t("Enter intern's Address")}
                   value={selectedFilters.address}
                   onChange={(e) => handleInputChange("address", e.target.value)}
                 />
 
                 <DatePicker
                   format={dateFormat}
-                  placeholder="Enter intern's Date Submitted Form"
+                  placeholder={t("Enter intern's Date Submitted Form")}
                   style={{ padding: "7px 11px", fontSize: "15px" }}
                   onChange={(date) => handleDateChange("dateSub", date)}
                 />
@@ -734,12 +740,12 @@ function ApproveCV() {
               <div className="buttons">
                 <div className="cln-btn btn" onClick={handleClearFilters}>
                   <DeleteOutlined style={{ marginRight: "10px" }} />
-                  Clean Filter
+                  {t("Clean Filter")}
                 </div>
                 <br />
                 <div className="srch-btn btn" onClick={handleSearch}>
                   <SearchOutlined style={{ marginRight: "10px" }} />
-                  Search
+                  {t("Search")}
                 </div>
               </div>
             </div>
