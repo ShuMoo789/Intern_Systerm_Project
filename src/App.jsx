@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
 import GroupZaloManagementDetails from "./pages/GroupZaloManagementDetails/GroupZaloManagementDetails.jsx";
+import GroupZaloManagement from "./pages/GroupZaloManagement/GroupZaloManagement/GroupZaloManagement.jsx";
 
 // Define the main App component
 function App() {
@@ -64,8 +65,11 @@ function App() {
         <Route path="/InternList" element={<InternList />} />
         {/* Route to the CV approval page, rendering the GroupList component */}
 
+        <Route path="/GroupZaloManagement" element={<GroupZaloManagement />} />
+        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagement component */}
+
         <Route
-          path="/ZaloGroupManagement"
+          path="/GroupZaloManagementDetails"
           element={<GroupZaloManagementDetails />}
         />
         {/* Route to the Zalo Group Management page, rendering the GroupZaloManagementDetails component */}

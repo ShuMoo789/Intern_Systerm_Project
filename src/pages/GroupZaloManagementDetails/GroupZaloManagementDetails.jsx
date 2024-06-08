@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
-
 import {
   ClockCircleOutlined,
   ExportOutlined,
@@ -9,11 +8,13 @@ import {
   DeleteOutlined,
   FolderAddOutlined,
   SendOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
-import { Col, Row, Input, Typography } from "antd";
+import { Col, Row, Input, Flex, Typography } from "antd";
+const { Title } = Typography;
 
-const { TextArea } = Input;
-const emojis = ["❤️", "👍", "😆", "😮"];
+import SenderContainer from "../../components/ChatContainer/SenderContainer";
+import ReceiverContainer from "../../components/ChatContainer/ReceiverContainer";
 
 const GroupZaloManagementDetails = () => {
   const groupButton = [
@@ -48,7 +49,6 @@ const GroupZaloManagementDetails = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [focusedMessageIndex, setFocusedMessageIndex] = useState(null);
 
   const handleSendMessage = () => {
     if (inputValue.trim()) {
@@ -60,33 +60,6 @@ const GroupZaloManagementDetails = () => {
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-
-  const addReaction = (index, emoji) => {
-    const newMessages = [...messages];
-    newMessages[index].reaction = emoji;
-    setMessages(newMessages);
-    setFocusedMessageIndex(null); // Hide emoji selector after selecting an emoji
-  };
-
-  const renderEmojiSelector = (index) => (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        marginTop: "10px",
-      }}
-    >
-      {emojis.map((emoji) => (
-        <span
-          key={emoji}
-          style={{ cursor: "pointer", fontSize: "20px" }}
-          onClick={() => addReaction(index, emoji)}
-        >
-          {emoji}
-        </span>
-      ))}
-    </div>
-  );
 
   return (
     <>
@@ -100,61 +73,69 @@ const GroupZaloManagementDetails = () => {
           <Col span={1}></Col>
           <Col
             style={{
-              minHeight: "1000px",
+              display: "flex",
+              flexDirection: "column",
+              height: "75vh",
               width: "92%",
               backgroundColor: "white",
               borderRadius: "20px",
               padding: "20px",
+              overflowY: "auto",
             }}
           >
-            <Row
-              style={{
-                marginBottom: "20px",
-                padding: "10px",
-              }}
-            >
-              <Col span={8}></Col>
-              <Col span={8}></Col>
-              <Col span={8}>
-                {messages.map((message, index) => (
-                  <div
-                    key={index}
-                    tabIndex={0}
-                    style={{
-                      display: "flex",
-                      padding: "10px",
-                      borderRadius: "18px",
-                      marginBottom: "10px",
-                      backgroundColor: "#f5f5f5",
-                      flexDirection: "column",
-                    }}
-                    onFocus={() => setFocusedMessageIndex(index)}
-                    onBlur={() => setFocusedMessageIndex(null)}
-                  >
-                    <TextArea
-                      value={message.text}
-                      autoSize
-                      bordered={false}
-                      style={{
-                        backgroundColor: "transparent",
-                        pointerEvents: "none",
-                        padding: 0,
-                      }}
-                    />
-                    {focusedMessageIndex === index &&
-                      renderEmojiSelector(index)}
-                  </div>
-                ))}
-              </Col>
-            </Row>
-            <div style={{ display: "flex" }}>
+            <div style={{ flex: "1 1 auto" }}>
+              <Flex
+                justify="space-between"
+                style={{
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                }}
+              >
+                <div />
+                <div
+                  style={{
+                    flex: "1 1 auto",
+                    textAlign: "center",
+                  }}
+                >
+                  <Title level={2} style={{ margin: 0 }}>
+                    Designer_FU_SP24
+                  </Title>
+                  <Title level={5} style={{ margin: 0 }}>
+                    50 members
+                  </Title>
+                </div>
+                <div style={{ flex: "0 0 auto" }}>
+                  <SearchOutlined />
+                  <a href="" style={{ marginRight: "20px" }}>
+                    View in Zalo
+                  </a>
+                </div>
+              </Flex>
+
+              {messages.map((message, index) => (
+                <div key={index}>
+                  <ReceiverContainer message={message.text} />
+                </div>
+              ))}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={1}></Col>
+          <Col
+            style={{
+              width: "92%",
+            }}
+          >
+            <div style={{ flex: "0 0 auto", marginTop: 20 }}>
               <Input
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Type a message"
                 onPressEnter={handleSendMessage}
                 style={{ flex: 1 }}
-                addonAfter={
+                suffix={
                   <SendOutlined
                     onClick={handleSendMessage}
                     style={{ cursor: "pointer", color: "#1890ff" }}
