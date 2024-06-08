@@ -1,8 +1,10 @@
+
 import React from "react";
 import "./FirstPage.css";  // Import the CSS file for styling
 import { Avatar, Button, Row, Col } from "antd";  // Import Ant Design components for Avatar and Button
 import userImage from "../../assets/user_image.png";  // Import a user image
 import { DownOutlined, UpOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons'; // Import the icons from Ant Design
+
 
 const accounts = [
   {
@@ -23,16 +25,20 @@ const accounts = [
 ];
 
 const First_Page = ({ Accounts }) => {
+
   const [isCollapsed, setIsCollapsed] = React.useState(true);  // Initialize state for menu collapse
+
 
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
 
+
   const handleClose = () => {
     // Add your close functionality here
     console.log("Close button clicked");
   };
+
 
   return (
     <>
@@ -41,11 +47,13 @@ const First_Page = ({ Accounts }) => {
         <Col span={4.5}>
         <Row>
           <div className="avatar" style={{ paddingLeft: '55px' }}>
+
             <Avatar
               className="AvaCurent"
               shape="square"
               size={200}
               src={userImage}
+
               
             />
           </div>
@@ -55,6 +63,7 @@ const First_Page = ({ Accounts }) => {
         </Row>
           <h3 className="UsernameCurent">Natalie Brogan</h3>
           <Button className="ManageAccount">Manage Your Account</Button>
+
 
           <div className="container-cover">
             <div className="container-1">
@@ -66,6 +75,7 @@ const First_Page = ({ Accounts }) => {
                   {isCollapsed ? <DownOutlined /> : <UpOutlined />}
                 </span>
               </Button>
+
               <div className={`custom-menu ${isCollapsed ? "" : "show"}`} style={{ width: 400 }}>
                 {accounts.map((account, index) => (
                   <div key={index} className="account-item">
@@ -82,6 +92,7 @@ const First_Page = ({ Accounts }) => {
                   Add account
                 </Button>
                 <Button type="link" className={isCollapsed ? "btn-signout-hide" : "btn-signout-show"} icon={<PlusOutlined />}>
+
                   Sign out
                 </Button>
               </div>
@@ -89,7 +100,6 @@ const First_Page = ({ Accounts }) => {
           </div>
         </Col>
         <Col span={9}></Col>
-        
       </Row>
     </>
   );

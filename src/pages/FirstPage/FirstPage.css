@@ -1,8 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
-
-body {
-  font-family: 'Quicksand', sans-serif;
-}
 
 .container-1 {
   display: flex;
@@ -14,6 +9,7 @@ body {
 
 .AvaCurent {
   margin: 0 35%;
+
   margin-top: 35%;
   align-items: center;
 }
@@ -41,6 +37,7 @@ body {
   height: 60px;
   width: 464.5px;
   border-radius: 25px;
+
   font-size: 25px;
   color: #280559;
   padding: 0px 40px 0px 40px;
@@ -118,6 +115,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+
   margin-bottom: 20px;
 }
 
@@ -140,8 +138,10 @@ body {
 }
 
 .btn-hide-acc {
+
   margin-top: 20px;
   margin-bottom: 20px;
+
   padding: 0 20px;
   width: 92%;
   display: flex;
@@ -160,13 +160,27 @@ body {
   flex-shrink: 0;
 }
 
+
 .account-buttons {
   display: flex;
   justify-content: space-between;
   padding-top: 0px;
-  width: 400px;
+
+.btn-add-account {
   height: 70px;
+  width: 195px;
+
+  font-size: 19px;
+  border-radius: 10px;
+  font-family: 'Quicksand', sans-serif;
 }
+
+.account-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+
+
 
 .btn-add-account-show {
   background-color: #ffffff;
