@@ -1,4 +1,3 @@
-/* Import Quicksand font */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
 
 body {
@@ -11,15 +10,22 @@ body {
   align-items: center;
   justify-content: center;
   width: 442.5px;
-  
 }
 
 .AvaCurent {
   margin: 0 35%;
-  margin-top:  35%;
-  /* box-shadow: #6363636e 5px 5px 10px 2px; */
+  margin-top: 35%;
   align-items: center;
-
+}
+.close-button {
+  position: absolute;
+  top:40px;
+  right: 20px;
+  font-size: 50px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .UsernameCurent {
@@ -34,59 +40,62 @@ body {
   border: 4px solid rgb(101,55,177);
   height: 60px;
   width: 464.5px;
-  border-radius: 20px;
+  border-radius: 25px;
   font-size: 25px;
   color: #280559;
   padding: 0px 40px 0px 40px;
   font-weight: 600;
   font-family: 'Quicksand', sans-serif;
-  
 }
 
 .custom-menu {
   background-color: #ffffff;
-  border: 1px solid #d9d9d900;
-  border-radius: 8px;
+  /* border: 1px solid #d9d9d900; */
   padding: 0px;
   margin-top: 10px;
-  border-radius: 50px;
-  
+  border-radius: 50px 50px 0px 0px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out; /* Slower transition */
+}
+
+.custom-menu.show {
+  max-height: 500px; /* Adjust the max-height as needed */
 }
 
 .container-cover {
   background-color: #e9e9e9;
   border: 1px solid #000000;
-  border-radius: 8px;
   padding: 10px;
   margin-top: 20px;
   border-radius: 50px;
-}
+} 
 
 .account-item {
   display: flex;
   align-items: center;
-  height: 70px; /* Set height to 70px */
-  padding: 10px 5px; /* Increased padding for better spacing */
+  height: 60px;
+  padding: 10px 5px;
   border-bottom: 5px solid #d9d9d9;
 }
 
 .account-item:last-child {
-  border-bottom: none; /* Remove border from the last item */
+  border-bottom: none;
 }
 
 .account-avatar {
-  margin-right: 20px; /* Increased margin for better spacing */
-  width: 48px; /* Larger avatar size */
-  height: 48px; /* Larger avatar size */
+  margin-right: 20px;
+  width: 48px;
+  height: 48px;
 }
 
 .account-name {
-  font-size: 20px; /* Increased font size for better readability */
+  font-size: 20px;
   font-family: 'Quicksand', sans-serif;
 }
 
 .account-email {
-  font-size: 18px; /* Increased font size for better readability */
+  font-size: 18px;
   color: #888;
   font-family: 'Quicksand', sans-serif;
 }
@@ -109,13 +118,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
-}
-
-.account-action {
-  width: 48%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .btn-show-accounts {
@@ -137,6 +140,8 @@ body {
 }
 
 .btn-hide-acc {
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 0 20px;
   width: 92%;
   display: flex;
@@ -155,45 +160,68 @@ body {
   flex-shrink: 0;
 }
 
-.btn-add-account {
-  height: 70px;
-  width: 195px;
-
-  font-size: 19px;
-  border-radius: 10px;
-  font-family: 'Quicksand', sans-serif;
-}
-
 .account-buttons {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
+  padding-top: 0px;
   width: 400px;
   height: 70px;
 }
 
-.btn-signout {
+.btn-add-account-show {
+  background-color: #ffffff;
+  border: #d9d9d9;
+  height: 70px;
+  width: 202.5px;
+  font-size: 19px;
+  border-radius: 0px 0px 0px 50px;
+  font-family: 'Quicksand', sans-serif;
+  border-right: 5px solid #d9d9d9;
+  border-top: 5px solid #d9d9d9;
+}
+
+.btn-add-account-hide {
+  background-color: #ffffff;
   height: 70px;
   width: 195px;
   font-size: 19px;
-  border-radius: 10px;
+  border-radius: 20px;
   font-family: 'Quicksand', sans-serif;
 }
 
+.btn-signout-show {
+  background-color: #ffffff;
+  border: #d9d9d9;
+  height: 70px;
+  width: 197.5px;
+  font-size: 19px;
+  border-radius: 0px 0px 50px 0px;
+  border-top: 5px solid #d9d9d9;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn-signout-hide {
+  background-color: #ffffff;
+  height: 70px;
+  width: 195px;
+  font-size: 19px;
+  border-radius: 20px;
+  font-family: 'Quicksand', sans-serif;
+}
 
 .icon-large {
-  font-size: 20px;  /* Adjust the size as needed */
-  
+  font-size: 20px;
 }
 
-.showandhide{
+.showandhide {
   font-size: 22px;
 }
-.avatar{
-  align-items: center;
-  padding-right: 90px;
-}
-.container-background{
+
+
+
+.container-background {
   background-color: #ffffff;
-  padding-left: 3%;
+  align-items: center;
 }
+
+
