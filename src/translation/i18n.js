@@ -3,7 +3,6 @@ import I18NextHttpBackend from "i18next-http-backend"; // Importing the backend 
 import { initReactI18next } from "react-i18next"; // Importing the React integration for i18next
 import translationEN from "../data/locales/en.json"; // Importing English translations
 import translationVI from "../data/locales/vi.json"; // Importing Vietnamese translations
-
 // Creating a resources object that contains the translations for different languages
 const resources = {
   en: { translation: translationEN },
@@ -12,6 +11,7 @@ const resources = {
 
 // Initializing i18next with the necessary configurations
 i18n
+    
     .use(I18NextHttpBackend) // Using the HTTP backend plugin to load translations
     .use(initReactI18next) // Integrating i18next with React
     .init({
