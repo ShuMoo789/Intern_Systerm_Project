@@ -1,0 +1,273 @@
+.user-info {
+    display: flex;
+    align-items: center;
+    /* margin-top: auto; */
+    /* padding: 20px; */
+    /* background: #e8e9eb; */
+    width: fit-content;
+}
+
+.user-info > .avatar-section {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.user-info > .avatar-section > .user-details {
+    margin-left: 5px;
+}
+
+.user-info > .avatar-section > .user-details > .username {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.user-info > .avatar-section > .user-details > .role {
+    font-size: 14px;
+    color: #aaabaf;
+    margin: 0;
+}
+
+.user-info > .notification-icon {
+    font-size: 20px;
+    color: #db0d4b;
+    margin-left: 10px;
+}
+
+.project-management-section > .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px ;
+    background-color: white; /* Set header background to white */
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 16px; /* Optional: Add margin to separate from the top and sides */
+}
+
+.project-management-section > .header-section > .header-title {
+    font-size: 36px;
+    color: #280559;
+    margin: 0;
+}
+
+.project-management-section > .main-grid {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 30px 40px;
+}
+
+.project-management-section > .main-grid > .search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+
+.buttons-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.clean-filters-button,
+.search-button,
+.action-buttons button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.clean-filters-button {
+    background-color: #fff;
+    border: 1px solid rgba(203, 210, 220, 0.5);
+    color: black;
+}
+
+.search-button {
+    background-color: #4889e9;
+    border: 1px solid rgba(72, 137, 233, 0.5);
+    color: #fff;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.action-buttons button {
+    flex: 1;
+}
+
+.export {
+    background-color: #41b137;
+    border: 1px solid rgba(203, 210, 220, 0.5);
+}
+
+.edit {
+    background-color: #fb8632;
+    border: 1px solid rgba(203, 210, 220, 0.5);
+}
+
+.delete {
+    background-color: #ff3a2e;
+    border: 1px solid rgba(203, 210, 220, 0.5);
+}
+
+.add {
+    background-color: #4889e9;
+    border: 1px solid rgba(72, 137, 233, 0.5);
+    color: #fff;
+}
+
+.project-management-section {
+    padding: 20px;
+    /* background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+    overflow: auto;
+    height: 100vh;
+}
+
+/* .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+} */
+
+.project-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.project-card:hover {
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.project-card .project-deadline {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-card .project-deadline p{
+    line-height: 1em;
+    height: 2em;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.project-header h3 {
+    margin: 0;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    gap: 10px;
+}
+
+.ant-card-extra > .status .ant-select-selector{
+    width: 120px;
+}
+
+.project-details p {
+    margin: 5px 0;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.issues,
+.members {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #5C5967;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--gray-light-background-gray-1, #f8f9fb);
+    border-radius: 4px;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pagination-label,
+.pagination-text {
+    font-size: 14px;
+}
+
+.pagination-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.pagination-divider {
+    width: 1px;
+    height: 24px;
+    background-color: #d9d9d9;
+}
+
+@media (max-width: 991px) {
+    .main-header,
+    .sidebar,
+    .main-grid,
+    .management-item,
+    .navigation-item,
+    .user-info,
+    .avatar-section,
+    .header-section,
+    .filter-box,
+    .buttons-section,
+    .action-buttons,
+    .project-list,
+    .pagination, 
+    .status{
+        width: 100%;
+        padding: 10px;
+    }
+
+    .management-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

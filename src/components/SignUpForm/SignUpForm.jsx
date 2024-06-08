@@ -1,14 +1,17 @@
 import { Flex, Form, Input, Button, Modal } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CheckCircleOutlined } from "@ant-design/icons";
-
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../../translation/LanguageContext";
 const SignUpForm = ({ role, dataSet }) => {
+  const { t , i18n } = useTranslation();
   const [wrong, setWrong] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [form] = Form.useForm();
+  const currentLanguage = useLanguage()
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
 
   const handleSignUp = async (values) => {
@@ -49,7 +52,26 @@ const SignUpForm = ({ role, dataSet }) => {
       throw error;
     }
   };
-
+  useEffect(() => {
+    form.setFields([
+      {
+        name: 'fullName',
+        errors: form.getFieldError('fullName').map(() => t("Please input your full name!")),
+      },
+      {
+        name: 'email',
+        errors: form.getFieldError('email').map(() => t("Please input your email!")),
+      },
+      {
+        name: 'password',
+        errors: form.getFieldError('password').map(() => t("Please input your password!")),
+      },
+      {
+        name: 'repassword',
+        errors: form.getFieldError('repassword').map(() => t("Please re-type your password!")),
+      },
+    ]);
+  }, [currentLanguage, t]);
   return (
     <div>
       <Flex vertical align="center">
@@ -61,11 +83,12 @@ const SignUpForm = ({ role, dataSet }) => {
               marginBottom: "-1px",
             }}
           >
-            Sign Up
+            {t('Sign Up')}
           </h1>
-          <span>Please fill your details to create your account</span>
+          <span>{t("Please fill your details to create your account")}</span>
 
-          <Form
+          <Form 
+            form={form}
             name="a"
             initialValues={{ remember: true }}
             layout="vertical"
@@ -73,33 +96,33 @@ const SignUpForm = ({ role, dataSet }) => {
             onFinish={handleSignUp}
           >
             <Form.Item
-              label="Full Name"
+              label={t("Full Name")}
               name="fullName"
               rules={[
                 {
                   required: true,
-                  message: "Please input your full name!",
+                  message: t("Please input your full name!"),
                 },
               ]}
             >
-              <Input placeholder="Enter your full name" allowClear />
+              <Input placeholder={t("Enter your full name")} allowClear />
             </Form.Item>
 
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              rules={[{ required: true, message: t("Please input your email!") }]}
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label={t("Password")}
               name="password"
               rules={[
                 {
                   required: true,
-                  message: "Please input your password!",
+                  message: t("Please input your password!"),
                 },
               ]}
             >
@@ -107,38 +130,38 @@ const SignUpForm = ({ role, dataSet }) => {
             </Form.Item>
 
             <Form.Item
-              label="Re-type password"
+              label={t("Re-type password")}
               name="repassword"
               rules={[
                 {
                   required: true,
-                  message: "Please re-type your password!",
+                  message: t("Please re-type your password!"),
                 },
               ]}
             >
-              <Input.Password placeholder="Re-enter your password" />
+              <Input.Password placeholder={t("Re-enter your password")} />
             </Form.Item>
             {wrong && (
               <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
-                Passwords don't match!
+                {t("Passwords don't match!")}
               </div>
             )}
             {emailExists && (
               <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
-                Email already existed!
+                {t("Email already existed!")}
               </div>
             )}
 
             <Form.Item>
               <Button type="primary" htmlType="submit" block>
-                Sign in
+                {t('Sign Up')}
               </Button>
             </Form.Item>
             <Form.Item>
               <Flex vertical align="center">
                 <div>
-                  <span>Already have an account?</span>{" "}
-                  <Link to="/SignIn">Sign in</Link>
+                  <span>{t('Already have an account?')}</span>{" "}
+                  <Link to="/SignIn">{t('Sign In')}</Link>
                 </div>
               </Flex>
             </Form.Item>
@@ -149,7 +172,7 @@ const SignUpForm = ({ role, dataSet }) => {
       <Modal open={isModalVisible} footer={null} closable={false} centered>
         <div style={{ textAlign: "center" }}>
           <CheckCircleOutlined style={{ fontSize: "48px", color: "#52c41a" }} />
-          <h2>Signed up successfully</h2>
+          <h2>{t('Signed up successfully')}</h2>
         </div>
       </Modal>
     </div>

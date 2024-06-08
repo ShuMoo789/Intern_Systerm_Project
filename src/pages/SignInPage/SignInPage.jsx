@@ -2,10 +2,10 @@ import { Col, Row, Tabs } from "antd";
 import React from "react";
 import Header from "../../components/header/Header";
 import SignInForm from "../../components/SignInForm/LoginForm";
-
+import { useTranslation } from "react-i18next";
 const { TabPane } = Tabs;
-
 const LoginPage = () => {
+  const { t } = useTranslation();
   return (
     <>
       <style>
@@ -39,41 +39,41 @@ const LoginPage = () => {
                 tabBarGutter={50}
                 tabBarStyle={{ color: "grey" }}
               >
-                <TabPane tab="Admin" key="1">
+                <TabPane tab={t("Admin")} key="1">
                   <SignInForm
-                    header="Admin Login"
+                    header={t("Admin Login")}
                     formName="admin"
                     role="Admin"
                     dataSet="Admins"
                   />
                 </TabPane>
-                <TabPane tab="Human Resources" key="2">
+                <TabPane tab={t("Human Resources")} key="2">
                   <SignInForm
-                    header="HR Login"
+                    header={t("HR Login")}
                     formName="hr"
                     role="HR"
                     dataSet="HRs"
                   />
                 </TabPane>
-                <TabPane tab="Mentor" key="3">
+                <TabPane tab={t("Mentor")} key="3">
                   <SignInForm
-                    header="Mentor Login"
+                    header={t("Mentor Login")}
                     formName="mentor"
                     role="Mentor"
                     dataSet="Mentors"
                   />
                 </TabPane>
-                <TabPane tab="School" key="4">
+                <TabPane tab={t("School")} key="4">
                   <SignInForm
-                    header="School Login"
+                    header={t("School Login")}
                     formName="school"
                     role="School"
                     dataSet="Schools"
                   />
                 </TabPane>
-                <TabPane tab="Intern" key="5">
+                <TabPane tab={t("Intern")} key="5">
                   <SignInForm
-                    header="Intern Login"
+                    header={t("Intern Login")}
                     formName="intern"
                     role="Intern"
                     dataSet="Interns"
