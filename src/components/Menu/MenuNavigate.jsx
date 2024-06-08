@@ -121,10 +121,7 @@ const MenuNavigate = ({ buttonClick }) => {
     const navigate = useNavigate()
     const onClick = (value) => {
         navigate('/' + value.key)
-        console.log(value.key);
     }
-
-    console.log('menu mount');
 
     const [collapsed, setCollapsed] = useState(false);
     const [hideAccountSetting, setHideAccountSetting] = useState(false)
