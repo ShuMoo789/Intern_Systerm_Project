@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
 import PositionManagement from "./pages/PositionManagement/PositionManagement.jsx";
+import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx"
 // Define the main App component
 function App() {
   // useState hook to manage a count state, although it isn't used in the current implementation
@@ -63,6 +64,7 @@ function App() {
         <Route path="/InternList" element={<InternList />} />
         {/* Route to the CV approval page, rendering the GroupList component */}
         <Route path="/positionManagement" element={<PositionManagement />} />
+        <Route path="/confirmCV" element={<ConfirmCV/>}/>
       </Routes>
     </>
   );

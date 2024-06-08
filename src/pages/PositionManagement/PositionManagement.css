@@ -94,3 +94,16 @@
     width: 16px;
     height: 16px;
 }
+
+.button-main {
+    width: 50%;
+    margin-left: 60%;
+    margin-top: -50px; /* Số lượng pixel bạn muốn dịch chuyển lên trên */
+    display: flex;
+    position: relative;
+}
+
+.iconfolder{
+    margin-top: 5px;
+}
+
