@@ -58,11 +58,17 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         {/* Route to the CV approval page, rendering the Dashboard component */}
 
-        <Route path="/GroupList" element={<GroupZaloManagementDetails />} />
+        <Route path="/GroupList" element={<GroupList />} />
         {/* Route to the CV approval page, rendering the GroupList component */}
 
         <Route path="/InternList" element={<InternList />} />
         {/* Route to the CV approval page, rendering the GroupList component */}
+
+        <Route
+          path="/ZaloGroupManagement"
+          element={<GroupZaloManagementDetails />}
+        />
+        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagementDetails component */}
       </Routes>
     </>
   );
