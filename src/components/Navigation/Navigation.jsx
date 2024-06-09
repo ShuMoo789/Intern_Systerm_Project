@@ -21,14 +21,14 @@ const Navigation = (props) => {
                         <AccountSetting />
                     </div>)}           
                 </div>
-            </div>
+            </div>            
             <div className="navigation">
                 <div className="search-navigation">
                     {isMobile ? 'Search' : 'Search for Information'}
                 </div>
                 {/* Pass props to GroupButton from InternList */}
                 <div className="group-button-navigation">
-                    <GroupButton groupButton={props.groupButton} onSendEmail={props.onSendEmail} />
+                    <GroupButton groupButton={props.groupButton} onSendEmail={props.onSendEmail}/>
                 </div>
             </div>
         </div>
