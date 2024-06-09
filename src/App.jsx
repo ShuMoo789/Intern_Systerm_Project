@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import AccountManagement from "./pages/AccountManagement/AccountManagement.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
-import PasswordReset from "./pages/PasswordReset/PasswordReset";
+import PasswordReset from "./pages/PasswordReset/PasswordReset.jsx";
 import OTPVerify from "./pages/OTPVerify/OTPVerify";
 import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
@@ -41,7 +41,7 @@ function App() {
         {/* Route to the account management page, rendering the AccountManagement component 
             Note: There seems to be a typo in the path "/Profie". It should likely be "/Profile". */}
 
-        <Route path="/pwdreset" element={<PasswordReset />} />
+        <Route path="/PasswordReset" element={<PasswordReset />} />
         {/* Route to the password reset page, rendering the PasswordReset component */}
 
         <Route path="/OTPVerify" element={<OTPVerify />} />
