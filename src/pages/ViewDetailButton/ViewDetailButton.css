@@ -1,0 +1,16 @@
+.view-detail-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #5C5967;
+    width: 120px;
+    height: 21px;
+
+}
+
+.container{
+    background: #fff;
+}
