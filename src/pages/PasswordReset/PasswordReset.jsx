@@ -69,7 +69,6 @@ function ResetPasswordForm() {
                                 className= "input-field"
                                 aria-label="Enter your email"
                             />
-                            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f8bc642fc8af17f8c6afa0d9222189edfb7bd77d18ba9728c2122351ffa3385c?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Email Icon" className="input-icon" />
                         </div>
                         <ErrorMessage name="email" component="p" className="form-error" style={{ color: 'red' }} />
                         <p className="form-note">
