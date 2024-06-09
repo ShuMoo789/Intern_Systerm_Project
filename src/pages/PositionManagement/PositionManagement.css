@@ -2,7 +2,6 @@
     display: flex;
     position: relative;
     right: -54%;
-
 }
 
 .button {
@@ -39,7 +38,7 @@
 
 .buttoncheck {
     background-color: white;
-    color: #5C5967;
+    color: #5c5967;
 }
 
 /* styles.css */
@@ -47,19 +46,22 @@
 .bodyposition {
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
+    border-radius: 20px;
+    justify-content: center;
+    padding: 20px 5px 50px;
 }
 
 .bodyposi {
-    flex: 1 0 calc(33.33% - 20px);
-    margin: 10px;
+    min-width: 500px;
+    margin: 50px 10px 0;
 }
 
-.card {
-    width: 336px;
-    height: 250px;
-    border: 1px solid #ccc;
+.card-pos {
+    width: 100%;
     border-radius: 5px;
-    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .card h2 {
@@ -96,14 +98,22 @@
 }
 
 .button-main {
-    width: 50%;
-    margin-left: 60%;
+    margin-left: 68%;
     margin-top: -50px; /* Số lượng pixel bạn muốn dịch chuyển lên trên */
     display: flex;
     position: relative;
 }
 
-.iconfolder{
+.iconfolder {
     margin-top: 5px;
 }
 
+.ant-dropdown-link {
+    color: black;
+}
+.dropdown-menu {
+    position: absolute;
+    padding-left: 30px;
+    top: 17px;
+    left: -20px;
+}

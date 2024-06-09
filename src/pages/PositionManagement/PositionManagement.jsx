@@ -214,9 +214,17 @@ const PositionManagement = () => {
             title: "Rank",
             dataIndex: "rank",
             key: "rank",
+            width: 80,
             render: (text, record) => (
-                <Dropdown overlay={rankMenu(record)} trigger={["click"]} className="dropdown-menu">
-                    <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                <Dropdown
+                    overlay={rankMenu(record)}
+                    trigger={["click"]}
+                    className="dropdown-menu"
+                >
+                    <a
+                        className="ant-dropdown-link"
+                        onClick={(e) => e.preventDefault()}
+                    >
                         {text} <DownOutlined />
                     </a>
                 </Dropdown>
@@ -240,7 +248,9 @@ const PositionManagement = () => {
                                 className="user-profile-small"
                             />
                             <div className="user-details">
-                                <span className="user-name">Natalie Brogan</span>
+                                <span className="user-name">
+                                    Natalie Brogan
+                                </span>
                                 <span className="user-role">Admin</span>
                             </div>
                             <div className="account-setting">
@@ -289,68 +299,91 @@ const PositionManagement = () => {
                     <section>
                         <div className="bodyposition">
                             <div className="bodyposi">
-                                <Card
+                                <Card className = "card-pos"
                                     title="Back-End"
                                     extra={
                                         <>
-                                            <Tag color="blue" style={{ borderRadius: "20px" }}>
+                                            <Tag
+                                                color="blue"
+                                                style={{ borderRadius: "20px" }}
+                                            >
                                                 100 people
                                             </Tag>
-                                            <Checkbox style={{ marginLeft: "10px" }} />
+                                            <Checkbox
+                                                style={{ marginLeft: "10px" }}
+                                            />
                                         </>
                                     }
-                                    style={{ width: 336, height: 260 }}
+                
                                 >
                                     <p>
-                                        <strong>Technology:</strong> .NET, Java, ...
+                                        <strong>Technology:</strong> .NET, Java,
+                                        ...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
-                                        Senior
+                                        <strong>Rank:</strong> Intern, Fresher,
+                                        Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong> <a href="#">Link</a>
+                                        <strong>Group Zalo:</strong>{" "}
+                                        <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
                                         <Avatar.Group>
-                                            <Tooltip title="Ant User" placement="top">
+                                            <Tooltip
+                                                title="Ant User"
+                                                placement="top"
+                                            >
                                                 <Avatar
                                                     src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                     style={{
-                                                        backgroundColor: "#FDD145",
+                                                        backgroundColor:
+                                                            "#FDD145",
                                                         width: "38px",
                                                         height: "38px",
                                                     }}
                                                 />
                                             </Tooltip>
 
-                                            <Tooltip title="Ant User" placement="top">
+                                            <Tooltip
+                                                title="Ant User"
+                                                placement="top"
+                                            >
                                                 <Avatar
                                                     src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                     style={{
-                                                        backgroundColor: "#FDD145",
+                                                        backgroundColor:
+                                                            "#FDD145",
                                                         marginLeft: "-10%",
                                                         width: "38px",
                                                         height: "38px",
                                                     }}
                                                 />
                                             </Tooltip>
-                                            <Tooltip title="Ant User" placement="top">
+                                            <Tooltip
+                                                title="Ant User"
+                                                placement="top"
+                                            >
                                                 <Avatar
                                                     src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                     style={{
-                                                        backgroundColor: "#91CADF",
+                                                        backgroundColor:
+                                                            "#91CADF",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
                                                     }}
                                                 />
                                             </Tooltip>
-                                            <Tooltip title="Ant User" placement="top">
+                                            <Tooltip
+                                                title="Ant User"
+                                                placement="top"
+                                            >
                                                 <Avatar
                                                     src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                     style={{
-                                                        backgroundColor: "#5C5967",
+                                                        backgroundColor:
+                                                            "#5C5967",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
@@ -374,95 +407,123 @@ const PositionManagement = () => {
                                         <Button
                                             type="link"
                                             className="button-main"
-                                            onClick={() => showModal("View Back-End Detail", "Back-End")}
+                                            onClick={() =>
+                                                showModal(
+                                                    "View Back-End Detail",
+                                                    "Back-End"
+                                                )
+                                            }
                                         >
                                             View Details
-                                            <FolderOutlined className="iconfolder"/>
+                                            <FolderOutlined className="iconfolder" />
                                         </Button>
                                     </div>
                                 </Card>
                             </div>
                             <div className="bodyposi">
-                                <Card
+                                <Card className = "card-pos"
                                     title="Front-End"
                                     extra={
                                         <>
-                                            <Tag color="blue" style={{ borderRadius: "20px" }}>
+                                            <Tag
+                                                color="blue"
+                                                style={{ borderRadius: "20px" }}
+                                            >
                                                 100 people
                                             </Tag>
-                                            <Checkbox style={{ marginLeft: "10px" }} />
+                                            <Checkbox
+                                                style={{ marginLeft: "10px" }}
+                                            />
                                         </>
                                     }
-                                    style={{ width: 336, height: 260 }}
+                
                                 >
                                     <p>
                                         <strong>Technology:</strong> ReactJS,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
-                                        Senior
+                                        <strong>Rank:</strong> Intern, Fresher,
+                                        Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong> <a href="#">Link</a>
+                                        <strong>Group Zalo:</strong>{" "}
+                                        <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
                                         <>
                                             <Avatar.Group>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
 
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             marginLeft: "-10%",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#91CADF",
+                                                            backgroundColor:
+                                                                "#91CADF",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#5C5967",
+                                                            backgroundColor:
+                                                                "#5C5967",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
                                                 <Avatar
                                                     style={{
-                                                        backgroundColor: "#F4D7DA",
+                                                        backgroundColor:
+                                                            "#F4D7DA",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
                                                         color: "#D25B68",
                                                     }}
-                                                // icon={<UserOutlined />}
+                                                    // icon={<UserOutlined />}
                                                 >
                                                     +2
                                                 </Avatar>
@@ -472,95 +533,123 @@ const PositionManagement = () => {
                                     <Button
                                         type="link"
                                         className="button-main"
-                                        onClick={() => showModal("View Front-End Detail", "Front-End")}
+                                        onClick={() =>
+                                            showModal(
+                                                "View Front-End Detail",
+                                                "Front-End"
+                                            )
+                                        }
                                     >
                                         View Details
-                                        <FolderOutlined className="iconfolder"/>
+                                        <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>
                             </div>
 
                             <div className="bodyposi">
-                                <Card
+                                <Card className = "card-pos"
                                     title="Business Analyst"
                                     extra={
                                         <>
-                                            <Tag color="blue" style={{ borderRadius: "20px" }}>
+                                            <Tag
+                                                color="blue"
+                                                style={{ borderRadius: "20px" }}
+                                            >
                                                 100 people
                                             </Tag>
-                                            <Checkbox style={{ marginLeft: "10px" }} />
+                                            <Checkbox
+                                                style={{ marginLeft: "10px" }}
+                                            />
                                         </>
                                     }
-                                    style={{ width: 336, height: 260 }}
+                
                                 >
                                     <p>
                                         <strong>Technology:</strong> Trello,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
-                                        Senior
+                                        <strong>Rank:</strong> Intern, Fresher,
+                                        Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong> <a href="#">Link</a>
+                                        <strong>Group Zalo:</strong>{" "}
+                                        <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
                                         <>
                                             <Avatar.Group>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
 
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             marginLeft: "-10%",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#91CADF",
+                                                            backgroundColor:
+                                                                "#91CADF",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#5C5967",
+                                                            backgroundColor:
+                                                                "#5C5967",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
                                                 <Avatar
                                                     style={{
-                                                        backgroundColor: "#F4D7DA",
+                                                        backgroundColor:
+                                                            "#F4D7DA",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
                                                         color: "#D25B68",
                                                     }}
-                                                // icon={<UserOutlined />}
+                                                    // icon={<UserOutlined />}
                                                 >
                                                     +2
                                                 </Avatar>
@@ -571,7 +660,12 @@ const PositionManagement = () => {
                                     <Button
                                         type="link"
                                         className="button-main"
-                                        onClick={() => showModal("View Business Analyst Detail", "Business Analyst")}
+                                        onClick={() =>
+                                            showModal(
+                                                "View Business Analyst Detail",
+                                                "Business Analyst"
+                                            )
+                                        }
                                     >
                                         View Details
                                         <FolderOutlined className="iconfolder" />
@@ -580,86 +674,110 @@ const PositionManagement = () => {
                             </div>
 
                             <div className="bodyposi">
-                                <Card
+                                <Card className = "card-pos"
                                     title="Marketing"
                                     extra={
                                         <>
-                                            <Tag color="blue" style={{ borderRadius: "20px" }}>
+                                            <Tag
+                                                color="blue"
+                                                style={{ borderRadius: "20px" }}
+                                            >
                                                 100 people
                                             </Tag>
-                                            <Checkbox style={{ marginLeft: "10px" }} />
+                                            <Checkbox
+                                                style={{ marginLeft: "10px" }}
+                                            />
                                         </>
                                     }
-                                    style={{ width: 336, height: 260 }}
+                
                                 >
                                     <p>
-                                        <strong>Technology:</strong> Excel, Word,...
+                                        <strong>Technology:</strong> Excel,
+                                        Word,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
-                                        Senior
+                                        <strong>Rank:</strong> Intern, Fresher,
+                                        Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong> <a href="#">Link</a>
+                                        <strong>Group Zalo:</strong>{" "}
+                                        <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
                                         <>
                                             <Avatar.Group>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
 
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             marginLeft: "-10%",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#91CADF",
+                                                            backgroundColor:
+                                                                "#91CADF",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#5C5967",
+                                                            backgroundColor:
+                                                                "#5C5967",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
                                                 <Avatar
                                                     style={{
-                                                        backgroundColor: "#F4D7DA",
+                                                        backgroundColor:
+                                                            "#F4D7DA",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
                                                         color: "#D25B68",
                                                     }}
-                                                // icon={<UserOutlined />}
+                                                    // icon={<UserOutlined />}
                                                 >
                                                     +2
                                                 </Avatar>
@@ -669,7 +787,12 @@ const PositionManagement = () => {
                                     <Button
                                         type="link"
                                         className="button-main"
-                                        onClick={() => showModal("View Marketing Detail", "Marketing")}
+                                        onClick={() =>
+                                            showModal(
+                                                "View Marketing Detail",
+                                                "Marketing"
+                                            )
+                                        }
                                     >
                                         View Details
                                         <FolderOutlined className="iconfolder" />
@@ -678,86 +801,109 @@ const PositionManagement = () => {
                             </div>
 
                             <div className="bodyposi">
-                                <Card
+                                <Card className = "card-pos"
                                     title="Designer"
                                     extra={
                                         <>
-                                            <Tag color="blue" style={{ borderRadius: "20px" }}>
+                                            <Tag
+                                                color="blue"
+                                                style={{ borderRadius: "20px" }}
+                                            >
                                                 100 people
                                             </Tag>
-                                            <Checkbox style={{ marginLeft: "10px" }} />
+                                            <Checkbox
+                                                style={{ marginLeft: "10px" }}
+                                            />
                                         </>
                                     }
-                                    style={{ width: 336, height: 260 }}
+                
                                 >
                                     <p>
                                         <strong>Technology:</strong> ReactJS,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
-                                        Senior
+                                        <strong>Rank:</strong> Intern, Fresher,
+                                        Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong> <a href="#">Link</a>
+                                        <strong>Group Zalo:</strong>{" "}
+                                        <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
                                         <>
                                             <Avatar.Group>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
 
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             marginLeft: "-10%",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#91CADF",
+                                                            backgroundColor:
+                                                                "#91CADF",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#5C5967",
+                                                            backgroundColor:
+                                                                "#5C5967",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
                                                 <Avatar
                                                     style={{
-                                                        backgroundColor: "#F4D7DA",
+                                                        backgroundColor:
+                                                            "#F4D7DA",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
                                                         color: "#D25B68",
                                                     }}
-                                                // icon={<UserOutlined />}
+                                                    // icon={<UserOutlined />}
                                                 >
                                                     +2
                                                 </Avatar>
@@ -767,7 +913,12 @@ const PositionManagement = () => {
                                     <Button
                                         type="link"
                                         className="button-main"
-                                        onClick={() => showModal("View Designer Detail", "Designer")}
+                                        onClick={() =>
+                                            showModal(
+                                                "View Designer Detail",
+                                                "Designer"
+                                            )
+                                        }
                                     >
                                         View Details
                                         <FolderOutlined className="iconfolder" />
@@ -776,86 +927,109 @@ const PositionManagement = () => {
                             </div>
 
                             <div className="bodyposi">
-                                <Card
+                                <Card className = "card-pos"
                                     title="Sales Executive"
                                     extra={
                                         <>
-                                            <Tag color="blue" style={{ borderRadius: "20px" }}>
+                                            <Tag
+                                                color="blue"
+                                                style={{ borderRadius: "20px" }}
+                                            >
                                                 100 people
                                             </Tag>
-                                            <Checkbox style={{ marginLeft: "10px" }} />
+                                            <Checkbox
+                                                style={{ marginLeft: "10px" }}
+                                            />
                                         </>
                                     }
-                                    style={{ width: 336,height: 260 }}
+                
                                 >
                                     <p>
                                         <strong>Technology:</strong> Trello,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
-                                        Senior
+                                        <strong>Rank:</strong> Intern, Fresher,
+                                        Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong> <a href="#">Link</a>
+                                        <strong>Group Zalo:</strong>{" "}
+                                        <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
                                         <>
                                             <Avatar.Group>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
 
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#FDD145",
+                                                            backgroundColor:
+                                                                "#FDD145",
                                                             marginLeft: "-10%",
                                                             width: "38px",
                                                             height: "38px",
                                                         }}
                                                     ></Avatar>
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#91CADF",
+                                                            backgroundColor:
+                                                                "#91CADF",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
-                                                <Tooltip title="Ant User" placement="top">
+                                                <Tooltip
+                                                    title="Ant User"
+                                                    placement="top"
+                                                >
                                                     <Avatar
                                                         src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
                                                         style={{
-                                                            backgroundColor: "#5C5967",
+                                                            backgroundColor:
+                                                                "#5C5967",
                                                             width: "38px",
                                                             height: "38px",
                                                             marginLeft: "-10%",
                                                         }}
-                                                    // icon={<UserOutlined />}
+                                                        // icon={<UserOutlined />}
                                                     />
                                                 </Tooltip>
                                                 <Avatar
                                                     style={{
-                                                        backgroundColor: "#F4D7DA",
+                                                        backgroundColor:
+                                                            "#F4D7DA",
                                                         width: "38px",
                                                         height: "38px",
                                                         marginLeft: "-10%",
                                                         color: "#D25B68",
                                                     }}
-                                                // icon={<UserOutlined />}
+                                                    // icon={<UserOutlined />}
                                                 >
                                                     +2
                                                 </Avatar>
@@ -865,25 +1039,36 @@ const PositionManagement = () => {
                                     <Button
                                         type="link"
                                         className="button-main"
-                                        onClick={() => showModal("View Sales Executive Detail", "Sales Executive")}
+                                        onClick={() =>
+                                            showModal(
+                                                "View Sales Executive Detail",
+                                                "Sales Executive"
+                                            )
+                                        }
                                     >
                                         View Details
                                         <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>
                             </div>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "flex-end",
-                                    marginTop: "20px",
-                                }}
-                            >
-                                <Pagination
-                                    defaultCurrent={1}
-                                    total={10} // Total number of pages
-                                    pageSize={3} // Number of items per page
-                                />
+                            <div style={{ position: "relative"}}>
+                                <div
+                                    style={{
+                                        position: "relative",
+                                        top: "30px",
+                                        bottom: 0,
+                                        width: "calc(82vw - 46px)",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        marginBottom: "20px",
+                                    }}
+                                >
+                                    <Pagination
+                                        defaultCurrent={1}
+                                        total={10} // Total number of pages
+                                        pageSize={3} // Number of items per page
+                                    />
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -893,7 +1078,7 @@ const PositionManagement = () => {
                         visible={isModalVisible}
                         onOk={handleOk}
                         onCancel={handleCancel}
-                        width={1000}
+                        width={1100}
                         footer={[]}
                     >
                         <Table
