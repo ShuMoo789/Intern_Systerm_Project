@@ -6,24 +6,9 @@
 
 }
 
-.ant-modal-content {
-    border-radius: 34px;
-}
 
-.ant-modal-title {
-    font-size: 24px;
-    font-weight: 500;
-}
 
-.ant-modal-close-x {
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
-}
 
-.ant-select-selector {
-    border-radius: 15px;
-}
 
 .type-email{
     height: 50px;
@@ -39,7 +24,7 @@
 .textarea{
     font-size: 16px;
     height: 200px;
-    border-radius: 9px;
+    border-radius: 8px;
     font-family: sans-serif, Quicksand;
 }
 
