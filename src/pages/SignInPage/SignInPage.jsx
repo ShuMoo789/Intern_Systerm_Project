@@ -2,6 +2,7 @@ import { Col, Row, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import SignInForm from "../../components/SignInForm/LoginForm";
+
 import { useTranslation } from "react-i18next";
 
 const { TabPane } = Tabs;
@@ -43,9 +44,9 @@ const LoginPage = () => {
               <Tabs
                 defaultActiveKey="1"
                 centered
-                size={"large"}
-                tabBarGutter={50}
+                size="large"
                 tabBarStyle={{ color: "grey" }}
+                destroyInactiveTabPane={true}
               >
                 <TabPane tab={t("Admin")} key="1">
                   <SignInForm

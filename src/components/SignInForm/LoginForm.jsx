@@ -4,12 +4,16 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../translation/LanguageContext";
+import { useNavigate } from "react-router-dom";
+
 const LoginForm = ({ header, formName, role, dataSet }) => {
   const [wrong, setWrong] = useState(false);
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
-  const { t } = useTranslation()
-  const currentLanguage = useLanguage()
-  const [form] = Form.useForm()
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const currentLanguage = useLanguage();
+  const [form] = Form.useForm();
+
   const handleLogin = async (values) => {
     const { email, password } = values;
     try {
@@ -22,6 +26,7 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
           user.role === role
       );
       if (user) {
+        navigate("/Profile");
         console.log("Login successful", user);
       } else {
         setWrong(true);
@@ -31,18 +36,24 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
       console.error("Login failed", error);
     }
   };
+
   useEffect(() => {
     form.setFields([
-    {
-      name: 'email',
-      errors: form.getFieldError('email').map(() => t("Please input your email!")),
-    },
-    {
-      name: 'password',
-      errors: form.getFieldError('password').map(() => t("Please input your password!")),
-    },
-  ])
-  }, [currentLanguage, t])
+      {
+        name: "email",
+        errors: form
+          .getFieldError("email")
+          .map(() => t("Please input your email!")),
+      },
+      {
+        name: "password",
+        errors: form
+          .getFieldError("password")
+          .map(() => t("Please input your password!")),
+      },
+    ]);
+  }, [currentLanguage, t]);
+
   return (
     <>
       <Flex vertical align="center">
@@ -65,7 +76,21 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: t("Please input your email!") }]}
+              rules={[
+                { required: true, message: t("Please input your email!") },
+                {
+                  type: "email",
+                  message: t("Please enter a valid email address!"),
+                },
+                {
+                  validator: (_, value) => {
+                    if (value && value.indexOf("@") === -1) {
+                      return Promise.reject("Email must contain @ symbol!");
+                    }
+                    return Promise.resolve();
+                  },
+                },
+              ]}
               placeholder
             >
               <Input placeholder="youremail@example.com" allowClear />
@@ -82,7 +107,7 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             </Form.Item>
             {wrong && (
               <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
-                {t('Email or Password is incorrect')}
+                {t("Email or Password is incorrect")}
               </div>
             )}
             <Form.Item>
