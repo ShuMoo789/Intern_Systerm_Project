@@ -57,19 +57,19 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
             <p>
                 <b>Leader: </b>
                 <Tooltip title={leader.name}>
-                <Avatar size="small" src={leader.avatar} icon={<UserOutlined/>}/>
+                    <Avatar size="small" src={leader.avatar} icon={<UserOutlined/>}/>
                 </Tooltip>
             </p>
             <p>
                 <b>Sub Leader: </b>
                 <Tooltip title={subLeader.name}>
-                <Avatar size="small" src={subLeader.avatar} icon={<UserOutlined/>}/>
-                </Tooltip>            
+                    <Avatar size="small" src={subLeader.avatar} icon={<UserOutlined/>}/>
+                </Tooltip>
             </p>
             <p>
                 <b>Mentor: </b>
                 <Tooltip title={mentor.name}>
-                <Avatar size="small" src={mentor.avatar} icon={<UserOutlined/>}/>
+                    <Avatar size="small" src={mentor.avatar} icon={<UserOutlined/>}/>
                 </Tooltip>
             </p>
             <p><b>Group Zalo: <a href="#" style={{textDecoration: "underline"}}>Link</a></b></p>
@@ -81,7 +81,7 @@ function ProjectCard({ title, status, position, technology, leader, subLeader, m
                 <Avatar.Group maxCount={4}>
                     {teamMembers.map((member, index) => (
                         <Tooltip title={member.name}>
-                        <Avatar key={index} src={member.avatar}/>
+                            <Avatar key={index} src={member.avatar}/>
                         </Tooltip>
                     ))}
                 </Avatar.Group>
@@ -115,15 +115,36 @@ function ProjectManagement() {
     }, []);
 
     const handleSearch = () => {
+        console.log("Selected Filters:", selectedFilters);
+
         let results = projects;
-        if (selectedFilters.title) results = results.filter(project => project.title === selectedFilters.title);
-        if (selectedFilters.status) results = results.filter(project => project.status === selectedFilters.status);
-        if (selectedFilters.position) results = results.filter(project => project.position === selectedFilters.position);
-        if (selectedFilters.technology) results = results.filter(project => project.technology === selectedFilters.technology);
-        if (selectedFilters.leader) results = results.filter(project => project.leader === selectedFilters.leader);
-        if (selectedFilters.subLeader) results = results.filter(project => project.subLeader === selectedFilters.subLeader);
-        if (selectedFilters.mentor) results = results.filter(project => project.mentor === selectedFilters.mentor);
-        if (selectedFilters.releaseDate) results = results.filter(project => new Date(project.releaseDate).toLocaleDateString() === selectedFilters.releaseDate.toLocaleDateString());
+
+        if (selectedFilters.title) {
+            results = results.filter(project => project.title.includes(selectedFilters.title));
+        }
+        if (selectedFilters.status) {
+            results = results.filter(project => project.status === selectedFilters.status);
+        }
+        if (selectedFilters.position) {
+            results = results.filter(project => project.position.includes(selectedFilters.position));
+        }
+        if (selectedFilters.technology) {
+            results = results.filter(project => project.technology.includes(selectedFilters.technology));
+        }
+        if (selectedFilters.leader) {
+            results = results.filter(project => project.leader.name.includes(selectedFilters.leader));
+        }
+        if (selectedFilters.subLeader) {
+            results = results.filter(project => project.subLeader.name.includes(selectedFilters.subLeader));
+        }
+        if (selectedFilters.mentor) {
+            results = results.filter(project => project.mentor.name.includes(selectedFilters.mentor));
+        }
+        if (selectedFilters.releaseDate) {
+            results = results.filter(project => dayjs(project.releaseDate).isSame(selectedFilters.releaseDate, 'day'));
+        }
+
+        console.log("Filtered Results:", results);
         setFilteredProjects(results);
     };
 
@@ -222,7 +243,9 @@ function ProjectManagement() {
                             placeholder="Enter Leader"
                             value={selectedFilters.leader || undefined}
                             onChange={(value) => handleFilterChange('leader', value)}
-                            options={projects.map(project => ({ value: project.leader, label: project.leader }))}
+
+                            options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
+
                         />
                     </Col>
                     <Col span={6}>
@@ -231,7 +254,9 @@ function ProjectManagement() {
                             placeholder="Enter Sub Leader"
                             value={selectedFilters.subLeader || undefined}
                             onChange={(value) => handleFilterChange('subLeader', value)}
-                            options={projects.map(project => ({ value: project.subLeader, label: project.subLeader }))}
+
+                            options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
+
                         />
                     </Col>
                     <Col span={6}>
@@ -240,7 +265,9 @@ function ProjectManagement() {
                             placeholder="Enter Mentor"
                             value={selectedFilters.mentor || undefined}
                             onChange={(value) => handleFilterChange('mentor', value)}
-                            options={projects.map(project => ({ value: project.mentor, label: project.mentor }))}
+
+                            options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
+
                         />
                     </Col>
                     <Col span={6}>

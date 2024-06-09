@@ -42,3 +42,8 @@
 .menu .button-collapsed:hover {
     cursor: pointer;
 }
+
+.change-language-navigation {
+    position: absolute;
+    bottom: 0;
+}

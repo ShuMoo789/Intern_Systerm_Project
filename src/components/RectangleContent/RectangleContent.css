@@ -4,7 +4,7 @@
     text-align: left;
     width: 100%;
     height: 100%;
-    margin: 72px 36px;
+    margin: 72px 30px;
 }
 
 .rectangle-content .divider {
@@ -29,5 +29,5 @@
 
 .rectangle-content .content2 {
     padding: 12px 24px;
-    height: 50px;
+    height: 40px;
 }
