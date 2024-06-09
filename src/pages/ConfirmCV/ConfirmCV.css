@@ -1,28 +1,20 @@
 .tbl-wrapper {
-    overflow-x: auto;
-    white-space: nowrap;
+    overflow-x: auto; /* Tạo thanh cuộn ngang khi bảng quá rộng */
 }
 
-.tbl-wrapper table {
-    width: 100%;
-    border-collapse: collapse;
+.table {
+    width: 100%; /* Bảng có thể mở rộng hết chiều rộng của phần tử chứa nó */
 }
 
-.tbl-wrapper th, .tbl-wrapper td {
-    border: 1px solid #ddd;
-    padding: 12px 8px; /* Adjust the padding to add more space */
-    text-align: left;
+/* Các phần tử trong bảng co dãn khi màn hình nhỏ hơn */
+.table td,
+.table th {
+    white-space: nowrap; /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
 }
 
-.tbl-wrapper th {
-    background-color: #f2f2f2;
-}
-
-.tbl-wrapper tr {
-    margin-bottom: 10px; /* Add margin between rows */
-}
-
-.tbl-wrapper input[type="checkbox"] {
-    margin: 0;
-    vertical-align: middle;
+/* Tùy chỉnh các đặc tính khi màn hình thu nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .tbl-wrapper {
+        overflow-x: scroll; /* Sử dụng thanh cuộn ngang khi bảng quá rộng */
+    }
 }

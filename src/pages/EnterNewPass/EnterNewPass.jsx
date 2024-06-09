@@ -6,8 +6,11 @@ import { useTranslation } from "react-i18next";  // Import the useTranslation ho
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
 import { Modal } from "antd";
 
+import {t} from "i18next";
+
+
 // PasswordInput component for input fields with show/hide password functionality
-function PasswordInput({ id, label, placeholder, value, onChange, error }) {
+function PasswordInput({ id, label, placeholder, value, onChange, error, warning }) {
     const [showPassword, setShowPassword] = React.useState(false);  // State to manage password visibility
 
     // Function to toggle password visibility
@@ -16,8 +19,8 @@ function PasswordInput({ id, label, placeholder, value, onChange, error }) {
     };
 
     return (
-        <>
-            <label htmlFor={id} className="form-label">
+        <div className='pwdinput'>
+            <label htmlFor={id} className="form-label" style={{paddingTop:"10px"}} >
                 {label}
             </label>
             <div className={`password-input ${error ? 'password-input-error' : ''}`}>
@@ -37,7 +40,8 @@ function PasswordInput({ id, label, placeholder, value, onChange, error }) {
                     />
                 </button>
             </div>
-        </>
+            {warning && <p className='warninglabel' style={{color: 'red'}}>{t("Passwords do not match")}</p>}
+        </div>
     );
 }
 
@@ -52,10 +56,10 @@ function ChangePasswordForm() {
     // Function to validate password
     const validatePassword = (password) => {
         if (password.length <= 5) {
-            return t("Password must be more than 5 characters");  // Check if password is longer than 5 characters
+            return <p className='warninglabel' style={{color: 'red', margin: '0', padding: '8px 0'}}> {t("Password must be more than 5 characters")} </p>;  // Check if password is longer than 5 characters
         }
         if (password.charAt(0) !== password.charAt(0).toUpperCase()) {
-            return t("The first character must be uppercase");  // Check if the first character is uppercase
+            return <p className='warninglabel' style={{color: 'red', margin: '0'}}> {t("The first character must be uppercase")} </p>;  // Check if the first character is uppercase
         }
         return "";  // Return an empty string if no errors
     };
@@ -95,7 +99,7 @@ function ChangePasswordForm() {
                 error={error && newPassword && validatePassword(newPassword)}
             />
             {/* Show error message if new password validation fails */}
-            {error && newPassword && validatePassword(newPassword) && <p style={{ color: 'red' }}>{validatePassword(newPassword)}</p>}
+            {error && newPassword && validatePassword(newPassword)}
             <PasswordInput
                 id="confirmPassword"
                 label={t("Confirm New Password *")}
@@ -103,9 +107,9 @@ function ChangePasswordForm() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}  // Update confirm password state
                 error={error && confirmPassword && newPassword !== confirmPassword}
+                warning={error && confirmPassword && newPassword !== confirmPassword}
             />
             {/* Show error message if passwords do not match */}
-            {error && confirmPassword && newPassword !== confirmPassword && <p style={{ color: 'red' }}>{t("Passwords do not match")}</p>}
             <button type="submit" className="submit-button">
                 {t("Change Password")}
             </button>
@@ -120,7 +124,7 @@ function MyPass() {
             <Header />  {/* Header component */}
             <main className="main-content">
                 <div className="content-wrapper">
-                    <div className="form-column">
+                    <div className="newpassbox">
                         <ChangePasswordForm />  {/* ChangePasswordForm component */}
                     </div>
                     <div className="image-column">

@@ -43,16 +43,18 @@ const data = [
 // AccountManagement functional component
 const AccountManagement = () => {
   return (
-    <>
+    
       <MainLayout>
         {/* Main content container */}
-        <div className="content">
-          {/* User image */}
-          <img src={userImage} alt="user image" className="ava-image" />
-          {/* Welcome message */}
-          <div className="welcome">Hello Natalie Brogan!</div>
-          {/* User email */}
-          <div className="user-gmail">nataliebrogan@gmail.com</div>
+        <div className="content-account-management">
+          <div className="user-detail">
+            {/* User image */}
+            <img src={userImage} alt="user image" className="ava-image" />
+            {/* Welcome message */}
+            <div className="welcome">Hello Natalie Brogan!</div>
+            {/* User email */}
+            <div className="user-gmail">nataliebrogan@gmail.com</div>
+          </div>
           {/* First group of RectangleContent components */}
           <div className="rectangle-content-group">
             <RectangleContent
@@ -84,7 +86,7 @@ const AccountManagement = () => {
           </div>
         </div>
       </MainLayout>
-    </>
+    
   );
 };
 

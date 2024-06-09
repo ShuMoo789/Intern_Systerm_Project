@@ -518,6 +518,7 @@ const InternList = () => {
                             (<div className="filter">
                                 <div className="filter-group">
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -532,6 +533,7 @@ const InternList = () => {
                                         value={filter.internID || null}
                                     />
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -545,6 +547,7 @@ const InternList = () => {
                                         value={filter.phoneNumber || null}
                                     />
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -558,6 +561,7 @@ const InternList = () => {
                                         value={filter.role || null}
                                     />
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -573,6 +577,7 @@ const InternList = () => {
                                 </div>
                                 <div className="filter-group">
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -586,6 +591,7 @@ const InternList = () => {
                                         value={filter.fullName || null}
                                     />
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -599,6 +605,7 @@ const InternList = () => {
                                         value={filter.address || null}
                                     />
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -612,6 +619,7 @@ const InternList = () => {
                                         value={filter.position || null}
                                     />
                                     <Select
+                                        size='large'
                                         showSearch
                                         style={{
                                             width: '100%',
@@ -627,6 +635,7 @@ const InternList = () => {
                                 </div>
                                 <div className="filter-group">
                                     <Input
+                                        size="large"
                                         style={{
                                             width: '100%',
                                             height: '20%',
@@ -637,6 +646,7 @@ const InternList = () => {
                                         onChange={(e) => handleChangeFilterDOB(e.target.value)}
                                     />
                                     <Input
+                                        size="large"
                                         style={{
                                             width: '100%',
                                             height: '20%',
@@ -647,6 +657,7 @@ const InternList = () => {
                                         onChange={(e) => handleChangeFilterEmail(e.target.value)}
                                     />
                                     <Input
+                                        size="large"
                                         style={{
                                             width: '100%',
                                             height: '20%',
@@ -657,6 +668,7 @@ const InternList = () => {
                                         onChange={(e) => handleChangeFilterSchool(e.target.value)}
                                     />
                                     <Input
+                                        size="large"
                                         style={{
                                             width: '100%',
                                             height: '20%',
@@ -669,12 +681,12 @@ const InternList = () => {
                                 </div>
                                 <div className="filter-group">
                                     <div className="filter-button">
-                                        <Button onClick={handleCleanFilterButton} style={{ width: '100%' }}>
+                                        <Button onClick={handleCleanFilterButton} style={{ width: '70%', height: 60, borderRadius: 15 }}>
                                             <FilterOutlined /> {isMobile ? '' : 'Clean Filters'}
                                         </Button>
                                     </div>
                                     <div className="search-button-internlist">
-                                        <Button type="primary" onClick={handleSearch} style={{ width: '100%' }}>
+                                        <Button type="primary" onClick={handleSearch} style={{ width: '70%', height: 60, borderRadius: 15 }}>
                                             <SearchOutlined /> {isMobile ? '' : 'Search'}
                                         </Button>
                                     </div>
@@ -685,6 +697,7 @@ const InternList = () => {
                                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                                     <div className="filter-group">
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -699,6 +712,7 @@ const InternList = () => {
                                             value={filter.internID || null}
                                         />
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -712,6 +726,7 @@ const InternList = () => {
                                             value={filter.phoneNumber || null}
                                         />
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -725,6 +740,7 @@ const InternList = () => {
                                             value={filter.role || null}
                                         />
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -742,6 +758,7 @@ const InternList = () => {
                                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                                     <div className="filter-group">
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -755,6 +772,7 @@ const InternList = () => {
                                             value={filter.fullName || null}
                                         />
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -768,6 +786,7 @@ const InternList = () => {
                                             value={filter.address || null}
                                         />
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -781,6 +800,7 @@ const InternList = () => {
                                             value={filter.position || null}
                                         />
                                         <Select
+                                            size='large'
                                             showSearch
                                             style={{
                                                 width: '100%',
@@ -798,6 +818,7 @@ const InternList = () => {
                                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                                     <div className="filter-group">
                                         <Input
+                                            size="large"
                                             style={{
                                                 width: '100%',
                                                 height: '20%',
@@ -808,6 +829,7 @@ const InternList = () => {
                                             onChange={(e) => handleChangeFilterDOB(e.target.value)}
                                         />
                                         <Input
+                                            size="large"
                                             style={{
                                                 width: '100%',
                                                 height: '20%',
@@ -818,6 +840,7 @@ const InternList = () => {
                                             onChange={(e) => handleChangeFilterEmail(e.target.value)}
                                         />
                                         <Input
+                                            size="large"
                                             style={{
                                                 width: '100%',
                                                 height: '20%',
@@ -828,6 +851,7 @@ const InternList = () => {
                                             onChange={(e) => handleChangeFilterSchool(e.target.value)}
                                         />
                                         <Input
+                                            size="large"
                                             style={{
                                                 width: '100%',
                                                 height: '20%',

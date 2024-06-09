@@ -54,7 +54,7 @@ const GroupButton = ({ groupButton, onSendEmail }) => {
                 <Button
                     key={prop.name}
                     onClick={() => handleButtonClick(prop.name)}
-                    style={{ minWidth: '15%', backgroundColor: prop.color, fontSize: '10px', color: '#FFFFFF' }}
+                    style={{ minWidth: '15%', backgroundColor: prop.color, fontSize: '15px', color: '#FFFFFF' }}
                 >
                     {isMobile ? prop.icon : <span>{prop.icon} {prop.name}</span>}
                     {/* {prop.icon}{prop.name} */}

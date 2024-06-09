@@ -14,29 +14,27 @@ const AccountSetting = (props) => {
     navigate('/profile')
   }
   return (
-    props.disabled 
-    ? 
-    (
-      <div></div>
-    )
-    :
-    (
-      <div>
-        {!isMobile ? (<div className="user-container">
-          <img onClick={handleClickUserImage} src={userImage} alt="user image" className="user-image" />
-          <div className="user-info">
-            <div className="user-name">Natalie Brogan</div>
-            <div className="user-role">Admin</div>
-          </div>
-          <SettingTwoTone twoToneColor="#DB0D4B" style={{fontSize: 30}}/>
-        </div>) : (<div className="user-container">
-          <div></div>
-          <img onClick={handleClickUserImage} src={userImage} alt="user image" className="user-image" />
-          <SettingTwoTone twoToneColor="#DB0D4B" style={{fontSize: 30}}/>
-        </div>)}
-        
-      </div>
-    )
+    props.disabled
+      ?
+      (
+        <div></div>
+      )
+      :
+      (
+        <div>
+          {!isMobile ? (<div className="user-container">
+            <img onClick={handleClickUserImage} src={userImage} alt="user image" className="user-image" />
+            <div className="user-info">
+              <div className="user-name">Natalie Brogan</div>
+              <div className="user-role">Admin</div>
+            </div>
+            <SettingTwoTone twoToneColor="#DB0D4B" style={{ fontSize: 30 }} />
+          </div>) : (<div className="user-container">
+            <img onClick={handleClickUserImage} src={userImage} alt="user image" className="user-image" />
+            <SettingTwoTone twoToneColor="#DB0D4B" style={{ fontSize: 30 }} />
+          </div>)}
+        </div>
+      )
   );
 };
 

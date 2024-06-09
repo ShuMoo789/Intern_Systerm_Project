@@ -14,10 +14,8 @@ import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
-import ProjectMan from "./pages/Project Management/ProjectMan.jsx";
-import TechnologyManagement from "./pages/TechnologyManagement/TechnologyManagement.jsx";
-import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx";
-
+import GroupZaloManagementDetails from "./pages/GroupZaloManagementDetails/GroupZaloManagementDetails.jsx";
+import GroupZaloManagement from "./pages/GroupZaloManagement/GroupZaloManagement/GroupZaloManagement.jsx";
 
 // Define the main App component
 function App() {
@@ -43,7 +41,7 @@ function App() {
         {/* Route to the account management page, rendering the AccountManagement component 
             Note: There seems to be a typo in the path "/Profie". It should likely be "/Profile". */}
 
-        <Route path="/PasswordReset" element={<PasswordReset />} />
+        <Route path="/pwdreset" element={<PasswordReset />} />
         {/* Route to the password reset page, rendering the PasswordReset component */}
 
         <Route path="/OTPVerify" element={<OTPVerify />} />
@@ -65,17 +63,16 @@ function App() {
         {/* Route to the CV approval page, rendering the GroupList component */}
 
         <Route path="/InternList" element={<InternList />} />
-
-        {/* Route to the CV approval page, rendering the InternList component */}
-
-        <Route path="/TechnologyManagement" element={<TechnologyManagement />} />
-        {/* Route to the CV approval page, rendering the InternList component */}
-
         {/* Route to the CV approval page, rendering the GroupList component */}
-        
-        <Route path="/projectManagement" element={<ProjectMan/>} />
-        <Route path="/confirmCV" element={<ConfirmCV />} />
 
+        <Route path="/GroupZaloManagement" element={<GroupZaloManagement />} />
+        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagement component */}
+
+        <Route
+          path="/GroupZaloManagementDetails"
+          element={<GroupZaloManagementDetails />}
+        />
+        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagementDetails component */}
       </Routes>
     </>
   );
