@@ -6,6 +6,7 @@
     position: absolute;
     bottom: 0;
     width: 90%;
+    font-family: Quicksand;
 }
 
 .user-container .user-image {
@@ -22,7 +23,6 @@
 }
 
 .user-container .user-info .user-name {
-    font-family: Poppins;
     font-size: 18px;
     font-weight: 500;
     line-height: 27px;
@@ -32,7 +32,6 @@
 }
 
 .user-container .user-info .user-role {
-    font-family: Poppins;
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;

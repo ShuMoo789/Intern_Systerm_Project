@@ -14,11 +14,12 @@
 
 .content-technology-management .sub-content-technology-management .group-button-technology-management {
     display: flex;
-    width: 54.3%;
+    width: 44.3%;
     height: 60px;
     position: relative;
     left: 30px;
     top: 0;
+    margin-top: 20px;
 }
 
 .content-navigation-technology-management {
@@ -39,8 +40,10 @@
 }
 
 .content-navigation-technology-management .header-navigation-technology-management .title-name-technology-management {
-    color: #280559;
-    font-size: 20px;
+    font-size: 24px;
+    color: #2c3e50;
+    font-family: Quicksand;
+    font-weight: 700;
 }
 
 .content-navigation-technology-management .header-navigation-technology-management .account-setting-technology-management {

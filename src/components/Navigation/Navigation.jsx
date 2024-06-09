@@ -3,6 +3,7 @@ import "./Navigation.css";
 import GroupButton from "../GroupButton/GroupButton";
 import AccountSetting from "../AccountSetting/AccountSetting";
 import useViewport from "../../hooks/useViewport";
+import { Input } from "antd";
 
 const Navigation = (props) => {
     const viewPort = useViewport()
@@ -24,7 +25,8 @@ const Navigation = (props) => {
             </div>            
             <div className="navigation">
                 <div className="search-navigation">
-                    {isMobile ? 'Search' : 'Search for Information'}
+                    {/* {isMobile ? 'Search' : 'Search for Information'} */}
+                    <Input placeholder={isMobile ? 'Search' : 'Search for Information'} variant="filled" />
                 </div>
                 {/* Pass props to GroupButton from InternList */}
                 <div className="group-button-navigation">
