@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Modal, Select, Typography, Row, Col, Input, message} from "antd";
-import { MailOutlined } from "@ant-design/icons";
+import { Button, Modal, Select, Typography, Row, Col, Input, Form} from "antd";
+import { MailOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import './SendMailButton.css'
 const { TextArea } = Input;
 
@@ -16,19 +16,36 @@ const SendMailButton = () => {
     const [loadings, setLoadings] = useState([]);
     // Khởi tạo giá trị ban đầu là false  -> ẩn modal;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    //const [visible, setVisible] = useState(false);
+    const [form] = Form.useForm();
 
+    const [open, setOpen] = useState(false);
+
+    const handleDropdownVisibleChange = (visible) => {
+        setOpen(visible);
+    };
     // Hàm được gọi khi muốn hiển thị modal
     const showModal = () => {
         setIsModalOpen(true);
     };
 
     const handleOk = () => {
-        setIsModalOpen(false);
+        form.validateFields()
+        .then(values => {
+            console.log('Received values:', values);
+            // Handle form submission
+            setIsModalOpen(false);
+            form.resetFields();
+        })
+        .catch(info => {
+            console.log('Validate Failed:', info);
+        });
     };
 
     // Hàm được gọi khi muốn ẩn modal
     const handleCancel = () => {
          setIsModalOpen(false);
+         form.resetFields();
     };
 
     // hàm tạo hiệu ứng loading khi người dùng bấm vào nút send email
@@ -42,7 +59,6 @@ const SendMailButton = () => {
             setLoadings((prevLoadings) => {
                 const newLoadings = [...prevLoadings];
                 newLoadings[index] = false;
-                message.success('Send Mail Success')
                 handleOk()
                 return newLoadings;
             });
@@ -63,12 +79,15 @@ const SendMailButton = () => {
                 Send Mail
             </Button>
                 <Modal
+                    className='sendMail-modal'
                     centered
                     title="Send Email" 
                     open={isModalOpen} 
                     onCancel={handleCancel} 
                     okText='Sendmail' 
-                    
+                    okButtonProps={{
+                        disabled: !form.isFieldsTouched(true) || form.getFieldsError().filter(({ errors }) => errors.length).length
+                    }}
                     destroyOnClose={true}
                     // Tạo nút sendmail khi modal xuất hiện
                     footer={[
@@ -91,29 +110,56 @@ const SendMailButton = () => {
                     <Row gutter={16}>
                         <Col span={7}>
                             {/* chọn loại email */}
-                            <Select 
-                                className='type-email' 
-                                placeholder="Types of email"                               
+                            <Form
+                                form={form}
+                                layout="vertical"
+                                name="select-form"
+                            >
+                                <Form.Item
+                                    name="select"
+                                    rules={[{ required: true, message: 'Please select type of Email!' }]}
                                 >
-                                {email_types.map((type,index)=> {
-                                    return <Select.Option key={index} value={type} 
-                                ></Select.Option>
+                                    <Select 
+                                        className='type-email' 
+                                        placeholder="Types of email"
+                                        onDropdownVisibleChange={handleDropdownVisibleChange}
+                                        suffixIcon={open ? <UpOutlined /> : <DownOutlined />}
+                                    >
+                                        {email_types.map((type,index)=> {
+                                            return <Select.Option key={index} value={type} 
+                                                ></Select.Option>
 
                                 })}
                             </Select>
+                                </Form.Item>
+
+                            </Form>
                         </Col>
                          <Col span={17}>
                                 {/* Khung text gửi mail */}
-                             <TextArea
-                                className="textarea"
-                                value={value}
-                                onChange={(e) => setValue(e.target.value)}
-                                placeholder="Enter your mail..."
-                                autoSize={{
-                                    minRows: 6,
-                                    maxRows: 6,
-                                }}
-                             > </TextArea> 
+                                <Form
+                                form={form}
+                                layout="vertical"
+                                name="text-form"
+                            >
+                                <Form.Item
+                                    name="text-email"
+                                    rules={[{ required: true, message: 'Please enter your mail!' }]}
+                                >
+                                    <TextArea
+                                        className="textarea"
+                                        value={value}
+                                        onChange={(e) => setValue(e.target.value)}
+                                        placeholder="Enter your mail..."
+                                        autoSize={{
+                                            minRows: 6,
+                                            maxRows: 6,
+                                            }}
+                                    > 
+                                    </TextArea> 
+                                </Form.Item>
+                            </Form>
+                             
                         </Col> 
                     </Row>                  
                 </Modal>        
