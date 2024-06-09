@@ -1,4 +1,4 @@
-.content .user-gmail {
+.content-account-management .user-gmail {
     color: #000000;
     font-family: inherit;
     font-size: 30px;
@@ -8,7 +8,7 @@
 
 }
 
-.content .welcome {
+.content-account-management .welcome {
     color: #000000;
     font-family: inherit;
     font-size: 30px;

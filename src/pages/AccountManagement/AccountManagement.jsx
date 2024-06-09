@@ -43,10 +43,10 @@ const data = [
 // AccountManagement functional component
 const AccountManagement = () => {
   return (
-    <>
+    
       <MainLayout>
         {/* Main content container */}
-        <div className="content">
+        <div className="content-account-management">
           <div className="user-detail">
             {/* User image */}
             <img src={userImage} alt="user image" className="ava-image" />
@@ -86,7 +86,7 @@ const AccountManagement = () => {
           </div>
         </div>
       </MainLayout>
-    </>
+    
   );
 };
 
