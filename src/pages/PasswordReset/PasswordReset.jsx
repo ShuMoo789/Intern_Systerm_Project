@@ -53,12 +53,12 @@ function ResetPasswordForm() {
             >
                 {({ isSubmitting, errors, touched }) => (
                     <Form className="reset-password-form">
-                        <h1 className="form-title">Reset your password</h1>
+                        <h1 className="form-title">{t("Reset your password")}</h1>
                         <p className="form-description">
-                            Please provide the email address that you used when you signed up for your account.
+                            {t("Please provide the email address that you used when you signed up for your account.")}
                         </p>
                         <label htmlFor="email" className="input-label">
-                            Email
+                            {t("Email")}
                         </label>
                         <div className={`input-wrapper ${errors.email && touched.email ? 'input-wrapper-error' : ''}`}>
                             <Field
@@ -72,10 +72,10 @@ function ResetPasswordForm() {
                         </div>
                         <ErrorMessage name="email" component="p" className="form-error" style={{ color: 'red' }} />
                         <p className="form-note">
-                            We will send you an email that will allow you to reset your password.
+                            {t("We will send you an email that will allow you to reset your password.")}
                         </p>
                         <button type="submit" className="reset-button" disabled={isSubmitting}>
-                            Reset password
+                            {t("Reset password")}
                         </button>
                     </Form>
                 )}

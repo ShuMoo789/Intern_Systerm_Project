@@ -11,9 +11,8 @@ import Icon, {
     LeftOutlined,
     RightOutlined
 } from "@ant-design/icons";
-import { Menu, Button } from "antd";
+import { Menu } from "antd";
 import logo from "../../assets/Logo.png";
-import AccountSetting from "../AccountSetting/AccountSetting";
 import { useNavigate } from 'react-router-dom'
 import { useState } from "react";
 import useViewport from "../../hooks/useViewport";
@@ -116,25 +115,27 @@ const items = [
 ];
 
 const MenuNavigate = ({ buttonClick }) => {
+    // When width of page <= 1024 it will return true for isMobile variable
     const viewPort = useViewport()
     const isMobile = viewPort.width <= 1024
     const navigate = useNavigate()
+
+    // When clicking on the menu, it will redirect to the corresponding link
     const onClick = (value) => {
         navigate('/' + value.key)
-        console.log(value.key);
     }
 
     const [collapsed, setCollapsed] = useState(false);
-    const [hideAccountSetting, setHideAccountSetting] = useState(false)
 
+    // Function run when the menu collapsed
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
         buttonClick()
-        setHideAccountSetting(!hideAccountSetting)
     };
 
     return (
         <div className="menu">
+            {/* If the page is mobile, the collapsed button will not appear and will automatically collapse */}
             {!isMobile ? (<div>
                 <img src={logo} alt="Logo" className="logo-amazing" hidden={collapsed} />
                 <Menu
@@ -149,11 +150,8 @@ const MenuNavigate = ({ buttonClick }) => {
                     inlineCollapsed={collapsed}
                 />
                 <div onClick={toggleCollapsed} className="button-collapsed">
-                    {/* <Button type="text" style={{width: '100%'}}> */}
                     {collapsed ? <RightOutlined /> : <LeftOutlined />}
-                    {/* </Button> */}
                 </div>
-                <AccountSetting disabled={hideAccountSetting} />
             </div>) : (<div>
                 <Menu
                     onClick={onClick}

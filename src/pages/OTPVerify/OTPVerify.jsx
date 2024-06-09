@@ -3,16 +3,16 @@ import "./OTPVerify.css";  // Import the CSS file for styling
 import Header from "../../components/header/Header.jsx";  // Import the Header component
 import { useTranslation } from 'react-i18next';  // Import the useTranslation hook for internationalization
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
-
+import { useLanguage } from '../../translation/LanguageContext.jsx';
 // OTP verification component
 const OTPVerify = () => {
-    const { t } = useTranslation();  // Initialize translation hook
+    const { t,i18n } = useTranslation();  // Initialize translation hook
     const navigate = useNavigate();  // Initialize navigate hook
     const [otpCode, setOtpCode] = useState(["", "", "", ""]);  // State for the OTP code input fields
     const [timeRemaining, setTimeRemaining] = useState(60);  // State for the countdown timer
     const [error, setError] = useState('');  // State for error messages
     const timerRef = useRef(null);  // Reference to store the interval timer
-
+    const [translatedError, setTranslatedError] = useState(''); // Lỗi đã dịch
     // useEffect to handle the countdown timer
     useEffect(() => {
         // Set an interval to decrease the timeRemaining every second
@@ -48,7 +48,7 @@ const OTPVerify = () => {
             }
         }
     };
-
+    
     // Function to handle key down events in the OTP input fields
     const handleKeyDown = (event) => {
         const forbiddenKeys = ["e", "+", "-", "."];  // Disallowed keys
@@ -68,7 +68,14 @@ const OTPVerify = () => {
         setTimeRemaining(60);  // Reset the countdown timer
         // Optionally, you can also update the mock OTP in localStorage if required.
     };
-
+    // Cập nhật lỗi đã dịch mỗi khi error hoặc ngôn ngữ thay đổi
+    useEffect(() => {
+        if (error) {
+          setTranslatedError(t(error));
+        } else {
+          setTranslatedError('');
+        }
+      }, [error, t]);
     // Function to handle OTP verification
     const handleVerify = () => {
         const enteredOtp = otpCode.join('');  // Combine the OTP fields to a single string
@@ -80,7 +87,7 @@ const OTPVerify = () => {
             setError('');
             navigate("/EnterNewPass");  // Navigate to the EnterNewPass page
         } else {
-            setError(t("Incorrect OTP"));
+            setError("Incorrect OTP");
         }
     };
 
@@ -131,7 +138,7 @@ const OTPVerify = () => {
                                 ))}
                             </div>
                         </div>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        {translatedError && <p style={{ color: 'red' }}>{translatedError}</p>}
                         <button className="verify-button" onClick={handleVerify}>
                             {t("Verify")}
                         </button>

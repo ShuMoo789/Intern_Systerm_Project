@@ -1,12 +1,15 @@
 import { Flex, Form, Input, Button, Checkbox } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../../translation/LanguageContext";
 const LoginForm = ({ header, formName, role, dataSet }) => {
   const [wrong, setWrong] = useState(false);
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
-
+  const { t } = useTranslation()
+  const currentLanguage = useLanguage()
+  const [form] = Form.useForm()
   const handleLogin = async (values) => {
     const { email, password } = values;
     try {
@@ -28,7 +31,18 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
       console.error("Login failed", error);
     }
   };
-
+  useEffect(() => {
+    form.setFields([
+    {
+      name: 'email',
+      errors: form.getFieldError('email').map(() => t("Please input your email!")),
+    },
+    {
+      name: 'password',
+      errors: form.getFieldError('password').map(() => t("Please input your password!")),
+    },
+  ])
+  }, [currentLanguage, t])
   return (
     <>
       <Flex vertical align="center">
@@ -38,9 +52,10 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
           >
             {header}
           </h1>
-          <span>Please fill your details to access your account</span>
+          <span>{t("Please fill your details to access your account")}</span>
 
           <Form
+            form={form}
             name={formName}
             initialValues={{ remember: true }}
             layout="vertical"
@@ -50,50 +65,50 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              rules={[{ required: true, message: t("Please input your email!") }]}
               placeholder
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label={t("Password")}
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: t("Please input your password!") },
               ]}
             >
               <Input.Password placeholder="**********" />
             </Form.Item>
             {wrong && (
               <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
-                Email or Password is incorrect
+                {t('Email or Password is incorrect')}
               </div>
             )}
             <Form.Item>
               <Flex justify="space-between">
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox>{t("Remember me")}</Checkbox>
                 <Link to="/pwdreset" style={{ color: "red" }}>
-                  Forgot password?
+                  {t("Forgot password?")}
                 </Link>
               </Flex>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" block>
-                Sign in
+                {t("Sign In")}
               </Button>
             </Form.Item>
             <Form.Item>
               <Link to="/signup">
                 <Button type="default" block>
-                  Sign up
+                  {t("Sign Up")}
                 </Button>
               </Link>
             </Form.Item>
 
             <Form.Item>
               <div type="" align="center">
-                OR LOGIN WITH
+                {t("OR LOGIN WITH")}
               </div>
             </Form.Item>
 
