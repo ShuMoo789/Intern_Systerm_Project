@@ -1,18 +1,29 @@
-.content .welcome,
 .content .user-gmail {
     color: #000000;
-    font-family: Inter;
+    font-family: inherit;
     font-size: 30px;
     font-weight: 700;
     text-align: center;
     padding-bottom: 24px;
+
+}
+
+.content .welcome {
+    color: #000000;
+    font-family: inherit;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 9px;
 }
 
 .ava-image {
     border-radius: 50%;
     width: 165px;
     height: 165px;
-    margin-left: 45%;
+    border: 1px solid rgb(79, 157, 37);
+    margin-top: 30px;
 }
 
 .rectangle-content-group {
@@ -21,4 +32,17 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 48px;
-}    
+
+}
+
+.rectangle-content {
+    border-radius: 5px;
+
+}
+
+.user-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
