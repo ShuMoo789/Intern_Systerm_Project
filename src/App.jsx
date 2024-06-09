@@ -15,11 +15,11 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
 
+
 import PositionManagement from "./pages/PositionManagement/PositionManagement.jsx";
 import ProjectMan from "./pages/Project Management/ProjectMan.jsx";
 import TechnologyManagement from "./pages/TechnologyManagement/TechnologyManagement.jsx";
 import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx";
-
 
 
 // Define the main App component

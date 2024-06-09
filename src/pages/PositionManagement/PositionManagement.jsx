@@ -3,17 +3,17 @@ import React, { useState } from "react";
 import MainLayout from "../../MainLayout/MainLayout";
 import User_Img from "../../assets/user_image.png";
 import {
-    Table,
-    Checkbox,
-    Button,
-    Modal,
-    Card,
-    Avatar,
-    Tag,
-    Tooltip,
-    Pagination,
-    Dropdown,
-    Menu,
+  Table,
+  Checkbox,
+  Button,
+  Modal,
+  Card,
+  Avatar,
+  Tag,
+  Tooltip,
+  Pagination,
+  Dropdown,
+  Menu,
 } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
@@ -22,147 +22,147 @@ import "../PositionManagement/PositionManagement.css";
 const { Meta } = Card;
 
 const PositionManagement = () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [selectedInterns, setSelectedInterns] = useState([]);
-    const [modalTitle, setModalTitle] = useState("");
-    // JSON data
-    const internsData = [
-        {
-            key: "1",
-            internID: "#12345128",
-            fullName: "Esther Eden",
-            phoneNumber: "0376782528",
-            position: "Back-End",
-            school: "FPT University",
-            email: "abc@gmail.com",
-            cvLink: "Link",
-            technology: ".NET",
-            rank: "Intern",
-        },
-        {
-            key: "2",
-            internID: "#12345129",
-            fullName: "John Doe",
-            phoneNumber: "123456789",
-            position: "Back-End",
-            school: "ABC University",
-            email: "john.doe@example.com",
-            cvLink: "Link",
-            technology: "Java",
-            rank: "Intern",
-        },
-        {
-            key: "3",
-            internID: "#12345130",
-            fullName: "Jane Smith",
-            phoneNumber: "987654321",
-            position: "Front-End",
-            school: "XYZ University",
-            email: "jane.smith@example.com",
-            cvLink: "Link",
-            technology: "ReactJS",
-            rank: "Junior",
-        },
-        {
-            key: "4",
-            internID: "#12345e131",
-            fullName: "Janes",
-            phoneNumber: "987654321",
-            position: "Front-End",
-            school: "XYZ University",
-            email: "janes.smith@example.com",
-            cvLink: "Link",
-            technology: "ReactJS",
-            rank: "Junior",
-        },
-        {
-            key: "5",
-            internID: "#12131",
-            fullName: "Janes",
-            phoneNumber: "987654321",
-            position: "Business Analyst",
-            school: "XYZ University",
-            email: "janes.smith@example.com",
-            cvLink: "Link",
-            technology: "trello",
-            rank: "Junior",
-        },
-        {
-            key: "6",
-            internID: "#123451c31",
-            fullName: "Janes",
-            phoneNumber: "987654321",
-            position: "Marketing",
-            school: "XYZ University",
-            email: "janes.smdfith@example.com",
-            cvLink: "Link",
-            technology: "Exceel",
-            rank: "Junior",
-        },
-        {
-            key: "7",
-            internID: "#12dd3451c31",
-            fullName: "luke",
-            phoneNumber: "987654321",
-            position: "Designer",
-            school: "XYZ University",
-            email: "luke.smdfith@example.com",
-            cvLink: "Link",
-            technology: "ReactJS",
-            rank: "Junior",
-        },
-        {
-            key: "8",
-            internID: "#12dd3ss451c31",
-            fullName: "D",
-            phoneNumber: "987654321",
-            position: "Sales Executive",
-            school: "XYZ University",
-            email: "luke.smdfith@example.com",
-            cvLink: "Link",
-            technology: "Trello",
-            rank: "Junior",
-        },
-        // Add more intern objects as needed
-    ];
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedInterns, setSelectedInterns] = useState([]);
+  const [modalTitle, setModalTitle] = useState("");
+  // JSON data
+  const internsData = [
+    {
+      key: "1",
+      internID: "#12345128",
+      fullName: "Esther Eden",
+      phoneNumber: "0376782528",
+      position: "Back-End",
+      school: "FPT University",
+      email: "abc@gmail.com",
+      cvLink: "Link",
+      technology: ".NET",
+      rank: "Intern",
+    },
+    {
+      key: "2",
+      internID: "#12345129",
+      fullName: "John Doe",
+      phoneNumber: "123456789",
+      position: "Back-End",
+      school: "ABC University",
+      email: "john.doe@example.com",
+      cvLink: "Link",
+      technology: "Java",
+      rank: "Intern",
+    },
+    {
+      key: "3",
+      internID: "#12345130",
+      fullName: "Jane Smith",
+      phoneNumber: "987654321",
+      position: "Front-End",
+      school: "XYZ University",
+      email: "jane.smith@example.com",
+      cvLink: "Link",
+      technology: "ReactJS",
+      rank: "Junior",
+    },
+    {
+      key: "4",
+      internID: "#12345e131",
+      fullName: "Janes",
+      phoneNumber: "987654321",
+      position: "Front-End",
+      school: "XYZ University",
+      email: "janes.smith@example.com",
+      cvLink: "Link",
+      technology: "ReactJS",
+      rank: "Junior",
+    },
+    {
+      key: "5",
+      internID: "#12131",
+      fullName: "Janes",
+      phoneNumber: "987654321",
+      position: "Business Analyst",
+      school: "XYZ University",
+      email: "janes.smith@example.com",
+      cvLink: "Link",
+      technology: "trello",
+      rank: "Junior",
+    },
+    {
+      key: "6",
+      internID: "#123451c31",
+      fullName: "Janes",
+      phoneNumber: "987654321",
+      position: "Marketing",
+      school: "XYZ University",
+      email: "janes.smdfith@example.com",
+      cvLink: "Link",
+      technology: "Exceel",
+      rank: "Junior",
+    },
+    {
+      key: "7",
+      internID: "#12dd3451c31",
+      fullName: "luke",
+      phoneNumber: "987654321",
+      position: "Designer",
+      school: "XYZ University",
+      email: "luke.smdfith@example.com",
+      cvLink: "Link",
+      technology: "ReactJS",
+      rank: "Junior",
+    },
+    {
+      key: "8",
+      internID: "#12dd3ss451c31",
+      fullName: "D",
+      phoneNumber: "987654321",
+      position: "Sales Executive",
+      school: "XYZ University",
+      email: "luke.smdfith@example.com",
+      cvLink: "Link",
+      technology: "Trello",
+      rank: "Junior",
+    },
+    // Add more intern objects as needed
+  ];
 
-    const showModal = (title, position) => {
-        const filteredInterns = internsData.filter(
-            (intern) => intern.position === position
-        );
-        setSelectedInterns(filteredInterns); // Set the filtered data to be displayed in the table
-        setIsModalVisible(true);
-        setModalTitle(title);
-    };
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const rankMenu = (record) => (
-        <Menu onClick={(e) => handleRankChange(e, record)}>
-            <Menu.Item key="Intern">Intern</Menu.Item>
-            <Menu.Item key="Fresher">Fresher</Menu.Item>
-            <Menu.Item key="Junior">Junior</Menu.Item>
-            <Menu.Item key="Middle">Middle</Menu.Item>
-        </Menu>
+  const showModal = (title, position) => {
+    const filteredInterns = internsData.filter(
+      (intern) => intern.position === position
     );
+    setSelectedInterns(filteredInterns); // Set the filtered data to be displayed in the table
+    setIsModalVisible(true);
+    setModalTitle(title);
+  };
 
-    const handleRankChange = (e, record) => {
-        const { key } = e;
-        // Cập nhật dữ liệu của record với rank mới được chọn
-        const updatedInterns = selectedInterns.map((intern) => {
-            if (intern.key === record.key) {
-                return { ...intern, rank: key };
-            }
-            return intern;
-        });
-        setSelectedInterns(updatedInterns);
-    };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const rankMenu = (record) => (
+    <Menu onClick={(e) => handleRankChange(e, record)}>
+      <Menu.Item key="Intern">Intern</Menu.Item>
+      <Menu.Item key="Fresher">Fresher</Menu.Item>
+      <Menu.Item key="Junior">Junior</Menu.Item>
+      <Menu.Item key="Middle">Middle</Menu.Item>
+    </Menu>
+  );
+
+  const handleRankChange = (e, record) => {
+    const { key } = e;
+    // Cập nhật dữ liệu của record với rank mới được chọn
+    const updatedInterns = selectedInterns.map((intern) => {
+      if (intern.key === record.key) {
+        return { ...intern, rank: key };
+      }
+      return intern;
+    });
+    setSelectedInterns(updatedInterns);
+  };
 
     const columns = [
         {
@@ -259,43 +259,42 @@ const PositionManagement = () => {
                         </div>
                     </header>
 
-                    <section className="content-section">
-                        <div className="button-group-position">
-                            <button className="button button-export">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Export Icon"
-                                    className="button-icon"
-                                />
-                                <span>Export Excel</span>
-                            </button>
-                            <button className="button button-edit">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Edit Icon"
-                                    className="button-icon"
-                                />
-                                <span>Edit</span>
-                            </button>
-                            <button className="button button-delete">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Delete Icon"
-                                    className="button-icon"
-                                />
-                                <span>Delete</span>
-                            </button>
-                            <button className="button button-add-intern">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Add Intern Icon"
-                                    className="button-icon"
-                                />
-                                <span>Add New Intern</span>
-                            </button>
-                        </div>
-                    </section>
-
+          <section className="content-section">
+            <div className="button-group-position">
+              <button className="button button-export">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Export Icon"
+                  className="button-icon"
+                />
+                <span>Export Excel</span>
+              </button>
+              <button className="button button-edit">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Edit Icon"
+                  className="button-icon"
+                />
+                <span>Edit</span>
+              </button>
+              <button className="button button-delete">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Delete Icon"
+                  className="button-icon"
+                />
+                <span>Delete</span>
+              </button>
+              <button className="button button-add-intern">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Add Intern Icon"
+                  className="button-icon"
+                />
+                <span>Add New Intern</span>
+              </button>
+            </div>
+          </section>
                     <section>
                         <div className="bodyposition">
                             <div className="bodyposi">
@@ -1091,6 +1090,7 @@ const PositionManagement = () => {
             </MainLayout>
         </div>
     );
+
 };
 
 export default PositionManagement;

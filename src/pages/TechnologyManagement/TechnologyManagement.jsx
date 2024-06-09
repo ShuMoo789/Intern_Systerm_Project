@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import GroupButton from "../../components/GroupButton/GroupButton";
 import AccountSetting from "../../components/AccountSetting/AccountSetting";
+import useViewport from "../../hooks/useViewport";
 
 // props GroupButton
 const groupButton = [
@@ -41,6 +42,8 @@ const groupButton = [
 
 
 const TechnologyManagement = () => {
+  const viewPort = useViewport()
+  const isMobile = viewPort.width <= 1024
   const [activeTab, setActiveTab] = useState('Back-End');
 
   // Hàm xử lý khi chuyển tab
@@ -56,9 +59,12 @@ const TechnologyManagement = () => {
             <div className="title-name-technology-management">
               TECHNOLOGY MANAGEMENT
             </div>
-            <div className="account-setting-technology-management">
+            {/* if mobile, width of AccountSetting will change */}
+            {!isMobile ? (<div className="account-setting-technology-management">
               <AccountSetting />
-            </div>
+            </div>) : (<div className="account-setting-technology-management-mobile">
+              <AccountSetting />
+            </div>)}
           </div>
           <div className="navigation-technology-management">
             <div className="nav-container" style={{ paddingLeft: 30 }}>
