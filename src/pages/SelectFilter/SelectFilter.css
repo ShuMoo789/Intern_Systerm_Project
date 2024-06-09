@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%; /* Kích thước của Container */
   border-radius: 34px;
-  padding: 20px 46px;
+  padding: 0 46px;
   box-sizing: border-box;
 }
 
@@ -34,7 +34,6 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .arrow-btn {
@@ -133,6 +132,7 @@
   width: 98%;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 30px;
 }
 
 .filter-select .ant-select-selector {
