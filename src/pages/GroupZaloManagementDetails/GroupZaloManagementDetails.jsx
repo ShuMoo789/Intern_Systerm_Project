@@ -9,6 +9,12 @@ import {
   FolderAddOutlined,
   SendOutlined,
   SearchOutlined,
+  CameraOutlined,
+  LinkOutlined,
+  SmileOutlined,
+  ExclamationOutlined,
+  EllipsisOutlined,
+  LikeOutlined,
 } from "@ant-design/icons";
 import { Col, Row, Input, Flex, Typography } from "antd";
 const { Title } = Typography;
@@ -49,16 +55,26 @@ const GroupZaloManagementDetails = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const iconStyle = { fontSize: "40px" };
 
-  const handleSendMessage = () => {
-    if (inputValue.trim()) {
-      setMessages([...messages, { text: inputValue, reaction: null }]);
+  const handleSendMessage = (message) => {
+    if (message.trim()) {
+      setMessages([...messages, { text: message, reaction: null }]);
       setInputValue("");
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSendMessage(inputValue);
+  };
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+  };
+
+  const handleLike = () => {
+    handleSendMessage("👍");
   };
 
   return (
@@ -78,7 +94,8 @@ const GroupZaloManagementDetails = () => {
               height: "75vh",
               width: "92%",
               backgroundColor: "white",
-              borderRadius: "20px",
+              borderTopLeftRadius: "20px",
+              borderTopRightRadius: "20px",
               padding: "20px",
               overflowY: "auto",
             }}
@@ -132,21 +149,61 @@ const GroupZaloManagementDetails = () => {
               width: "92%",
             }}
           >
-            <div style={{ flex: "0 0 auto", marginTop: 20 }}>
+            <div
+              style={{
+                display: "flex",
+                backgroundColor: "#dad6d6",
+                border: "1px solid black",
+                height: "60px",
+                alignItems: "center",
+                gap: "20px",
+              }}
+            >
+              <div style={{ marginLeft: "5px" }}></div>
+              <CameraOutlined style={iconStyle} />
+              <LinkOutlined style={iconStyle} />
+              <SmileOutlined style={iconStyle} />
+              <ClockCircleOutlined style={iconStyle} />
+              <ExclamationOutlined style={iconStyle} />
+              <EllipsisOutlined style={iconStyle} />
+            </div>
+
+            <form onSubmit={handleSubmit}>
               <Input
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Type a message"
-                onPressEnter={handleSendMessage}
-                style={{ flex: 1 }}
+                style={{
+                  flex: 1,
+                  marginBottom: "40px",
+                  backgroundColor: "#dad6d6",
+                  borderRadius: 0,
+                  height: "60px",
+                  borderTop: "0",
+                  borderRight: "1px solid black",
+                  borderBottom: "1px solid black",
+                  borderLeft: "1px solid black",
+                  paddingLeft: "25px",
+                }}
+                bordered={false}
                 suffix={
-                  <SendOutlined
-                    onClick={handleSendMessage}
-                    style={{ cursor: "pointer", color: "#1890ff" }}
-                  />
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <LikeOutlined
+                      onClick={handleLike}
+                      style={{ cursor: "pointer", fontSize: "25px" }}
+                    />
+                    <SendOutlined
+                      onClick={() => handleSendMessage(inputValue)}
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "25px",
+                        marginRight: "5px",
+                      }}
+                    />
+                  </div>
                 }
               />
-            </div>
+            </form>
           </Col>
         </Row>
       </MainLayout>

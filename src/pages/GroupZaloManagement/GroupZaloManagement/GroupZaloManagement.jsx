@@ -53,8 +53,10 @@ const GroupZaloManagement = () => {
         />
         <Row>
           <Col span={1}></Col>
-          <Col style={{ margin: "0 0 0 60px" }}>
-            <MyComponent />
+          <Col span={22}>
+            <div className="main-content" style={{ width: "100%" }}>
+              <MyComponent />
+            </div>
           </Col>
         </Row>
       </MainLayout>
