@@ -1,19 +1,44 @@
 import { Tabs, Col, Row } from "antd";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import SignUpFormIntern from "../../components/SignUpForm_Intern/SignUpForm";
+
 const { TabPane } = Tabs;
 
 const SignUpPage = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const responsiveImageStyle = {
+    height: "700px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const hiddenImageStyle = {
+    display: "none",
+  };
+
   return (
     <>
       <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
         <Header />
         <Row style={{ margin: "50px 30px 20px 30px" }}>
-          <Col span={1}></Col>
-          <Col span={8}>
-            <div>
+          <Col xs={24} md={1}></Col>
+          <Col xs={24} md={8}>
+            <div className="tabs-container">
               <Tabs
                 defaultActiveKey="1"
                 centered
@@ -39,12 +64,18 @@ const SignUpPage = () => {
               </Tabs>
             </div>
           </Col>
-          <Col>
+          <Col
+            xs={0}
+            md={14}
+            style={isMobile ? hiddenImageStyle : responsiveImageStyle}
+          >
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/769194cc6b501f03568e57e28b6c0656e834e905ae2d3de0cdbbcf291c9e53b3?apiKey=41832340d6f545c2a0509736ad9e1693&"
-              style={{ height: "700px" }}
+              style={{ height: "100%", width: "100%" }}
+              alt="Sign Up illustration"
             />
           </Col>
+          <Col xs={0} md={1}></Col>
         </Row>
       </div>
     </>

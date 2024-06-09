@@ -1,70 +1,70 @@
 .content-navigation {
-    max-width: 92%;
-    right: 0;
-    top: 0;
-    margin: 20px auto;
-    font-family: Quicksand !important;
+  max-width: 92%;
+  right: 0;
+  top: 0;
+  margin: 20px auto;
+  font-family: Quicksand !important;
 }
 
 .content-navigation .header-navigation {
-    width: 100%;
-    height: 60px;
-    /* position: relative; */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
+  width: 100%;
+  height: 60px;
+  /* position: relative; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .content-navigation .header-navigation .title-name {
-    font-size: 24px;
-    color: #2c3e50;
-    font-family: Quicksand;
-    font-weight: 700;
+  font-size: 24px;
+  color: #2c3e50;
+  font-family: Quicksand;
+  font-weight: 700;
 }
 
 .content-navigation .header-navigation .account-setting {
-    width: 266px;
-    height: 100%;
-    margin-right: 50px;
-    position: relative;
+  width: 266px;
+  height: 100%;
+  margin-right: 50px;
+  position: relative;
 }
 
 .content-navigation .header-navigation .account-setting-mobile {
-    width: 100px;
-    height: 100%;
-    margin-right: 50px;
-    position: relative;
+  width: 100px;
+  height: 100%;
+  margin-right: 50px;
+  position: relative;
 }
 
 .content-navigation .header-navigation .group-header-navigation {
-    display: flex;
-    height: 100%;
+  display: flex;
+  height: 100%;
 }
 
 .content-navigation .navigation {
-    width: 100%;
-    height: 60px;
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    border-radius: 15px;
-    position: relative;
-    margin: auto;
+  width: 100%;
+  height: 60px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  border-radius: 15px;
+  position: relative;
+  margin: auto;
 }
 
 .navigation .search-navigation {
-    width: 38.4%;
-    height: 100%;
-    padding: 15px 20px;
-    align-items: center;
-    color: #92929D;
+  width: 38.4%;
+  height: 100%;
+  padding: 15px 20px;
+  align-items: center;
+  color: #92929d;
 }
 
 .navigation .group-button-navigation {
-    display: flex;
-    width: 54.3%;
-    height: 100%;
-    position: absolute;
-    right: 30px;
-    top: 0;
+  display: flex;
+  width: 54.3%;
+  height: 100%;
+  position: absolute;
+  right: 30px;
+  top: 0;
 }
