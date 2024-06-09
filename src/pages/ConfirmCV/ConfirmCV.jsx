@@ -43,7 +43,7 @@ function IconTextBlock({ iconSrc, altText, text }) {
 
 
 const interns = [
-    
+
 
 ];
 const dateFormat = 'YYYY/MM/DD';
@@ -409,20 +409,24 @@ const ConfirmCV = () => {
     const handleModalCancel = () => {
         setModalVisible(false);
     };
-
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        },
+    };
     const [allChecked, setAllChecked] = useState(false);
     const columns = [
-        {
-            title: <Checkbox onChange={handleAllCheckedChange} />,
-            dataIndex: 'checkbox',
-            key: 'checkbox',
-            render: (text, record) => (
-                <Checkbox
-                    checked={statusMap[record.internId]}
-                    onChange={(e) => handleChange(e.target.checked, record.internId)}
-                />
-            ),
-        },
+        // {
+        //     title: <Checkbox onChange={handleAllCheckedChange} />,
+        //     dataIndex: 'checkbox',
+        //     key: 'checkbox',
+        //     render: (text, record) => (
+        //         <Checkbox
+        //             checked={statusMap[record.internId]}
+        //             onChange={(e) => handleChange(e.target.checked, record.internId)}
+        //         />
+        //     ),
+        // },
         {
             title: 'Intern ID',
             dataIndex: 'internID',
@@ -508,12 +512,12 @@ const ConfirmCV = () => {
             key: 'confirmEmail',
             render: (confirmEmail, record) => (
                 <Select
-                    defaultValue={confirmEmail}
+                    defaultValue={record.confirm}
                     style={{ width: 120 }}
                     onChange={(value) => handleChange(value, record)}
                 >
-                    <Option value="Yes" >Confirmed</Option>
-                    <Option value="No" >Not Confirmed</Option>
+                    <Option value="Yes">Confirmed</Option>
+                    <Option value="No">Not Confirmed</Option>
                 </Select>
             ),
         },
@@ -557,7 +561,7 @@ const ConfirmCV = () => {
             width: 100,
         },
     ]
-
+    const [selectionType, setSelectionType] = useState('checkbox');
     return (
         <div id="APRCV">
 
@@ -588,7 +592,7 @@ const ConfirmCV = () => {
                             {/* <button className="button button-schedule">
                                 <Sheldule />
                             </button> */}
-                            <SendMailButton />
+                            <SendMailButton className="button button-send" />
                             <button className="button button-export">
                                 <img
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
@@ -694,14 +698,18 @@ const ConfirmCV = () => {
                                 </Dropdown>
                             </div>
                             <div className="buttons">
-                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }}/>Clean Filter</div>
+                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }} />Clean Filter</div>
                                 <br />
-                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }}/>Search</div>
+                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }} />Search</div>
                             </div>
                         </div>
                         <div className="list">
                             <div className="tbl-wrapper">
                                 <Table
+                                    rowSelection={{
+                                        type: selectionType,
+                                        ...rowSelection,
+                                    }}
                                     columns={columns}
                                     dataSource={filteredInterns}
                                     rowKey="internId"
