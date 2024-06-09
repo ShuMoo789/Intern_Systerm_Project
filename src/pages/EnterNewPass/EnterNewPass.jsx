@@ -107,7 +107,7 @@ function ChangePasswordForm() {
             <PasswordInput
                 id="newPassword"
                 label={t("New Password *")}
-                placeholder="••••••••"
+                placeholder="Enter new password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}  // Update new password state
                 error={submitted && newPasswordError}
