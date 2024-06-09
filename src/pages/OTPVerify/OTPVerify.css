@@ -62,6 +62,9 @@
     margin-top: 5px;
     width: 100%;
     max-width: 1744px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 991px) {
@@ -88,7 +91,11 @@
     justify-content: center;
     line-height: normal;
     width: 36%;
-    margin-left: 0;
+    margin: auto;
+    padding: 2em;
+    box-shadow: 0 5px 5px 5px lightgray;
+    height: fit-content;
+    border-radius: 10px;
 }
 
 @media (max-width: 991px) {
@@ -244,4 +251,5 @@ input::-webkit-outer-spin-button{
 
 p{
     font-family: 'Quicksand', sans-serif;
+    
 }

@@ -1,124 +1,164 @@
-import React, { useState } from 'react';
-import { Button, Modal, Select, Typography, Row, Col, Input, message} from "antd";
-import { MailOutlined } from "@ant-design/icons";
-import './SendMailButton.css'
+import React, { useState } from "react";
+import { Button, Modal, Select, Typography, Row, Col, Input, Form } from "antd";
+import { MailOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
+import "./SendMailButton.css";
 const { TextArea } = Input;
 
 //các loại email
 const email_types = [
-    "Email interview" ,
-    "Email result",
-    "Internship Information"
-]
+  "Email interview",
+  "Email result",
+  "Internship Information",
+];
 
 const SendMailButton = () => {
-    const [value, setValue] = useState("");
-    const [loadings, setLoadings] = useState([]);
-    // Khởi tạo giá trị ban đầu là false  -> ẩn modal;
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [loadings, setLoadings] = useState([]);
+  // Khởi tạo giá trị ban đầu là false  -> ẩn modal;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
 
-    // Hàm được gọi khi muốn hiển thị modal
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+  const [open, setOpen] = useState(false);
 
-    const handleOk = () => {
+  const handleDropdownVisibleChange = (visible) => {
+    setOpen(visible);
+  };
+  // Hàm được gọi khi muốn hiển thị modal
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        console.log("Received values:", values);
+        // Handle form submission
         setIsModalOpen(false);
-    };
+        form.resetFields();
+      })
+      .catch((info) => {
+        console.log("Validate Failed:", info);
+      });
+  };
 
-    // Hàm được gọi khi muốn ẩn modal
-    const handleCancel = () => {
-         setIsModalOpen(false);
-    };
+  // Hàm được gọi khi muốn ẩn modal
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+  };
 
-    // hàm tạo hiệu ứng loading khi người dùng bấm vào nút send email
-    const enterLoading = (index) => {
-        setLoadings((prevLoadings) => {
-            const newLoadings = [...prevLoadings];
-            newLoadings[index] = true;
-            return newLoadings;
-        });
-        setTimeout(() => {
-            setLoadings((prevLoadings) => {
-                const newLoadings = [...prevLoadings];
-                newLoadings[index] = false;
-                message.success('Send Mail Success')
-                handleOk()
-                return newLoadings;
-            });
-        }, 1000);
-    };
+  // hàm tạo hiệu ứng loading khi người dùng bấm vào nút send email
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        handleOk();
+        return newLoadings;
+      });
+    }, 1000);
+  };
 
-    return (
-        <div>
-            {/* Button để mở modal */}
-            <Button 
-                    className="send-email-btn"
-                    type="primary" 
-                    onClick={showModal}
-                    key="submit"
-                    //type="default"
-                    icon={<MailOutlined />}
+  return (
+    <div>
+      {/* Button để mở modal */}
+      <Button
+        className="send-email-btn"
+        type="primary"
+        onClick={showModal}
+        key="submit"
+        //type="default"
+        icon={<MailOutlined />}
+      >
+        Send Mail
+      </Button>
+      <Modal
+        className="sendMail-modal"
+        centered
+        title="Send Email"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        okText="Sendmail"
+        okButtonProps={{
+          disabled:
+            !form.isFieldsTouched(true) ||
+            form.getFieldsError().filter(({ errors }) => errors.length).length,
+        }}
+        destroyOnClose={true}
+        // Tạo nút sendmail khi modal xuất hiện
+        footer={[
+          <Button
+            className="send-email-modal"
+            key="submit"
+            type="default"
+            icon={<MailOutlined />}
+            //Gọi hàm để tạo hiệu ứng loading cho button
+            loading={loadings[1] || false}
+            onClick={() => enterLoading(1)}
+          >
+            Send Email
+          </Button>,
+        ]}
+        width={1125}
+      >
+        <Typography.Paragraph className="desc">
+          Choose types of Email
+        </Typography.Paragraph>
+        <Row gutter={16}>
+          <Col span={7}>
+            {/* chọn loại email */}
+            <Form form={form} layout="vertical" name="select-form">
+              <Form.Item
+                name="select"
+                rules={[
+                  { required: true, message: "Please select type of Email!" },
+                ]}
+              >
+                <Select
+                  className="type-email"
+                  placeholder="Types of email"
+                  onDropdownVisibleChange={handleDropdownVisibleChange}
+                  suffixIcon={open ? <UpOutlined /> : <DownOutlined />}
                 >
-                Send Mail
-            </Button>
-                <Modal
-                    centered
-                    title="Send Email" 
-                    open={isModalOpen} 
-                    onCancel={handleCancel} 
-                    okText='Sendmail' 
-                    
-                    destroyOnClose={true}
-                    // Tạo nút sendmail khi modal xuất hiện
-                    footer={[
-                        <Button
-                            className="send-email-modal"
-                            key="submit"
-                            type="default"
-                            icon={<MailOutlined />}
-                            //Gọi hàm để tạo hiệu ứng loading cho button
-                            loading={loadings[1] || false}
-                            onClick={() => enterLoading(1)}        
-                        >
-                            Send Email
-                        </Button>,
-                    ]}
-                    width={1125}>
-                    <Typography.Paragraph className="desc">
-                        Choose types of Email
-                    </Typography.Paragraph>
-                    <Row gutter={16}>
-                        <Col span={7}>
-                            {/* chọn loại email */}
-                            <Select 
-                                className='type-email' 
-                                placeholder="Types of email"                               
-                                >
-                                {email_types.map((type,index)=> {
-                                    return <Select.Option key={index} value={type} 
-                                ></Select.Option>
-
-                                })}
-                            </Select>
-                        </Col>
-                         <Col span={17}>
-                                {/* Khung text gửi mail */}
-                             <TextArea
-                                className="textarea"
-                                value={value}
-                                onChange={(e) => setValue(e.target.value)}
-                                placeholder="Enter your mail..."
-                                autoSize={{
-                                    minRows: 6,
-                                    maxRows: 6,
-                                }}
-                             > </TextArea> 
-                        </Col> 
-                    </Row>                  
-                </Modal>        
-        </div>
-    );
+                  {email_types.map((type, index) => {
+                    return (
+                      <Select.Option key={index} value={type}></Select.Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
+            </Form>
+          </Col>
+          <Col span={17}>
+            {/* Khung text gửi mail */}
+            <Form form={form} layout="vertical" name="text-form">
+              <Form.Item
+                name="text-email"
+                rules={[{ required: true, message: "Please enter your mail!" }]}
+              >
+                <TextArea
+                  className="textarea"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  placeholder="Enter your mail..."
+                  autoSize={{
+                    minRows: 6,
+                    maxRows: 6,
+                  }}
+                ></TextArea>
+              </Form.Item>
+            </Form>
+          </Col>
+        </Row>
+      </Modal>
+    </div>
+  );
 };
 
 export default SendMailButton;

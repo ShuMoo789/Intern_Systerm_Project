@@ -1,0 +1,78 @@
+.content-technology-management {
+    width: 100%;
+    height: 860px;
+}
+
+.content-technology-management .sub-content-technology-management {
+    width: 92%;
+    height: 700px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    border-radius: 34px;
+    position: relative;
+}
+
+.content-technology-management .sub-content-technology-management .group-button-technology-management {
+    display: flex;
+    width: 54.3%;
+    height: 60px;
+    position: relative;
+    left: 30px;
+    top: 0;
+}
+
+.content-navigation-technology-management {
+    max-width: 92%;
+    right: 0;
+    top: 0;
+    margin: 20px auto;
+}
+
+.content-navigation-technology-management .header-navigation-technology-management {
+    width: 100%;
+    height: 60px;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.content-navigation-technology-management .header-navigation-technology-management .title-name-technology-management {
+    color: #280559;
+    font-size: 20px;
+}
+
+.content-navigation-technology-management .header-navigation-technology-management .account-setting-technology-management {
+    width: 266px;
+    height: 100%;
+    margin-right: 50px;
+    position: relative;
+}
+
+.content-navigation-technology-management .header-navigation-technology-management .account-setting-technology-management-mobile {
+    width: 100px;
+    height: 100%;
+    margin-right: 50px;
+    position: relative;
+}
+
+.content-navigation-technology-management .navigation-technology-management {
+    width: 100%;
+    height: 60px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    border-radius: 15px;
+    position: relative;
+    margin: auto;
+}
+
+.sub-content-technology-management {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.technology-list-container {
+    padding: 5px 20px;
+}

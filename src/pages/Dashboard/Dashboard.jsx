@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import userImage from "../../assets/user_image.png";
-import MenuNavigate from "../../components/Menu/MenuNavigate";
+import MainLayout from "../../MainLayout/MainLayout";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 const { Title } = Typography;
@@ -94,18 +94,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider
-          width={256}
-          style={{
-            borderRadius: "25px",
-            overflow: "hidden",
-            backgroundColor: "#fff",
-            maxHeight: "93vh",
-          }}
-        >
-          <MenuNavigate />
-        </Sider>
+      <MainLayout>
         <Layout>
           <Header style={{ padding: 0, background: "transparent" }}>
             <Row>
@@ -150,14 +139,14 @@ const Dashboard = () => {
             >
               <Col span={2}></Col>
               <Col>
-                <Space size={80}>
+                <Space size={60}>
                   <Card
                     bordered={true}
                     style={{
                       textAlign: "center",
                       borderColor: "purple",
-                      width: "180px",
-                      height: "150px",
+                      width: "210px",
+                      height: "190px",
                       borderWidth: 2,
                     }}
                   >
@@ -170,8 +159,8 @@ const Dashboard = () => {
                     style={{
                       textAlign: "center",
                       borderColor: "purple",
-                      width: "180px",
-                      height: "150px",
+                      width: "210px",
+                      height: "190px",
                       borderWidth: 2,
                     }}
                   >
@@ -184,8 +173,8 @@ const Dashboard = () => {
                     style={{
                       textAlign: "center",
                       borderColor: "purple",
-                      width: "180px",
-                      height: "150px",
+                      width: "210px",
+                      height: "190px",
                       borderWidth: 2,
                     }}
                   >
@@ -198,8 +187,8 @@ const Dashboard = () => {
                     style={{
                       textAlign: "center",
                       borderColor: "purple",
-                      width: "180px",
-                      height: "150px",
+                      width: "210px",
+                      height: "190px",
                       borderWidth: 2,
                     }}
                   >
@@ -212,8 +201,8 @@ const Dashboard = () => {
                     style={{
                       textAlign: "center",
                       borderColor: "purple",
-                      width: "180px",
-                      height: "150px",
+                      width: "210px",
+                      height: "190px",
                       borderWidth: 2,
                     }}
                   >
@@ -310,7 +299,7 @@ const Dashboard = () => {
             </div>
           </Content>
         </Layout>
-      </Layout>
+      </MainLayout>
     </>
   );
 };

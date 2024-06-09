@@ -929,6 +929,7 @@ const PositionManagement = () => {
       </MainLayout>
     </div>
   );
+
 };
 
 export default PositionManagement;
