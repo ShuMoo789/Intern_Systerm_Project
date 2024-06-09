@@ -82,6 +82,7 @@
     font-size: 16px;
     font-weight: 500;
     padding: 2em;
+    margin-left: 5%;
 }
 
 .form-title {
@@ -108,12 +109,9 @@
 .password-input {
     display: flex;
     align-items: center;
-    gap: 20px;
-    border: 1px solid rgba(208, 213, 221, 1);
-    border-radius: 8px;
-    padding: 10px 14px;
     width: 100%; /* Updated to be flexible */
     margin-bottom: 10px;
+    
 }
 
 @media (max-width: 991px) {
@@ -128,7 +126,7 @@
     font-weight: 400;
     line-height: 150%;
     flex: 1;
-    border: none;
+    border: 1px solid black;
     outline: none;
 }
 
@@ -145,7 +143,6 @@
     color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 12px 60px;
     align-self: center;
     box-shadow: 0 4px 4px #ccc;
     margin-top: 22px;
