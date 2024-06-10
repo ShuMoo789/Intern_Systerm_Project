@@ -14,6 +14,7 @@ import {
   Pagination,
   Dropdown,
   Menu,
+  message,
 } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
@@ -25,6 +26,7 @@ const PositionManagement = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedInterns, setSelectedInterns] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
+  const [originalSelectedInterns, setOriginalSelectedInterns] = useState([]);
   // JSON data
   const internsData = [
     {
@@ -133,14 +135,18 @@ const PositionManagement = () => {
     setSelectedInterns(filteredInterns); // Set the filtered data to be displayed in the table
     setIsModalVisible(true);
     setModalTitle(title);
+    setOriginalSelectedInterns([...filteredInterns]);
   };
 
   const handleOk = () => {
+    message.success("Update Success");
     setIsModalVisible(false);
   };
 
+  // Function to handle Cancel button
   const handleCancel = () => {
-    setIsModalVisible(false);
+    setSelectedInterns(originalSelectedInterns); // Reset selected interns to original values
+    setIsModalVisible(false); // Close modal
   };
 
   const rankMenu = (record) => (
@@ -290,11 +296,11 @@ const PositionManagement = () => {
               </button>
             </div>
           </section>
-
           <section>
             <div className="bodyposition">
               <div className="bodyposi">
                 <Card
+                  className="card-pos"
                   title="Back-End"
                   extra={
                     <>
@@ -304,7 +310,6 @@ const PositionManagement = () => {
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
-                  style={{ width: 336, height: 260 }}
                 >
                   <p>
                     <strong>Technology:</strong> .NET, Java, ...
@@ -391,6 +396,7 @@ const PositionManagement = () => {
               </div>
               <div className="bodyposi">
                 <Card
+                  className="card-pos"
                   title="Front-End"
                   extra={
                     <>
@@ -400,7 +406,6 @@ const PositionManagement = () => {
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
-                  style={{ width: 336, height: 260 }}
                 >
                   <p>
                     <strong>Technology:</strong> ReactJS,...
@@ -491,6 +496,7 @@ const PositionManagement = () => {
 
               <div className="bodyposi">
                 <Card
+                  className="card-pos"
                   title="Business Analyst"
                   extra={
                     <>
@@ -500,7 +506,6 @@ const PositionManagement = () => {
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
-                  style={{ width: 336, height: 260 }}
                 >
                   <p>
                     <strong>Technology:</strong> Trello,...
@@ -595,6 +600,7 @@ const PositionManagement = () => {
 
               <div className="bodyposi">
                 <Card
+                  className="card-pos"
                   title="Marketing"
                   extra={
                     <>
@@ -604,7 +610,6 @@ const PositionManagement = () => {
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
-                  style={{ width: 336, height: 260 }}
                 >
                   <p>
                     <strong>Technology:</strong> Excel, Word,...
@@ -695,6 +700,7 @@ const PositionManagement = () => {
 
               <div className="bodyposi">
                 <Card
+                  className="card-pos"
                   title="Designer"
                   extra={
                     <>
@@ -704,7 +710,6 @@ const PositionManagement = () => {
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
-                  style={{ width: 336, height: 260 }}
                 >
                   <p>
                     <strong>Technology:</strong> ReactJS,...
@@ -795,6 +800,7 @@ const PositionManagement = () => {
 
               <div className="bodyposi">
                 <Card
+                  className="card-pos"
                   title="Sales Executive"
                   extra={
                     <>
@@ -804,7 +810,6 @@ const PositionManagement = () => {
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
-                  style={{ width: 336, height: 260 }}
                 >
                   <p>
                     <strong>Technology:</strong> Trello,...
@@ -895,18 +900,24 @@ const PositionManagement = () => {
                   </Button>
                 </Card>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginTop: "20px",
-                }}
-              >
-                <Pagination
-                  defaultCurrent={1}
-                  total={10} // Total number of pages
-                  pageSize={3} // Number of items per page
-                />
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    top: "30px",
+                    bottom: 0,
+                    width: "calc(82vw - 46px)",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <Pagination
+                    defaultCurrent={1}
+                    total={10} // Total number of pages
+                    pageSize={3} // Number of items per page
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -917,7 +928,16 @@ const PositionManagement = () => {
             onOk={handleOk}
             onCancel={handleCancel}
             width={1100}
-            footer={[]}
+            footer={[
+                <Button 
+                key="submit" 
+                type="primary" 
+                onClick={handleOk}
+                style={{ width: '7%', borderRadius: '10px', padding: '1px' }}
+              >
+                OK
+              </Button>
+            ]}
           >
             <Table
               columns={columns}
@@ -929,7 +949,6 @@ const PositionManagement = () => {
       </MainLayout>
     </div>
   );
-
 };
 
 export default PositionManagement;
