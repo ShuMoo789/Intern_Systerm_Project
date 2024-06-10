@@ -179,5 +179,13 @@
     border-radius: 4px; /* Add border-radius to match input style */
 }
 
+.warninglabel {
+    color: red;
+    margin: 0;
+    padding: 8px 0;
+}
 
+.password-input-error .form-input {
+    border-color: red;
+}
 
