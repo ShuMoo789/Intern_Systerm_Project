@@ -472,12 +472,12 @@ const GroupList = () => {
           <div>
             <Row>
               <Col span={1}></Col>
-              <Col style={{ padding: isMobile ? "0 0 0 20px" : "0" }}>
+              <Col span={23}>
                 <div
                   style={{
                     backgroundColor: "white",
                     borderRadius: "25px",
-                    width: isMobile ? "92%" : "100%",
+                    width: "96%",
                   }}
                 >
                   <Space
@@ -608,15 +608,13 @@ const GroupList = () => {
                     style={{
                       overflowX: "auto",
                       width: isMobile ? "100%" : "100%",
-                      maxWidth: "1610px",
                     }}
                   >
                     <Table
                       columns={columns}
                       dataSource={filteredData}
-                      scroll={{ x: 1500 }}
+                      scroll={{ x: 1400 }}
                       pagination={{ pageSize: 6 }}
-                      style={{ width: "100%" }}
                     />
                   </div>
                 </div>
