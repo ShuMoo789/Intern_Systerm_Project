@@ -3,7 +3,7 @@ import "./GroupButton.css";
 import { Button } from "antd";
 import useViewport from "../../hooks/useViewport";
 
-const GroupButton = ({ groupButton, onSendEmail }) => {
+const GroupButton = ({ groupButton, onSendEmail, onScheduleInterview }) => {
     const viewPort = useViewport()
     const isMobile = viewPort.width <= 1024
 
@@ -32,6 +32,10 @@ const GroupButton = ({ groupButton, onSendEmail }) => {
         console.log('add new intern');
     };
 
+    const handleScheduleInterview = () => {
+        onScheduleInterview()
+    }
+
     // function branches to handle functions by button name
     const handleButtonClick = (name) => {
         if (name === 'Send Email') {
@@ -44,6 +48,8 @@ const GroupButton = ({ groupButton, onSendEmail }) => {
             handleDeleteClick();
         } else if (name === 'Add New Intern') {
             handleAddNewInternClick();
+        } else if (name === 'Schedule Interview') {
+            handleScheduleInterview();
         }
     };
 

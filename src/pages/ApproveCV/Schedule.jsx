@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { DatePicker, Button, Modal,Dropdown,TimePicker,Form,Input } from 'antd';
 import { ClockCircleOutlined ,DownOutlined } from '@ant-design/icons';
-import "./ApproveCV.css"
+
+
+
 
 const items = [
     {
@@ -42,7 +44,7 @@ const items = [
     },
   ];
 
-const Sheldule = () => {
+const Sheldule = (props) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState('');
@@ -82,16 +84,16 @@ const Sheldule = () => {
   };
   return (
     <>
-      <button className="button button-schedule" onClick={showModal}>
+      {/* <Button  type="primary" onClick={showModal} style={{ background: "#7d3c98"}}>
       <ClockCircleOutlined/>
-        <span className='btn-name'>Schedule interview</span>
-      </button>
+        Schedule interview
+      </Button> */}
 
       <Modal
-        open={open}
+        open={props.open}
         title="Schedule interview for Intern's ID: xxxx"
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={props.handleOk}
+        onCancel={props.handleCancel}
         width={1125}
         height= {997}
         footer={[

@@ -12,11 +12,14 @@ import {
   EyeOutlined,
   PlusOutlined,
   SettingOutlined,
-  FolderAddOutlined,
+  ArrowRightOutlined,
+  ArrowLeftOutlined,
   SearchOutlined,
   DeleteOutlined,
+  MailOutlined,
+  ExportOutlined,
   EditOutlined,
-  DownCircleOutlined
+  FolderAddOutlined,
 } from "@ant-design/icons";
 import { Input } from "antd";
 import {
@@ -33,6 +36,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import i18n from "i18next";
 import axios from "axios";
+import Navigation from "../../components/Navigation/Navigation.jsx";
 
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
@@ -179,17 +183,17 @@ function ApproveCV() {
             style={
               intern.status === "Pending"
                 ? {
-                    backgroundColor: "#FFB596",
-                    color: "#E5731C",
-                  }
+                  backgroundColor: "#FFB596",
+                  color: "#E5731C",
+                }
                 : intern.status === "Failed"
-                ? {
+                  ? {
                     backgroundColor: "#F5A3B7",
                     color: "#7D0022",
                   }
-                : intern.status === "Passed"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
+                  : intern.status === "Passed"
+                    ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                    : {}
             }
           >
             {intern.status}
@@ -528,14 +532,14 @@ function ApproveCV() {
     {
       title: "Button",
       width: 120,
-      render: (record) => (
+      render: () => (
         <div className="approve-btns">
-          <Button className="view" onClick={() => handleViewClick(record)} >
+          <div className="view" onClick={() => handleViewClick(intern)}>
             View
-          </Button>
-          <Button className="feedbacks" onClick={() => handleViewFeedback(record)} >
+          </div>
+          <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>
             Feedbacks
-          </Button>
+          </div>
         </div>
       ),
     },
@@ -557,11 +561,68 @@ function ApproveCV() {
     },
   ];
 
+  const groupButton = [
+    {
+      color: "#6537B1",
+      name: "Schedule Interview",
+      icon: <MailOutlined />,
+    },
+    {
+      color: "#41B137",
+      name: "Export Excel",
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: "Edit",
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: "Delete",
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: "Add New Intern",
+      icon: <FolderAddOutlined />,
+    },
+  ];
+
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+  };
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+    }, 3000);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
+    
+  const onChange = (date, dateString) => {
+    // Handle the date change here
+    console.log(date, dateString);
+  };
+
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
-          <header className="content-header">
+          {/* <header className="content-header">
             <h1 className="content-title">Approve CV</h1>
             <div className="user-info">
               <img
@@ -583,26 +644,54 @@ function ApproveCV() {
           <section className="content-section">
             <h2 className="section-title">Search for Information</h2>
             <div className="button-group">
-              <Sheldule />
+              <button className="button button-schedule">
+                <Sheldule />
+              </button>
               <button className="button button-export">
-                <DownCircleOutlined />
-                <span className="btn-name">Export Excel</span>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Export Icon"
+                  className="button-icon"
+                />
+                <span>Export Excel</span>
               </button>
               <button className="button button-edit">
-                <EditOutlined />
-                <span className="btn-name">Edit</span>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Edit Icon"
+                  className="button-icon"
+                />
+                <span>Edit</span>
               </button>
               <button className="button button-delete">
-                <DeleteOutlined />
-                <span className="btn-name">Delete</span>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Delete Icon"
+                  className="button-icon"
+                />
+                <span>Delete</span>
               </button>
               <button className="button button-add-intern">
-                <FolderAddOutlined />
-                <span className="btn-name">Add New Intern</span>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Add Intern Icon"
+                  className="button-icon"
+                />
+                <span>Add New Intern</span>
               </button>
             </div>
-          </section>
+          </section> */}
+          <Navigation
+            titleName='APPROVE CV'
+            groupButton={groupButton}
+            onScheduleInterview={showModal}
+          />
 
+          <Sheldule 
+            open={open}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
           <section className="filter-section">
             <div className="filter">
               <div className="fields">
@@ -717,12 +806,12 @@ function ApproveCV() {
               <div className="buttons">
                 <div className="cln-btn btn" onClick={handleClearFilters}>
                   <DeleteOutlined style={{ marginRight: "10px" }} />
-                  <p>Clean Filter</p>
+                  Clean Filter
                 </div>
                 <br />
                 <div className="srch-btn btn" onClick={handleSearch}>
                   <SearchOutlined style={{ marginRight: "10px" }} />
-                  <p>Search</p>
+                  Search
                 </div>
               </div>
             </div>
