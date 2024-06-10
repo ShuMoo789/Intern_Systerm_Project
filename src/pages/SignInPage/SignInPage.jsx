@@ -40,7 +40,7 @@ const LoginPage = () => {
         <Row style={{ margin: "50px 30px 20px 30px" }}>
           <Col xs={24} md={1}></Col>
           <Col xs={24} md={8}>
-            <div className="tabs-container">
+            <div>
               <Tabs
                 defaultActiveKey="1"
                 centered

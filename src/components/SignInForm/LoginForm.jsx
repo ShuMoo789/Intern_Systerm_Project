@@ -1,10 +1,9 @@
 import { Flex, Form, Input, Button, Checkbox } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../translation/LanguageContext";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ header, formName, role, dataSet }) => {
   const [wrong, setWrong] = useState(false);
@@ -82,16 +81,8 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
                   type: "email",
                   message: t("Please enter a valid email address!"),
                 },
-                {
-                  validator: (_, value) => {
-                    if (value && value.indexOf("@") === -1) {
-                      return Promise.reject("Email must contain @ symbol!");
-                    }
-                    return Promise.resolve();
-                  },
-                },
               ]}
-              placeholder
+              validateTrigger="onFinish"
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
@@ -119,22 +110,29 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
               </Flex>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" block>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+              >
                 {t("Sign In")}
               </Button>
             </Form.Item>
             <Form.Item>
               <Link to="/signup">
-                <Button type="default" block>
+                <Button
+                  type="default"
+                  block
+                  style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+                >
                   {t("Sign Up")}
                 </Button>
               </Link>
             </Form.Item>
 
             <Form.Item>
-              <div type="" align="center">
-                {t("OR LOGIN WITH")}
-              </div>
+              <div align="center">{t("OR LOGIN WITH")}</div>
             </Form.Item>
 
             <Form.Item>
@@ -149,7 +147,12 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
                 >
                   <img
                     src="https://th.bing.com/th/id/OIP.HgH-NjiOdFOrkmwjsZCCfAHaHl?rs=1&pid=ImgDetMain"
-                    style={{ width: "15px", height: "15px" }}
+                    alt="Google"
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                      marginRight: "8px",
+                    }}
                   />
                   GOOGLE
                 </Button>
