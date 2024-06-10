@@ -7,35 +7,42 @@ const { Option } = Select;
 
 // CommentPopup component
 const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
-    // State variables for various fields
-    const [major, setMajor] = useState(intern?.major || '');
-    const [programmingLanguage, setProgrammingLanguage] = useState(intern?.programmingLanguage || '');
-    const [projectOnGitHub, setProjectOnGitHub] = useState(intern?.projectOnGitHub || '');
-    const [position, setPosition] = useState(intern?.position || '');
-    const [rank, setRank] = useState(intern?.rank || 'Intern');
-    const [comment, setComment] = useState('');
-    const [selectedOption, setSelectedOption] = useState(initialPage);
+    // Single state object to manage all fields
+    const [state, setState] = useState({
+        major: intern?.major || '',
+        programmingLanguage: intern?.programmingLanguage || '',
+        projectOnGitHub: intern?.projectOnGitHub || '',
+        position: intern?.position || '',
+        rank: intern?.rank || 'Intern',
+        comment: '',
+        selectedOption: initialPage,
+    });
 
     // Effect to set selected option when initial page changes
     useEffect(() => {
-        setSelectedOption(initialPage)
-    },[initialPage])
+        setState((prevState) => ({ ...prevState, selectedOption: initialPage }));
+    }, [initialPage]);
+
+    // Function to update any field in the state
+    const updateField = (field, value) => {
+        setState((prevState) => ({ ...prevState, [field]: value }));
+    };
 
     // Function to handle button click and change selected option
     const handleButtonClick = (index) => {
-        setSelectedOption(index);
+        updateField('selectedOption', index);
     };
 
     // Function to handle save action
     const handleSave = () => {
         const updatedIntern = {
             ...intern,
-            major,
-            programmingLanguage,
-            projectOnGitHub,
-            position,
-            rank,
-            comment
+            major: state.major,
+            programmingLanguage: state.programmingLanguage,
+            projectOnGitHub: state.projectOnGitHub,
+            position: state.position,
+            rank: state.rank,
+            comment: state.comment,
         };
         onSave(updatedIntern);
     };
@@ -48,8 +55,8 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     <button
                         className="toggle-popup-btn"
                         style={{
-                            borderBottom: selectedOption === 0 ? '2px solid #4889E9' : '2px solid lightgray',
-                            color: selectedOption === 0 ? 'black' : '#C7BFBF',
+                            borderBottom: state.selectedOption === 0 ? '2px solid #4889E9' : '2px solid lightgray',
+                            color: state.selectedOption === 0 ? 'black' : '#C7BFBF',
                             transition: 'border-bottom 0.5s',
                         }}
                         onClick={() => handleButtonClick(0)}
@@ -59,8 +66,8 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     <button
                         className="toggle-popup-btn"
                         style={{
-                            borderBottom: selectedOption === 1 ? '2px solid #4889E9' : '2px solid lightgray',
-                            color: selectedOption === 1 ? 'black' : '#C7BFBF',
+                            borderBottom: state.selectedOption === 1 ? '2px solid #4889E9' : '2px solid lightgray',
+                            color: state.selectedOption === 1 ? 'black' : '#C7BFBF',
                             transition: 'border-bottom 0.5s',
                         }}
                         onClick={() => handleButtonClick(1)}
@@ -70,8 +77,8 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     <button
                         className="toggle-popup-btn"
                         style={{
-                            borderBottom: selectedOption === 2 ? '2px solid #4889E9' : '2px solid lightgray',
-                            color: selectedOption === 2 ? 'black' : '#C7BFBF',
+                            borderBottom: state.selectedOption === 2 ? '2px solid #4889E9' : '2px solid lightgray',
+                            color: state.selectedOption === 2 ? 'black' : '#C7BFBF',
                             transition: 'border-bottom 0.5s',
                         }}
                         onClick={() => handleButtonClick(2)}
@@ -86,46 +93,46 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
             width={1200}
         >
             {/* Different sections based on selected option */}
-            {selectedOption === 0 && (
+            {state.selectedOption === 0 && (
                 <div className="detail-popup-comment">
-                    {/* Section for detials of intern */}
+                    {/* Section for details of intern */}
                     <div className="view-popup-row">
                         <label><h4>Intern ID</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.internID || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Full Name</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.fullName || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Date Of Birth</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.dateOfBirth || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Phone Number</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.phoneNumber || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Position</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.position} onChange={(e) => updateField('position', e.target.value)} />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>School</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.school || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Address</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.address || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Email</h4></label>
-                        <Input type="text" />
+                        <Input type="text" value={intern?.email || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
                         <label><h4>Link CV</h4></label>
                         <a
                             className="view-popup-link"
-                            href="#"
+                            href={intern?.cvLink || 'https://youtu.be/dQw4w9WgXcQ?si=xqVazvMo-5hva6i8'}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -133,34 +140,34 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         </a>
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Rank</h4></label> <br />
-                        <Input type="text" value="Intern" />
+                        <label><h4>Rank</h4></label>
+                        <Input type="text" value={state.rank} onChange={(e) => updateField('rank', e.target.value)} />
                     </div>
                 </div>
             )}
-            {selectedOption === 1 && (
+            {state.selectedOption === 1 && (
                 <div className="comment-section">
                     {/* Section for comments of intern */}
                     <div className="comment-popup-content">
                         <div className="comment-popup-row">
                             <label><h4>Major</h4></label>
-                            <Input value={major} onChange={(e) => setMajor(e.target.value)} />
+                            <Input value={state.major} onChange={(e) => updateField('major', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
                             <label><h4>Programming language</h4></label>
-                            <Input value={programmingLanguage} onChange={(e) => setProgrammingLanguage(e.target.value)} />
+                            <Input value={state.programmingLanguage} onChange={(e) => updateField('programmingLanguage', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
                             <label><h4>Project on GitHub</h4></label>
-                            <Input value={projectOnGitHub} onChange={(e) => setProjectOnGitHub(e.target.value)} />
+                            <Input value={state.projectOnGitHub} onChange={(e) => updateField('projectOnGitHub', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
                             <label><h4>Position</h4></label>
-                            <Input value={position} onChange={(e) => setPosition(e.target.value)} />
+                            <Input value={state.position} onChange={(e) => updateField('position', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
                             <label><h4>Rank</h4></label>
-                            <Select value={rank} onChange={setRank}>
+                            <Select value={state.rank} onChange={(value) => updateField('rank', value)}>
                                 <Option value="Intern">Intern</Option>
                                 <Option value="Senior">Senior</Option>
                                 <Option value="Junior">Junior</Option>
@@ -168,7 +175,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         </div>
                         <div className="comment-popup-row">
                             <label><h4>Add Comment</h4></label>
-                            <TextArea rows={2} value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Click to add more comment" />
+                            <TextArea rows={2} value={state.comment} onChange={(e) => updateField('comment', e.target.value)} placeholder="Click to add more comment" />
                         </div>
                     </div>
                     <div className="comment-popup-footer">
@@ -178,7 +185,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     </div>  
                 </div>
             )}
-            {selectedOption === 2 && (
+            {state.selectedOption === 2 && (
                 <div className="result-popup-section">
                     <div className="result-section">
                         {/* Section for interview results */}
