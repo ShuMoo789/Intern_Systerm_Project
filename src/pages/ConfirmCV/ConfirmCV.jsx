@@ -630,7 +630,7 @@ const ConfirmCV = () => {
                         onClose={handleCloseEmailPopup}
                         openPopup={isEmailPopupVisible}
                     />
-                    <section className="filter-section-confirm" style={{ width: "89%", marginLeft: "4%", backgroundColor: "white", padding: "20px", borderRadius: "20px" }}>
+                    <section className="filter-section-confirmv" style={{ width: "89%", marginLeft: "4%", backgroundColor: "white", padding: "20px", borderRadius: "20px" }}>
                         <div className="filter-confirm">
                             <div className="fields-confirm">
                                 <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']} onDropdownVisibleChange={handleDropdownVisibleChange} suffixIcon={open ? <UpOutlined /> : <DownOutlined />}>
