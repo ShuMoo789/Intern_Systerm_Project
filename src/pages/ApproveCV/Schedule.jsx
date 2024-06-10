@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { DatePicker, Button, Modal, TimePicker, Input, Select ,message} from "antd";
 
@@ -47,6 +48,7 @@ const optionsEmailType = [
   { value: "Email result", label: "Email result" },
   { value: "Internship information", label: "Internship information" },
 ];
+
 
 const Sheldule = () => {
 
@@ -101,6 +103,7 @@ const Sheldule = () => {
 
   return (
     <>
+
     
       <Button
         type="primary"
@@ -110,6 +113,7 @@ const Sheldule = () => {
         <ClockCircleOutlined />
         Schedule interview
       </Button>
+
 
       <Modal
         open={open}

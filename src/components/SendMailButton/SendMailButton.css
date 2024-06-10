@@ -1,31 +1,19 @@
 .desc {
-    margin-top: 25px;
+    margin-top: 13px;
     font: 16px;
     font-weight: 600;
+    font-family: sans-serif, Quicksand;
+
 }
 
-.ant-modal-content {
-    border-radius: 34px !important;
-}
 
-.ant-modal-title {
-    font-size: 24px !important;
-    font-weight: 500;
-}
 
-.ant-modal-close-x {
-    font-size: 24px !important;
-    width: 24px !important;
-    height: 24px !important;
-}
 
-.ant-select-selector {
-    border-radius: 15px !important;
-}
 
 .type-email{
     height: 50px;
     width: 100%;
+    font-family: sans-serif, Quicksand;
 }
 
 .type-email label {
@@ -35,8 +23,9 @@
 
 .textarea{
     font-size: 16px;
-    height: 200px !important;
-    border-radius: 15px !important;
+    height: 200px;
+    border-radius: 8px;
+    font-family: sans-serif, Quicksand;
 }
 
 
@@ -55,13 +44,15 @@
 }
 
 .send-email-modal{
-    /* margin: 0% 150px; */
     background-color: #6537b1;
-    
+    font-family: sans-serif, Quicksand;
     color: #ffff;
-    width: 150px;
+    width: auto;
     height: 45px;
     border-radius: 15px;
     font-size: 16px;
-    
+}
+
+.sendMail-modal{
+    font-family: sans-serif, Quicksand;
 }

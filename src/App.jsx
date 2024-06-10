@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import AccountManagement from "./pages/AccountManagement/AccountManagement.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
-import PasswordReset from "./pages/PasswordReset/PasswordReset";
+import PasswordReset from "./pages/PasswordReset/PasswordReset.jsx";
 import OTPVerify from "./pages/OTPVerify/OTPVerify";
 import EnterNewPass from "./pages/EnterNewPass/EnterNewPass";
 import SignUp from "./components/SignUpForm_Intern/SignUpForm.jsx";
@@ -14,13 +14,12 @@ import ApproveCV from "./pages/ApproveCV/ApproveCV.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import GroupList from "./pages/GroupList/GroupList.jsx";
 import InternList from "./pages/InternList/InternList.jsx";
-
 import PositionManagement from "./pages/PositionManagement/PositionManagement.jsx";
 import ProjectMan from "./pages/Project Management/ProjectMan.jsx";
 import TechnologyManagement from "./pages/TechnologyManagement/TechnologyManagement.jsx";
 import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx";
-
-
+import GroupZaloManagementDetails from "./pages/GroupZaloManagementDetails/GroupZaloManagementDetails.jsx";
+import GroupZaloManagement from "./pages/GroupZaloManagement/GroupZaloManagement/GroupZaloManagement.jsx";
 
 // Define the main App component
 function App() {
@@ -68,20 +67,27 @@ function App() {
         {/* Route to the CV approval page, rendering the GroupList component */}
 
         <Route path="/InternList" element={<InternList />} />
-
-        {/* Route to the CV approval page, rendering the InternList component */}
-
-        <Route path="/TechnologyManagement" element={<TechnologyManagement />} />
+        {/* Route to the CV approval page, rendering the GroupList component */}
+        <Route
+          path="/TechnologyManagement"
+          element={<TechnologyManagement />}
+        />
         {/* Route to the CV approval page, rendering the InternList component */}
 
         {/* Route to the CV approval page, rendering the GroupList component */}
 
         <Route path="/positionManagement" element={<PositionManagement />} />
 
-        
-        <Route path="/projectManagement" element={<ProjectMan/>} />
+        <Route path="/projectManagement" element={<ProjectMan />} />
         <Route path="/confirmCV" element={<ConfirmCV />} />
+        <Route path="/GroupZaloManagement" element={<GroupZaloManagement />} />
+        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagement component */}
 
+        <Route
+          path="/GroupZaloManagementDetails"
+          element={<GroupZaloManagementDetails />}
+        />
+        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagementDetails component */}
       </Routes>
     </>
   );
