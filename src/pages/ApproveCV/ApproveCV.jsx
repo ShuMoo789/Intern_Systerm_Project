@@ -16,6 +16,10 @@ import {
   ArrowLeftOutlined,
   SearchOutlined,
   DeleteOutlined,
+  MailOutlined,
+  ExportOutlined,
+  EditOutlined,
+  FolderAddOutlined,
 } from "@ant-design/icons";
 import { Input } from "antd";
 import {
@@ -32,6 +36,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import i18n from "i18next";
 import axios from "axios";
+import Navigation from "../../components/Navigation/Navigation.jsx";
 
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
@@ -178,17 +183,17 @@ function ApproveCV() {
             style={
               intern.status === "Pending"
                 ? {
-                    backgroundColor: "#FFB596",
-                    color: "#E5731C",
-                  }
+                  backgroundColor: "#FFB596",
+                  color: "#E5731C",
+                }
                 : intern.status === "Failed"
-                ? {
+                  ? {
                     backgroundColor: "#F5A3B7",
                     color: "#7D0022",
                   }
-                : intern.status === "Passed"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
+                  : intern.status === "Passed"
+                    ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                    : {}
             }
           >
             {intern.status}
@@ -556,11 +561,68 @@ function ApproveCV() {
     },
   ];
 
+  const groupButton = [
+    {
+      color: "#6537B1",
+      name: "Schedule Interview",
+      icon: <MailOutlined />,
+    },
+    {
+      color: "#41B137",
+      name: "Export Excel",
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: "Edit",
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: "Delete",
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: "Add New Intern",
+      icon: <FolderAddOutlined />,
+    },
+  ];
+
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+  };
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+    }, 3000);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
+    
+  const onChange = (date, dateString) => {
+    // Handle the date change here
+    console.log(date, dateString);
+  };
+
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
-          <header className="content-header">
+          {/* <header className="content-header">
             <h1 className="content-title">Approve CV</h1>
             <div className="user-info">
               <img
@@ -618,8 +680,18 @@ function ApproveCV() {
                 <span>Add New Intern</span>
               </button>
             </div>
-          </section>
+          </section> */}
+          <Navigation
+            titleName='APPROVE CV'
+            groupButton={groupButton}
+            onScheduleInterview={showModal}
+          />
 
+          <Sheldule 
+            open={open}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
           <section className="filter-section">
             <div className="filter">
               <div className="fields">

@@ -44,7 +44,7 @@ const items = [
     },
   ];
 
-const Sheldule = () => {
+const Sheldule = (props) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState('');
@@ -84,16 +84,16 @@ const Sheldule = () => {
   };
   return (
     <>
-      <Button  type="primary" onClick={showModal} style={{ background: "#7d3c98"}}>
+      {/* <Button  type="primary" onClick={showModal} style={{ background: "#7d3c98"}}>
       <ClockCircleOutlined/>
         Schedule interview
-      </Button>
+      </Button> */}
 
       <Modal
-        open={open}
+        open={props.open}
         title="Schedule interview for Intern's ID: xxxx"
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={props.handleOk}
+        onCancel={props.handleCancel}
         width={1125}
         height= {997}
         footer={[
