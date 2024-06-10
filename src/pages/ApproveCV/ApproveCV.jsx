@@ -7,15 +7,17 @@ import CommentPopup from "./CommentPopup.jsx";
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import { Toaster, toast } from 'react-hot-toast';
 import {
   DownOutlined,
   EyeOutlined,
   PlusOutlined,
   SettingOutlined,
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
+  FolderAddOutlined,
   SearchOutlined,
   DeleteOutlined,
+  EditOutlined,
+  DownCircleOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
 import {
@@ -178,17 +180,17 @@ function ApproveCV() {
             style={
               intern.status === "Pending"
                 ? {
-                    backgroundColor: "#FFB596",
-                    color: "#E5731C",
-                  }
+                  backgroundColor: "#FFB596",
+                  color: "#E5731C",
+                }
                 : intern.status === "Failed"
-                ? {
+                  ? {
                     backgroundColor: "#F5A3B7",
                     color: "#7D0022",
                   }
-                : intern.status === "Passed"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
+                  : intern.status === "Passed"
+                    ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                    : {}
             }
           >
             {intern.status}
@@ -276,7 +278,7 @@ function ApproveCV() {
    */
   const handleSaveComment = (updatedIntern) => {
     // Update the interns state with the updated intern object
-    setInterns((prevInterns) =>
+    setIntern((prevInterns) =>
       prevInterns.map((intern) =>
         intern.internID === updatedIntern.internID ? updatedIntern : intern
       )
@@ -527,14 +529,14 @@ function ApproveCV() {
     {
       title: "Button",
       width: 120,
-      render: () => (
+      render: (record) => (
         <div className="approve-btns">
-          <div className="view" onClick={() => handleViewClick(intern)}>
+          <Button className="view" onClick={() => handleViewClick(record)} >
             View
-          </div>
-          <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>
+          </Button>
+          <Button className="feedbacks" onClick={() => handleViewFeedback(record)} >
             Feedbacks
-          </div>
+          </Button>
         </div>
       ),
     },
@@ -582,40 +584,22 @@ function ApproveCV() {
           <section className="content-section">
             <h2 className="section-title">Search for Information</h2>
             <div className="button-group">
-              <button className="button button-schedule">
-                <Sheldule />
-              </button>
+              <Sheldule />
               <button className="button button-export">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                  alt="Export Icon"
-                  className="button-icon"
-                />
-                <span>Export Excel</span>
+                <DownCircleOutlined />
+                <span className="btn-name">Export Excel</span>
               </button>
               <button className="button button-edit">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                  alt="Edit Icon"
-                  className="button-icon"
-                />
-                <span>Edit</span>
+                <EditOutlined />
+                <span className="btn-name">Edit</span>
               </button>
               <button className="button button-delete">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                  alt="Delete Icon"
-                  className="button-icon"
-                />
-                <span>Delete</span>
+                <DeleteOutlined />
+                <span className="btn-name">Delete</span>
               </button>
               <button className="button button-add-intern">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                  alt="Add Intern Icon"
-                  className="button-icon"
-                />
-                <span>Add New Intern</span>
+                <FolderAddOutlined />
+                <span className="btn-name">Add New Intern</span>
               </button>
             </div>
           </section>
@@ -734,12 +718,12 @@ function ApproveCV() {
               <div className="buttons">
                 <div className="cln-btn btn" onClick={handleClearFilters}>
                   <DeleteOutlined style={{ marginRight: "10px" }} />
-                  Clean Filter
+                  <p>Clean Filter</p>
                 </div>
                 <br />
                 <div className="srch-btn btn" onClick={handleSearch}>
                   <SearchOutlined style={{ marginRight: "10px" }} />
-                  Search
+                  <p>Search</p>
                 </div>
               </div>
             </div>
@@ -768,6 +752,7 @@ function ApproveCV() {
           onSave={handleSaveComment}
         />
       </MainLayout>
+      <Toaster />
     </div>
   );
 }

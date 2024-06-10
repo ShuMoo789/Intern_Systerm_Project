@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../translation/LanguageContext";
+
 const SignUpForm = ({ role, dataSet }) => {
-  const { t , i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [wrong, setWrong] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
-  const currentLanguage = useLanguage()
+  const currentLanguage = useLanguage();
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
 
   const handleSignUp = async (values) => {
@@ -52,26 +53,36 @@ const SignUpForm = ({ role, dataSet }) => {
       throw error;
     }
   };
+
   useEffect(() => {
     form.setFields([
       {
-        name: 'fullName',
-        errors: form.getFieldError('fullName').map(() => t("Please input your full name!")),
+        name: "fullName",
+        errors: form
+          .getFieldError("fullName")
+          .map(() => t("Please input your full name!")),
       },
       {
-        name: 'email',
-        errors: form.getFieldError('email').map(() => t("Please input your email!")),
+        name: "email",
+        errors: form
+          .getFieldError("email")
+          .map(() => t("Please input your email!")),
       },
       {
-        name: 'password',
-        errors: form.getFieldError('password').map(() => t("Please input your password!")),
+        name: "password",
+        errors: form
+          .getFieldError("password")
+          .map(() => t("Please input your password!")),
       },
       {
-        name: 'repassword',
-        errors: form.getFieldError('repassword').map(() => t("Please re-type your password!")),
+        name: "repassword",
+        errors: form
+          .getFieldError("repassword")
+          .map(() => t("Please re-type your password!")),
       },
     ]);
   }, [currentLanguage, t]);
+
   return (
     <div>
       <Flex vertical align="center">
@@ -83,11 +94,11 @@ const SignUpForm = ({ role, dataSet }) => {
               marginBottom: "-1px",
             }}
           >
-            {t('Sign Up')}
+            {t("Sign Up")}
           </h1>
           <span>{t("Please fill your details to create your account")}</span>
 
-          <Form 
+          <Form
             form={form}
             name="a"
             initialValues={{ remember: true }}
@@ -111,7 +122,17 @@ const SignUpForm = ({ role, dataSet }) => {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: t("Please input your email!") }]}
+              rules={[
+                {
+                  required: true,
+                  message: t("Please input your email!"),
+                },
+                {
+                  type: "email",
+                  message: t("The input is not a valid email!"),
+                },
+              ]}
+              validateTrigger="onFinish"
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
@@ -153,15 +174,22 @@ const SignUpForm = ({ role, dataSet }) => {
             )}
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" block>
-                {t('Sign Up')}
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                style={{
+                  boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)",
+                }}
+              >
+                {t("Sign Up")}
               </Button>
             </Form.Item>
             <Form.Item>
               <Flex vertical align="center">
                 <div>
-                  <span>{t('Already have an account?')}</span>{" "}
-                  <Link to="/SignIn">{t('Sign In')}</Link>
+                  <span>{t("Already have an account?")}</span>{" "}
+                  <Link to="/SignIn">{t("Sign In")}</Link>
                 </div>
               </Flex>
             </Form.Item>
@@ -172,7 +200,7 @@ const SignUpForm = ({ role, dataSet }) => {
       <Modal open={isModalVisible} footer={null} closable={false} centered>
         <div style={{ textAlign: "center" }}>
           <CheckCircleOutlined style={{ fontSize: "48px", color: "#52c41a" }} />
-          <h2>{t('Signed up successfully')}</h2>
+          <h2>{t("Signed up successfully")}</h2>
         </div>
       </Modal>
     </div>

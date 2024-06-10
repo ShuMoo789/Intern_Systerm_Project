@@ -1,61 +1,70 @@
-import React, { useState } from 'react';
-import { DatePicker, Button, Modal,Dropdown,TimePicker,Form,Input } from 'antd';
-import { ClockCircleOutlined ,DownOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import {
+  DatePicker,
+  Button,
+  Modal,
+  TimePicker,
+  Input,
+  Select,
+  message,
+} from "antd";
 
+import { ClockCircleOutlined } from "@ant-design/icons";
+import "./Schedule.css";
 
+const { TextArea } = Input;
 
+const optionsDuration = [
+  { value: "15 minutes", label: "15 minutes" },
+  { value: "30 minutes", label: "30 minutes" },
+  { value: "45 minutes", label: "45 minutes" },
+  { value: "1 hour", label: "1 hour" },
+];
 
-const items = [
-    {
-      key: '1',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          Email interview
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          Email result
-        </a>
-      ),
-    },
-    {
-      key: '3',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          Internship information
-        </a>
-      ),
-    },
-  ];
+const optionsInterviewType = [
+  { value: "Online", label: "Online" },
+  { value: "Offline", label: "Offline" },
+];
+
+const optionsInterviewer = [
+  { value: "Nguyen Van A", label: "Nguyen Van A" },
+  { value: "Interviewer B", label: "Interviewer B" },
+  { value: "Interviewer C", label: "Interviewer C" },
+];
+
+const optionsRank = [
+  {
+    value: "Intern/Senior/Junior",
+    label: "Intern/Senior/Junior",
+    disabled: true,
+  },
+  { value: "Intern", label: "Intern" },
+  { value: "Senior", label: "Senior" },
+  { value: "Junior", label: "Junior" },
+];
+
+const optionsPositions = [
+  { value: "Positions", label: "Positions", disabled: true },
+  { value: "Back-End", label: "Back-End" },
+  { value: "Front-End", label: "Front-End" },
+  { value: "BA", label: "BA" },
+];
+const optionsEmailType = [
+  { value: "Types of email", label: "Types of email", disabled: true },
+  { value: "Email interview", label: "Email interview" },
+  { value: "Email result", label: "Email result" },
+  { value: "Internship information", label: "Internship information" },
+];
 
 const Sheldule = () => {
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState('');
-  const [startTime, setStartTime] = useState('12:00 AM');
-  const [timeDuration, setTimeDuration] = useState('15 minutes');
-  const [interviewType, setInterviewType] = useState('Online/Offline');
-  const [interviewer, setInterviewer] = useState('Nguyen Van A');
-  const [position, setPosition] = useState('');
-  const [emailType, setEmailType] = useState('');
-  const [to, setTo] = useState('');
-  const [bcc, setBcc] = useState('');
+  const [loadings, setLoadings] = useState([false]);
+  const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
+  const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
+  const [interviewer, setInterviewer] = useState(optionsInterviewer[0]);
+  const [emailType, setEmailType] = useState(optionsEmailType[0]);
+  const [rank, setRank] = useState(optionsRank[0]);
+  const [position, setPosition] = useState(optionsPositions[0]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,26 +75,43 @@ const Sheldule = () => {
   };
 
   const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-    }, 3000);
+    setOpen(false);
   };
 
   const handleCancel = () => {
     setOpen(false);
   };
 
-    
   const onChange = (date, dateString) => {
     // Handle the date change here
     console.log(date, dateString);
   };
+
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        message.success("Send Mail Success");
+        handleOk();
+        return newLoadings;
+      });
+    }, 1000);
+  };
+
   return (
     <>
-      <Button  type="primary" onClick={showModal} style={{ background: "#7d3c98"}}>
-      <ClockCircleOutlined/>
+      <Button
+        type="primary"
+        onClick={showModal}
+        style={{ background: "#7d3c98" }}
+      >
+        <ClockCircleOutlined />
         Schedule interview
       </Button>
 
@@ -95,255 +121,407 @@ const Sheldule = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         width={1125}
-        height= {997}
+        height={997}
         footer={[
-      
-            <Button type="primary" style={{ background: "#6537B1"}}>
-            <ClockCircleOutlined/>
-              Set Schedule
-            </Button>
-        
+          <Button
+            key="submit"
+            type="primary"
+            icon={<ClockCircleOutlined />}
+            style={{ background: "#6537B1" }}
+            loading={loadings[1] || false}
+            onClick={() => enterLoading(1)}
+          >
+            Set Schedule
+          </Button>,
         ]}
       >
-                 <form onSubmit={handleSubmit}>
-                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
-                 <div style={{ marginBottom: '20px', marginRight: '10px' }}>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Date</label>
- 
-  <input
-    type="text"
-    value={date}
-    onChange={(e) => setDate(e.target.value)}
-    placeholder="DD/MM/YYYY"
-    style={{
-      width: '260px',
-      height: '57px',
-      borderRadius: '10px',
-      padding: '8px',
-      border: '1px solid #ccc',
-      boxSizing: 'border-box', // Add this line
-      fontSize: '14px', // Adjust font size if needed
-    }}
-  />
-</div>
-
-  <div style={{ marginBottom: '20px', marginRight: '10px' }}>
-    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Start Time</label>
-   
-     <TimePicker 
-    style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
-     value={date} use12Hours onChange={onChange} />
-  </div>
-
-  <div style={{ marginBottom: '20px'}}>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px',opacity: 0.5}}>Time Duration</label>
-  <select
-    value={timeDuration}
-    onChange={(e) => setTimeDuration(e.target.value)}
-    style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
-  >
-
-    <option value="15 minutes">15 minutes</option>
-    <option value="30 minutes">30 minutes</option>
-    <option value="45 minutes">45 minutes</option>
-    <option value="1 hour">1 hour</option>
-  </select>
-</div>
-
-</div>
-
-
-        {/*  SECOND ROUND */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
-
-        
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Types of Interviews</label>
-          <select
-            value={interviewType}
-            onChange={(e) => setInterviewType(e.target.value)}
-            style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
-          >
-            <option value="Online">Online</option>
-            <option value="Offline">Offline</option>
-          </select>
-        </div>
-
-        {/* INTERVIEWER */}
-        <div>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Interviewer</label>
-  <div style={{ position: 'relative', width: '322px', height: '57px' }}>
-    <select 
-      style={{ 
-        position: 'absolute', 
-        width: '122px', 
-        height: '57px', 
-        border: '1px solid #ccc', 
-        borderRadius: '10px', 
-        textAlign: 'center', 
-        textAlignLast: 'center',
-        zIndex: 2, 
-        background: "#6537B1",
-        color:"white"
-      }}
-    >
-      <option value="" disabled selected>Position</option>
-      <option value="back-end">Back-End</option>
-      <option value="front-end">Front-End</option>
-      <option value="ba">BA</option>
-    </select>
-    
-    <select
-      value={interviewer}
-      onChange={(e) => setInterviewer(e.target.value)}
-      style={{ 
-        width: '322px', 
-        height: '57px', 
-        border: '1px solid #ccc', 
-        borderRadius: '10px', 
-        textAlign: 'center', 
-        textAlignLast: 'center',
-        zIndex: 1,
-       
-        
-      }}
-    >
-    
-      <option value="Nguyen Van A">Nguyen Van A</option>
-      <option value="Interviewer B">Interviewer B</option>
-      <option value="Interviewer C">Interviewer C</option>
-    </select>
-  </div>
-</div>
-
-
-        {/* LINK GOOGLE MEET */}
-        <div style={{ marginBottom: '20px' }}>
-  <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Link Google Meet/Address</label>
-  <input
-    type="text"
-    value={date}
-    onChange={(e) => setDate(e.target.value)}
-  
-    style={{
-      width: '260px',
-      height: '57px',
-   
-      padding: '8px',
-      border: '1px solid #ccc',
-      borderRadius: '10px',
-      boxSizing: 'border-box', // Add this line
-      fontSize: '14px', // Adjust font size if needed
-    }}
-  />
-</div>
-
-        </div>
-
-        {/* SEND EMAIL */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
-
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Send Email</label>
-          <select
-            value={interviewType}
-            
-         
-          
+        <form onSubmit={handleSubmit}>
+          <div
             style={{
-              width: '260px',
-              height: '57px',
-              borderRadius: '10px',
-              padding: '8px',
-              border: '1px solid #ccc',
-              boxSizing: 'border-box', // Add this line
-              fontSize: '14px', // Adjust font size if needed
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
             }}
           >
-            <option value="" disabled selected>Online/Offline</option>
-            <option value="Online">Online</option>
-            <option value="Offline">Offline</option>
-          </select>
-        </div>
-        
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Rank</label>
-          <select
-             style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <div
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Date
+              </div>
+
+              <DatePicker
+                format={{
+                  format: "YYYY-MM-DD",
+                  type: "mask",
+                }}
+                style={{
+                  width: "330px",
+                  height: "57px",
+                  padding: "8px",
+                  border: "1px solid #ccc",
+
+                  boxSizing: "border-box", // Add this line
+                  fontSize: "14px", // Adjust font size if needed
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Start Time
+              </label>
+
+              <TimePicker
+                style={{
+                  width: "330px",
+                  height: "57px",
+                  padding: "8px",
+                  border: "1px solid #ccc",
+                }}
+                use12Hours
+                onChange={onChange}
+              />
+            </div>
+            {/* TIME DURATION */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Time Duration
+              </label>
+
+              <Select
+                value={timeDuration}
+                onChange={setTimeDuration}
+                options={optionsDuration}
+                style={{
+                  width: "330px",
+                  height: "57px",
+                  opacity: 0.5,
+                  font: "bold",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* SECOND ROUND */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
           >
-            <option value="intern">Intern</option>
-            <option value="senior">Senior</option>
-            <option value="junior">Junior</option>
-          </select>
-        </div>
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Types of Interviews
+              </label>
 
+              <Select
+                value={interviewType}
+                onChange={setInterviewType}
+                options={optionsInterviewType}
+                style={{
+                  width: "330px",
+                  height: "57px",
+                }}
+              />
+            </div>
 
-        </div>
+            {/* INTERVIEWER */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Interviewer
+              </label>
 
+              <Select
+                className="position-select"
+                style={{
+                  position: "absolute",
+                  width: "122px",
+                  height: "57px",
 
-              {/* to and bcc  */}
+                  textAlign: "center",
+                  textAlignLast: "center",
+                  zIndex: 2,
+                }}
+                value={position}
+                onChange={setPosition}
+                options={optionsPositions}
+              ></Select>
+              <Select
+                value={interviewer}
+                onChange={setInterviewer}
+                options={optionsInterviewer}
+                style={{
+                  width: "330px",
+                  height: "57px",
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'space-between' }}>
+                  textAlign: "right",
+                  textAlignLast: "right",
+                }}
+              />
+            </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>To:</label>
-          <input
-            type="email"
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-            placeholder="Enter email addresses"
-            style={{ width: '465px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Bcc:</label>
-          <input
-            type="email"
-            value={bcc}
-            onChange={(e) => setBcc(e.target.value)}
-            placeholder="Enter email addresses"
-            style={{ width: '465px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
-          />
-        </div>
+            {/* LINK GOOGLE MEET */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Link Google Meet/Address
+              </label>
+              <Input
+                style={{
+                  width: "330px",
+                  height: "57px",
+                }}
+              />
+            </div>
+          </div>
 
-        </div>
+          {/* SEND EMAIL */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Send Email
+              </label>
+
+              <Select
+                value={interviewType}
+                onChange={setInterviewType}
+                options={optionsInterviewType}
+                style={{
+                  width: "330px",
+                  height: "57px",
+                }}
+              />
+            </div>
+
+            {/* RANK */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Rank
+              </label>
+              <Select
+                value={rank}
+                onChange={setRank}
+                options={optionsRank}
+                style={{
+                  width: "330px",
+                  height: "57px",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* to and bcc */}
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* TO email andress */}
+            <div
+              style={{
+                flex: "0 50%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                To:
+              </label>
+              <Input
+                type="email"
+                style={{
+                  width: "510px",
+                  height: "57px",
+                  padding: "8px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+
+            {/* BCC address */}
+            <div
+              style={{
+                flex: "0 50%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Bcc:
+              </label>
+              <Input
+                type="email"
+                style={{
+                  width: "510px",
+                  height: "57px",
+                  padding: "8px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+          </div>
 
           {/* type of email */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-  <div style={{ marginBottom: '20px' }}>
-    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Choose types of Email</label>
-    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-      <select style={{ width: '260px', height: '57px', padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}>
-        <option value="" disabled selected>Please select an option</option>
-        <option value=""  >Email interview</option>
-        <option value=""  >Email Result</option>
-        <option value=""  >internship information</option>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Choose types of Email
+              </label>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "center" }}
+              >
+                <Select
+                  value={emailType}
+                  onChange={setEmailType}
+                  options={optionsEmailType}
+                  style={{
+                    width: "300px",
+                    height: "57px",
+                  }}
+                />
+              </div>
+            </div>
 
-       
-      </select>
-    </div>
-  </div>
-
-  <div style={{ marginBottom: '20px' }}>
-
-
-  <textarea  placeholder="Enter your email"
-    style={{
-      width: '759px',
-      height: '196px',
-    
-      border: '1px solid #ccc',
-      borderRadius: '4px',
-      lineHeight: '1',
-    
-    }}
-      />
-</div>
-
-</div>
-
-      </form>
-
+            <div style={{ marginTop: "25px" }}>
+              <TextArea
+                rows={4}
+                placeholder="Enter your mail"
+                style={{
+                  width: "759px",
+                  height: "196px",
+                }}
+              />
+            </div>
+          </div>
+        </form>
       </Modal>
     </>
   );
