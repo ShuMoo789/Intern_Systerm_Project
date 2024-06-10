@@ -1,0 +1,9 @@
+.position-select .ant-select-selector{
+    background-color: #6537B1 !important;
+    opacity: 0.8;
+   color: white;
+  }
+.position-select .ant-select-arrow {
+    color: white;
+  }
+  
