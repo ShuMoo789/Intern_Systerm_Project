@@ -872,35 +872,17 @@ const InternList = () => {
                         {isMobile ? '' : <FilterOutlined />} Clean Filters
                       </Button>
                     </div>
-                    <div className="search-button-internlist">
-                      <Button type="primary" onClick={handleSearch} style={{ width: '100%' }}>
-                        {isMobile ? '' : <SearchOutlined />} Search
-                      </Button>
-                    </div>
-                  </div>
-                </Col>
-              </Row>)
-            }
 
+                </div>
+                {/*Render Email Popup */}
+                <SendEmailPopup
+                    onClose={handleCloseEmailPopup}
+                    onSend={handleSendEmail}
+                    // intern={selectedIntern}
+                    openPopup={isEmailPopupVisible}
+                />
+            </MainLayout>
 
-
-            <div className="table-intern-list">
-              {/* use table of Ant Design */}
-              <Table
-                rowSelection={{
-                  type: 'checkbox',
-                  ...rowSelection
-                }}
-                columns={columns}
-                dataSource={dataTable}
-                scroll={{ x: '2200px', y: '360px' }}
-                style={{ maxWidth: '100%', minHeight: '100%' }}
-                pagination={{
-                  pageSize: 7,
-                }}
-              />
-            </div>
-          </div>
         </div>
         {/*Render Email Popup */}
         <SendEmailPopup
