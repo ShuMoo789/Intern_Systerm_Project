@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  DatePicker,
-  Button,
-  Modal,
+import { DatePicker, Button, Modal, TimePicker, Input, Select ,message} from "antd";
 
-  TimePicker,
-  
-  Input,
- 
-  Select,
-} from "antd";
-
-import { ClockCircleOutlined, DownOutlined } from "@ant-design/icons";
-import './Schedule.css'
+import { ClockCircleOutlined } from "@ant-design/icons";
+import "./Schedule.css";
 
 const { TextArea } = Input;
 
@@ -59,9 +49,9 @@ const optionsEmailType = [
 ];
 
 const Sheldule = () => {
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
 
+  const [open, setOpen] = useState(false);
+  const [loadings, setLoadings] = useState([false]);
   const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
   const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
   const [interviewer, setInterviewer] = useState(optionsInterviewer[0]);
@@ -78,11 +68,7 @@ const Sheldule = () => {
   };
 
   const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-    }, 3000);
+    setOpen(false);
   };
 
   const handleCancel = () => {
@@ -93,8 +79,29 @@ const Sheldule = () => {
     // Handle the date change here
     console.log(date, dateString);
   };
+
+
+
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        message.success("Send Mail Success");
+        handleOk();
+        return newLoadings;
+      });
+    }, 1000);
+  };
+
   return (
     <>
+    
       <Button
         type="primary"
         onClick={showModal}
@@ -112,8 +119,14 @@ const Sheldule = () => {
         width={1125}
         height={997}
         footer={[
-          <Button type="primary" style={{ background: "#6537B1" }}>
-            <ClockCircleOutlined />
+          <Button
+            key="submit"
+            type="primary"
+            icon={<ClockCircleOutlined />}
+            style={{ background: "#6537B1" }}
+            loading={loadings[1] || false}
+            onClick={() => enterLoading(1)}  
+          >
             Set Schedule
           </Button>,
         ]}
@@ -277,24 +290,20 @@ const Sheldule = () => {
               </label>
 
               <Select
-              className="position-select"
+                className="position-select"
                 style={{
                   position: "absolute",
                   width: "122px",
                   height: "57px",
-                
+
                   textAlign: "center",
                   textAlignLast: "center",
                   zIndex: 2,
-              
-               
                 }}
                 value={position}
                 onChange={setPosition}
                 options={optionsPositions}
-              >
-              
-              </Select>
+              ></Select>
               <Select
                 value={interviewer}
                 onChange={setInterviewer}
@@ -499,13 +508,6 @@ const Sheldule = () => {
                     height: "57px",
                   }}
                 />
-                {/* <option value="" disabled selected>
-Please select an option
-</option>
-<option value="">Email interview</option>
-<option value="">Email Result</option>
-<option value="">internship information</option> */}
-                {/* </Select> */}
               </div>
             </div>
 
