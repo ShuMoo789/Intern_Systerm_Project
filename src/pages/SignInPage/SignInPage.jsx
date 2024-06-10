@@ -2,6 +2,7 @@ import { Col, Row, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import SignInForm from "../../components/SignInForm/LoginForm";
+
 import { useTranslation } from "react-i18next";
 
 const { TabPane } = Tabs;
@@ -39,13 +40,13 @@ const LoginPage = () => {
         <Row style={{ margin: "50px 30px 20px 30px" }}>
           <Col xs={24} md={1}></Col>
           <Col xs={24} md={8}>
-            <div className="tabs-container">
+            <div>
               <Tabs
                 defaultActiveKey="1"
                 centered
-                size={"large"}
-                tabBarGutter={50}
+                size="large"
                 tabBarStyle={{ color: "grey" }}
+                destroyInactiveTabPane={true}
               >
                 <TabPane tab={t("Admin")} key="1">
                   <SignInForm
