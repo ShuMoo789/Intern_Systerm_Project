@@ -879,7 +879,7 @@ const InternList = () => {
                 {/*Render Email Popup */}
                 <SendEmailPopup
                     onClose={handleCloseEmailPopup}
-                    onSendEmail={handleSendEmail}
+                    onSend={handleSendEmail}
                     // intern={selectedIntern}
                     openPopup={isEmailPopupVisible}
                 />

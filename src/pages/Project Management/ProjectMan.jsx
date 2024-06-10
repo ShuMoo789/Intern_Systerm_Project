@@ -201,84 +201,94 @@ function ProjectManagement() {
             </section>
             <main className="main-grid">
                 <Form className="search-form" layout="inline">
-                    <Form.Item>
-                        <Button type="primary" icon={<SearchOutlined />} className="search-button" onClick={handleSearch}>Search</Button>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" icon={<DeleteOutlined />} className="clean-filters-button" onClick={handleClearFilters}>Clean Filters</Button>
-                    </Form.Item>
+                    <Row gutter={[16, 16]} className="filter-box">
+                        <Col span={18}>
+                            <Row gutter={[10,10]}>
+                                <Col span={7}>
+                                <Select
+                                    showSearch
+                                    style={{ width: '100%' }}
+                                    placeholder="Enter Name of Project"
+                                    value={selectedFilters.title || undefined}
+                                    onChange={(value) => handleFilterChange('title', value)}
+                                    options={projects.map(project => ({ value: project.title, label: project.title }))}
+                                />
+                            </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Position"
+                                        value={selectedFilters.position || undefined}
+                                        onChange={(value) => handleFilterChange('position', value)}
+                                        options={projects.map(project => ({ value: project.position, label: project.position }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Technology"
+                                        value={selectedFilters.technology || undefined}
+                                        onChange={(value) => handleFilterChange('technology', value)}
+                                        options={projects.map(project => ({ value: project.technology, label: project.technology }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Leader"
+                                        value={selectedFilters.leader || undefined}
+                                        onChange={(value) => handleFilterChange('leader', value)}
+                                        options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Sub Leader"
+                                        value={selectedFilters.subLeader || undefined}
+                                        onChange={(value) => handleFilterChange('subLeader', value)}
+                                        options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Mentor"
+                                        value={selectedFilters.mentor || undefined}
+                                        onChange={(value) => handleFilterChange('mentor', value)}
+                                        options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <DatePicker
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Release Date"
+                                        value={selectedFilters.releaseDate}
+                                        onChange={(date) => handleFilterChange('releaseDate', date)}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col span={4}>
+                            <Col span={6}>
+                                <div className="filterbuttons">
+                                <Form.Item>
+                                    <Button type="primary" icon={<DeleteOutlined />} className="clean-filters-button" onClick={handleClearFilters}>Clean Filters</Button>
+                                </Form.Item>
+                                    <Form.Item>
+                                        <Button type="primary" icon={<SearchOutlined />} className="searchpm-button" onClick={handleSearch}>Search</Button>
+                                    </Form.Item>
+                                </div>
+                                </Col>
+                        </Col>
+                    </Row>
                 </Form>
-
-                <Row gutter={[16, 16]} className="filter-box">
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Name of Project"
-                            value={selectedFilters.title || undefined}
-                            onChange={(value) => handleFilterChange('title', value)}
-                            options={projects.map(project => ({ value: project.title, label: project.title }))}
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Position"
-                            value={selectedFilters.position || undefined}
-                            onChange={(value) => handleFilterChange('position', value)}
-                            options={projects.map(project => ({ value: project.position, label: project.position }))}
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Technology"
-                            value={selectedFilters.technology || undefined}
-                            onChange={(value) => handleFilterChange('technology', value)}
-                            options={projects.map(project => ({ value: project.technology, label: project.technology }))}
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Leader"
-                            value={selectedFilters.leader || undefined}
-                            onChange={(value) => handleFilterChange('leader', value)}
-
-                            options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
-
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Sub Leader"
-                            value={selectedFilters.subLeader || undefined}
-                            onChange={(value) => handleFilterChange('subLeader', value)}
-
-                            options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
-
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Mentor"
-                            value={selectedFilters.mentor || undefined}
-                            onChange={(value) => handleFilterChange('mentor', value)}
-
-                            options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
-
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <DatePicker
-                            style={{ width: '100%' }}
-                            placeholder="Enter Release Date"
-                            value={selectedFilters.releaseDate}
-                            onChange={(date) => handleFilterChange('releaseDate', date)}
-                        />
-                    </Col>
-                </Row>
+                
 
                 <Row gutter={[16, 16]} className="project-list">
                     {filteredProjects.map((project, index) => (
