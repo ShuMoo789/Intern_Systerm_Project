@@ -53,7 +53,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 onClose();
             })
             .catch(info => {
-                toast.error('Please fill in at least one field.');
+
             });
     };
 
@@ -329,7 +329,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         <div className="field rs">
                             <h2>Final result:
                                 <Form.Item name="finalResult" rules={[{ required: true, message: 'Please select the final result!' }]}>
-                                    <Select defaultValue="Passed" style={{ marginLeft: "3em" }}>
+                                    <Select defaultValue="Passed" style={{ width: "30%" }}>
                                         <Option value="Passed">Passed</Option>
                                         <Option value="Failed">Failed</Option>
                                     </Select>
@@ -337,7 +337,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                             </h2>
                         </div>
                         <div className="comment-popup-footer">
-                            <div className="save-btn" onClick={handleSave}>Save</div>
+                            <div className="save-btn" style={{ marginRight: "1em" }} onClick={handleSave}>Save</div>
                             <Toaster />
                         </div>
                     </div>
