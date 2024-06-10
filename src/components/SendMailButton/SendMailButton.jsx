@@ -3,7 +3,7 @@ import { Modal, Select, Input, Button } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import { Typography, Row, Col, Form } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import '.c/SendMailButton.css'
+import './SendMailButton.css'
 
 const { Option } = Select;
 const { TextArea } = Input;
