@@ -60,6 +60,19 @@ function IconTextBlock({ iconSrc, altText, text }) {
 }
 
 function ApproveCV() {
+
+  // option of intern School from file Approve.json
+  const optionsInternSchool = Array.from(new Set(DataApproveList.map((item) => item.school))).map((school) => ({
+    value: school,
+    label: school,
+  }));
+
+// option of intern Position from file Approve.json
+  const optionsInternPosition = Array.from(new Set(DataApproveList.map((item) => item.position))).map((position) => ({
+    value: position,
+    label: position,
+  }));
+  
   // Date format for date inputs
   const dateFormat = "YYYY/MM/DD";
 
@@ -640,32 +653,16 @@ function ApproveCV() {
                       }
                   />
 
-                  <Dropdown
-                      overlay={createMenu("school", schoolNames)}
-                      trigger={["click"]}
-                  >
-                    <Button
-                        style={{
-                          padding: "7px 11px",
-                          fontSize: "15px",
-                          textAlign: "left",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          height: "100%",
-                        }}
-                    >
-                      {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                      <div
-                          style={{
-                            color: selectedFilters.school ? "#000000" : "#C7BFBF",
-                          }}
-                      >
-                        {selectedFilters.school || "Enter intern's School"}
-                      </div>
-                      <DownOutlined />
-                    </Button>
-                  </Dropdown>
+                  <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: '100%',
+                        fontSize: 5
+                      }}
+                      placeholder="Enter intern's School"
+                      options={optionsInternSchool}
+                  />
 
                   <Input
                       size="large"
@@ -674,31 +671,16 @@ function ApproveCV() {
                       onChange={(e) => handleInputChange("email", e.target.value)}
                   />
 
-                  <Dropdown
-                      overlay={createMenu("position", positionNames)}
-                      trigger={["click"]}
-                  >
-                    <Button
-                        style={{
-                          padding: "7px 11px",
-                          fontSize: "15px",
-                          textAlign: "left",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          height: "100%",
-                        }}
-                    >
-                      <div
-                          style={{
-                            color: selectedFilters.position ? "#000000" : "#C7BFBF",
-                          }}
-                      >
-                        {selectedFilters.position || "Enter intern's Position"}
-                      </div>
-                      <DownOutlined />
-                    </Button>
-                  </Dropdown>
+                  <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: '100%',
+                        fontSize: 5
+                      }}
+                      placeholder="Enter intern's Position"
+                      options={optionsInternPosition}
+                  />
 
                   <Input
                       size="large"
