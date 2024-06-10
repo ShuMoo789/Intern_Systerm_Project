@@ -95,10 +95,11 @@ body {
 #APRCV .content > .filter-section {
     background-color: #ffffff;
     padding: 20px 20px 0px 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 34px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-x: hidden;
+    margin: 0 60px;
+    max-width: 92%;
 }
 
 .button-group {
@@ -253,6 +254,7 @@ div.approve-btns > .feedbacks:hover{
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
     border: 1px solid #CBD2DC;
+    margin-top: 10px;
 }
 
 
@@ -266,6 +268,7 @@ div.approve-btns > .feedbacks:hover{
     color: #fff;
     background-color: #4889E9;
     border: 1px solid #4889E9;
+    padding: 10px;
 }
 
 
