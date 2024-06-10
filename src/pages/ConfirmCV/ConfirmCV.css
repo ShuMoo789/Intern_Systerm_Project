@@ -1,20 +1,130 @@
 .tbl-wrapper {
-    overflow-x: auto; /* Tạo thanh cuộn ngang khi bảng quá rộng */
+    overflow-x: auto;
+    /* Tạo thanh cuộn ngang khi bảng quá rộng */
 }
 
 .table {
-    width: 100%; /* Bảng có thể mở rộng hết chiều rộng của phần tử chứa nó */
+    width: 100%;
+    /* Bảng có thể mở rộng hết chiều rộng của phần tử chứa nó */
 }
 
 /* Các phần tử trong bảng co dãn khi màn hình nhỏ hơn */
 .table td,
 .table th {
-    white-space: nowrap; /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
+    white-space: nowrap;
+    /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
 }
 
 /* Tùy chỉnh các đặc tính khi màn hình thu nhỏ hơn 768px */
 @media (max-width: 768px) {
     .tbl-wrapper {
-        overflow-x: scroll; /* Sử dụng thanh cuộn ngang khi bảng quá rộng */
+        overflow-x: scroll;
+        /* Sử dụng thanh cuộn ngang khi bảng quá rộng */
     }
+}
+
+.filter-section-confirm {
+    margin-left: 50px;
+}
+
+.filter-confirm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 71%;
+}
+
+.fields-confirm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+
+}
+
+.fields-confirm .ant-btn {
+    width: 100%;
+    padding: 7px 11px;
+    font-size: 15px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.fields-confirm .ant-btn div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fields-confirm .ant-btn .anticon-down {
+    margin-left: 8px;
+}
+
+.fields-confirm .ant-input,
+.fields-confirm .ant-picker {
+    width: 100%;
+    padding: 7px 11px;
+    font-size: 15px;
+}
+
+.fields-confirm .ant-picker .ant-picker-input input {
+    padding: 7px 11px;
+}
+
+.buttons-confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Align items to the right */
+    gap: 0px;
+    margin-top: -216px;
+    margin-right: -176px;
+    margin-bottom: 68px;
+}
+
+.cln-btn-confirm,
+.btn-confirm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 20px 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    width: 10%;
+}
+
+.btn-confirm {
+    color: white;
+    background-color: #1890ff;
+
+}
+
+.cln-btn-confirm .anticon,
+.btn-confirm .anticon {
+    margin-right: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .buttons-confirm {
+        align-items: center;
+        /* Center align items on smaller screens */
+        margin-top: 0;
+        margin-bottom: 10%;
+    }
+
+    .cln-btn-confirm,
+    .btn-confirm {
+        width: 50%;
+        /* Make buttons full width on smaller screens */
+        margin-left: -40%;
+
+    }
+
+    
+
 }
