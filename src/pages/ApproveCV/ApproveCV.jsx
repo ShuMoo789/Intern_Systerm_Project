@@ -7,6 +7,7 @@ import CommentPopup from "./CommentPopup.jsx";
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import { Toaster, toast } from 'react-hot-toast';
 import {
   DownOutlined,
   EyeOutlined,
@@ -179,17 +180,17 @@ function ApproveCV() {
             style={
               intern.status === "Pending"
                 ? {
-                    backgroundColor: "#FFB596",
-                    color: "#E5731C",
-                  }
+                  backgroundColor: "#FFB596",
+                  color: "#E5731C",
+                }
                 : intern.status === "Failed"
-                ? {
+                  ? {
                     backgroundColor: "#F5A3B7",
                     color: "#7D0022",
                   }
-                : intern.status === "Passed"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
+                  : intern.status === "Passed"
+                    ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                    : {}
             }
           >
             {intern.status}
@@ -277,7 +278,7 @@ function ApproveCV() {
    */
   const handleSaveComment = (updatedIntern) => {
     // Update the interns state with the updated intern object
-    setInterns((prevInterns) =>
+    setIntern((prevInterns) =>
       prevInterns.map((intern) =>
         intern.internID === updatedIntern.internID ? updatedIntern : intern
       )
@@ -751,6 +752,7 @@ function ApproveCV() {
           onSave={handleSaveComment}
         />
       </MainLayout>
+      <Toaster />
     </div>
   );
 }
