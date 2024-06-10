@@ -7,9 +7,9 @@ import { useLanguage } from "../../translation/LanguageContext";
 const LoginForm = ({ header, formName, role, dataSet }) => {
   const [wrong, setWrong] = useState(false);
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
-  const { t } = useTranslation()
-  const currentLanguage = useLanguage()
-  const [form] = Form.useForm()
+  const { t } = useTranslation();
+  const currentLanguage = useLanguage();
+  const [form] = Form.useForm();
   const handleLogin = async (values) => {
     const { email, password } = values;
     try {
@@ -33,16 +33,20 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
   };
   useEffect(() => {
     form.setFields([
-    {
-      name: 'email',
-      errors: form.getFieldError('email').map(() => t("Please input your email!")),
-    },
-    {
-      name: 'password',
-      errors: form.getFieldError('password').map(() => t("Please input your password!")),
-    },
-  ])
-  }, [currentLanguage, t])
+      {
+        name: "email",
+        errors: form
+          .getFieldError("email")
+          .map(() => t("Please input your email!")),
+      },
+      {
+        name: "password",
+        errors: form
+          .getFieldError("password")
+          .map(() => t("Please input your password!")),
+      },
+    ]);
+  }, [currentLanguage, t]);
   return (
     <>
       <Flex vertical align="center">
@@ -65,7 +69,9 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: t("Please input your email!") }]}
+              rules={[
+                { required: true, message: t("Please input your email!") },
+              ]}
               placeholder
             >
               <Input placeholder="youremail@example.com" allowClear />
@@ -82,13 +88,13 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             </Form.Item>
             {wrong && (
               <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
-                {t('Email or Password is incorrect')}
+                {t("Email or Password is incorrect")}
               </div>
             )}
             <Form.Item>
               <Flex justify="space-between">
                 <Checkbox>{t("Remember me")}</Checkbox>
-                <Link to="/pwdreset" style={{ color: "red" }}>
+                <Link to="/PasswordReset" style={{ color: "red" }}>
                   {t("Forgot password?")}
                 </Link>
               </Flex>

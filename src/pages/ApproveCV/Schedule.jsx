@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { DatePicker, Button, Modal,Dropdown,TimePicker,Form,Input } from 'antd';
 import { ClockCircleOutlined ,DownOutlined } from '@ant-design/icons';
-
-
-
+import "./ApproveCV.css"
 
 const items = [
     {
@@ -84,10 +82,10 @@ const Sheldule = () => {
   };
   return (
     <>
-      <Button  type="primary" onClick={showModal} style={{ background: "#7d3c98"}}>
+      <button className="button button-schedule" onClick={showModal}>
       <ClockCircleOutlined/>
-        Schedule interview
-      </Button>
+        <span className='btn-name'>Schedule interview</span>
+      </button>
 
       <Modal
         open={open}
