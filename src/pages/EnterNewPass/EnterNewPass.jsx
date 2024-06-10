@@ -4,12 +4,14 @@ import Header from "../../components/header/Header.jsx";  // Import the Header c
 import "./EnterNewPass.css";  // Import the CSS file for styling
 import { useTranslation } from "react-i18next";  // Import the useTranslation hook for internationalization
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
-import { Modal } from "antd";
+import { Modal, Form, Input, Button } from "antd";
 import { t } from "i18next";
+
+const { Item } = Form;
 
 // PasswordInput component for input fields with show/hide password functionality
 function PasswordInput({ id, label, placeholder, value, onChange, error, warning }) {
-    const [showPassword, setShowPassword] = React.useState(false);  // State to manage password visibility
+    const [showPassword, setShowPassword] = useState(false);  // State to manage password visibility
 
     // Function to toggle password visibility
     const togglePasswordVisibility = () => {
@@ -22,7 +24,7 @@ function PasswordInput({ id, label, placeholder, value, onChange, error, warning
                 {label}
             </label>
             <div className={`password-input ${error ? 'password-input-error' : ''}`}>
-                <input
+                <Input
                     type={showPassword ? "text" : "password"}  // Toggle between text and password type
                     id={id}
                     className="form-input"
@@ -48,49 +50,24 @@ function PasswordInput({ id, label, placeholder, value, onChange, error, warning
 function ChangePasswordForm() {
     const { t } = useTranslation();  // Initialize translation hook
     const navigate = useNavigate();  // Initialize navigate hook
-    const [newPassword, setNewPassword] = useState("");  // State for new password
-    const [confirmPassword, setConfirmPassword] = useState("");  // State for confirm password
-    const [newPasswordError, setNewPasswordError] = useState("");  // State for new password error message
-    const [confirmPasswordError, setConfirmPasswordError] = useState("");  // State for confirm password error message
-    const [submitted, setSubmitted] = useState(false);  // State to track form submission
-
-    // Function to validate password
-    const validatePassword = (password) => {
-        if (password.length <= 5) {
-            return t("Password must be more than 5 characters");  // Check if password is longer than 5 characters
-        }
-        if (password.charAt(0) !== password.charAt(0).toUpperCase()) {
-            return t("The first character must be uppercase");  // Check if the first character is uppercase
-        }
-        return "";  // Return an empty string if no errors
-    };
+    const [form] = Form.useForm();  // Initialize Ant Design form
 
     // Function to handle form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();  // Prevent default form submission
-        setSubmitted(true);  // Mark form as submitted
+    const handleSubmit = (values) => {
+        const { newPassword, confirmPassword } = values;
 
-        let newPasswordError = "";
-        let confirmPasswordError = "";
-
-        if (!newPassword) {
-            newPasswordError = t("You have not entered any password");  // Set error if no new password is entered
-        } else {
-            newPasswordError = validatePassword(newPassword);  // Validate new password
+        // Check if passwords match
+        if (newPassword !== confirmPassword) {
+            form.setFields([
+                {
+                    name: 'confirmPassword',
+                    errors: [t("Passwords do not match")],
+                },
+            ]);
+            return;
         }
 
-        if (!confirmPassword) {
-            confirmPasswordError = t("You have not entered any password");  // Set error if no confirm password is entered
-        } else if (newPassword && newPassword !== confirmPassword) {
-            confirmPasswordError = t("Passwords do not match");  // Set error if passwords do not match
-        }
-
-        setNewPasswordError(newPasswordError);
-        setConfirmPasswordError(confirmPasswordError);
-
-        if (!newPasswordError && !confirmPasswordError) {
-            success();
-        }
+        success();
     };
 
     const success = () => {
@@ -102,28 +79,43 @@ function ChangePasswordForm() {
     };
 
     return (
-        <form className="change-password-form" onSubmit={handleSubmit}>
+        <Form
+            form={form}
+            className="change-password-form"
+            onFinish={handleSubmit}
+            layout="vertical"
+        >
             <h1 className="form-title">{t("Change Password")}</h1>
-            <PasswordInput
-                id="newPassword"
-                label={t("New Password *")}
-                placeholder="Enter new password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}  // Update new password state
-                error={submitted && newPasswordError}
-            />
-            <PasswordInput
-                id="confirmPassword"
-                label={t("Confirm New Password *")}
-                placeholder={t("Re-enter your password")}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}  // Update confirm password state
-                error={submitted && confirmPasswordError}
-            />
-            <button type="submit" className="submit-button">
+            <Item
+                name="newPassword"
+                label={t("New Password")}
+                rules={[
+                    { required: true, message: t("You have not entered any password") },
+                    { min: 6, message: t("Password must be more than 5 characters") },
+                    { pattern: /^[A-Z]/, message: t("The first character must be uppercase") },
+                ]}
+            >
+                <PasswordInput
+                    id="newPassword"
+                    placeholder="Enter new password"
+                />
+            </Item>
+            <Item
+                name="confirmPassword"
+                label={t("Confirm New Password")}
+                rules={[
+                    { required: true, message: t("You have not entered any password") },
+                ]}
+            >
+                <PasswordInput
+                    id="confirmPassword"
+                    placeholder={t("Re-enter your password")}
+                />
+            </Item>
+            <Button type="primary" htmlType="submit" className="submit-button">
                 {t("Change Password")}
-            </button>
-        </form>
+            </Button>
+        </Form>
     );
 }
 
