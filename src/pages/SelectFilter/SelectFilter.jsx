@@ -206,17 +206,20 @@ const MyComponent = () => {
               );
             })}
           </Col>
+
+          <Row className="row-btn">
+            <div className="cta-btn">
+              <Button className="arrow-btn" onClick={handleClick}>
+                {expanded ? (
+                  <UpOutlined style={{ fontSize: "20px" }} />
+                ) : (
+                  <DownOutlined style={{ fontSize: "20px" }} />
+                )}
+              </Button>
+            </div>
+          </Row>
         </Row>
       </main>
-      <div className="cta-btn">
-        <Button className="arrow-btn" onClick={handleClick}>
-          {expanded ? (
-            <UpOutlined style={{ fontSize: "40px" }} />
-          ) : (
-            <DownOutlined style={{ fontSize: "40px" }} />
-          )}
-        </Button>
-      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import CommentPopup from "./CommentPopup.jsx";
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import { Toaster, toast } from 'react-hot-toast';
 import {
   DownOutlined,
   EyeOutlined,
@@ -148,6 +149,7 @@ function ApproveCV() {
 
     // Slice the filteredInterns array to get the interns for the current page
     return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
+
         // Each row is a table row (<tr>) element with a unique key based on the index
         <tr key={index}>
           {/* Checkbox for selecting the intern */}
@@ -217,6 +219,7 @@ function ApproveCV() {
             <div className="feedbacks">Feedbacks</div>
           </td>
         </tr>
+
     ));
   };
 
@@ -290,10 +293,12 @@ function ApproveCV() {
    */
   const handleSaveComment = (updatedIntern) => {
     // Update the interns state with the updated intern object
+
     setInterns((prevInterns) =>
         prevInterns.map((intern) =>
             intern.internID === updatedIntern.internID ? updatedIntern : intern
         )
+
     );
     handleCloseCommentPopup(); // Close the comment popup after saving
   };
@@ -708,6 +713,7 @@ function ApproveCV() {
                   </div>
                 </div>
               </div>
+
               <div className="list">
                 <Table
                     rowSelection={{
@@ -734,6 +740,7 @@ function ApproveCV() {
           />
         </MainLayout>
       </div>
+
   );
 }
 

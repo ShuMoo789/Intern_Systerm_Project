@@ -3,34 +3,37 @@ import "./GroupButton.css";
 import { Button } from "antd";
 import useViewport from "../../hooks/useViewport";
 
+
 const GroupButton = ({ groupButton, onSendEmail, onScheduleInterview }) => {
     const viewPort = useViewport()
     const isMobile = viewPort.width <= 1024
 
-    // function handle Send Mail when click button Send Mail
-    const handleSendMailClick = () => {
-        onSendEmail();
-    };
 
-    // function handle Export Excel when click button Export Excel
-    const handleExportExcelClick = () => {
-        console.log('export excel');
-    };
+  // function handle Send Mail when click button Send Mail
+  const handleSendMailClick = () => {
+    onSendEmail();
+  };
 
-    // function handle Edit when click button Edit
-    const handleEditClick = () => {
-        console.log('edit');
-    };
+  // function handle Export Excel when click button Export Excel
+  const handleExportExcelClick = () => {
+    console.log("export excel");
+  };
 
-    // function handle Delete when click button Delete
-    const handleDeleteClick = () => {
-        console.log('delete');
-    };
+  // function handle Edit when click button Edit
+  const handleEditClick = () => {
+    console.log("edit");
+  };
 
-    // function handle Add New Intern when click button Add New Intern
-    const handleAddNewInternClick = () => {
-        console.log('add new intern');
-    };
+  // function handle Delete when click button Delete
+  const handleDeleteClick = () => {
+    console.log("delete");
+  };
+
+  // function handle Add New Intern when click button Add New Intern
+  const handleAddNewInternClick = () => {
+    onCreateIntern();
+  };
+
 
     const handleScheduleInterview = () => {
         onScheduleInterview()
@@ -53,22 +56,32 @@ const GroupButton = ({ groupButton, onSendEmail, onScheduleInterview }) => {
         }
     };
 
-    return (
-        <div className="group-button">
-            {/* map button group from prop passed from InternList via Navigation */}
-            {groupButton.map((prop) => (
-                <Button
-                    key={prop.name}
-                    onClick={() => handleButtonClick(prop.name)}
-                    style={{ minWidth: '15%', backgroundColor: prop.color, fontSize: '15px', color: '#FFFFFF' }}
-                >
-                    {isMobile ? prop.icon : <span>{prop.icon} {prop.name}</span>}
-                    {/* {prop.icon}{prop.name} */}
-                </Button>
-            ))}
-        </div>
-    );
+  return (
+    <div className="group-button">
+      {/* map button group from prop passed from InternList via Navigation */}
+      {groupButton.map((prop) => (
+        <Button
+          key={prop.name}
+          onClick={() => handleButtonClick(prop.name)}
+          style={{
+            minWidth: "15%",
+            backgroundColor: prop.color,
+            fontSize: "15px",
+            color: "#FFFFFF",
+          }}
+        >
+          {isMobile ? (
+            prop.icon
+          ) : (
+            <span>
+              {prop.icon} {prop.name}
+            </span>
+          )}
+          {/* {prop.icon}{prop.name} */}
+        </Button>
+      ))}
+    </div>
+  );
 };
-
 
 export default GroupButton;

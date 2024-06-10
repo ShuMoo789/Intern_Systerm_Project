@@ -1,15 +1,18 @@
 import { Flex, Form, Input, Button, Checkbox } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../translation/LanguageContext";
+
 const LoginForm = ({ header, formName, role, dataSet }) => {
   const [wrong, setWrong] = useState(false);
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const currentLanguage = useLanguage();
   const [form] = Form.useForm();
+
   const handleLogin = async (values) => {
     const { email, password } = values;
     try {
@@ -22,6 +25,7 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
           user.role === role
       );
       if (user) {
+        navigate("/Profile");
         console.log("Login successful", user);
       } else {
         setWrong(true);
@@ -31,6 +35,7 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
       console.error("Login failed", error);
     }
   };
+
   useEffect(() => {
     form.setFields([
       {
@@ -47,6 +52,7 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
       },
     ]);
   }, [currentLanguage, t]);
+
   return (
     <>
       <Flex vertical align="center">
@@ -71,8 +77,12 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
               name="email"
               rules={[
                 { required: true, message: t("Please input your email!") },
+                {
+                  type: "email",
+                  message: t("Please enter a valid email address!"),
+                },
               ]}
-              placeholder
+              validateTrigger="onFinish"
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
@@ -100,22 +110,29 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
               </Flex>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" block>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+              >
                 {t("Sign In")}
               </Button>
             </Form.Item>
             <Form.Item>
               <Link to="/signup">
-                <Button type="default" block>
+                <Button
+                  type="default"
+                  block
+                  style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+                >
                   {t("Sign Up")}
                 </Button>
               </Link>
             </Form.Item>
 
             <Form.Item>
-              <div type="" align="center">
-                {t("OR LOGIN WITH")}
-              </div>
+              <div align="center">{t("OR LOGIN WITH")}</div>
             </Form.Item>
 
             <Form.Item>
@@ -130,7 +147,12 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
                 >
                   <img
                     src="https://th.bing.com/th/id/OIP.HgH-NjiOdFOrkmwjsZCCfAHaHl?rs=1&pid=ImgDetMain"
-                    style={{ width: "15px", height: "15px" }}
+                    alt="Google"
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                      marginRight: "8px",
+                    }}
                   />
                   GOOGLE
                 </Button>

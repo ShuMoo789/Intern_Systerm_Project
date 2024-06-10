@@ -2,7 +2,7 @@
 .container-group {
   background: #ffffff;
   width: 100%;
-  height: 100%; /* Kích thước của Container */
+  margin-bottom: 100px;
   border-radius: 34px;
   padding: 0 46px;
   box-sizing: border-box;
@@ -28,6 +28,11 @@
   width: 100%;
 }
 
+.row-btn {
+  margin: 2%;
+  width: 100%;
+}
+
 /* Arrow Button */
 .cta-btn {
   display: flex;
@@ -39,8 +44,8 @@
 .arrow-btn {
   border: 1px solid #6937b1;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
 }
 
 /* ============ Avatar Group ============ */
@@ -129,10 +134,10 @@
 }
 
 .filter-container {
+  margin-top: 30px;
   width: 98%;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 30px;
 }
 
 .filter-select .ant-select-selector {
