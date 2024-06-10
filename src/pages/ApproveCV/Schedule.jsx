@@ -1,6 +1,13 @@
-
 import React, { useState, useEffect } from "react";
-import { DatePicker, Button, Modal, TimePicker, Input, Select ,message} from "antd";
+import {
+  DatePicker,
+  Button,
+  Modal,
+  TimePicker,
+  Input,
+  Select,
+  message,
+} from "antd";
 
 import { ClockCircleOutlined } from "@ant-design/icons";
 import "./Schedule.css";
@@ -49,9 +56,7 @@ const optionsEmailType = [
   { value: "Internship information", label: "Internship information" },
 ];
 
-
 const Sheldule = () => {
-
   const [open, setOpen] = useState(false);
   const [loadings, setLoadings] = useState([false]);
   const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
@@ -82,8 +87,6 @@ const Sheldule = () => {
     console.log(date, dateString);
   };
 
-
-
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
       const newLoadings = [...prevLoadings];
@@ -103,8 +106,6 @@ const Sheldule = () => {
 
   return (
     <>
-
-    
       <Button
         type="primary"
         onClick={showModal}
@@ -113,7 +114,6 @@ const Sheldule = () => {
         <ClockCircleOutlined />
         Schedule interview
       </Button>
-
 
       <Modal
         open={open}
@@ -129,7 +129,7 @@ const Sheldule = () => {
             icon={<ClockCircleOutlined />}
             style={{ background: "#6537B1" }}
             loading={loadings[1] || false}
-            onClick={() => enterLoading(1)}  
+            onClick={() => enterLoading(1)}
           >
             Set Schedule
           </Button>,
@@ -168,7 +168,6 @@ const Sheldule = () => {
                 style={{
                   width: "330px",
                   height: "57px",
-                  borderRadius: "15px",
                   padding: "8px",
                   border: "1px solid #ccc",
 
@@ -201,7 +200,6 @@ const Sheldule = () => {
                   height: "57px",
                   padding: "8px",
                   border: "1px solid #ccc",
-                  borderRadius: "15px",
                 }}
                 use12Hours
                 onChange={onChange}
@@ -343,7 +341,6 @@ const Sheldule = () => {
                 style={{
                   width: "330px",
                   height: "57px",
-                  borderRadius: "15px",
                 }}
               />
             </div>
@@ -447,7 +444,6 @@ const Sheldule = () => {
                   height: "57px",
                   padding: "8px",
                   border: "1px solid #ccc",
-                  borderRadius: "15px",
                 }}
               />
             </div>
@@ -476,7 +472,6 @@ const Sheldule = () => {
                   height: "57px",
                   padding: "8px",
                   border: "1px solid #ccc",
-                  borderRadius: "15px",
                 }}
               />
             </div>
@@ -522,7 +517,6 @@ const Sheldule = () => {
                 style={{
                   width: "759px",
                   height: "196px",
-                  borderRadius: "15px",
                 }}
               />
             </div>
