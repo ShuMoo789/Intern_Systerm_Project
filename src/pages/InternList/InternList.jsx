@@ -499,7 +499,6 @@ const InternList = () => {
   };
 
   return (
-    {/*Project-Management*/}
       <div>
         <MainLayout>
           {/* Content of InternList */}
@@ -507,7 +506,7 @@ const InternList = () => {
             {/* Pass props to Navigation */}
             <Navigation
                 titleName="INTERN LIST"
-                groupButton={groupButton}
+                groupButton={props.groupButton}
                 onSendEmail={handleOpenEmailPopup}
             />
             {/* Group of filter and table */}
@@ -774,9 +773,8 @@ const InternList = () => {
               openPopup={isEmailPopupVisible}
           />
         </MainLayout>
-        <Toaster />
       </div>
   );
-};
+}
 
 export default InternList;
