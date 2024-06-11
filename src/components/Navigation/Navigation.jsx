@@ -39,6 +39,7 @@ const Navigation = (props) => {
             groupButton={props.groupButton}
             onSendEmail={props.onSendEmail}
             onScheduleInterview={props.onScheduleInterview}
+            onCreateIntern={props.onCreateIntern}
           />
         </div>
       </div>
