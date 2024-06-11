@@ -10,6 +10,7 @@ import {
   Select,
   Modal,
   Form,
+  message,
 } from "antd";
 
 import {
@@ -457,6 +458,46 @@ const GroupList = () => {
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
+  const [modalWidth, setModalWidth] = useState("64%");
+
+  useEffect(() => {
+    const updateModalWidth = () => {
+      if (window.innerWidth <= 600) {
+        setModalWidth("90%");
+      } else if (window.innerWidth <= 1024) {
+        setModalWidth("75%");
+      } else {
+        setModalWidth("64%");
+      }
+    };
+
+    updateModalWidth();
+    window.addEventListener("resize", updateModalWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateModalWidth);
+    };
+  }, []);
+
+  const [formValues, setFormValues] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
+
+  const handleInputChange = (e, title) => {
+    setFormValues({ ...formValues, [title]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const allFieldsFilled = Object.values(formValues).every(
+      (value) => value.trim() !== ""
+    );
+    if (allFieldsFilled) {
+      handleCancel();
+    } else {
+      message.error("Please fill all fields");
+    }
+  };
+
   return (
     <>
       <div>
@@ -631,22 +672,37 @@ const GroupList = () => {
             <Button
               key="addNewIntern"
               type="primary"
-              onClick={handleCancel}
-              style={{ margin: " 20px 20px 0 0" }}
+              onClick={handleSubmit}
+              style={{ margin: "20px 20px 0 0" }}
             >
               Add New Intern
             </Button>,
           ]}
-          width="55%"
+          width={modalWidth}
         >
-          <Space size={[30, 50]} wrap style={{ marginTop: "20px" }}>
-            {inputFields.map((field) => (
-              <Space direction="vertical" size="small">
+          <Space
+            size={[80, 50]}
+            wrap
+            style={{
+              marginTop: "20px",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            {inputFields.map((field, index) => (
+              <Space
+                key={index}
+                direction="vertical"
+                size="small"
+                style={{ width: "300px" }}
+              >
                 <label style={{ fontWeight: "bold" }}>{field.title}</label>
                 <Input
                   placeholder={field.placeholder}
+                  value={formValues[field.title]}
+                  onChange={(e) => handleInputChange(e, field.title)}
                   style={{
-                    width: "325px",
+                    width: "100%",
                     height: "60px",
                     borderRadius: "15px",
                   }}
