@@ -10,6 +10,7 @@ import {
     Select,
     Modal,
     Form,
+  message,
     Flex,
 } from "antd";
 
@@ -464,215 +465,261 @@ const GroupList = () => {
     const filterOption = (input, option) =>
         (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-    return (
-        <>
-            <div>
-                <MainLayout>
-                    <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
-                        <Navigation
-                            titleName="GROUP LIST"
-                            groupButton={groupButton}
-                            onSendEmail={showModal}
-                            onCreateIntern={handleCreateIntern}
-                        />
-                    </div>
-                    <div>
-                        <Row>
-                            <Col span={1}></Col>
-                            <Col span={23}>
-                                <div
-                                    style={{
-                                        paddingRight: isMobile ? "10px" : "0",
-                                        backgroundColor: "white",
-                                        borderRadius: "25px",
-                                        width: "96%",
-                                    }}
-                                >
-                                    <Space
-                                        className="space-bg"
-                                        style={{
-                                            margin: "20px 0px 30px 30px ",
-                                            width: isMobile ? "93%" : "960px",
-                                            flexDirection: isMobile
-                                                ? "column"
-                                                : "row",
-                                            alignItems: "unset",
-                                        }}
-                                        size={[8, 8]}
-                                        wrap
-                                    >
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's ID"
-                                            name="InternId"
-                                            value={filters.InternId}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Full name"
-                                            name="FullName"
-                                            value={filters.FullName}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's D.O.B"
-                                            name="DOB"
-                                            value={filters.DOB}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Phone number"
-                                            name="PhoneNumber"
-                                            value={filters.PhoneNumber}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Address"
-                                            name="Address"
-                                            value={filters.Address}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Email"
-                                            name="Email"
-                                            value={filters.Email}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Major"
-                                            name="Major"
-                                            value={filters.Major}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Position"
-                                            name="Position"
-                                            value={filters.Position}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's School"
-                                            name="School"
-                                            value={filters.School}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Title"
-                                            name="Title"
-                                            value={filters.Title}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Project"
-                                            name="Project"
-                                            value={filters.Project}
-                                            onChange={handleFilterChange}
-                                        />
-                                        <Input
-                                            style={inputStyle}
-                                            placeholder="Enter intern's Group Zalo"
-                                            name="GroupZalo"
-                                            value={filters.GroupZalo}
-                                            onChange={handleFilterChange}
-                                        />
-                                    </Space>
-                                    <Space
-                                        direction="vertical"
-                                        style={{
-                                            width: isMobile ? "100%" : "10%",
-                                            // marginBottom: isMobile ? "30px" : 0,
-                                            paddingLeft: isMobile ? "30px" : 0,
-                                            margin: isMobile
-                                                ? "0 0 30px 3.6%"
-                                                : "0 30px",
-                                        }}
-                                    >
-                                        <Button
-                                            style={{
-                                                width: isMobile ? "86%" : 120,
-                                            }}
-                                            icon={<FilterOutlined />}
-                                            onClick={handleClearFilters}
-                                        >
-                                            Clear filter
-                                        </Button>
-                                        <Button
-                                            style={{
-                                                backgroundColor: "#4889E9",
-                                                color: "white",
-                                                width: isMobile ? "86%" : 120,
-                                            }}
-                                            icon={<SearchOutlined />}
-                                            onClick={handleSearch}
-                                        >
-                                            Search
-                                        </Button>
-                                    </Space>
-                                    <div
-                                        style={{
-                                            overflowX: "auto",
-                                            width: isMobile ? "100%" : "100%",
-                                        }}
-                                    >
-                                        <Table
-                                            columns={columns}
-                                            dataSource={filteredData}
-                                            scroll={{ x: 1400 }}
-                                            pagination={{ pageSize: 6 }}
-                                        />
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                </MainLayout>
+  const [modalWidth, setModalWidth] = useState("64%");
 
-                <Modal
-                    title={
-                        <span style={{ fontSize: "25px" }}>Add New Intern</span>
-                    }
-                    open={visible}
-                    onCancel={handleCancel}
-                    footer={[
-                        <Button
-                            key="addNewIntern"
-                            type="primary"
-                            onClick={handleCancel}
-                            style={{ margin: " 20px 20px 0 0" }}
-                        >
-                            Add New Intern
-                        </Button>,
-                    ]}
-                    width="55%"
+  useEffect(() => {
+    const updateModalWidth = () => {
+      if (window.innerWidth <= 600) {
+        setModalWidth("90%");
+      } else if (window.innerWidth <= 1024) {
+        setModalWidth("75%");
+      } else {
+        setModalWidth("64%");
+      }
+    };
+
+    updateModalWidth();
+    window.addEventListener("resize", updateModalWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateModalWidth);
+    };
+  }, []);
+
+  const [formValues, setFormValues] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
+
+  const handleInputChange = (e, title) => {
+    setFormValues({ ...formValues, [title]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const allFieldsFilled = Object.values(formValues).every(
+      (value) => value.trim() !== ""
+    );
+    if (allFieldsFilled) {
+      message.success("Intern added successfully!", 2);
+      setFormValues(inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {}));
+      handleCancel();
+    } else {
+      message.error("Please fill all fields", 1);
+    }
+  };
+
+  return (
+    <>
+      <div>
+        <MainLayout>
+          <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
+            <Navigation
+              titleName="GROUP LIST"
+              groupButton={groupButton}
+              onSendEmail={showModal}
+              onCreateIntern={handleCreateIntern}
+            />
+          </div>
+          <div>
+            <Row>
+              <Col span={1}></Col>
+              <Col span={23}>
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    borderRadius: "25px",
+                    width: "96%",
+                  }}
                 >
-                    <Space size={[30, 50]} wrap style={{ marginTop: "20px" }}>
-                        {inputFields.map((field) => (
-                            <Space direction="vertical" size="small">
-                                <label style={{ fontWeight: "bold" }}>
-                                    {field.title}
-                                </label>
-                                <Input
-                                    placeholder={field.placeholder}
-                                    style={{
-                                        width: "325px",
-                                        height: "60px",
-                                        borderRadius: "15px",
-                                    }}
-                                />
-                            </Space>
-                        ))}
-                    </Space>
-                </Modal>
+                  <Space
+                    style={{
+                      margin: "20px 0 30px 30px ",
+                      width: isMobile ? "93%" : "960px",
+                      flexDirection: isMobile ? "column" : "row",
+                      alignItems: "unset",
+                    }}
+                    size={[8, 8]}
+                    wrap
+                  >
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's ID"
+                      name="InternId"
+                      value={filters.InternId}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Full name"
+                      name="FullName"
+                      value={filters.FullName}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's D.O.B"
+                      name="DOB"
+                      value={filters.DOB}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Phone number"
+                      name="PhoneNumber"
+                      value={filters.PhoneNumber}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Address"
+                      name="Address"
+                      value={filters.Address}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Email"
+                      name="Email"
+                      value={filters.Email}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Major"
+                      name="Major"
+                      value={filters.Major}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Position"
+                      name="Position"
+                      value={filters.Position}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's School"
+                      name="School"
+                      value={filters.School}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Title"
+                      name="Title"
+                      value={filters.Title}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Project"
+                      name="Project"
+                      value={filters.Project}
+                      onChange={handleFilterChange}
+                    />
+                    <Input
+                      style={inputStyle}
+                      placeholder="Enter intern's Group Zalo"
+                      name="GroupZalo"
+                      value={filters.GroupZalo}
+                      onChange={handleFilterChange}
+                    />
+                  </Space>
+                  <Space
+                    direction="vertical"
+                    style={{
+                      width: isMobile ? "96%" : "0",
+                      marginBottom: isMobile ? "30px" : 0,
+                      margin: isMobile ? "0 10px" : "0",
+                    }}
+                  >
+                    <Button
+                      style={{
+                        width: isMobile ? "100%" : 120,
+                      }}
+                      icon={<FilterOutlined />}
+                      onClick={handleClearFilters}
+                    >
+                      Clear filter
+                    </Button>
+                    <Button
+                      style={{
+                        backgroundColor: "#4889E9",
+                        color: "white",
+                        width: isMobile ? "100%" : 120,
+                      }}
+                      icon={<SearchOutlined />}
+                      onClick={handleSearch}
+                    >
+                      Search
+                    </Button>
+                  </Space>
+                  <div
+                    style={{
+                      overflowX: "auto",
+                      width: isMobile ? "100%" : "100%",
+                    }}
+                  >
+                    <Table
+                      columns={columns}
+                      dataSource={filteredData}
+                      scroll={{ x: 1400 }}
+                      pagination={{ pageSize: 6 }}
+                    />
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </MainLayout>
+
+        <Modal
+          title={<span style={{ fontSize: "25px" }}>Add New Intern</span>}
+          open={visible}
+          onCancel={handleCancel}
+          footer={[
+            <Button
+              key="addNewIntern"
+              type="primary"
+              onClick={handleSubmit}
+              style={{ margin: " 20px 20px 0 0" }}
+            >
+              Add New Intern
+            </Button>,
+          ]}
+          width={modalWidth}
+        >
+          <Space
+            size={[80, 30]}
+            wrap
+            style={{
+              marginTop: "20px",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            {inputFields.map((field, index) => (
+              <Space
+                key={index}
+                direction="vertical"
+                size="small"
+                style={{ width: "300px" }}
+              >
+                <label style={{ fontWeight: "bold" }}>{field.title}</label>
+                <Input
+                  placeholder={field.placeholder}
+                  value={formValues[field.title]}
+                  onChange={(e) => handleInputChange(e, field.title)}
+                  style={{
+                    width: "100%",
+                    height: "45px",
+                    borderRadius: "15px",
+                  }}
+                />
+              </Space>
+            ))}
+          </Space>
+        </Modal>
 
                 <Modal
                     title={<h2>Create group</h2>}
