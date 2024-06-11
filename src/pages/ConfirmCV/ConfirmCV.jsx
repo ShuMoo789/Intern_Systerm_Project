@@ -6,15 +6,16 @@ import User_Img from "../../assets/user_image.png";
 import SendMailButton from '../../components/SendMailButton/SendMailButton';
 import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton"
 import MailOutlined from "@ant-design/icons/MailOutlined"
+import Navigation from "../../components/Navigation/Navigation";
 import {
     DownOutlined,
     EyeOutlined,
     PlusOutlined,
-    SettingOutlined,
-    ArrowRightOutlined,
-    ArrowLeftOutlined,
+    ExportOutlined,
     SearchOutlined,
-    DeleteOutlined
+    DeleteOutlined,
+    EditOutlined,
+    FolderAddOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
 import DataConfirmCV from "../../data/ConfirmCV.json"
@@ -562,63 +563,60 @@ const ConfirmCV = () => {
         },
     ]
     const [selectionType, setSelectionType] = useState('checkbox');
+
+    const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
+
+    const handleOpenEmailPopup = () => {
+        setEmailPopupVisible(true);
+    };
+
+    const handleCloseEmailPopup = () => {
+        setEmailPopupVisible(false);
+    };
+
+    const groupButton = [
+        {
+          color: "#6537B1",
+          name: "Send Email",
+          icon: <MailOutlined />,
+        },
+        {
+          color: "#41B137",
+          name: "Export Excel",
+          icon: <ExportOutlined />,
+        },
+        {
+          color: "#FB8632",
+          name: "Edit",
+          icon: <EditOutlined />,
+        },
+        {
+          color: "#FF3A2E",
+          name: "Delete",
+          icon: <DeleteOutlined />,
+        },
+        {
+          color: "#4889E9",
+          name: "Add New Intern",
+          icon: <FolderAddOutlined />,
+        },
+      ];
     return (
         <div id="APRCV">
-
-
-
             <MainLayout>
 
                 <main className="content">
-                    <header className="content-header">
-                        <h1 className="content-title"><b>Confirm CV</b></h1>
-                        <div className="user-info">
-                            <img loading="lazy"
-                                src={User_Img}
-                                alt="User Profile" className="user-profile-small" />
-                            <div className="user-details">
-                                <span className="user-name">Natalie Brogan</span>
-                                <span className="user-role">Admin</span>
-                            </div>
-                            <div className="account-setting">
-                                <SettingOutlined style={{ color: "#DB0D4B" }} />
-                            </div>
-                        </div>
-                    </header>
-
-                    <section className="content-section">
-                        <h2 className="section-title">Search for Information</h2>
-                        <div className="button-group">
-                            {/* <button className="button button-schedule">
-                                <Sheldule />
-                            </button> */}
-                            <SendMailButton className="button button-send" />
-                            <button className="button button-export">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Export Icon" className="button-icon" />
-                                <span>Export Excel</span>
-                            </button>
-                            <button className="button button-edit">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Edit Icon" className="button-icon" />
-                                <span>Edit</span>
-                            </button>
-                            <button className="button button-delete">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Delete Icon" className="button-icon" />
-                                <span>Delete</span>
-                            </button>
-                            <button className="button button-add-intern">
-                                <img
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
-                                    alt="Add Intern Icon" className="button-icon" />
-                                <span>Add New Intern</span>
-                            </button>
-                        </div>
-                    </section>
+                    <div>
+                        <Navigation
+                            titleName='CONFIRM CV'
+                            groupButton={groupButton}
+                            onSendEmail={handleOpenEmailPopup}/>
+                    </div>
+                    <SendMailButton
+                        onClose={handleCloseEmailPopup}
+                        openPopup={isEmailPopupVisible}
+                />
+                    
 
                     <section className="filter-section">
                         <div className="filter">
