@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
 import {
-  Row,
-  Col,
-  Input,
-  Button,
-  Table,
-  Checkbox,
-  Space,
-  Select,
-  Modal,
-  Form,
+    Row,
+    Col,
+    Input,
+    Button,
+    Table,
+    Checkbox,
+    Space,
+    Select,
+    Modal,
+    Form,
+    Flex,
 } from "antd";
 
+import "./GroupList.css";
+
 import {
-  UsergroupAddOutlined,
-  ExportOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  FolderAddOutlined,
-  FilterOutlined,
-  SearchOutlined,
+    UsergroupAddOutlined,
+    ExportOutlined,
+    EditOutlined,
+    DeleteOutlined,
+    FolderAddOutlined,
+    FilterOutlined,
+    SearchOutlined,
 } from "@ant-design/icons";
 
 import jsonData from "../../data/GroupList.json";
@@ -30,741 +33,767 @@ import useViewport from "../../hooks/useViewport";
 const { Option } = Select;
 
 const GroupList = () => {
-  const [data, setData] = useState(jsonData);
-  const [filteredData, setFilteredData] = useState(jsonData);
-  const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
-  const [visible, setVisible] = useState(false);
+    const [data, setData] = useState(jsonData);
+    const [filteredData, setFilteredData] = useState(jsonData);
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 1024;
+    const [visible, setVisible] = useState(false);
 
-  const [filters, setFilters] = useState({
-    InternId: "",
-    FullName: "",
-    DOB: "",
-    PhoneNumber: "",
-    Address: "",
-    Email: "",
-    Major: "",
-    Position: "",
-    School: "",
-    Title: "",
-    Project: "",
-    GroupZalo: "",
-  });
-
-  const inputStyle = {
-    width: isMobile ? "92%" : "300px",
-  };
-
-  useEffect(() => {
-    setData(jsonData);
-    setFilteredData(jsonData);
-  }, []);
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters({
-      ...filters,
-      [name]: value,
+    const [filters, setFilters] = useState({
+        InternId: "",
+        FullName: "",
+        DOB: "",
+        PhoneNumber: "",
+        Address: "",
+        Email: "",
+        Major: "",
+        Position: "",
+        School: "",
+        Title: "",
+        Project: "",
+        GroupZalo: "",
     });
-  };
 
-  const handleSearch = () => {
-    const filtered = data.filter((item) =>
-      Object.keys(filters).every(
-        (key) =>
-          filters[key] === "" ||
-          (item[key] &&
-            item[key]
-              .toString()
-              .toLowerCase()
-              .includes(filters[key].toString().toLowerCase()))
-      )
-    );
-    setFilteredData(filtered);
-  };
+    const inputStyle = {
+        width: isMobile ? "92%" : "300px",
+    };
 
-  const handleClearFilters = () => {
-    setFilters({
-      InternId: "",
-      FullName: "",
-      DOB: "",
-      PhoneNumber: "",
-      Address: "",
-      Email: "",
-      Major: "",
-      Position: "",
-      School: "",
-      Title: "",
-      Project: "",
-      GroupZalo: "",
-    });
-    setFilteredData(data);
-  };
+    useEffect(() => {
+        setData(jsonData);
+        setFilteredData(jsonData);
+    }, []);
 
-  const handleStatusChange = (value, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, Status: value } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
-  };
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilters({
+            ...filters,
+            [name]: value,
+        });
+    };
 
-  const handleContractChange = (value, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, InternshipContract: value } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
-  };
+    const handleSearch = () => {
+        const filtered = data.filter((item) =>
+            Object.keys(filters).every(
+                (key) =>
+                    filters[key] === "" ||
+                    (item[key] &&
+                        item[key]
+                            .toString()
+                            .toLowerCase()
+                            .includes(filters[key].toString().toLowerCase()))
+            )
+        );
+        setFilteredData(filtered);
+    };
 
-  const handleCancel = () => {
-    setVisible(false);
-  };
+    const handleClearFilters = () => {
+        setFilters({
+            InternId: "",
+            FullName: "",
+            DOB: "",
+            PhoneNumber: "",
+            Address: "",
+            Email: "",
+            Major: "",
+            Position: "",
+            School: "",
+            Title: "",
+            Project: "",
+            GroupZalo: "",
+        });
+        setFilteredData(data);
+    };
 
-  const statusOptions = [
-    { label: "Accepted", value: "Accepted", color: "green" },
-    { label: "Pending", value: "Pending", color: "red" },
-    { label: "Interviewed", value: "Interviewed", color: "orange" },
-  ];
+    const handleStatusChange = (value, record) => {
+        const updatedData = data.map((item) =>
+            item.key === record.key ? { ...item, Status: value } : item
+        );
+        setData(updatedData);
+        setFilteredData(updatedData);
+    };
 
-  const inputFields = [
-    { title: "Intern ID", placeholder: "#12345128" },
-    { title: "Full name", placeholder: "Esther Eden" },
-    { title: "Phone number ", placeholder: "090759355" },
-    { title: "Position", placeholder: "Back-end" },
-    { title: "School", placeholder: "FPT University" },
-    { title: "Address", placeholder: "District 9" },
-    { title: "Email", placeholder: "abc@gmail.com" },
-    { title: "Link CV", placeholder: "Link" },
-    { title: "Mentor", placeholder: "Ajmal Abdul" },
-    { title: "Project", placeholder: "Intern System" },
-    { title: "Group Zalo", placeholder: "FE Intern System" },
-    { title: "Role", placeholder: "Leader" },
-  ];
+    const handleContractChange = (value, record) => {
+        const updatedData = data.map((item) =>
+            item.key === record.key
+                ? { ...item, InternshipContract: value }
+                : item
+        );
+        setData(updatedData);
+        setFilteredData(updatedData);
+    };
 
-  const contractOptions = [
-    { label: "Signed", value: "Signed", color: "green" },
-    { label: "Pending", value: "Pending", color: "red" },
-  ];
+    const handleCancel = () => {
+        setVisible(false);
+    };
 
-  const groupButton = [
-    {
-      color: "#6537B1",
-      name: "Create Group",
-      icon: <UsergroupAddOutlined />,
-    },
-    {
-      color: "#41B137",
-      name: "Export Excel",
-      icon: <ExportOutlined />,
-    },
-    {
-      color: "#FB8632",
-      name: "Edit",
-      icon: <EditOutlined />,
-    },
-    {
-      color: "#FF3A2E",
-      name: "Delete",
-      icon: <DeleteOutlined />,
-    },
-    {
-      color: "#4889E9",
-      name: "Add New Intern",
-      icon: <FolderAddOutlined />,
-    },
-  ];
+    const statusOptions = [
+        { label: "Accepted", value: "Accepted", color: "green" },
+        { label: "Pending", value: "Pending", color: "red" },
+        { label: "Interviewed", value: "Interviewed", color: "orange" },
+    ];
 
-  const handleCreateIntern = () => {
-    setVisible(true);
-  };
+    const inputFields = [
+        { title: "Intern ID", placeholder: "#12345128" },
+        { title: "Full name", placeholder: "Esther Eden" },
+        { title: "Phone number ", placeholder: "090759355" },
+        { title: "Position", placeholder: "Back-end" },
+        { title: "School", placeholder: "FPT University" },
+        { title: "Address", placeholder: "District 9" },
+        { title: "Email", placeholder: "abc@gmail.com" },
+        { title: "Link CV", placeholder: "Link" },
+        { title: "Mentor", placeholder: "Ajmal Abdul" },
+        { title: "Project", placeholder: "Intern System" },
+        { title: "Group Zalo", placeholder: "FE Intern System" },
+        { title: "Role", placeholder: "Leader" },
+    ];
 
-  const columns = [
-    {
-      title: "",
-      dataIndex: "select",
-      render: (_, record) => <Checkbox />,
-      width: 50,
-    },
-    {
-      title: "Intern ID",
-      dataIndex: "InternId",
-      key: "InternId",
-      width: 140,
-    },
-    {
-      title: "Date of Interview",
-      dataIndex: "DateInterview",
-      key: "DateInterview",
-      width: 140,
-    },
-    {
-      title: "Time of Interview",
-      dataIndex: "TimeInterview",
-      key: "TimeInterview",
-      width: 140,
-    },
-    {
-      title: "Full Name",
-      dataIndex: "FullName",
-      key: "FullName",
-      width: 140,
-    },
-    {
-      title: "Date of Birth",
-      dataIndex: "DateOfBirth",
-      key: "DateOfBirth",
-      width: 140,
-    },
-    {
-      title: "Phone Number",
-      dataIndex: "PhoneNumber",
-      key: "PhoneNumber",
-      width: 140,
-    },
-    {
-      title: "Position",
-      dataIndex: "Position",
-      key: "Position",
-      width: 140,
-    },
-    {
-      title: "School",
-      dataIndex: "School",
-      key: "School",
-      width: 140,
-    },
-    {
-      title: "Address",
-      dataIndex: "Address",
-      key: "Address",
-      width: 140,
-    },
-    {
-      title: "Email",
-      dataIndex: "Email",
-      key: "Email",
-      width: 140,
-    },
-    {
-      title: "CV",
-      dataIndex: "CV",
-      key: "CV",
-      width: 140,
-    },
-    {
-      title: "Comments",
-      dataIndex: "Comments",
-      key: "Comments",
-      width: 140,
-    },
-    {
-      title: "Role",
-      dataIndex: "Role",
-      key: "Role",
-      width: 140,
-    },
-    {
-      title: "Project",
-      dataIndex: "Project",
-      key: "Project",
-      width: 140,
-    },
-    {
-      title: "Group Zalo",
-      dataIndex: "GroupZalo",
-      key: "GroupZalo",
-      width: 140,
-    },
-    {
-      title: "Mentor",
-      dataIndex: "Mentor",
-      key: "Mentor",
-      width: 140,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      key: "Status",
-      width: 140,
+    const contractOptions = [
+        { label: "Signed", value: "Signed", color: "green" },
+        { label: "Pending", value: "Pending", color: "red" },
+    ];
 
-      render: (text, record) => (
-        <Select
-          value={text}
-          onChange={(value) => handleStatusChange(value, record)}
-          style={{ width: 120 }}
-        >
-          {statusOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              <div
-                style={{
-                  color: option.color,
-                }}
-              >
-                {option.label}
-              </div>
-            </Option>
-          ))}
-        </Select>
-      ),
-    },
-    {
-      title: "Internship Contract",
-      dataIndex: "InternshipContract",
-      key: "InternshipContract",
-      width: 160,
-
-      render: (text, record) => (
-        <Select
-          value={text}
-          onChange={(value) => handleContractChange(value, record)}
-          style={{ width: 120 }}
-        >
-          {contractOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              <div style={{ color: option.color }}>{option.label}</div>
-            </Option>
-          ))}
-        </Select>
-      ),
-    },
-    {
-      title: "Button",
-      key: "Button",
-      width: 200,
-
-      render: (_, record) => (
-        <Space>
-          <Button
-            shape="round"
-            style={{
-              color: "#3498db",
-              borderColor: "#3498db",
-            }}
-          >
-            View
-          </Button>
-          <Button
-            shape="round"
-            style={{
-              color: "#3498db",
-              borderColor: "#3498db",
-            }}
-          >
-            Upload File
-          </Button>
-        </Space>
-      ),
-    },
-  ];
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [role, setRole] = useState("");
-  const [groupZalo, setGroupZalo] = useState("");
-  const [project, setProject] = useState("");
-  const [mentor, setMentor] = useState("");
-  const [groups, setGroups] = useState([]);
-  const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    fetchGroups();
-  }, []);
-
-  const fetchGroups = async () => {
-    try {
-      const response = await fetch(
-        "https://65f40c0f105614e654a1c922.mockapi.io/group"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch groups");
-      }
-      const data = await response.json();
-      setGroups(data);
-    } catch (error) {
-      console.error("Error fetching groups:", error);
-      message.error("Failed to fetch groups");
-    }
-  };
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCancel2 = () => {
-    setIsModalOpen(false);
-    setErrors({});
-  };
-
-  const validateFields = () => {
-    const newErrors = {};
-    if (!role) newErrors.role = "Role is required";
-    if (!groupZalo) newErrors.groupZalo = "Group Zalo is required";
-    if (!project) newErrors.project = "Project is required";
-    if (!mentor) newErrors.mentor = "Mentor is required";
-    return newErrors;
-  };
-
-  const handleCreateGroup = async () => {
-    const newErrors = validateFields();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      message.error("Please fill in all fields");
-      return;
-    }
-
-    const newGroup = { role, groupZalo, project, mentor };
-
-    try {
-      const response = await fetch(
-        "https://65f40c0f105614e654a1c922.mockapi.io/group",
+    const groupButton = [
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newGroup),
-        }
-      );
+            color: "#6537B1",
+            name: "Create Group",
+            icon: <UsergroupAddOutlined />,
+        },
+        {
+            color: "#41B137",
+            name: "Export Excel",
+            icon: <ExportOutlined />,
+        },
+        {
+            color: "#FB8632",
+            name: "Edit",
+            icon: <EditOutlined />,
+        },
+        {
+            color: "#FF3A2E",
+            name: "Delete",
+            icon: <DeleteOutlined />,
+        },
+        {
+            color: "#4889E9",
+            name: "Add New Intern",
+            icon: <FolderAddOutlined />,
+        },
+    ];
 
-      if (!response.ok) {
-        throw new Error("Failed to add new group");
-      }
+    const handleCreateIntern = () => {
+        setVisible(true);
+    };
 
-      const data = await response.json();
-      setGroups([...groups, data]);
-      setIsModalOpen(false);
+    const columns = [
+        {
+            title: "",
+            dataIndex: "select",
+            render: (_, record) => <Checkbox />,
+            width: 50,
+        },
+        {
+            title: "Intern ID",
+            dataIndex: "InternId",
+            key: "InternId",
+            width: 140,
+        },
+        {
+            title: "Date of Interview",
+            dataIndex: "DateInterview",
+            key: "DateInterview",
+            width: 140,
+        },
+        {
+            title: "Time of Interview",
+            dataIndex: "TimeInterview",
+            key: "TimeInterview",
+            width: 140,
+        },
+        {
+            title: "Full Name",
+            dataIndex: "FullName",
+            key: "FullName",
+            width: 140,
+        },
+        {
+            title: "Date of Birth",
+            dataIndex: "DateOfBirth",
+            key: "DateOfBirth",
+            width: 140,
+        },
+        {
+            title: "Phone Number",
+            dataIndex: "PhoneNumber",
+            key: "PhoneNumber",
+            width: 140,
+        },
+        {
+            title: "Position",
+            dataIndex: "Position",
+            key: "Position",
+            width: 140,
+        },
+        {
+            title: "School",
+            dataIndex: "School",
+            key: "School",
+            width: 140,
+        },
+        {
+            title: "Address",
+            dataIndex: "Address",
+            key: "Address",
+            width: 140,
+        },
+        {
+            title: "Email",
+            dataIndex: "Email",
+            key: "Email",
+            width: 140,
+        },
+        {
+            title: "CV",
+            dataIndex: "CV",
+            key: "CV",
+            width: 140,
+        },
+        {
+            title: "Comments",
+            dataIndex: "Comments",
+            key: "Comments",
+            width: 140,
+        },
+        {
+            title: "Role",
+            dataIndex: "Role",
+            key: "Role",
+            width: 140,
+        },
+        {
+            title: "Project",
+            dataIndex: "Project",
+            key: "Project",
+            width: 140,
+        },
+        {
+            title: "Group Zalo",
+            dataIndex: "GroupZalo",
+            key: "GroupZalo",
+            width: 140,
+        },
+        {
+            title: "Mentor",
+            dataIndex: "Mentor",
+            key: "Mentor",
+            width: 140,
+        },
+        {
+            title: "Status",
+            dataIndex: "Status",
+            key: "Status",
+            width: 140,
 
-      // Reset form values
-      setRole("");
-      setGroupZalo("");
-      setProject("");
-      setMentor("");
-      setErrors({});
-    } catch (error) {
-      console.error("Error adding new group:", error);
-      message.error("Failed to add new group");
-    }
-  };
-
-  const onChangeRole = (value) => {
-    setRole(value);
-  };
-
-  const onChangeProject = (value) => {
-    setProject(value);
-  };
-
-  const filterOption = (input, option) =>
-    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-
-  return (
-    <>
-      <div>
-        <MainLayout>
-          <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
-            <Navigation
-              titleName="GROUP LIST"
-              groupButton={groupButton}
-              onSendEmail={showModal}
-              onCreateIntern={handleCreateIntern}
-            />
-          </div>
-          <div>
-            <Row>
-              <Col span={1}></Col>
-              <Col span={23}>
-                <div
-                  style={{
-                    backgroundColor: "white",
-                    borderRadius: "25px",
-                    width: "96%",
-                  }}
+            render: (text, record) => (
+                <Select
+                    value={text}
+                    onChange={(value) => handleStatusChange(value, record)}
+                    style={{ width: 120 }}
                 >
-                  <Space
-                    style={{
-                      margin: "20px 0 30px 30px ",
-                      width: isMobile ? "93%" : "960px",
-                      flexDirection: isMobile ? "column" : "row",
-                      alignItems: "unset",
-                    }}
-                    size={[8, 8]}
-                    wrap
-                  >
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's ID"
-                      name="InternId"
-                      value={filters.InternId}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Full name"
-                      name="FullName"
-                      value={filters.FullName}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's D.O.B"
-                      name="DOB"
-                      value={filters.DOB}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Phone number"
-                      name="PhoneNumber"
-                      value={filters.PhoneNumber}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Address"
-                      name="Address"
-                      value={filters.Address}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Email"
-                      name="Email"
-                      value={filters.Email}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Major"
-                      name="Major"
-                      value={filters.Major}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Position"
-                      name="Position"
-                      value={filters.Position}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's School"
-                      name="School"
-                      value={filters.School}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Title"
-                      name="Title"
-                      value={filters.Title}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Project"
-                      name="Project"
-                      value={filters.Project}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder="Enter intern's Group Zalo"
-                      name="GroupZalo"
-                      value={filters.GroupZalo}
-                      onChange={handleFilterChange}
-                    />
-                  </Space>
-                  <Space
-                    direction="vertical"
-                    style={{
-                      width: isMobile ? "96%" : "0",
-                      marginBottom: isMobile ? "30px" : 0,
-                      margin: isMobile ? "0 10px" : "0",
-                    }}
-                  >
+                    {statusOptions.map((option) => (
+                        <Option key={option.value} value={option.value}>
+                            <div
+                                style={{
+                                    color: option.color,
+                                }}
+                            >
+                                {option.label}
+                            </div>
+                        </Option>
+                    ))}
+                </Select>
+            ),
+        },
+        {
+            title: "Internship Contract",
+            dataIndex: "InternshipContract",
+            key: "InternshipContract",
+            width: 160,
+
+            render: (text, record) => (
+                <Select
+                    value={text}
+                    onChange={(value) => handleContractChange(value, record)}
+                    style={{ width: 120 }}
+                >
+                    {contractOptions.map((option) => (
+                        <Option key={option.value} value={option.value}>
+                            <div style={{ color: option.color }}>
+                                {option.label}
+                            </div>
+                        </Option>
+                    ))}
+                </Select>
+            ),
+        },
+        {
+            title: "Button",
+            key: "Button",
+            width: 200,
+
+            render: (_, record) => (
+                <Space>
                     <Button
-                      style={{
-                        width: isMobile ? "100%" : 120,
-                      }}
-                      icon={<FilterOutlined />}
-                      onClick={handleClearFilters}
+                        shape="round"
+                        style={{
+                            color: "#3498db",
+                            borderColor: "#3498db",
+                        }}
                     >
-                      Clear filter
+                        View
                     </Button>
                     <Button
-                      style={{
-                        backgroundColor: "#4889E9",
-                        color: "white",
-                        width: isMobile ? "100%" : 120,
-                      }}
-                      icon={<SearchOutlined />}
-                      onClick={handleSearch}
+                        shape="round"
+                        style={{
+                            color: "#3498db",
+                            borderColor: "#3498db",
+                        }}
                     >
-                      Search
+                        Upload File
                     </Button>
-                  </Space>
-                  <div
+                </Space>
+            ),
+        },
+    ];
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [role, setRole] = useState("");
+    const [groupZalo, setGroupZalo] = useState("");
+    const [project, setProject] = useState("");
+    const [mentor, setMentor] = useState("");
+    const [groups, setGroups] = useState([]);
+    const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        fetchGroups();
+    }, []);
+
+    const fetchGroups = async () => {
+        try {
+            const response = await fetch(
+                "https://65f40c0f105614e654a1c922.mockapi.io/group"
+            );
+            if (!response.ok) {
+                throw new Error("Failed to fetch groups");
+            }
+            const data = await response.json();
+            setGroups(data);
+        } catch (error) {
+            console.error("Error fetching groups:", error);
+            message.error("Failed to fetch groups");
+        }
+    };
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCancel2 = () => {
+        setIsModalOpen(false);
+        setErrors({});
+    };
+
+    const validateFields = () => {
+        const newErrors = {};
+        if (!role) newErrors.role = "Role is required";
+        if (!groupZalo) newErrors.groupZalo = "Group Zalo is required";
+        if (!project) newErrors.project = "Project is required";
+        if (!mentor) newErrors.mentor = "Mentor is required";
+        return newErrors;
+    };
+
+    const handleCreateGroup = async () => {
+        const newErrors = validateFields();
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            message.error("Please fill in all fields");
+            return;
+        }
+
+        const newGroup = { role, groupZalo, project, mentor };
+
+        try {
+            const response = await fetch(
+                "https://65f40c0f105614e654a1c922.mockapi.io/group",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(newGroup),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to add new group");
+            }
+
+            const data = await response.json();
+            setGroups([...groups, data]);
+            setIsModalOpen(false);
+
+            // Reset form values
+            setRole("");
+            setGroupZalo("");
+            setProject("");
+            setMentor("");
+            setErrors({});
+        } catch (error) {
+            console.error("Error adding new group:", error);
+            message.error("Failed to add new group");
+        }
+    };
+
+    const onChangeRole = (value) => {
+        setRole(value);
+    };
+
+    const onChangeProject = (value) => {
+        setProject(value);
+    };
+
+    const filterOption = (input, option) =>
+        (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+    return (
+        <>
+            <div>
+                <MainLayout>
+                    <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
+                        <Navigation
+                            titleName="GROUP LIST"
+                            groupButton={groupButton}
+                            onSendEmail={showModal}
+                            onCreateIntern={handleCreateIntern}
+                        />
+                    </div>
+                    <div>
+                        <Row>
+                            <Col span={1}></Col>
+                            <Col span={23}>
+                                <div
+                                    style={{
+                                        paddingRight: isMobile ? "10px" : "0",
+                                        backgroundColor: "white",
+                                        borderRadius: "25px",
+                                        width: "96%",
+                                    }}
+                                >
+                                    <Space
+                                        className="space-bg"
+                                        style={{
+                                            margin: "20px 0px 30px 30px ",
+                                            width: isMobile ? "93%" : "960px",
+                                            flexDirection: isMobile
+                                                ? "column"
+                                                : "row",
+                                            alignItems: "unset",
+                                        }}
+                                        size={[8, 8]}
+                                        wrap
+                                    >
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's ID"
+                                            name="InternId"
+                                            value={filters.InternId}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Full name"
+                                            name="FullName"
+                                            value={filters.FullName}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's D.O.B"
+                                            name="DOB"
+                                            value={filters.DOB}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Phone number"
+                                            name="PhoneNumber"
+                                            value={filters.PhoneNumber}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Address"
+                                            name="Address"
+                                            value={filters.Address}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Email"
+                                            name="Email"
+                                            value={filters.Email}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Major"
+                                            name="Major"
+                                            value={filters.Major}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Position"
+                                            name="Position"
+                                            value={filters.Position}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's School"
+                                            name="School"
+                                            value={filters.School}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Title"
+                                            name="Title"
+                                            value={filters.Title}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Project"
+                                            name="Project"
+                                            value={filters.Project}
+                                            onChange={handleFilterChange}
+                                        />
+                                        <Input
+                                            style={inputStyle}
+                                            placeholder="Enter intern's Group Zalo"
+                                            name="GroupZalo"
+                                            value={filters.GroupZalo}
+                                            onChange={handleFilterChange}
+                                        />
+                                    </Space>
+                                    <Space
+                                        direction="vertical"
+                                        style={{
+                                            width: isMobile ? "100%" : "10%",
+                                            // marginBottom: isMobile ? "30px" : 0,
+                                            paddingLeft: isMobile ? "30px" : 0,
+                                            margin: isMobile
+                                                ? "0 0 30px 3.6%"
+                                                : "0 30px",
+                                        }}
+                                    >
+                                        <Button
+                                            style={{
+                                                width: isMobile ? "86%" : 120,
+                                            }}
+                                            icon={<FilterOutlined />}
+                                            onClick={handleClearFilters}
+                                        >
+                                            Clear filter
+                                        </Button>
+                                        <Button
+                                            style={{
+                                                backgroundColor: "#4889E9",
+                                                color: "white",
+                                                width: isMobile ? "86%" : 120,
+                                            }}
+                                            icon={<SearchOutlined />}
+                                            onClick={handleSearch}
+                                        >
+                                            Search
+                                        </Button>
+                                    </Space>
+                                    <div
+                                        style={{
+                                            overflowX: "auto",
+                                            width: isMobile ? "100%" : "100%",
+                                        }}
+                                    >
+                                        <Table
+                                            columns={columns}
+                                            dataSource={filteredData}
+                                            scroll={{ x: 1400 }}
+                                            pagination={{ pageSize: 6 }}
+                                        />
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                </MainLayout>
+
+                <Modal
+                    title={
+                        <span style={{ fontSize: "25px" }}>Add New Intern</span>
+                    }
+                    open={visible}
+                    onCancel={handleCancel}
+                    footer={[
+                        <Button
+                            key="addNewIntern"
+                            type="primary"
+                            onClick={handleCancel}
+                            style={{ margin: " 20px 20px 0 0" }}
+                        >
+                            Add New Intern
+                        </Button>,
+                    ]}
+                    width="55%"
+                >
+                    <Space size={[30, 50]} wrap style={{ marginTop: "20px" }}>
+                        {inputFields.map((field) => (
+                            <Space direction="vertical" size="small">
+                                <label style={{ fontWeight: "bold" }}>
+                                    {field.title}
+                                </label>
+                                <Input
+                                    placeholder={field.placeholder}
+                                    style={{
+                                        width: "325px",
+                                        height: "60px",
+                                        borderRadius: "15px",
+                                    }}
+                                />
+                            </Space>
+                        ))}
+                    </Space>
+                </Modal>
+
+                <Modal
+                    title={<h2>Create group</h2>}
+                    open={isModalOpen}
+                    onCancel={handleCancel2}
+                    footer={null}
                     style={{
-                      overflowX: "auto",
-                      width: isMobile ? "100%" : "100%",
+                        maxWidth: "1200px",
+                        width: "100%",
                     }}
-                  >
-                    <Table
-                      columns={columns}
-                      dataSource={filteredData}
-                      scroll={{ x: 1400 }}
-                      pagination={{ pageSize: 6 }}
-                    />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </MainLayout>
+                >
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div style={{ width: "33%" }}>
+                            <p>
+                                <b>Role</b>
+                            </p>
+                            <Select
+                                showSearch
+                                placeholder="Select a role"
+                                optionFilterProp="children"
+                                onChange={onChangeRole}
+                                filterOption={filterOption}
+                                style={{ width: "100%" }}
+                                options={[
+                                    { value: "Admin", label: "Admin" },
+                                    {
+                                        value: "Human resources",
+                                        label: "Human resources",
+                                    },
+                                    { value: "Mentor", label: "Mentor" },
+                                    { value: "School", label: "School" },
+                                    { value: "Intern", label: "Intern" },
+                                ]}
+                                value={role}
+                            />
+                            {errors.role && (
+                                <p style={{ color: "red" }}>{errors.role}</p>
+                            )}
 
-        <Modal
-          title={<span style={{ fontSize: "25px" }}>Add New Intern</span>}
-          open={visible}
-          onCancel={handleCancel}
-          footer={[
-            <Button
-              key="addNewIntern"
-              type="primary"
-              onClick={handleCancel}
-              style={{ margin: " 20px 20px 0 0" }}
-            >
-              Add New Intern
-            </Button>,
-          ]}
-          width="55%"
-        >
-          <Space size={[30, 50]} wrap style={{ marginTop: "20px" }}>
-            {inputFields.map((field) => (
-              <Space direction="vertical" size="small">
-                <label style={{ fontWeight: "bold" }}>{field.title}</label>
-                <Input
-                  placeholder={field.placeholder}
-                  style={{
-                    width: "325px",
-                    height: "60px",
-                    borderRadius: "15px",
-                  }}
-                />
-              </Space>
-            ))}
-          </Space>
-        </Modal>
+                            {/* Mentor */}
+                            <p>
+                                <b>Mentor</b>
+                            </p>
+                            <Input
+                                style={{ width: "100%" }}
+                                placeholder="Mentor name"
+                                value={mentor}
+                                onChange={(e) => setMentor(e.target.value)}
+                            />
+                            {errors.mentor && (
+                                <p style={{ color: "red" }}>{errors.mentor}</p>
+                            )}
+                        </div>
+                        <div
+                            style={{
+                                width: "33%",
+                                paddingLeft: "16px",
+                                paddingRight: "16px",
+                                marginLeft: "20px",
+                            }}
+                        >
+                            {/* Project */}
+                            <p>
+                                <b>Project</b>
+                            </p>
+                            <Select
+                                showSearch
+                                placeholder="Select a project"
+                                optionFilterProp="children"
+                                onChange={onChangeProject}
+                                filterOption={filterOption}
+                                style={{ width: "100%" }}
+                                options={[
+                                    { value: "Project 1", label: "Project 1" },
+                                ]}
+                                value={project}
+                            />
+                            {errors.project && (
+                                <p style={{ color: "red" }}>{errors.project}</p>
+                            )}
+                        </div>
 
-        <Modal
-          title={<h2>Create group</h2>}
-          open={isModalOpen}
-          onCancel={handleCancel2}
-          footer={null}
-          style={{
-            maxWidth: "1200px",
-            width: "100%",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div style={{ width: "33%" }}>
-              <p>
-                <b>Role</b>
-              </p>
-              <Select
-                showSearch
-                placeholder="Select a role"
-                optionFilterProp="children"
-                onChange={onChangeRole}
-                filterOption={filterOption}
-                style={{ width: "100%" }}
-                options={[
-                  { value: "Admin", label: "Admin" },
-                  { value: "Human resources", label: "Human resources" },
-                  { value: "Mentor", label: "Mentor" },
-                  { value: "School", label: "School" },
-                  { value: "Intern", label: "Intern" },
-                ]}
-                value={role}
-              />
-              {errors.role && <p style={{ color: "red" }}>{errors.role}</p>}
-
-              {/* Mentor */}
-              <p>
-                <b>Mentor</b>
-              </p>
-              <Input
-                style={{ width: "100%" }}
-                placeholder="Mentor name"
-                value={mentor}
-                onChange={(e) => setMentor(e.target.value)}
-              />
-              {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
+                        <div style={{ width: "33%", paddingLeft: "16px" }}>
+                            {/* Group zalo */}
+                            <p>
+                                <b>Group zalo</b>
+                            </p>
+                            <Input
+                                style={{ width: "100%" }}
+                                placeholder="FE intern system"
+                                value={groupZalo}
+                                onChange={(e) => setGroupZalo(e.target.value)}
+                            />
+                            {errors.groupZalo && (
+                                <p style={{ color: "red" }}>
+                                    {errors.groupZalo}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                    <div style={{ marginTop: 16, textAlign: "right" }}>
+                        <Button
+                            type="primary"
+                            onClick={handleCreateGroup}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginLeft: "auto",
+                                backgroundColor: "#6537B1",
+                                padding: "20px",
+                                borderRadius: "10px",
+                            }}
+                        >
+                            <span>Create group</span>
+                        </Button>
+                    </div>
+                </Modal>
             </div>
-            <div
-              style={{
-                width: "33%",
-                paddingLeft: "16px",
-                paddingRight: "16px",
-                marginLeft: "20px",
-              }}
-            >
-              {/* Project */}
-              <p>
-                <b>Project</b>
-              </p>
-              <Select
-                showSearch
-                placeholder="Select a project"
-                optionFilterProp="children"
-                onChange={onChangeProject}
-                filterOption={filterOption}
-                style={{ width: "100%" }}
-                options={[{ value: "Project 1", label: "Project 1" }]}
-                value={project}
-              />
-              {errors.project && (
-                <p style={{ color: "red" }}>{errors.project}</p>
-              )}
-            </div>
-
-            <div style={{ width: "33%", paddingLeft: "16px" }}>
-              {/* Group zalo */}
-              <p>
-                <b>Group zalo</b>
-              </p>
-              <Input
-                style={{ width: "100%" }}
-                placeholder="FE intern system"
-                value={groupZalo}
-                onChange={(e) => setGroupZalo(e.target.value)}
-              />
-              {errors.groupZalo && (
-                <p style={{ color: "red" }}>{errors.groupZalo}</p>
-              )}
-            </div>
-          </div>
-          <div style={{ marginTop: 16, textAlign: "right" }}>
-            <Button
-              type="primary"
-              onClick={handleCreateGroup}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginLeft: "auto",
-                backgroundColor: "#6537B1",
-                padding: "20px",
-                borderRadius: "10px",
-              }}
-            >
-              <span>Create group</span>
-            </Button>
-          </div>
-        </Modal>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default GroupList;
