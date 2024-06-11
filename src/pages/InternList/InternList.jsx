@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Toaster, toast } from 'react-hot-toast';
-
 import {
   MailOutlined,
   ExportOutlined,
@@ -12,12 +10,12 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { Table, Select, Button, Input, Col, Row } from "antd";
-import DataInternList from "../../data/InternList.json";  // data of table intern list
+import DataInternList from "../../data/InternList.json"; // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
 import SendEmailPopup from "./SendEmailPopup";
 import ReportProcessModal from "./ReportProcessPopup";
 import ViewButton from "./ViewButton";
-import './InternList.css';
+import "./InternList.css";
 import MainLayout from "../../MainLayout/MainLayout";
 import useViewport from "../../hooks/useViewport";
 
@@ -157,12 +155,11 @@ const rowSelection = {
 };
 
 const InternList = () => {
-
   const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
-  const [dataTable, setDataTable] = useState(DataInternList)
-  const viewPort = useViewport()
-  const isMobile = viewPort.width <= 1024
+  const [dataTable, setDataTable] = useState(DataInternList);
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
 
   // state of filter
   const [filter, setFilter] = useState({
@@ -502,6 +499,7 @@ const InternList = () => {
   };
 
   return (
+    {/*Project-Management*/}
       <div>
         <MainLayout>
           {/* Content of InternList */}
@@ -779,6 +777,6 @@ const InternList = () => {
         <Toaster />
       </div>
   );
-}
+};
 
 export default InternList;
