@@ -6,9 +6,8 @@ import useViewport from "../../hooks/useViewport";
 import { Input } from "antd";
 
 const Navigation = (props) => {
-  const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
-
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 1024;
 
     return (
         <div className="content-navigation">
@@ -17,50 +16,31 @@ const Navigation = (props) => {
                     {props.titleName}
                 </div>
                 <div className="group-header-navigation">
-                    {!isMobile ? (<div className="account-setting">
-                        <AccountSetting />
-                    </div>) : (<div className="account-setting-mobile">
-                        <AccountSetting />
-                    </div>)}           
+                    {!isMobile ? (
+                        <div className="account-setting">
+                            <AccountSetting />
+                        </div>
+                    ) : (
+                        <div className="account-setting-mobile">
+                            <AccountSetting />
+                        </div>
+                    )}
                 </div>
-            </div>            
+            </div>
             <div className="navigation">
                 <div className="search-navigation">
-                    {/* {isMobile ? 'Search' : 'Search for Information'} */}
                     <Input placeholder={isMobile ? 'Search' : 'Search for Information'} variant="filled" />
                 </div>
-                {/* Pass props to GroupButton from InternList */}
                 <div className="group-button-navigation">
-                    <GroupButton groupButton={props.groupButton} onSendEmail={props.onSendEmail} onScheduleInterview={props.onScheduleInterview}/>
+                    <GroupButton
+                        groupButton={props.groupButton}
+                        onSendEmail={props.onSendEmail}
+                        onScheduleInterview={props.onScheduleInterview}
+                    />
                 </div>
-
             </div>
-          ) : (
-            <div className="account-setting-mobile">
-              <AccountSetting />
-            </div>
-          )}
         </div>
-      </div>
-      <div className="navigation">
-        <div className="search-navigation">
-          {/* {isMobile ? 'Search' : 'Search for Information'} */}
-          <Input
-            placeholder={isMobile ? "Search" : "Search for Information"}
-            variant="filled"
-          />
-        </div>
-        {/* Pass props to GroupButton from InternList */}
-        <div className="group-button-navigation">
-          <GroupButton
-            groupButton={props.groupButton}
-            onSendEmail={props.onSendEmail}
-            onCreateIntern={props.onCreateIntern}
-          />
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Navigation;
