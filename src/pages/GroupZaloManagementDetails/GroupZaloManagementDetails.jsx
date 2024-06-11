@@ -21,32 +21,34 @@ const { Title } = Typography;
 
 import SenderContainer from "../../components/ChatContainer/SenderContainer";
 import ReceiverContainer from "../../components/ChatContainer/ReceiverContainer";
+import { useTranslation } from "react-i18next";
 
 const GroupZaloManagementDetails = () => {
+  const {t} = useTranslation()
   const groupButton = [
     {
       color: "#6537B1",
-      name: "Schedule interview",
+      name: t("Schedule interview"),
       icon: <ClockCircleOutlined />,
     },
     {
       color: "#41B137",
-      name: "Export Excel",
+      name: t("Export Excel"),
       icon: <ExportOutlined />,
     },
     {
       color: "#FB8632",
-      name: "Edit",
+      name: t("Edit"),
       icon: <EditOutlined />,
     },
     {
       color: "#FF3A2E",
-      name: "Delete",
+      name: t("Delete"),
       icon: <DeleteOutlined />,
     },
     {
       color: "#4889E9",
-      name: "Add New Intern",
+      name: t("Add New Intern"),
       icon: <FolderAddOutlined />,
     },
   ];
@@ -119,19 +121,19 @@ const GroupZaloManagementDetails = () => {
                     Designer_FU_SP24
                   </Title>
                   <Title level={5} style={{ margin: 0 }}>
-                    50 members
+                    50 {t("members")}
                   </Title>
                 </div>
                 <div style={{ flex: "0 0 auto" }}>
                   <SearchOutlined />
                   <a href="" style={{ marginRight: "20px" }}>
-                    View in Zalo
+                    {t("View in Zalo")}
                   </a>
                 </div>
               </Flex>
 
               <SenderContainer
-                message="Are you done with the work? Reply soon"
+                message={t("Are you done with the work? Reply soon")}
                 avatar="https://picsum.photos/200/300"
               />
               {messages.map((message, index) => (
@@ -172,7 +174,7 @@ const GroupZaloManagementDetails = () => {
               <Input
                 value={inputValue}
                 onChange={handleInputChange}
-                placeholder="Type a message"
+                placeholder={t("Type a message")}
                 style={{
                   flex: 1,
                   marginBottom: "40px",

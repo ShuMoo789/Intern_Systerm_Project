@@ -64,6 +64,7 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    justify-content: space-between;
 }
 
 .filter-box {
@@ -71,6 +72,7 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 .filter-input {
@@ -87,7 +89,7 @@
 }
 
 .clean-filters-button,
-.search-button,
+.searchpm-button,
 .action-buttons button {
     display: flex;
     align-items: center;
@@ -103,12 +105,16 @@
     color: black;
 }
 
-.search-button {
+.searchpm-button {
     background-color: #4889e9;
     border: 1px solid rgba(72, 137, 233, 0.5);
     color: #fff;
+    margin-top: 10px;
 }
 
+.filterbuttons{
+    width: fit-content;
+}
 .action-buttons {
     display: flex;
     gap: 10px;
@@ -218,7 +224,7 @@
 
 .pagination {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     padding: 10px;
     background-color: var(--gray-light-background-gray-1, #f8f9fb);

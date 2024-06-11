@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DatePicker, TimePicker, Button, Modal } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const ViewButton = () => {
   const [open, setOpen] = useState(false);
@@ -8,7 +9,7 @@ const ViewButton = () => {
   const [date, setDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [timeDuration, setTimeDuration] = useState('15 minutes');
-
+  const {t} = useTranslation()
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
@@ -44,12 +45,12 @@ const ViewButton = () => {
     <>
       <Button type="primary" onClick={showModal} style={{ background: "white", color: "blue", border: "1px solid blue", borderRadius: "15px" }}>
 
-        View
+        {t("View")}
       </Button>
 
       <Modal
         open={open}
-        title="Schedule interview for Intern's ID: xxxx"
+        title={t("Schedule interview for Intern's ID: xxxx")}
         onOk={handleOk}
         onCancel={handleCancel}
         width={1125}
@@ -61,7 +62,7 @@ const ViewButton = () => {
 
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Intern ID</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Intern ID")}</label>
               <div
                 type="text"
                 value={date}
@@ -87,7 +88,7 @@ const ViewButton = () => {
             </div>
 
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Full Name</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Full Name")}</label>
               <div
                 type="text"
                 value={date}
@@ -110,7 +111,7 @@ const ViewButton = () => {
               </div>
             </div>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Date Of Birth</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Date Of Birth")}</label>
               <div
                 type="text"
                 value={date}
@@ -136,7 +137,7 @@ const ViewButton = () => {
 
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Phone Number</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Phone Number")}</label>
               <div
                 type="text"
                 value={date}
@@ -160,7 +161,7 @@ const ViewButton = () => {
             </div>
 
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Position</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Position")}</label>
               <div
                 type="text"
                 value={date}
@@ -183,7 +184,7 @@ const ViewButton = () => {
               </div>
             </div>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>School</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("School")}</label>
               <div
                 type="text"
                 value={date}
@@ -209,7 +210,7 @@ const ViewButton = () => {
 
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Adress</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Address")}</label>
               <div
                 type="text"
                 value={date}
@@ -233,7 +234,7 @@ const ViewButton = () => {
             </div>
 
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Email</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Email")}</label>
               <div
                 type="text"
                 value={date}
@@ -256,7 +257,7 @@ const ViewButton = () => {
               </div>
             </div>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Lin CV</label>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Link CV</label>
               <div
                 type="text"
                 value={date}
@@ -280,7 +281,7 @@ const ViewButton = () => {
             </div>
           </div>
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Rank</label>
+            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>{t("Rank")}</label>
             <div
               type="text"
               value={date}
@@ -299,7 +300,7 @@ const ViewButton = () => {
                 textAlign: 'left', // Ensure text alignment is left
               }}
             >
-              Intern
+              {t("Intern")}
             </div>
           </div>
 

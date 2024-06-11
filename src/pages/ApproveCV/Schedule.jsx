@@ -144,10 +144,10 @@ const Sheldule = () => {
     style={{ width: '260px',height:"57px", padding: '8px', border: '1px solid #ccc', borderRadius: '10px' }}
   >
 
-    <option value="15 minutes">15 minutes</option>
-    <option value="30 minutes">30 minutes</option>
-    <option value="45 minutes">45 minutes</option>
-    <option value="1 hour">1 hour</option>
+    <option value={t("15 minutes")}> {t("15 minutes")}</option>
+    <option value={t("30 minutes")}> {t("30 minutes")}</option>
+    <option value={t("45 minutes")}> {t("45 minutes")}</option>
+    <option value={t("1 hour")}> {t("1 hour")}</option>
   </select>
 </div>
 

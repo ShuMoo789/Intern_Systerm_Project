@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, Button, Input, Typography, Row, Col } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 
 const ReportProcessModal = ({ record }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [reportText, setReportText] = useState('');
-
+    const {t} = useTranslation() 
     const { TextArea } = Input;
     const onChange = (e) => {
         console.log('Change:', e.target.value);
@@ -38,38 +39,38 @@ const ReportProcessModal = ({ record }) => {
     return (
         <>
             <Button onClick={showModal}>
-                Report Process
+                {t("Report Process")}
                 <EditOutlined />
             </Button>
             <Modal
                 width={700}
-                title="Report Process"
+                title={t("Report Process")}
                 visible={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 footer={
                     <Button type="primary" onClick={handleSave} style={{ backgroundColor: "#771BB8", height: 45, borderRadius: 10, marginRight: 50 }}>
-                        <SaveOutlined /> Save Changes
+                        <SaveOutlined /> {t("Save Changes")}
                     </Button>
                 }
             >
                 <div style={{ paddingBottom: 20 }}>
                     <Row gutter={16}>
                         <Col span={8}>
-                            <h5>Position</h5>
+                            <h5>{t("Position")}</h5>
                             <Input placeholder="Front-end" />
                         </Col>
                         <Col span={8}>
-                            <h5>Project</h5>
+                            <h5>{t("Project")}</h5>
                             <Input placeholder="Intern system" />
                         </Col>
                         <Col span={8}>
-                            <h5>Mentor</h5>
+                            <h5>{t("Mentor")}</h5>
                             <Input placeholder="Ajmal Abdui" />
                         </Col>
                     </Row>
                 </div>
-                <h5>Reports</h5>
+                <h5>{t("Reports")}</h5>
                 <TextArea
 
 

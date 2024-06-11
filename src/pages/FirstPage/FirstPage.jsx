@@ -9,7 +9,8 @@ import {
   CloseOutlined,
 } from "@ant-design/icons"; // Import the icons from Ant Design
 import { Link } from "react-router-dom";
-
+import Header from "../../components/header/Header";
+import { useTranslation } from "react-i18next";
 const accounts = [
   {
     name: "Francis Sam",
@@ -30,7 +31,7 @@ const accounts = [
 
 const First_Page = ({ Accounts }) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true); // Initialize state for menu collapse
-
+  const {t} = useTranslation()
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -42,7 +43,8 @@ const First_Page = ({ Accounts }) => {
 
   return (
     <>
-      <Row className="container-background">
+      <Row className="container-background" style={{ backgroundColor: "white", minHeight: "100vh", padding: "0 65px" }}>
+        <Header/>
         <Col span={9}></Col>
         <Col span={4.5}>
           <Row>
@@ -60,14 +62,14 @@ const First_Page = ({ Accounts }) => {
           </Row>
           <h3 className="UsernameCurent">Natalie Brogan</h3>
           <Link to="/Profile">
-            <Button className="ManageAccount">Manage Your Account</Button>
+            <Button className="ManageAccount">{t("Manage Your Account")}</Button>
           </Link>
 
           <div className="container-cover">
             <div className="container-1">
               <Button type="text" className="btn-hide-acc" onClick={toggleMenu}>
                 <span className="btn-text showandhide">
-                  {isCollapsed ? "Show accounts" : "Hide accounts"}
+                  {isCollapsed ? t("Show accounts") : t("Hide accounts")}
                 </span>
                 <span className="btn-icon icon-large">
                   {isCollapsed ? <DownOutlined /> : <UpOutlined />}
@@ -103,7 +105,7 @@ const First_Page = ({ Accounts }) => {
                     }
                     icon={<PlusOutlined />}
                   >
-                    Add account
+                    {t("Add account")}
                   </Button>
                 </Link>
                 <Button
@@ -113,7 +115,7 @@ const First_Page = ({ Accounts }) => {
                   }
                   icon={<PlusOutlined />}
                 >
-                  Sign out
+                  {t("Sign out")}
                 </Button>
               </div>
             </div>

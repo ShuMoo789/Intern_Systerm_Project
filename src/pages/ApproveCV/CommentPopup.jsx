@@ -245,15 +245,15 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         <h3>{t("Question of Technology")}</h3>
                         <div className="field qot">
                             <div className="question">
-                                <label><h4>{t("Question 1")}</h4></label>
+                                <label><h4>{t("Question")} 1</h4></label>
                                 <Input placeholder={t("Enter intern's answer")} />
                             </div>
                             <div className="question">
-                                <label><h4>{t("Question 2")}</h4></label>
+                                <label><h4>{t("Question")} 2</h4></label>
                                 <Input />
                             </div>
                             <div className="question">
-                                <label><h4>{t("Question 3")}</h4></label>
+                                <label><h4>{t("Question")} 3</h4></label>
                                 <Input />
                             </div>
                         </div>

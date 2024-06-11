@@ -176,17 +176,17 @@ function ApproveCV() {
           <div
             className="Status"
             style={
-              intern.status === "Pending"
+              intern.status === t("Pending")
                 ? {
                     backgroundColor: "#FFB596",
                     color: "#E5731C",
                   }
-                : intern.status === "Failed"
+                : intern.status === t("Failed")
                 ? {
                     backgroundColor: "#F5A3B7",
                     color: "#7D0022",
                   }
-                : intern.status === "Passed"
+                : intern.status === t("Passed")
                 ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
                 : {}
             }
@@ -390,7 +390,8 @@ function ApproveCV() {
 
   const { t,i18n } = useTranslation();
   const [optionChoose, setOptionChoose] = useState([]);
-
+  const commentText = t("comment");
+  const commentsText = t("comments")
   // checkbox table Ant Design
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -461,6 +462,7 @@ function ApproveCV() {
       title: t("School"),
       dataIndex: "school",
       width: 160,
+      render: (text) => t(text)
       // filteredValue: [selectedFilters.school],
       // onFilter: (value, record) => {
       //     return record.school.includes(value)
@@ -470,7 +472,8 @@ function ApproveCV() {
       title: t("Address"),
       dataIndex: "address",
       width: 120,
-      // filteredValue: [selectedFilters.address],
+      filteredValue: [selectedFilters.address],
+      render: (text) => t(text)
       // onFilter: (value, record) => {
       //     return record.address.includes(value)
       // }
@@ -506,7 +509,7 @@ function ApproveCV() {
           onClick={() => handleCommentClick(intern)}
           style={{ width: "100%" }}
         >
-          {text === "1" ? `${text} comment` : `${text} comments`}
+          { text === "1" ? `${text} ${commentText}`  : `${text} ${commentsText}`}
           <EyeOutlined />
         </Button>
       ),
@@ -518,12 +521,14 @@ function ApproveCV() {
       render: (text) => {
         return (
           <Select
-            defaultValue={text}
+            defaultValue= {text}
             style={{
               width: 100,
-            }}
-            options={optionChoose}
-          />
+            }}>
+            <Option value="Pending">{t("Pending")}</Option>
+            <Option value="Failed">{t("Failed")}</Option>
+            <Option value="Passed">{t("Passed")}</Option>
+          </Select>
         );
       },
     },
@@ -544,30 +549,32 @@ function ApproveCV() {
   ];
 
   // option of status column
-  useEffect(() => {
+  
   const optionSelect = [
     {
       value: "passed",
-      label: t("Passed"),
+      label: "Passed",
     },
     {
       value: "failed",
-      label: t("Failed"),
+      label: "Failed",
     },
     {
       value: "pending",
-      label: t("Pending"),
+      label: "Pending",
     },
   ];
-  setOptionChoose(optionSelect)
-}, [t])
+  const translatedData = optionSelect.map(item => ({
+    value: item.value,
+    label: t(item.label),
+  }));
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
           <header className="content-header">
-            <h1 className="content-title">Approve CV</h1>
-            <Header/>
+            <h1 className="content-title">{t("Approve CV")}</h1>
+            
             <div className="user-info">
               <img
                 loading="lazy"

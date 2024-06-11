@@ -11,6 +11,7 @@ import {
 } from "antd";
 import { EllipsisOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import "./SelectFilter.css"; // Import file CSS
+import { useTranslation } from "react-i18next";
 
 // Avatar Group
 const AvatarGroup = () => {
@@ -77,6 +78,7 @@ const AvatarGroup = () => {
 
 // Item Group
 const GroupItem = ({ data }) => {
+  const {t} = useTranslation()
   const menuButton = (
     <Menu>
       <Menu.Item key="1">Option 1</Menu.Item>
@@ -95,7 +97,7 @@ const GroupItem = ({ data }) => {
             {data.title}
           </Typography.Title>
           <a href="/GroupZaloManagementDetails" className="click-view">
-            Click to view
+            {t("Click to view")}
           </a>
         </div>
       </div>
@@ -114,7 +116,7 @@ const GroupItem = ({ data }) => {
 // Main Component
 const MyComponent = () => {
   // const [filter, setFilter] = useState('');
-
+  const {t} = useTranslation()
   const [data, setData] = useState([
     {
       title: "Designer_FU_SP24",
@@ -190,7 +192,7 @@ const MyComponent = () => {
                 }
                 style={{ width: "15%" }}
               >
-                <Select.Option value="">All</Select.Option>
+                <Select.Option value="">{t("All")}</Select.Option>
                 <Select.Option value="Designer">Designer</Select.Option>
                 <Select.Option value="Back_End">Back_End</Select.Option>
                 <Select.Option value="Front_End">Front_End</Select.Option>

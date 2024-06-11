@@ -1,23 +1,43 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./PasswordReset.css";  // Import the CSS file for styling
 import Header from "../../components/header/Header.jsx";  // Import the Header component
 import { useTranslation } from 'react-i18next';  // Import the useTranslation hook for internationalization
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook for navigation
 import * as Yup from 'yup';
 import { Formik, Field, Form, ErrorMessage } from "formik";
-
+import { useFormik } from "formik";
 function ResetPasswordForm() {
     const navigate = useNavigate();  // Initialize navigation hook
-    const { t } = useTranslation();  // Initialize translation hook
+    const { t,i18n } = useTranslation();  // Initialize translation hook
     const [otp, setOtp] = useState("");  // State to store the generated OTP
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
 
     // Regular expression to validate email format
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email address').required('Email is required')
+        email: Yup.string().email(t('Invalid email address')).required(t('Email is required'))
     })
 
+    
+    // Rebuild the validation schema when the language changes
+    useEffect(() => {
+        formik.setFormikState((prevState) => ({
+          ...prevState,
+          validationSchema: Yup.object().shape({
+            email: Yup.string().email(t('Invalid email address')).required(t('Email is required'))
+          })
+        }));
+      }, [i18n.language]);
+
+      const formik = useFormik({
+        initialValues: {
+          email: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+          console.log(values);
+        }
+      });
     // Function to generate a random OTP code
     const generateOtp = () => {
         return Math.floor(1000 + Math.random() * 9000).toString();  // Generate a 4-digit random OTP

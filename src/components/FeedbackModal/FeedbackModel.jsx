@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FiSave } from "react-icons/fi";
 import './modal.css';
+import { useTranslation } from 'react-i18next';
 
 const FeedBackModal = ({ onClose }) => {
+    const {t} = useTranslation()
     const [formData, setFormData] = useState({
         programmingLanguage: '',
         major: '',
@@ -191,7 +193,7 @@ const FeedBackModal = ({ onClose }) => {
                 <h3>Question of Technology</h3>
                 <div className="form-group-row">
                     <div className="form-group">
-                        <label htmlFor="question1">Question 1</label>
+                        <label htmlFor="question1">{t("Question")} 1</label>
                         <input
                             placeholder='Enter answer'
                             type="text"
@@ -202,7 +204,7 @@ const FeedBackModal = ({ onClose }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="question2">Question 2</label>
+                        <label htmlFor="question2">{("Question")} 2</label>
                         <input
                             type="text"
                             id="question2"
@@ -212,7 +214,7 @@ const FeedBackModal = ({ onClose }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="question3">Question 3</label>
+                        <label htmlFor="question3">{t("Question")} 3</label>
                         <input
                             type="text"
                             id="question3"

@@ -18,6 +18,7 @@ import {
 import { DownOutlined } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
 import "../PositionManagement/PositionManagement.css";
+import { useTranslation } from "react-i18next";
 
 const { Meta } = Card;
 
@@ -25,6 +26,7 @@ const PositionManagement = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedInterns, setSelectedInterns] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
+  const {t} = useTranslation();
   // JSON data
   const internsData = [
     {
@@ -166,27 +168,27 @@ const PositionManagement = () => {
 
     const columns = [
         {
-            title: "Intern ID",
+            title: t("Intern ID"),
             dataIndex: "internID",
             key: "internID",
         },
         {
-            title: "Full Name",
+            title: t("Full Name"),
             dataIndex: "fullName",
             key: "fullName",
         },
         {
-            title: "Phone Number",
+            title: t("Phone Number"),
             dataIndex: "phoneNumber",
             key: "phoneNumber",
         },
         {
-            title: "Position",
+            title: t("Position"),
             dataIndex: "position",
             key: "position",
         },
         {
-            title: "School",
+            title: t("School"),
             dataIndex: "school",
             key: "school",
         },
@@ -206,12 +208,12 @@ const PositionManagement = () => {
             ),
         },
         {
-            title: "Technology",
+            title: t("Technology"),
             dataIndex: "technology",
             key: "technology",
         },
         {
-            title: "Rank",
+            title: t("Rank"),
             dataIndex: "rank",
             key: "rank",
             width: 80,
@@ -238,7 +240,7 @@ const PositionManagement = () => {
                 <main className="content">
                     <header className="content-header">
                         <h1 className="content-title">
-                            <b>Position Management</b>
+                            <b>{t("Position Management")}</b>
                         </h1>
                         <div className="user-info">
                             <img
@@ -267,7 +269,7 @@ const PositionManagement = () => {
                   alt="Export Icon"
                   className="button-icon"
                 />
-                <span>Export Excel</span>
+                <span>{t("Export Excel")}</span>
               </button>
               <button className="button button-edit">
                 <img
@@ -275,7 +277,7 @@ const PositionManagement = () => {
                   alt="Edit Icon"
                   className="button-icon"
                 />
-                <span>Edit</span>
+                <span>{t("Edit")}</span>
               </button>
               <button className="button button-delete">
                 <img
@@ -283,7 +285,7 @@ const PositionManagement = () => {
                   alt="Delete Icon"
                   className="button-icon"
                 />
-                <span>Delete</span>
+                <span>{t("Delete")}</span>
               </button>
               <button className="button button-add-intern">
                 <img
@@ -291,7 +293,7 @@ const PositionManagement = () => {
                   alt="Add Intern Icon"
                   className="button-icon"
                 />
-                <span>Add New Intern</span>
+                <span>{t("Add New Intern")}</span>
               </button>
             </div>
           </section>
@@ -316,15 +318,15 @@ const PositionManagement = () => {
                 
                                 >
                                     <p>
-                                        <strong>Technology:</strong> .NET, Java,
+                                        <strong>{t("Technology")}:</strong> .NET, Java,
                                         ...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher,
+                                        <strong>{t("Rank")}:</strong> Intern, Fresher,
                                         Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong>{" "}
+                                        <strong>{t("Group Zalo")}:</strong>{" "}
                                         <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
@@ -413,7 +415,7 @@ const PositionManagement = () => {
                                                 )
                                             }
                                         >
-                                            View Details
+                                            {t("View Details")}
                                             <FolderOutlined className="iconfolder" />
                                         </Button>
                                     </div>
@@ -438,14 +440,14 @@ const PositionManagement = () => {
                 
                                 >
                                     <p>
-                                        <strong>Technology:</strong> ReactJS,...
+                                        <strong>{t("Technology")}:</strong> ReactJS,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher,
+                                        <strong>{t("Rank")}:</strong> Intern, Fresher,
                                         Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong>{" "}
+                                        <strong>{t("Group Zalo")}:</strong>{" "}
                                         <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
@@ -539,7 +541,7 @@ const PositionManagement = () => {
                                             )
                                         }
                                     >
-                                        View Details
+                                        {t("View Details")}
                                         <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>
@@ -564,14 +566,14 @@ const PositionManagement = () => {
                 
                                 >
                                     <p>
-                                        <strong>Technology:</strong> Trello,...
+                                        <strong>{t("Technology")}:</strong> Trello,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher,
+                                        <strong>{t("Rank")}:</strong> Intern, Fresher,
                                         Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong>{" "}
+                                        <strong>{t("Group Zalo")}:</strong>{" "}
                                         <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
@@ -666,7 +668,7 @@ const PositionManagement = () => {
                                             )
                                         }
                                     >
-                                        View Details
+                                        {t("View Details")}
                                         <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>
@@ -691,15 +693,15 @@ const PositionManagement = () => {
                 
                                 >
                                     <p>
-                                        <strong>Technology:</strong> Excel,
+                                        <strong>{t("Technology")}:</strong> Excel,
                                         Word,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher,
+                                        <strong>{t("Rank")}:</strong> Intern, Fresher,
                                         Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong>{" "}
+                                        <strong>{t("Group Zalo")}:</strong>{" "}
                                         <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
@@ -793,7 +795,7 @@ const PositionManagement = () => {
                                             )
                                         }
                                     >
-                                        View Details
+                                        {t("View Details")}
                                         <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>
@@ -818,14 +820,14 @@ const PositionManagement = () => {
                 
                                 >
                                     <p>
-                                        <strong>Technology:</strong> ReactJS,...
+                                        <strong>{t("Technology")}:</strong> ReactJS,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher,
+                                        <strong>{t("Rank")}:</strong> Intern, Fresher,
                                         Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong>{" "}
+                                        <strong>{t("Group Zalo")}:</strong>{" "}
                                         <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
@@ -919,7 +921,7 @@ const PositionManagement = () => {
                                             )
                                         }
                                     >
-                                        View Details
+                                        {t("View Details")}
                                         <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>
@@ -944,14 +946,14 @@ const PositionManagement = () => {
                 
                                 >
                                     <p>
-                                        <strong>Technology:</strong> Trello,...
+                                        <strong>{t("Technology")}:</strong> Trello,...
                                     </p>
                                     <p>
-                                        <strong>Rank:</strong> Intern, Fresher,
+                                        <strong>{t("Rank")}:</strong> Intern, Fresher,
                                         Junior, Middle, Senior
                                     </p>
                                     <p>
-                                        <strong>Group Zalo:</strong>{" "}
+                                        <strong>{t("Group Zalo")}:</strong>{" "}
                                         <a href="#">Link</a>
                                     </p>
                                     <div className="avatars">
@@ -1045,7 +1047,7 @@ const PositionManagement = () => {
                                             )
                                         }
                                     >
-                                        View Details
+                                        {t("View Details")}
                                         <FolderOutlined className="iconfolder" />
                                     </Button>
                                 </Card>

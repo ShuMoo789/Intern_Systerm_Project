@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import { Button, Modal, Select, Typography, Row, Col, Input, Form } from "antd";
 import { MailOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import "./SendMailButton.css";
+import { useTranslation } from "react-i18next";
 const { TextArea } = Input;
 
-//các loại email
-const email_types = [
-  "Email interview",
-  "Email result",
-  "Internship Information",
-];
+
 
 const SendMailButton = () => {
+  const {t} = useTranslation()
   const [value, setValue] = useState("");
   const [loadings, setLoadings] = useState([]);
   // Khởi tạo giá trị ban đầu là false  -> ẩn modal;
@@ -27,6 +24,12 @@ const SendMailButton = () => {
   const showModal = () => {
     setIsModalOpen(true);
   };
+  //các loại email
+const email_types = [
+  t("Email interview"),
+  t("Email result"),
+  t("Internship Information"),
+];
 
   const handleOk = () => {
     form
@@ -76,12 +79,12 @@ const SendMailButton = () => {
         //type="default"
         icon={<MailOutlined />}
       >
-        Send Mail
+        {t("Send Email")}
       </Button>
       <Modal
         className="sendMail-modal"
         centered
-        title="Send Email"
+        title={t("Send Email")}
         open={isModalOpen}
         onCancel={handleCancel}
         okText="Sendmail"
@@ -102,13 +105,13 @@ const SendMailButton = () => {
             loading={loadings[1] || false}
             onClick={() => enterLoading(1)}
           >
-            Send Email
+            {t("Send Email")}
           </Button>,
         ]}
         width={1125}
       >
         <Typography.Paragraph className="desc">
-          Choose types of Email
+          {t("Choose types of Email")}
         </Typography.Paragraph>
         <Row gutter={16}>
           <Col span={7}>
@@ -122,7 +125,7 @@ const SendMailButton = () => {
               >
                 <Select
                   className="type-email"
-                  placeholder="Types of email"
+                  placeholder={t("Types of email")}
                   onDropdownVisibleChange={handleDropdownVisibleChange}
                   suffixIcon={open ? <UpOutlined /> : <DownOutlined />}
                 >
@@ -140,13 +143,13 @@ const SendMailButton = () => {
             <Form form={form} layout="vertical" name="text-form">
               <Form.Item
                 name="text-email"
-                rules={[{ required: true, message: "Please enter your mail!" }]}
+                rules={[{ required: true, message: t("Please enter your mail!") }]}
               >
                 <TextArea
                   className="textarea"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  placeholder="Enter your mail..."
+                  placeholder={t("Enter your mail...")}
                   autoSize={{
                     minRows: 6,
                     maxRows: 6,

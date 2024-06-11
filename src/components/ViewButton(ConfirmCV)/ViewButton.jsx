@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Table, Checkbox, Button, Select, Modal, Row, Col } from "antd";
 import MenuNavigate from "../../components/Menu/MenuNavigate";
 import "./ViewButton.css";
+import { useTranslation } from "react-i18next";
 
 const ViewButton = () => {
   const [confirmedEmailKeys, setConfirmedEmailKeys] = useState([]);
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const {t} = useTranslation();
  
   // Function to handle view button click
   const handleView = (record) => {
@@ -19,9 +20,7 @@ const ViewButton = () => {
   const handleModalClose = () => {
     setModalVisible(false);
   };
-
   
-
   return (
     <>
       <div className="table-container">
@@ -41,7 +40,7 @@ const ViewButton = () => {
       </div>
       {selectedIntern && (
         <Modal
-          title="View details of Intern"
+          title={t("View details of Intern")}
           visible={modalVisible}
           onCancel={handleModalClose}
           width={900}
@@ -50,7 +49,7 @@ const ViewButton = () => {
           <Row gutter={[16, 16]}>
             <Col span={8}>
               <p>
-                <strong>Intern ID:</strong>
+                <strong>{t("Intern ID")}</strong>
               </p>
               <p
                 style={{
@@ -64,7 +63,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Date Submitted Form:</strong>
+                <strong>{t("Date Submitted Form")}</strong>
               </p>
               <p
                 style={{
@@ -79,7 +78,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Time Interview:</strong>
+                <strong>{t("Time Interview")}</strong>
               </p>
               <p
                 style={{
@@ -94,7 +93,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Full Name:</strong>
+                <strong>{t("Full Name")}</strong>
               </p>
               <p
                 style={{
@@ -109,7 +108,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Date Of Birth:</strong>
+                <strong>{t("Date Of Birth")}</strong>
               </p>
               <p
                 style={{
@@ -124,7 +123,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Phone Number:</strong>
+                <strong>{t("Phone Number")}</strong>
               </p>
               <p
                 style={{
@@ -139,7 +138,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Position:</strong>
+                <strong>{t("Position")}</strong>
               </p>
               <p
                 style={{
@@ -154,7 +153,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>School:</strong>
+                <strong>{t("School")}</strong>
               </p>
               <p
                 style={{
@@ -168,7 +167,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Address:</strong>
+                <strong>{t("Address")}</strong>
               </p>
               <p
                 style={{
@@ -183,7 +182,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Email:</strong>
+                <strong>{t("Email")}</strong>
               </p>
               <p
                 style={{
@@ -200,7 +199,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>CV Link:</strong>
+                <strong>CV Link</strong>
               </p>
               <p
                 style={{
@@ -221,7 +220,7 @@ const ViewButton = () => {
             </Col>
             <Col span={8}>
               <p>
-                <strong>Interviewer:</strong>
+                <strong>{t("Interviewer")}</strong>
               </p>
               <p
                 style={{

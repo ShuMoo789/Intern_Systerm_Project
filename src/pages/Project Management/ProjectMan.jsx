@@ -8,7 +8,7 @@ import {
     FileExcelOutlined,
     EditOutlined,
     DeleteOutlined,
-    CopyOutlined
+    CopyOutlined, DownCircleOutlined
 } from '@ant-design/icons';
 import './ProjectMan.css';
 import NewProjectModal from './NewProjectModal.jsx';
@@ -182,103 +182,113 @@ function ProjectManagement() {
                 <h2 className="section-title">Search for Information</h2>
                 <div className="button-group">
                     <button className="button button-export">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Export Icon" className="button-icon" />
+                        <FileExcelOutlined alt="Export Icon" className="button-icon" />
                         <span>Export Excel</span>
                     </button>
                     <button className="button button-edit">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Edit Icon" className="button-icon" />
+                        <EditOutlined alt="Edit Icon" className="button-icon" />
                         <span>Edit</span>
                     </button>
                     <button className="button button-delete">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Delete Icon" className="button-icon" />
+                        <DeleteOutlined alt="Delete Icon" className="button-icon" />
                         <span>Delete</span>
                     </button>
                     <button className="button button-add-intern" onClick={handleOpenModal}>
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Add Intern Icon" className="button-icon" />
+                        <PlusOutlined alt="Add Intern Icon" className="button-icon" />
                         <span>Add New Project</span>
                     </button>
                 </div>
             </section>
             <main className="main-grid">
                 <Form className="search-form" layout="inline">
-                    <Form.Item>
-                        <Button type="primary" icon={<SearchOutlined />} className="search-button" onClick={handleSearch}>Search</Button>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" icon={<DeleteOutlined />} className="clean-filters-button" onClick={handleClearFilters}>Clean Filters</Button>
-                    </Form.Item>
+                    <Row gutter={[16, 16]} className="filter-box">
+                        <Col span={18}>
+                            <Row gutter={[10,10]}>
+                                <Col span={7}>
+                                <Select
+                                    showSearch
+                                    style={{ width: '100%' }}
+                                    placeholder="Enter Name of Project"
+                                    value={selectedFilters.title || undefined}
+                                    onChange={(value) => handleFilterChange('title', value)}
+                                    options={projects.map(project => ({ value: project.title, label: project.title }))}
+                                />
+                            </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Position"
+                                        value={selectedFilters.position || undefined}
+                                        onChange={(value) => handleFilterChange('position', value)}
+                                        options={projects.map(project => ({ value: project.position, label: project.position }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Technology"
+                                        value={selectedFilters.technology || undefined}
+                                        onChange={(value) => handleFilterChange('technology', value)}
+                                        options={projects.map(project => ({ value: project.technology, label: project.technology }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Leader"
+                                        value={selectedFilters.leader || undefined}
+                                        onChange={(value) => handleFilterChange('leader', value)}
+                                        options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Sub Leader"
+                                        value={selectedFilters.subLeader || undefined}
+                                        onChange={(value) => handleFilterChange('subLeader', value)}
+                                        options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <Select
+                                        showSearch
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Mentor"
+                                        value={selectedFilters.mentor || undefined}
+                                        onChange={(value) => handleFilterChange('mentor', value)}
+                                        options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
+                                    />
+                                </Col>
+                                <Col span={7}>
+                                    <DatePicker
+                                        style={{ width: '100%' }}
+                                        placeholder="Enter Release Date"
+                                        value={selectedFilters.releaseDate}
+                                        onChange={(date) => handleFilterChange('releaseDate', date)}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col span={4}>
+                            <Col span={6}>
+                                <div className="filterbuttons">
+                                <Form.Item>
+                                    <Button type="primary" icon={<DeleteOutlined />} className="clean-filters-button" onClick={handleClearFilters}>Clean Filters</Button>
+                                </Form.Item>
+                                    <Form.Item>
+                                        <Button type="primary" icon={<SearchOutlined />} className="searchpm-button" onClick={handleSearch}>Search</Button>
+                                    </Form.Item>
+                                </div>
+                                </Col>
+                        </Col>
+                    </Row>
                 </Form>
-
-                <Row gutter={[16, 16]} className="filter-box">
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Name of Project"
-                            value={selectedFilters.title || undefined}
-                            onChange={(value) => handleFilterChange('title', value)}
-                            options={projects.map(project => ({ value: project.title, label: project.title }))}
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Position"
-                            value={selectedFilters.position || undefined}
-                            onChange={(value) => handleFilterChange('position', value)}
-                            options={projects.map(project => ({ value: project.position, label: project.position }))}
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Technology"
-                            value={selectedFilters.technology || undefined}
-                            onChange={(value) => handleFilterChange('technology', value)}
-                            options={projects.map(project => ({ value: project.technology, label: project.technology }))}
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Leader"
-                            value={selectedFilters.leader || undefined}
-                            onChange={(value) => handleFilterChange('leader', value)}
-
-                            options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
-
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Sub Leader"
-                            value={selectedFilters.subLeader || undefined}
-                            onChange={(value) => handleFilterChange('subLeader', value)}
-
-                            options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
-
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <Select
-                            style={{ width: '100%' }}
-                            placeholder="Enter Mentor"
-                            value={selectedFilters.mentor || undefined}
-                            onChange={(value) => handleFilterChange('mentor', value)}
-
-                            options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
-
-                        />
-                    </Col>
-                    <Col span={6}>
-                        <DatePicker
-                            style={{ width: '100%' }}
-                            placeholder="Enter Release Date"
-                            value={selectedFilters.releaseDate}
-                            onChange={(date) => handleFilterChange('releaseDate', date)}
-                        />
-                    </Col>
-                </Row>
+                
 
                 <Row gutter={[16, 16]} className="project-list">
                     {filteredProjects.map((project, index) => (

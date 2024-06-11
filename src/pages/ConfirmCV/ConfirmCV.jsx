@@ -4,8 +4,6 @@ import { Table, Checkbox, Button, Select, Modal, Row, Col } from 'antd'; // Impo
 import MainLayout from '../../MainLayout/MainLayout';
 import User_Img from "../../assets/user_image.png";
 import SendMailButton from '../../components/SendMailButton/SendMailButton';
-import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton"
-import MailOutlined from "@ant-design/icons/MailOutlined"
 import {
     DownOutlined,
     EyeOutlined,
@@ -25,6 +23,7 @@ import {
 } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { useTranslation } from 'react-i18next';
 const { RangePicker } = DatePicker;
 const { Option } = Select; // Destructure Option from Select
 dayjs.extend(customParseFormat);
@@ -39,15 +38,14 @@ function IconTextBlock({ iconSrc, altText, text }) {
         </div>
     );
 }
-
-
-
 const interns = [
-
 
 ];
 const dateFormat = 'YYYY/MM/DD';
 const ConfirmCV = () => {
+    const {t} = useTranslation();
+    const commentText = t("comment");
+    const commentsText = t("comments")
     // Number of interns per page
     const internsPerPage = 6;
 
@@ -253,10 +251,10 @@ const ConfirmCV = () => {
         if (record.commentsCV !== undefined && record.commentsCV !== null) {
             if (record.commentsCV == 1) {
                 console.log('Rendering Comment');
-                return "1 Comment";
+                return `1 ${commentText}`;
             } else {
-                console.log(`Rendering ${record.commentsCV} Comments`);
-                return `${record.commentsCV} Comments`;
+                console.log(`Rendering ${record.commentsCV} ${commentsText}`);
+                return `${record.commentsCV} ${commentsText}`;
             }
         } else {
             console.log('CommentsCV is undefined or null');
@@ -428,61 +426,62 @@ const ConfirmCV = () => {
         //     ),
         // },
         {
-            title: 'Intern ID',
+            title: t('Intern ID'),
             dataIndex: 'internID',
             key: 'internID',
             filteredValue: [selectedFilters.internID],
         },
         {
-            title: 'Date Interview',
+            title: t('Date Interview'),
             dataIndex: 'dateInterView',
             key: 'dateInterView',
             filteredValue: [selectedFilters.dateInterView]
         },
         {
-            title: 'Time Interview',
+            title: t('Time Interview'),
             dataIndex: 'timeinterview',
             key: 'timeinterview',
             filteredValue: [selectedFilters.timeInterView]
         },
         {
-            title: 'Full Name',
+            title: t('Full Name'),
             dataIndex: 'fullName',
             key: 'fullName',
             filteredValue: [selectedFilters.fullName]
         },
         {
-            title: 'Date Of Birth',
+            title: t('Date Of Birth'),
             dataIndex: 'dateOfBirth',
             key: 'dateOfBirth',
             filteredValue: [selectedFilters.dateOfBirth]
         },
         {
-            title: 'Phone Number',
+            title: t('Phone Number'),
             dataIndex: 'phoneNumber',
             key: 'phoneNumber',
             filteredValue: [selectedFilters.phoneNumber]
         },
         {
-            title: 'Position',
+            title: t('Position'),
             dataIndex: 'position',
             key: 'position',
             filteredValue: [selectedFilters.position]
         },
         {
-            title: 'School',
+            title: t('School'),
             dataIndex: 'school',
             key: 'school',
             filteredValue: [selectedFilters.school]
         },
         {
-            title: 'Address',
+            title: t('Address'),
             dataIndex: 'address',
             key: 'address',
-            filteredValue: [selectedFilters.address]
+            filteredValue: [selectedFilters.address],
+            render: (text) => t(text)
         },
         {
-            title: 'Email',
+            title: t('Email'),
             dataIndex: 'email',
             key: 'email',
             filteredValue: [selectedFilters.email]
@@ -494,7 +493,7 @@ const ConfirmCV = () => {
             render: () => <a style={{ textDecoration: "underline", color: "black" }} onClick={() => window.location.href = '/'}>Link</a>,
         },
         {
-            title: 'Comments CV',
+            title: t('Comments CV'),
             dataIndex: 'commentsCV',
             key: 'commentsCV',
             render: (text, record) => (
@@ -507,7 +506,7 @@ const ConfirmCV = () => {
         },
 
         {
-            title: 'Confirm Email',
+            title: t('Confirm Email'),
             dataIndex: 'confirmEmail',
             key: 'confirmEmail',
             render: (confirmEmail, record) => (
@@ -516,19 +515,19 @@ const ConfirmCV = () => {
                     style={{ width: 120 }}
                     onChange={(value) => handleChange(value, record)}
                 >
-                    <Option value="Yes">Confirmed</Option>
-                    <Option value="No">Not Confirmed</Option>
+                    <Option value="Yes">{t("Confirmed")}</Option>
+                    <Option value="No">{t("Not Confirmed")}</Option>
                 </Select>
             ),
         },
         {
-            title: 'Interviewer',
+            title: t('Interviewer'),
             dataIndex: 'interviewer',
             key: 'interviewer',
             filteredValue: [selectedFilters.dateInterView]
         },
         {
-            title: 'Status',
+            title: t('Status'),
             dataIndex: 'status',
             key: 'status',
             render: (text, record) => (
@@ -538,14 +537,14 @@ const ConfirmCV = () => {
                     onChange={(value) => handleChange(value, record.internId)}
                     style={{ width: 120 }}
                 >
-                    <Option value="Pending">Pending</Option>
-                    <Option value="Failed">Failed</Option>
-                    <Option value="Passed">Passed</Option>
+                    <Option value="Pending">{t("Pending")}</Option>
+                    <Option value="Failed">{t("Failed")}</Option>
+                    <Option value="Passed">{t("Passed")}</Option>
                 </Select>
             ),
         },
         {
-            title: 'Button',
+            title: t('Button'),
             dataIndex: 'button',
             key: 'button',
             render: (text, record) => (
@@ -557,7 +556,7 @@ const ConfirmCV = () => {
                         borderRadius: "20px"
 
 
-                    }}>View</Button>),
+                    }}>{t("View")}</Button>),
             width: 100,
         },
     ]
@@ -571,7 +570,7 @@ const ConfirmCV = () => {
 
                 <main className="content">
                     <header className="content-header">
-                        <h1 className="content-title"><b>Confirm CV</b></h1>
+                        <h1 className="content-title"><b>{t("Confirm CV")}</b></h1>
                         <div className="user-info">
                             <img loading="lazy"
                                 src={User_Img}
@@ -587,7 +586,7 @@ const ConfirmCV = () => {
                     </header>
 
                     <section className="content-section">
-                        <h2 className="section-title">Search for Information</h2>
+                        <h2 className="section-title">{t("Search for Information")}</h2>
                         <div className="button-group">
                             {/* <button className="button button-schedule">
                                 <Sheldule />
@@ -597,25 +596,25 @@ const ConfirmCV = () => {
                                 <img
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
                                     alt="Export Icon" className="button-icon" />
-                                <span>Export Excel</span>
+                                <span>{t("Export Excel")}</span>
                             </button>
                             <button className="button button-edit">
                                 <img
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
                                     alt="Edit Icon" className="button-icon" />
-                                <span>Edit</span>
+                                <span>{t("Edit")}</span>
                             </button>
                             <button className="button button-delete">
                                 <img
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
                                     alt="Delete Icon" className="button-icon" />
-                                <span>Delete</span>
+                                <span>{t("Delete")}</span>
                             </button>
                             <button className="button button-add-intern">
                                 <img
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
                                     alt="Add Intern Icon" className="button-icon" />
-                                <span>Add New Intern</span>
+                                <span>{t("Add New Intern")}</span>
                             </button>
                         </div>
                     </section>
@@ -625,7 +624,7 @@ const ConfirmCV = () => {
                             <div className="fields">
                                 <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || "Enter intern's ID"}</div>
+                                        <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || t("Enter intern's ID")}</div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
@@ -633,7 +632,7 @@ const ConfirmCV = () => {
                                 <Dropdown overlay={createMenu('fullName', fullNameChoice)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
                                         {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                        <div style={{ color: selectedFilters.fullName ? "#000000" : "#C7BFBF" }}>{selectedFilters.fullName || "Enter intern's Full name"}</div>
+                                        <div style={{ color: selectedFilters.fullName ? "#000000" : "#C7BFBF" }}>{selectedFilters.fullName || t("Enter intern's Full name")}</div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
@@ -647,28 +646,28 @@ const ConfirmCV = () => {
                                 <Dropdown overlay={createMenu('phoneNumber', phoneNumberChoice)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
                                         {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                        <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF" }}>{selectedFilters.phoneNumber || "Enter intern's Phone number"}</div>
+                                        <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF" }}>{selectedFilters.phoneNumber || t("Enter intern's Phone number")}</div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
 
                                 <Dropdown overlay={createMenu('address', addressName)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.address ? "#000000" : "#C7BFBF" }}>{selectedFilters.address || "Enter intern's Address"}</div>
+                                        <div style={{ color: selectedFilters.address ? "#000000" : "#C7BFBF" }}>{selectedFilters.address || t("Enter intern's Address")}</div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
 
                                 <Input
                                     size="large"
-                                    placeholder="Enter intern's Email"
+                                    placeholder= {t("Enter intern's Email")}
                                     value={selectedFilters.email}
                                     onChange={handleInputChange}
                                 />
 
                                 <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF" }}>{selectedFilters.position || "Enter intern's Position"}</div>
+                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF" }}>{selectedFilters.position || t("Enter intern's Position")}</div>
                                         <DownOutlined />
                                     </Button>
 
@@ -676,14 +675,14 @@ const ConfirmCV = () => {
 
                                 <Input
                                     size="large"
-                                    placeholder="Enter intern's School"
+                                    placeholder={t("Enter intern's School")}
                                     value={selectedFilters.school}
                                     onChange={handleInputChange}
                                 />
 
                                 <Dropdown overlay={createMenu('dateInterView', dateInterviewChoice)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.dateInterView || "Enter Date Interview"}</div>
+                                        <div style={{ color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.dateInterView || t("Enter Date Interview")}</div>
                                         <DownOutlined />
                                     </Button>
 
@@ -691,16 +690,16 @@ const ConfirmCV = () => {
 
                                 <Dropdown overlay={createMenu('timeInterView', timeInterviewChoice)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.timeInterView || "Enter Time Interview"}</div>
+                                        <div style={{ color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.timeInterView || t("Enter Time Interview")}</div>
                                         <DownOutlined />
                                     </Button>
 
                                 </Dropdown>
                             </div>
                             <div className="buttons">
-                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }} />Clean Filter</div>
+                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }} />{t("Clean Filter")}</div>
                                 <br />
-                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }} />Search</div>
+                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }} />{t("Search")}</div>
                             </div>
                         </div>
                         <div className="list">
@@ -747,7 +746,7 @@ const ConfirmCV = () => {
                     </section>
                     {selectedIntern && (
                         <Modal
-                            title="View details of Intern"
+                            title={t("View details of Intern")}
                             visible={commentPopupVisible}
                             onCancel={handleCancel}
                             width={900}
@@ -756,7 +755,7 @@ const ConfirmCV = () => {
                             <Row gutter={[16, 16]}>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Intern ID:</strong>
+                                        <strong>{t("Intern ID")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -770,7 +769,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Date Interview:</strong>
+                                        <strong>{t("Date Interview")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -785,7 +784,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Time Interview:</strong>
+                                        <strong>{t("Time Interview")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -800,7 +799,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Full Name:</strong>
+                                        <strong>{t("Full Name")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -815,7 +814,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Date Of Birth:</strong>
+                                        <strong>{t("Date Of Birth")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -830,7 +829,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Phone Number:</strong>
+                                        <strong>{t("Phone Number")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -845,7 +844,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Position:</strong>
+                                        <strong>{t("Position")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -860,7 +859,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>School:</strong>
+                                        <strong>{t("School")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -874,7 +873,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Address:</strong>
+                                        <strong>{t("Address")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -889,7 +888,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Email:</strong>
+                                        <strong>{t("Email")}:</strong>
                                     </p>
                                     <p
                                         style={{
@@ -927,7 +926,7 @@ const ConfirmCV = () => {
                                 </Col>
                                 <Col span={8}>
                                     <p>
-                                        <strong>Interviewer:</strong>
+                                        <strong>{t("Interviewer")}:</strong>
                                     </p>
                                     <p
                                         style={{

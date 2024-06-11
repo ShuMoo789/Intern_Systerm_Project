@@ -13,35 +13,11 @@ import {
 import GroupButton from "../../components/GroupButton/GroupButton";
 import AccountSetting from "../../components/AccountSetting/AccountSetting";
 import useViewport from "../../hooks/useViewport";
-
-// props GroupButton
-const groupButton = [
-  {
-    color: "#41B137",
-    name: "Export Excel",
-    icon: <ExportOutlined />,
-  },
-  {
-    color: "#FB8632",
-    name: "Edit",
-    icon: <EditOutlined />,
-  },
-  {
-    color: "#FF3A2E",
-    name: "Delete",
-    icon: <DeleteOutlined />,
-  },
-  {
-    color: "#4889E9",
-    name: "Add New Technology",
-    icon: <FolderAddOutlined />,
-  },
-];
-
-
+import { useTranslation } from "react-i18next";
 
 
 const TechnologyManagement = () => {
+  const {t} = useTranslation();
   const viewPort = useViewport()
   const isMobile = viewPort.width <= 1024
   const [activeTab, setActiveTab] = useState('Back-End');
@@ -50,14 +26,36 @@ const TechnologyManagement = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-
+  // props GroupButton
+const groupButton = [
+  {
+    color: "#41B137",
+    name: t("Export Excel"),
+    icon: <ExportOutlined />,
+  },
+  {
+    color: "#FB8632",
+    name: t("Edit"),
+    icon: <EditOutlined />,
+  },
+  {
+    color: "#FF3A2E",
+    name: t("Delete"),
+    icon: <DeleteOutlined />,
+  },
+  {
+    color: "#4889E9",
+    name: t("Add New Technology"),
+    icon: <FolderAddOutlined />,
+  },
+];
   return (
     <MainLayout>
       <div className="content-technology-management">
         <div className="content-navigation-technology-management">
           <div className="header-navigation-technology-management">
             <div className="title-name-technology-management">
-              TECHNOLOGY MANAGEMENT
+              {t("TECHNOLOGY MANAGEMENT")}
             </div>
             {/* if mobile, width of AccountSetting will change */}
             {!isMobile ? (<div className="account-setting-technology-management">

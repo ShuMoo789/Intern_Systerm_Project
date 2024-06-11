@@ -6,6 +6,7 @@ import { TiFolderDelete } from "react-icons/ti";
 import { Modal } from "antd";
 import { Tabs } from "antd";
 import Question from "./Question";
+import { useTranslation } from 'react-i18next';
 
 const onChange = (key) => {
     console.log(key);
@@ -96,7 +97,7 @@ const items = [
 
 const TechnologyList = ({ activeTab }) => {
     const [open, setOpen] = useState(false);
-
+    const {t} = useTranslation()
     const showModal = () => {
         setOpen(true);
     };
@@ -140,7 +141,7 @@ const TechnologyList = ({ activeTab }) => {
                         <Card.Img variant="top" src={tech.imageUrl} />
                         <Card.Body>
                             <TiFolderDelete style={{ marginTop: 5, marginRight: 5 }} />
-                            <Link className='link1' style={{ paddingRight: 10, color: "black" }} variant="primary" onClick={showModal}>Show questions</Link>
+                            <Link className='link1' style={{ paddingRight: 10, color: "black" }} variant="primary" onClick={showModal}>{t("Show questions")}</Link>
                         </Card.Body>
                     </Card>
                 </div>
