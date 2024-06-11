@@ -127,9 +127,27 @@ const TechnologyList = ({ activeTab }) => {
           "https://seeklogo.com/images/R/react-logo-7B3CE81517-seeklogo.com.png",
       },
     ],
-    "Business Analyst": [],
-    Marketing: [],
-    Design: [],
+    "Business Analyst": [
+      {
+        title: "BA",
+        imageUrl:
+          "https://assets.janbasktraining.com/blog/uploads/images/image_750x_5da6c72103449.jpg",
+      },
+    ],
+    Marketing: [
+      {
+        title: "Marketing",
+        imageUrl:
+          "https://e7.pngegg.com/pngimages/645/742/png-clipart-marketing-mix-strategy-promotion-porter-s-five-forces-analysis-framework-text-logo.png",
+      },
+    ],
+    Design: [
+      {
+        title: "Design",
+        imageUrl:
+          "https://i.pinimg.com/736x/a5/58/b4/a558b426cb8973523f37bbed94cf0f09.jpg",
+      },
+    ],
   };
 
   return (

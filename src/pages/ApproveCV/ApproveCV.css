@@ -23,7 +23,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    margin: 20px;
+    margin: 20px 0 40px;
 }
 
 .content-title {
@@ -289,7 +289,7 @@ div.approve-btns > .feedbacks:hover{
     .button-group > .button > .btn-name {
         display: none;
     }
-    
+
     #APRCV .content > .filter-section > .filter > .buttons {
         display: flex;
         gap: 5px;
@@ -301,7 +301,7 @@ div.approve-btns > .feedbacks:hover{
     #APRCV .content > .filter-section > .filter > .fields {
         display: flex;
         flex-direction: column;
-    }   
+    }
 
     .content-header > .user-info > .user-details,
     .content-header > .user-info > .account-setting {

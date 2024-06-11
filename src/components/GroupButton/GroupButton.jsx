@@ -3,9 +3,11 @@ import "./GroupButton.css";
 import { Button } from "antd";
 import useViewport from "../../hooks/useViewport";
 
-const GroupButton = ({ groupButton, onSendEmail, onCreateIntern }) => {
-  const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
+
+const GroupButton = ({ groupButton, onSendEmail, onScheduleInterview }) => {
+    const viewPort = useViewport()
+    const isMobile = viewPort.width <= 1024
+
 
   // function handle Send Mail when click button Send Mail
   const handleSendMailClick = () => {
@@ -32,20 +34,27 @@ const GroupButton = ({ groupButton, onSendEmail, onCreateIntern }) => {
     onCreateIntern();
   };
 
-  // function branches to handle functions by button name
-  const handleButtonClick = (name) => {
-    if (name === "Send Email" || name === "Create Group") {
-      handleSendMailClick();
-    } else if (name === "Export Excel") {
-      handleExportExcelClick();
-    } else if (name === "Edit") {
-      handleEditClick();
-    } else if (name === "Delete") {
-      handleDeleteClick();
-    } else if (name === "Add New Intern") {
-      handleAddNewInternClick();
+
+    const handleScheduleInterview = () => {
+        onScheduleInterview()
     }
-  };
+
+    // function branches to handle functions by button name
+    const handleButtonClick = (name) => {
+        if (name === 'Send Email') {
+            handleSendMailClick();
+        } else if (name === 'Export Excel') {
+            handleExportExcelClick();
+        } else if (name === 'Edit') {
+            handleEditClick();
+        } else if (name === 'Delete') {
+            handleDeleteClick();
+        } else if (name === 'Add New Intern') {
+            handleAddNewInternClick();
+        } else if (name === 'Schedule Interview') {
+            handleScheduleInterview();
+        }
+    };
 
   return (
     <div className="group-button">

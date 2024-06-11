@@ -641,13 +641,13 @@ const ConfirmCV = () => {
                                 {/* <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{ padding: "7px 11px", fontSize: "15px" }} onChange={(dates) => handleDateChange('dateOfBirth', dates)} /> */}
                                 <DatePicker
                                     onChange={(date) => handleDateChange('dateOfBirth', date)}
-                                    style={{ marginLeft: 10 }}
                                     placeholder={["Enter intern's D.O.B"]}
                                 />
                                 <Dropdown overlay={createMenu('phoneNumber', phoneNumberChoice)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                                        <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF" }}>{selectedFilters.phoneNumber || "Enter intern's Phone number"}</div>
+                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%", width: "200px" }}>
+                                        <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                                            {selectedFilters.phoneNumber || "Enter intern's Phone number"}
+                                        </div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
@@ -668,7 +668,7 @@ const ConfirmCV = () => {
 
                                 <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
                                     <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF" }}>{selectedFilters.position || "Enter intern's Position"}</div>
+                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF", width: "20px" }}>{selectedFilters.position || "Enter intern's Position"}</div>
                                         <DownOutlined />
                                     </Button>
 
@@ -713,7 +713,7 @@ const ConfirmCV = () => {
                                     columns={columns}
                                     dataSource={filteredInterns}
                                     rowKey="internId"
-                                    pagination={{ pageSize: 4 }}
+                                    pagination={{ pageSize: 6 }}
                                     scroll={{ x: 'max-content' }}
                                 />
 

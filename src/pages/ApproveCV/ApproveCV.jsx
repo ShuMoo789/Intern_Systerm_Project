@@ -7,6 +7,7 @@ import CommentPopup from "./CommentPopup.jsx";
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
+import { Toaster, toast } from 'react-hot-toast';
 import {
   DownOutlined,
   EyeOutlined,
@@ -50,16 +51,29 @@ dayjs.extend(customParseFormat);
 function IconTextBlock({ iconSrc, altText, text }) {
   // The component returns a div with a class name 'icon-text-block'
   return (
-    <div className="icon-text-block">
-      {/* The image element with the source URL and alt text passed as props */}
-      <img src={iconSrc} alt={altText} className="icon" />
-      {/* The span element that displays the text passed as a prop */}
-      <span className="icon-text">{text}</span>
-    </div>
+      <div className="icon-text-block">
+        {/* The image element with the source URL and alt text passed as props */}
+        <img src={iconSrc} alt={altText} className="icon" />
+        {/* The span element that displays the text passed as a prop */}
+        <span className="icon-text">{text}</span>
+      </div>
   );
 }
 
 function ApproveCV() {
+
+  // option of intern School from file Approve.json
+  const optionsInternSchool = Array.from(new Set(DataApproveList.map((item) => item.school))).map((school) => ({
+    value: school,
+    label: school,
+  }));
+
+// option of intern Position from file Approve.json
+  const optionsInternPosition = Array.from(new Set(DataApproveList.map((item) => item.position))).map((position) => ({
+    value: position,
+    label: position,
+  }));
+  
   // Date format for date inputs
   const dateFormat = "YYYY/MM/DD";
 
@@ -129,81 +143,83 @@ function ApproveCV() {
     const startIndex = currentPage * internsPerPage;
     // Calculate the ending index of the interns for the current page, ensuring it does not exceed the total number of interns
     const endIndex = Math.min(
-      (currentPage + 1) * internsPerPage,
-      interns.length
+        (currentPage + 1) * internsPerPage,
+        interns.length
     );
 
     // Slice the filteredInterns array to get the interns for the current page
     return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
-      // Each row is a table row (<tr>) element with a unique key based on the index
-      <tr key={index}>
-        {/* Checkbox for selecting the intern */}
-        <td>
-          <input type={"checkbox"} />
-        </td>
-        {/* Display intern details in table cells (<td>) */}
-        <td>{intern.internID}</td>
-        <td>{intern.dateSubmittedForm}</td>
-        <td>{intern.fullName}</td>
-        <td>{intern.dateOfBirth}</td>
-        <td>{intern.phoneNumber}</td>
-        <td>{intern.position}</td>
-        <td>{intern.school}</td>
-        <td>{intern.address}</td>
-        <td>{intern.email}</td>
-        {/* Link to the intern's CV */}
-        <td>
-          <a href="#">{intern.cvLink}</a>
-        </td>
-        {/* Comments section with eye icon for viewing comments and a button to add comments */}
-        <td style={{ display: "flex" }}>
-          <div className="Comments-CV">
-            {intern.commentsCV === "1"
-              ? `${intern.commentsCV} Comment`
-              : `${intern.commentsCV} Comments`}
-            <EyeOutlined
-              style={{ marginLeft: "5px", cursor: "pointer" }}
-              onClick={() => {
-                handleCommentClick(intern);
-              }}
-            />
-          </div>
-          <div className="add-cmt-btn">
-            <PlusOutlined />
-          </div>
-        </td>
-        {/* Status section with conditional styling based on the intern's status */}
-        <td>
-          <div
-            className="Status"
-            style={
-              intern.status === "Pending"
-                ? {
-                    backgroundColor: "#FFB596",
-                    color: "#E5731C",
-                  }
-                : intern.status === "Failed"
-                ? {
-                    backgroundColor: "#F5A3B7",
-                    color: "#7D0022",
-                  }
-                : intern.status === "Passed"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
-            }
-          >
-            {intern.status}
-            <DownOutlined />
-          </div>
-        </td>
-        {/* Action buttons for viewing intern details and feedbacks */}
-        <td style={{ display: "flex" }}>
-          <div className="view" onClick={() => handleViewClick(intern)}>
-            View
-          </div>
-          <div className="feedbacks">Feedbacks</div>
-        </td>
-      </tr>
+
+        // Each row is a table row (<tr>) element with a unique key based on the index
+        <tr key={index}>
+          {/* Checkbox for selecting the intern */}
+          <td>
+            <input type={"checkbox"} />
+          </td>
+          {/* Display intern details in table cells (<td>) */}
+          <td>{intern.internID}</td>
+          <td>{intern.dateSubmittedForm}</td>
+          <td>{intern.fullName}</td>
+          <td>{intern.dateOfBirth}</td>
+          <td>{intern.phoneNumber}</td>
+          <td>{intern.position}</td>
+          <td>{intern.school}</td>
+          <td>{intern.address}</td>
+          <td>{intern.email}</td>
+          {/* Link to the intern's CV */}
+          <td>
+            <a href="#">{intern.cvLink}</a>
+          </td>
+          {/* Comments section with eye icon for viewing comments and a button to add comments */}
+          <td style={{ display: "flex" }}>
+            <div className="Comments-CV">
+              {intern.commentsCV === "1"
+                  ? `${intern.commentsCV} Comment`
+                  : `${intern.commentsCV} Comments`}
+              <EyeOutlined
+                  style={{ marginLeft: "5px", cursor: "pointer" }}
+                  onClick={() => {
+                    handleCommentClick(intern);
+                  }}
+              />
+            </div>
+            <div className="add-cmt-btn">
+              <PlusOutlined />
+            </div>
+          </td>
+          {/* Status section with conditional styling based on the intern's status */}
+          <td>
+            <div
+                className="Status"
+                style={
+                  intern.status === "Pending"
+                      ? {
+                        backgroundColor: "#FFB596",
+                        color: "#E5731C",
+                      }
+                      : intern.status === "Failed"
+                          ? {
+                            backgroundColor: "#F5A3B7",
+                            color: "#7D0022",
+                          }
+                          : intern.status === "Passed"
+                              ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                              : {}
+                }
+            >
+              {intern.status}
+              <DownOutlined />
+            </div>
+          </td>
+          {/* Action buttons for viewing intern details and feedbacks */}
+          <td style={{ display: "flex" }}>
+            <div className="view" onClick={() => handleViewClick(intern)}>
+              View
+            </div>
+            <div className="feedbacks">Feedbacks</div>
+          </td>
+        </tr>
+
     ));
   };
 
@@ -227,14 +243,14 @@ function ApproveCV() {
    * @returns {JSX.Element} A menu component with filter options.
    */
   const createMenu = (type, items) => (
-    <Menu onClick={({ key }) => handleMenuClick(type, key)}>
-      {/* Map over the items to create menu items */}
-      {items.map((item) => (
-        <Menu.Item key={item}>
-          <div>{item}</div>
-        </Menu.Item>
-      ))}
-    </Menu>
+      <Menu onClick={({ key }) => handleMenuClick(type, key)}>
+        {/* Map over the items to create menu items */}
+        {items.map((item) => (
+            <Menu.Item key={item}>
+              <div>{item}</div>
+            </Menu.Item>
+        ))}
+      </Menu>
   );
 
   /**
@@ -277,10 +293,12 @@ function ApproveCV() {
    */
   const handleSaveComment = (updatedIntern) => {
     // Update the interns state with the updated intern object
+
     setInterns((prevInterns) =>
-      prevInterns.map((intern) =>
-        intern.internID === updatedIntern.internID ? updatedIntern : intern
-      )
+        prevInterns.map((intern) =>
+            intern.internID === updatedIntern.internID ? updatedIntern : intern
+        )
+
     );
     handleCloseCommentPopup(); // Close the comment popup after saving
   };
@@ -312,55 +330,55 @@ function ApproveCV() {
 
     if (selectedFilters.position) {
       results = results.filter(
-        (intern) => intern.position === selectedFilters.position
+          (intern) => intern.position === selectedFilters.position
       );
     }
     if (selectedFilters.school) {
       results = results.filter(
-        (intern) => intern.school === selectedFilters.school
+          (intern) => intern.school === selectedFilters.school
       );
     }
     if (selectedFilters.internID) {
       const searchText = selectedFilters.internID.toLowerCase();
       results = results.filter((intern) =>
-        intern.internID.toLowerCase().includes(searchText)
+          intern.internID.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.fullName) {
       const searchText = selectedFilters.fullName.toLowerCase();
       results = results.filter((intern) =>
-        intern.fullName.toLowerCase().includes(searchText)
+          intern.fullName.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.email) {
       const searchText = selectedFilters.email.toLowerCase();
       results = results.filter((intern) =>
-        intern.email.toLowerCase().includes(searchText)
+          intern.email.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.address) {
       const searchText = selectedFilters.address.toLowerCase();
       results = results.filter((intern) =>
-        intern.address.toLowerCase().includes(searchText)
+          intern.address.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.phoneNumber) {
       const searchText = selectedFilters.phoneNumber.toLowerCase();
       results = results.filter((intern) =>
-        intern.phoneNumber.toLowerCase().includes(searchText)
+          intern.phoneNumber.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.dateOfBirth) {
       results = results.filter((intern) =>
-        moment(intern.dateOfBirth).isSame(selectedFilters.dateOfBirth, "day")
+          moment(intern.dateOfBirth).isSame(selectedFilters.dateOfBirth, "day")
       );
     }
     if (selectedFilters.dateSubmittedForm) {
       results = results.filter((intern) =>
-        moment(intern.dateSubmittedForm).isBetween(
-          selectedFilters.dateSubmittedForm,
-          "day"
-        )
+          moment(intern.dateSubmittedForm).isBetween(
+              selectedFilters.dateSubmittedForm,
+              "day"
+          )
       );
     }
     setFilteredInterns(results);
@@ -393,9 +411,9 @@ function ApproveCV() {
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
+          `selectedRowKeys: ${selectedRowKeys}`,
+          "selectedRows: ",
+          selectedRows
       );
     },
     getCheckboxProps: (record) => ({
@@ -487,12 +505,12 @@ function ApproveCV() {
       dataIndex: "cvLink",
       width: 60,
       render: (text) => (
-        <a
-          href={text}
-          style={{ color: "#000000", textDecoration: "underline" }}
-        >
-          Link
-        </a>
+          <a
+              href={text}
+              style={{ color: "#000000", textDecoration: "underline" }}
+          >
+            Link
+          </a>
       ),
     },
     {
@@ -500,13 +518,13 @@ function ApproveCV() {
       dataIndex: "commentsCV",
       width: 130,
       render: (text) => (
-        <Button
-          onClick={() => handleCommentClick(intern)}
-          style={{ width: "100%" }}
-        >
-          {text === "1" ? `${text} comment` : `${text} comments`}
-          <EyeOutlined />
-        </Button>
+          <Button
+              onClick={() => handleCommentClick(intern)}
+              style={{ width: "100%" }}
+          >
+            {text === "1" ? `${text} comment` : `${text} comments`}
+            <EyeOutlined />
+          </Button>
       ),
     },
     {
@@ -515,13 +533,13 @@ function ApproveCV() {
       width: 100,
       render: (text) => {
         return (
-          <Select
-            defaultValue={text}
-            style={{
-              width: 100,
-            }}
-            options={optionSelect}
-          />
+            <Select
+                defaultValue={text}
+                style={{
+                  width: 100,
+                }}
+                options={optionSelect}
+            />
         );
       },
     },
@@ -529,14 +547,14 @@ function ApproveCV() {
       title: "Button",
       width: 120,
       render: (record) => (
-        <div className="approve-btns">
-          <Button className="view" onClick={() => handleViewClick(record)} >
-            View
-          </Button>
-          <Button className="feedbacks" onClick={() => handleViewFeedback(record)} >
-            Feedbacks
-          </Button>
-        </div>
+          <div className="approve-btns">
+            <Button className="view" onClick={() => handleViewClick(record)} >
+              View
+            </Button>
+            <Button className="feedbacks" onClick={() => handleViewFeedback(record)} >
+              Feedbacks
+            </Button>
+          </div>
       ),
     },
   ];
@@ -558,200 +576,171 @@ function ApproveCV() {
   ];
 
   return (
-    <div id="APRCV">
-      <MainLayout>
-        <main className="content">
-          <header className="content-header">
-            <h1 className="content-title">Approve CV</h1>
-            <div className="user-info">
-              <img
-                loading="lazy"
-                src={User_Img}
-                alt="User Profile"
-                className="user-profile-small"
-              />
-              <div className="user-details">
-                <span className="user-name">Natalie Brogan</span>
-                <span className="user-role">Admin</span>
-              </div>
-              <div className="account-setting">
-                <SettingOutlined style={{ color: "#DB0D4B" }} />
-              </div>
-            </div>
-          </header>
-
-          <section className="content-section">
-            <h2 className="section-title">Search for Information</h2>
-            <div className="button-group">
-              <Sheldule />
-              <button className="button button-export">
-                <DownCircleOutlined />
-                <span className="btn-name">Export Excel</span>
-              </button>
-              <button className="button button-edit">
-                <EditOutlined />
-                <span className="btn-name">Edit</span>
-              </button>
-              <button className="button button-delete">
-                <DeleteOutlined />
-                <span className="btn-name">Delete</span>
-              </button>
-              <button className="button button-add-intern">
-                <FolderAddOutlined />
-                <span className="btn-name">Add New Intern</span>
-              </button>
-            </div>
-          </section>
-
-          <section className="filter-section">
-            <div className="filter">
-              <div className="fields">
-                <Input
-                  size="large"
-                  placeholder="Enter intern's ID"
-                  value={selectedFilters.internID}
-                  onChange={(e) =>
-                    handleInputChange("internID", e.target.value)
-                  }
+      <div id="APRCV">
+        <MainLayout>
+          <main className="content">
+            <header className="content-header">
+              <h1 className="content-title">Approve CV</h1>
+              <div className="user-info">
+                <img
+                    loading="lazy"
+                    src={User_Img}
+                    alt="User Profile"
+                    className="user-profile-small"
                 />
-
-                <Input
-                  size="large"
-                  placeholder="Enter intern's Full name"
-                  value={selectedFilters.fullName}
-                  onChange={(e) =>
-                    handleInputChange("fullName", e.target.value)
-                  }
-                />
-
-                <DatePicker
-                  format={dateFormat}
-                  placeholder="Enter intern's D.O.B"
-                  style={{ padding: "7px 11px", fontSize: "15px" }}
-                  onChange={(date) => handleDateChange("dateOfBirth", date)}
-                />
-
-                <Input
-                  size="large"
-                  placeholder="Enter intern's Phone number"
-                  value={selectedFilters.phoneNumber}
-                  onChange={(e) =>
-                    handleInputChange("phoneNumber", e.target.value)
-                  }
-                />
-
-                <Dropdown
-                  overlay={createMenu("school", schoolNames)}
-                  trigger={["click"]}
-                >
-                  <Button
-                    style={{
-                      padding: "7px 11px",
-                      fontSize: "15px",
-                      textAlign: "left",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      height: "100%",
-                    }}
-                  >
-                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                    <div
-                      style={{
-                        color: selectedFilters.school ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.school || "Enter intern's School"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
-
-                <Input
-                  size="large"
-                  placeholder="Enter intern's Email"
-                  value={selectedFilters.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                />
-
-                <Dropdown
-                  overlay={createMenu("position", positionNames)}
-                  trigger={["click"]}
-                >
-                  <Button
-                    style={{
-                      padding: "7px 11px",
-                      fontSize: "15px",
-                      textAlign: "left",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      height: "100%",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: selectedFilters.position ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.position || "Enter intern's Position"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
-
-                <Input
-                  size="large"
-                  placeholder="Enter intern's Address"
-                  value={selectedFilters.address}
-                  onChange={(e) => handleInputChange("address", e.target.value)}
-                />
-
-                <DatePicker
-                  format={dateFormat}
-                  placeholder="Enter intern's Date Submitted Form"
-                  style={{ padding: "7px 11px", fontSize: "15px" }}
-                  onChange={(date) => handleDateChange("dateSub", date)}
-                />
-              </div>
-              <div className="buttons">
-                <div className="cln-btn btn" onClick={handleClearFilters}>
-                  <DeleteOutlined style={{ marginRight: "10px" }} />
-                  <p>Clean Filter</p>
+                <div className="user-details">
+                  <span className="user-name">Natalie Brogan</span>
+                  <span className="user-role">Admin</span>
                 </div>
-                <br />
-                <div className="srch-btn btn" onClick={handleSearch}>
-                  <SearchOutlined style={{ marginRight: "10px" }} />
-                  <p>Search</p>
+                <div className="account-setting">
+                  <SettingOutlined style={{ color: "#DB0D4B" }} />
                 </div>
               </div>
-            </div>
-            <div className="list">
-              <Table
-                rowSelection={{
-                  type: "checkbox",
-                  ...rowSelection,
-                }}
-                columns={columns}
-                dataSource={filteredInterns}
-                scroll={{ x: "2200px", y: "360px" }}
-                style={{ maxWidth: "100%", minHeight: "100%" }}
-                pagination={{
-                  pageSize: 8,
-                }}
-              />
-            </div>
-          </section>
-        </main>
-        <CommentPopup
-          isVisible={commentPopupVisible}
-          onClose={handleCloseCommentPopup}
-          intern={selectedIntern}
-          initialPage={initialPage}
-          onSave={handleSaveComment}
-        />
-      </MainLayout>
-    </div>
+            </header>
+
+            <section className="content-section">
+              <h2 className="section-title">Search for Information</h2>
+              <div className="button-group">
+                <Sheldule />
+                <button className="button button-export">
+                  <DownCircleOutlined />
+                  <span className="btn-name">Export Excel</span>
+                </button>
+                <button className="button button-edit">
+                  <EditOutlined />
+                  <span className="btn-name">Edit</span>
+                </button>
+                <button className="button button-delete">
+                  <DeleteOutlined />
+                  <span className="btn-name">Delete</span>
+                </button>
+                <button className="button button-add-intern">
+                  <FolderAddOutlined />
+                  <span className="btn-name">Add New Intern</span>
+                </button>
+              </div>
+            </section>
+
+            <section className="filter-section">
+              <div className="filter">
+                <div className="fields">
+                  <Input
+                      size="large"
+                      placeholder="Enter intern's ID"
+                      value={selectedFilters.internID}
+                      onChange={(e) =>
+                          handleInputChange("internID", e.target.value)
+                      }
+                  />
+
+                  <Input
+                      size="large"
+                      placeholder="Enter intern's Full name"
+                      value={selectedFilters.fullName}
+                      onChange={(e) =>
+                          handleInputChange("fullName", e.target.value)
+                      }
+                  />
+
+                  <DatePicker
+                      format={dateFormat}
+                      placeholder="Enter intern's D.O.B"
+                      style={{ padding: "7px 11px", fontSize: "15px" }}
+                      onChange={(date) => handleDateChange("dateOfBirth", date)}
+                  />
+
+                  <Input
+                      size="large"
+                      placeholder="Enter intern's Phone number"
+                      value={selectedFilters.phoneNumber}
+                      onChange={(e) =>
+                          handleInputChange("phoneNumber", e.target.value)
+                      }
+                  />
+
+                  <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: '100%',
+                        fontSize: 5
+                      }}
+                      placeholder="Enter intern's School"
+                      options={optionsInternSchool}
+                  />
+
+                  <Input
+                      size="large"
+                      placeholder="Enter intern's Email"
+                      value={selectedFilters.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                  />
+
+                  <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: '100%',
+                        fontSize: 5
+                      }}
+                      placeholder="Enter intern's Position"
+                      options={optionsInternPosition}
+                  />
+
+                  <Input
+                      size="large"
+                      placeholder="Enter intern's Address"
+                      value={selectedFilters.address}
+                      onChange={(e) => handleInputChange("address", e.target.value)}
+                  />
+
+                  <DatePicker
+                      format={dateFormat}
+                      placeholder="Enter intern's Date Submitted Form"
+                      style={{ padding: "7px 11px", fontSize: "15px" }}
+                      onChange={(date) => handleDateChange("dateSub", date)}
+                  />
+                </div>
+                <div className="buttons">
+                  <div className="cln-btn btn" onClick={handleClearFilters}>
+                    <DeleteOutlined style={{ marginRight: "10px" }} />
+                    <p>Clean Filter</p>
+                  </div>
+                  <br />
+                  <div className="srch-btn btn" onClick={handleSearch}>
+                    <SearchOutlined style={{ marginRight: "10px" }} />
+                    <p>Search</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="list">
+                <Table
+                    rowSelection={{
+                      type: "checkbox",
+                      ...rowSelection,
+                    }}
+                    columns={columns}
+                    dataSource={filteredInterns}
+                    scroll={{ x: "2200px", y: "360px" }}
+                    style={{ maxWidth: "100%", minHeight: "100%" }}
+                    pagination={{
+                      pageSize: 8,
+                    }}
+                />
+              </div>
+            </section>
+          </main>
+          <CommentPopup
+              isVisible={commentPopupVisible}
+              onClose={handleCloseCommentPopup}
+              intern={selectedIntern}
+              initialPage={initialPage}
+              onSave={handleSaveComment}
+          />
+        </MainLayout>
+      </div>
+
   );
 }
 
