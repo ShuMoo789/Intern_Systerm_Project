@@ -37,9 +37,14 @@ const GroupButton = ({
     onCreateIntern();
   };
 
+
+  const handleScheduleInterview = () => {
+    onScheduleInterview();
+  };
+
   // function branches to handle functions by button name
   const handleButtonClick = (name) => {
-    if (name === "Send Email") {
+    if (name === "Send Email" || name === "Create Group") {
       handleSendMailClick();
     } else if (name === "Export Excel") {
       handleExportExcelClick();

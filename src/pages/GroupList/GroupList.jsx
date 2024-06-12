@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+
     Row,
     Col,
     Input,
@@ -486,9 +487,24 @@ const GroupList = () => {
     };
   }, []);
 
-  const [formValues, setFormValues] = useState(
-    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
-  );
+      const data = await response.json();
+      setGroups([...groups, data]);
+      setIsModalOpen(false);
+
+      // Reset form values
+      setRole("");
+      setGroupZalo("");
+      setProject("");
+      setMentor("");
+      setErrors({});
+      message.success("Group created successfully!");
+
+    } catch (error) {
+      console.error("Error adding new group:", error);
+      message.error("Failed to add new group");
+    }
+  };
+
 
   const handleInputChange = (e, title) => {
     setFormValues({ ...formValues, [title]: e.target.value });
@@ -506,6 +522,51 @@ const GroupList = () => {
       message.error("Please fill all fields", 1);
     }
   };
+
+
+  const filterOption = (input, option) =>
+    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+  const [modalWidth, setModalWidth] = useState("64%");
+
+  useEffect(() => {
+    const updateModalWidth = () => {
+      if (window.innerWidth <= 600) {
+        setModalWidth("90%");
+      } else if (window.innerWidth <= 1024) {
+        setModalWidth("75%");
+      } else {
+        setModalWidth("64%");
+      }
+    };
+
+    updateModalWidth();
+    window.addEventListener("resize", updateModalWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateModalWidth);
+    };
+  }, []);
+
+  const [formValues, setFormValues] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
+
+  const handleInputChange = (e, title) => {
+    setFormValues({ ...formValues, [title]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const allFieldsFilled = Object.values(formValues).every(
+      (value) => value.trim() !== ""
+    );
+    if (allFieldsFilled) {
+      handleCancel();
+    } else {
+      message.error("Please fill all fields");
+    }
+  };
+
 
   return (
     <>
@@ -682,7 +743,9 @@ const GroupList = () => {
               key="addNewIntern"
               type="primary"
               onClick={handleSubmit}
-              style={{ margin: " 20px 20px 0 0" }}
+
+              style={{ margin: "20px 20px 0 0" }}
+
             >
               Add New Intern
             </Button>,
@@ -690,7 +753,9 @@ const GroupList = () => {
           width={modalWidth}
         >
           <Space
-            size={[80, 30]}
+
+            size={[80, 50]}
+
             wrap
             style={{
               marginTop: "20px",
@@ -712,7 +777,9 @@ const GroupList = () => {
                   onChange={(e) => handleInputChange(e, field.title)}
                   style={{
                     width: "100%",
-                    height: "45px",
+
+                    height: "60px",
+
                     borderRadius: "15px",
                   }}
                 />
@@ -721,126 +788,129 @@ const GroupList = () => {
           </Space>
         </Modal>
 
-                <Modal
-                    title={<h2>Create group</h2>}
-                    open={isModalOpen}
-                    onCancel={handleCancel2}
-                    footer={null}
-                    style={{
-                        maxWidth: "1200px",
-                        width: "100%",
-                    }}
-                >
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div style={{ width: "33%" }}>
-                            <p>
-                                <b>Role</b>
-                            </p>
-                            <Select
-                                showSearch
-                                placeholder="Select a role"
-                                optionFilterProp="children"
-                                onChange={onChangeRole}
-                                filterOption={filterOption}
-                                style={{ width: "100%" }}
-                                options={[
-                                    { value: "Admin", label: "Admin" },
-                                    {
-                                        value: "Human resources",
-                                        label: "Human resources",
-                                    },
-                                    { value: "Mentor", label: "Mentor" },
-                                    { value: "School", label: "School" },
-                                    { value: "Intern", label: "Intern" },
-                                ]}
-                                value={role}
-                            />
-                            {errors.role && (
-                                <p style={{ color: "red" }}>{errors.role}</p>
-                            )}
+        <Modal
+          title={<h2>Create group</h2>}
+          open={isModalOpen}
+          onCancel={handleCancel2}
+          footer={null}
+          style={{
+            maxWidth: "1200px",
+            width: "100%",
+          }}
+        >
+          <Row justify="center">
+            <Col span ={8} >
+              
+            <div style={{ width: "95%" , alignContent: "center"}}>
+              {/* Project */}
+              <p>
+                <b>Role</b>
+              </p>
+              <Select
+                showSearch
+                placeholder="Select a role"
+                optionFilterProp="children"
+                onChange={onChangeRole}
+                filterOption={filterOption}
+                style={{ width: "100%" }}
+                options={[
+                  { value: "Admin", label: "Admin" },
+                  { value: "Human resources", label: "Human resources" },
+                  { value: "Mentor", label: "Mentor" },
+                  { value: "School", label: "School" },
+                  { value: "Intern", label: "Intern" },
+                ]}
+                value={role}
+              />
+              {errors.role && <p style={{ color: "red" }}>{errors.role}</p>}
 
-                            {/* Mentor */}
-                            <p>
-                                <b>Mentor</b>
-                            </p>
-                            <Input
-                                style={{ width: "100%" }}
-                                placeholder="Mentor name"
-                                value={mentor}
-                                onChange={(e) => setMentor(e.target.value)}
-                            />
-                            {errors.mentor && (
-                                <p style={{ color: "red" }}>{errors.mentor}</p>
-                            )}
-                        </div>
-                        <div
-                            style={{
-                                width: "33%",
-                                paddingLeft: "16px",
-                                paddingRight: "16px",
-                                marginLeft: "20px",
-                            }}
-                        >
-                            {/* Project */}
-                            <p>
-                                <b>Project</b>
-                            </p>
-                            <Select
-                                showSearch
-                                placeholder="Select a project"
-                                optionFilterProp="children"
-                                onChange={onChangeProject}
-                                filterOption={filterOption}
-                                style={{ width: "100%" }}
-                                options={[
-                                    { value: "Project 1", label: "Project 1" },
-                                ]}
-                                value={project}
-                            />
-                            {errors.project && (
-                                <p style={{ color: "red" }}>{errors.project}</p>
-                            )}
-                        </div>
-
-                        <div style={{ width: "33%", paddingLeft: "16px" }}>
-                            {/* Group zalo */}
-                            <p>
-                                <b>Group zalo</b>
-                            </p>
-                            <Input
-                                style={{ width: "100%" }}
-                                placeholder="FE intern system"
-                                value={groupZalo}
-                                onChange={(e) => setGroupZalo(e.target.value)}
-                            />
-                            {errors.groupZalo && (
-                                <p style={{ color: "red" }}>
-                                    {errors.groupZalo}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                    <div style={{ marginTop: 16, textAlign: "right" }}>
-                        <Button
-                            type="primary"
-                            onClick={handleCreateGroup}
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginLeft: "auto",
-                                backgroundColor: "#6537B1",
-                                padding: "20px",
-                                borderRadius: "10px",
-                            }}
-                        >
-                            <span>Create group</span>
-                        </Button>
-                    </div>
-                </Modal>
             </div>
-        </>
-    );
+
+            <div style={{ width: "95%" , alignContent: "center"}}>
+              {/* Group zalo */}
+              <p>
+                <b>Mentor</b>
+              </p>
+              
+              <Input
+                style={{ width: "100%" }}
+                placeholder="Mentor name"
+                value={mentor}
+                onChange={(e) => setMentor(e.target.value)}
+              />
+                            {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
+
+            </div>
+
+
+
+
+            </Col>
+
+            <Col span ={8}>
+            <div
+              style={{ width: "95%" , alignContent: "center"}}
+            >
+              {/* Project */}
+              <p>
+                <b>Project</b>
+              </p>
+              <Select
+                showSearch
+                placeholder="Select a project"
+                optionFilterProp="children"
+                onChange={onChangeProject}
+                filterOption={filterOption}
+                style={{ width: "100%" }}
+                options={[{ value: "Project 1", label: "Project 1" }]}
+                value={project}
+              />
+              {errors.project && (
+                <p style={{ color: "red" }}>{errors.project}</p>
+              )}
+            </div>
+            </Col>
+            
+            <Col span ={8}>
+            <div style={{ width: "100%" , alignContent: "center"}}>
+              {/* Group zalo */}
+              <p>
+                <b>Group zalo</b>
+              </p>
+              <Input
+                style={{ width: "100%" }}
+                placeholder="FE intern system"
+                value={groupZalo}
+                onChange={(e) => setGroupZalo(e.target.value)}
+              />
+              {errors.groupZalo && (
+                <p style={{ color: "red", width : "120%"}}>{errors.groupZalo}</p>
+              )}
+            </div>
+            </Col>
+          </Row>
+          <div style={{ width: "100%" , alignContent: "center"}}>
+            <Button
+              type="primary"
+              onClick={handleCreateGroup}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginLeft: "auto",
+                backgroundColor: "#6537B1",
+                padding: "20px",
+                borderRadius: "10px",
+              }}
+            >
+              <span>Create group</span>
+            </Button>
+          </div>
+        </Modal>
+      </div>
+    </>
+  );
+
 };
 
 export default GroupList;
