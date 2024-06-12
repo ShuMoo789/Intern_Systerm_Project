@@ -32,7 +32,7 @@ import {
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
-
+import {Typography} from "antd";
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
@@ -392,6 +392,7 @@ function ApproveCV() {
   const [optionChoose, setOptionChoose] = useState([]);
   const commentText = t("comment");
   const commentsText = t("comments")
+  const {Text} = Typography;
   // checkbox table Ant Design
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -406,12 +407,24 @@ function ApproveCV() {
     }),
   };
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Passed':
+        return 'green';
+      case 'Failed':
+        return 'red';
+      case 'Pending':
+        return 'yellow';
+      default:
+        return 'black';
+    }
+  };
   // title of apprve list table
   const columns = [
     {
       title: t("Intern ID"),
       dataIndex: "internID",
-      width: 80,
+      // width: 80,
       filteredValue: [selectedFilters.internID],
       // onFilter: (value, record) => {
       //     return record.internID.includes(value)
@@ -420,12 +433,12 @@ function ApproveCV() {
     {
       title: t("Date Submitted Form"),
       dataIndex: "dateSubmittedForm",
-      width: 140,
+      // width: 140,
     },
     {
       title: t("Full Name"),
       dataIndex: "fullName",
-      width: 150,
+      
       filteredValue: [selectedFilters.fullName],
       // onFilter: (value, record) => {
       //     return record.fullName.includes(value)
@@ -434,7 +447,7 @@ function ApproveCV() {
     {
       title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
-      width: 110,
+      // width: 110,
       // filteredValue: [selectedFilters.dateOfBirth],
       // onFilter: (value, record) => {
       //     return record.dateOfBirth.includes(value)
@@ -443,7 +456,7 @@ function ApproveCV() {
     {
       title: t("Phone Number"),
       dataIndex: "phoneNumber",
-      width: 120,
+      // width: 120,
       // filteredValue: [selectedFilters.phoneNumber],
       // onFilter: (value, record) => {
       //     return record.phoneNumber.includes(value)
@@ -452,7 +465,7 @@ function ApproveCV() {
     {
       title: t("Position"),
       dataIndex: "position",
-      width: 120,
+      // width: 120,
       // filteredValue: [selectedFilters.position],
       // onFilter: (value, record) => {
       //     return record.position.includes(value)
@@ -461,7 +474,7 @@ function ApproveCV() {
     {
       title: t("School"),
       dataIndex: "school",
-      width: 160,
+      // width: 160,
       render: (text) => t(text)
       // filteredValue: [selectedFilters.school],
       // onFilter: (value, record) => {
@@ -471,7 +484,7 @@ function ApproveCV() {
     {
       title: t("Address"),
       dataIndex: "address",
-      width: 120,
+      // width: 120,
       filteredValue: [selectedFilters.address],
       render: (text) => t(text)
       // onFilter: (value, record) => {
@@ -481,7 +494,7 @@ function ApproveCV() {
     {
       title: "Email",
       dataIndex: "email",
-      width: 180,
+      // width: 180,
       // filteredValue: [selectedFilters.email],
       // onFilter: (value, record) => {
       //     return record.email.includes(value)
@@ -490,11 +503,11 @@ function ApproveCV() {
     {
       title: "CV",
       dataIndex: "cvLink",
-      width: 60,
+      // width: 60,
       render: (text) => (
         <a
           href={text}
-          style={{ color: "#000000", textDecoration: "underline" }}
+          style={{ color: "#0000FF", textDecoration: "underline" }}
         >
           Link
         </a>
@@ -503,7 +516,7 @@ function ApproveCV() {
     {
       title: t("Comments"),
       dataIndex: "commentsCV",
-      width: 130,
+      // width: 130,
       render: (text) => (
         <Button
           onClick={() => handleCommentClick(intern)}
@@ -517,24 +530,30 @@ function ApproveCV() {
     {
       title: t("Status"),
       dataIndex: "status",
-      width: 100,
+      // width: 100,
       render: (text) => {
         return (
           <Select
             defaultValue= {text}
             style={{
-              width: 100,
+              // width: 100,
             }}>
-            <Option value="Pending">{t("Pending")}</Option>
-            <Option value="Failed">{t("Failed")}</Option>
-            <Option value="Passed">{t("Passed")}</Option>
+            <Option value="Pending">
+              <Text style={{ color: getStatusColor('Pending') }}>{t("Pending")}</Text>
+            </Option>
+            <Option value="Failed">
+              <Text style={{ color: getStatusColor('Failed') }}>{t("Failed")}</Text>
+            </Option>
+            <Option value="Passed">
+              <Text style={{ color: getStatusColor('Passed') }}>{t("Passed")}</Text>
+            </Option>
           </Select>
         );
       },
     },
     {
       title: "Button",
-      width: 120,
+      // width: 120,
       render: () => (
         <div className="approve-btns">
           <div className="view" onClick={() => handleViewClick(intern)}>
@@ -596,7 +615,7 @@ function ApproveCV() {
             <h2 className="section-title">{t("Search for Information")}</h2>
             <div className="button-group">
               <button className="button button-schedule">
-                <Sheldule />
+                <Sheldule/>
               </button>
               <button className="button button-export">
                 <img
@@ -764,8 +783,8 @@ function ApproveCV() {
                 }}
                 columns={columns}
                 dataSource={filteredInterns}
-                scroll={{ x: "2200px", y: "360px" }}
-                style={{ maxWidth: "100%", minHeight: "100%" }}
+                scroll={{ x: "max-content", y: "360px" }}
+                style={{ tableLayout: 'auto' }}
                 pagination={{
                   pageSize: 8,
                 }}
