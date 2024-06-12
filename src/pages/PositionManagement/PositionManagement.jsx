@@ -3,11 +3,7 @@ import React, { useState } from "react";
 import MainLayout from "../../MainLayout/MainLayout";
 import User_Img from "../../assets/user_image.png";
 import Navigation from "../../components/Navigation/Navigation";
-import GroupButton from "../../components/GroupButton/GroupButton";
-import AccountSetting from "../../components/AccountSetting/AccountSetting";
-import useViewport from "../../hooks/useViewport";
 import {
-
   Table,
   Checkbox,
   Button,
@@ -21,12 +17,12 @@ import {
   Menu,
   message,
 } from "antd";
-import { 
-  DownOutlined, 
-  ExportOutlined, 
-  EditOutlined, 
-  DeleteOutlined, 
-  FolderAddOutlined 
+import {
+  DownOutlined,
+  ExportOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  FolderAddOutlined,
 } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
 import "../PositionManagement/PositionManagement.css";
@@ -38,24 +34,24 @@ const { Meta } = Card;
 
 const groupButton = [
   {
-      color: "#41B137",
-      name: "Export Excel",
-      icon: <ExportOutlined />,
+    color: "#41B137",
+    name: "Export Excel",
+    icon: <ExportOutlined />,
   },
   {
-      color: "#FB8632",
-      name: "Edit",
-      icon: <EditOutlined />,
+    color: "#FB8632",
+    name: "Edit",
+    icon: <EditOutlined />,
   },
   {
-      color: "#FF3A2E",
-      name: "Delete",
-      icon: <DeleteOutlined />,
+    color: "#FF3A2E",
+    name: "Delete",
+    icon: <DeleteOutlined />,
   },
   {
-      color: "#4889E9",
-      name: "Add New Position",
-      icon: <FolderAddOutlined />,
+    color: "#4889E9",
+    name: "Add New Position",
+    icon: <FolderAddOutlined />,
   },
 ];
 
@@ -64,8 +60,8 @@ const PositionManagement = () => {
   const [selectedInterns, setSelectedInterns] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
   const [originalSelectedInterns, setOriginalSelectedInterns] = useState([]);
-  const viewPort = useViewport()
-  const isMobile = viewPort.width <= 1024
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
   // JSON data
   const internsData = [
     {
@@ -117,27 +113,26 @@ const PositionManagement = () => {
       rank: "Junior",
     },
     {
-        color: "#41B137",
-        name: "Export Excel",
-        icon: <ExportOutlined />,
+      color: "#41B137",
+      name: "Export Excel",
+      icon: <ExportOutlined />,
     },
     {
-        color: "#FB8632",
-        name: "Edit",
-        icon: <EditOutlined />,
+      color: "#FB8632",
+      name: "Edit",
+      icon: <EditOutlined />,
     },
     {
-        color: "#FF3A2E",
-        name: "Delete",
-        icon: <DeleteOutlined />,
+      color: "#FF3A2E",
+      name: "Delete",
+      icon: <DeleteOutlined />,
     },
     {
-        color: "#4889E9",
-        name: "Add New Position",
-        icon: <FolderAddOutlined />,
+      color: "#4889E9",
+      name: "Add New Position",
+      icon: <FolderAddOutlined />,
     },
-];
-
+  ];
 
   const showModal = (title, position) => {
     const filteredInterns = internsData.filter(
@@ -160,26 +155,26 @@ const PositionManagement = () => {
     setIsModalVisible(false); // Close modal
   };
 
-    const rankMenu = (record) => (
-        <Menu onClick={(e) => handleRankChange(e, record)}>
-            <Menu.Item key="Intern">Intern</Menu.Item>
-            <Menu.Item key="Fresher">Fresher</Menu.Item>
-            <Menu.Item key="Junior">Junior</Menu.Item>
-            <Menu.Item key="Middle">Middle</Menu.Item>
-        </Menu>
-    );
+  const rankMenu = (record) => (
+    <Menu onClick={(e) => handleRankChange(e, record)}>
+      <Menu.Item key="Intern">Intern</Menu.Item>
+      <Menu.Item key="Fresher">Fresher</Menu.Item>
+      <Menu.Item key="Junior">Junior</Menu.Item>
+      <Menu.Item key="Middle">Middle</Menu.Item>
+    </Menu>
+  );
 
-    const handleRankChange = (e, record) => {
-        const { key } = e;
-        // Cập nhật dữ liệu của record với rank mới được chọn
-        const updatedInterns = selectedInterns.map((intern) => {
-            if (intern.key === record.key) {
-                return { ...intern, rank: key };
-            }
-            return intern;
-        });
-        setSelectedInterns(updatedInterns);
-    };
+  const handleRankChange = (e, record) => {
+    const { key } = e;
+    // Cập nhật dữ liệu của record với rank mới được chọn
+    const updatedInterns = selectedInterns.map((intern) => {
+      if (intern.key === record.key) {
+        return { ...intern, rank: key };
+      }
+      return intern;
+    });
+    setSelectedInterns(updatedInterns);
+  };
 
   const columns = [
     {
@@ -246,35 +241,32 @@ const PositionManagement = () => {
     },
   ];
 
-
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
-          
           <header className="content-header">
             <h1 className="content-title">
-                <b>Position Management</b>
+              <b>Position Management</b>
             </h1>
 
             {!isMobile ? (
-                <div className="user-info-box">
-                    <AccountSetting />
-                </div>
+              <div className="user-info-box">
+                <AccountSetting />
+              </div>
             ) : (
-                <div className="user-info-box-mobile">
-                    <AccountSetting />
-                </div>
+              <div className="user-info-box-mobile">
+                <AccountSetting />
+              </div>
             )}
           </header>
 
           <div className="button-group-position">
-              <div className="row-btn-grp-pos">
-                  <GroupButton groupButton={groupButton} />
-              </div>
+            <div className="row-btn-grp-pos">
+              <GroupButton groupButton={groupButton} />
+            </div>
           </div>
-       
-    
+
           <section>
             <div className="bodyposition">
               <div className="bodyposi">
@@ -409,7 +401,6 @@ const PositionManagement = () => {
                             }}
                           ></Avatar>
                         </Tooltip>
-
 
                         <Tooltip title="Ant User" placement="top">
                           <Avatar
@@ -562,7 +553,6 @@ const PositionManagement = () => {
                     </>
                   </div>
 
-
                   <Button
                     type="link"
                     className="button-main"
@@ -615,7 +605,6 @@ const PositionManagement = () => {
                             }}
                           ></Avatar>
                         </Tooltip>
-
 
                         <Tooltip title="Ant User" placement="top">
                           <Avatar
@@ -716,7 +705,6 @@ const PositionManagement = () => {
                             }}
                           ></Avatar>
                         </Tooltip>
-
 
                         <Tooltip title="Ant User" placement="top">
                           <Avatar
