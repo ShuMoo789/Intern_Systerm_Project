@@ -6,19 +6,20 @@ import User_Img from "../../assets/user_image.png";
 import SendMailButton from '../../components/SendMailButton/SendMailButton';
 import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton"
 import MailOutlined from "@ant-design/icons/MailOutlined"
+import Navigation from "../../components/Navigation/Navigation";
 import {
     DownOutlined,
     EyeOutlined,
     PlusOutlined,
-    SettingOutlined,
-    ArrowRightOutlined,
-    ArrowLeftOutlined,
+    ExportOutlined,
     SearchOutlined,
     DeleteOutlined,
+
     ClockCircleOutlined,
     ExportOutlined,
     EditOutlined,
     FolderAddOutlined, UpOutlined
+
 } from "@ant-design/icons";
 import { Input } from "antd";
 import DataConfirmCV from "../../data/ConfirmCV.json"
@@ -614,6 +615,7 @@ const ConfirmCV = () => {
         },
     ]
     const [selectionType, setSelectionType] = useState('checkbox');
+
     const groupButton = [
         {
             color: "#6537B1",
@@ -661,7 +663,45 @@ const ConfirmCV = () => {
         <div id="APRCV">
 
 
+    const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
 
+    const handleOpenEmailPopup = () => {
+        setEmailPopupVisible(true);
+    };
+
+    const handleCloseEmailPopup = () => {
+        setEmailPopupVisible(false);
+    };
+
+    const groupButton = [
+        {
+          color: "#6537B1",
+          name: "Send Email",
+          icon: <MailOutlined />,
+        },
+        {
+          color: "#41B137",
+          name: "Export Excel",
+          icon: <ExportOutlined />,
+        },
+        {
+          color: "#FB8632",
+          name: "Edit",
+          icon: <EditOutlined />,
+        },
+        {
+          color: "#FF3A2E",
+          name: "Delete",
+          icon: <DeleteOutlined />,
+        },
+        {
+          color: "#4889E9",
+          name: "Add New Intern",
+          icon: <FolderAddOutlined />,
+        },
+      ];
+    return (
+        <div id="APRCV">
             <MainLayout>
 
                 <main className="content">
@@ -669,17 +709,21 @@ const ConfirmCV = () => {
                         <Navigation
                             titleName='CONFIRM CV'
                             groupButton={groupButton}
+
                             onSendEmail={handleOpenEmailPopup} />
+
                     </div>
                     <SendMailButton
                         onClose={handleCloseEmailPopup}
                         openPopup={isEmailPopupVisible}
+
                     />
                     <section className="filter-section-confirm">
                         <div className="filter-confirm">
                             <div className="fields-confirm">
                                 <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']} onDropdownVisibleChange={handleDropdownVisibleChange} suffixIcon={open ? <UpOutlined /> : <DownOutlined />}>
                                     <Button className="filter-button">
+
                                         <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || "Enter intern's ID"}</div>
                                         <DownOutlined />
                                     </Button>
@@ -723,8 +767,10 @@ const ConfirmCV = () => {
                                 />
 
                                 <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
+
                                     <Button className="filter-button">
                                         <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF", width: "200px" }}>{selectedFilters.position || "Enter intern's Position"}</div>
+
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
