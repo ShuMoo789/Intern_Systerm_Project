@@ -136,6 +136,12 @@ const MyComponent = () => {
         {
             title: "Marketing_FU_SP24",
         },
+        {
+            title: "title 5",
+        },
+        {
+            title: "title 6",
+        },
     ]);
 
     const [expanded, setExpanded] = useState(false);
@@ -156,12 +162,6 @@ const MyComponent = () => {
     const handleClick = () => {
         let arr = [
             {
-                title: "title 5",
-            },
-            {
-                title: "title 6",
-            },
-            {
                 title: "title 7",
             },
             {
@@ -177,7 +177,7 @@ const MyComponent = () => {
         if (data.length < 10 && !expanded) {
             setData((pre) => [...pre, ...arr]);
         } else {
-            setData((pre) => pre.slice(0, 4));
+            setData((pre) => pre.slice(0, 6));
         }
         setExpanded(!expanded);
     };
