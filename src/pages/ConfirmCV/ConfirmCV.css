@@ -1,129 +1,1713 @@
-.tbl-wrapper {
-    overflow-x: auto;
-    /* Tạo thanh cuộn ngang khi bảng quá rộng */
-}
-
-.table {
-    width: 100%;
-    /* Bảng có thể mở rộng hết chiều rộng của phần tử chứa nó */
-}
-
-/* Các phần tử trong bảng co dãn khi màn hình nhỏ hơn */
-.table td,
-.table th {
-    white-space: nowrap;
-    /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
-}
-
-/* Tùy chỉnh các đặc tính khi màn hình thu nhỏ hơn 768px */
-@media (max-width: 768px) {
-    .tbl-wrapper {
-        overflow-x: scroll;
-        /* Sử dụng thanh cuộn ngang khi bảng quá rộng */
+    .content {
+        font-family: Quicksand;
     }
-}
 
-.filter-section-confirm {
-    margin-left: 50px;
-}
+    .tbl-wrapper {
+        overflow-x: auto;
+        /* Tạo thanh cuộn ngang khi bảng quá rộng */
+    }
 
-.filter-confirm {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 71%;
-}
+    .table {
+        width: 100%;
+        /* Bảng có thể mở rộng hết chiều rộng của phần tử chứa nó */
+    }
 
-.fields-confirm {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
+    /* Các phần tử trong bảng co dãn khi màn hình nhỏ hơn */
+    .table td,
+    .table th {
+        white-space: nowrap;
+        /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
+    }
 
-}
+    /* Tùy chỉnh các đặc tính khi màn hình thu nhỏ hơn 768px */
+    @media (max-width: 768px) {
+        .tbl-wrapper {
+            overflow-x: scroll;
+            /* Sử dụng thanh cuộn ngang khi bảng quá rộng */
+        }
+    }
 
-.fields-confirm .ant-btn {
-    width: 100%;
-    padding: 7px 11px;
-    font-size: 15px;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
 
-.fields-confirm .ant-btn div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
-.fields-confirm .ant-btn .anticon-down {
-    margin-left: 8px;
-}
+    .filter-section-confirm {
+        width: 89%;
+        margin-left: 4%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        font-family: Quicksand;
+    }
 
-.fields-confirm .ant-input,
-.fields-confirm .ant-picker {
-    width: 100%;
-    padding: 7px 11px;
-    font-size: 15px;
-}
-
-.fields-confirm .ant-picker .ant-picker-input input {
-    padding: 7px 11px;
-}
-
-.buttons-confirm {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    /* Align items to the right */
-    gap: 0px;
-    margin-top: -216px;
-    margin-right: -176px;
-    margin-bottom: 68px;
-}
-
-.cln-btn-confirm,
-.btn-confirm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 20px 20px;
-    border: 1px solid #d9d9d9;
-    border-radius: 20px;
-    background-color: #f5f5f5;
-    width: 10%;
-}
-
-.btn-confirm {
-    color: white;
-    background-color: #1890ff;
-
-}
-
-.cln-btn-confirm .anticon,
-.btn-confirm .anticon {
-    margin-right: 10px;
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-    .buttons-confirm {
+    .filter-button {
+        flex: 1 1 200px;
+        /* Adjust the basis to control minimum width */
+        padding: 7px 11px;
+        font-size: 15px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        /* Center align items on smaller screens */
-        margin-top: 0;
-        margin-bottom: 10%;
+        height: 100%;
+    }
+
+
+    .filter-confirm {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 71%;
+    }
+
+    .fields-confirm {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 10px;
+
+    }
+
+    .fields-confirm .ant-btn {
+        width: 100%;
+        padding: 7px 11px;
+        font-size: 15px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    .fields-confirm .ant-btn div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .fields-confirm .ant-btn .anticon-down {
+        margin-left: 8px;
+    }
+
+    .fields-confirm .ant-input,
+    .fields-confirm .ant-picker {
+        width: 100%;
+        padding: 7px 11px;
+        font-size: 15px;
+    }
+
+    .buttons-confirm {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        /* Align items to the right */
+        gap: 0px;
+        margin-top: -204px;
+        margin-right: -176px;
+        margin-bottom: 68px;
     }
 
     .cln-btn-confirm,
     .btn-confirm {
-        width: 50%;
-        /* Make buttons full width on smaller screens */
-        margin-left: -40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 20px 20px;
+        border: 1px solid #d9d9d9;
+        border-radius: 20px;
+        background-color: #f5f5f5;
+        width: 10%;
     }
 
-    
+    .btn-confirm {
+        color: white;
+        background-color: #1890ff;
 
-}
+    }
+
+    .cln-btn-confirm .anticon,
+    .btn-confirm .anticon {
+        margin-right: 10px;
+    }
+
+    .filter-input {
+        width: 100%;
+    }
+
+    .date-picker {
+        width: 100%;
+    }
+
+    /* responsive*/
+
+    @media (max-width: 766px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 13px;
+            padding: 5px 8px;
+        }
+
+        .filter-input {
+            font-size: 13px;
+        }
+
+        .date-picker {
+            font-size: 13px;
+        }
+
+        .buttons-confirm {
+            align-items: center;
+            /* Center align items on smaller screens */
+            margin-top: 0;
+            margin-bottom: 10%;
+        }
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 50%;
+            margin-left: -38%;
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .filter-section-confirm {
+            width: 81%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 12%;
+            margin-left: -38%;
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 1424px) {
+        .filter-section-confirm {
+            width: 89%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 11%;
+            /* margin-left: -38%; */
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 1412px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 11%;
+            margin-left: -38%;
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 1289px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 12%;
+            /* margin-left: -38%; */
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 1162px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 12%;
+            margin-left: -38%;
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 1158px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 13%;
+            margin-left: -38%;
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 1049px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {}
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 14%;
+            margin-left: -38%;
+            padding: 2%;
+        }
+    }
+
+    @media (max-width: 993px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 14%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 996px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 14%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 990px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 14%;
+            margin-left: -38%;
+            padding: 2%;
+            /* margin-bottom: 0.5%; */
+        }
+    }
+
+    @media (max-width: 971px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 970px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 968px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 965px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 952px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 0.1%;
+        }
+    }
+
+
+    @media (max-width: 940px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+
+        }
+    }
+
+    @media (max-width: 900px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 15%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+        }
+    }
+
+    @media (max-width: 899px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 16%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+        }
+    }
+
+    @media (max-width: 860px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 16%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+        }
+    }
+
+    @media (max-width: 836px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 825px) {
+        .filter-section-confirm {
+            width: 87%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 810px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 809px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 809px) {
+        .filter-section-confirm {
+            width: 88%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 808px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 790px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 789px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+        }
+    }
+
+    @media (max-width: 772px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 17%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 4px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 766px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 62%;
+            margin-left: -32%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+
+        .fields-confirm {
+            width: 136%;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 62%;
+            margin-left: -32%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 643px) {
+        .filter-section-confirm {
+            width: 86%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 60%;
+            margin-left: -34%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .filter-section-confirm {
+            width: 85%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 60%;
+            margin-left: -34%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 629px) {
+        .filter-section-confirm {
+            width: 84%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 60%;
+            margin-left: -34%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 617px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 606px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 56%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 596px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 56%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 591px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 56%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 586px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 584px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 56%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 54%;
+            margin-left: -40%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 569px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 54%;
+            margin-left: -40%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 556px) {
+        .filter-section-confirm {
+            width: 78%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 558px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -38%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 551px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 543px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 526px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
+
+    @media (max-width: 510px) {
+        .filter-section-confirm {
+            width: 83%;
+            margin-left: 4%;
+            padding: 20px;
+        }
+
+        .filter-button {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+
+        .filter-input {
+            font-size: 12px;
+        }
+
+        .date-picker {
+            font-size: 12px;
+        }
+
+        .buttons-confirm {
+            margin-bottom: 4px;
+        }
+
+
+        .cln-btn-confirm,
+        .btn-confirm {
+            width: 58%;
+            margin-left: -36%;
+            padding: 2%;
+            margin-bottom: 2px;
+            margin-right: 6px;
+        }
+    }
