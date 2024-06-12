@@ -41,7 +41,27 @@ const Navigation = (props) => {
                 </div>
             </div>
         </div>
-    );
+      </div>
+      <div className="navigation">
+        <div className="search-navigation">
+          {/* {isMobile ? 'Search' : 'Search for Information'} */}
+          <Input
+            placeholder={isMobile ? "Search" : "Search for Information"}
+            variant="filled"
+          />
+        </div>
+        {/* Pass props to GroupButton from InternList */}
+        <div className="group-button-navigation">
+          <GroupButton
+            groupButton={props.groupButton}
+            onSendEmail={props.onSendEmail}
+            onScheduleInterview={props.onScheduleInterview}
+            onCreateIntern={props.onCreateIntern}
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Navigation;

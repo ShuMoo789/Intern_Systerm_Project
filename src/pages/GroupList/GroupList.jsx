@@ -10,6 +10,7 @@ import {
   Select,
   Modal,
   Form,
+  message,
 } from "antd";
 
 import {
@@ -440,6 +441,7 @@ const GroupList = () => {
       setProject("");
       setMentor("");
       setErrors({});
+      message.success("Group created successfully!");
     } catch (error) {
       console.error("Error adding new group:", error);
       message.error("Failed to add new group");
@@ -456,6 +458,46 @@ const GroupList = () => {
 
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+  const [modalWidth, setModalWidth] = useState("64%");
+
+  useEffect(() => {
+    const updateModalWidth = () => {
+      if (window.innerWidth <= 600) {
+        setModalWidth("90%");
+      } else if (window.innerWidth <= 1024) {
+        setModalWidth("75%");
+      } else {
+        setModalWidth("64%");
+      }
+    };
+
+    updateModalWidth();
+    window.addEventListener("resize", updateModalWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateModalWidth);
+    };
+  }, []);
+
+  const [formValues, setFormValues] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
+
+  const handleInputChange = (e, title) => {
+    setFormValues({ ...formValues, [title]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const allFieldsFilled = Object.values(formValues).every(
+      (value) => value.trim() !== ""
+    );
+    if (allFieldsFilled) {
+      handleCancel();
+    } else {
+      message.error("Please fill all fields");
+    }
+  };
 
   return (
     <>
@@ -631,22 +673,37 @@ const GroupList = () => {
             <Button
               key="addNewIntern"
               type="primary"
-              onClick={handleCancel}
-              style={{ margin: " 20px 20px 0 0" }}
+              onClick={handleSubmit}
+              style={{ margin: "20px 20px 0 0" }}
             >
               Add New Intern
             </Button>,
           ]}
-          width="55%"
+          width={modalWidth}
         >
-          <Space size={[30, 50]} wrap style={{ marginTop: "20px" }}>
-            {inputFields.map((field) => (
-              <Space direction="vertical" size="small">
+          <Space
+            size={[80, 50]}
+            wrap
+            style={{
+              marginTop: "20px",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            {inputFields.map((field, index) => (
+              <Space
+                key={index}
+                direction="vertical"
+                size="small"
+                style={{ width: "300px" }}
+              >
                 <label style={{ fontWeight: "bold" }}>{field.title}</label>
                 <Input
                   placeholder={field.placeholder}
+                  value={formValues[field.title]}
+                  onChange={(e) => handleInputChange(e, field.title)}
                   style={{
-                    width: "325px",
+                    width: "100%",
                     height: "60px",
                     borderRadius: "15px",
                   }}
@@ -666,85 +723,93 @@ const GroupList = () => {
             width: "100%",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div style={{ width: "33%" }}>
-              <p>
-                <b>Role</b>
-              </p>
-              <Select
-                showSearch
-                placeholder="Select a role"
-                optionFilterProp="children"
-                onChange={onChangeRole}
-                filterOption={filterOption}
-                style={{ width: "100%" }}
-                options={[
-                  { value: "Admin", label: "Admin" },
-                  { value: "Human resources", label: "Human resources" },
-                  { value: "Mentor", label: "Mentor" },
-                  { value: "School", label: "School" },
-                  { value: "Intern", label: "Intern" },
-                ]}
-                value={role}
-              />
-              {errors.role && <p style={{ color: "red" }}>{errors.role}</p>}
+          <Row justify="center">
+            <Col span={8}>
+              <div style={{ width: "95%", alignContent: "center" }}>
+                {/* Project */}
+                <p>
+                  <b>Role</b>
+                </p>
+                <Select
+                  showSearch
+                  placeholder="Select a role"
+                  optionFilterProp="children"
+                  onChange={onChangeRole}
+                  filterOption={filterOption}
+                  style={{ width: "100%" }}
+                  options={[
+                    { value: "Admin", label: "Admin" },
+                    { value: "Human resources", label: "Human resources" },
+                    { value: "Mentor", label: "Mentor" },
+                    { value: "School", label: "School" },
+                    { value: "Intern", label: "Intern" },
+                  ]}
+                  value={role}
+                />
+                {errors.role && <p style={{ color: "red" }}>{errors.role}</p>}
+              </div>
 
-              {/* Mentor */}
-              <p>
-                <b>Mentor</b>
-              </p>
-              <Input
-                style={{ width: "100%" }}
-                placeholder="Mentor name"
-                value={mentor}
-                onChange={(e) => setMentor(e.target.value)}
-              />
-              {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
-            </div>
-            <div
-              style={{
-                width: "33%",
-                paddingLeft: "16px",
-                paddingRight: "16px",
-                marginLeft: "20px",
-              }}
-            >
-              {/* Project */}
-              <p>
-                <b>Project</b>
-              </p>
-              <Select
-                showSearch
-                placeholder="Select a project"
-                optionFilterProp="children"
-                onChange={onChangeProject}
-                filterOption={filterOption}
-                style={{ width: "100%" }}
-                options={[{ value: "Project 1", label: "Project 1" }]}
-                value={project}
-              />
-              {errors.project && (
-                <p style={{ color: "red" }}>{errors.project}</p>
-              )}
-            </div>
+              <div style={{ width: "95%", alignContent: "center" }}>
+                {/* Group zalo */}
+                <p>
+                  <b>Mentor</b>
+                </p>
 
-            <div style={{ width: "33%", paddingLeft: "16px" }}>
-              {/* Group zalo */}
-              <p>
-                <b>Group zalo</b>
-              </p>
-              <Input
-                style={{ width: "100%" }}
-                placeholder="FE intern system"
-                value={groupZalo}
-                onChange={(e) => setGroupZalo(e.target.value)}
-              />
-              {errors.groupZalo && (
-                <p style={{ color: "red" }}>{errors.groupZalo}</p>
-              )}
-            </div>
-          </div>
-          <div style={{ marginTop: 16, textAlign: "right" }}>
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Mentor name"
+                  value={mentor}
+                  onChange={(e) => setMentor(e.target.value)}
+                />
+                {errors.mentor && (
+                  <p style={{ color: "red" }}>{errors.mentor}</p>
+                )}
+              </div>
+            </Col>
+
+            <Col span={8}>
+              <div style={{ width: "95%", alignContent: "center" }}>
+                {/* Project */}
+                <p>
+                  <b>Project</b>
+                </p>
+                <Select
+                  showSearch
+                  placeholder="Select a project"
+                  optionFilterProp="children"
+                  onChange={onChangeProject}
+                  filterOption={filterOption}
+                  style={{ width: "100%" }}
+                  options={[{ value: "Project 1", label: "Project 1" }]}
+                  value={project}
+                />
+                {errors.project && (
+                  <p style={{ color: "red" }}>{errors.project}</p>
+                )}
+              </div>
+            </Col>
+
+            <Col span={8}>
+              <div style={{ width: "100%", alignContent: "center" }}>
+                {/* Group zalo */}
+                <p>
+                  <b>Group zalo</b>
+                </p>
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="FE intern system"
+                  value={groupZalo}
+                  onChange={(e) => setGroupZalo(e.target.value)}
+                />
+                {errors.groupZalo && (
+                  <p style={{ color: "red", width: "120%" }}>
+                    {errors.groupZalo}
+                  </p>
+                )}
+              </div>
+            </Col>
+          </Row>
+          <div style={{ width: "100%", alignContent: "center" }}>
             <Button
               type="primary"
               onClick={handleCreateGroup}
