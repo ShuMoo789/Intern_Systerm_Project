@@ -1,18 +1,18 @@
 /* =============================== Main Content ================================ */
 .container-group {
-    background: #ffffff;
-    min-width: 521px;
     width: 100%;
-    margin-bottom: 2%;
-    border-radius: 34px;
-    padding: 0 46px;
-    box-sizing: border-box;
+    margin: 0 auto;
+    font-family: "Quicksand" !important;
 }
 
 .main-content-group {
+    background: #ffffff;
+    padding: 0 46px;
+    margin-bottom: 2%;
+    border-radius: 34px;
+
     /* overflow: hidden; */
     height: 100%;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,14 +84,12 @@
     margin-top: -5px;
     z-index: 1;
 }
-
 /* ================= Item Group ================= */
 .group-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 366px;
-    max-width: 90%;
+    max-width: 100%;
     padding: 20px 30px;
     background-color: #ececec;
     border-radius: 30px;
@@ -108,7 +106,6 @@
     font-family: "Quicksand";
     display: flex;
     flex-direction: column;
-    min-width: 280px;
     position: relative;
     top: -10px;
 }
@@ -154,4 +151,36 @@
     border-radius: 25px;
     border-color: #6537b1 !important;
     border-width: 2px !important;
+}
+/* =============================================== */
+
+@media screen and (max-width: 680px) {
+    .group-item .group-box {
+        gap: 10px;
+    }
+    .group-item .title-name {
+        font-size: 13.5px;
+    }
+
+    .group-item .click-view {
+        font-size: 10px;
+    }
+
+    .avatar-group .my-avatar {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #fff;
+    }
+
+    .avatar-counter {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #fff;
+    }
+    .custom-dropdown-button .anticon {
+        font-size: 32px;
+    }
+    .group-item .click-view {
+        font-size: 12px;
+    }
 }

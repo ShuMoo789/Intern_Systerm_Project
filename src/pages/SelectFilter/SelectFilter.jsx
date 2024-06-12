@@ -217,7 +217,7 @@ const MyComponent = () => {
                         </div>
 
                         {!isMobile ? (
-                            <Row gutter={[6, 16]}>
+                            <Row gutter={[16, 16]}>
                                 {filteredData.map((item, index) => {
                                     return (
                                         <Col span={12} key={index}>
