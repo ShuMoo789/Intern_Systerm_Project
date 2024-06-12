@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 import MainLayout from "../../MainLayout/MainLayout";
 import User_Img from "../../assets/user_image.png";
+import Navigation from "../../components/Navigation/Navigation";
+import GroupButton from "../../components/GroupButton/GroupButton";
+import AccountSetting from "../../components/AccountSetting/AccountSetting";
+import useViewport from "../../hooks/useViewport";
 import {
+
   Table,
   Checkbox,
   Button,
@@ -112,55 +117,27 @@ const PositionManagement = () => {
       rank: "Junior",
     },
     {
-      key: "5",
-      internID: "#12131",
-      fullName: "Janes",
-      phoneNumber: "987654321",
-      position: "Business Analyst",
-      school: "XYZ University",
-      email: "janes.smith@example.com",
-      cvLink: "Link",
-      technology: "trello",
-      rank: "Junior",
+        color: "#41B137",
+        name: "Export Excel",
+        icon: <ExportOutlined />,
     },
     {
-      key: "6",
-      internID: "#123451c31",
-      fullName: "Janes",
-      phoneNumber: "987654321",
-      position: "Marketing",
-      school: "XYZ University",
-      email: "janes.smdfith@example.com",
-      cvLink: "Link",
-      technology: "Exceel",
-      rank: "Junior",
+        color: "#FB8632",
+        name: "Edit",
+        icon: <EditOutlined />,
     },
     {
-      key: "7",
-      internID: "#12dd3451c31",
-      fullName: "luke",
-      phoneNumber: "987654321",
-      position: "Designer",
-      school: "XYZ University",
-      email: "luke.smdfith@example.com",
-      cvLink: "Link",
-      technology: "ReactJS",
-      rank: "Junior",
+        color: "#FF3A2E",
+        name: "Delete",
+        icon: <DeleteOutlined />,
     },
     {
-      key: "8",
-      internID: "#12dd3ss451c31",
-      fullName: "D",
-      phoneNumber: "987654321",
-      position: "Sales Executive",
-      school: "XYZ University",
-      email: "luke.smdfith@example.com",
-      cvLink: "Link",
-      technology: "Trello",
-      rank: "Junior",
+        color: "#4889E9",
+        name: "Add New Position",
+        icon: <FolderAddOutlined />,
     },
-    // Add more intern objects as needed
-  ];
+];
+
 
   const showModal = (title, position) => {
     const filteredInterns = internsData.filter(
@@ -183,26 +160,26 @@ const PositionManagement = () => {
     setIsModalVisible(false); // Close modal
   };
 
-  const rankMenu = (record) => (
-    <Menu onClick={(e) => handleRankChange(e, record)}>
-      <Menu.Item key="Intern">Intern</Menu.Item>
-      <Menu.Item key="Fresher">Fresher</Menu.Item>
-      <Menu.Item key="Junior">Junior</Menu.Item>
-      <Menu.Item key="Middle">Middle</Menu.Item>
-    </Menu>
-  );
+    const rankMenu = (record) => (
+        <Menu onClick={(e) => handleRankChange(e, record)}>
+            <Menu.Item key="Intern">Intern</Menu.Item>
+            <Menu.Item key="Fresher">Fresher</Menu.Item>
+            <Menu.Item key="Junior">Junior</Menu.Item>
+            <Menu.Item key="Middle">Middle</Menu.Item>
+        </Menu>
+    );
 
-  const handleRankChange = (e, record) => {
-    const { key } = e;
-    // Cập nhật dữ liệu của record với rank mới được chọn
-    const updatedInterns = selectedInterns.map((intern) => {
-      if (intern.key === record.key) {
-        return { ...intern, rank: key };
-      }
-      return intern;
-    });
-    setSelectedInterns(updatedInterns);
-  };
+    const handleRankChange = (e, record) => {
+        const { key } = e;
+        // Cập nhật dữ liệu của record với rank mới được chọn
+        const updatedInterns = selectedInterns.map((intern) => {
+            if (intern.key === record.key) {
+                return { ...intern, rank: key };
+            }
+            return intern;
+        });
+        setSelectedInterns(updatedInterns);
+    };
 
   const columns = [
     {
@@ -268,6 +245,7 @@ const PositionManagement = () => {
       ),
     },
   ];
+
 
   return (
     <div id="APRCV">
@@ -432,6 +410,7 @@ const PositionManagement = () => {
                           ></Avatar>
                         </Tooltip>
 
+
                         <Tooltip title="Ant User" placement="top">
                           <Avatar
                             src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
@@ -583,6 +562,7 @@ const PositionManagement = () => {
                     </>
                   </div>
 
+
                   <Button
                     type="link"
                     className="button-main"
@@ -635,6 +615,7 @@ const PositionManagement = () => {
                             }}
                           ></Avatar>
                         </Tooltip>
+
 
                         <Tooltip title="Ant User" placement="top">
                           <Avatar
@@ -735,6 +716,7 @@ const PositionManagement = () => {
                             }}
                           ></Avatar>
                         </Tooltip>
+
 
                         <Tooltip title="Ant User" placement="top">
                           <Avatar

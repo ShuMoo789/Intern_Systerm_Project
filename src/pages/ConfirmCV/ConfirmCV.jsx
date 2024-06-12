@@ -14,8 +14,12 @@ import {
     ExportOutlined,
     SearchOutlined,
     DeleteOutlined,
+
+    ClockCircleOutlined,
+    ExportOutlined,
     EditOutlined,
-    FolderAddOutlined
+    FolderAddOutlined, UpOutlined
+
 } from "@ant-design/icons";
 import { Input } from "antd";
 import DataConfirmCV from "../../data/ConfirmCV.json"
@@ -26,6 +30,7 @@ import {
 } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import Navigation from '../../components/Navigation/Navigation';
 const { RangePicker } = DatePicker;
 const { Option } = Select; // Destructure Option from Select
 dayjs.extend(customParseFormat);
@@ -379,7 +384,9 @@ const ConfirmCV = () => {
     const handleCancel = () => {
         setSelectedIntern(null);
         setCommentPopupVisible(false);
+        setIsModalVisible(false);
     };
+
     const [statusMap, setStatusMap] = useState(interns.reduce((acc, intern) => {
         acc[intern.internId] = false; // Initialize all checkboxes to unchecked
         return acc;
@@ -416,6 +423,21 @@ const ConfirmCV = () => {
         },
     };
     const [allChecked, setAllChecked] = useState(false);
+    const [confirmStatus, setConfirmStatus] = useState("");
+    const handleConfirmEmail = (key, confirmStatus) => {
+        // Cập nhật trạng thái xác nhận email của hàng có key tương ứng
+        setConfirmStatus(prevState => ({
+            ...prevState,
+            [key]: confirmStatus
+        }));
+    };
+    const [selectedStatus, setSelectedStatus] = useState('');
+    const handleChangestatus = (key, record) => {
+        record.status = key;
+        setSelectedOption(key);
+    };
+
+    const [selectedOption, setSelectedOption] = useState('');
     const columns = [
         // {
         //     title: <Checkbox onChange={handleAllCheckedChange} />,
@@ -492,7 +514,7 @@ const ConfirmCV = () => {
             title: 'CV',
             dataIndex: 'cvLink',
             key: 'cvLink',
-            render: () => <a style={{ textDecoration: "underline", color: "black" }} onClick={() => window.location.href = '/'}>Link</a>,
+            render: () => <a style={{ textDecoration: "underline", color: "blue" }} onClick={() => window.location.href = '/'}>Link</a>,
         },
         {
             title: 'Comments CV',
@@ -511,17 +533,32 @@ const ConfirmCV = () => {
             title: 'Confirm Email',
             dataIndex: 'confirmEmail',
             key: 'confirmEmail',
-            render: (confirmEmail, record) => (
-                <Select
-                    defaultValue={record.confirm}
-                    style={{ width: 120 }}
-                    onChange={(value) => handleChange(value, record)}
-                >
-                    <Option value="Yes">Confirmed</Option>
-                    <Option value="No">Not Confirmed</Option>
-                </Select>
+            render: (text, record) => (
+                <div key={record.key} style={{ width: 126 }}>
+                    <Dropdown overlay={
+                        <Menu onClick={({ key }) => handleConfirmEmail(record.key, key)}>
+                            <Menu.Item key="confirmed">Confirmed</Menu.Item>
+                            <Menu.Item key="not confirmed">Not confirmed</Menu.Item>
+                        </Menu>
+                    }>
+                        <Button
+                            style={{
+                                backgroundColor: confirmStatus[record.key] === "confirmed" ? "#EFF9F1" : "#F8E7EE",
+                                color: confirmStatus[record.key] === "confirmed" ? "#449E3C" : "#B70D52",
+                                borderRadius: '50px', // Đặt bo tròn thành hình tròn
+                                marginLeft: "-8px",
+                                width: "100%",
+                                fontSize: "12px"
+                            }}
+                        >
+                            {confirmStatus[record.key] === "confirmed" ? "Confirmed" : "Not confirmed"}
+                            <DownOutlined />
+                        </Button>
+                    </Dropdown>
+                </div>
             ),
         },
+
         {
             title: 'Interviewer',
             dataIndex: 'interviewer',
@@ -533,18 +570,33 @@ const ConfirmCV = () => {
             dataIndex: 'status',
             key: 'status',
             render: (text, record) => (
-                <Select
-                    defaultValue={text}
-
-                    onChange={(value) => handleChange(value, record.internId)}
-                    style={{ width: 120 }}
+                <Dropdown
+                    overlay={
+                        <Menu onClick={({ key }) => handleChangestatus(key, record)}>
+                            <Menu.Item key="Pending">
+                                <span>Pending</span>
+                            </Menu.Item>
+                            <Menu.Item key="Failed">
+                                <span>Failed</span>
+                            </Menu.Item>
+                            <Menu.Item key="Passed">
+                                <span>Passed</span>
+                            </Menu.Item>
+                        </Menu>
+                    }
                 >
-                    <Option value="Pending">Pending</Option>
-                    <Option value="Failed">Failed</Option>
-                    <Option value="Passed">Passed</Option>
-                </Select>
-            ),
+                    <Button style={{ width: 120, backgroundColor: record.status === 'Failed' ? '#F8E7EE' : record.status === 'Passed' ? '#EFF9F1' : '#FFEFE6', 
+                        color: record.status === 'Failed' ? '#B70D52' : record.status === 'Passed' ? '#449E3C' : '#FF5D02',
+                        borderRadius: "100px",
+                        fontSize: "12px",
+                        width: "100%"
+
+                     }}>
+                        {record.status} <DownOutlined />
+                    </Button>
+                </Dropdown>)
         },
+
         {
             title: 'Button',
             dataIndex: 'button',
@@ -563,6 +615,53 @@ const ConfirmCV = () => {
         },
     ]
     const [selectionType, setSelectionType] = useState('checkbox');
+
+    const groupButton = [
+        {
+            color: "#6537B1",
+            name: "Send Email",
+            icon: <MailOutlined />,
+            component: <SendMailButton />
+        },
+        {
+            color: "#41B137",
+            name: "Export Excel",
+            icon: <ExportOutlined />,
+        },
+        {
+            color: "#FB8632",
+            name: "Edit",
+            icon: <EditOutlined />,
+        },
+        {
+            color: "#FF3A2E",
+            name: "Delete",
+            icon: <DeleteOutlined />,
+        },
+        {
+            color: "#4889E9",
+            name: "Add New Intern",
+            icon: <FolderAddOutlined />,
+        },
+    ];
+
+    const handleOpenCreateGroup = () => { setIsModalVisible(true); };
+    const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
+    const handleOpenEmailPopup = () => {
+        setEmailPopupVisible(true);
+    };
+
+    const handleCloseEmailPopup = () => {
+        setEmailPopupVisible(false);
+        form.resetFields();
+    };
+    const handleDropdownVisibleChange = (visible) => {
+        setOpen(visible);
+    };
+    const [selectedItems, setSelectedItems] = useState([]);
+    return (
+        <div id="APRCV">
+
 
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
 
@@ -610,39 +709,41 @@ const ConfirmCV = () => {
                         <Navigation
                             titleName='CONFIRM CV'
                             groupButton={groupButton}
-                            onSendEmail={handleOpenEmailPopup}/>
+
+                            onSendEmail={handleOpenEmailPopup} />
+
                     </div>
                     <SendMailButton
                         onClose={handleCloseEmailPopup}
                         openPopup={isEmailPopupVisible}
-                />
-                    
 
-                    <section className="filter-section">
-                        <div className="filter">
-                            <div className="fields">
-                                <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                    />
+                    <section className="filter-section-confirm">
+                        <div className="filter-confirm">
+                            <div className="fields-confirm">
+                                <Dropdown overlay={createMenu('internID', internIDChoice)} trigger={['click']} onDropdownVisibleChange={handleDropdownVisibleChange} suffixIcon={open ? <UpOutlined /> : <DownOutlined />}>
+                                    <Button className="filter-button">
+
                                         <div style={{ color: selectedFilters.internID ? "#000000" : "#C7BFBF" }}>{selectedFilters.internID || "Enter intern's ID"}</div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
 
                                 <Dropdown overlay={createMenu('fullName', fullNameChoice)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                                    <Button className="filter-button">
                                         <div style={{ color: selectedFilters.fullName ? "#000000" : "#C7BFBF" }}>{selectedFilters.fullName || "Enter intern's Full name"}</div>
                                         <DownOutlined />
                                     </Button>
                                 </Dropdown>
 
-                                {/* <DatePicker format={dateFormat} placeholder="Enter intern's D.O.B" style={{ padding: "7px 11px", fontSize: "15px" }} onChange={(dates) => handleDateChange('dateOfBirth', dates)} /> */}
                                 <DatePicker
                                     onChange={(date) => handleDateChange('dateOfBirth', date)}
                                     placeholder={["Enter intern's D.O.B"]}
+                                    className="date-picker"
                                 />
+
                                 <Dropdown overlay={createMenu('phoneNumber', phoneNumberChoice)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%", width: "200px" }}>
+                                    <Button className="filter-button">
                                         <div style={{ color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                                             {selectedFilters.phoneNumber || "Enter intern's Phone number"}
                                         </div>
@@ -651,7 +752,7 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Dropdown overlay={createMenu('address', addressName)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                    <Button className="filter-button">
                                         <div style={{ color: selectedFilters.address ? "#000000" : "#C7BFBF" }}>{selectedFilters.address || "Enter intern's Address"}</div>
                                         <DownOutlined />
                                     </Button>
@@ -662,14 +763,16 @@ const ConfirmCV = () => {
                                     placeholder="Enter intern's Email"
                                     value={selectedFilters.email}
                                     onChange={handleInputChange}
+                                    className="filter-input"
                                 />
 
                                 <Dropdown overlay={createMenu('position', positionNames)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
-                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF", width: "20px" }}>{selectedFilters.position || "Enter intern's Position"}</div>
+
+                                    <Button className="filter-button">
+                                        <div style={{ color: selectedFilters.position ? "#000000" : "#C7BFBF", width: "200px" }}>{selectedFilters.position || "Enter intern's Position"}</div>
+
                                         <DownOutlined />
                                     </Button>
-
                                 </Dropdown>
 
                                 <Input
@@ -677,28 +780,27 @@ const ConfirmCV = () => {
                                     placeholder="Enter intern's School"
                                     value={selectedFilters.school}
                                     onChange={handleInputChange}
+                                    className="filter-input"
                                 />
 
                                 <Dropdown overlay={createMenu('dateInterView', dateInterviewChoice)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                    <Button className="filter-button">
                                         <div style={{ color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.dateInterView || "Enter Date Interview"}</div>
                                         <DownOutlined />
                                     </Button>
-
                                 </Dropdown>
 
                                 <Dropdown overlay={createMenu('timeInterView', timeInterviewChoice)} trigger={['click']}>
-                                    <Button style={{ padding: "7px 11px", fontSize: "15px", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%" }}>
+                                    <Button className="filter-button">
                                         <div style={{ color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF" }}>{selectedFilters.timeInterView || "Enter Time Interview"}</div>
                                         <DownOutlined />
                                     </Button>
-
                                 </Dropdown>
                             </div>
-                            <div className="buttons">
-                                <div className="cln-btn btn" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }} />Clean Filter</div>
+                            <div className="buttons-confirm">
+                                <div className="cln-btn-confirm" onClick={handleClearFilters}><DeleteOutlined style={{ marginRight: "10px" }} />Clean Filter</div>
                                 <br />
-                                <div className="srch-btn btn" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }} />Search</div>
+                                <div className="srch-btn btn-confirm" onClick={handleSearch}><SearchOutlined style={{ marginRight: "10px" }} />Search</div>
                             </div>
                         </div>
                         <div className="list">
@@ -916,8 +1018,10 @@ const ConfirmCV = () => {
                                         {" "}
                                         <a
                                             href={selectedIntern.cvLink}
+
                                             target="_blank"
                                             rel="noopener noreferrer"
+
                                         >
                                             Link
                                         </a>
