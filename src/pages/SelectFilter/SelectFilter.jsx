@@ -215,7 +215,7 @@ const MyComponent = () => {
                                 </Select.Option>
                             </Select>
                         </div>
-
+                        {/* Mobile */}
                         {!isMobile ? (
                             <Row gutter={[16, 16]}>
                                 {filteredData.map((item, index) => {

@@ -152,7 +152,7 @@
     border-color: #6537b1 !important;
     border-width: 2px !important;
 }
-/* =============================================== */
+/* ====================== Responsive ========================= */
 
 @media screen and (max-width: 680px) {
     .group-item .group-box {
