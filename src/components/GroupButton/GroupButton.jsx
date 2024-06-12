@@ -37,6 +37,7 @@ const GroupButton = ({
     onCreateIntern();
   };
 
+
   const handleScheduleInterview = () => {
     onScheduleInterview();
   };
