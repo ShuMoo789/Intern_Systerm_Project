@@ -696,7 +696,6 @@ const ConfirmCV = () => {
                   : "#FF5D02",
               borderRadius: "100px",
               fontSize: "12px",
-              width: "100%",
             }}
           >
             {record.status} <DownOutlined />
