@@ -441,6 +441,8 @@ const GroupList = () => {
       setProject("");
       setMentor("");
       setErrors({});
+      message.success("Group created successfully!");
+
     } catch (error) {
       console.error("Error adding new group:", error);
       message.error("Failed to add new group");
@@ -722,8 +724,11 @@ const GroupList = () => {
             width: "100%",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div style={{ width: "33%" }}>
+          <Row justify="center">
+            <Col span ={8} >
+              
+            <div style={{ width: "95%" , alignContent: "center"}}>
+              {/* Project */}
               <p>
                 <b>Role</b>
               </p>
@@ -745,25 +750,32 @@ const GroupList = () => {
               />
               {errors.role && <p style={{ color: "red" }}>{errors.role}</p>}
 
-              {/* Mentor */}
+            </div>
+
+            <div style={{ width: "95%" , alignContent: "center"}}>
+              {/* Group zalo */}
               <p>
                 <b>Mentor</b>
               </p>
+              
               <Input
                 style={{ width: "100%" }}
                 placeholder="Mentor name"
                 value={mentor}
                 onChange={(e) => setMentor(e.target.value)}
               />
-              {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
+                            {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
+
             </div>
+
+
+
+
+            </Col>
+
+            <Col span ={8}>
             <div
-              style={{
-                width: "33%",
-                paddingLeft: "16px",
-                paddingRight: "16px",
-                marginLeft: "20px",
-              }}
+              style={{ width: "95%" , alignContent: "center"}}
             >
               {/* Project */}
               <p>
@@ -783,8 +795,10 @@ const GroupList = () => {
                 <p style={{ color: "red" }}>{errors.project}</p>
               )}
             </div>
-
-            <div style={{ width: "33%", paddingLeft: "16px" }}>
+            </Col>
+            
+            <Col span ={8}>
+            <div style={{ width: "100%" , alignContent: "center"}}>
               {/* Group zalo */}
               <p>
                 <b>Group zalo</b>
@@ -796,11 +810,12 @@ const GroupList = () => {
                 onChange={(e) => setGroupZalo(e.target.value)}
               />
               {errors.groupZalo && (
-                <p style={{ color: "red" }}>{errors.groupZalo}</p>
+                <p style={{ color: "red", width : "120%"}}>{errors.groupZalo}</p>
               )}
             </div>
-          </div>
-          <div style={{ marginTop: 16, textAlign: "right" }}>
+            </Col>
+          </Row>
+          <div style={{ width: "100%" , alignContent: "center"}}>
             <Button
               type="primary"
               onClick={handleCreateGroup}
