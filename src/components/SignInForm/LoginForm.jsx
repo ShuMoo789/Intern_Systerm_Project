@@ -1,15 +1,18 @@
 import { Flex, Form, Input, Button, Checkbox } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../translation/LanguageContext";
+
 const LoginForm = ({ header, formName, role, dataSet }) => {
   const [wrong, setWrong] = useState(false);
   const API_URL = "https://6640ca07a7500fcf1a9ebc23.mockapi.io/api/intern/";
-  const { t } = useTranslation()
-  const currentLanguage = useLanguage()
-  const [form] = Form.useForm()
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const currentLanguage = useLanguage();
+  const [form] = Form.useForm();
+
   const handleLogin = async (values) => {
     const { email, password } = values;
     try {
@@ -22,6 +25,7 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
           user.role === role
       );
       if (user) {
+        navigate("/Profile");
         console.log("Login successful", user);
       } else {
         setWrong(true);
@@ -31,18 +35,24 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
       console.error("Login failed", error);
     }
   };
+
   useEffect(() => {
     form.setFields([
-    {
-      name: 'email',
-      errors: form.getFieldError('email').map(() => t("Please input your email!")),
-    },
-    {
-      name: 'password',
-      errors: form.getFieldError('password').map(() => t("Please input your password!")),
-    },
-  ])
-  }, [currentLanguage, t])
+      {
+        name: "email",
+        errors: form
+          .getFieldError("email")
+          .map(() => t("Please input your email!")),
+      },
+      {
+        name: "password",
+        errors: form
+          .getFieldError("password")
+          .map(() => t("Please input your password!")),
+      },
+    ]);
+  }, [currentLanguage, t]);
+
   return (
     <>
       <Flex vertical align="center">
@@ -65,8 +75,14 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: t("Please input your email!") }]}
-              placeholder
+              rules={[
+                { required: true, message: t("Please input your email!") },
+                {
+                  type: "email",
+                  message: t("Please enter a valid email address!"),
+                },
+              ]}
+              validateTrigger="onFinish"
             >
               <Input placeholder="youremail@example.com" allowClear />
             </Form.Item>
@@ -82,34 +98,41 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
             </Form.Item>
             {wrong && (
               <div style={{ color: "red", margin: "-15px 0 10px 0" }}>
-                {t('Email or Password is incorrect')}
+                {t("Email or Password is incorrect")}
               </div>
             )}
             <Form.Item>
               <Flex justify="space-between">
                 <Checkbox>{t("Remember me")}</Checkbox>
-                <Link to="/pwdreset" style={{ color: "red" }}>
+                <Link to="/PasswordReset" style={{ color: "red" }}>
                   {t("Forgot password?")}
                 </Link>
               </Flex>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" block>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+              >
                 {t("Sign In")}
               </Button>
             </Form.Item>
             <Form.Item>
               <Link to="/signup">
-                <Button type="default" block>
+                <Button
+                  type="default"
+                  block
+                  style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+                >
                   {t("Sign Up")}
                 </Button>
               </Link>
             </Form.Item>
 
             <Form.Item>
-              <div type="" align="center">
-                {t("OR LOGIN WITH")}
-              </div>
+              <div align="center">{t("OR LOGIN WITH")}</div>
             </Form.Item>
 
             <Form.Item>
@@ -124,7 +147,12 @@ const LoginForm = ({ header, formName, role, dataSet }) => {
                 >
                   <img
                     src="https://th.bing.com/th/id/OIP.HgH-NjiOdFOrkmwjsZCCfAHaHl?rs=1&pid=ImgDetMain"
-                    style={{ width: "15px", height: "15px" }}
+                    alt="Google"
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                      marginRight: "8px",
+                    }}
                   />
                   GOOGLE
                 </Button>

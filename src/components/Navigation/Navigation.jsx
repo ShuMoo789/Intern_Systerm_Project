@@ -28,8 +28,12 @@ function UserInfo({ name, role, avatarSrc }) {
 
 
 const Navigation = (props) => {
-    const viewPort = useViewport()
-    const isMobile = viewPort.width <= 1024
+  {
+    /*Project-Management*/
+  }
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
+
 
     return (
         <div className="content-navigation">
@@ -59,9 +63,35 @@ const Navigation = (props) => {
                 <div className="group-button-navigation">
                     <GroupButton groupButton={props.groupButton} onSendEmail={props.onSendEmail}/>
                 </div>
+
             </div>
+          ) : (
+            <div className="account-setting-mobile">
+              <AccountSetting />
+            </div>
+          )}
         </div>
-    )
-}
+      </div>
+      <div className="navigation">
+        <div className="search-navigation">
+          {/* {isMobile ? 'Search' : 'Search for Information'} */}
+          <Input
+            placeholder={isMobile ? "Search" : "Search for Information"}
+            variant="filled"
+          />
+        </div>
+        {/* Pass props to GroupButton from InternList */}
+        <div className="group-button-navigation">
+          <GroupButton
+            groupButton={props.groupButton}
+            onSendEmail={props.onSendEmail}
+            onScheduleInterview={props.onScheduleInterview}
+            onCreateIntern={props.onCreateIntern}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Navigation;

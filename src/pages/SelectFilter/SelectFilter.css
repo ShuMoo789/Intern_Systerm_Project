@@ -1,0 +1,186 @@
+/* =============================== Main Content ================================ */
+.container-group {
+    width: 100%;
+    margin: 0 auto;
+    font-family: "Quicksand" !important;
+}
+
+.main-content-group {
+    background: #ffffff;
+    padding: 0 46px;
+    margin-bottom: 2%;
+    border-radius: 34px;
+
+    /* overflow: hidden; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content-group .list-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+}
+
+.row-custom {
+    width: 100%;
+}
+
+.row-btn {
+    margin: 2%;
+    width: 100%;
+}
+
+/* Arrow Button */
+.cta-btn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-btn {
+    border: 1px solid #6937b1;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+/* ============ Avatar Group ============ */
+.avatar-group {
+    display: grid;
+    grid-template-columns: repeat(2, 36px);
+}
+
+.avatar-group .my-avatar {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #fff;
+}
+
+.my-avatar:not(:nth-child(odd)) {
+    margin-left: -5px;
+}
+
+.my-avatar:nth-child(3) {
+    margin-top: -5px;
+}
+
+.avatar-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #000000;
+    background-color: #fde3cf;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    font-size: 16px;
+    margin-left: -5px;
+    margin-top: -5px;
+    z-index: 1;
+}
+/* ================= Item Group ================= */
+.group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    padding: 20px 30px;
+    background-color: #ececec;
+    border-radius: 30px;
+}
+
+.group-item .group-box {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+}
+
+.group-item .title-group {
+    font-family: "Quicksand";
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -10px;
+}
+
+.group-item .title-name {
+    font-size: 28px;
+}
+
+.group-item .click-view {
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+}
+
+/* ========== Drop Down Button ========== */
+.custom-dropdown-button {
+    height: 100%;
+    width: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-dropdown-button .anticon {
+    font-size: 56px;
+    transform: rotate(90deg); /* Rotate the dots to make them vertical */
+}
+
+.filter-container {
+    margin-top: 30px;
+    width: 98%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filter-select .ant-select-selector {
+    transition: border-color 0.3s ease;
+    border-radius: 25px;
+    border-color: #6537b1 !important;
+    border-width: 2px !important;
+}
+/* ====================== Responsive ========================= */
+
+@media screen and (max-width: 680px) {
+    .group-item .group-box {
+        gap: 10px;
+    }
+    .group-item .title-name {
+        font-size: 13.5px;
+    }
+
+    .group-item .click-view {
+        font-size: 10px;
+    }
+
+    .avatar-group .my-avatar {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #fff;
+    }
+
+    .avatar-counter {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #fff;
+    }
+    .custom-dropdown-button .anticon {
+        font-size: 32px;
+    }
+    .group-item .click-view {
+        font-size: 12px;
+    }
+}
