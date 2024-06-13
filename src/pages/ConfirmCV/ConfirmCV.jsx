@@ -141,12 +141,12 @@ const ConfirmCV = () => {
             style={
               intern.confirmEmail === "No"
                 ? {
-                    backgroundColor: "#F5A3B7",
-                    color: "#7D0022",
-                  }
+                  backgroundColor: "#F5A3B7",
+                  color: "#7D0022",
+                }
                 : intern.confirmEmail === "Yes"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
+                  ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                  : {}
             }
           >
             {intern.status}
@@ -161,17 +161,17 @@ const ConfirmCV = () => {
             style={
               intern.status === "Pending"
                 ? {
-                    backgroundColor: "#FFB596",
-                    color: "#E5731C",
-                  }
+                  backgroundColor: "#FFB596",
+                  color: "#E5731C",
+                }
                 : intern.status === "Failed"
-                ? {
+                  ? {
                     backgroundColor: "#F5A3B7",
                     color: "#7D0022",
                   }
-                : intern.status === "Passed"
-                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                : {}
+                  : intern.status === "Passed"
+                    ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                    : {}
             }
           >
             {intern.status}
@@ -245,6 +245,7 @@ const ConfirmCV = () => {
     timeInterView: "",
     dateOfBirth: "",
     email: "",
+    searchText: "",
   });
 
   /**
@@ -341,12 +342,13 @@ const ConfirmCV = () => {
    * @param {string} name - The name of the filter field.
    * @param {string} value - The value of the filter field.
    */
-  const handleInputChange = (type, value) => {
+  const handleInputChange = (key, value) => {
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
-      [type]: value,
+      [key]: value,
     }));
   };
+
 
   const handleDateChange = (type, dates) => {
     setSelectedFilters((prevFilters) => ({
@@ -396,9 +398,12 @@ const ConfirmCV = () => {
       );
     }
     if (selectedFilters.school) {
-      results = results.filter((intern) =>
-        intern.school.toLowerCase().includes(searchText)
-      );
+      if (selectedFilters.school) {
+        const searchText = selectedFilters.school.toLowerCase();
+        results = results.filter((intern) =>
+          intern.school.toLowerCase().includes(searchText)
+        );
+      }
     }
     if (selectedFilters.email) {
       results = results.filter((intern) =>
@@ -686,14 +691,14 @@ const ConfirmCV = () => {
                 record.status === "Failed"
                   ? "#F8E7EE"
                   : record.status === "Passed"
-                  ? "#EFF9F1"
-                  : "#FFEFE6",
+                    ? "#EFF9F1"
+                    : "#FFEFE6",
               color:
                 record.status === "Failed"
                   ? "#B70D52"
                   : record.status === "Passed"
-                  ? "#449E3C"
-                  : "#FF5D02",
+                    ? "#449E3C"
+                    : "#FF5D02",
               borderRadius: "100px",
               fontSize: "12px",
             }}
@@ -795,176 +800,174 @@ const ConfirmCV = () => {
                   onDropdownVisibleChange={handleDropdownVisibleChange}
                   suffixIcon={open ? <UpOutlined /> : <DownOutlined />}
                 >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.internID ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.internID || "Enter intern's ID"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+                  <Button className="filter-button" style={{
+                    height: "90%",
+                    marginTop: "3px"}}>
+                  <div
+                    style={{
+                      color: selectedFilters.internID ? "#000000" : "#C7BFBF",
+                    }}
+                  >
+                    {selectedFilters.internID || "Enter intern's ID"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Dropdown
-                  overlay={createMenu("fullName", fullNameChoice)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.fullName ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.fullName || "Enter intern's Full name"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+              <Dropdown
+                overlay={createMenu("fullName", fullNameChoice)}
+                trigger={["click"]}
+              >
+                <Button className="filter-button" style={{
+                    height: "90%",
+                    marginTop: "3px"}}>
+                  <div
+                    style={{
+                      color: selectedFilters.fullName ? "#000000" : "#C7BFBF",
+                      paddingRight: "40px"
+                    }}
+                  >
+                    {selectedFilters.fullName || "Enter intern's Full name"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <DatePicker
-                  onChange={(date) => handleDateChange("dateOfBirth", date)}
-                  placeholder={["Enter intern's D.O.B"]}
-                  className="date-picker"
-                />
+              <DatePicker
+                onChange={(date) => handleDateChange("dateOfBirth", date)}
+                placeholder={["Enter intern's D.O.B"]}
+                className="filter-input"
+              />
 
-                <Dropdown
-                  overlay={createMenu("phoneNumber", phoneNumberChoice)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.phoneNumber
-                          ? "#000000"
-                          : "#C7BFBF",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {selectedFilters.phoneNumber ||
-                        "Enter intern's Phone number"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+              <Dropdown
+                overlay={createMenu("phoneNumber", phoneNumberChoice)}
+                trigger={["click"]}
+              >
+                <Button className="filter-button">
+                  <div
+                    style={{
+                      color: selectedFilters.phoneNumber ? "#000000" : "#C7BFBF",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {selectedFilters.phoneNumber || "Enter intern's Phone number"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Dropdown
-                  overlay={createMenu("address", addressName)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.address ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.address || "Enter intern's Address"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+              <Dropdown
+                overlay={createMenu("address", addressName)}
+                trigger={["click"]}
+              >
+                <Button className="filter-button">
+                  <div
+                    style={{
+                      color: selectedFilters.address ? "#000000" : "#C7BFBF",
+                    }}
+                  >
+                    {selectedFilters.address || "Enter intern's Address"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Input
-                  size="large"
-                  placeholder="Enter intern's Email"
-                  value={selectedFilters.email}
-                  onChange={handleInputChange}
-                  className="filter-input"
-                />
+              <Input
+                size="large"
+                placeholder="Enter intern's Email"
+                value={selectedFilters.email}
+                onChange={handleInputChange}
+                className="filter-input"
+              />
 
-                <Dropdown
-                  overlay={createMenu("position", positionNames)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.position ? "#000000" : "#C7BFBF",
-                        width: "200px",
-                      }}
-                    >
-                      {selectedFilters.position || "Enter intern's Position"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+              <Dropdown
+                overlay={createMenu("position", positionNames)}
+                trigger={["click"]}
+              >
+                <Button className="filter-button">
+                  <div
+                    style={{
+                      color: selectedFilters.position ? "#000000" : "#C7BFBF",
+                    }}
+                  >
+                    {selectedFilters.position || "Enter intern's Position"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Input
-                  size="large"
-                  placeholder="Enter intern's School"
-                  value={selectedFilters.school}
-                  onChange={handleInputChange}
-                  className="filter-input"
-                />
+              <Input
+                size="large"
+                placeholder="Enter intern's School"
+                value={selectedFilters.school}
+                onChange={(e) => handleInputChange("school", e.target.value)}
+                className="filter-input"
+              />
 
-                <Dropdown
-                  overlay={createMenu("dateInterView", dateInterviewChoice)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.dateInterView
-                          ? "#000000"
-                          : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.dateInterView || "Enter Date Interview"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+              <Dropdown
+                overlay={createMenu("dateInterView", dateInterviewChoice)}
+                trigger={["click"]}
+              >
+                <Button className="filter-button">
+                  <div
+                    style={{
+                      color: selectedFilters.dateInterView ? "#000000" : "#C7BFBF",
+                      paddingRight: "70px"
+                    }}
+                  >
+                    {selectedFilters.dateInterView || "Enter Date Interview"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Dropdown
-                  overlay={createMenu("timeInterView", timeInterviewChoice)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.timeInterView
-                          ? "#000000"
-                          : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.timeInterView || "Enter Time Interview"}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
-              </div>
-              <div className="buttons-confirm">
-                <div className="cln-btn-confirm" onClick={handleClearFilters}>
-                  <DeleteOutlined style={{ marginRight: "10px" }} />
-                  Clean Filter
-                </div>
-                <br />
-                <div className="srch-btn btn-confirm" onClick={handleSearch}>
-                  <SearchOutlined style={{ marginRight: "10px" }} />
-                  Search
-                </div>
-              </div>
+              <Dropdown
+                overlay={createMenu("timeInterView", timeInterviewChoice)}
+                trigger={["click"]}
+              >
+                <Button className="filter-button">
+                  <div
+                    style={{
+                      color: selectedFilters.timeInterView ? "#000000" : "#C7BFBF",
+                    }}
+                  >
+                    {selectedFilters.timeInterView || "Enter Time Interview"}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
             </div>
-            <div className="list">
-              <div className="tbl-wrapper">
-                <Table
-                  rowSelection={{
-                    type: selectionType,
-                    ...rowSelection,
-                  }}
-                  columns={columns}
-                  dataSource={filteredInterns}
-                  rowKey="internId"
-                  pagination={{ pageSize: 6 }}
-                  scroll={{ x: "max-content" }}
-                />
-              </div>
+            <div className="buttons-confirm">
+              <Button className="cln-btn-confirm" onClick={handleClearFilters}>
+                <DeleteOutlined />
+                Clean Filter
+              </Button>
+              <br />
+              <Button className="srch-btn btn-confirm" onClick={handleSearch}>
+                <SearchOutlined />
+                Search
+              </Button>
             </div>
+          </div>
+          <div className="list">
+            <div className="tbl-wrapper">
+              <Table
+                rowSelection={{
+                  type: selectionType,
+                  ...rowSelection,
+                }}
+                columns={columns}
+                dataSource={filteredInterns}
+                rowKey="internId"
+                pagination={{ pageSize: 6 }}
+                scroll={{ x: "max-content" }}
+              />
+            </div>
+          </div>
 
-            {/* <div className="pagination">
+          {/* <div className="pagination">
                             <button
                                 className="pagination-button"
                                 onClick={() => handlePageChange(currentPage - 1)}
@@ -987,208 +990,208 @@ const ConfirmCV = () => {
                                 <ArrowRightOutlined />
                             </button>
                         </div> */}
-          </section>
-          {selectedIntern && (
-            <Modal
-              title="View details of Intern"
-              visible={commentPopupVisible}
-              onCancel={handleCancel}
-              width={900}
-              footer={null}
-            >
-              <Row gutter={[16, 16]}>
-                <Col span={8}>
-                  <p>
-                    <strong>Intern ID:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
+        </section>
+        {selectedIntern && (
+          <Modal
+            title="View details of Intern"
+            visible={commentPopupVisible}
+            onCancel={handleCancel}
+            width={900}
+            footer={null}
+          >
+            <Row gutter={[16, 16]}>
+              <Col span={8}>
+                <p>
+                  <strong>Intern ID:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {selectedIntern.internID}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Date Interview:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.dateInterView}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Time Interview:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.timeinterview}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Full Name:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.fullName}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Date Of Birth:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.dateOfBirth}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Phone Number:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.phoneNumber}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Position:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.position}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>School:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {selectedIntern.school}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Address:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.address}
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Email:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  <a href={`mailto:${selectedIntern.email}`}>
+                    {selectedIntern.email}
+                  </a>
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>CV Link:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  <a
+                    href={selectedIntern.cvLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {selectedIntern.internID}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Date Interview:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.dateInterView}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Time Interview:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.timeinterview}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Full Name:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.fullName}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Date Of Birth:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.dateOfBirth}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Phone Number:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.phoneNumber}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Position:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.position}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>School:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {selectedIntern.school}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Address:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.address}
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Email:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    <a href={`mailto:${selectedIntern.email}`}>
-                      {selectedIntern.email}
-                    </a>
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>CV Link:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    <a
-                      href={selectedIntern.cvLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Link
-                    </a>
-                  </p>
-                </Col>
-                <Col span={8}>
-                  <p>
-                    <strong>Interviewer:</strong>
-                  </p>
-                  <p
-                    style={{
-                      border: "2px solid #12345129",
-                      padding: "10px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {" "}
-                    {selectedIntern.interviewer}
-                  </p>
-                </Col>
-              </Row>
-            </Modal>
-          )}
-        </main>
-      </MainLayout>
-    </div>
+                    Link
+                  </a>
+                </p>
+              </Col>
+              <Col span={8}>
+                <p>
+                  <strong>Interviewer:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.interviewer}
+                </p>
+              </Col>
+            </Row>
+          </Modal>
+        )}
+      </main>
+    </MainLayout>
+    </div >
   );
 };
 
