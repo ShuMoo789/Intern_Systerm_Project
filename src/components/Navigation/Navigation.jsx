@@ -44,42 +44,38 @@ const Navigation = (props) => {
               </div>)}           
           </div>
       </div>  */}
-
-                <header className="header-section">
-                    <h1 className="header-title">{props.titleName}</h1>
-                    {isMobile ? (
-                        <SettingOutlined className="setting-icon" />
-                    ) : (
-                        <UserInfo
-                            name="Natalie Brogan"
-                            role="Admin"
-                            avatarSrc={userImage}
-                        />
-                    )}
-                </header>
-                <div className="navigation">
-                    <div className="search-navigation">
-                        {/* {isMobile ? 'Search' : 'Search for Information'} */}
-                        <Input
-                            placeholder={
-                                isMobile ? "Search" : "Search for Information"
-                            }
-                            variant="filled"
-                        />
-                    </div>
-                    {/* Pass props to GroupButton from InternList */}
-                    <div className="group-button-navigation">
-                        <GroupButton
-                            groupButton={props.groupButton}
-                            onSendEmail={props.onSendEmail}
-                            onCreateIntern={props.onCreateIntern}
-                            onScheduleInterview={props.onScheduleInterview}
-                        />
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+        <header className="header-section">
+          <h1 className="header-title">{props.titleName}</h1>
+          {isMobile ? (
+            <SettingOutlined className="setting-icon" />
+          ) : (
+            <UserInfo
+              name="Natalie Brogan"
+              role="Admin"
+              avatarSrc={userImage}
+            />
+          )}
+        </header>
+        <div className="navigation">
+          <div className="search-navigation">
+            {/* {isMobile ? 'Search' : 'Search for Information'} */}
+            <Input
+              placeholder={isMobile ? "Search" : "Search for Information"}
+              variant="filled"
+            />
+          </div>
+          {/* Pass props to GroupButton from InternList */}
+          <div className="group-button-navigation">
+            <GroupButton
+              groupButton={props.groupButton}
+              onSendEmail={props.onSendEmail}
+              onCreateIntern={props.onCreateIntern}
+              onScheduleInterview={props.onScheduleInterview}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
-
 export default Navigation;
