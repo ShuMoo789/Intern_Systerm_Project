@@ -9,15 +9,20 @@ import {
   FolderAddOutlined,
   SendOutlined,
   SearchOutlined,
-  CameraOutlined,
+  PictureFilled,
   LinkOutlined,
+  CameraOutlined,
   SmileOutlined,
   ExclamationOutlined,
   EllipsisOutlined,
   LikeOutlined,
+  
 } from "@ant-design/icons";
-import { Col, Row, Input, Flex, Typography } from "antd";
+import { Col, Row, Input, Flex, Typography, Popover } from "antd";
 const { Title } = Typography;
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import './GroupZaloManagementDetails.css'; 
 
 import SenderContainer from "../../components/ChatContainer/SenderContainer";
 import ReceiverContainer from "../../components/ChatContainer/ReceiverContainer";
@@ -55,6 +60,7 @@ const GroupZaloManagementDetails = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false);
   const iconStyle = { fontSize: "40px" };
 
   const handleSendMessage = (message) => {
@@ -77,6 +83,10 @@ const GroupZaloManagementDetails = () => {
     handleSendMessage("👍");
   };
 
+  const addEmoji = (emoji) => {
+    setInputValue(inputValue + emoji.native);
+  };
+
   return (
     <>
       <MainLayout>
@@ -91,7 +101,7 @@ const GroupZaloManagementDetails = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              height: "75vh",
+              height: "65vh",
               width: "92%",
               backgroundColor: "white",
               borderTopLeftRadius: "20px",
@@ -147,25 +157,18 @@ const GroupZaloManagementDetails = () => {
           <Col
             style={{
               width: "92%",
+
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                backgroundColor: "#dad6d6",
-                border: "1px solid black",
-                height: "60px",
-                alignItems: "center",
-                gap: "20px",
-              }}
-            >
+            <div className="chat-input-container chat-input-container-top">
               <div style={{ marginLeft: "5px" }}></div>
-              <CameraOutlined style={iconStyle} />
-              <LinkOutlined style={iconStyle} />
-              <SmileOutlined style={iconStyle} />
-              <ClockCircleOutlined style={iconStyle} />
-              <ExclamationOutlined style={iconStyle} />
-              <EllipsisOutlined style={iconStyle} />
+              <PictureFilled className="icon"/>
+              <CameraOutlined className="icon"/>
+              <LinkOutlined className="icon" />
+              <ClockCircleOutlined className="icon" />
+              <ExclamationOutlined className="icon" />
+              <EllipsisOutlined className="icon" />
+              
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -173,33 +176,36 @@ const GroupZaloManagementDetails = () => {
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Type a message"
-                style={{
-                  flex: 1,
-                  marginBottom: "40px",
-                  backgroundColor: "#dad6d6",
-                  borderRadius: 0,
-                  height: "60px",
-                  borderTop: "0",
-                  borderRight: "1px solid black",
-                  borderBottom: "1px solid black",
-                  borderLeft: "1px solid black",
-                  paddingLeft: "25px",
-                }}
+                className="chat-input chat-input-bottom"
                 bordered={false}
                 suffix={
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <LikeOutlined
-                      onClick={handleLike}
-                      style={{ cursor: "pointer", fontSize: "25px" }}
-                    />
-                    <SendOutlined
-                      onClick={() => handleSendMessage(inputValue)}
-                      style={{
-                        cursor: "pointer",
-                        fontSize: "25px",
-                        marginRight: "5px",
-                      }}
-                    />
+                  <div style={{ display: "flex", gap: "10px", alignItems: 'center' }}>
+                    <Popover
+                      content={<Picker data={data} onEmojiSelect={addEmoji} theme="light" />}
+                      trigger="click"
+                      visible={emojiPickerVisible}
+                      onVisibleChange={() => setEmojiPickerVisible(!emojiPickerVisible)}
+                    >
+                      <SmileOutlined
+                        style={{ cursor: "pointer", fontSize: "25px" }}
+                        onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}
+                      />
+                    </Popover>
+                    {inputValue.trim() ? (
+                      <SendOutlined
+                        onClick={() => handleSendMessage(inputValue)}
+                        style={{
+                          cursor: "pointer",
+                          fontSize: "25px",
+                          marginRight: "5px",
+                        }}
+                      />
+                    ) : (
+                      <LikeOutlined
+                        onClick={handleLike}
+                        style={{ cursor: "pointer", fontSize: "25px" }}
+                      />
+                    )}
                   </div>
                 }
               />
@@ -212,3 +218,4 @@ const GroupZaloManagementDetails = () => {
 };
 
 export default GroupZaloManagementDetails;
+

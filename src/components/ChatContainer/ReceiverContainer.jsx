@@ -1,18 +1,35 @@
 import React, { useState } from "react";
+import { SmileOutlined } from "@ant-design/icons";
+import './ReceiverContainer.css';
 
 const emojis = ["❤️", "👍", "😆", "😮"];
 
 const ReceiverContainer = ({ message }) => {
   const [showEmojiSelector, setShowEmojiSelector] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
+  const [showEmojiIcon, setShowEmojiIcon] = useState(false);
+  const [emojiPickerActive, setEmojiPickerActive] = useState(false);
 
   const handleEmojiClick = () => {
     setShowEmojiSelector(!showEmojiSelector);
+    setEmojiPickerActive(!emojiPickerActive);
   };
 
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
     setShowEmojiSelector(false);
+    setEmojiPickerActive(false);
+  };
+
+  const handleMouseEnter = () => {
+    setShowEmojiIcon(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!emojiPickerActive) {
+      setShowEmojiIcon(false);
+      setShowEmojiSelector(false);
+    }
   };
 
   return (
@@ -22,37 +39,44 @@ const ReceiverContainer = ({ message }) => {
         justifyContent: "flex-end",
         flexDirection: "row",
         alignItems: "center",
+        position: "relative",
+      
+        
       }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <p
-        style={{
-          padding: 10,
-          backgroundColor: "#f5f5f5",
-          borderRadius: 20,
-          maxWidth: "60%",
-          wordWrap: "break-word",
-          fontSize: "20px",
-        }}
-        onClick={handleEmojiClick}
-      >
+      <div className="boxchat">
         {message}
         {selectedEmoji && (
-          <span style={{ marginLeft: 5 }}>{selectedEmoji}</span>
+          <span className="selected-emoji2">{selectedEmoji}</span>
         )}
-      </p>
-      {showEmojiSelector && (
-        <div>
-          {emojis.map((emoji) => (
-            <span
-              key={emoji}
-              style={{ cursor: "pointer", fontSize: "20px", marginRight: 5 }}
-              onClick={() => handleEmojiSelect(emoji)}
-            >
-              {emoji}
-            </span>
-          ))}
-        </div>
-      )}
+        {showEmojiIcon && (
+          <SmileOutlined
+            style={{
+              fontSize: "20px",
+              position: "absolute",
+              bottom: 10,
+              left: -30,
+              cursor: "pointer",
+            }}
+            onClick={handleEmojiClick}
+          />
+        )}
+        {showEmojiSelector && (
+          <div className="icon-selector">
+            {emojis.map((emoji) => (
+              <span
+                key={emoji}
+                style={{ cursor: "pointer", fontSize: "35px" }}
+                onClick={() => handleEmojiSelect(emoji)}
+              >
+                {emoji}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
