@@ -67,7 +67,7 @@ const GroupButton = ({
           key={prop.name}
           onClick={() => handleButtonClick(prop.name)}
           style={{
-            minWidth: "15%",
+            minWidth: "12%",
             backgroundColor: prop.color,
             fontSize: "15px",
             color: "#FFFFFF",
