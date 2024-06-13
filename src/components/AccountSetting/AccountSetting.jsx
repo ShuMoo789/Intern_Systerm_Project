@@ -28,10 +28,10 @@ const AccountSetting = (props) => {
               <div className="user-name">Natalie Brogan</div>
               <div className="user-role">Admin</div>
             </div>
-            <SettingTwoTone twoToneColor="#DB0D4B" style={{ fontSize: 30 }} />
+            <SettingTwoTone twoToneColor="#DB0D4B" style={{ fontSize: 16 }} />
           </div>) : (<div className="user-container">
             <img onClick={handleClickUserImage} src={userImage} alt="user image" className="user-image" />
-            <SettingTwoTone twoToneColor="#DB0D4B" style={{ fontSize: 30 }} />
+            <SettingTwoTone twoToneColor="#DB0D4B" style={{ fontSize: 26 }} />
           </div>)}
         </div>
       )
