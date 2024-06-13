@@ -1,15 +1,14 @@
 .content-navigation {
 
-    max-width: 96%;
-    right: 0;
-    top: 0;
-    margin: 20px auto;
-    font-family: Quicksand !important;
-
+  max-width: 100%;
+  right: 0;
+  top: 0;
+  margin: 20px;
+  font-family: Quicksand !important;
 }
 
 .content-navigation .header-navigation {
-  width: 100%;
+  width: 104%;
   height: 60px;
   /* position: relative; */
   display: flex;
@@ -26,9 +25,8 @@
 }
 
 .content-navigation .header-navigation .account-setting {
-  width: 266px;
+  width: 260px;
   height: 100%;
-  margin-right: 50px;
   position: relative;
 }
 
