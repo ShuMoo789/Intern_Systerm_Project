@@ -1,69 +1,65 @@
 .content-navigation {
-
-  max-width: 100%;
-  right: 0;
-  top: 0;
-  margin: 20px;
-  font-family: Quicksand !important;
+    max-width: 100%;
+    right: 0;
+    top: 0;
+    margin: 20px;
+    font-family: Quicksand !important;
 }
 
 .content-navigation .header-navigation {
-  width: 104%;
-  height: 60px;
-  /* position: relative; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
+    width: 104%;
+    height: 60px;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
 .content-navigation .header-navigation .title-name {
-  font-size: 24px;
-  color: #2c3e50;
-  font-family: Quicksand;
-  font-weight: 700;
+    font-size: 24px;
+    color: #2c3e50;
+    font-family: Quicksand;
+    font-weight: 700;
 }
 
 .content-navigation .header-navigation .account-setting {
-  width: 260px;
-  height: 100%;
-  position: relative;
+    width: 260px;
+    height: 100%;
+    position: relative;
 }
 
 .content-navigation .header-navigation .account-setting-mobile {
-  width: 100px;
-  height: 100%;
-  margin-right: 50px;
-  position: relative;
+    width: 100px;
+    height: 100%;
+    margin-right: 50px;
+    position: relative;
 }
 
 .content-navigation .header-navigation .group-header-navigation {
-  display: flex;
-  height: 100%;
+    display: flex;
+    height: 100%;
 }
 
 .content-navigation .navigation {
-
     width: 100%;
     height: 60px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 10px;
     position: relative;
     margin: auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .navigation .search-navigation {
-  width: 38.4%;
-  height: 100%;
-  padding: 15px 20px;
-  align-items: center;
-  color: #92929d;
+    width: 38.4%;
+    height: 100%;
+    padding: 15px 20px;
+    align-items: center;
+    color: #92929d;
 }
 
 .navigation .group-button-navigation {
-
     display: flex;
     width: 54.3%;
     height: 100%;
@@ -113,7 +109,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 24px ;
+    padding: 10px 24px;
     background-color: white; /* Set header background to white */
     border-bottom: 1px solid #e8e8e8;
     border-radius: 10px; /* Rounded corners */

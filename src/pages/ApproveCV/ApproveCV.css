@@ -12,6 +12,7 @@ body {
 }
 
 .content {
+    margin: 20;
     height: 100vh;
     overflow-x: auto;
 }
