@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../GroupList/GroupList.css";
 import {
   Row,
   Col,
@@ -185,109 +186,109 @@ const GroupList = () => {
       title: "",
       dataIndex: "select",
       render: (_, record) => <Checkbox />,
-      width: 50,
+      width: "auto",
     },
     {
       title: "Intern ID",
       dataIndex: "InternId",
       key: "InternId",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Date of Interview",
       dataIndex: "DateInterview",
       key: "DateInterview",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Time of Interview",
       dataIndex: "TimeInterview",
       key: "TimeInterview",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Full Name",
       dataIndex: "FullName",
       key: "FullName",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Date of Birth",
       dataIndex: "DateOfBirth",
       key: "DateOfBirth",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Phone Number",
       dataIndex: "PhoneNumber",
       key: "PhoneNumber",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Position",
       dataIndex: "Position",
       key: "Position",
-      width: 140,
+      width: "auto",
     },
     {
       title: "School",
       dataIndex: "School",
       key: "School",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Address",
       dataIndex: "Address",
       key: "Address",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Email",
       dataIndex: "Email",
       key: "Email",
-      width: 140,
+      width: "auto",
     },
     {
       title: "CV",
       dataIndex: "CV",
       key: "CV",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Comments",
       dataIndex: "Comments",
       key: "Comments",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Role",
       dataIndex: "Role",
       key: "Role",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Project",
       dataIndex: "Project",
       key: "Project",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Group Zalo",
       dataIndex: "GroupZalo",
       key: "GroupZalo",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Mentor",
       dataIndex: "Mentor",
       key: "Mentor",
-      width: 140,
+      width: "auto",
     },
     {
       title: "Status",
       dataIndex: "Status",
       key: "Status",
-      width: 140,
+      width: "auto",
 
       render: (text, record) => (
         <Select
@@ -313,7 +314,7 @@ const GroupList = () => {
       title: "Internship Contract",
       dataIndex: "InternshipContract",
       key: "InternshipContract",
-      width: 160,
+      width: "auto",
 
       render: (text, record) => (
         <Select
@@ -337,15 +338,17 @@ const GroupList = () => {
       render: (_, record) => (
         <Space>
           <Button
+            className="view-button"
             shape="round"
             style={{
-              color: "#3498db",
-              borderColor: "#3498db",
+              color: "#B22222",
+              borderColor: "#B22222",
             }}
           >
             View
           </Button>
           <Button
+            className="upload-file-button"
             shape="round"
             style={{
               color: "#3498db",
@@ -626,8 +629,9 @@ const GroupList = () => {
                     }}
                   >
                     <Button
+                      className="clear-filter-button"
                       style={{
-                        width: isMobile ? "100%" : 120,
+                        width: isMobile ? "100%" : 140,
                       }}
                       icon={<FilterOutlined />}
                       onClick={handleClearFilters}
@@ -635,10 +639,11 @@ const GroupList = () => {
                       Clear filter
                     </Button>
                     <Button
+                    className="search-filter-button"
                       style={{
                         backgroundColor: "#4889E9",
                         color: "white",
-                        width: isMobile ? "100%" : 120,
+                        width: isMobile ? "100%" : 140,
                       }}
                       icon={<SearchOutlined />}
                       onClick={handleSearch}
@@ -655,8 +660,8 @@ const GroupList = () => {
                     <Table
                       columns={columns}
                       dataSource={filteredData}
-                      scroll={{ x: 1400 }}
-                      pagination={{ pageSize: 6 }}
+                      scroll={{ x: 3300 }}
+                      pagination={{ pageSize: 7 }}
                     />
                   </div>
                 </div>
