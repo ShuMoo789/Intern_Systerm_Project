@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input, Col } from "antd";
-import styled from 'styled-components';
 
-const StyledButton = styled(Button)`
-  &:hover {
-    background-color: green;
-    opacity: 1;
-  }
-`;
 
 const Question = () => {
   const [questions, setQuestions] = useState([
