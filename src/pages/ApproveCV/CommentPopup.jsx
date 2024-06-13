@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Input, Select, Button, Form } from 'antd';
 import { Toaster, toast } from 'react-hot-toast';
 import './CommentPopup.css';
+import { useTranslation } from 'react-i18next';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -9,6 +10,7 @@ const { Option } = Select;
 // CommentPopup component
 const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
     const [form] = Form.useForm();
+    const {t} = useTranslation();
     // Single state object to manage all fields
     const [state, setState] = useState({
         major: intern?.major || '',
@@ -71,7 +73,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         }}
                         onClick={() => handleButtonClick(0)}
                     >
-                        View details of Intern
+                        {t("View details of Intern")}
                     </button>
                     <button
                         className="toggle-popup-btn"
@@ -82,7 +84,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         }}
                         onClick={() => handleButtonClick(1)}
                     >
-                        Comments of CV
+                        {t("Comments of CV")}
                     </button>
                     <button
                         className="toggle-popup-btn"
@@ -93,7 +95,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         }}
                         onClick={() => handleButtonClick(2)}
                     >
-                        Result of Interview
+                        {t("Result of Interview")}
                     </button>
                 </div>}
             visible={isVisible}
@@ -107,35 +109,35 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 <div className="detail-popup-comment">
                     {/* Section for details of intern */}
                     <div className="view-popup-row">
-                        <label><h4>Intern ID</h4></label>
+                        <label><h4>{t("Intern ID")}</h4></label>
                         <Input type="text" value={intern?.internID || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Full Name</h4></label>
+                        <label><h4>{t("Full Name")}</h4></label>
                         <Input type="text" value={intern?.fullName || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Date Of Birth</h4></label>
+                        <label><h4>{t("Date Of Birth")}</h4></label>
                         <Input type="text" value={intern?.dateOfBirth || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Phone Number</h4></label>
+                        <label><h4>{t("Phone Number")}</h4></label>
                         <Input type="text" value={intern?.phoneNumber || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Position</h4></label>
+                        <label><h4>{t("Position")}</h4></label>
                         <Input type="text" value={intern?.position} onChange={(e) => updateField('position', e.target.value)} />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>School</h4></label>
+                        <label><h4>{t("School")}</h4></label>
                         <Input type="text" value={intern?.school || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Address</h4></label>
+                        <label><h4>{t("Address")}</h4></label>
                         <Input type="text" value={intern?.address || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Email</h4></label>
+                        <label><h4>{t("Email")}</h4></label>
                         <Input type="text" value={intern?.email || ''} readOnly />
                     </div>
                     <div className="view-popup-row">
@@ -150,7 +152,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                         </a>
                     </div>
                     <div className="view-popup-row">
-                        <label><h4>Rank</h4></label>
+                        <label><h4>{t("Rank")}</h4></label>
                         <Input type="text" value={state.rank} onChange={(e) => updateField('rank', e.target.value)} />
                     </div>
                 </div>
@@ -160,23 +162,23 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     {/* Section for comments of intern */}
                     <div className="comment-popup-content">
                         <div className="comment-popup-row">
-                            <label><h4>Major</h4></label>
+                            <label><h4>{t("Major")}</h4></label>
                             <Input value={state.major} onChange={(e) => updateField('major', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
-                            <label><h4>Programming language</h4></label>
+                            <label><h4>{t("Programming language")}</h4></label>
                             <Input value={state.programmingLanguage} onChange={(e) => updateField('programmingLanguage', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
-                            <label><h4>Project on GitHub</h4></label>
+                            <label><h4>{t("Project on GitHub")}</h4></label>
                             <Input value={state.projectOnGitHub} onChange={(e) => updateField('projectOnGitHub', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
-                            <label><h4>Position</h4></label>
+                            <label><h4>{t("Position")}</h4></label>
                             <Input value={state.position} onChange={(e) => updateField('position', e.target.value)} />
                         </div>
                         <div className="comment-popup-row">
-                            <label><h4>Rank</h4></label>
+                            <label><h4>{t("Rank")}</h4></label>
                             <Select value={state.rank} onChange={(value) => updateField('rank', value)}>
                                 <Option value="Intern">Intern</Option>
                                 <Option value="Senior">Senior</Option>
@@ -184,14 +186,14 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                             </Select>
                         </div>
                         <div className="comment-popup-row">
-                            <label><h4>Add Comment</h4></label>
+                            <label><h4>{t("Add Comment")}</h4></label>
                             <TextArea rows={2} value={state.comment} onChange={(e) => updateField('comment', e.target.value)} placeholder="Click to add more comment" />
                         </div>
                     </div>
                     <div className="comment-popup-footer">
                         {/* Footer buttons to cancel or save comments */}
-                        <Button onClick={onClose}>Cancel</Button>
-                        <Button type="primary" onClick={handleSave}>Save Comments</Button>
+                        <Button onClick={onClose}>{t("Cancel")}</Button>
+                        <Button type="primary" onClick={handleSave}>{t("Save Comments")}</Button>
                     </div>
                 </div>
             )}
@@ -200,71 +202,71 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     <div className="result-section">
                         <div className="field details">
                             <div className="info">
-                                <label><h4>Programming language</h4></label>
-                                <Form.Item name="programmingLanguage" rules={[{ required: true, message: 'Please input the programming language!' }]}>
+                                <label><h4>{t("Programming language")}</h4></label>
+                                <Form.Item name="programmingLanguage" rules={[{ required: true, message: t('Please input the programming language!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Major</h4></label>
-                                <Form.Item name="major" rules={[{ required: true, message: 'Please input the major!' }]}>
+                                <label><h4>{t("Major")}</h4></label>
+                                <Form.Item name="major" rules={[{ required: true, message: t('Please input the major!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Which year you are in?</h4></label>
-                                <Form.Item name="year" rules={[{ required: true, message: 'Please select your year!' }]}>
+                                <label><h4>{t("Which year you are in?")}</h4></label>
+                                <Form.Item name="year" rules={[{ required: true, message: t('Please select your year!') }]}>
                                     <Select style={{ width: "100%", height: "49px" }}>
-                                        <Option value="Sophomore">Sophomore</Option>
-                                        <Option value="Not Sophomore">Not Sophomore</Option>
+                                        <Option value="Sophomore">{t("Sophomore")}</Option>
+                                        <Option value="Not Sophomore">{t("Not Sophomore")}</Option>
                                     </Select>
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Why choose this major?</h4></label>
-                                <Form.Item name="whyMajor" rules={[{ required: true, message: 'Please explain why you chose this major!' }]}>
+                                <label><h4>{t("Why choose this major?")}</h4></label>
+                                <Form.Item name="whyMajor" rules={[{ required: true, message: t('Please explain why you chose this major!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Why choose to intern at Amazing Tech?</h4></label>
-                                <Form.Item name="whyIntern" rules={[{ required: true, message: 'Please explain why you chose to intern at Amazing Tech!' }]}>
+                                <label><h4>{t("Why choose to intern at Amazing Tech?")}</h4></label>
+                                <Form.Item name="whyIntern" rules={[{ required: true, message: t('Please explain why you chose to intern at Amazing Tech!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>How do you know about Amazing Tech?</h4></label>
-                                <Form.Item name="howKnow" rules={[{ required: true, message: 'Please explain how you know about Amazing Tech!' }]}>
+                                <label><h4>{t("How do you know about Amazing Tech?")}</h4></label>
+                                <Form.Item name="howKnow" rules={[{ required: true, message: t('Please explain how you know about Amazing Tech!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Do you know the office address?</h4></label>
-                                <Form.Item name="officeAddress" rules={[{ required: true, message: 'Please select if you know the office address!' }]}>
+                                <label><h4>{t("Do you know the office address?")}</h4></label>
+                                <Form.Item name="officeAddress" rules={[{ required: true, message: t('Please select if you know the office address!') }]}>
                                     <Select style={{ width: "100%", height: "49px" }}>
-                                        <Option value="Yes">Yes</Option>
-                                        <Option value="No">No</Option>
+                                        <Option value="Yes">{t("Yes")}</Option>
+                                        <Option value="No">{t("No")}</Option>
                                     </Select>
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Do you know about <span style={{ color: "red" }}>UNPAID</span> internships?</h4></label>
-                                <Form.Item name="unpaid" rules={[{ required: true, message: 'Please select if you know about unpaid internships!' }]}>
+                                <label><h4>{t("Do you know about")} <span style={{ color: "red" }}>{t("UNPAID")}</span> {t("internships?")}</h4></label>
+                                <Form.Item name="unpaid" rules={[{ required: true, message: t('Please select if you know about unpaid internships!') }]}>
                                     <Select style={{ width: "100%", height: "49px" }}>
-                                        <Option value="Yes">Yes</Option>
-                                        <Option value="No">No</Option>
+                                        <Option value="Yes">{t("Yes")}</Option>
+                                        <Option value="No">{t("No")}</Option>
                                     </Select>
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>What are your desire when interning at Amazing Tech?</h4></label>
-                                <Form.Item name="desire" rules={[{ required: true, message: 'Please explain your desire when interning at Amazing Tech!' }]}>
+                                <label><h4>{t("What are your desire when interning at Amazing Tech?")}</h4></label>
+                                <Form.Item name="desire" rules={[{ required: true, message: t('Please explain your desire when interning at Amazing Tech!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Work online or offline?</h4></label>
-                                <Form.Item name="workMode" rules={[{ required: true, message: 'Please select if you want to work online or offline!' }]}>
+                                <label><h4>{t("Work online or offline?")}</h4></label>
+                                <Form.Item name="workMode" rules={[{ required: true, message: t('Please select if you want to work online or offline!') }]}>
                                     <Select style={{ width: "100%", height: "49px" }}>
                                         <Option value="Online">Online</Option>
                                         <Option value="Offline">Offline</Option>
@@ -272,72 +274,72 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Are you busy with anything else?</h4></label>
-                                <Form.Item name="busy" rules={[{ required: true, message: 'Please input if you are busy with anything else!' }]}>
+                                <label><h4>{t("Are you busy with anything else?")}</h4></label>
+                                <Form.Item name="busy" rules={[{ required: true, message: t('Please input if you are busy with anything else!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="info">
-                                <label><h4>Communication skill</h4></label>
-                                <Form.Item name="communication" rules={[{ required: true, message: 'Please input your communication skill!' }]}>
+                                <label><h4>{t("Communication skill")}</h4></label>
+                                <Form.Item name="communication" rules={[{ required: true, message: t('Please input your communication skill!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                         </div>
-                        <h3>Question of Technology</h3>
+                        <h3>{t("Question of Technology")}</h3>
                         <div className="field qot">
                             <div className="question">
-                                <label><h4>Question 1</h4></label>
-                                <Form.Item name="question1" rules={[{ required: true, message: 'Please input the answer for question 1!' }]}>
-                                    <Input placeholder="Enter intern's answer" />
+                                <label><h4>{t("Question")} 1</h4></label>
+                                <Form.Item name="question1" rules={[{ required: true, message: t('Please input the answer for question 1!') }]}>
+                                    <Input placeholder={t("Enter intern's answer")} />
                                 </Form.Item>
                             </div>
                             <div className="question">
-                                <label><h4>Question 2</h4></label>
-                                <Form.Item name="question2" rules={[{ required: true, message: 'Please input the answer for question 2!' }]}>
+                                <label><h4>{t("Question")} 2</h4></label>
+                                <Form.Item name="question2" rules={[{ required: true, message: t('Please input the answer for question 2!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="question">
-                                <label><h4>Question 3</h4></label>
-                                <Form.Item name="question3" rules={[{ required: true, message: 'Please input the answer for question 3!' }]}>
+                                <label><h4>{t("Question")} 3</h4></label>
+                                <Form.Item name="question3" rules={[{ required: true, message: t('Please input the answer for question 3!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                         </div>
-                        <h3>Assign Project</h3>
+                        <h3>{t("Assign Project")}</h3>
                         <div className="field ap">
                             <div className="pass">
-                                <label><h4>Project's Name</h4></label>
-                                <Form.Item name="projectName" rules={[{ required: true, message: 'Please input the project name!' }]}>
-                                    <Input placeholder="Enter intern's answer" />
+                                <label><h4>{t("Project's Name")}</h4></label>
+                                <Form.Item name="projectName" rules={[{ required: true, message: t('Please input the project name!') }]}>
+                                    <Input placeholder={t("Enter intern's answer")} />
                                 </Form.Item>
                             </div>
                             <div className="pass">
-                                <label><h4>Position</h4></label>
-                                <Form.Item name="projectPosition" rules={[{ required: true, message: 'Please input the project position!' }]}>
+                                <label><h4>{t("Position")}</h4></label>
+                                <Form.Item name="projectPosition" rules={[{ required: true, message: t('Please input the project position!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                             <div className="pass">
-                                <label><h4>Group Zalo</h4></label>
-                                <Form.Item name="projectGroupZalo" rules={[{ required: true, message: 'Please input the Group Zalo!' }]}>
+                                <label><h4>{t("Group Zalo")}</h4></label>
+                                <Form.Item name="projectGroupZalo" rules={[{ required: true, message: t('Please input the Group Zalo!') }]}>
                                     <Input />
                                 </Form.Item>
                             </div>
                         </div>
                         <div className="field rs">
-                            <h2>Final result:
-                                <Form.Item name="finalResult" rules={[{ required: true, message: 'Please select the final result!' }]}>
+                            <h2>{t("Final result")}:
+                                <Form.Item name="finalResult" rules={[{ required: true, message: t('Please select the final result!') }]}>
                                     <Select defaultValue="Passed" style={{ width: "30%" }}>
-                                        <Option value="Passed">Passed</Option>
-                                        <Option value="Failed">Failed</Option>
+                                        <Option value="Passed">{t("Passed")}</Option>
+                                        <Option value="Failed">{t("Failed")}</Option>
                                     </Select>
                                 </Form.Item>
                             </h2>
                         </div>
                         <div className="comment-popup-footer">
-                            <div className="save-btn" style={{ marginRight: "1em" }} onClick={handleSave}>Save</div>
+                            <div className="save-btn" style={{ marginRight: "1em" }} onClick={handleSave}>{t("Save")}</div>
                             <Toaster />
                         </div>
                     </div>

@@ -29,39 +29,44 @@ import "../PositionManagement/PositionManagement.css";
 import useViewport from "../../hooks/useViewport";
 import AccountSetting from "../../components/AccountSetting/AccountSetting";
 import GroupButton from "../../components/GroupButton/GroupButton";
+import { useTranslation } from "react-i18next";
 
 const { Meta } = Card;
 
-const groupButton = [
-  {
-    color: "#41B137",
-    name: "Export Excel",
-    icon: <ExportOutlined />,
-  },
-  {
-    color: "#FB8632",
-    name: "Edit",
-    icon: <EditOutlined />,
-  },
-  {
-    color: "#FF3A2E",
-    name: "Delete",
-    icon: <DeleteOutlined />,
-  },
-  {
-    color: "#4889E9",
-    name: "Add New Position",
-    icon: <FolderAddOutlined />,
-  },
-];
+
 
 const PositionManagement = () => {
+  const {t} = useTranslation()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedInterns, setSelectedInterns] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
   const [originalSelectedInterns, setOriginalSelectedInterns] = useState([]);
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
+
+  const groupButton = [
+    {
+      color: "#41B137",
+      name: t("Export Excel"),
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: t("Edit"),
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: t("Delete"),
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: t("Add New Position"),
+      icon: <FolderAddOutlined />,
+    },
+  ];
+  
   // JSON data
   const internsData = [
     {
@@ -178,32 +183,32 @@ const PositionManagement = () => {
 
   const columns = [
     {
-      title: "Intern ID",
+      title: t("Intern ID"),
       dataIndex: "internID",
       key: "internID",
     },
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "fullName",
       key: "fullName",
     },
     {
-      title: "Phone Number",
+      title: t("Phone Number"),
       dataIndex: "phoneNumber",
       key: "phoneNumber",
     },
     {
-      title: "Position",
+      title: t("Position"),
       dataIndex: "position",
       key: "position",
     },
     {
-      title: "School",
+      title: t("School"),
       dataIndex: "school",
       key: "school",
     },
     {
-      title: "Email",
+      title: t("Email"),
       dataIndex: "email",
       key: "email",
     },
@@ -218,12 +223,12 @@ const PositionManagement = () => {
       ),
     },
     {
-      title: "Technology",
+      title: t("Technology"),
       dataIndex: "technology",
       key: "technology",
     },
     {
-      title: "Rank",
+      title: t("Rank"),
       dataIndex: "rank",
       key: "rank",
       width: 80,
@@ -247,7 +252,7 @@ const PositionManagement = () => {
         <main className="content">
           <header className="content-header">
             <h1 className="content-title">
-              <b>Position Management</b>
+              <b>{t("Position Management")}</b>
             </h1>
 
             {!isMobile ? (
@@ -276,21 +281,21 @@ const PositionManagement = () => {
                   extra={
                     <>
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 people
+                        100 {t("people")}
                       </Tag>
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
                 >
                   <p>
-                    <strong>Technology:</strong> .NET, Java, ...
+                    <strong>{t("Technology")}:</strong> .NET, Java, ...
                   </p>
                   <p>
-                    <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
                   </p>
                   <p>
-                    <strong>Group Zalo:</strong> <a href="#">Link</a>
+                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
                   </p>
                   <div className="avatars">
                     <Avatar.Group>
@@ -356,10 +361,10 @@ const PositionManagement = () => {
                       type="link"
                       className="button-main"
                       onClick={() =>
-                        showModal("View Back-End Detail", "Back-End")
+                        showModal(t("View Back-End Detail"), "Back-End")
                       }
                     >
-                      View Details
+                      {t("View Details")}
                       <FolderOutlined className="iconfolder" />
                     </Button>
                   </div>
@@ -372,21 +377,21 @@ const PositionManagement = () => {
                   extra={
                     <>
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 people
+                        100 {t("people")}
                       </Tag>
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
                 >
                   <p>
-                    <strong>Technology:</strong> ReactJS,...
+                    <strong>{t("Technology")}:</strong> ReactJS,...
                   </p>
                   <p>
-                    <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
                   </p>
                   <p>
-                    <strong>Group Zalo:</strong> <a href="#">Link</a>
+                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
                   </p>
                   <div className="avatars">
                     <>
@@ -456,10 +461,10 @@ const PositionManagement = () => {
                     type="link"
                     className="button-main"
                     onClick={() =>
-                      showModal("View Front-End Detail", "Front-End")
+                      showModal(t("View Front-End Detail"), "Front-End")
                     }
                   >
-                    View Details
+                    {t("View Details")}
                     <FolderOutlined className="iconfolder" />
                   </Button>
                 </Card>
@@ -472,21 +477,21 @@ const PositionManagement = () => {
                   extra={
                     <>
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 people
+                        100 {t("people")}
                       </Tag>
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
                 >
                   <p>
-                    <strong>Technology:</strong> Trello,...
+                    <strong>{t("Technology")}:</strong> Trello,...
                   </p>
                   <p>
-                    <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
                   </p>
                   <p>
-                    <strong>Group Zalo:</strong> <a href="#">Link</a>
+                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
                   </p>
                   <div className="avatars">
                     <>
@@ -558,12 +563,12 @@ const PositionManagement = () => {
                     className="button-main"
                     onClick={() =>
                       showModal(
-                        "View Business Analyst Detail",
+                        t("View Business Analyst Detail"),
                         "Business Analyst"
                       )
                     }
                   >
-                    View Details
+                    {t("View Details")}
                     <FolderOutlined className="iconfolder" />
                   </Button>
                 </Card>
@@ -576,21 +581,21 @@ const PositionManagement = () => {
                   extra={
                     <>
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 people
+                        100 {t("people")}
                       </Tag>
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
                 >
                   <p>
-                    <strong>Technology:</strong> Excel, Word,...
+                    <strong>{t("Technology")}:</strong> Excel, Word,...
                   </p>
                   <p>
-                    <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
                   </p>
                   <p>
-                    <strong>Group Zalo:</strong> <a href="#">Link</a>
+                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
                   </p>
                   <div className="avatars">
                     <>
@@ -660,10 +665,10 @@ const PositionManagement = () => {
                     type="link"
                     className="button-main"
                     onClick={() =>
-                      showModal("View Marketing Detail", "Marketing")
+                      showModal(t("View Marketing Detail"), "Marketing")
                     }
                   >
-                    View Details
+                    {t("View Details")}
                     <FolderOutlined className="iconfolder" />
                   </Button>
                 </Card>
@@ -676,21 +681,21 @@ const PositionManagement = () => {
                   extra={
                     <>
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 people
+                        100 {t("people")}
                       </Tag>
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
                 >
                   <p>
-                    <strong>Technology:</strong> ReactJS,...
+                    <strong>{t("Technology")}:</strong> ReactJS,...
                   </p>
                   <p>
-                    <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
                   </p>
                   <p>
-                    <strong>Group Zalo:</strong> <a href="#">Link</a>
+                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
                   </p>
                   <div className="avatars">
                     <>
@@ -760,10 +765,10 @@ const PositionManagement = () => {
                     type="link"
                     className="button-main"
                     onClick={() =>
-                      showModal("View Designer Detail", "Designer")
+                      showModal(t("View Designer Detail"), "Designer")
                     }
                   >
-                    View Details
+                    {t("View Details")}
                     <FolderOutlined className="iconfolder" />
                   </Button>
                 </Card>
@@ -776,21 +781,21 @@ const PositionManagement = () => {
                   extra={
                     <>
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 people
+                        100 {t("people")}
                       </Tag>
                       <Checkbox style={{ marginLeft: "10px" }} />
                     </>
                   }
                 >
                   <p>
-                    <strong>Technology:</strong> Trello,...
+                    <strong>{t("Technology")}:</strong> Trello,...
                   </p>
                   <p>
-                    <strong>Rank:</strong> Intern, Fresher, Junior, Middle,
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
                   </p>
                   <p>
-                    <strong>Group Zalo:</strong> <a href="#">Link</a>
+                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
                   </p>
                   <div className="avatars">
                     <>
@@ -861,12 +866,12 @@ const PositionManagement = () => {
                     className="button-main"
                     onClick={() =>
                       showModal(
-                        "View Sales Executive Detail",
+                        t("View Sales Executive Detail"),
                         "Sales Executive"
                       )
                     }
                   >
-                    View Details
+                    {t("View Details")}
                     <FolderOutlined className="iconfolder" />
                   </Button>
                 </Card>
@@ -906,7 +911,7 @@ const PositionManagement = () => {
                 onClick={handleOk}
                 style={{ width: "7%", borderRadius: "10px", padding: "1px" }}
               >
-                OK
+                {t("OK")}
               </Button>,
             ]}
           >

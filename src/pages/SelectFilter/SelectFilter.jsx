@@ -12,6 +12,7 @@ import {
 import { EllipsisOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import "./SelectFilter.css"; // Import file CSS
 import useViewport from "../../hooks/useViewport";
+import { useTranslation } from "react-i18next";
 
 // Avatar Group
 const AvatarGroup = () => {
@@ -78,11 +79,12 @@ const AvatarGroup = () => {
 
 // Item Group
 const GroupItem = ({ data }) => {
+    const {t} = useTranslation()
     const menuButton = (
         <Menu>
-            <Menu.Item key="1">Option 1</Menu.Item>
-            <Menu.Item key="2">Option 2</Menu.Item>
-            <Menu.Item key="3">Option 3</Menu.Item>
+            <Menu.Item key="1">{t("Option")} 1</Menu.Item>
+            <Menu.Item key="2">{t("Option")} 2</Menu.Item>
+            <Menu.Item key="3">{t("Option")} 3</Menu.Item>
         </Menu>
     );
 
@@ -99,7 +101,7 @@ const GroupItem = ({ data }) => {
                         href="/GroupZaloManagementDetails"
                         className="click-view"
                     >
-                        Click to view
+                        {t("Click to view")}
                     </a>
                 </div>
             </div>
@@ -118,7 +120,7 @@ const GroupItem = ({ data }) => {
 // Main Component
 const MyComponent = () => {
     const viewPort = useViewport();
-
+    const {t} = useTranslation()
     const isMobile = viewPort.width <= 1200;
 
     // const [filter, setFilter] = useState('');
@@ -195,12 +197,12 @@ const MyComponent = () => {
                                 onChange={handleFilterChange}
                                 placeholder={
                                     <span className="filter-placeholder">
-                                        Filter by title
+                                        {t("Filter by title")}
                                     </span>
                                 }
                                 style={{ width: "15%" }}
                             >
-                                <Select.Option value="">All</Select.Option>
+                                <Select.Option value="">{t("All")}</Select.Option>
                                 <Select.Option value="Designer">
                                     Designer
                                 </Select.Option>

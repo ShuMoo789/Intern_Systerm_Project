@@ -18,63 +18,10 @@ import ViewButton from "./ViewButton";
 import "./InternList.css";
 import MainLayout from "../../MainLayout/MainLayout";
 import useViewport from "../../hooks/useViewport";
+import { useTranslation } from "react-i18next";
 
 // props GroupButton
-const groupButton = [
-  {
-    color: "#6537B1",
-    name: "Send Email",
-    icon: <MailOutlined />,
-  },
-  {
-    color: "#41B137",
-    name: "Export Excel",
-    icon: <ExportOutlined />,
-  },
-  {
-    color: "#FB8632",
-    name: "Edit",
-    icon: <EditOutlined />,
-  },
-  {
-    color: "#FF3A2E",
-    name: "Delete",
-    icon: <DeleteOutlined />,
-  },
-  {
-    color: "#4889E9",
-    name: "Add New Intern",
-    icon: <FolderAddOutlined />,
-  },
-];
 
-// option of status column
-const optionSelect = [
-  {
-    value: "inProcess",
-    label: "In process",
-  },
-  {
-    value: "completedOJT",
-    label: "Completed OJT",
-  },
-  {
-    value: "out",
-    label: "Out",
-  },
-];
-
-// option of intern ID from file InternList.json
-const optionsInternID = DataInternList.map((item) => ({
-  value: item.internID,
-  label: item.internID,
-}));
-
-// option of intern phone number from file InternList.json
-const optionsInternPhoneNumber = DataInternList.map((item) => ({
-  value: item.phoneNumber,
-  label: item.phoneNumber,
-}));
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
   const existingValue = options.find((option) => option.value === item.role);
@@ -154,13 +101,72 @@ const rowSelection = {
   }),
 };
 
+
 const InternList = () => {
+  const {t} = useTranslation()
+  const commentText = t("comment");
+  const commentsText = t("comments")
   const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [dataTable, setDataTable] = useState(DataInternList);
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
-
+  const groupButton = [
+    {
+      color: "#6537B1",
+      name: "Send Email",
+      icon: <MailOutlined />,
+    },
+    {
+      color: "#41B137",
+      name: t("Export Excel"),
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: t("Edit"),
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: t("Delete"),
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: t("Add New Intern"),
+      icon: <FolderAddOutlined />,
+    },
+  ];
+  
+  
+  // option of status column
+  const optionSelect = [
+    {
+      value: "inProcess",
+      label: t("In process"),
+    },
+    {
+      value: "completedOJT",
+      label: t("Completed OJT"),
+    },
+    {
+      value: "out",
+      label: t("Out"),
+    },
+  ];
+  
+  // option of intern ID from file InternList.json
+  const optionsInternID = DataInternList.map((item) => ({
+    value: item.internID,
+    label: t(item.internID),
+  }));
+  
+  // option of intern phone number from file InternList.json
+  const optionsInternPhoneNumber = DataInternList.map((item) => ({
+    value: item.phoneNumber,
+    label: item.phoneNumber,
+  }));
   // state of filter
   const [filter, setFilter] = useState({
     internID: "",
@@ -180,22 +186,22 @@ const InternList = () => {
   // title of intern list table
   const columns = [
     {
-      title: "Intern ID",
+      title: t("Intern ID"),
       dataIndex: "internID",
       width: 120,
     },
     {
-      title: "Start Date",
+      title: t("Start Date"),
       dataIndex: "startDate",
       width: 120,
     },
     {
-      title: "Finish Date",
+      title: t("Finish Date"),
       dataIndex: "finishDate",
       width: 120,
     },
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "fullName",
       width: 130,
       // filteredValue: [filter.fullName],
@@ -204,7 +210,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Date Of Birth",
+      title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
       width: 110,
       // filteredValue: [filter.dateOfBirth],
@@ -213,7 +219,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Phone Number",
+      title: t("Phone Number"),
       dataIndex: "phoneNumber",
       width: 120,
       // filteredValue: [filter.phoneNumber],
@@ -222,7 +228,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Position",
+      title: t("Position"),
       dataIndex: "position",
       width: 120,
       // filteredValue: [filter.position],
@@ -231,25 +237,27 @@ const InternList = () => {
       // }
     },
     {
-      title: "School",
+      title:t("School"),
       dataIndex: "school",
       width: 160,
+      render: (text) => t(text)
       // filteredValue: [filter.school],
       // onFilter: (value, record) => {
       //     return record.school.includes(value)
       // }
     },
     {
-      title: "Address",
+      title: t("Address"),
       dataIndex: "address",
       width: 120,
+      render: (text) => t(text)
       // filteredValue: [filter.address],
       // onFilter: (value, record) => {
       //     return record.address.includes(value)
       // }
     },
     {
-      title: "Email",
+      title: t("Email"),
       dataIndex: "email",
       width: 180,
       // filteredValue: [filter.email],
@@ -266,18 +274,18 @@ const InternList = () => {
       ),
     },
     {
-      title: "Comments",
+      title: t("Comments"),
       dataIndex: "comments",
       width: 150,
       render: (text) => (
         <Button>
-          {text}
+          2 {commentsText}
           <EyeOutlined />
         </Button>
       ),
     },
     {
-      title: "Role",
+      title: t("Role"),
       dataIndex: "role",
       width: 120,
       // filteredValue: [filter.role],
@@ -286,7 +294,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Project",
+      title: t("Project"),
       dataIndex: "project",
       width: 130,
       // filteredValue: [filter.project],
@@ -295,7 +303,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Group Zalo",
+      title: t("Group Zalo"),
       dataIndex: "groupZalo",
       width: 160,
       // filteredValue: [filter.groupZalo],
@@ -304,7 +312,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Mentor",
+      title: t("Mentor"),
       dataIndex: "mentor",
       width: 130,
       // filteredValue: [filter.mentor],
@@ -313,7 +321,7 @@ const InternList = () => {
       // }
     },
     {
-      title: "Status",
+      title: t("Status"),
       dataIndex: "status",
       width: 160,
       render: (text) => {
@@ -329,7 +337,7 @@ const InternList = () => {
       },
     },
     {
-      title: "Report Process",
+      title: t("Report Process"),
       dataIndex: "reportProcess",
       width: 170,
       render: (text, record) => (
@@ -344,7 +352,7 @@ const InternList = () => {
       ),
     },
     {
-      title: "Button",
+      title: t("Button"),
       dataIndex: "button",
       width: 120,
       render: (text) => <ViewButton>{text}</ViewButton>,
@@ -499,282 +507,431 @@ const InternList = () => {
   };
 
   return (
-      <div>
-        <MainLayout>
-          {/* Content of InternList */}
-          <div className="content-intern-list">
-            {/* Pass props to Navigation */}
-            <Navigation
-                titleName="INTERN LIST"
-                groupButton={props.groupButton}
-                onSendEmail={handleOpenEmailPopup}
-            />
-            {/* Group of filter and table */}
-            <div className="group-filter-table">
-              {/* Filter */}
-              {!isMobile ? (
-                  <div className="filter">
-                    <div className="filter-group">
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's ID"
-                          options={optionsInternID}
-                          onChange={handleChangeFilterInternID}
-                          value={filter.internID || null}
-                      />
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Phone number"
-                          options={optionsInternPhoneNumber}
-                          onChange={handleChangeFilterPhoneNumber}
-                          value={filter.phoneNumber || null}
-                      />
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Role"
-                          options={optionsInternRole}
-                          onChange={handleChangeFilterRole}
-                          value={filter.role || null}
-                      />
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Mentor"
-                          options={optionsInternMentor}
-                          onChange={handleChangeFilterMentor}
-                          value={filter.mentor || null}
-                      />
+    <div>
+      <MainLayout>
+        {/* Content of InternList right */}
+        <div className="content-intern-list">
+          {/* Pass props to Navigation */}
+          <Navigation
+            titleName={t("INTERN LIST")}
+            groupButton={groupButton}
+            onSendEmail={handleOpenEmailPopup}
+          />
+          {/* Group of filter and table */}
+          <div className="group-filter-table">
+            {/* Filter */}
+            {!isMobile ? (
+              <div className="filter">
+                <div className="filter-group">
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    defaultValue=""
+                    placeholder={t("Enter intern's ID")}
+                    options={optionsInternID}
+                    onChange={handleChangeFilterInternID}
+                    value={filter.internID || null}
+                  />
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Phone number")}
+                    options={optionsInternPhoneNumber}
+                    onChange={handleChangeFilterPhoneNumber}
+                    value={filter.phoneNumber || null}
+                  />
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Role")}
+                    options={optionsInternRole}
+                    onChange={handleChangeFilterRole}
+                    value={filter.role || null}
+                  />
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Mentor")}
+                    options={optionsInternMentor}
+                    onChange={handleChangeFilterMentor}
+                    value={filter.mentor || null}
+                  />
+                </div>
+                <div className="filter-group">
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Full name")}
+                    options={optionsInternFullName}
+                    onChange={handleChangeFilterFullName}
+                    value={filter.fullName || null}
+                  />
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Address")}
+                    options={optionsInternAddress}
+                    onChange={handleChangeFilterAddress}
+                    value={filter.address || null}
+                  />
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Position")}
+                    options={optionsInternPosition}
+                    onChange={handleChangeFilterPosition}
+                    value={filter.position || null}
+                  />
+                  <Select
+                    size="large"
+                    showSearch
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                      fontSize: 5,
+                    }}
+                    placeholder={t("Enter intern's Project")}
+                    options={optionsInternProject}
+                    onChange={handleChangeFilterProject}
+                    value={filter.project || null}
+                  />
+                </div>
+                <div className="filter-group">
+                  <Input
+                    size="large"
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                    }}
+                    placeholder={t("Enter intern's D.O.B")}
+                    value={filter.dateOfBirth}
+                    onChange={(e) => handleChangeFilterDOB(e.target.value)}
+                  />
+                  <Input
+                    size="large"
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                    }}
+                    placeholder={t("Enter intern's Email")}
+                    value={filter.email}
+                    onChange={(e) => handleChangeFilterEmail(e.target.value)}
+                  />
+                  <Input
+                    size="large"
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                    }}
+                    placeholder={t("Enter intern's School")}
+                    value={filter.school}
+                    onChange={(e) => handleChangeFilterSchool(e.target.value)}
+                  />
+                  <Input
+                    size="large"
+                    style={{
+                      width: "100%",
+                      height: "20%",
+                      marginTop: 5,
+                    }}
+                    placeholder={t("Enter intern's Group Zalo")}
+                    value={filter.groupZalo}
+                    onChange={(e) =>
+                      handleChangeFilterGroupZalo(e.target.value)
+                    }
+                  />
+                </div>
+                <div className="filter-group">
+                  <div className="filter-button">
+                    <Button
+                      onClick={handleCleanFilterButton}
+                      style={{ width: "70%", height: 60, borderRadius: 15 }}
+                    >
+                      <FilterOutlined /> {isMobile ? "" : t("Clean Filters")}
+                    </Button>
+                  </div>
+                  <div className="search-button-internlist">
+                    <Button
+                      type="primary"
+                      onClick={handleSearch}
+                      style={{ width: "70%", height: 60, borderRadius: 15 }}
+                    >
+                      <SearchOutlined /> {isMobile ? "" : "Search"}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Row>
+                <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+                  <div className="filter-group">
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 15,
+                        fontSize: 5,
+                      }}
+                      defaultValue=""
+                      placeholder={t("Enter intern's ID")}
+                      options={optionsInternID}
+                      onChange={handleChangeFilterInternID}
+                      value={filter.internID || null}
+                    />
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Phone number")}
+                      options={optionsInternPhoneNumber}
+                      onChange={handleChangeFilterPhoneNumber}
+                      value={filter.phoneNumber || null}
+                    />
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Role")}
+                      options={optionsInternRole}
+                      onChange={handleChangeFilterRole}
+                      value={filter.role || null}
+                    />
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Mentor")}
+                      options={optionsInternMentor}
+                      onChange={handleChangeFilterMentor}
+                      value={filter.mentor || null}
+                    />
+                  </div>
+                </Col>
+                <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+                  <div className="filter-group">
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Fullname")}
+                      options={optionsInternFullName}
+                      onChange={handleChangeFilterFullName}
+                      value={filter.fullName || null}
+                    />
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Address")}
+                      options={optionsInternAddress}
+                      onChange={handleChangeFilterAddress}
+                      value={filter.address || null}
+                    />
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Position")}
+                      options={optionsInternPosition}
+                      onChange={handleChangeFilterPosition}
+                      value={filter.position || null}
+                    />
+                    <Select
+                      size="large"
+                      showSearch
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                        fontSize: 5,
+                      }}
+                      placeholder={t("Enter intern's Project")}
+                      options={optionsInternProject}
+                      onChange={handleChangeFilterProject}
+                      value={filter.project || null}
+                    />
+                  </div>
+                </Col>
+                <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+                  <div className="filter-group">
+                    <Input
+                      size="large"
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                      }}
+                      placeholder={t("Enter intern's D.O.B")}
+                      value={filter.dateOfBirth}
+                      onChange={(e) => handleChangeFilterDOB(e.target.value)}
+                    />
+                    <Input
+                      size="large"
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                      }}
+                      placeholder={t("Enter intern's Email")}
+                      value={filter.email}
+                      onChange={(e) => handleChangeFilterEmail(e.target.value)}
+                    />
+                    <Input
+                      size="large"
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                      }}
+                      placeholder={t("Enter intern's School")}
+                      value={filter.school}
+                      onChange={(e) => handleChangeFilterSchool(e.target.value)}
+                    />
+                    <Input
+                      size="large"
+                      style={{
+                        width: "100%",
+                        height: "20%",
+                        marginTop: 5,
+                      }}
+                      placeholder={t("Enter intern's Group Zalo")}
+                      value={filter.groupZalo}
+                      onChange={(e) =>
+                        handleChangeFilterGroupZalo(e.target.value)
+                      }
+                    />
+                  </div>
+                </Col>
+                <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+                  <div className="filter-group">
+                    <div className="filter-button">
+                      <Button
+                        onClick={handleCleanFilterButton}
+                        style={{ width: "100%" }}
+                      >
+                        {isMobile ? "" : <FilterOutlined />} {t("Clean Filters")}
+                      </Button>
                     </div>
-                    <div className="filter-group">
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Fullname"
-                          options={optionsInternFullName}
-                          onChange={handleChangeFilterFullName}
-                          value={filter.fullName || null}
-                      />
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Address"
-                          options={optionsInternAddress}
-                          onChange={handleChangeFilterAddress}
-                          value={filter.address || null}
-                      />
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Position"
-                          options={optionsInternPosition}
-                          onChange={handleChangeFilterPosition}
-                          value={filter.position || null}
-                      />
-                      <Select
-                          size="large"
-                          showSearch
-                          style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                          placeholder="Enter intern's Project"
-                          options={optionsInternProject}
-                          onChange={handleChangeFilterProject}
-                          value={filter.project || null}
-                      />
-                    </div>
-                    <div className="filter-group">
-                      <Input
-                          size="large"
-                          style={{ width: '100%', height: '20%', marginTop: 5 }}
-                          placeholder="Enter intern's D.O.B"
-                          value={filter.dateOfBirth}
-                          onChange={(e) => handleChangeFilterDOB(e.target.value)}
-                      />
-                      <Input
-                          size="large"
-                          style={{ width: '100%', height: '20%', marginTop: 5 }}
-                          placeholder="Enter intern's Email"
-                          value={filter.email}
-                          onChange={(e) => handleChangeFilterEmail(e.target.value)}
-                      />
-                      <Input
-                          size="large"
-                          style={{ width: '100%', height: '20%', marginTop: 5 }}
-                          placeholder="Enter intern's School"
-                          value={filter.school}
-                          onChange={(e) => handleChangeFilterSchool(e.target.value)}
-                      />
-                      <Input
-                          size="large"
-                          style={{ width: '100%', height: '20%', marginTop: 5 }}
-                          placeholder="Enter intern's Group Zalo"
-                          value={filter.groupZalo}
-                          onChange={(e) => handleChangeFilterGroupZalo(e.target.value)}
-                      />
-                    </div>
-                    <div className="filter-group">
-                      <div className="filter-button">
-                        <Button onClick={handleCleanFilterButton} style={{ width: '70%', height: 60, borderRadius: 15 }}>
-                          <FilterOutlined /> {isMobile ? '' : 'Clean Filters'}
-                        </Button>
-                      </div>
-                      <div className="search-button-internlist">
-                        <Button type="primary" onClick={handleSearch} style={{ width: '70%', height: 60, borderRadius: 15 }}>
-                          <SearchOutlined /> {isMobile ? '' : 'Search'}
-                        </Button>
-                      </div>
+                    <div className="search-button-internlist">
+                      <Button
+                        type="primary"
+                        onClick={handleSearch}
+                        style={{ width: "100%" }}
+                      >
+                        {isMobile ? "" : <SearchOutlined />} Search
+                      </Button>
                     </div>
                   </div>
-              ) : (
-                  <Row>
-                    <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
-                      <div className="filter-group">
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 15, fontSize: 5 }}
-                            placeholder="Enter intern's ID"
-                            options={optionsInternID}
-                            onChange={handleChangeFilterInternID}
-                            value={filter.internID || null}
-                        />
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Phone number"
-                            options={optionsInternPhoneNumber}
-                            onChange={handleChangeFilterPhoneNumber}
-                            value={filter.phoneNumber || null}
-                        />
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Role"
-                            options={optionsInternRole}
-                            onChange={handleChangeFilterRole}
-                            value={filter.role || null}
-                        />
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Mentor"
-                            options={optionsInternMentor}
-                            onChange={handleChangeFilterMentor}
-                            value={filter.mentor || null}
-                        />
-                      </div>
-                    </Col>
-                    <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
-                      <div className="filter-group">
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Fullname"
-                            options={optionsInternFullName}
-                            onChange={handleChangeFilterFullName}
-                            value={filter.fullName || null}
-                        />
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Address"
-                            options={optionsInternAddress}
-                            onChange={handleChangeFilterAddress}
-                            value={filter.address || null}
-                        />
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Position"
-                            options={optionsInternPosition}
-                            onChange={handleChangeFilterPosition}
-                            value={filter.position || null}
-                        />
-                        <Select
-                            size="large"
-                            showSearch
-                            style={{ width: '100%', height: '20%', marginTop: 5, fontSize: 5 }}
-                            placeholder="Enter intern's Project"
-                            options={optionsInternProject}
-                            onChange={handleChangeFilterProject}
-                            value={filter.project || null}
-                        />
-                      </div>
-                    </Col>
-                    <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
-                      <div className="filter-group">
-                        <Input
-                            size="large"
-                            style={{ width: '100%', height: '20%', marginTop: 5 }}
-                            placeholder="Enter intern's D.O.B"
-                            value={filter.dateOfBirth}
-                            onChange={(e) => handleChangeFilterDOB(e.target.value)}
-                        />
-                        <Input
-                            size="large"
-                            style={{ width: '100%', height: '20%', marginTop: 5 }}
-                            placeholder="Enter intern's Email"
-                            value={filter.email}
-                            onChange={(e) => handleChangeFilterEmail(e.target.value)}
-                        />
-                        <Input
-                            size="large"
-                            style={{ width: '100%', height: '20%', marginTop: 5 }}
-                            placeholder="Enter intern's School"
-                            value={filter.school}
-                            onChange={(e) => handleChangeFilterSchool(e.target.value)}
-                        />
-                        <Input
-                            size="large"
-                            style={{ width: '100%', height: '20%', marginTop: 5 }}
-                            placeholder="Enter intern's Group Zalo"
-                            value={filter.groupZalo}
-                            onChange={(e) => handleChangeFilterGroupZalo(e.target.value)}
-                        />
-                      </div>
-                    </Col>
-                    <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
-                      <div className="filter-group">
-                        <div className="filter-button">
-                          <Button onClick={handleCleanFilterButton} style={{ width: '100%' }}>
-                            <FilterOutlined /> Clean Filters
-                          </Button>
-                        </div>
-                        <div className="search-button-internlist">
-                          <Button type="primary" onClick={handleSearch} style={{ width: '100%' }}>
-                            <SearchOutlined /> Search
-                          </Button>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-              )}
+                </Col>
+              </Row>
+            )}
+
+            <div className="table-intern-list">
+              {/* use table of Ant Design */}
+              <Table
+                rowSelection={{
+                  type: "checkbox",
+                  ...rowSelection,
+                }}
+                columns={columns}
+                dataSource={dataTable}
+                scroll={{ x: "2200px", y: "360px" }}
+                style={{ maxWidth: "100%", minHeight: "100%" }}
+                pagination={{
+                  pageSize: 7,
+                }}
+              />
             </div>
           </div>
-          {/* Render Email Popup */}
-          <SendEmailPopup
-              onClose={handleCloseEmailPopup}
-              onSend={handleSendEmail}
-              // intern={selectedIntern}
-              openPopup={isEmailPopupVisible}
-          />
-        </MainLayout>
-      </div>
+        </div>
+        {/*Render Email Popup */}
+        <SendEmailPopup
+          onClose={handleCloseEmailPopup}
+          onSendEmail={handleSendEmail}
+          // intern={selectedIntern}
+          openPopup={isEmailPopupVisible}
+        />
+      </MainLayout>
+    </div>
   );
-}
+};
 
 export default InternList;
