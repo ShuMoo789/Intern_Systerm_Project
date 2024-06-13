@@ -389,7 +389,7 @@ function ApproveCV() {
     setViewPopupVisible(false); // Hide the view popup
   };
 
-  const { t, i18n } = useTranslation();
+  const { t,i18n } = useTranslation();
   const [optionChoose, setOptionChoose] = useState([]);
   const commentText = t("comment");
   const commentsText = t("comments");
@@ -442,7 +442,7 @@ function ApproveCV() {
     {
       title: t("Full Name"),
       dataIndex: "fullName",
-
+      
       filteredValue: [selectedFilters.fullName],
       // onFilter: (value, record) => {
       //     return record.fullName.includes(value)
@@ -535,34 +535,45 @@ function ApproveCV() {
       title: t("Status"),
       dataIndex: "status",
       // width: 100,
-      render: (text) => {
-        return (
-          <Select
-            defaultValue={text}
-            style={
-              {
-                // width: 100,
-              }
-            }
-          >
-            <Option value="Pending">
-              <Text style={{ color: getStatusColor("Pending") }}>
-                {t("Pending")}
-              </Text>
-            </Option>
-            <Option value="Failed">
-              <Text style={{ color: getStatusColor("Failed") }}>
-                {t("Failed")}
-              </Text>
-            </Option>
-            <Option value="Passed">
-              <Text style={{ color: getStatusColor("Passed") }}>
-                {t("Passed")}
-              </Text>
-            </Option>
-          </Select>
-        );
-      },
+      render: (text, record) => (
+        <Dropdown
+        overlay={
+          <Menu onClick={({ key }) => handleChangestatus(key, record)}>
+            <Menu.Item key="Pending">
+              <span>{t("Pending")}</span>
+            </Menu.Item>
+            <Menu.Item key="Failed">
+              <span>{t("Failed")}</span>
+            </Menu.Item>
+            <Menu.Item key="Passed">
+              <span>{t("Passed")}</span>
+            </Menu.Item>
+          </Menu>
+        }
+      >
+        <Button
+          style={{
+            width: 120,
+            backgroundColor:
+              record.status === "Failed"
+                ? "#F8E7EE"
+                : record.status === "Passed"
+                ? "#EFF9F1"
+                : "#FFEFE6",
+            color:
+              record.status === "Failed"
+                ? "#B70D52"
+                : record.status === "Passed"
+                ? "#449E3C"
+                : "#FF5D02",
+            borderRadius: "100px",
+            fontSize: "12px",
+          }}
+        >
+          {t(record.status)} <DownOutlined />
+        </Button>
+      </Dropdown>
+    ),
     },
     {
       title: "Button",
@@ -581,7 +592,11 @@ function ApproveCV() {
   ];
 
   // option of status column
-
+  const handleChangestatus = (key, record) => {
+    record.status = key;
+    setSelectedOption(key);
+  };
+  const [selectedOption, setSelectedOption] = useState("");  
   const optionSelect = [
     {
       value: "passed",
@@ -606,7 +621,7 @@ function ApproveCV() {
         <main className="content">
           <header className="content-header">
             <h1 className="content-title">{t("Approve CV")}</h1>
-
+            
             <div className="user-info">
               <img
                 loading="lazy"
@@ -628,7 +643,7 @@ function ApproveCV() {
             <h2 className="section-title">{t("Search for Information")}</h2>
             <div className="button-group">
               <button className="button button-schedule">
-                <Sheldule />
+                <Sheldule/>
               </button>
               <button className="button button-export">
                 <img

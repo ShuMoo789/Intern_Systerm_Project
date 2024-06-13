@@ -27,6 +27,7 @@ import jsonData from "../../data/GroupList.json";
 import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
@@ -36,7 +37,7 @@ const GroupList = () => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
   const [visible, setVisible] = useState(false);
-
+  const {t} = useTranslation()
   const [filters, setFilters] = useState({
     InternId: "",
     FullName: "",
@@ -123,9 +124,9 @@ const GroupList = () => {
   };
 
   const statusOptions = [
-    { label: "Accepted", value: "Accepted", color: "green" },
-    { label: "Pending", value: "Pending", color: "red" },
-    { label: "Interviewed", value: "Interviewed", color: "orange" },
+    { label: t("Accepted"), value: "Accepted", color: "green" },
+    { label: t("Pending"), value: "Pending", color: "red" },
+    { label: t("Interviewed"), value: "Interviewed", color: "orange" },
   ];
 
   const inputFields = [
@@ -144,8 +145,8 @@ const GroupList = () => {
   ];
 
   const contractOptions = [
-    { label: "Signed", value: "Signed", color: "green" },
-    { label: "Pending", value: "Pending", color: "red" },
+    { label: t("Signed"), value: "Signed", color: "green" },
+    { label: t("Pending"), value: "Pending", color: "red" },
   ];
 
   const groupButton = [
@@ -156,22 +157,22 @@ const GroupList = () => {
     },
     {
       color: "#41B137",
-      name: "Export Excel",
+      name: t("Export Excel"),
       icon: <ExportOutlined />,
     },
     {
       color: "#FB8632",
-      name: "Edit",
+      name: t("Edit"),
       icon: <EditOutlined />,
     },
     {
       color: "#FF3A2E",
-      name: "Delete",
+      name: t("Delete"),
       icon: <DeleteOutlined />,
     },
     {
       color: "#4889E9",
-      name: "Add New Intern",
+      name: t("Add New Intern"),
       icon: <FolderAddOutlined />,
     },
   ];
@@ -188,55 +189,56 @@ const GroupList = () => {
       width: 50,
     },
     {
-      title: "Intern ID",
+      title: t("Intern ID"),
       dataIndex: "InternId",
       key: "InternId",
       width: 140,
     },
     {
-      title: "Date of Interview",
+      title: t("Date of Interview"),
       dataIndex: "DateInterview",
       key: "DateInterview",
       width: 140,
     },
     {
-      title: "Time of Interview",
+      title: t("Time of Interview"),
       dataIndex: "TimeInterview",
       key: "TimeInterview",
       width: 140,
     },
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "FullName",
       key: "FullName",
       width: 140,
     },
     {
-      title: "Date of Birth",
+      title: t("Date of Birth"),
       dataIndex: "DateOfBirth",
       key: "DateOfBirth",
       width: 140,
     },
     {
-      title: "Phone Number",
+      title: t("Phone Number"),
       dataIndex: "PhoneNumber",
       key: "PhoneNumber",
       width: 140,
     },
     {
-      title: "Position",
+      title: t("Position"),
       dataIndex: "Position",
       key: "Position",
       width: 140,
+      
     },
     {
-      title: "School",
+      title: t("School"),
       dataIndex: "School",
       key: "School",
       width: 140,
     },
     {
-      title: "Address",
+      title: t("Address"),
       dataIndex: "Address",
       key: "Address",
       width: 140,
@@ -254,37 +256,40 @@ const GroupList = () => {
       width: 140,
     },
     {
-      title: "Comments",
+      title: t("Comments"),
       dataIndex: "Comments",
       key: "Comments",
       width: 140,
+      render: (text) => t(text)
     },
     {
-      title: "Role",
+      title: t("Role"),
       dataIndex: "Role",
       key: "Role",
       width: 140,
     },
     {
-      title: "Project",
+      title: t("Project"),
       dataIndex: "Project",
       key: "Project",
       width: 140,
+      render: (text) => t(text)
     },
     {
-      title: "Group Zalo",
+      title: t("Group Zalo"),
       dataIndex: "GroupZalo",
       key: "GroupZalo",
       width: 140,
+      render: (text) => t(text)
     },
     {
-      title: "Mentor",
+      title: t("Mentor"),
       dataIndex: "Mentor",
       key: "Mentor",
       width: 140,
     },
     {
-      title: "Status",
+      title: t("Status"),
       dataIndex: "Status",
       key: "Status",
       width: 140,
@@ -310,7 +315,7 @@ const GroupList = () => {
       ),
     },
     {
-      title: "Internship Contract",
+      title: t("Internship Contract"),
       dataIndex: "InternshipContract",
       key: "InternshipContract",
       width: 160,
@@ -330,7 +335,7 @@ const GroupList = () => {
       ),
     },
     {
-      title: "Button",
+      title: t("Button"),
       key: "Button",
       width: 200,
 
@@ -343,7 +348,7 @@ const GroupList = () => {
               borderColor: "#3498db",
             }}
           >
-            View
+            {t("View")}
           </Button>
           <Button
             shape="round"
@@ -352,7 +357,7 @@ const GroupList = () => {
               borderColor: "#3498db",
             }}
           >
-            Upload File
+            {t("Upload File")}
           </Button>
         </Space>
       ),
@@ -398,10 +403,10 @@ const GroupList = () => {
 
   const validateFields = () => {
     const newErrors = {};
-    if (!role) newErrors.role = "Role is required";
-    if (!groupZalo) newErrors.groupZalo = "Group Zalo is required";
-    if (!project) newErrors.project = "Project is required";
-    if (!mentor) newErrors.mentor = "Mentor is required";
+    if (!role) newErrors.role = t("Role is required");
+    if (!groupZalo) newErrors.groupZalo = t("Group Zalo is required");
+    if (!project) newErrors.project = t("Project is required");
+    if (!mentor) newErrors.mentor = t("Mentor is required");
     return newErrors;
   };
 
@@ -505,7 +510,7 @@ const GroupList = () => {
         <MainLayout>
           <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
             <Navigation
-              titleName="GROUP LIST"
+              titleName= {t("GROUP LIST")}
               groupButton={groupButton}
               onSendEmail={showModal}
               onCreateIntern={handleCreateIntern}
@@ -534,84 +539,84 @@ const GroupList = () => {
                   >
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's ID"
+                      placeholder={t("Enter intern's ID")}
                       name="InternId"
                       value={filters.InternId}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Full name"
+                      placeholder={t("Enter intern's Full name")}
                       name="FullName"
                       value={filters.FullName}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's D.O.B"
+                      placeholder={t("Enter intern's D.O.B")}
                       name="DOB"
                       value={filters.DOB}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Phone number"
+                      placeholder={t("Enter intern's Phone number")}
                       name="PhoneNumber"
                       value={filters.PhoneNumber}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Address"
+                      placeholder={t("Enter intern's Address")}
                       name="Address"
                       value={filters.Address}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Email"
+                      placeholder={t("Enter intern's Email")}
                       name="Email"
                       value={filters.Email}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Major"
+                      placeholder={t("Enter intern's Major")}
                       name="Major"
                       value={filters.Major}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Position"
+                      placeholder={t("Enter intern's Position")}
                       name="Position"
                       value={filters.Position}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's School"
+                      placeholder={t("Enter intern's School")}
                       name="School"
                       value={filters.School}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Title"
+                      placeholder={t("Enter intern's Title")}
                       name="Title"
                       value={filters.Title}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Project"
+                      placeholder={t("Enter intern's Project")}
                       name="Project"
                       value={filters.Project}
                       onChange={handleFilterChange}
                     />
                     <Input
                       style={inputStyle}
-                      placeholder="Enter intern's Group Zalo"
+                      placeholder={t("Enter intern's Group Zalo")}
                       name="GroupZalo"
                       value={filters.GroupZalo}
                       onChange={handleFilterChange}
@@ -632,7 +637,7 @@ const GroupList = () => {
                       icon={<FilterOutlined />}
                       onClick={handleClearFilters}
                     >
-                      Clear filter
+                      {t("Clean Filter")}
                     </Button>
                     <Button
                       style={{
@@ -643,7 +648,7 @@ const GroupList = () => {
                       icon={<SearchOutlined />}
                       onClick={handleSearch}
                     >
-                      Search
+                      {t("Search")}
                     </Button>
                   </Space>
                   <div
@@ -666,7 +671,7 @@ const GroupList = () => {
         </MainLayout>
 
         <Modal
-          title={<span style={{ fontSize: "25px" }}>Add New Intern</span>}
+          title={<span style={{ fontSize: "25px" }}>{t("Add New Intern")}</span>}
           open={visible}
           onCancel={handleCancel}
           footer={[
@@ -676,7 +681,7 @@ const GroupList = () => {
               onClick={handleSubmit}
               style={{ margin: "20px 20px 0 0" }}
             >
-              Add New Intern
+              {t("Add New Intern")}
             </Button>,
           ]}
           width={modalWidth}
@@ -714,7 +719,7 @@ const GroupList = () => {
         </Modal>
 
         <Modal
-          title={<h2>Create group</h2>}
+          title={<h2>{t("Create Group")}</h2>}
           open={isModalOpen}
           onCancel={handleCancel2}
           footer={null}
@@ -728,7 +733,7 @@ const GroupList = () => {
               <div style={{ width: "95%", alignContent: "center" }}>
                 {/* Project */}
                 <p>
-                  <b>Role</b>
+                  <b>{t("Role")}</b>
                 </p>
                 <Select
                   showSearch
@@ -740,9 +745,9 @@ const GroupList = () => {
                   options={[
                     { value: "Admin", label: "Admin" },
                     { value: "Human resources", label: "Human resources" },
-                    { value: "Mentor", label: "Mentor" },
-                    { value: "School", label: "School" },
-                    { value: "Intern", label: "Intern" },
+                    { value: "Mentor", label: t("Mentor") },
+                    { value: "School", label: t("School") },
+                    { value: "Intern", label: t("Intern") },
                   ]}
                   value={role}
                 />
@@ -752,7 +757,7 @@ const GroupList = () => {
               <div style={{ width: "95%", alignContent: "center" }}>
                 {/* Group zalo */}
                 <p>
-                  <b>Mentor</b>
+                  <b>{t("Mentor")}</b>
                 </p>
 
                 <Input
@@ -771,7 +776,7 @@ const GroupList = () => {
               <div style={{ width: "95%", alignContent: "center" }}>
                 {/* Project */}
                 <p>
-                  <b>Project</b>
+                  <b>{t("Project")}</b>
                 </p>
                 <Select
                   showSearch
@@ -793,7 +798,7 @@ const GroupList = () => {
               <div style={{ width: "100%", alignContent: "center" }}>
                 {/* Group zalo */}
                 <p>
-                  <b>Group zalo</b>
+                  <b>{t("Group Zalo")}</b>
                 </p>
                 <Input
                   style={{ width: "100%" }}
@@ -823,7 +828,7 @@ const GroupList = () => {
                 borderRadius: "10px",
               }}
             >
-              <span>Create group</span>
+              <span>{t("Create Group")}</span>
             </Button>
           </div>
         </Modal>
