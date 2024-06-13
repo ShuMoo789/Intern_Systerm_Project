@@ -1,5 +1,5 @@
 .content-navigation {
-    max-width: 92%;
+    max-width: 96%;
     right: 0;
     top: 0;
     margin: 20px auto;
@@ -46,10 +46,10 @@
     width: 100%;
     height: 60px;
     background-color: #FFFFFF;
-    border-radius: 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     position: relative;
     margin: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navigation .search-navigation {
@@ -67,4 +67,65 @@
     position: absolute;
     right: 30px;
     top: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    /* margin-top: auto; */
+    /* padding: 20px; */
+    /* background: #e8e9eb; */
+    width: fit-content;
+}
+
+.user-info > .avatar-section {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.user-info > .avatar-section > .user-details {
+    margin-left: 5px;
+}
+
+.user-info > .avatar-section > .user-details > .username {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.user-info > .avatar-section > .user-details > .role {
+    font-size: 14px;
+    color: #aaabaf;
+    margin: 0;
+}
+
+.user-info > .setting-icon {
+    font-size: 20px;
+    color: #db0d4b;
+    margin-left: 10px;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px ;
+    background-color: white; /* Set header background to white */
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 16px; /* Optional: Add margin to separate from the top and sides */
+}
+
+.header-section > .header-title {
+    font-size: 24px;
+    color: #2c3e50;
+    font-family: Quicksand;
+    font-weight: 700;
+}
+
+.header-section > .setting-icon {
+    font-size: 20px;
+    color: #db0d4b;
+    margin-right: 30px;
 }
