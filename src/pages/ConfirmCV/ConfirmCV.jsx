@@ -109,7 +109,9 @@ const ConfirmCV = () => {
         <td>{intern.position}</td>
         <td>{intern.school}</td>
         <td>{intern.address}</td>
-        <td>{intern.email}</td>
+        <td>{intern.email}</td>   
+        {/* add field englishProficiency */}
+        <td>{intern.englishProficiency}</td>
         {/* Link to the intern's CV */}
         <td>
           <a href="#">{intern.cvLink}</a>
@@ -596,6 +598,7 @@ const ConfirmCV = () => {
         </a>
       ),
     },
+    
     {
       title: "Comments CV",
       dataIndex: "commentsCV",
@@ -1181,6 +1184,21 @@ const ConfirmCV = () => {
                   >
                     {" "}
                     {selectedIntern.interviewer}
+                  </p>
+                </Col>
+                <Col span={8}>
+                  <p>
+                    <strong>English Proficiency:</strong>
+                  </p>
+                  <p
+                    style={{
+                      border: "2px solid #12345129",
+                      padding: "10px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    {" "}
+                    {selectedIntern.englishProficiency}
                   </p>
                 </Col>
               </Row>
