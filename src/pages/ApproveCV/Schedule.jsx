@@ -62,7 +62,7 @@ const optionsEmailType = [
     { value: "Internship information", label: "Internship information" },
 ];
 
-const Sheldule = () => {
+const Schedule = ({ onClose, openPopup } ) => {
 
   const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
   const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
@@ -73,19 +73,14 @@ const Sheldule = () => {
 
 
   const [loadings, setLoadings] = useState([false]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
+  
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
       console.log("Received values:", values);
       // Handle form submission
-      setIsModalOpen(false);
+      onClose();
       form.resetFields();
       message.success("Send Mail Success");
     } catch (error) {
@@ -93,11 +88,8 @@ const Sheldule = () => {
     }
   };
 
-
-
-
   const handleCancel = () => {
-    setIsModalOpen(false);
+    onClose();
     form.resetFields();
   };
 
@@ -128,18 +120,9 @@ const Sheldule = () => {
   };
   return (
     <>
-      <Button
-        type="primary"
-        onClick={showModal}
-        style={{ background: "#7d3c98" }}
-      >
-        <ClockCircleOutlined />
-        Schedule interview
-      </Button>
-
       <Modal
         title="Schedule interview for Intern's ID: xxxx"
-        open={isModalOpen}
+        open={openPopup}
         onCancel={handleCancel}
         okButtonProps={{
           disabled:
@@ -147,12 +130,8 @@ const Sheldule = () => {
             form.getFieldsError().filter(({ errors }) => errors.length).length,
         }}
         destroyOnClose={true}
-
-
         width={1125}
         height={997}
-
-
         footer={[
           <Button
             key="submit"
@@ -166,7 +145,7 @@ const Sheldule = () => {
           </Button>
           
           ,
-          <Toaster />
+          // <Toaster />
         ]}
       >
         <Form form={form}  layout="vertical" >
@@ -679,4 +658,4 @@ const Sheldule = () => {
   );
 };
 
-export default Sheldule;
+export default Schedule;

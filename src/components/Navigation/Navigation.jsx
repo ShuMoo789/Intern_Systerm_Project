@@ -44,6 +44,7 @@ const Navigation = (props) => {
               </div>)}           
           </div>
       </div>  */}
+
                 <header className="header-section">
                     <h1 className="header-title">{props.titleName}</h1>
                     {isMobile ? (
@@ -72,6 +73,7 @@ const Navigation = (props) => {
                             groupButton={props.groupButton}
                             onSendEmail={props.onSendEmail}
                             onCreateIntern={props.onCreateIntern}
+                            onScheduleInterview={props.onScheduleInterview}
                         />
                     </div>
                 </div>
