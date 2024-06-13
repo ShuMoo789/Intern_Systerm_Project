@@ -4,12 +4,13 @@ import { MailOutlined } from '@ant-design/icons';
 import { Typography, Row, Col, Form, message} from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import './SendMailButton.css'
+import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 const SendEmailPopup = ({ onClose, openPopup }) => {
-
+    const {t} = useTranslation()
     const [emailType, setEmailType] = useState('');
     const [emailContent, setEmailContent] = useState('');
     const [loadings, setLoadings] = useState([]);
@@ -59,16 +60,16 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
   };
 
   const email_types = [
-    "Email interview",
-    "Email result",
-    "Internship Information"
+    t("Email interview"),
+    t("Email result"),
+    t("Internship Information")
   ]
 
   return (
     <Modal
       className='sendMail-modal'
       centered
-      title="Send Email"
+      title={t("Send Email")}
       open={openPopup}
       onCancel={handleCancel}
       okText='Sendmail'
@@ -87,12 +88,12 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
           loading={loadings[1] || false}
           onClick={() => enterLoading(1)}
         >
-          Send Email
+          {t("Send Email")}
         </Button>,
       ]}
       width={1125}>
       <Typography.Paragraph className="desc">
-        Choose types of Email
+        {t("Choose types of Email")}
       </Typography.Paragraph>
       <Row gutter={16}>
         <Col span={7}>
@@ -104,11 +105,11 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
           >
             <Form.Item
               name="select"
-              rules={[{ required: true, message: 'Please select type of Email!' }]}
+              rules={[{ required: true, message: t('Please select type of Email!') }]}
             >
               <Select
                 className='type-email'
-                placeholder="Types of email"
+                placeholder={t("Types of email")}
                 value={emailType}
                 onDropdownVisibleChange={handleDropdownVisibleChange}
                 suffixIcon={open ? <UpOutlined /> : <DownOutlined />}
@@ -138,7 +139,7 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
                 className="textarea"
                 value={emailContent}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder="Enter your mail..."
+                placeholder={t("Enter your mail...")}
                 autoSize={{
                   minRows: 6,
                   maxRows: 6,

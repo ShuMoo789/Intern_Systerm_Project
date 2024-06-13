@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/header/Header.jsx";  // Import the Header component
 import "./EnterNewPass.css";  // Import the CSS file for styling
 import { useTranslation } from "react-i18next";  // Import the useTranslation hook for internationalization
@@ -48,10 +48,10 @@ function PasswordInput({ id, label, placeholder, value, onChange, error, warning
 
 // ChangePasswordForm component for the change password form
 function ChangePasswordForm() {
-    const { t } = useTranslation();  // Initialize translation hook
+    const { t, i18n } = useTranslation();  // Initialize translation hook
     const navigate = useNavigate();  // Initialize navigate hook
     const [form] = Form.useForm();  // Initialize Ant Design form
-
+    
     // Function to handle form submission
     const handleSubmit = (values) => {
         const { newPassword, confirmPassword } = values;
@@ -69,7 +69,7 @@ function ChangePasswordForm() {
 
         success();
     };
-
+    
     const success = () => {
         Modal.success({
             content: t("Password has been successfully changed"),
@@ -97,7 +97,7 @@ function ChangePasswordForm() {
             >
                 <PasswordInput
                     id="newPassword"
-                    placeholder="Enter new password"
+                    placeholder={t("Enter new password")}
                 />
             </Item>
             <Item

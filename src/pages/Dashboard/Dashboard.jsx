@@ -21,6 +21,7 @@ import {
 import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
+import { useTranslation } from "react-i18next";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -64,6 +65,7 @@ const months = [
 const years = ["2022", "2023", "2024"];
 
 const Dashboard = () => {
+  const {t} = useTranslation()
   const [data, setData] = useState(data2024);
   const [selectedMonth, setSelectedMonth] = useState("All Months");
   const [selectedYear, setSelectedYear] = useState("2024");
@@ -101,31 +103,34 @@ const Dashboard = () => {
   const groupButton = [
     {
       color: "#6537B1",
-      name: "Schedule interview",
+      name: t("Schedule interview"),
       icon: <ClockCircleOutlined />,
     },
     {
       color: "#41B137",
-      name: "Export Excel",
+      name: t("Export Excel"),
       icon: <ExportOutlined />,
     },
     {
       color: "#FB8632",
-      name: "Edit",
+      name: t("Edit"),
       icon: <EditOutlined />,
     },
     {
       color: "#FF3A2E",
-      name: "Delete",
+      name: t("Delete"),
       icon: <DeleteOutlined />,
     },
     {
       color: "#4889E9",
-      name: "Add New Intern",
+      name: t("Add New Intern"),
       icon: <FolderAddOutlined />,
     },
   ];
-
+  const translatedData = data.map(item => ({
+    name: t(item.name),
+    students: item.students,
+  }));
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
 
@@ -135,7 +140,7 @@ const Dashboard = () => {
     <>
       <MainLayout>
         <Navigation
-          titleName="Group Zalo Management"
+          titleName={t("Dashboard")}
           groupButton={groupButton}
           onSendEmail={handleOpenCreateGroup}
         />
@@ -161,7 +166,7 @@ const Dashboard = () => {
                 }}
               >
                 <Title level={1}>200</Title>
-                <p>Total students received CV</p>
+                <p>{t("Total students received CV")}</p>
               </Card>
 
               <Card
@@ -175,7 +180,7 @@ const Dashboard = () => {
                 }}
               >
                 <Title level={1}>150</Title>
-                <p>Total students interviewed</p>
+                <p>{t("Total students interviewed")}</p>
               </Card>
 
               <Card
@@ -189,7 +194,7 @@ const Dashboard = () => {
                 }}
               >
                 <Title level={1}>150</Title>
-                <p>Total students passed</p>
+                <p>{t("Total students passed")}</p>
               </Card>
 
               <Card
@@ -203,7 +208,7 @@ const Dashboard = () => {
                 }}
               >
                 <Title level={1}>150</Title>
-                <p>Total students interning</p>
+                <p>{t("Total students interning")}</p>
               </Card>
 
               <Card
@@ -217,7 +222,7 @@ const Dashboard = () => {
                 }}
               >
                 <Title level={1}>150</Title>
-                <p>Total students interned</p>
+                <p>{t("Total students interned")}</p>
               </Card>
             </Space>
           </Col>
@@ -228,17 +233,17 @@ const Dashboard = () => {
           <Col span={11}>
             <div style={{ textAlign: "center" }}>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data}>
+                <BarChart data={translatedData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="students" fill="#8884d8" />
+                  <Tooltip formatter={(value, name) => [value, t(name)]}/>
+                  <Legend formatter={(value) => t(value)}/>
+                  <Bar dataKey="students" name={t('students')} fill="#8884d8" />
                 </BarChart>
               </ResponsiveContainer>
               <div style={{ fontWeight: "bold" }}>
-                Number of students interning in January, 2023
+                {t("Number of students interning in January, 2023")}
               </div>
             </div>
           </Col>
@@ -249,13 +254,13 @@ const Dashboard = () => {
               direction={isMobile ? "vertical" : "horizontal"}
             >
               <Select
-                defaultValue="All Months"
+                defaultValue={t("All Months")}
                 style={{ width: "100%" }}
                 onChange={handleMonthChange}
               >
                 {months.map((month) => (
                   <Option key={month} value={month}>
-                    {month}
+                      {t(month)}
                   </Option>
                 ))}
               </Select>
@@ -278,37 +283,37 @@ const Dashboard = () => {
           <Col span={11}>
             <div style={{ textAlign: "center" }}>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data}>
+                <BarChart data= {translatedData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
+                  <XAxis dataKey= "name" />
                   <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="students" fill="#82ca9d" />
+                  <Tooltip formatter={(value, name) => [value, t(name)]}/>
+                  <Legend formatter={(value) => t(value)}/>
+                  <Bar dataKey="students" name={t('students')} fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
-              <div style={{ fontWeight: "bold" }}>FPT University</div>
+              <div style={{ fontWeight: "bold" }}>{t("FPT University")}</div>
             </div>
           </Col>
           <Col span={11}>
             <div style={{ textAlign: "center" }}>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data}>
+                <BarChart data={translatedData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="students" fill="#ffc658" />
+                  <Tooltip formatter={(value, name) => [value, t(name)]}/>
+                  <Legend formatter={(value) => t(value)}/>
+                  <Bar dataKey="students" name={t('students')} fill="#ffc658" />
                 </BarChart>
               </ResponsiveContainer>
-              <div style={{ fontWeight: "bold" }}>FPT University</div>
+              <div style={{ fontWeight: "bold" }}>{t("FPT University")}</div>
             </div>
           </Col>
         </Row>
         <div style={{ textAlign: "center", marginTop: "30px" }}>
           <div style={{ fontWeight: "bold" }}>
-            Number of students interning in year 2023 by schools
+            {t("Number of students interning in year 2023 by schools")}
           </div>
         </div>
       </MainLayout>

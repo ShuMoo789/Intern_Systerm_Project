@@ -35,7 +35,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
+      <div style={{ backgroundColor: "white", minHeight: "100vh", padding: "0 65px" }}>
         <Header />
         <Row style={{ margin: "50px 30px 20px 30px" }}>
           <Col xs={24} md={1}></Col>

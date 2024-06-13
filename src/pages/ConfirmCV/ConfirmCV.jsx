@@ -27,6 +27,7 @@ import { DatePicker, Dropdown, Menu } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import Navigation from "../../components/Navigation/Navigation";
+import { useTranslation } from "react-i18next";
 const { RangePicker } = DatePicker;
 const { Option } = Select; // Destructure Option from Select
 dayjs.extend(customParseFormat);
@@ -45,6 +46,9 @@ function IconTextBlock({ iconSrc, altText, text }) {
 const interns = [];
 const dateFormat = "YYYY/MM/DD";
 const ConfirmCV = () => {
+    const {t} = useTranslation();
+    const commentText = t("comment");
+    const commentsText = t("comments")
   // Number of interns per page
   const internsPerPage = 6;
 
@@ -245,6 +249,7 @@ const ConfirmCV = () => {
     timeInterView: "",
     dateOfBirth: "",
     email: "",
+    searchText: "",
   });
 
   /**
@@ -311,10 +316,10 @@ const ConfirmCV = () => {
     if (record.commentsCV !== undefined && record.commentsCV !== null) {
       if (record.commentsCV == 1) {
         console.log("Rendering Comment");
-        return "1 Comment";
+        return `1 ${commentText}`;
       } else {
         console.log(`Rendering ${record.commentsCV} Comments`);
-        return `${record.commentsCV} Comments`;
+        return `${record.commentsCV} ${commentsText}`;
       }
     } else {
       console.log("CommentsCV is undefined or null");
@@ -341,10 +346,10 @@ const ConfirmCV = () => {
    * @param {string} name - The name of the filter field.
    * @param {string} value - The value of the filter field.
    */
-  const handleInputChange = (type, value) => {
+  const handleInputChange = (key, value) => {
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
-      [type]: value,
+      [key]: value,
     }));
   };
 
@@ -396,14 +401,20 @@ const ConfirmCV = () => {
       );
     }
     if (selectedFilters.school) {
-      results = results.filter((intern) =>
-        intern.school.toLowerCase().includes(searchText)
-      );
+        if (selectedFilters.school) {
+            const searchText = selectedFilters.school.toLowerCase();
+            results = results.filter((intern) =>
+              intern.school.toLowerCase().includes(searchText)
+            );
+          }
     }
     if (selectedFilters.email) {
-      results = results.filter((intern) =>
-        intern.email.toLowerCase().includes(searchText)
-      );
+        if (selectedFilters.email) {
+            const searchText = selectedFilters.email.toLowerCase();
+            results = results.filter((intern) =>
+              intern.email.toLowerCase().includes(searchText)
+            );
+          }
     }
     if (selectedFilters.dateOfBirth) {
       results = results.filter((intern) =>
@@ -524,61 +535,63 @@ const ConfirmCV = () => {
     //     ),
     // },
     {
-      title: "Intern ID",
+      title: t("Intern ID"),
       dataIndex: "internID",
       key: "internID",
       filteredValue: [selectedFilters.internID],
     },
     {
-      title: "Date Interview",
+      title: t("Date Interview"),
       dataIndex: "dateInterView",
       key: "dateInterView",
       filteredValue: [selectedFilters.dateInterView],
     },
     {
-      title: "Time Interview",
+      title: t("Time Interview"),
       dataIndex: "timeinterview",
       key: "timeinterview",
       filteredValue: [selectedFilters.timeInterView],
     },
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "fullName",
       key: "fullName",
       filteredValue: [selectedFilters.fullName],
     },
     {
-      title: "Date Of Birth",
+      title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
       key: "dateOfBirth",
       filteredValue: [selectedFilters.dateOfBirth],
     },
     {
-      title: "Phone Number",
+      title: t("Phone Number"),
       dataIndex: "phoneNumber",
       key: "phoneNumber",
       filteredValue: [selectedFilters.phoneNumber],
     },
     {
-      title: "Position",
+      title: t("Position"),
       dataIndex: "position",
       key: "position",
       filteredValue: [selectedFilters.position],
     },
     {
-      title: "School",
+      title: t("School"),
       dataIndex: "school",
       key: "school",
       filteredValue: [selectedFilters.school],
+      render: (text) => t(text)
     },
     {
-      title: "Address",
+      title: t("Address"),
       dataIndex: "address",
       key: "address",
       filteredValue: [selectedFilters.address],
+      render: (text) => t(text)
     },
     {
-      title: "Email",
+      title: t("Email"),
       dataIndex: "email",
       key: "email",
       filteredValue: [selectedFilters.email],
@@ -597,7 +610,7 @@ const ConfirmCV = () => {
       ),
     },
     {
-      title: "Comments CV",
+      title: t("Comments CV"),
       dataIndex: "commentsCV",
       key: "commentsCV",
       render: (text, record) => (
@@ -614,7 +627,7 @@ const ConfirmCV = () => {
     },
 
     {
-      title: "Confirm Email",
+      title: t("Confirm Email"),
       dataIndex: "confirmEmail",
       key: "confirmEmail",
       render: (text, record) => (
@@ -622,8 +635,8 @@ const ConfirmCV = () => {
           <Dropdown
             overlay={
               <Menu onClick={({ key }) => handleConfirmEmail(record.key, key)}>
-                <Menu.Item key="confirmed">Confirmed</Menu.Item>
-                <Menu.Item key="not confirmed">Not confirmed</Menu.Item>
+                <Menu.Item key="confirmed">{t("Confirmed")}</Menu.Item>
+                <Menu.Item key="not confirmed">{t("Not Confirmed")}</Menu.Item>
               </Menu>
             }
           >
@@ -644,8 +657,8 @@ const ConfirmCV = () => {
               }}
             >
               {confirmStatus[record.key] === "confirmed"
-                ? "Confirmed"
-                : "Not confirmed"}
+                ? t("Confirmed")
+                : t("Not Confirmed")}
               <DownOutlined />
             </Button>
           </Dropdown>
@@ -654,13 +667,13 @@ const ConfirmCV = () => {
     },
 
     {
-      title: "Interviewer",
+      title: t("Interviewer"),
       dataIndex: "interviewer",
       key: "interviewer",
       filteredValue: [selectedFilters.dateInterView],
     },
     {
-      title: "Status",
+      title: t("Status"),
       dataIndex: "status",
       key: "status",
       render: (text, record) => (
@@ -668,13 +681,13 @@ const ConfirmCV = () => {
           overlay={
             <Menu onClick={({ key }) => handleChangestatus(key, record)}>
               <Menu.Item key="Pending">
-                <span>Pending</span>
+                <span>{t("Pending")}</span>
               </Menu.Item>
               <Menu.Item key="Failed">
-                <span>Failed</span>
+                <span>{t("Failed")}</span>
               </Menu.Item>
               <Menu.Item key="Passed">
-                <span>Passed</span>
+                <span>{t("Passed")}</span>
               </Menu.Item>
             </Menu>
           }
@@ -698,14 +711,14 @@ const ConfirmCV = () => {
               fontSize: "12px",
             }}
           >
-            {record.status} <DownOutlined />
+            {t(record.status)} <DownOutlined />
           </Button>
         </Dropdown>
       ),
     },
 
     {
-      title: "Button",
+      title: t("Button"),
       dataIndex: "button",
       key: "button",
       render: (text, record) => (
@@ -719,7 +732,7 @@ const ConfirmCV = () => {
             borderRadius: "20px",
           }}
         >
-          View
+          {t("View")}
         </Button>
       ),
       width: 100,
@@ -731,26 +744,26 @@ const ConfirmCV = () => {
       color: "#6537B1",
       name: "Send Email",
       icon: <MailOutlined />,
-      component: <SendMailButton />,
+      component: <SendMailButton/>,
     },
     {
       color: "#41B137",
-      name: "Export Excel",
+      name: t("Export Excel"),
       icon: <ExportOutlined />,
     },
     {
       color: "#FB8632",
-      name: "Edit",
+      name: t("Edit"),
       icon: <EditOutlined />,
     },
     {
       color: "#FF3A2E",
-      name: "Delete",
+      name: t("Delete"),
       icon: <DeleteOutlined />,
     },
     {
       color: "#4889E9",
-      name: "Add New Intern",
+      name: t("Add New Intern"),
       icon: <FolderAddOutlined />,
     },
   ];
@@ -777,7 +790,7 @@ const ConfirmCV = () => {
         <main className="content">
           <div>
             <Navigation
-              titleName="CONFIRM CV"
+              titleName={t("CONFIRM CV")}
               groupButton={groupButton}
               onSendEmail={handleOpenEmailPopup}
             />
@@ -801,7 +814,7 @@ const ConfirmCV = () => {
                         color: selectedFilters.internID ? "#000000" : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.internID || "Enter intern's ID"}
+                      {selectedFilters.internID || t("Enter intern's ID")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -817,7 +830,7 @@ const ConfirmCV = () => {
                         color: selectedFilters.fullName ? "#000000" : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.fullName || "Enter intern's Full name"}
+                      {selectedFilters.fullName || t("Enter intern's Full name")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -845,7 +858,7 @@ const ConfirmCV = () => {
                       }}
                     >
                       {selectedFilters.phoneNumber ||
-                        "Enter intern's Phone number"}
+                        t("Enter intern's Phone number")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -861,7 +874,7 @@ const ConfirmCV = () => {
                         color: selectedFilters.address ? "#000000" : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.address || "Enter intern's Address"}
+                      {selectedFilters.address || t("Enter intern's Address")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -869,9 +882,9 @@ const ConfirmCV = () => {
 
                 <Input
                   size="large"
-                  placeholder="Enter intern's Email"
+                  placeholder={t("Enter intern's Email")}
                   value={selectedFilters.email}
-                  onChange={handleInputChange}
+                  onChange={e => handleInputChange("email", e.target.value)}
                   className="filter-input"
                 />
 
@@ -886,7 +899,7 @@ const ConfirmCV = () => {
                         width: "200px",
                       }}
                     >
-                      {selectedFilters.position || "Enter intern's Position"}
+                      {selectedFilters.position || t("Enter intern's Position")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -894,9 +907,9 @@ const ConfirmCV = () => {
 
                 <Input
                   size="large"
-                  placeholder="Enter intern's School"
+                  placeholder={t("Enter intern's School")}
                   value={selectedFilters.school}
-                  onChange={handleInputChange}
+                  onChange={(e) => handleInputChange("school", e.target.value)}
                   className="filter-input"
                 />
 
@@ -912,7 +925,7 @@ const ConfirmCV = () => {
                           : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.dateInterView || "Enter Date Interview"}
+                      {selectedFilters.dateInterView || t("Enter Date Interview")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -930,7 +943,7 @@ const ConfirmCV = () => {
                           : "#C7BFBF",
                       }}
                     >
-                      {selectedFilters.timeInterView || "Enter Time Interview"}
+                      {selectedFilters.timeInterView || t("Enter Time Interview")}
                     </div>
                     <DownOutlined />
                   </Button>
@@ -939,12 +952,12 @@ const ConfirmCV = () => {
               <div className="buttons-confirm">
                 <div className="cln-btn-confirm" onClick={handleClearFilters}>
                   <DeleteOutlined style={{ marginRight: "10px" }} />
-                  Clean Filter
+                  {t("Clean Filter")}
                 </div>
                 <br />
                 <div className="srch-btn btn-confirm" onClick={handleSearch}>
                   <SearchOutlined style={{ marginRight: "10px" }} />
-                  Search
+                  {t("Search")}
                 </div>
               </div>
             </div>
@@ -999,7 +1012,7 @@ const ConfirmCV = () => {
               <Row gutter={[16, 16]}>
                 <Col span={8}>
                   <p>
-                    <strong>Intern ID:</strong>
+                    <strong>{t("Intern ID")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1013,7 +1026,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Date Interview:</strong>
+                    <strong>{t("Date Interview")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1028,7 +1041,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Time Interview:</strong>
+                    <strong>{t("Time Interview")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1043,7 +1056,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Full Name:</strong>
+                    <strong>{t("Full Name")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1058,7 +1071,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Date Of Birth:</strong>
+                    <strong>{t("Date Of Birth")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1073,7 +1086,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Phone Number:</strong>
+                    <strong>{t("Phone Number")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1088,7 +1101,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Position:</strong>
+                    <strong>{t("Position")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1103,7 +1116,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>School:</strong>
+                    <strong>{t("School")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1117,7 +1130,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Address:</strong>
+                    <strong>{t("Address")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1132,7 +1145,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Email:</strong>
+                    <strong>{t("Email")}:</strong>
                   </p>
                   <p
                     style={{
@@ -1170,7 +1183,7 @@ const ConfirmCV = () => {
                 </Col>
                 <Col span={8}>
                   <p>
-                    <strong>Interviewer:</strong>
+                    <strong>{t("Interviewer")}:</strong>
                   </p>
                   <p
                     style={{

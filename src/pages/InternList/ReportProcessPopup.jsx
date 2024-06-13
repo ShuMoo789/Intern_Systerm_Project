@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Input, Typography, Row, Col, Form } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
 import { Toaster, toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 const { Text } = Typography;
 
 const ReportProcessModal = ({ record }) => {
@@ -9,7 +10,7 @@ const ReportProcessModal = ({ record }) => {
     const [reportText, setReportText] = useState('');
     const [form] = Form.useForm();
     const { TextArea } = Input;
-
+    const {t} = useTranslation();
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -41,18 +42,18 @@ const ReportProcessModal = ({ record }) => {
     return (
         <>
             <Button onClick={showModal}>
-                Report Process
+                {t("Report Process")}
                 <EditOutlined />
             </Button>
             <Modal
                 width={700}
-                title="Report Process"
+                title={t("Report Process")}
                 visible={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 footer={
                     <Button type="primary" onClick={handleSave} style={{ backgroundColor: "#771BB8", height: 45, borderRadius: 10 }}>
-                        <SaveOutlined /> Save Changes
+                        <SaveOutlined /> {t("Save Changes")}
                     </Button>
                 }
             >
@@ -62,8 +63,8 @@ const ReportProcessModal = ({ record }) => {
                             <Col span={8}>
                                 <Form.Item
                                     name="position"
-                                    label="Position"
-                                    rules={[{ required: true, message: 'Please input the position!' }]}
+                                    label={t("Position")}
+                                    rules={[{ required: true, message: t('Please input the position!') }]}
                                 >
                                     <Input placeholder="Front-end" />
                                 </Form.Item>
@@ -71,17 +72,17 @@ const ReportProcessModal = ({ record }) => {
                             <Col span={8}>
                                 <Form.Item
                                     name="project"
-                                    label="Project"
-                                    rules={[{ required: true, message: 'Please input the project!' }]}
+                                    label={t("Project")}
+                                    rules={[{ required: true, message: t('Please input the project!') }]}
                                 >
-                                    <Input placeholder="Intern system" />
+                                    <Input placeholder={t("Intern system")} />
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
                                 <Form.Item
                                     name="mentor"
-                                    label="Mentor"
-                                    rules={[{ required: true, message: 'Please input the mentor!' }]}
+                                    label={t("Mentor")}
+                                    rules={[{ required: true, message: t('Please input the mentor!') }]}
                                 >
                                     <Input placeholder="Ajmal Abdui" />
                                 </Form.Item>
@@ -90,8 +91,8 @@ const ReportProcessModal = ({ record }) => {
                     </div>
                     <Form.Item
                         name="reportText"
-                        label="Reports"
-                        rules={[{ required: true, message: 'Please input the report text!' }]}
+                        label={t("Reports")}
+                        rules={[{ required: true, message: t('Please input the report text!') }]}
                     >
                         <TextArea
                             maxLength={1000}
