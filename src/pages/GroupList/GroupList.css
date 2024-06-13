@@ -1,3 +1,27 @@
 .space-bg {
     text-align: center;
 }
+
+.clear-filter-button {
+    transform: translate(-30px, 100px);
+    font-size: 14px;
+    border-radius: 15px;
+    height: 50px;
+}
+
+.search-filter-button {
+    transform: translate(-30px, -40px);
+    font-size: 14px;
+    border-radius: 15px;
+    height: 50px;
+}
+
+.view-button:hover {
+    background-color: #B22222 !important;
+    color: #fff !important;
+}
+
+.upload-file-button:hover {
+    background-color: #3498db !important;
+    color: #fff !important;
+}
