@@ -1,120 +1,124 @@
 .container {
-    max-width: 1200px;
-    height: 100vh;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    
-  }
-  
-  .form-group-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-  }
-  
-  .form-group {
-    flex: 0 0 33.33%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    margin-bottom : 20px;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 15px;
-    margin-top: 15px;
-  }
-  
-  input[type="text"],
-  select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  
-  .question-group,
-  .project-group,
-  .result-group {
-    margin-bottom: 20px;
-  }
-  
-  .result-group {
-    display: flex;
-    align-items: center;
-  }
-  
-  .result-group label {
-    margin-right: 10px;
-  }
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 
-  .result-group select {
-    width: 20%;
-    background-color: #D6FCD3;
-  }
+}
 
-  .result-select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  
-  .result-select.passed {
-    background-color: green;
-    color: white;
+.form-group-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+
+.form-group {
+  flex: 0 0 33.33%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.question-group,
+.project-group,
+.result-group {
+  margin-bottom: 20px;
+}
+
+.result-group {
+  display: flex;
+  align-items: center;
+}
+
+.result-group label {
+  margin-right: 10px;
+}
+
+.result-group select {
+  width: 20%;
+  background-color: #D6FCD3;
+}
+
+.result-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.result-select.passed {
+  background-color: green;
+  color: white;
 }
 
 .result-select.not-passed {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 
-  
-  .save-btn {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
 
-  h3 {
-    color : #C22E09;
-    margin-right: 30px;
-  }
+.save-btn {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  label {
-    font-size: 13px;
-  }
+h3 {
+  color: #C22E09;
+  margin-right: 30px;
+}
 
- .save-btn {
-    
-    justify-content: center;
-    text-align: center;
-    
-  }
+label {
+  font-size: 13px;
+}
 
-  .save-comments-button {
-    position: absolute; ;
-    right: 20px; /* Khoảng cách từ bên phải */
-    top: 20px; /* Khoảng cách từ trên cùng, tùy chọn */
-    width: 20%;
-    height: 45px;
-    background-color: #277AD7;
-    color: white;
-    border-radius: 10px;
+.save-btn {
+
+  justify-content: center;
+  text-align: center;
+
+}
+
+.save-comments-button {
+  position: absolute;
+  ;
+  right: 20px;
+  /* Khoảng cách từ bên phải */
+  top: 20px;
+  /* Khoảng cách từ trên cùng, tùy chọn */
+  width: 20%;
+  height: 45px;
+  background-color: #277AD7;
+  color: white;
+  border-radius: 10px;
 }
 
 .container-two {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .modal-overlay {
@@ -135,8 +139,14 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  max-width: 800px; /* Giới hạn chiều rộng tối đa */
-  max-height: 80vh; /* Giới hạn chiều cao tối đa */
-  overflow: auto; /* Thêm thanh cuộn khi nội dung vượt quá kích thước */
+  max-width: 800px;
+  /* Giới hạn chiều rộng tối đa */
+  max-height: 80vh;
+  /* Giới hạn chiều cao tối đa */
+  overflow: auto;
+  /* Thêm thanh cuộn khi nội dung vượt quá kích thước */
 }
 
+:where(.css-dev-only-do-not-override-1r287do).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 150% !important;
+}

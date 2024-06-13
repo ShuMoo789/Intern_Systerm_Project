@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+
   DatePicker,
   Button,
   Modal,
@@ -17,48 +18,52 @@ const { TextArea } = Input;
 
 // Options for various dropdowns
 const optionsDuration = [
-  { value: "15 minutes", label: "15 minutes" },
-  { value: "30 minutes", label: "30 minutes" },
-  { value: "45 minutes", label: "45 minutes" },
-  { value: "1 hour", label: "1 hour" },
+
+    { value: "15 minutes", label: "15 minutes" },
+    { value: "30 minutes", label: "30 minutes" },
+    { value: "45 minutes", label: "45 minutes" },
+    { value: "1 hour", label: "1 hour" },
 ];
 
 const optionsInterviewType = [
-  { value: "Online", label: "Online" },
-  { value: "Offline", label: "Offline" },
+    { value: "Online", label: "Online" },
+    { value: "Offline", label: "Offline" },
 ];
 
 const optionsInterviewer = [
-  { value: "Nguyen Van A", label: "Nguyen Van A" },
-  { value: "Interviewer B", label: "Interviewer B" },
-  { value: "Interviewer C", label: "Interviewer C" },
+    { value: "Nguyen Van A", label: "Nguyen Van A" },
+    { value: "Interviewer B", label: "Interviewer B" },
+    { value: "Interviewer C", label: "Interviewer C" },
 ];
 
 const optionsRank = [
-  {
-    value: "Intern/Senior/Junior",
-    label: "Intern/Senior/Junior",
-    disabled: true,
-  },
-  { value: "Intern", label: "Intern" },
-  { value: "Senior", label: "Senior" },
-  { value: "Junior", label: "Junior" },
+    {
+        value: "Intern/Senior/Junior",
+        label: "Intern/Senior/Junior",
+        disabled: true,
+    },
+    { value: "Intern", label: "Intern" },
+    { value: "Senior", label: "Senior" },
+    { value: "Junior", label: "Junior" },
 ];
 
 const optionsPositions = [
 
+
   { value: "Back-End", label: "Back-End" },
   { value: "Front-End", label: "Front-End" },
   { value: "BA", label: "BA" },
+
 ];
 const optionsEmailType = [
-  { value: "Types of email", label: "Types of email", disabled: true },
-  { value: "Email interview", label: "Email interview" },
-  { value: "Email result", label: "Email result" },
-  { value: "Internship information", label: "Internship information" },
+    { value: "Types of email", label: "Types of email", disabled: true },
+    { value: "Email interview", label: "Email interview" },
+    { value: "Email result", label: "Email result" },
+    { value: "Internship information", label: "Internship information" },
 ];
 
 const Sheldule = () => {
+
   const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
   const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
   const [interviewer, setInterviewer] = useState(optionsInterviewer[0]);
