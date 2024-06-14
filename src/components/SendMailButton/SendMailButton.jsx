@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Modal, Select, Input, Button } from 'antd';
-import { MailOutlined } from '@ant-design/icons';
-import { Typography, Row, Col, Form, message} from "antd";
+import React, { useState } from "react";
+import { Modal, Select, Input, Button } from "antd";
+import { MailOutlined } from "@ant-design/icons";
+import { Typography, Row, Col, Form, message } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+
 import './SendMailButton.css'
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +11,7 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 const SendEmailPopup = ({ onClose, openPopup }) => {
+
     const {t} = useTranslation()
     const [emailType, setEmailType] = useState('');
     const [emailContent, setEmailContent] = useState('');
@@ -17,16 +19,28 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
     const [value, setValue] = useState("");
     const [open, setOpen] = useState(false);
 
-  const [form] = Form.useForm();
+    const [form] = Form.useForm();
 
+    const handleOk = () => {
+        form.validateFields()
+            .then((values) => {
+                console.log("Received values:", values);
+                message.success("Send successfully!");
+                // Handle form submission
+                onClose();
+                form.resetFields();
+            })
+            .catch((info) => {
+                console.log("Validate Failed:", info);
+                message.error("Please fill full input information!");
+            });
+    };
 
-  const handleOk = () => {
-    form.validateFields()
-      .then(values => {
-        console.log('Received values:', values);
-        // Handle form submission
-        onClose()
+    // Hàm được gọi khi muốn ẩn modal
+    const handleCancel = () => {
+        onClose();
         form.resetFields();
+
       })
       .catch(info => {
         console.log('Validate Failed:', info);
@@ -153,7 +167,6 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
       </Row>
     </Modal>
   );
-
 };
 
 export default SendEmailPopup;

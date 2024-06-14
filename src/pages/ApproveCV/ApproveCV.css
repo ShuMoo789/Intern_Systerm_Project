@@ -12,7 +12,7 @@ body {
 }
 
 .content {
-    padding: 0 20px 0 20px;
+    margin: 20;
     height: 100vh;
     overflow-x: auto;
 }
@@ -83,14 +83,14 @@ body {
     margin-bottom: 20px;
 }
 
-.ant-table-container{
-    font-family: 'Quicksand', sans-serif;
+.ant-table-container {
+    font-family: "Quicksand", sans-serif;
 }
 
 .section-title {
     font-size: 20px;
     /* margin-bottom: 10px; */
-    color: #92929D;
+    color: #92929d;
 }
 
 #APRCV .content > .filter-section {
@@ -107,7 +107,7 @@ body {
     gap: 1.2em;
     flex-wrap: wrap;
 }
-.filter-search{
+.filter-search {
     display: inline;
 }
 
@@ -185,11 +185,11 @@ table {
     color: black;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #fff;
     padding: 8px;
     text-align: left;
-
 }
 
 th {
@@ -205,7 +205,7 @@ div.approve-btns {
     display: flex;
 }
 
-div.approve-btns > div.view{
+div.approve-btns > div.view {
     margin-right: 5px;
     padding: 5px 10px;
     color: #b22222;
@@ -217,23 +217,22 @@ div.approve-btns > div.view{
 div.approve-btns > div.feedbacks {
     margin-right: 5px;
     padding: 5px 10px;
-    color: #4889E9;
+    color: #4889e9;
     background-color: #ffffff;
-    border: 1px solid #4889E9;
+    border: 1px solid #4889e9;
     border-radius: 20px;
     cursor: pointer;
 }
 
-
-div.approve-btns > div.view:hover{
+div.approve-btns > div.view:hover {
     color: #ffffff;
     background-color: #b22222;
     border: 1px solid #b22222;
 }
-div.approve-btns > div.feedbacks:hover{
+div.approve-btns > div.feedbacks:hover {
     color: #ffffff;
-    background-color: #4889E9;
-    border: 1px solid #4889E9;
+    background-color: #4889e9;
+    border: 1px solid #4889e9;
 }
 
 #APRCV .content > .filter-section > .filter {
@@ -243,24 +242,20 @@ div.approve-btns > div.feedbacks:hover{
     margin-bottom: 1em;
 }
 
-
 #APRCV .content > .filter-section > .filter > .fields {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
 }
 
-
 #APRCV .content > .filter-section > .filter > .fields > input {
     width: 20em;
     background-color: #fff;
 }
 
-
 #APRCV .content > .filter-section > .filter > .buttons {
     gap: 5px;
 }
-
 
 #APRCV .content > .filter-section > .filter > .buttons > .btn {
     padding: 15px 20px;
@@ -269,28 +264,24 @@ div.approve-btns > div.feedbacks:hover{
     cursor: pointer;
 }
 
-
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
-    border: 1px solid #CBD2DC;
+    border: 1px solid #cbd2dc;
 }
-
 
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn:hover {
     color: #fff;
     background-color: #6d6d6d;
 }
 
-
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
-    background-color: #4889E9;
+    background-color: #4889e9;
 }
 
-
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
-    border: 1px solid #4889E9;
-    color: #4889E9;
+    border: 1px solid #4889e9;
+    color: #4889e9;
     background-color: #fff;
     cursor: pointer;
 }

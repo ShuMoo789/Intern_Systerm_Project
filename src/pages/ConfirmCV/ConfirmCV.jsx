@@ -7,19 +7,19 @@ import SendMailButton from "../../components/SendMailButton/SendMailButton";
 import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton";
 import MailOutlined from "@ant-design/icons/MailOutlined";
 import {
-  DownOutlined,
-  EyeOutlined,
-  PlusOutlined,
-  SettingOutlined,
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
-  SearchOutlined,
-  DeleteOutlined,
-  ClockCircleOutlined,
-  ExportOutlined,
-  EditOutlined,
-  FolderAddOutlined,
-  UpOutlined,
+    DownOutlined,
+    EyeOutlined,
+    PlusOutlined,
+    SettingOutlined,
+    ArrowRightOutlined,
+    ArrowLeftOutlined,
+    SearchOutlined,
+    DeleteOutlined,
+    ClockCircleOutlined,
+    ExportOutlined,
+    EditOutlined,
+    FolderAddOutlined,
+    UpOutlined,
 } from "@ant-design/icons";
 import { Input } from "antd";
 import DataConfirmCV from "../../data/ConfirmCV.json";
@@ -32,15 +32,15 @@ const { RangePicker } = DatePicker;
 const { Option } = Select; // Destructure Option from Select
 dayjs.extend(customParseFormat);
 function IconTextBlock({ iconSrc, altText, text }) {
-  // The component returns a div with a class name 'icon-text-block'
-  return (
-    <div className="icon-text-block">
-      {/* The image element with the source URL and alt text passed as props */}
-      <img src={iconSrc} alt={altText} className="icon" />
-      {/* The span element that displays the text passed as a prop */}
-      <span className="icon-text">{text}</span>
-    </div>
-  );
+    // The component returns a div with a class name 'icon-text-block'
+    return (
+        <div className="icon-text-block">
+            {/* The image element with the source URL and alt text passed as props */}
+            <img src={iconSrc} alt={altText} className="icon" />
+            {/* The span element that displays the text passed as a prop */}
+            <span className="icon-text">{text}</span>
+        </div>
+    );
 }
 
 const interns = [];
@@ -55,45 +55,32 @@ const ConfirmCV = () => {
   // React useState hook to manage the current page number
   const [currentPage, setCurrentPage] = useState(0);
 
-  // State to manage the currently selected intern(s)
-  const [selectedIntern, setSelectedIntern] = useState([]);
+    // React useState hook to manage the current page number
+    const [currentPage, setCurrentPage] = useState(0);
 
-  // State to manage the list of interns
-  const [intern, setIntern] = useState(DataConfirmCV);
+    // State to manage the currently selected intern(s)
+    const [selectedIntern, setSelectedIntern] = useState([]);
 
-  // State to manage the filtered list of interns
-  const [filteredInterns, setFilteredInterns] = useState(DataConfirmCV);
+    // State to manage the list of interns
+    const [intern, setIntern] = useState(DataConfirmCV);
 
-  // State to manage the initial page number (could be used for resetting or other purposes)
-  const [initialPage, setInitialPage] = useState(0);
+    // State to manage the filtered list of interns
+    const [filteredInterns, setFilteredInterns] = useState(DataConfirmCV);
 
-  // Calculate the total number of pages based on the number of interns and interns per page
-  const totalPages = Math.ceil(DataConfirmCV.length / internsPerPage);
-  const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+    // State to manage the initial page number (could be used for resetting or other purposes)
+    const [initialPage, setInitialPage] = useState(0);
 
-  /**
-   * Function to handle page changes.
-   * @param {number} page - The page number to switch to.
-   */
-  const handlePageChange = (page) => {
-    setCurrentPage(page); // Update the current page state with the new page number
-  };
+    // Calculate the total number of pages based on the number of interns and interns per page
+    const totalPages = Math.ceil(DataConfirmCV.length / internsPerPage);
+    const [commentPopupVisible, setCommentPopupVisible] = useState(false);
 
-  /**
-   * Function to render the list of interns for the current page.
-   * This function slices the `filteredInterns` array to get the interns for the current page
-   * and maps over them to create table rows.
-   *
-   * @returns {JSX.Element[]} An array of JSX elements representing the rows of the interns table.
-   */
-  const renderInterns = () => {
-    // Calculate the starting index of the interns for the current page
-    const startIndex = currentPage * internsPerPage;
-    // Calculate the ending index of the interns for the current page, ensuring it does not exceed the total number of interns
-    const endIndex = Math.min(
-      (currentPage + 1) * internsPerPage,
-      interns.length
-    );
+    /**
+     * Function to handle page changes.
+     * @param {number} page - The page number to switch to.
+     */
+    const handlePageChange = (page) => {
+        setCurrentPage(page); // Update the current page state with the new page number
+    };
 
     // Slice the filteredInterns array to get the interns for the current page
     return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
@@ -206,35 +193,137 @@ const ConfirmCV = () => {
     ));
   };
 
-  // Extract unique school names from the filteredInterns array
-  const schoolNames = [
-    ...new Set(filteredInterns.map((intern) => intern.school)),
-  ];
+        // Slice the filteredInterns array to get the interns for the current page
+        return filteredInterns
+            .slice(startIndex, endIndex)
+            .map((intern, index) => (
+                // Each row is a table row (<tr>) element with a unique key based on the index
+                <tr key={index}>
+                    {/* Checkbox for selecting the intern */}
+                    <td>
+                        <input type={"checkbox"} />
+                    </td>
+                    {/* Display intern details in table cells (<td>) */}
+                    <td>{intern.internID}</td>
+                    <td>{intern.dateInterView}</td>
+                    <td>{intern.timeinterview}</td>
+                    <td>{intern.fullName}</td>
+                    <td>{intern.dateOfBirth}</td>
+                    <td>{intern.phoneNumber}</td>
+                    <td>{intern.position}</td>
+                    <td>{intern.school}</td>
+                    <td>{intern.address}</td>
+                    <td>{intern.email}</td>
+                    {/* Link to the intern's CV */}
+                    <td>
+                        <a href="#">{intern.cvLink}</a>
+                    </td>
+                    {/* Comments section with eye icon for viewing comments and a button to add comments */}
+                    <td style={{ display: "flex" }}>
+                        <div className="Comments-CV">
+                            {/* Hiển thị số lượng bình luận */}
+                            {renderComments(intern)}
+                            {/* Hiển thị biểu tượng mắt và gán sự kiện onClick */}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <span style={{ marginRight: "5px" }}>
+                                    {/* Thêm một khoảng cách giữa văn bản và biểu tượng */}
+                                </span>
+                                <EyeOutlined
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => handleCommentClick(intern)}
+                                />
+                            </div>
+                        </div>
+                        <div className="add-cmt-btn">
+                            {/* Biểu tượng Plus */}
+                            <PlusOutlined />
+                        </div>
+                    </td>
+                    <td>
+                        <div
+                            className="Status"
+                            style={
+                                intern.confirmEmail === "No"
+                                    ? {
+                                          backgroundColor: "#F5A3B7",
+                                          color: "#7D0022",
+                                      }
+                                    : intern.confirmEmail === "Yes"
+                                    ? {
+                                          backgroundColor: "#B7EACB",
+                                          color: "#3A7D34",
+                                      }
+                                    : {}
+                            }
+                        >
+                            {intern.status}
+                            <DownOutlined />
+                        </div>
+                    </td>
+                    <td>{intern.interviewer}</td>
+                    {/* Status section with conditional styling based on the intern's status */}
+                    <td>
+                        <div
+                            className="Status"
+                            style={
+                                intern.status === "Pending"
+                                    ? {
+                                          backgroundColor: "#FFB596",
+                                          color: "#E5731C",
+                                      }
+                                    : intern.status === "Failed"
+                                    ? {
+                                          backgroundColor: "#F5A3B7",
+                                          color: "#7D0022",
+                                      }
+                                    : intern.status === "Passed"
+                                    ? {
+                                          backgroundColor: "#B7EACB",
+                                          color: "#3A7D34",
+                                      }
+                                    : {}
+                            }
+                        >
+                            {intern.status}
+                            <DownOutlined />
+                        </div>
+                    </td>
+                    {/* Action buttons for viewing intern details and feedbacks */}
+                    <td style={{ display: "flex" }}>
+                        <div
+                            className="view"
+                            style={{
+                                border: "1px solid #4889E9",
+                                padding: "05px",
+                                borderRadius: "20px",
+                                color: "#4889E9",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                handleViewClick(intern); // Set the modal visibility to true
+                            }}
+                        >
+                            View
+                        </div>
+                    </td>
+                </tr>
+            ));
+    };
 
-  // Extract unique position names from the filteredInterns array
-  const positionNames = [
-    ...new Set(filteredInterns.map((intern) => intern.position)),
-  ];
+    // Extract unique school names from the filteredInterns array
+    const schoolNames = [
+        ...new Set(filteredInterns.map((intern) => intern.school)),
+    ];
 
-  const internIDChoice = [
-    ...new Set(filteredInterns.map((intern) => intern.internID)),
-  ];
-
-  const phoneNumberChoice = [
-    ...new Set(filteredInterns.map((intern) => intern.phoneNumber)),
-  ];
-
-  const fullNameChoice = [
-    ...new Set(filteredInterns.map((intern) => intern.fullName)),
-  ];
-
-  const addressName = [
-    ...new Set(filteredInterns.map((intern) => intern.address)),
-  ];
-
-  const timeInterviewChoice = [
-    ...new Set(filteredInterns.map((intern) => intern.timeinterview)),
-  ];
+    // Extract unique position names from the filteredInterns array
+    const positionNames = [
+        ...new Set(filteredInterns.map((intern) => intern.position)),
+    ];
 
   const dateInterviewChoice = [
     ...new Set(filteredInterns.map((intern) => intern.dateInterView)),
@@ -254,66 +343,38 @@ const ConfirmCV = () => {
     searchText: "",
   });
 
-  /**
-   * Handles menu item clicks for filtering interns.
-   * @param {string} type - The type of filter (e.g., 'school' or 'position').
-   * @param {string} key - The selected filter value.
-   */
-  const handleMenuClick = (type, key) => {
-    // Update the selectedFilters state with the new filter value
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [type]: key,
-    }));
-  };
+    const phoneNumberChoice = [
+        ...new Set(filteredInterns.map((intern) => intern.phoneNumber)),
+    ];
 
-  /**
-   * Creates a menu for filtering options.
-   * @param {string} type - The type of filter (e.g., 'school' or 'position').
-   * @param {string[]} items - The list of filter values.
-   * @returns {JSX.Element} A menu component with filter options.
-   */
-  const createMenu = (type, items) => (
-    <Menu onClick={({ key }) => handleMenuClick(type, key)}>
-      {/* Map over the items to create menu items */}
-      {items.map((item) => (
-        <Menu.Item key={item}>
-          <div>{item}</div>
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
+    const fullNameChoice = [
+        ...new Set(filteredInterns.map((intern) => intern.fullName)),
+    ];
 
-  /**
-   * Handles the action when the comment button is clicked.
-   * @param {Object} intern - The intern object for which the comment is being added.
-   */
-  const handleCommentClick = (intern) => {
-    setSelectedIntern(intern); // Set the selected intern
-    setInitialPage(1); // Set the initial page to 1
-    setCommentPopupVisible(true); // Show the comment popup
-  };
+    const addressName = [
+        ...new Set(filteredInterns.map((intern) => intern.address)),
+    ];
 
-  /**
-   * Handles the action when the view button is clicked.
-   * @param {Object} intern - The intern object to be viewed.
-   */
-  // const handleViewClick = (intern) => {
-  //     setSelectedIntern(intern); // Set the selected intern
-  //     setInitialPage(0);         // Set the initial page to 0
-  //     setCommentPopupVisible(true); // Show the comment popup
-  // };
+    const timeInterviewChoice = [
+        ...new Set(filteredInterns.map((intern) => intern.timeinterview)),
+    ];
 
-  /**
-   * Handles the action to close the comment popup.
-   */
-  const handleCloseCommentPopup = () => {
-    setCommentPopupVisible(false); // Hide the comment popup
-    setSelectedIntern(null); // Clear the selected intern
-  };
-  const renderComments = (record) => {
-    console.log("Rendering Comments for intern:", record);
-    console.log("CommentsCV value:", record.commentsCV);
+    const dateInterviewChoice = [
+        ...new Set(filteredInterns.map((intern) => intern.dateInterView)),
+    ];
+    // useState hook to manage the selected filters for school and position
+    const [selectedFilters, setSelectedFilters] = useState({
+        school: "", // Currently selected school filter
+        position: "", // Currently selected position filter
+        internID: "",
+        phoneNumber: "",
+        dateInterView: "",
+        fullName: "",
+        address: "",
+        timeInterView: "",
+        dateOfBirth: "",
+        email: "",
+    });
 
     if (record.commentsCV !== undefined && record.commentsCV !== null) {
       if (record.commentsCV == 1) {
@@ -329,19 +390,22 @@ const ConfirmCV = () => {
     }
   };
 
-  /**
-   * Handles the action to save the updated comment for an intern.
-   * @param {Object} updatedIntern - The updated intern object with comments.
-   */
-  const handleSaveComment = (updatedIntern) => {
-    // Update the interns state with the updated intern object
-    setInterns((prevInterns) =>
-      prevInterns.map((intern) =>
-        intern.internID === updatedIntern.internID ? updatedIntern : intern
-      )
+    /**
+     * Creates a menu for filtering options.
+     * @param {string} type - The type of filter (e.g., 'school' or 'position').
+     * @param {string[]} items - The list of filter values.
+     * @returns {JSX.Element} A menu component with filter options.
+     */
+    const createMenu = (type, items) => (
+        <Menu onClick={({ key }) => handleMenuClick(type, key)}>
+            {/* Map over the items to create menu items */}
+            {items.map((item) => (
+                <Menu.Item key={item}>
+                    <div>{item}</div>
+                </Menu.Item>
+            ))}
+        </Menu>
     );
-    handleCloseCommentPopup(); // Close the comment popup after saving
-  };
 
   /**
    * Handles input change for filter values.
@@ -355,12 +419,15 @@ const ConfirmCV = () => {
     }));
   };
 
-  const handleDateChange = (type, dates) => {
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [type]: dates,
-    }));
-  };
+    /**
+     * Handles the action when the view button is clicked.
+     * @param {Object} intern - The intern object to be viewed.
+     */
+    // const handleViewClick = (intern) => {
+    //     setSelectedIntern(intern); // Set the selected intern
+    //     setInitialPage(0);         // Set the initial page to 0
+    //     setCommentPopupVisible(true); // Show the comment popup
+    // };
 
   /**
    * Handles the search functionality based on filter values.
@@ -426,102 +493,138 @@ const ConfirmCV = () => {
     setFilteredInterns(results);
   };
 
-  /**
-   * Handles clearing all filter values and resetting the filtered interns list.
-   */
-  const handleClearFilters = () => {
-    setFilteredInterns(DataConfirmCV); // Reset the filtered interns to the full list
-    setCurrentPage(0); // Reset the current page to 0
-    setSelectedFilters({
-      school: null,
-      position: null,
-      internID: null,
-      phoneNumber: null,
-      dateInterView: null,
-      fullName: null,
-      address: null,
-      timeinterview: null,
-      dateOfBirth: null,
-      searchText: "",
-    }); // Reset selected school and position filters
-  };
+        if (record.commentsCV !== undefined && record.commentsCV !== null) {
+            if (record.commentsCV == 1) {
+                console.log("Rendering Comment");
+                return "1 Comment";
+            } else {
+                console.log(`Rendering ${record.commentsCV} Comments`);
+                return `${record.commentsCV} Comments`;
+            }
+        } else {
+            console.log("CommentsCV is undefined or null");
+            return "No Comments";
+        }
+    };
 
-  /**
-   * Handles the action to close the view popup.
-   */
-  const handleViewClose = () => {
-    setViewPopupVisible(false); // Hide the view popup
-  };
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+    /**
+     * Handles the action to save the updated comment for an intern.
+     * @param {Object} updatedIntern - The updated intern object with comments.
+     */
+    const handleSaveComment = (updatedIntern) => {
+        // Update the interns state with the updated intern object
+        setInterns((prevInterns) =>
+            prevInterns.map((intern) =>
+                intern.internID === updatedIntern.internID
+                    ? updatedIntern
+                    : intern
+            )
+        );
+        handleCloseCommentPopup(); // Close the comment popup after saving
+    };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
+    /**
+     * Handles input change for filter values.
+     * @param {string} name - The name of the filter field.
+     * @param {string} value - The value of the filter field.
+     */
+    const handleInputChange = (type, value) => {
+        setSelectedFilters((prevFilters) => ({
+            ...prevFilters,
+            [type]: value,
+        }));
+    };
 
-  const handleCancel = () => {
-    setSelectedIntern(null);
-    setCommentPopupVisible(false);
-    setIsModalVisible(false);
-  };
+    const handleDateChange = (type, dates) => {
+        setSelectedFilters((prevFilters) => ({
+            ...prevFilters,
+            [type]: dates,
+        }));
+    };
 
-  const [statusMap, setStatusMap] = useState(
-    interns.reduce((acc, intern) => {
-      acc[intern.internId] = false; // Initialize all checkboxes to unchecked
-      return acc;
-    }, {})
-  );
-  const handleChange = (checked, internId) => {
-    const newStatusMap = { ...statusMap, [internId]: checked };
-    setStatusMap(newStatusMap);
-  };
+    /**
+     * Handles the search functionality based on filter values.
+     */
+    const handleSearch = () => {
+        let results = DataConfirmCV;
+        if (selectedFilters.internID) {
+            results = results.filter(
+                (intern) => intern.internID === selectedFilters.internID
+            );
+        }
+        if (selectedFilters.position) {
+            results = results.filter(
+                (intern) => intern.position === selectedFilters.position
+            );
+        }
+        if (selectedFilters.fullName) {
+            results = results.filter(
+                (intern) => intern.fullName === selectedFilters.fullName
+            );
+        }
+        if (selectedFilters.phoneNumber) {
+            results = results.filter(
+                (intern) => intern.phoneNumber === selectedFilters.phoneNumber
+            );
+        }
+        if (selectedFilters.dateInterView) {
+            results = results.filter(
+                (intern) =>
+                    intern.dateInterView === selectedFilters.dateInterView
+            );
+        }
+        if (selectedFilters.timeInterView) {
+            results = results.filter(
+                (intern) =>
+                    intern.timeinterview === selectedFilters.timeInterView
+            );
+        }
+        if (selectedFilters.address) {
+            results = results.filter(
+                (intern) => intern.address === selectedFilters.address
+            );
+        }
+        if (selectedFilters.school) {
+            results = results.filter((intern) =>
+                intern.school.toLowerCase().includes(searchText)
+            );
+        }
+        if (selectedFilters.email) {
+            results = results.filter((intern) =>
+                intern.email.toLowerCase().includes(searchText)
+            );
+        }
+        if (selectedFilters.dateOfBirth) {
+            results = results.filter((intern) =>
+                moment(intern.dateOfBirth).isSame(
+                    selectedFilters.dateOfBirth,
+                    "day"
+                )
+            );
+        }
+        setFilteredInterns(results);
+    };
 
-  const handleAllCheckedChange = (e) => {
-    const isChecked = e.target.checked;
-    const newStatusMap = {};
-    for (const internId in statusMap) {
-      newStatusMap[internId] = isChecked;
-    }
-    setStatusMap(newStatusMap);
-  };
-  const [modalVisible, setModalVisible] = useState(false);
-  // const [selectedIntern, setSelectedIntern] = useState(null);
-  // const [commentPopupVisible, setCommentPopupVisible] = useState(false);
-  // const [initialPage, setInitialPage] = useState(0); // Assuming you have initial page state
-  const handleViewClick = (intern) => {
-    setSelectedIntern(intern);
-    setInitialPage(0);
-    setCommentPopupVisible(true);
-    setModalVisible(true);
-  };
-  const handleModalCancel = () => {
-    setModalVisible(false);
-  };
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-  };
-  const [allChecked, setAllChecked] = useState(false);
-  const [confirmStatus, setConfirmStatus] = useState("");
-  const handleConfirmEmail = (key, confirmStatus) => {
-    // Cập nhật trạng thái xác nhận email của hàng có key tương ứng
-    setConfirmStatus((prevState) => ({
-      ...prevState,
-      [key]: confirmStatus,
-    }));
-  };
-  const [selectedStatus, setSelectedStatus] = useState("");
-  const handleChangestatus = (key, record) => {
-    record.status = key;
-    setSelectedOption(key);
-  };
+    /**
+     * Handles clearing all filter values and resetting the filtered interns list.
+     */
+    const handleClearFilters = () => {
+        setFilteredInterns(DataConfirmCV); // Reset the filtered interns to the full list
+        setCurrentPage(0); // Reset the current page to 0
+        setSelectedFilters({
+            school: null,
+            position: null,
+            internID: null,
+            phoneNumber: null,
+            dateInterView: null,
+            fullName: null,
+            address: null,
+            timeinterview: null,
+            dateOfBirth: null,
+            searchText: "",
+        }); // Reset selected school and position filters
+    };
+
 
   const [selectedOption, setSelectedOption] = useState("");
   const columns = [
@@ -771,17 +874,53 @@ const ConfirmCV = () => {
     },
   ];
 
-  const handleOpenCreateGroup = () => {
-    setIsModalVisible(true);
-  };
-  const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
-  const handleOpenEmailPopup = () => {
-    setEmailPopupVisible(true);
-  };
+    const handleAllCheckedChange = (e) => {
+        const isChecked = e.target.checked;
+        const newStatusMap = {};
+        for (const internId in statusMap) {
+            newStatusMap[internId] = isChecked;
+        }
+        setStatusMap(newStatusMap);
+    };
+    const [modalVisible, setModalVisible] = useState(false);
+    // const [selectedIntern, setSelectedIntern] = useState(null);
+    // const [commentPopupVisible, setCommentPopupVisible] = useState(false);
+    // const [initialPage, setInitialPage] = useState(0); // Assuming you have initial page state
+    const handleViewClick = (intern) => {
+        setSelectedIntern(intern);
+        setInitialPage(0);
+        setCommentPopupVisible(true);
+        setModalVisible(true);
+    };
+    const handleModalCancel = () => {
+        setModalVisible(false);
+    };
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(
+                `selectedRowKeys: ${selectedRowKeys}`,
+                "selectedRows: ",
+                selectedRows
+            );
+        },
+    };
+    const [allChecked, setAllChecked] = useState(false);
+    const [confirmStatus, setConfirmStatus] = useState("");
+    const handleConfirmEmail = (key, confirmStatus) => {
+        // Cập nhật trạng thái xác nhận email của hàng có key tương ứng
+        setConfirmStatus((prevState) => ({
+            ...prevState,
+            [key]: confirmStatus,
+        }));
+    };
+    const [selectedStatus, setSelectedStatus] = useState("");
+    const handleChangestatus = (key, record) => {
+        record.status = key;
+        setSelectedOption(key);
+    };
 
   const handleCloseEmailPopup = () => {
     setEmailPopupVisible(false);
-    form.resetFields();
   };
   const handleDropdownVisibleChange = (visible) => {
     setOpen(visible);
@@ -823,15 +962,25 @@ const ConfirmCV = () => {
                   </Button>
                 </Dropdown>
 
-                <Dropdown
-                  overlay={createMenu("fullName", fullNameChoice)}
-                  trigger={["click"]}
-                >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.fullName ? "#000000" : "#C7BFBF",
-                      }}
+        {
+            title: "Confirm Email",
+            dataIndex: "confirmEmail",
+            key: "confirmEmail",
+            render: (text, record) => (
+                <div key={record.key} style={{ width: 126 }}>
+                    <Dropdown
+                        overlay={
+                            <Menu
+                                onClick={({ key }) =>
+                                    handleConfirmEmail(record.key, key)
+                                }
+                            >
+                                <Menu.Item key="confirmed">Confirmed</Menu.Item>
+                                <Menu.Item key="not confirmed">
+                                    Not confirmed
+                                </Menu.Item>
+                            </Menu>
+                        }
                     >
                       {selectedFilters.fullName || t("Enter intern's Full name")}
                     </div>
@@ -845,20 +994,54 @@ const ConfirmCV = () => {
                   className="date-picker"
                 />
 
+        {
+            title: "Interviewer",
+            dataIndex: "interviewer",
+            key: "interviewer",
+            filteredValue: [selectedFilters.dateInterView],
+        },
+        {
+            title: "Status",
+            dataIndex: "status",
+            key: "status",
+            render: (text, record) => (
                 <Dropdown
-                  overlay={createMenu("phoneNumber", phoneNumberChoice)}
-                  trigger={["click"]}
+                    overlay={
+                        <Menu
+                            onClick={({ key }) =>
+                                handleChangestatus(key, record)
+                            }
+                        >
+                            <Menu.Item key="Pending">
+                                <span>Pending</span>
+                            </Menu.Item>
+                            <Menu.Item key="Failed">
+                                <span>Failed</span>
+                            </Menu.Item>
+                            <Menu.Item key="Passed">
+                                <span>Passed</span>
+                            </Menu.Item>
+                        </Menu>
+                    }
                 >
-                  <Button className="filter-button">
-                    <div
-                      style={{
-                        color: selectedFilters.phoneNumber
-                          ? "#000000"
-                          : "#C7BFBF",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
+                    <Button
+                        style={{
+                            width: 120,
+                            backgroundColor:
+                                record.status === "Failed"
+                                    ? "#F8E7EE"
+                                    : record.status === "Passed"
+                                    ? "#EFF9F1"
+                                    : "#FFEFE6",
+                            color:
+                                record.status === "Failed"
+                                    ? "#B70D52"
+                                    : record.status === "Passed"
+                                    ? "#449E3C"
+                                    : "#FF5D02",
+                            borderRadius: "100px",
+                            fontSize: "12px",
+                        }}
                     >
                       {selectedFilters.phoneNumber ||
                         t("Enter intern's Phone number")}
@@ -866,11 +1049,25 @@ const ConfirmCV = () => {
                     <DownOutlined />
                   </Button>
                 </Dropdown>
+            ),
+        },
 
-                <Dropdown
-                  overlay={createMenu("address", addressName)}
-                  trigger={["click"]}
+        {
+            title: "Button",
+            dataIndex: "button",
+            key: "button",
+            render: (text, record) => (
+                <Button
+                    type="primary"
+                    onClick={() => handleViewClick(record)}
+                    style={{
+                        backgroundColor: "white",
+                        color: "#4889E9",
+                        border: "2px solid #4889E9",
+                        borderRadius: "20px",
+                    }}
                 >
+
                   <Button className="filter-button">
                     <div
                       style={{
@@ -903,10 +1100,43 @@ const ConfirmCV = () => {
                       }}
                     >
                       {selectedFilters.position || t("Enter intern's Position")}
+
                     </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+                    <SendMailButton
+                        onClose={handleCloseEmailPopup}
+                        openPopup={isEmailPopupVisible}
+                    />
+                    <section className="filter-section-confirm">
+                        <div className="filter-confirm">
+                            <div className="fields-confirm">
+                                <Dropdown
+                                    overlay={createMenu(
+                                        "internID",
+                                        internIDChoice
+                                    )}
+                                    trigger={["click"]}
+                                    onDropdownVisibleChange={
+                                        handleDropdownVisibleChange
+                                    }
+                                    suffixIcon={
+                                        open ? <UpOutlined /> : <DownOutlined />
+                                    }
+                                >
+                                    <Button className="filter-button">
+                                        <div
+                                            style={{
+                                                color: selectedFilters.internID
+                                                    ? "#000000"
+                                                    : "#C7BFBF",
+                                            }}
+                                        >
+                                            {selectedFilters.internID ||
+                                                "Enter intern's ID"}
+                                        </div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+
 
                 <Input
                   size="large"
@@ -980,7 +1210,120 @@ const ConfirmCV = () => {
               </div>
             </div>
 
-            {/* <div className="pagination">
+                                <Dropdown
+                                    overlay={createMenu(
+                                        "position",
+                                        positionNames
+                                    )}
+                                    trigger={["click"]}
+                                >
+                                    <Button className="filter-button">
+                                        <div
+                                            style={{
+                                                color: selectedFilters.position
+                                                    ? "#000000"
+                                                    : "#C7BFBF",
+                                                width: "200px",
+                                            }}
+                                        >
+                                            {selectedFilters.position ||
+                                                "Enter intern's Position"}
+                                        </div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+
+                                <Input
+                                    size="large"
+                                    placeholder="Enter intern's School"
+                                    value={selectedFilters.school}
+                                    onChange={handleInputChange}
+                                    className="filter-input"
+                                />
+
+                                <Dropdown
+                                    overlay={createMenu(
+                                        "dateInterView",
+                                        dateInterviewChoice
+                                    )}
+                                    trigger={["click"]}
+                                >
+                                    <Button className="filter-button">
+                                        <div
+                                            style={{
+                                                color: selectedFilters.dateInterView
+                                                    ? "#000000"
+                                                    : "#C7BFBF",
+                                            }}
+                                        >
+                                            {selectedFilters.dateInterView ||
+                                                "Enter Date Interview"}
+                                        </div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+
+                                <Dropdown
+                                    overlay={createMenu(
+                                        "timeInterView",
+                                        timeInterviewChoice
+                                    )}
+                                    trigger={["click"]}
+                                >
+                                    <Button className="filter-button">
+                                        <div
+                                            style={{
+                                                color: selectedFilters.timeInterView
+                                                    ? "#000000"
+                                                    : "#C7BFBF",
+                                            }}
+                                        >
+                                            {selectedFilters.timeInterView ||
+                                                "Enter Time Interview"}
+                                        </div>
+                                        <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+                            </div>
+                            <div className="buttons-confirm">
+                                <div
+                                    className="cln-btn-confirm"
+                                    onClick={handleClearFilters}
+                                >
+                                    <DeleteOutlined
+                                        style={{ marginRight: "10px" }}
+                                    />
+                                    Clean Filter
+                                </div>
+                                <br />
+                                <div
+                                    className="srch-btn btn-confirm"
+                                    onClick={handleSearch}
+                                >
+                                    <SearchOutlined
+                                        style={{ marginRight: "10px" }}
+                                    />
+                                    Search
+                                </div>
+                            </div>
+                        </div>
+                        <div className="list">
+                            <div className="tbl-wrapper">
+                                <Table
+                                    rowSelection={{
+                                        type: selectionType,
+                                        ...rowSelection,
+                                    }}
+                                    columns={columns}
+                                    dataSource={filteredInterns}
+                                    rowKey="internId"
+                                    pagination={{ pageSize: 6 }}
+                                    scroll={{ x: "max-content" }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* <div className="pagination">
                             <button
                                 className="pagination-button"
                                 onClick={() => handlePageChange(currentPage - 1)}
@@ -1003,6 +1346,7 @@ const ConfirmCV = () => {
                                 <ArrowRightOutlined />
                             </button>
                         </div> */}
+
           </section>
           {selectedIntern && (
             <Modal
