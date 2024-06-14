@@ -238,299 +238,434 @@ function ApproveCV() {
         </Menu>
     );
 
-    /**
-     * Handles the action when the comment button is clicked.
-     * @param {Object} intern - The intern object for which the comment is being added.
-     */
-    const handleCommentClick = (intern) => {
-        setSelectedIntern(intern); // Set the selected intern
-        setInitialPage(1); // Set the initial page to 1
-        setCommentPopupVisible(true); // Show the comment popup
-    };
 
-    /**
-     * Handles the action when the view button is clicked.
-     * @param {Object} intern - The intern object to be viewed.
-     */
-    const handleViewClick = (intern) => {
-        setSelectedIntern(intern); // Set the selected intern
-        setInitialPage(0); // Set the initial page to 0
-        setCommentPopupVisible(true); // Show the comment popup
-    };
+  const handleDateChange = (type, dates) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [type]: dates,
+    }));
+  };
 
-    const handleViewFeedback = (intern) => {
-        setSelectedIntern(intern); // Set the selected intern
-        setInitialPage(2); // Set the initial page to 0
-        setCommentPopupVisible(true); // Show the comment popup
-    };
+  /**
+   * Handles the search functionality based on filter values.
+   */
+  const handleSearch = () => {
+    let results = DataApproveList;
 
-    /**
-     * Handles the action to close the comment popup.
-     */
-    const handleCloseCommentPopup = () => {
-        setCommentPopupVisible(false); // Hide the comment popup
-        setSelectedIntern(null); // Clear the selected intern
-    };
+    if (selectedFilters.position) {
+      results = results.filter(
+        (intern) => intern.position === selectedFilters.position
+      );
+    }
+    if (selectedFilters.school) {
+      results = results.filter(
+        (intern) => intern.school === selectedFilters.school
+      );
+    }
+    if (selectedFilters.internID) {
+      const searchText = selectedFilters.internID.toLowerCase();
+      results = results.filter((intern) =>
+        intern.internID.toLowerCase().includes(searchText)
+      );
+    }
+    if (selectedFilters.fullName) {
+      const searchText = selectedFilters.fullName.toLowerCase();
+      results = results.filter((intern) =>
+        intern.fullName.toLowerCase().includes(searchText)
+      );
+    }
+    if (selectedFilters.email) {
+      const searchText = selectedFilters.email.toLowerCase();
+      results = results.filter((intern) =>
+        intern.email.toLowerCase().includes(searchText)
+      );
+    }
+    if (selectedFilters.address) {
+      const searchText = selectedFilters.address.toLowerCase();
+      results = results.filter((intern) =>
+        intern.address.toLowerCase().includes(searchText)
+      );
+    }
+    if (selectedFilters.phoneNumber) {
+      const searchText = selectedFilters.phoneNumber.toLowerCase();
+      results = results.filter((intern) =>
+        intern.phoneNumber.toLowerCase().includes(searchText)
+      );
+    }
+    if (selectedFilters.dateOfBirth) {
+      results = results.filter((intern) =>
+        moment(intern.dateOfBirth).isSame(selectedFilters.dateOfBirth, "day")
+      );
+    }
+    if (selectedFilters.dateSubmittedForm) {
+      results = results.filter((intern) =>
+        moment(intern.dateSubmittedForm).isBetween(
+          selectedFilters.dateSubmittedForm,
+          "day"
+        )
+      );
+    }
+    setFilteredInterns(results);
+  };
 
-    /**
-     * Handles the action to save the updated comment for an intern.
-     * @param {Object} updatedIntern - The updated intern object with comments.
-     */
-    const handleSaveComment = (updatedIntern) => {
-        // Update the interns state with the updated intern object
-        setInterns((prevInterns) =>
-            prevInterns.map((intern) =>
-                intern.internID === updatedIntern.internID
-                    ? updatedIntern
-                    : intern
-            )
-        );
-        handleCloseCommentPopup(); // Close the comment popup after saving
-    };
+  /**
+   * Handles clearing all filter values and resetting the filtered interns list.
+   */
+  const handleClearFilters = () => {
+    setFilteredInterns(DataApproveList); // Reset the filtered interns to the full list
+    setCurrentPage(0); // Reset the current page to 0
+    setSelectedFilters({
+      internID: "",
+      fullName: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      email: "",
+      address: "",
+      dateSubmittedForm: "",
+      searchText: "",
+      school: "",
+      position: "",
+    }); // Reset selected school and position filters
+  };
+  const handleViewClose = () => {
+    setViewPopupVisible(false); // Hide the view popup
+  };
 
-    /**
-     * Handles input change for filter values.
-     * @param {string} name - The name of the filter field.
-     * @param {string} value - The value of the filter field.
-     */
-    const handleInputChange = (key, value) => {
-        setSelectedFilters((prevFilters) => ({
-            ...prevFilters,
-            [key]: value,
-        }));
-    };
+  const { t,i18n } = useTranslation();
+  const [optionChoose, setOptionChoose] = useState([]);
+  const commentText = t("comment");
+  const commentsText = t("comments");
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
+  const { Text } = Typography;
+  const inputStyle = { width: isMobile ? "100%" : "300px" };
+  // checkbox table Ant Design
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
+      );
+    },
+    getCheckboxProps: (record) => ({
+      name: record.name,
+    }),
+  };
 
-    const handleDateChange = (type, dates) => {
-        setSelectedFilters((prevFilters) => ({
-            ...prevFilters,
-            [type]: dates,
-        }));
-    };
-
-    /**
-     * Handles the search functionality based on filter values.
-     */
-    const handleSearch = () => {
-        let results = DataApproveList;
-
-        if (selectedFilters.position) {
-            results = results.filter(
-                (intern) => intern.position === selectedFilters.position
-            );
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Passed":
+        return "green";
+      case "Failed":
+        return "red";
+      case "Pending":
+        return "yellow";
+      default:
+        return "black";
+    }
+  };
+  // title of apprve list table
+  const columns = [
+    {
+      title: t("Intern ID"),
+      dataIndex: "internID",
+      // width: 80,
+      filteredValue: [selectedFilters.internID],
+      // onFilter: (value, record) => {
+      //     return record.internID.includes(value)
+      // }
+    },
+    {
+      title: t("Date Submitted Form"),
+      dataIndex: "dateSubmittedForm",
+      // width: 140,
+    },
+    {
+      title: t("Full Name"),
+      dataIndex: "fullName",
+      
+      filteredValue: [selectedFilters.fullName],
+      // onFilter: (value, record) => {
+      //     return record.fullName.includes(value)
+      // }
+    },
+    {
+      title: t("Date Of Birth"),
+      dataIndex: "dateOfBirth",
+      // width: 110,
+      // filteredValue: [selectedFilters.dateOfBirth],
+      // onFilter: (value, record) => {
+      //     return record.dateOfBirth.includes(value)
+      // }
+    },
+    {
+      title: t("Phone Number"),
+      dataIndex: "phoneNumber",
+      // width: 120,
+      // filteredValue: [selectedFilters.phoneNumber],
+      // onFilter: (value, record) => {
+      //     return record.phoneNumber.includes(value)
+      // }
+    },
+    {
+      title: t("Position"),
+      dataIndex: "position",
+      // width: 120,
+      // filteredValue: [selectedFilters.position],
+      // onFilter: (value, record) => {
+      //     return record.position.includes(value)
+      // }
+    },
+    {
+      title: t("School"),
+      dataIndex: "school",
+      // width: 160,
+      render: (text) => t(text),
+      // filteredValue: [selectedFilters.school],
+      // onFilter: (value, record) => {
+      //     return record.school.includes(value)
+      // }
+    },
+    {
+      title: t("Address"),
+      dataIndex: "address",
+      // width: 120,
+      filteredValue: [selectedFilters.address],
+      render: (text) => t(text),
+      // onFilter: (value, record) => {
+      //     return record.address.includes(value)
+      // }
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      // width: 180,
+      // filteredValue: [selectedFilters.email],
+      // onFilter: (value, record) => {
+      //     return record.email.includes(value)
+      // }
+    },
+    {
+      title: "CV",
+      dataIndex: "cvLink",
+      // width: 60,
+      render: (text) => (
+        <a
+          href={text}
+          style={{ color: "#0000FF", textDecoration: "underline" }}
+        >
+          Link
+        </a>
+      ),
+    },
+    {
+      title: t("Comments"),
+      dataIndex: "commentsCV",
+      // width: 130,
+      render: (text) => (
+        <Button
+          onClick={() => handleCommentClick(intern)}
+          style={{ width: "100%" }}
+        >
+          {text === "1" ? `${text} ${commentText}` : `${text} ${commentsText}`}
+          <EyeOutlined />
+        </Button>
+      ),
+    },
+    {
+      title: t("Status"),
+      dataIndex: "status",
+      // width: 100,
+      render: (text, record) => (
+        <Dropdown
+        overlay={
+          <Menu onClick={({ key }) => handleChangestatus(key, record)}>
+            <Menu.Item key="Pending">
+              <span>{t("Pending")}</span>
+            </Menu.Item>
+            <Menu.Item key="Failed">
+              <span>{t("Failed")}</span>
+            </Menu.Item>
+            <Menu.Item key="Passed">
+              <span>{t("Passed")}</span>
+            </Menu.Item>
+          </Menu>
         }
-        if (selectedFilters.school) {
-            results = results.filter(
-                (intern) => intern.school === selectedFilters.school
-            );
-        }
-        if (selectedFilters.internID) {
-            const searchText = selectedFilters.internID.toLowerCase();
-            results = results.filter((intern) =>
-                intern.internID.toLowerCase().includes(searchText)
-            );
-        }
-        if (selectedFilters.fullName) {
-            const searchText = selectedFilters.fullName.toLowerCase();
-            results = results.filter((intern) =>
-                intern.fullName.toLowerCase().includes(searchText)
-            );
-        }
-        if (selectedFilters.email) {
-            const searchText = selectedFilters.email.toLowerCase();
-            results = results.filter((intern) =>
-                intern.email.toLowerCase().includes(searchText)
-            );
-        }
-        if (selectedFilters.address) {
-            const searchText = selectedFilters.address.toLowerCase();
-            results = results.filter((intern) =>
-                intern.address.toLowerCase().includes(searchText)
-            );
-        }
-        if (selectedFilters.phoneNumber) {
-            const searchText = selectedFilters.phoneNumber.toLowerCase();
-            results = results.filter((intern) =>
-                intern.phoneNumber.toLowerCase().includes(searchText)
-            );
-        }
-        if (selectedFilters.dateOfBirth) {
-            results = results.filter((intern) =>
-                moment(intern.dateOfBirth).isSame(
-                    selectedFilters.dateOfBirth,
-                    "day"
-                )
-            );
-        }
-        if (selectedFilters.dateSubmittedForm) {
-            results = results.filter((intern) =>
-                moment(intern.dateSubmittedForm).isBetween(
-                    selectedFilters.dateSubmittedForm,
-                    "day"
-                )
-            );
-        }
-        setFilteredInterns(results);
-    };
+      >
+        <Button
+          style={{
+            width: 120,
+            backgroundColor:
+              record.status === "Failed"
+                ? "#F8E7EE"
+                : record.status === "Passed"
+                ? "#EFF9F1"
+                : "#FFEFE6",
+            color:
+              record.status === "Failed"
+                ? "#B70D52"
+                : record.status === "Passed"
+                ? "#449E3C"
+                : "#FF5D02",
+            borderRadius: "100px",
+            fontSize: "12px",
+          }}
+        >
+          {t(record.status)} <DownOutlined />
+        </Button>
+      </Dropdown>
+    ),
+    },
+    {
+      title: "Button",
+      // width: 120,
+      render: () => (
+        <div className="approve-btns">
+          <div className="view" onClick={() => handleViewClick(intern)}>
+            {t("View")}
+          </div>
+          <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>
+            {t("Feedbacks")}
+          </div>
+        </div>
+      ),
+    },
+  ];
 
-    /**
-     * Handles clearing all filter values and resetting the filtered interns list.
-     */
-    const handleClearFilters = () => {
-        setFilteredInterns(DataApproveList); // Reset the filtered interns to the full list
-        setCurrentPage(0); // Reset the current page to 0
-        setSelectedFilters({
-            internID: "",
-            fullName: "",
-            dateOfBirth: "",
-            phoneNumber: "",
-            email: "",
-            address: "",
-            dateSubmittedForm: "",
-            searchText: "",
-            school: "",
-            position: "",
-        }); // Reset selected school and position filters
-    };
-    const handleViewClose = () => {
-        setViewPopupVisible(false); // Hide the view popup
-    };
+  // option of status column
+  const handleChangestatus = (key, record) => {
+    record.status = key;
+    setSelectedOption(key);
+  };
+  const [selectedOption, setSelectedOption] = useState("");  
+  const optionSelect = [
+    {
+      value: "passed",
+      label: "Passed",
+    },
+    {
+      value: "failed",
+      label: "Failed",
+    },
+    {
+      value: "pending",
+      label: "Pending",
+    },
+  ];
+  const translatedData = optionSelect.map((item) => ({
+    value: item.value,
+    label: t(item.label),
+  }));
+  return (
+    <div id="APRCV">
+      <MainLayout>
+        <main className="content">
+          <header className="content-header">
+            <h1 className="content-title">{t("Approve CV")}</h1>
+            
+            <div className="user-info">
+              <img
+                loading="lazy"
+                src={User_Img}
+                alt="User Profile"
+                className="user-profile-small"
+              />
+              <div className="user-details">
+                <span className="user-name">Natalie Brogan</span>
+                <span className="user-role">Admin</span>
+              </div>
+              <div className="account-setting">
+                <SettingOutlined style={{ color: "#DB0D4B" }} />
+              </div>
+            </div>
+          </header>
 
-    const { t, i18n } = useTranslation();
-    const [optionChoose, setOptionChoose] = useState([]);
-    const commentText = t("comment");
-    const commentsText = t("comments");
-    const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1024;
-    const { Text } = Typography;
-    const inputStyle = { width: isMobile ? "100%" : "300px" };
-    // checkbox table Ant Design
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(
-                `selectedRowKeys: ${selectedRowKeys}`,
-                "selectedRows: ",
-                selectedRows
-            );
-        },
-        getCheckboxProps: (record) => ({
-            name: record.name,
-        }),
-    };
+          <section className="content-section">
+            <h2 className="section-title">{t("Search for Information")}</h2>
+            <div className="button-group">
+              <button className="button button-schedule">
+                <Sheldule/>
+              </button>
+              <button className="button button-export">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Export Icon"
+                  className="button-icon"
+                />
+                <span>{t("Export Excel")}</span>
+              </button>
+              <button className="button button-edit">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Edit Icon"
+                  className="button-icon"
+                />
+                <span>{t("Edit")}</span>
+              </button>
+              <button className="button button-delete">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Delete Icon"
+                  className="button-icon"
+                />
+                <span>{t("Delete")}</span>
+              </button>
+              <button className="button button-add-intern">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Add Intern Icon"
+                  className="button-icon"
+                />
+                <span>{t("Add New Intern")}</span>
+              </button>
+            </div>
+          </section>
 
-    const getStatusColor = (status) => {
-        switch (status) {
-            case "Passed":
-                return "green";
-            case "Failed":
-                return "red";
-            case "Pending":
-                return "yellow";
-            default:
-                return "black";
-        }
-    };
-    // title of apprve list table
-    const columns = [
-        {
-            title: t("Intern ID"),
-            dataIndex: "internID",
-            // width: 80,
-            filteredValue: [selectedFilters.internID],
-            // onFilter: (value, record) => {
-            //     return record.internID.includes(value)
-            // }
-        },
-        {
-            title: t("Date Submitted Form"),
-            dataIndex: "dateSubmittedForm",
-            // width: 140,
-        },
-        {
-            title: t("Full Name"),
-            dataIndex: "fullName",
+          <section className="filter-section">
+            <div className="filter">
+              <div className="fields">
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's ID")}
+                  value={selectedFilters.internID}
+                  onChange={(e) =>
+                    handleInputChange("internID", e.target.value)
+                  }
+                />
 
-            filteredValue: [selectedFilters.fullName],
-            // onFilter: (value, record) => {
-            //     return record.fullName.includes(value)
-            // }
-        },
-        {
-            title: t("Date Of Birth"),
-            dataIndex: "dateOfBirth",
-            // width: 110,
-            // filteredValue: [selectedFilters.dateOfBirth],
-            // onFilter: (value, record) => {
-            //     return record.dateOfBirth.includes(value)
-            // }
-        },
-        {
-            title: t("Phone Number"),
-            dataIndex: "phoneNumber",
-            // width: 120,
-            // filteredValue: [selectedFilters.phoneNumber],
-            // onFilter: (value, record) => {
-            //     return record.phoneNumber.includes(value)
-            // }
-        },
-        {
-            title: t("Position"),
-            dataIndex: "position",
-            // width: 120,
-            // filteredValue: [selectedFilters.position],
-            // onFilter: (value, record) => {
-            //     return record.position.includes(value)
-            // }
-        },
-        {
-            title: t("School"),
-            dataIndex: "school",
-            // width: 160,
-            render: (text) => t(text),
-            // filteredValue: [selectedFilters.school],
-            // onFilter: (value, record) => {
-            //     return record.school.includes(value)
-            // }
-        },
-        {
-            title: t("Address"),
-            dataIndex: "address",
-            // width: 120,
-            filteredValue: [selectedFilters.address],
-            render: (text) => t(text),
-            // onFilter: (value, record) => {
-            //     return record.address.includes(value)
-            // }
-        },
-        {
-            title: "Email",
-            dataIndex: "email",
-            // width: 180,
-            // filteredValue: [selectedFilters.email],
-            // onFilter: (value, record) => {
-            //     return record.email.includes(value)
-            // }
-        },
-        {
-            title: "CV",
-            dataIndex: "cvLink",
-            // width: 60,
-            render: (text) => (
-                <a
-                    href={text}
-                    style={{ color: "#0000FF", textDecoration: "underline" }}
-                >
-                    Link
-                </a>
-            ),
-        },
-        {
-            title: t("Comments"),
-            dataIndex: "commentsCV",
-            // width: 130,
-            render: (text) => (
-                <Button
-                    onClick={() => handleCommentClick(intern)}
-                    style={{ width: "100%" }}
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's Full name")}
+                  value={selectedFilters.fullName}
+                  onChange={(e) =>
+                    handleInputChange("fullName", e.target.value)
+                  }
+                />
+
+                <DatePicker
+                  format={dateFormat}
+                  placeholder={t("Enter intern's D.O.B")}
+                  style={{ padding: "7px 11px", fontSize: "15px" }}
+                  onChange={(date) => handleDateChange("dateOfBirth", date)}
+                />
+
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's Phone number")}
+                  value={selectedFilters.phoneNumber}
+                  onChange={(e) =>
+                    handleInputChange("phoneNumber", e.target.value)
+                  }
+                />
+
+                <Dropdown
+                  overlay={createMenu("school", schoolNames)}
+                  trigger={["click"]}
+                  style={inputStyle}
                 >
                     {text === "1"
                         ? `${text} ${commentText}`

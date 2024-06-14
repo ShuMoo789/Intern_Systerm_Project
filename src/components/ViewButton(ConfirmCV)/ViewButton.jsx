@@ -8,7 +8,6 @@ const ViewButton = () => {
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
- 
   // Function to handle view button click
   const handleView = (record) => {
     setSelectedIntern(record);
@@ -19,8 +18,6 @@ const ViewButton = () => {
   const handleModalClose = () => {
     setModalVisible(false);
   };
-
-  
 
   return (
     <>
@@ -233,6 +230,21 @@ const ViewButton = () => {
                 {" "}
                 {selectedIntern.interviewer}
               </p>
+              <Col span={8}>
+                <p>
+                  <strong>English Proficiency:</strong>
+                </p>
+                <p
+                  style={{
+                    border: "2px solid #12345129",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {" "}
+                  {selectedIntern.englishProficiency}
+                </p>
+              </Col>
             </Col>
           </Row>
         </Modal>

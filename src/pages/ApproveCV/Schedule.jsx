@@ -13,16 +13,17 @@ import {
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { Toaster, toast } from 'react-hot-toast';
 import "./Schedule.css";
-
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 const { TextArea } = Input;
 
 // Options for various dropdowns
 const optionsDuration = [
 
-    { value: "15 minutes", label: "15 minutes" },
-    { value: "30 minutes", label: "30 minutes" },
-    { value: "45 minutes", label: "45 minutes" },
-    { value: "1 hour", label: "1 hour" },
+    { value: "15 minutes", label: t("15 minutes") },
+    { value: "30 minutes", label: t("30 minutes") },
+    { value: "45 minutes", label: t("45 minutes") },
+    { value: "1 hour", label: t("1 hour") },
 ];
 
 const optionsInterviewType = [
@@ -56,13 +57,13 @@ const optionsPositions = [
 
 ];
 const optionsEmailType = [
-    { value: "Types of email", label: "Types of email", disabled: true },
-    { value: "Email interview", label: "Email interview" },
-    { value: "Email result", label: "Email result" },
-    { value: "Internship information", label: "Internship information" },
+    { value: "Types of email", label: t("Types of email"), disabled: true },
+    { value: "Email interview", label: t("Email interview") },
+    { value: "Email result", label: t("Email result") },
+    { value: "Internship information", label: t("Internship information") },
 ];
-
 const Schedule = ({ onClose, openPopup } ) => {
+  const {t} = useTranslation();
 
   const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
   const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
@@ -121,8 +122,9 @@ const Schedule = ({ onClose, openPopup } ) => {
   return (
     <>
       <Modal
-        title="Schedule interview for Intern's ID: xxxx"
+        title={t("Schedule interview for Intern's ID: xxxx")}
         open={openPopup}
+
         onCancel={handleCancel}
         okButtonProps={{
           disabled:
@@ -141,7 +143,7 @@ const Schedule = ({ onClose, openPopup } ) => {
             loading={loadings[1] || false}
             onClick={() => enterLoading(1)}
           >
-            Set Schedule
+            {t("Set Schedule")}
           </Button>
           
           ,
@@ -171,12 +173,12 @@ const Schedule = ({ onClose, openPopup } ) => {
                   marginBottom: "5px",
                 }}
               >
-                Date
+                {t("Date")}
               </div>
 
               <Form.Item
                 name="date"
-                rules={[{ required: true, message: "Please select a date" }]}
+                rules={[{ required: true, message: t("Please select a date") }]}
               >
                 <DatePicker
                   format={{
@@ -210,13 +212,13 @@ const Schedule = ({ onClose, openPopup } ) => {
                   marginBottom: "5px",
                 }}
               >
-                Start Time
+                {t("Start Time")}
               </label>
 
               <Form.Item
                 name="startTime"
                 rules={[
-                  { required: true, message: "Please select a start time" },
+                  { required: true, message: t("Please select a start time") },
                 ]}
               >
                 <TimePicker
@@ -248,13 +250,13 @@ const Schedule = ({ onClose, openPopup } ) => {
                   marginBottom: "5px",
                 }}
               >
-                Time Duration
+                {t("Time Duration")}
               </label>
 
               <Form.Item
                 name="timeDuration"
                 rules={[
-                  { required: true, message: "Please select a time duration" },
+                  { required: true, message: t("Please select a time duration") },
                 ]}
               >
                 <Select
@@ -304,7 +306,7 @@ const Schedule = ({ onClose, openPopup } ) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please select an interview type",
+                      message: t("Please select an interview type"),
                     },
                   ]}
                 >
@@ -335,7 +337,7 @@ const Schedule = ({ onClose, openPopup } ) => {
                     marginBottom: "5px",
                   }}
                 >
-                  Interviewer
+                  {t("Interviewer")}
                 </label>
 
                   <Select
@@ -357,7 +359,7 @@ const Schedule = ({ onClose, openPopup } ) => {
                     <Form.Item
                   name="interviewer"
                   rules={[
-                    { required: true, message: "Please select an interviewer" },
+                    { required: true, message: t("Please select an interviewer") },
                   ]}
                 >
                   <Select
@@ -389,14 +391,14 @@ const Schedule = ({ onClose, openPopup } ) => {
                     marginBottom: "5px",
                   }}
                 >
-                  Link Google Meet/Address
+                  {t("Link Google Meet/Address")}
                 </label>
                 <Form.Item
                   name="link"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter a link or address",
+                      message: t("Please enter a link or address"),
                     },
                   ]}
                 >
@@ -434,13 +436,13 @@ const Schedule = ({ onClose, openPopup } ) => {
                     marginBottom: "5px",
                   }}
                 >
-                  Send Email
+                  {t("Send Email")}
                 </label>
 
                 <Form.Item
                   name="sendEmail"
                   rules={[
-                    { required: true, message: "Please select an email type" },
+                    { required: true, message: t("Please select an email type") },
                   ]}
                 >
                   <Select
@@ -470,11 +472,11 @@ const Schedule = ({ onClose, openPopup } ) => {
                     marginBottom: "5px",
                   }}
                 >
-                  Rank
+                  {t("Rank")}
                 </label>
                 <Form.Item
                   name="rank"
-                  rules={[{ required: true, message: "Please select a rank" }]}
+                  rules={[{ required: true, message: t("Please select a rank") }]}
                 >
                   <Select
                     value={rank}
@@ -513,18 +515,18 @@ const Schedule = ({ onClose, openPopup } ) => {
                     marginBottom: "5px",
                   }}
                 >
-                  To:
+                  {t("To")}:
                 </label>
                 <Form.Item
                   name="to"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter a 'To' email address",
+                      message: t("Please enter a 'To' email address"),
                     },
                     {
                       type: "email",
-                      message: "Please enter a valid email address",
+                      message: t("Please enter a valid email address"),
                     },
                   ]}
                 >
@@ -563,11 +565,11 @@ const Schedule = ({ onClose, openPopup } ) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter a 'Bcc' email address",
+                      message: t("Please enter a 'Bcc' email address"),
                     },
                     {
                       type: "email",
-                      message: "Please enter a valid email address",
+                      message: t("Please enter a valid email address"),
                     },
                   ]}
                 >
@@ -601,7 +603,7 @@ const Schedule = ({ onClose, openPopup } ) => {
                     marginBottom: "5px",
                   }}
                 >
-                  Choose types of Email
+                  {t("Choose types of Email")}
                 </label>
                 <div
                   style={{ display: "flex", gap: "10px", alignItems: "center" }}
@@ -611,7 +613,7 @@ const Schedule = ({ onClose, openPopup } ) => {
                     rules={[
                       {
                         required: true,
-                        message: "Please select an email type",
+                        message: t("Please select an email type"),
                       },
                     ]}
                   >
@@ -634,13 +636,13 @@ const Schedule = ({ onClose, openPopup } ) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your email content",
+                      message: t("Please enter your email content"),
                     },
                   ]}
                 >
                   <TextArea
                     rows={4}
-                    placeholder="Enter your mail"
+                    placeholder= {t("Enter your mail")}
                     style={{
                       width: "759px",
                       height: "196px",

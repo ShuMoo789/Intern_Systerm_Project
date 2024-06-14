@@ -29,7 +29,6 @@ import NewProjectModal from "./NewProjectModal.jsx";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
 import Navigation from "../../components/Navigation/Navigation";
 import projectData from "../../data/ProjectMana.json";
-import dayjs from "dayjs";
 
 const groupButton = [
     {
@@ -54,6 +53,9 @@ const groupButton = [
     },
 ];
 
+import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
+
 const { Header, Content } = Layout;
 
 // function UserInfo({ name, role, avatarSrc }) {
@@ -71,25 +73,15 @@ const { Header, Content } = Layout;
 //     );
 // }
 
-function ProjectCard({
-    title,
-    status,
-    position,
-    technology,
-    leader,
-    subLeader,
-    mentor,
-    startDate,
-    releaseDate,
-    issues,
-    teamMembers,
-}) {
-    const optionSelect = [
-        { value: "inProcessed", label: "In process" },
-        { value: "completed", label: "Completed" },
-    ];
 
-    const formatDate = (date) => dayjs(date).format("DD MMM YYYY");
+function ProjectCard({ title, status, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues, teamMembers }) {
+    const {t} = useTranslation()
+    const optionSelect = [
+        { value: 'inProcessed', label: t('In process') },
+        { value: 'completed', label: t('Completed') },
+    ];
+    
+    const formatDate = (date) => dayjs(date).format('DD MMM YYYY');
 
     return (
         <Card
@@ -102,16 +94,11 @@ function ProjectCard({
                 </span>
             }
         >
+
+            <p><b>{t("Position")}: </b>{position}</p>
+            <p><b>{t("Technology")}: </b>{technology}</p>
             <p>
-                <b>Position: </b>
-                {position}
-            </p>
-            <p>
-                <b>Technology: </b>
-                {technology}
-            </p>
-            <p>
-                <b>Leader: </b>
+                <b>{t("Leader")}: </b>
                 <Tooltip title={leader.name}>
                     <Avatar
                         size="small"
@@ -121,7 +108,7 @@ function ProjectCard({
                 </Tooltip>
             </p>
             <p>
-                <b>Sub Leader: </b>
+                <b>{t("Sub Leader")}: </b>
                 <Tooltip title={subLeader.name}>
                     <Avatar
                         size="small"
@@ -131,7 +118,7 @@ function ProjectCard({
                 </Tooltip>
             </p>
             <p>
-                <b>Mentor: </b>
+                <b>{t("Mentor")}: </b>
                 <Tooltip title={mentor.name}>
                     <Avatar
                         size="small"
@@ -140,21 +127,12 @@ function ProjectCard({
                     />
                 </Tooltip>
             </p>
-            <p>
-                <b>
-                    Group Zalo:{" "}
-                    <a href="#" style={{ textDecoration: "underline" }}>
-                        Link
-                    </a>
-                </b>
-            </p>
+      </p>
+
+            <p><b>{t("Group Zalo")}: <a href="#" style={{textDecoration: "underline"}}>Link</a></b></p>
             <div className="project-deadline">
-                <p style={{ color: "#5DF400" }}>
-                    <b>Start Date: {formatDate(startDate)}</b>
-                </p>
-                <p style={{ color: "#D62222" }}>
-                    <b>Release Date: {formatDate(releaseDate)}</b>
-                </p>
+                <p style={{color: "#5DF400"}}><b>{t("Start Date")}: {formatDate(startDate)}</b></p>
+                <p style={{color: "#D62222"}}><b>{t("Release Date")}: {formatDate(releaseDate)}</b></p>
             </div>
             <div className="project-footer">
                 <Avatar.Group maxCount={4}>
@@ -165,8 +143,9 @@ function ProjectCard({
                     ))}
                 </Avatar.Group>
                 <div className="issues">
-                    <CopyOutlined style={{ color: "#5C5967" }} />
-                    {issues} issues
+
+                    <CopyOutlined style={{color: "#5C5967"}}/>
+                    {issues} {t("issues")}
                 </div>
             </div>
         </Card>
@@ -174,6 +153,7 @@ function ProjectCard({
 }
 
 function ProjectManagement() {
+    const {t} = useTranslation()
     const [openModal, setOpenModal] = useState(false);
     const [projects, setProjects] = useState([]);
     const [filteredProjects, setFilteredProjects] = useState([]);
@@ -274,7 +254,7 @@ function ProjectManagement() {
         <Layout className="project-management-section">
             <div>
                 <Navigation
-                    titleName="Project Management"
+                    titleName={t("Project Management")}
                     groupButton={groupButton}
                     onCreateIntern={handleOpenModal}
                 />
@@ -286,23 +266,23 @@ function ProjectManagement() {
                 <UserInfo name="Natalie Brogan" role="Admin" avatarSrc="user-avatar-url" />
             </header>
             <section className="content-section">
-                <h2 className="section-title">Search for Information</h2>
+                <h2 className="section-title">{t("Search for Information")}</h2>
                 <div className="button-group">
                     <button className="button button-export">
                         <FileExcelOutlined alt="Export Icon" className="button-icon" />
-                        <span>Export Excel</span>
+                        <span>{t("Export Excel")}</span>
                     </button>
                     <button className="button button-edit">
                         <EditOutlined alt="Edit Icon" className="button-icon" />
-                        <span>Edit</span>
+                        <span>{t("Edit")}</span>
                     </button>
                     <button className="button button-delete">
                         <DeleteOutlined alt="Delete Icon" className="button-icon" />
-                        <span>Delete</span>
+                        <span>{t("Delete")}</span>
                     </button>
                     <button className="button button-add-intern" onClick={handleOpenModal}>
                         <PlusOutlined alt="Add Intern Icon" className="button-icon" />
-                        <span>Add New Project</span>
+                        <span>{t("Add New Project")}</span>
                     </button>
                 </div>
             </section> */}
@@ -312,123 +292,79 @@ function ProjectManagement() {
                         <Col span={18}>
                             <Row gutter={[10, 10]}>
                                 <Col span={7}>
+
+                                <Select
+                                    showSearch
+                                    style={{ width: '100%' }}
+                                    placeholder={t("Enter Name of Project")}
+                                    value={selectedFilters.title || undefined}
+                                    onChange={(value) => handleFilterChange('title', value)}
+                                    options={projects.map(project => ({ value: project.title, label: project.title }))}
+                                />
+                            </Col>
+                                <Col span={7}>
                                     <Select
                                         showSearch
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Name of Project"
-                                        value={
-                                            selectedFilters.title || undefined
-                                        }
-                                        onChange={(value) =>
-                                            handleFilterChange("title", value)
-                                        }
-                                        options={projects.map((project) => ({
-                                            value: project.title,
-                                            label: project.title,
-                                        }))}
+                                        style={{ width: '100%' }}
+                                        placeholder={t("Enter Position")}
+                                        value={selectedFilters.position || undefined}
+                                        onChange={(value) => handleFilterChange('position', value)}
+                                        options={projects.map(project => ({ value: project.position, label: project.position }))}
+
                                     />
                                 </Col>
                                 <Col span={7}>
                                     <Select
                                         showSearch
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Position"
-                                        value={
-                                            selectedFilters.position ||
-                                            undefined
-                                        }
-                                        onChange={(value) =>
-                                            handleFilterChange(
-                                                "position",
-                                                value
-                                            )
-                                        }
-                                        options={projects.map((project) => ({
-                                            value: project.position,
-                                            label: project.position,
-                                        }))}
+                                        style={{ width: '100%' }}
+                                        placeholder={t("Enter Technology")}
+                                        value={selectedFilters.technology || undefined}
+                                        onChange={(value) => handleFilterChange('technology', value)}
+                                        options={projects.map(project => ({ value: project.technology, label: project.technology }))}
                                     />
                                 </Col>
                                 <Col span={7}>
                                     <Select
                                         showSearch
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Technology"
-                                        value={
-                                            selectedFilters.technology ||
-                                            undefined
-                                        }
-                                        onChange={(value) =>
-                                            handleFilterChange(
-                                                "technology",
-                                                value
-                                            )
-                                        }
-                                        options={projects.map((project) => ({
-                                            value: project.technology,
-                                            label: project.technology,
-                                        }))}
+
+                                        style={{ width: '100%' }}
+                                        placeholder={t("Enter Leader")}
+                                        value={selectedFilters.leader || undefined}
+                                        onChange={(value) => handleFilterChange('leader', value)}
+                                        options={projects.map(project => ({ value: project.leader.name, label: project.leader.name }))}
+
                                     />
                                 </Col>
                                 <Col span={7}>
                                     <Select
                                         showSearch
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Leader"
-                                        value={
-                                            selectedFilters.leader || undefined
-                                        }
-                                        onChange={(value) =>
-                                            handleFilterChange("leader", value)
-                                        }
-                                        options={projects.map((project) => ({
-                                            value: project.leader.name,
-                                            label: project.leader.name,
-                                        }))}
+
+                                        style={{ width: '100%' }}
+                                        placeholder={t("Enter Sub Leader")}
+                                        value={selectedFilters.subLeader || undefined}
+                                        onChange={(value) => handleFilterChange('subLeader', value)}
+                                        options={projects.map(project => ({ value: project.subLeader.name, label: project.subLeader.name }))}
+
                                     />
                                 </Col>
                                 <Col span={7}>
                                     <Select
                                         showSearch
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Sub Leader"
-                                        value={
-                                            selectedFilters.subLeader ||
-                                            undefined
-                                        }
-                                        onChange={(value) =>
-                                            handleFilterChange(
-                                                "subLeader",
-                                                value
-                                            )
-                                        }
-                                        options={projects.map((project) => ({
-                                            value: project.subLeader.name,
-                                            label: project.subLeader.name,
-                                        }))}
-                                    />
-                                </Col>
-                                <Col span={7}>
-                                    <Select
-                                        showSearch
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Mentor"
-                                        value={
-                                            selectedFilters.mentor || undefined
-                                        }
-                                        onChange={(value) =>
-                                            handleFilterChange("mentor", value)
-                                        }
-                                        options={projects.map((project) => ({
-                                            value: project.mentor.name,
-                                            label: project.mentor.name,
-                                        }))}
+
+                                        style={{ width: '100%' }}
+                                        placeholder={t("Enter Mentor")}
+                                        value={selectedFilters.mentor || undefined}
+                                        onChange={(value) => handleFilterChange('mentor', value)}
+                                        options={projects.map(project => ({ value: project.mentor.name, label: project.mentor.name }))}
+
                                     />
                                 </Col>
                                 <Col span={7}>
                                     <DatePicker
-                                        style={{ width: "100%" }}
-                                        placeholder="Enter Release Date"
+
+                                        style={{ width: '100%' }}
+                                        placeholder={t("Enter Release Date")}
+
                                         value={selectedFilters.releaseDate}
                                         onChange={(date) =>
                                             handleFilterChange(
@@ -443,25 +379,13 @@ function ProjectManagement() {
                         <Col span={4}>
                             <Col span={6}>
                                 <div className="filterbuttons">
+
+                                <Form.Item>
+                                    <Button type="primary" icon={<DeleteOutlined />} className="clean-filters-button" onClick={handleClearFilters}>{t("Clean Filter")}</Button>
+                                </Form.Item>
                                     <Form.Item>
-                                        <Button
-                                            type="primary"
-                                            icon={<DeleteOutlined />}
-                                            className="clean-filters-button"
-                                            onClick={handleClearFilters}
-                                        >
-                                            Clean Filters
-                                        </Button>
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Button
-                                            type="primary"
-                                            icon={<SearchOutlined />}
-                                            className="searchpm-button"
-                                            onClick={handleSearch}
-                                        >
-                                            Search
-                                        </Button>
+                                        <Button type="primary" icon={<SearchOutlined />} className="searchpm-button" onClick={handleSearch}>{t("Search")}</Button>
+
                                     </Form.Item>
                                 </div>
                             </Col>
