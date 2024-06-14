@@ -1,0 +1,41 @@
+/* EmojiPickerCustom.css */
+/* Loại bỏ phần tiêu đề "☝️ Pick an emoji…" */
+.emoji-mart .emoji-mart-anchor {
+    display: none !important;
+  }
+  .emoji-mart {
+    background-color: white !important;
+  }
+  .chat-input-container {
+    display: flex;
+    background-color: #eeeeee;
+    border: 1px 1px 1px 1px solid rgb(191, 191, 191);
+    height: 60px;
+    align-items: center;
+    gap: 15px;
+  }
+  .chat-input-container-top{
+    border-radius: 0px 0px 0px 0px;
+  }
+  
+/* styles.css */
+.chat-input {
+  
+  flex: 1;
+  font-size: large;
+  margin-bottom: 40px;
+  background-color: #eeeeee;
+  border-radius: 0;
+  height: 60px;
+  border-top: 1px solid rgb(191, 191, 191);
+  border-bottom: 1px solid rgb(191, 191, 191);
+  
+  padding-left: 25px;
+}
+.chat-input-bottom {
+  
+  border-radius: 0px 0px 20px 20px;
+}
+.icon{
+  font-size: xx-large
+}

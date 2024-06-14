@@ -12,32 +12,33 @@ import { Col, Row, Input, Typography } from "antd";
 import MainLayout from "../../../MainLayout/MainLayout";
 import Navigation from "../../../components/Navigation/Navigation";
 import MyComponent from "../../SelectFilter/SelectFilter";
-
+import { useTranslation } from "react-i18next";
 const GroupZaloManagement = () => {
+    const {t} = useTranslation()
     const groupButton = [
         {
             color: "#6537B1",
-            name: "Schedule interview",
+            name: t("Schedule interview"),
             icon: <ClockCircleOutlined />,
         },
         {
             color: "#41B137",
-            name: "Export Excel",
+            name: t("Export Excel"),
             icon: <ExportOutlined />,
         },
         {
             color: "#FB8632",
-            name: "Edit",
+            name: t("Edit"),
             icon: <EditOutlined />,
         },
         {
             color: "#FF3A2E",
-            name: "Delete",
+            name: t("Delete"),
             icon: <DeleteOutlined />,
         },
         {
             color: "#4889E9",
-            name: "Add New Intern",
+            name: t("Add New Intern"),
             icon: <FolderAddOutlined />,
         },
     ];
@@ -47,7 +48,7 @@ const GroupZaloManagement = () => {
         <>
             <MainLayout>
                 <Navigation
-                    titleName="Group Zalo Management"
+                    titleName={t("Group Zalo Management")}
                     groupButton={groupButton}
                     onSendEmail={handleOpenCreateGroup}
                 />

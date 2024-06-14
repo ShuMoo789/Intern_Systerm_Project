@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
-import { DatePicker, TimePicker, Button, Modal } from 'antd';
-import { ClockCircleOutlined } from '@ant-design/icons';
+
+import React, { useState } from "react";
+import { DatePicker, TimePicker, Button, Modal } from "antd";
+import { ClockCircleOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+
 
 const ViewButton = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
-  const [timeDuration, setTimeDuration] = useState('15 minutes');
+
+  const [timeDuration, setTimeDuration] = useState("15 minutes");
+  const {t} = useTranslation()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,14 +47,24 @@ const ViewButton = () => {
 
   return (
     <>
-      <div className="view" onClick={showModal}>
-        View
-      </div>
+
+      <Button
+        type="primary"
+        onClick={showModal}
+        style={{
+          background: "white",
+          color: "blue",
+          border: "1px solid blue",
+          borderRadius: "15px",
+        }}
+      >
+        {t("View")}
+      </Button>
 
 
       <Modal
         open={open}
-        title="Schedule interview for Intern's ID: xxxx"
+        title={t("Schedule interview for Intern's ID: xxxx")}
         onOk={handleOk}
         onCancel={handleCancel}
         width={1125}
@@ -58,10 +73,23 @@ const ViewButton = () => {
         ]}
       >
         <form onSubmit={handleSubmit}>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Intern ID</label>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Intern ID")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -86,8 +114,16 @@ const ViewButton = () => {
 
             </div>
 
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Full Name</label>
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Full Name")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -109,8 +145,16 @@ const ViewButton = () => {
                 Ester Eden
               </div>
             </div>
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Date Of Birth</label>
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Date Of Birth")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -133,10 +177,23 @@ const ViewButton = () => {
               </div>
             </div>
           </div>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Phone Number</label>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Phone Number")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -159,8 +216,16 @@ const ViewButton = () => {
               </div>
             </div>
 
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Position</label>
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Position")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -179,11 +244,19 @@ const ViewButton = () => {
                   textAlign: 'left', // Ensure text alignment is left
                 }}
               >
-                Back-End
+                {t("Back-End")}
               </div>
             </div>
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>School</label>
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("School")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -202,14 +275,28 @@ const ViewButton = () => {
                   textAlign: 'left', // Ensure text alignment is left
                 }}
               >
-                FPT UNIVERISY
+                {t("FPT University")}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Adress</label>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Adress")}
+              </label>
               <div
                 type="text"
                 value={date}
@@ -228,7 +315,7 @@ const ViewButton = () => {
                   textAlign: 'left', // Ensure text alignment is left
                 }}
               >
-                District 9
+                {t("District 9")}
               </div>
             </div>
 
@@ -279,8 +366,16 @@ const ViewButton = () => {
               </div>
             </div>
           </div>
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Rank</label>
+          <div style={{ marginBottom: "20px" }}>
+            <label
+              style={{
+                display: "block",
+                fontWeight: "bold",
+                marginBottom: "5px",
+              }}
+            >
+              {t("Rank")}
+            </label>
             <div
               type="text"
               value={date}
@@ -299,7 +394,7 @@ const ViewButton = () => {
                 textAlign: 'left', // Ensure text alignment is left
               }}
             >
-              Intern
+              {t("Intern")}
             </div>
           </div>
 

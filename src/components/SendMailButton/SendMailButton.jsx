@@ -1,40 +1,41 @@
-import React, { useState } from 'react';
-import { Modal, Select, Input, Button } from 'antd';
-import { MailOutlined } from '@ant-design/icons';
-import { Typography, Row, Col, Form, message} from "antd";
+import React, { useState } from "react";
+import { Modal, Select, Input, Button } from "antd";
+import { MailOutlined } from "@ant-design/icons";
+import { Typography, Row, Col, Form, message } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import './SendMailButton.css'
+import "./SendMailButton.css";
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 const SendEmailPopup = ({ onClose, openPopup }) => {
-
-    const [emailType, setEmailType] = useState('');
-    const [emailContent, setEmailContent] = useState('');
-    const [loadings, setLoadings] = useState([]);
-    const [value, setValue] = useState("");
-    const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+  const [emailType, setEmailType] = useState("");
+  const [emailContent, setEmailContent] = useState("");
+  const [loadings, setLoadings] = useState([]);
+  const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false);
 
   const [form] = Form.useForm();
 
-
   const handleOk = () => {
-    form.validateFields()
-      .then(values => {
-        console.log('Received values:', values);
+    form
+      .validateFields()
+      .then((values) => {
+        console.log("Received values:", values);
         // Handle form submission
-        onClose()
+        onClose();
         form.resetFields();
       })
-      .catch(info => {
-        console.log('Validate Failed:', info);
+      .catch((info) => {
+        console.log("Validate Failed:", info);
       });
   };
 
   // Hàm được gọi khi muốn ẩn modal
   const handleCancel = () => {
-    onClose()
+    onClose();
     form.resetFields();
   };
 
@@ -48,7 +49,7 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
       setLoadings((prevLoadings) => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
-        handleOk()
+        handleOk();
         return newLoadings;
       });
     }, 1000);
@@ -59,21 +60,23 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
   };
 
   const email_types = [
-    "Email interview",
-    "Email result",
-    "Internship Information"
-  ]
+    t("Email interview"),
+    t("Email result"),
+    t("Internship Information"),
+  ];
 
   return (
     <Modal
-      className='sendMail-modal'
+      className="sendMail-modal"
       centered
-      title="Send Email"
+      title={t("Send Email")}
       open={openPopup}
       onCancel={handleCancel}
-      okText='Sendmail'
+      okText="Sendmail"
       okButtonProps={{
-        disabled: !form.isFieldsTouched(true) || form.getFieldsError().filter(({ errors }) => errors.length).length
+        disabled:
+          !form.isFieldsTouched(true) ||
+          form.getFieldsError().filter(({ errors }) => errors.length).length,
       }}
       destroyOnClose={true}
       // Tạo nút sendmail khi modal xuất hiện
@@ -87,72 +90,61 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
           loading={loadings[1] || false}
           onClick={() => enterLoading(1)}
         >
-          Send Email
+          {t("Send Email")}
         </Button>,
       ]}
-      width={1125}>
+      width={1125}
+    >
       <Typography.Paragraph className="desc">
-        Choose types of Email
+        {t("Choose types of Email")}
       </Typography.Paragraph>
       <Row gutter={16}>
         <Col span={7}>
           {/* chọn loại email */}
-          <Form
-            form={form}
-            layout="vertical"
-            name="select-form"
-          >
+          <Form form={form} layout="vertical" name="select-form">
             <Form.Item
               name="select"
-              rules={[{ required: true, message: 'Please select type of Email!' }]}
+              rules={[
+                { required: true, message: t("Please select type of Email!") },
+              ]}
             >
               <Select
-                className='type-email'
-                placeholder="Types of email"
+                className="type-email"
+                placeholder={t("Types of email")}
                 value={emailType}
                 onDropdownVisibleChange={handleDropdownVisibleChange}
                 suffixIcon={open ? <UpOutlined /> : <DownOutlined />}
               >
                 {email_types.map((type, index) => {
-                  return <Option key={index} value={type}
-                  ></Option>
-
+                  return <Option key={index} value={type}></Option>;
                 })}
               </Select>
             </Form.Item>
-
           </Form>
         </Col>
         <Col span={17}>
           {/* Khung text gửi mail */}
-          <Form
-            form={form}
-            layout="vertical"
-            name="text-form"
-          >
+          <Form form={form} layout="vertical" name="text-form">
             <Form.Item
               name="text-email"
-              rules={[{ required: true, message: 'Please enter your mail!' }]}
+              rules={[{ required: true, message: "Please enter your mail!" }]}
             >
               <TextArea
                 className="textarea"
                 value={emailContent}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder="Enter your mail..."
+                placeholder={t("Enter your mail...")}
                 autoSize={{
                   minRows: 6,
                   maxRows: 6,
                 }}
-              >
-              </TextArea>
+              ></TextArea>
             </Form.Item>
           </Form>
-
         </Col>
       </Row>
     </Modal>
   );
-
 };
 
 export default SendEmailPopup;

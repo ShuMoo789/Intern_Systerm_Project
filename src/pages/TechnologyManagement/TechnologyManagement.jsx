@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import './TechnologyManagement.css'
-import MainLayout from '../../MainLayout/MainLayout'
+import React, { useState } from "react";
+import "./TechnologyManagement.css";
+import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
 import TechNavigation from "../../components/TechNavigation/TechNavigation";
 import TechnologyList from "../../components/TechnologyList/TechnologyList";
@@ -38,13 +38,10 @@ const groupButton = [
   },
 ];
 
-
-
-
 const TechnologyManagement = () => {
-  const viewPort = useViewport()
-  const isMobile = viewPort.width <= 1024
-  const [activeTab, setActiveTab] = useState('Back-End');
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
+  const [activeTab, setActiveTab] = useState("Back-End");
 
   // Hàm xử lý khi chuyển tab
   const handleTabClick = (tab) => {
@@ -60,15 +57,22 @@ const TechnologyManagement = () => {
               TECHNOLOGY MANAGEMENT
             </div>
             {/* if mobile, width of AccountSetting will change */}
-            {!isMobile ? (<div className="account-setting-technology-management">
-              <AccountSetting />
-            </div>) : (<div className="account-setting-technology-management-mobile">
-              <AccountSetting />
-            </div>)}
+            {!isMobile ? (
+              <div className="account-setting-technology-management">
+                <AccountSetting />
+              </div>
+            ) : (
+              <div className="account-setting-technology-management-mobile">
+                <AccountSetting />
+              </div>
+            )}
           </div>
           <div className="navigation-technology-management">
             <div className="nav-container" style={{ paddingLeft: 30 }}>
-              <TechNavigation activeTab={activeTab} onTabClick={handleTabClick} />
+              <TechNavigation
+                activeTab={activeTab}
+                onTabClick={handleTabClick}
+              />
             </div>
           </div>
         </div>
@@ -84,7 +88,7 @@ const TechnologyManagement = () => {
         </div>
       </div>
     </MainLayout>
-  )
-}
+  );
+};
 
-export default TechnologyManagement
+export default TechnologyManagement;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useTransition } from "react";
 
 
 import "./MenuNavigate.css";
@@ -58,15 +58,26 @@ const TechnologyIcon = (props) => <Icon component={TechnologySvg} {...props} />;
 
 
 const MenuNavigate = ({ buttonClick }) => {
+    const { i18n,t } = useTranslation();
     // When width of page <= 1024 it will return true for isMobile variable
     const viewPort = useViewport()
     const isMobile = viewPort.width <= 1024
     const navigate = useNavigate()
 
     // When clicking on the menu, it will redirect to the corresponding link
+    const [languageLabel, setLanguageLabel] = useState(t('Language'));
+
+  useEffect(() => {
+    if (i18n.language === 'vi') {
+      setLanguageLabel('Tiếng Việt');
+    } else if (i18n.language === 'en') {
+      setLanguageLabel('English');
+    }
+  }, [i18n.language]);
     const onClick = (value) => {
         if(value.key == 'vi' || value.key == 'en'){
             // xử lí chuyển ngôn ngữ khi click ở đây
+            i18n.changeLanguage(value.key)
             console.log(value.key);
         }
         else {
@@ -83,7 +94,7 @@ const MenuNavigate = ({ buttonClick }) => {
     };
 
     const { useToken } = theme;
-    const { i18n } = useTranslation();
+    
     const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
     const getCurrentLang = () => i18n.language;
     useEffect(() => {
@@ -91,127 +102,90 @@ const MenuNavigate = ({ buttonClick }) => {
     }, [i18n.language]);
 
     const handleLanguageChange = (language) => {
-        i18n.changeLanguage(language);
-        setSelectedLanguage(language);
+        if (i18n.language !== language) {
+            i18n.changeLanguage(language);
+          }
     };
 
     const items = [
         {
             key: 'dashBoard',
-            label: 'Dashboard',
+            label: t('Dashboard'),
             icon: <AppstoreOutlined />,
         },
         {
             key: 'cvManagement',
-            label: 'CV Management',
+            label: t('CV Management'),
             icon: <AuditOutlined />,
             children: [
                 {
                     key: 'approveCV',
-                    label: 'Approve CV',
+                    label: t('Approve CV'),
                 },
                 {
                     key: 'confirmCV',
-                    label: 'Confirm CV',
+                    label: t('Confirm CV'),
                 },
             ],
         },
         {
             key: 'listManagement',
-            label: 'List Management',
+            label: t('List Management'),
             icon: <TeamOutlined />,
             children: [
                 {
                     key: 'internList',
-                    label: 'Intern list',
+                    label: t('Intern list'),
                 },
                 {
                     key: 'groupList',
-                    label: 'Group list',
+                    label: t('Group list'),
                 },
             ],
         },
         {
             key: 'projectManagement',
-            label: 'Project Management',
+            label: t('Project Management'),
             icon: <ProjectOutlined />,
         },
         {
             key: 'positionManagement',
-            label: 'Position Management',
+            label: t('Position Management'),
             icon: <PositionIcon />,
         },
         {
             key: 'technologyManagement',
-            label: 'Technology Management',
+            label: t('Technology Management'),
             icon: <TechnologyIcon />,
         },
         {
             key: 'groupZaloManagement',
-            label: 'Group Zalo Management',
+            label: t('Group Zalo Management'),
             icon: <ZaloIcon />,
         },
         {
             key: 'settings',
-            label: 'Settings',
+            label: t('Settings'),
             icon: <SettingOutlined />,
         },
         {
             key: 'language',
-            label: 'Language' ,
+            label: languageLabel ,
             icon: <GlobalOutlined />,
             children: [
                 {
                     key: 'vi',
-                    label: 'Việt Nam',
+                    label: 'Tiếng Việt',
+                    
                 },
                 {
                     key: 'en',
                     label: 'English',
+                    
                 },
             ],
         }
     ];
-
-    const itemsLanguage = [
-        {
-            key: '1',
-            label: (
-                <button onClick={(e) => handleLanguageChange(e.target.value)}>
-                    <option value="en">English</option>
-                </button>
-            ),
-        },
-        {
-            key: '2',
-            label: (
-                <button onClick={(e) => handleLanguageChange(e.target.value)}>
-                    <option value="vi">Tiếng Việt</option>
-                </button>
-            ),
-
-        },
-
-    ];
-    const { token } = useToken();
-    const contentStyle = {
-        backgroundColor: token.colorBgElevated,
-        borderRadius: token.borderRadiusLG,
-        boxShadow: token.boxShadowSecondary,
-    };
-    const menuStyle = {
-        boxShadow: 'none',
-    };
-    const languageData = {
-        en: {
-            flag: "https://cdn.builder.io/api/v1/image/assets/TEMP/ed3550ad056d60b4375fcbb86733c2b3eb54425ccccc2358fcad0c028c501dc1?apiKey=41832340d6f545c2a0509736ad9e1693&",
-            abbreviation: "EN",
-        },
-        vi: {
-            flag: "https://th.bing.com/th/id/R.751d701d99ca9f36a2ec10d886db35bb?rik=wL0QNJdgvG%2fQsQ&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f25700000%2fvietnamese-flag-vietnamese-places_mina_kimngan-25790392-1024-768.jpg&ehk=Ul%2fE21vkUUol5RlgNc%2b1OZxq5%2fHqVQmwnw42bVUaACU%3d&risl=&pid=ImgRaw&r=0",
-            abbreviation: "VI",
-        },
-    };
 
     return (
         <div className="menu">

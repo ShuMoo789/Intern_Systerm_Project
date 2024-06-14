@@ -1,534 +1,671 @@
 import React, { useState, useEffect } from "react";
 import {
-
-    DatePicker,
-    Button,
-    Modal,
-    TimePicker,
-    Input,
-    Select,
-    message,
-
-  
+  DatePicker,
+  Button,
+  Modal,
+  TimePicker,
+  Input,
+  Select,
+  message,
+  Form,
 } from "antd";
-
 import { ClockCircleOutlined } from "@ant-design/icons";
+import { Toaster, toast } from "react-hot-toast";
 import "./Schedule.css";
-
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 const { TextArea } = Input;
 
+// Options for various dropdowns
 const optionsDuration = [
-
-    { value: "15 minutes", label: "15 minutes" },
-    { value: "30 minutes", label: "30 minutes" },
-    { value: "45 minutes", label: "45 minutes" },
-    { value: "1 hour", label: "1 hour" },
+  { value: "15 minutes", label: t("15 minutes") },
+  { value: "30 minutes", label: t("30 minutes") },
+  { value: "45 minutes", label: t("45 minutes") },
+  { value: "1 hour", label: t("1 hour") },
 ];
 
 const optionsInterviewType = [
-    { value: "Online", label: "Online" },
-    { value: "Offline", label: "Offline" },
+  { value: "Online", label: "Online" },
+  { value: "Offline", label: "Offline" },
 ];
 
 const optionsInterviewer = [
-    { value: "Nguyen Van A", label: "Nguyen Van A" },
-    { value: "Interviewer B", label: "Interviewer B" },
-    { value: "Interviewer C", label: "Interviewer C" },
+  { value: "Nguyen Van A", label: "Nguyen Van A" },
+  { value: "Interviewer B", label: "Interviewer B" },
+  { value: "Interviewer C", label: "Interviewer C" },
 ];
 
 const optionsRank = [
-    {
-        value: "Intern/Senior/Junior",
-        label: "Intern/Senior/Junior",
-        disabled: true,
-    },
-    { value: "Intern", label: "Intern" },
-    { value: "Senior", label: "Senior" },
-    { value: "Junior", label: "Junior" },
+  {
+    value: "Intern/Senior/Junior",
+    label: "Intern/Senior/Junior",
+    disabled: true,
+  },
+  { value: "Intern", label: "Intern" },
+  { value: "Senior", label: "Senior" },
+  { value: "Junior", label: "Junior" },
 ];
 
 const optionsPositions = [
-    { value: "Positions", label: "Positions", disabled: true },
-    { value: "Back-End", label: "Back-End" },
-    { value: "Front-End", label: "Front-End" },
-    { value: "BA", label: "BA" },
+  { value: "Back-End", label: "Back-End" },
+  { value: "Front-End", label: "Front-End" },
+  { value: "BA", label: "BA" },
 ];
 const optionsEmailType = [
-    { value: "Types of email", label: "Types of email", disabled: true },
-    { value: "Email interview", label: "Email interview" },
-    { value: "Email result", label: "Email result" },
-    { value: "Internship information", label: "Internship information" },
+  { value: "Types of email", label: t("Types of email"), disabled: true },
+  { value: "Email interview", label: t("Email interview") },
+  { value: "Email result", label: t("Email result") },
+  { value: "Internship information", label: t("Internship information") },
 ];
 
 const Sheldule = () => {
-    const [open, setOpen] = useState(false);
-    const [loadings, setLoadings] = useState([false]);
-    const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
-    const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
-    const [interviewer, setInterviewer] = useState(optionsInterviewer[0]);
-    const [emailType, setEmailType] = useState(optionsEmailType[0]);
-    const [rank, setRank] = useState(optionsRank[0]);
-    const [position, setPosition] = useState(optionsPositions[0]);
+  const { t } = useTranslation();
+  const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
+  const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
+  const [interviewer, setInterviewer] = useState(optionsInterviewer[0]);
+  const [emailType, setEmailType] = useState(optionsEmailType[0]);
+  const [rank, setRank] = useState(optionsRank[0]);
+  const [position, setPosition] = useState(optionsPositions[0]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission
-    };
-    const showModal = () => {
-        setOpen(true);
-    };
+  const [loadings, setLoadings] = useState([false]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
 
-    const handleOk = () => {
-        setOpen(false);
-    };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
-    const handleCancel = () => {
-        setOpen(false);
-    };
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields();
+      console.log("Received values:", values);
+      // Handle form submission
+      setIsModalOpen(false);
+      form.resetFields();
+      message.success("Send Mail Success");
+    } catch (error) {
+      console.log("Validate Failed:", error);
+    }
+  };
 
-    const onChange = (date, dateString) => {
-        // Handle the date change here
-        console.log(date, dateString);
-    };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+  };
 
-    const enterLoading = (index) => {
+  const onChange = (date, dateString) => {
+    // Handle the date change here
+    console.log(date, dateString);
+  };
+
+  // hàm tạo hiệu ứng loading khi người dùng bấm vào nút send email
+  const enterLoading = async (index) => {
+    try {
+      await handleOk();
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = true;
+        return newLoadings;
+      });
+      setTimeout(() => {
         setLoadings((prevLoadings) => {
-            const newLoadings = [...prevLoadings];
-            newLoadings[index] = true;
-            return newLoadings;
+          const newLoadings = [...prevLoadings];
+          newLoadings[index] = false;
+          return newLoadings;
         });
-        setTimeout(() => {
-            setLoadings((prevLoadings) => {
-                const newLoadings = [...prevLoadings];
-                newLoadings[index] = false;
-                message.success("Send Mail Success");
-                handleOk();
-                return newLoadings;
-            });
-        }, 1000);
-    };
+      }, 1000);
+    } catch (error) {
+      console.log("Failed to submit:", error);
+    }
+  };
+  return (
+    <>
+      <Button
+        type="primary"
+        onClick={showModal}
+        style={{ background: "#7d3c98" }}
+      >
+        <ClockCircleOutlined />
+        {t("Schedule interview")}
+      </Button>
 
-    return (
-        <>
-            <Button
-                type="primary"
-                onClick={showModal}
-                style={{ background: "#7d3c98" }}
+      <Modal
+        title={t("Schedule interview for Intern's ID: xxxx")}
+        open={isModalOpen}
+        onCancel={handleCancel}
+        okButtonProps={{
+          disabled:
+            !form.isFieldsTouched(true) ||
+            form.getFieldsError().filter(({ errors }) => errors.length).length,
+        }}
+        destroyOnClose={true}
+        width={1125}
+        height={997}
+        footer={[
+          <Button
+            key="submit"
+            type="primary"
+            icon={<ClockCircleOutlined />}
+            style={{ background: "#6537B1" }}
+            loading={loadings[1] || false}
+            onClick={() => enterLoading(1)}
+          >
+            {t("Set Schedule")}
+          </Button>,
+
+          <Toaster />,
+        ]}
+      >
+        <Form form={form} layout="vertical">
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* DATE picker */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
             >
-                <ClockCircleOutlined />
-                Schedule interview
-            </Button>
+              <div
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Date")}
+              </div>
 
-            <Modal
-                open={open}
-                title="Schedule interview for Intern's ID: xxxx"
-                onOk={handleOk}
-                onCancel={handleCancel}
-                width={1125}
-                height={997}
-                footer={[
-                    <Button
-                        key="submit"
-                        type="primary"
-                        icon={<ClockCircleOutlined />}
-                        style={{ background: "#6537B1" }}
-                        loading={loadings[1] || false}
-                        onClick={() => enterLoading(1)}
-                    >
-                        Set Schedule
-                    </Button>,
+              <Form.Item
+                name="date"
+                rules={[{ required: true, message: t("Please select a date") }]}
+              >
+                <DatePicker
+                  format={{
+                    format: "YYYY-MM-DD",
+                    type: "mask",
+                  }}
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                    borderRadius: "15px",
+                    padding: "8px",
+                    border: "1px solid #ccc",
+                    boxSizing: "border-box",
+                    fontSize: "14px",
+                  }}
+                />
+              </Form.Item>
+            </div>
+            {/* START TIME */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Start Time")}
+              </label>
+
+              <Form.Item
+                name="startTime"
+                rules={[
+                  { required: true, message: t("Please select a start time") },
                 ]}
+              >
+                <TimePicker
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                    padding: "8px",
+                    border: "1px solid #ccc",
+                    borderRadius: "15px",
+                  }}
+                  use12Hours
+                  onChange={onChange}
+                />
+              </Form.Item>
+            </div>
+
+            {/* TIME DURATION */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
             >
-                <form onSubmit={handleSubmit}>
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <div
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Date
-                            </div>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Time Duration")}
+              </label>
 
-                            <DatePicker
-                                format={{
-                                    format: "YYYY-MM-DD",
-                                    type: "mask",
-                                }}
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                    padding: "8px",
-                                    border: "1px solid #ccc",
+              <Form.Item
+                name="timeDuration"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please select a time duration"),
+                  },
+                ]}
+              >
+                <Select
+                  value={timeDuration}
+                  onChange={setTimeDuration}
+                  options={optionsDuration}
+                  style={{
+                    width: "330px",
+                    height: "57px", // ...
 
-                                    boxSizing: "border-box", // Add this line
-                                    fontSize: "14px", // Adjust font size if needed
-                                }}
-                            />
-                        </div>
+                    opacity: 0.5,
+                    font: "bold",
+                  }}
+                />
+              </Form.Item>
+            </div>
+          </div>
 
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Start Time
-                            </label>
+          {/* ROW 2 */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* TYPE OF interview */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Types of Interviews
+              </label>
 
-                            <TimePicker
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                    padding: "8px",
-                                    border: "1px solid #ccc",
-                                }}
-                                use12Hours
-                                onChange={onChange}
-                            />
-                        </div>
-                        {/* TIME DURATION */}
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Time Duration
-                            </label>
+              <Form.Item
+                name="interviewType"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please select an interview type"),
+                  },
+                ]}
+              >
+                <Select
+                  value={interviewType}
+                  onChange={setInterviewType}
+                  options={optionsInterviewType}
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                  }}
+                />
+              </Form.Item>
+            </div>
 
-                            <Select
-                                value={timeDuration}
-                                onChange={setTimeDuration}
-                                options={optionsDuration}
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                    opacity: 0.5,
-                                    font: "bold",
-                                }}
-                            />
-                        </div>
-                    </div>
+            {/* INTERVIEWER */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Interviewer")}
+              </label>
 
-                    {/* SECOND ROUND */}
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Types of Interviews
-                            </label>
+              <Select
+                className="position-select"
+                style={{
+                  position: "absolute",
+                  width: "122px",
+                  height: "57px",
+                  textAlign: "center",
+                  textAlignLast: "center",
+                  zIndex: 2,
+                }}
+                value={position}
+                onChange={setPosition}
+                options={optionsPositions}
+              />
 
-                            <Select
-                                value={interviewType}
-                                onChange={setInterviewType}
-                                options={optionsInterviewType}
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                }}
-                            />
-                        </div>
+              <Form.Item
+                name="interviewer"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please select an interviewer"),
+                  },
+                ]}
+              >
+                <Select
+                  value={interviewer}
+                  onChange={setInterviewer}
+                  options={optionsInterviewer}
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                    textAlign: "right",
+                    textAlignLast: "right",
+                  }}
+                />
+              </Form.Item>
+            </div>
 
-                        {/* INTERVIEWER */}
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Interviewer
-                            </label>
+            {/* LINK GOOGLE MEET */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Link Google Meet/Address")}
+              </label>
+              <Form.Item
+                name="link"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please enter a link or address"),
+                  },
+                ]}
+              >
+                <Input
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                    borderRadius: "15px",
+                  }}
+                />
+              </Form.Item>
+            </div>
+          </div>
 
-                            <Select
-                                className="position-select"
-                                style={{
-                                    position: "absolute",
-                                    width: "122px",
-                                    height: "57px",
+          {/* ROW 3  SEND EMAIL */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Send Email")}
+              </label>
 
-                                    textAlign: "center",
-                                    textAlignLast: "center",
-                                    zIndex: 2,
-                                }}
-                                value={position}
-                                onChange={setPosition}
-                                options={optionsPositions}
-                            ></Select>
-                            <Select
-                                value={interviewer}
-                                onChange={setInterviewer}
-                                options={optionsInterviewer}
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
+              <Form.Item
+                name="sendEmail"
+                rules={[
+                  { required: true, message: t("Please select an email type") },
+                ]}
+              >
+                <Select
+                  value={emailType}
+                  onChange={setEmailType}
+                  options={optionsEmailType}
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                  }}
+                />
+              </Form.Item>
+            </div>
 
-                                    textAlign: "right",
-                                    textAlignLast: "right",
-                                }}
-                            />
-                        </div>
+            {/* RANK */}
+            <div
+              style={{
+                flex: "0 0 33.33%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Rank")}
+              </label>
+              <Form.Item
+                name="rank"
+                rules={[{ required: true, message: t("Please select a rank") }]}
+              >
+                <Select
+                  value={rank}
+                  onChange={setRank}
+                  options={optionsRank}
+                  style={{
+                    width: "330px",
+                    height: "57px",
+                  }}
+                />
+              </Form.Item>
+            </div>
+          </div>
 
-                        {/* LINK GOOGLE MEET */}
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Link Google Meet/Address
-                            </label>
-                            <Input
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                }}
-                            />
-                        </div>
-                    </div>
+          {/* ROW 4 : to and bcc */}
 
-                    {/* SEND EMAIL */}
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Send Email
-                            </label>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* TO email andress */}
+            <div
+              style={{
+                flex: "0 50%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("To")}:
+              </label>
+              <Form.Item
+                name="to"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please enter a 'To' email address"),
+                  },
+                  {
+                    type: "email",
+                    message: t("Please enter a valid email address"),
+                  },
+                ]}
+              >
+                <Input
+                  type="email"
+                  style={{
+                    width: "510px",
+                    height: "57px",
+                    padding: "8px",
+                    border: "1px solid #ccc",
+                    borderRadius: "15px",
+                  }}
+                />
+              </Form.Item>
+            </div>
 
-                            <Select
-                                value={interviewType}
-                                onChange={setInterviewType}
-                                options={optionsInterviewType}
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                }}
-                            />
-                        </div>
+            {/* BCC address */}
+            <div
+              style={{
+                flex: "0 50%",
+                boxSizing: "border-box",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Bcc:
+              </label>
+              <Form.Item
+                name="BCC"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please enter a 'Bcc' email address"),
+                  },
+                  {
+                    type: "email",
+                    message: t("Please enter a valid email address"),
+                  },
+                ]}
+              >
+                <Input
+                  type="email"
+                  style={{
+                    width: "510px",
+                    height: "57px",
+                    padding: "8px",
+                    border: "1px solid #ccc",
+                    borderRadius: "15px",
+                  }}
+                />
+              </Form.Item>
+            </div>
+          </div>
 
-                        {/* RANK */}
-                        <div
-                            style={{
-                                flex: "0 0 33.33%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Rank
-                            </label>
-                            <Select
-                                value={rank}
-                                onChange={setRank}
-                                options={optionsRank}
-                                style={{
-                                    width: "330px",
-                                    height: "57px",
-                                }}
-                            />
-                        </div>
-                    </div>
+          {/* type of email ROW 5  */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ marginBottom: "20px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                {t("Choose types of Email")}
+              </label>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "center" }}
+              >
+                <Form.Item
+                  name="emailType"
+                  rules={[
+                    {
+                      required: true,
+                      message: t("Please select an email type"),
+                    },
+                  ]}
+                >
+                  <Select
+                    value={emailType}
+                    onChange={setEmailType}
+                    options={optionsEmailType}
+                    style={{
+                      width: "300px",
+                      height: "57px",
+                    }}
+                  />
+                </Form.Item>
+              </div>
+            </div>
 
-                    {/* to and bcc */}
-
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        {/* TO email andress */}
-                        <div
-                            style={{
-                                flex: "0 50%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                To:
-                            </label>
-                            <Input
-                                type="email"
-                                style={{
-                                    width: "510px",
-                                    height: "57px",
-                                    padding: "8px",
-                                    border: "1px solid #ccc",
-                                }}
-                            />
-                        </div>
-
-                        {/* BCC address */}
-                        <div
-                            style={{
-                                flex: "0 50%",
-                                boxSizing: "border-box",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Bcc:
-                            </label>
-                            <Input
-                                type="email"
-                                style={{
-                                    width: "510px",
-                                    height: "57px",
-                                    padding: "8px",
-                                    border: "1px solid #ccc",
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    {/* type of email */}
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div style={{ marginBottom: "20px" }}>
-                            <label
-                                style={{
-                                    display: "block",
-                                    fontWeight: "bold",
-                                    marginBottom: "5px",
-                                }}
-                            >
-                                Choose types of Email
-                            </label>
-                            <div
-                                style={{ display: "flex", gap: "10px", alignItems: "center" }}
-                            >
-                                <Select
-                                    value={emailType}
-                                    onChange={setEmailType}
-                                    options={optionsEmailType}
-                                    style={{
-                                        width: "300px",
-                                        height: "57px",
-                                    }}
-                                />
-                            </div>
-                        </div>
-
-                        <div style={{ marginTop: "25px" }}>
-                            <TextArea
-                                rows={4}
-                                placeholder="Enter your mail"
-                                style={{
-                                    width: "759px",
-                                    height: "196px",
-                                }}
-                            />
-                        </div>
-                    </div>
-                </form>
-            </Modal>
-        </>
-    );
+            <div style={{ marginTop: "25px" }}>
+              <Form.Item
+                name="emailContent"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please enter your email content"),
+                  },
+                ]}
+              >
+                <TextArea
+                  rows={4}
+                  placeholder={t("Enter your mail")}
+                  style={{
+                    width: "759px",
+                    height: "196px",
+                    borderRadius: "15px",
+                  }}
+                />
+              </Form.Item>
+            </div>
+          </div>
+        </Form>
+      </Modal>
+    </>
+  );
 };
 
 export default Sheldule;
