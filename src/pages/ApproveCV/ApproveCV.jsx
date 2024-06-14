@@ -7,17 +7,16 @@ import CommentPopup from "./CommentPopup.jsx";
 import Sheldule from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
-import { Toaster, toast } from 'react-hot-toast';
+import Header from "../../components/header/Header.jsx";
 import {
   DownOutlined,
   EyeOutlined,
   PlusOutlined,
   SettingOutlined,
-  FolderAddOutlined,
+  ArrowRightOutlined,
+  ArrowLeftOutlined,
   SearchOutlined,
   DeleteOutlined,
-  EditOutlined,
-  DownCircleOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
 import {
@@ -32,9 +31,9 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import i18n from "i18next";
-import axios from "axios";
-
+import { useTranslation } from "react-i18next";
+import { Typography } from "antd";
+import useViewport from "../../hooks/useViewport.jsx";
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
@@ -51,29 +50,16 @@ dayjs.extend(customParseFormat);
 function IconTextBlock({ iconSrc, altText, text }) {
   // The component returns a div with a class name 'icon-text-block'
   return (
-      <div className="icon-text-block">
-        {/* The image element with the source URL and alt text passed as props */}
-        <img src={iconSrc} alt={altText} className="icon" />
-        {/* The span element that displays the text passed as a prop */}
-        <span className="icon-text">{text}</span>
-      </div>
+    <div className="icon-text-block">
+      {/* The image element with the source URL and alt text passed as props */}
+      <img src={iconSrc} alt={altText} className="icon" />
+      {/* The span element that displays the text passed as a prop */}
+      <span className="icon-text">{text}</span>
+    </div>
   );
 }
 
 function ApproveCV() {
-
-  // option of intern School from file Approve.json
-  const optionsInternSchool = Array.from(new Set(DataApproveList.map((item) => item.school))).map((school) => ({
-    value: school,
-    label: school,
-  }));
-
-// option of intern Position from file Approve.json
-  const optionsInternPosition = Array.from(new Set(DataApproveList.map((item) => item.position))).map((position) => ({
-    value: position,
-    label: position,
-  }));
-  
   // Date format for date inputs
   const dateFormat = "YYYY/MM/DD";
 
@@ -143,83 +129,81 @@ function ApproveCV() {
     const startIndex = currentPage * internsPerPage;
     // Calculate the ending index of the interns for the current page, ensuring it does not exceed the total number of interns
     const endIndex = Math.min(
-        (currentPage + 1) * internsPerPage,
-        interns.length
+      (currentPage + 1) * internsPerPage,
+      interns.length
     );
 
     // Slice the filteredInterns array to get the interns for the current page
     return filteredInterns.slice(startIndex, endIndex).map((intern, index) => (
-
-        // Each row is a table row (<tr>) element with a unique key based on the index
-        <tr key={index}>
-          {/* Checkbox for selecting the intern */}
-          <td>
-            <input type={"checkbox"} />
-          </td>
-          {/* Display intern details in table cells (<td>) */}
-          <td>{intern.internID}</td>
-          <td>{intern.dateSubmittedForm}</td>
-          <td>{intern.fullName}</td>
-          <td>{intern.dateOfBirth}</td>
-          <td>{intern.phoneNumber}</td>
-          <td>{intern.position}</td>
-          <td>{intern.school}</td>
-          <td>{intern.address}</td>
-          <td>{intern.email}</td>
-          {/* Link to the intern's CV */}
-          <td>
-            <a href="#">{intern.cvLink}</a>
-          </td>
-          {/* Comments section with eye icon for viewing comments and a button to add comments */}
-          <td style={{ display: "flex" }}>
-            <div className="Comments-CV">
-              {intern.commentsCV === "1"
-                  ? `${intern.commentsCV} Comment`
-                  : `${intern.commentsCV} Comments`}
-              <EyeOutlined
-                  style={{ marginLeft: "5px", cursor: "pointer" }}
-                  onClick={() => {
-                    handleCommentClick(intern);
-                  }}
-              />
-            </div>
-            <div className="add-cmt-btn">
-              <PlusOutlined />
-            </div>
-          </td>
-          {/* Status section with conditional styling based on the intern's status */}
-          <td>
-            <div
-                className="Status"
-                style={
-                  intern.status === "Pending"
-                      ? {
-                        backgroundColor: "#FFB596",
-                        color: "#E5731C",
-                      }
-                      : intern.status === "Failed"
-                          ? {
-                            backgroundColor: "#F5A3B7",
-                            color: "#7D0022",
-                          }
-                          : intern.status === "Passed"
-                              ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
-                              : {}
-                }
-            >
-              {intern.status}
-              <DownOutlined />
-            </div>
-          </td>
-          {/* Action buttons for viewing intern details and feedbacks */}
-          <td style={{ display: "flex" }}>
-            <div className="view" onClick={() => handleViewClick(intern)}>
-              View
-            </div>
-            <div className="feedbacks">Feedbacks</div>
-          </td>
-        </tr>
-
+      // Each row is a table row (<tr>) element with a unique key based on the index
+      <tr key={index}>
+        {/* Checkbox for selecting the intern */}
+        <td>
+          <input type={"checkbox"} />
+        </td>
+        {/* Display intern details in table cells (<td>) */}
+        <td>{intern.internID}</td>
+        <td>{intern.dateSubmittedForm}</td>
+        <td>{intern.fullName}</td>
+        <td>{intern.dateOfBirth}</td>
+        <td>{intern.phoneNumber}</td>
+        <td>{intern.position}</td>
+        <td>{intern.school}</td>
+        <td>{intern.address}</td>
+        <td>{intern.email}</td>
+        {/* Link to the intern's CV */}
+        <td>
+          <a href="#">{intern.cvLink}</a>
+        </td>
+        {/* Comments section with eye icon for viewing comments and a button to add comments */}
+        <td style={{ display: "flex" }}>
+          <div className="Comments-CV">
+            {intern.commentsCV === "1"
+              ? `${intern.commentsCV} Comment`
+              : `${intern.commentsCV} Comments`}
+            <EyeOutlined
+              style={{ marginLeft: "5px", cursor: "pointer" }}
+              onClick={() => {
+                handleCommentClick(intern);
+              }}
+            />
+          </div>
+          <div className="add-cmt-btn">
+            <PlusOutlined />
+          </div>
+        </td>
+        {/* Status section with conditional styling based on the intern's status */}
+        <td>
+          <div
+            className="Status"
+            style={
+              intern.status === t("Pending")
+                ? {
+                    backgroundColor: "#FFB596",
+                    color: "#E5731C",
+                  }
+                : intern.status === t("Failed")
+                ? {
+                    backgroundColor: "#F5A3B7",
+                    color: "#7D0022",
+                  }
+                : intern.status === t("Passed")
+                ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
+                : {}
+            }
+          >
+            {intern.status}
+            <DownOutlined />
+          </div>
+        </td>
+        {/* Action buttons for viewing intern details and feedbacks */}
+        <td style={{ display: "flex" }}>
+          <div className="view" onClick={() => handleViewClick(intern)}>
+            View
+          </div>
+          <div className="feedbacks">Feedbacks</div>
+        </td>
+      </tr>
     ));
   };
 
@@ -243,14 +227,14 @@ function ApproveCV() {
    * @returns {JSX.Element} A menu component with filter options.
    */
   const createMenu = (type, items) => (
-      <Menu onClick={({ key }) => handleMenuClick(type, key)}>
-        {/* Map over the items to create menu items */}
-        {items.map((item) => (
-            <Menu.Item key={item}>
-              <div>{item}</div>
-            </Menu.Item>
-        ))}
-      </Menu>
+    <Menu onClick={({ key }) => handleMenuClick(type, key)}>
+      {/* Map over the items to create menu items */}
+      {items.map((item) => (
+        <Menu.Item key={item}>
+          <div>{item}</div>
+        </Menu.Item>
+      ))}
+    </Menu>
   );
 
   /**
@@ -293,12 +277,10 @@ function ApproveCV() {
    */
   const handleSaveComment = (updatedIntern) => {
     // Update the interns state with the updated intern object
-
     setInterns((prevInterns) =>
-        prevInterns.map((intern) =>
-            intern.internID === updatedIntern.internID ? updatedIntern : intern
-        )
-
+      prevInterns.map((intern) =>
+        intern.internID === updatedIntern.internID ? updatedIntern : intern
+      )
     );
     handleCloseCommentPopup(); // Close the comment popup after saving
   };
@@ -330,55 +312,55 @@ function ApproveCV() {
 
     if (selectedFilters.position) {
       results = results.filter(
-          (intern) => intern.position === selectedFilters.position
+        (intern) => intern.position === selectedFilters.position
       );
     }
     if (selectedFilters.school) {
       results = results.filter(
-          (intern) => intern.school === selectedFilters.school
+        (intern) => intern.school === selectedFilters.school
       );
     }
     if (selectedFilters.internID) {
       const searchText = selectedFilters.internID.toLowerCase();
       results = results.filter((intern) =>
-          intern.internID.toLowerCase().includes(searchText)
+        intern.internID.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.fullName) {
       const searchText = selectedFilters.fullName.toLowerCase();
       results = results.filter((intern) =>
-          intern.fullName.toLowerCase().includes(searchText)
+        intern.fullName.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.email) {
       const searchText = selectedFilters.email.toLowerCase();
       results = results.filter((intern) =>
-          intern.email.toLowerCase().includes(searchText)
+        intern.email.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.address) {
       const searchText = selectedFilters.address.toLowerCase();
       results = results.filter((intern) =>
-          intern.address.toLowerCase().includes(searchText)
+        intern.address.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.phoneNumber) {
       const searchText = selectedFilters.phoneNumber.toLowerCase();
       results = results.filter((intern) =>
-          intern.phoneNumber.toLowerCase().includes(searchText)
+        intern.phoneNumber.toLowerCase().includes(searchText)
       );
     }
     if (selectedFilters.dateOfBirth) {
       results = results.filter((intern) =>
-          moment(intern.dateOfBirth).isSame(selectedFilters.dateOfBirth, "day")
+        moment(intern.dateOfBirth).isSame(selectedFilters.dateOfBirth, "day")
       );
     }
     if (selectedFilters.dateSubmittedForm) {
       results = results.filter((intern) =>
-          moment(intern.dateSubmittedForm).isBetween(
-              selectedFilters.dateSubmittedForm,
-              "day"
-          )
+        moment(intern.dateSubmittedForm).isBetween(
+          selectedFilters.dateSubmittedForm,
+          "day"
+        )
       );
     }
     setFilteredInterns(results);
@@ -407,13 +389,21 @@ function ApproveCV() {
     setViewPopupVisible(false); // Hide the view popup
   };
 
+  const { t,i18n } = useTranslation();
+  const [optionChoose, setOptionChoose] = useState([]);
+  const commentText = t("comment");
+  const commentsText = t("comments");
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
+  const { Text } = Typography;
+  const inputStyle = { width: isMobile ? "100%" : "300px" };
   // checkbox table Ant Design
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(
-          `selectedRowKeys: ${selectedRowKeys}`,
-          "selectedRows: ",
-          selectedRows
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
       );
     },
     getCheckboxProps: (record) => ({
@@ -421,72 +411,86 @@ function ApproveCV() {
     }),
   };
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Passed":
+        return "green";
+      case "Failed":
+        return "red";
+      case "Pending":
+        return "yellow";
+      default:
+        return "black";
+    }
+  };
   // title of apprve list table
   const columns = [
     {
-      title: "Intern ID",
+      title: t("Intern ID"),
       dataIndex: "internID",
-      width: 80,
+      // width: 80,
       filteredValue: [selectedFilters.internID],
       // onFilter: (value, record) => {
       //     return record.internID.includes(value)
       // }
     },
     {
-      title: "Date Submitted Form",
+      title: t("Date Submitted Form"),
       dataIndex: "dateSubmittedForm",
-      width: 140,
+      // width: 140,
     },
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "fullName",
-      width: 150,
+      
       filteredValue: [selectedFilters.fullName],
       // onFilter: (value, record) => {
       //     return record.fullName.includes(value)
       // }
     },
     {
-      title: "Date Of Birth",
+      title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
-      width: 110,
+      // width: 110,
       // filteredValue: [selectedFilters.dateOfBirth],
       // onFilter: (value, record) => {
       //     return record.dateOfBirth.includes(value)
       // }
     },
     {
-      title: "Phone Number",
+      title: t("Phone Number"),
       dataIndex: "phoneNumber",
-      width: 120,
+      // width: 120,
       // filteredValue: [selectedFilters.phoneNumber],
       // onFilter: (value, record) => {
       //     return record.phoneNumber.includes(value)
       // }
     },
     {
-      title: "Position",
+      title: t("Position"),
       dataIndex: "position",
-      width: 120,
+      // width: 120,
       // filteredValue: [selectedFilters.position],
       // onFilter: (value, record) => {
       //     return record.position.includes(value)
       // }
     },
     {
-      title: "School",
+      title: t("School"),
       dataIndex: "school",
-      width: 160,
+      // width: 160,
+      render: (text) => t(text),
       // filteredValue: [selectedFilters.school],
       // onFilter: (value, record) => {
       //     return record.school.includes(value)
       // }
     },
     {
-      title: "Address",
+      title: t("Address"),
       dataIndex: "address",
-      width: 120,
-      // filteredValue: [selectedFilters.address],
+      // width: 120,
+      filteredValue: [selectedFilters.address],
+      render: (text) => t(text),
       // onFilter: (value, record) => {
       //     return record.address.includes(value)
       // }
@@ -494,7 +498,7 @@ function ApproveCV() {
     {
       title: "Email",
       dataIndex: "email",
-      width: 180,
+      // width: 180,
       // filteredValue: [selectedFilters.email],
       // onFilter: (value, record) => {
       //     return record.email.includes(value)
@@ -503,63 +507,96 @@ function ApproveCV() {
     {
       title: "CV",
       dataIndex: "cvLink",
-      width: 60,
+      // width: 60,
       render: (text) => (
-          <a
-              href={text}
-              style={{ color: "#000000", textDecoration: "underline" }}
-          >
-            Link
-          </a>
+        <a
+          href={text}
+          style={{ color: "#0000FF", textDecoration: "underline" }}
+        >
+          Link
+        </a>
       ),
     },
     {
-      title: "Comments",
+      title: t("Comments"),
       dataIndex: "commentsCV",
-      width: 130,
+      // width: 130,
       render: (text) => (
-          <Button
-              onClick={() => handleCommentClick(intern)}
-              style={{ width: "100%" }}
-          >
-            {text === "1" ? `${text} comment` : `${text} comments`}
-            <EyeOutlined />
-          </Button>
+        <Button
+          onClick={() => handleCommentClick(intern)}
+          style={{ width: "100%" }}
+        >
+          {text === "1" ? `${text} ${commentText}` : `${text} ${commentsText}`}
+          <EyeOutlined />
+        </Button>
       ),
     },
     {
-      title: "Status",
+      title: t("Status"),
       dataIndex: "status",
-      width: 100,
-      render: (text) => {
-        return (
-            <Select
-                defaultValue={text}
-                style={{
-                  width: 100,
-                }}
-                options={optionSelect}
-            />
-        );
-      },
+      // width: 100,
+      render: (text, record) => (
+        <Dropdown
+        overlay={
+          <Menu onClick={({ key }) => handleChangestatus(key, record)}>
+            <Menu.Item key="Pending">
+              <span>{t("Pending")}</span>
+            </Menu.Item>
+            <Menu.Item key="Failed">
+              <span>{t("Failed")}</span>
+            </Menu.Item>
+            <Menu.Item key="Passed">
+              <span>{t("Passed")}</span>
+            </Menu.Item>
+          </Menu>
+        }
+      >
+        <Button
+          style={{
+            width: 120,
+            backgroundColor:
+              record.status === "Failed"
+                ? "#F8E7EE"
+                : record.status === "Passed"
+                ? "#EFF9F1"
+                : "#FFEFE6",
+            color:
+              record.status === "Failed"
+                ? "#B70D52"
+                : record.status === "Passed"
+                ? "#449E3C"
+                : "#FF5D02",
+            borderRadius: "100px",
+            fontSize: "12px",
+          }}
+        >
+          {t(record.status)} <DownOutlined />
+        </Button>
+      </Dropdown>
+    ),
     },
     {
       title: "Button",
-      width: 120,
-      render: (record) => (
-          <div className="approve-btns">
-            <Button className="view" onClick={() => handleViewClick(record)} >
-              View
-            </Button>
-            <Button className="feedbacks" onClick={() => handleViewFeedback(record)} >
-              Feedbacks
-            </Button>
+      // width: 120,
+      render: () => (
+        <div className="approve-btns">
+          <div className="view" onClick={() => handleViewClick(intern)}>
+            {t("View")}
           </div>
+          <div className="feedbacks" onClick={() => handleViewFeedback(intern)}>
+            {t("Feedbacks")}
+          </div>
+        </div>
       ),
     },
   ];
 
   // option of status column
+  const handleChangestatus = (key, record) => {
+    record.status = key;
+    setSelectedOption(key);
+  };
+  const [selectedOption, setSelectedOption] = useState("");  
   const optionSelect = [
     {
       value: "passed",
@@ -574,173 +611,233 @@ function ApproveCV() {
       label: "Pending",
     },
   ];
-
+  const translatedData = optionSelect.map((item) => ({
+    value: item.value,
+    label: t(item.label),
+  }));
   return (
-      <div id="APRCV">
-        <MainLayout>
-          <main className="content">
-            <header className="content-header">
-              <h1 className="content-title">Approve CV</h1>
-              <div className="user-info">
+    <div id="APRCV">
+      <MainLayout>
+        <main className="content">
+          <header className="content-header">
+            <h1 className="content-title">{t("Approve CV")}</h1>
+            
+            <div className="user-info">
+              <img
+                loading="lazy"
+                src={User_Img}
+                alt="User Profile"
+                className="user-profile-small"
+              />
+              <div className="user-details">
+                <span className="user-name">Natalie Brogan</span>
+                <span className="user-role">Admin</span>
+              </div>
+              <div className="account-setting">
+                <SettingOutlined style={{ color: "#DB0D4B" }} />
+              </div>
+            </div>
+          </header>
+
+          <section className="content-section">
+            <h2 className="section-title">{t("Search for Information")}</h2>
+            <div className="button-group">
+              <button className="button button-schedule">
+                <Sheldule/>
+              </button>
+              <button className="button button-export">
                 <img
-                    loading="lazy"
-                    src={User_Img}
-                    alt="User Profile"
-                    className="user-profile-small"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa11b0683eb59e5c46f322a171b42edba502fadc3f8daffe251ee8087dea429?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Export Icon"
+                  className="button-icon"
                 />
-                <div className="user-details">
-                  <span className="user-name">Natalie Brogan</span>
-                  <span className="user-role">Admin</span>
-                </div>
-                <div className="account-setting">
-                  <SettingOutlined style={{ color: "#DB0D4B" }} />
-                </div>
-              </div>
-            </header>
+                <span>{t("Export Excel")}</span>
+              </button>
+              <button className="button button-edit">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ecb69ed4f9191e15f4927b1b9b7dd5b7e05e78dcd440b3b135257bd3dc95bd03?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Edit Icon"
+                  className="button-icon"
+                />
+                <span>{t("Edit")}</span>
+              </button>
+              <button className="button button-delete">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/68a48237f0bae3c61dd65cfd116f092ab3bef8fb895c06116eaa24230e3d5284?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Delete Icon"
+                  className="button-icon"
+                />
+                <span>{t("Delete")}</span>
+              </button>
+              <button className="button button-add-intern">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/464e70c797da987e533d3b7bac06274e496eb711c8027e3b77bb65828b659322?apiKey=41832340d6f545c2a0509736ad9e1693&"
+                  alt="Add Intern Icon"
+                  className="button-icon"
+                />
+                <span>{t("Add New Intern")}</span>
+              </button>
+            </div>
+          </section>
 
-            <section className="content-section">
-              <h2 className="section-title">Search for Information</h2>
-              <div className="button-group">
-                <Sheldule />
-                <button className="button button-export">
-                  <DownCircleOutlined />
-                  <span className="btn-name">Export Excel</span>
-                </button>
-                <button className="button button-edit">
-                  <EditOutlined />
-                  <span className="btn-name">Edit</span>
-                </button>
-                <button className="button button-delete">
-                  <DeleteOutlined />
-                  <span className="btn-name">Delete</span>
-                </button>
-                <button className="button button-add-intern">
-                  <FolderAddOutlined />
-                  <span className="btn-name">Add New Intern</span>
-                </button>
-              </div>
-            </section>
+          <section className="filter-section">
+            <div className="filter">
+              <div className="fields">
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's ID")}
+                  value={selectedFilters.internID}
+                  onChange={(e) =>
+                    handleInputChange("internID", e.target.value)
+                  }
+                />
 
-            <section className="filter-section">
-              <div className="filter">
-                <div className="fields">
-                  <Input
-                      size="large"
-                      placeholder="Enter intern's ID"
-                      value={selectedFilters.internID}
-                      onChange={(e) =>
-                          handleInputChange("internID", e.target.value)
-                      }
-                  />
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's Full name")}
+                  value={selectedFilters.fullName}
+                  onChange={(e) =>
+                    handleInputChange("fullName", e.target.value)
+                  }
+                />
 
-                  <Input
-                      size="large"
-                      placeholder="Enter intern's Full name"
-                      value={selectedFilters.fullName}
-                      onChange={(e) =>
-                          handleInputChange("fullName", e.target.value)
-                      }
-                  />
+                <DatePicker
+                  format={dateFormat}
+                  placeholder={t("Enter intern's D.O.B")}
+                  style={{ padding: "7px 11px", fontSize: "15px" }}
+                  onChange={(date) => handleDateChange("dateOfBirth", date)}
+                />
 
-                  <DatePicker
-                      format={dateFormat}
-                      placeholder="Enter intern's D.O.B"
-                      style={{ padding: "7px 11px", fontSize: "15px" }}
-                      onChange={(date) => handleDateChange("dateOfBirth", date)}
-                  />
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's Phone number")}
+                  value={selectedFilters.phoneNumber}
+                  onChange={(e) =>
+                    handleInputChange("phoneNumber", e.target.value)
+                  }
+                />
 
-                  <Input
-                      size="large"
-                      placeholder="Enter intern's Phone number"
-                      value={selectedFilters.phoneNumber}
-                      onChange={(e) =>
-                          handleInputChange("phoneNumber", e.target.value)
-                      }
-                  />
-
-                  <Select
-                      size="large"
-                      showSearch
-                      style={{
-                        width: '100%',
-                        fontSize: 5
-                      }}
-                      placeholder="Enter intern's School"
-                      options={optionsInternSchool}
-                  />
-
-                  <Input
-                      size="large"
-                      placeholder="Enter intern's Email"
-                      value={selectedFilters.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                  />
-
-                  <Select
-                      size="large"
-                      showSearch
-                      style={{
-                        width: '100%',
-                        fontSize: 5
-                      }}
-                      placeholder="Enter intern's Position"
-                      options={optionsInternPosition}
-                  />
-
-                  <Input
-                      size="large"
-                      placeholder="Enter intern's Address"
-                      value={selectedFilters.address}
-                      onChange={(e) => handleInputChange("address", e.target.value)}
-                  />
-
-                  <DatePicker
-                      format={dateFormat}
-                      placeholder="Enter intern's Date Submitted Form"
-                      style={{ padding: "7px 11px", fontSize: "15px" }}
-                      onChange={(date) => handleDateChange("dateSub", date)}
-                  />
-                </div>
-                <div className="buttons">
-                  <div className="cln-btn btn" onClick={handleClearFilters}>
-                    <DeleteOutlined style={{ marginRight: "10px" }} />
-                    <p>Clean Filter</p>
-                  </div>
-                  <br />
-                  <div className="srch-btn btn" onClick={handleSearch}>
-                    <SearchOutlined style={{ marginRight: "10px" }} />
-                    <p>Search</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="list">
-                <Table
-                    rowSelection={{
-                      type: "checkbox",
-                      ...rowSelection,
+                <Dropdown
+                  overlay={createMenu("school", schoolNames)}
+                  trigger={["click"]}
+                  style={inputStyle}
+                >
+                  <Button
+                    style={{
+                      padding: "7px 11px",
+                      fontSize: "15px",
+                      textAlign: "left",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      height: "100%",
                     }}
-                    columns={columns}
-                    dataSource={filteredInterns}
-                    scroll={{ x: "2200px", y: "360px" }}
-                    style={{ maxWidth: "100%", minHeight: "100%" }}
-                    pagination={{
-                      pageSize: 8,
+                  >
+                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                    <div
+                      style={{
+                        color: selectedFilters.school ? "#000000" : "#C7BFBF",
+                      }}
+                    >
+                      {selectedFilters.school || t("Enter intern's School")}
+                    </div>
+                    <DownOutlined />
+                  </Button>
+                </Dropdown>
+
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's Email")}
+                  value={selectedFilters.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                />
+
+                <Dropdown
+                  overlay={createMenu("position", positionNames)}
+                  trigger={["click"]}
+                >
+                  <Button
+                    style={{
+                      padding: "7px 11px",
+                      fontSize: "15px",
+                      textAlign: "left",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      height: "100%",
                     }}
+                  >
+                    <div
+                      style={{
+                        color: selectedFilters.position ? "#000000" : "#C7BFBF",
+                      }}
+                    >
+                      {selectedFilters.position || t("Enter intern's Position")}
+                    </div>
+                    <DownOutlined />
+                  </Button>
+                </Dropdown>
+
+                <Input
+                  style={inputStyle}
+                  size="large"
+                  placeholder={t("Enter intern's Address")}
+                  value={selectedFilters.address}
+                  onChange={(e) => handleInputChange("address", e.target.value)}
+                />
+
+                <DatePicker
+                  format={dateFormat}
+                  placeholder={t("Enter intern's Date Submitted Form")}
+                  style={{ padding: "7px 11px", fontSize: "15px" }}
+                  onChange={(date) => handleDateChange("dateSub", date)}
                 />
               </div>
-            </section>
-          </main>
-          <CommentPopup
-              isVisible={commentPopupVisible}
-              onClose={handleCloseCommentPopup}
-              intern={selectedIntern}
-              initialPage={initialPage}
-              onSave={handleSaveComment}
-          />
-        </MainLayout>
-      </div>
-
+              <div className="buttons">
+                <div className="cln-btn btn" onClick={handleClearFilters}>
+                  <DeleteOutlined style={{ marginRight: "10px" }} />
+                  {t("Clean Filter")}
+                </div>
+                <br />
+                <div className="srch-btn btn" onClick={handleSearch}>
+                  <SearchOutlined style={{ marginRight: "10px" }} />
+                  {t("Search")}
+                </div>
+              </div>
+            </div>
+            <div className="list">
+              <Table
+                rowSelection={{
+                  type: "checkbox",
+                  ...rowSelection,
+                }}
+                columns={columns}
+                dataSource={filteredInterns}
+                scroll={{ x: "max-content" }}
+                style={{
+                  tableLayout: "auto",
+                  width: isMobile ? "96%" : "100%",
+                }}
+                pagination={{
+                  pageSize: 8,
+                }}
+              />
+            </div>
+          </section>
+        </main>
+        <CommentPopup
+          isVisible={commentPopupVisible}
+          onClose={handleCloseCommentPopup}
+          intern={selectedIntern}
+          initialPage={initialPage}
+          onSave={handleSaveComment}
+        />
+      </MainLayout>
+    </div>
   );
 }
 

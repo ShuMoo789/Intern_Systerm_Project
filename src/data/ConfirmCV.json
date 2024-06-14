@@ -13,9 +13,10 @@
     "email": "abc@gmail.com",
     "cvLink": "Link",
     "commentsCV": "1",
-    "confirm": "Yes",
+    "confirm": "Not confirmed",
     "interviewer": "Ajmal Abdul",
-    "status": "Passed"
+    "status": "Passed",
+    "englishProficiency": "IELTS 7.0"
 },
 {
     "key": "2",
@@ -31,9 +32,10 @@
     "email": "john.doe@gmail.com",
     "cvLink": "Link",
     "commentsCV": "2 ",
-    "confirm": "No",
+    "confirm": "Not confirmed",
     "interviewer": "Jane Smith",
-    "status": "Pending"
+    "status": "Pending",
+    "englishProfiency": "IELTS 7.5"
 },
 {
     "key": "3",
@@ -49,9 +51,10 @@
     "email": "john.doe@gmail.com",
     "cvLink": "Link",
     "commentsCV": "2 ",
-    "confirm": "No",
+    "confirm": "Not confirmed",
     "interviewer": "Jane Smith",
-    "status": "Failed"
+    "status": "Failed",
+    "englishProfiency": "IELTS 6.0"
 },
 {
     "key": "4",
@@ -67,9 +70,10 @@
     "email": "john.doe@gmail.com",
     "cvLink": "Link",
     "commentsCV": "2 ",
-    "confirm": "No",
+    "confirm": "Not confirmed",
     "interviewer": "Jane Smith",
-    "status": "Pending"
+    "status": "Pending",
+    "englishProfiency": "IELTS 8.0"
 },
 {
     "key": "5",
@@ -85,8 +89,9 @@
     "email": "john.doe@gmail.com",
     "cvLink": "Link",
     "commentsCV": "1 ",
-    "confirm": "No",
+    "confirm": "Not confirmed",
     "interviewer": "Jane Smith",
-    "status": "Pending"
+    "status": "Pending",
+    "englishProfiency": "IELTS 9.0"
 }
 ]

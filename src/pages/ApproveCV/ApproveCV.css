@@ -18,10 +18,10 @@ body {
 }
 
 .content-header {
-    width: inherit;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
     border-radius: 10px;
     margin: 20px 0 40px;
 }
@@ -32,8 +32,10 @@ body {
     color: #2c3e50;
 }
 
-.content-header > .user-info {
-    display: flex;
+.user-info {
+    width: 25%;
+    display: grid;
+    grid-template-columns: min-content auto min-content;
     align-items: center;
     cursor: pointer;
 }
@@ -55,9 +57,8 @@ body {
     margin-right: 20px;
 }
 
-.content-header > .user-info >.user-details {
+.user-details {
     text-align: left;
-    margin-right: 20px;
 }
 
 .user-name {
@@ -103,10 +104,14 @@ body {
 
 .button-group {
     display: flex;
-    justify-content: space-between;
+    gap: 1.2em;
+    flex-wrap: wrap;
+}
+.filter-search{
+    display: inline;
 }
 
-.button-group > .button {
+.button {
     display: flex;
     align-items: center;
     padding: 10px 15px;
@@ -117,8 +122,10 @@ body {
     transition: background-color 0.3s;
 }
 
-.button-group > .button > .btn-name {
-    margin-left: 5px;
+.button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 
 .button-schedule {
@@ -191,20 +198,39 @@ th {
 
 div.approve-btns {
     display: flex;
-    gap: 1em;
 }
 
-div.approve-btns > .view,
-div.approve-btns > .feedbacks {
-    color: blue;
+div.approve-btns > div.view,
+div.approve-btns {
+    display: flex;
+}
+
+div.approve-btns > div.view{
+    margin-right: 5px;
+    padding: 5px 10px;
+    color: #b22222;
     background-color: #ffffff;
-    border: 1px solid blue;
-    border-radius: 15px;
+    border: 1px solid #b22222;
+    border-radius: 20px;
+    cursor: pointer;
+}
+div.approve-btns > div.feedbacks {
+    margin-right: 5px;
+    padding: 5px 10px;
+    color: #4889E9;
+    background-color: #ffffff;
+    border: 1px solid #4889E9;
+    border-radius: 20px;
     cursor: pointer;
 }
 
-div.approve-btns > .view:hover,
-div.approve-btns > .feedbacks:hover{
+
+div.approve-btns > div.view:hover{
+    color: #ffffff;
+    background-color: #b22222;
+    border: 1px solid #b22222;
+}
+div.approve-btns > div.feedbacks:hover{
     color: #ffffff;
     background-color: #4889E9;
     border: 1px solid #4889E9;
@@ -212,43 +238,37 @@ div.approve-btns > .feedbacks:hover{
 
 #APRCV .content > .filter-section > .filter {
     display: flex;
-    justify-content: space-between;
-    gap: 20px ;
+    gap: 10px;
+    margin-bottom: 1em;
     margin-bottom: 1em;
 }
 
 
 #APRCV .content > .filter-section > .filter > .fields {
-    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
     gap: 5px;
 }
 
 
 #APRCV .content > .filter-section > .filter > .fields > input {
-    width: 100%;
+    width: 20em;
     background-color: #fff;
 }
 
 
 #APRCV .content > .filter-section > .filter > .buttons {
-    width: fit-content;
     gap: 5px;
 }
 
 
 #APRCV .content > .filter-section > .filter > .buttons > .btn {
-    display: flex;
-    padding: 0 10px;
+    padding: 15px 20px;
     text-align: center;
     border-radius: 15px;
     cursor: pointer;
 }
 
-#APRCV .content > .filter-section > .filter > .buttons > .btn > p {
-    white-space: nowrap;
-}
 
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
@@ -265,47 +285,12 @@ div.approve-btns > .feedbacks:hover{
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
     background-color: #4889E9;
-    border: 1px solid #4889E9;
 }
 
 
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
+    border: 1px solid #4889E9;
     color: #4889E9;
     background-color: #fff;
-}
-
-
-@media only screen and (max-width: 1383px) {
-
-    #APRCV .content > .filter-section > .filter {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .button-group {
-        justify-content: space-between;
-    }
-
-    .button-group > .button > .btn-name {
-        display: none;
-    }
-
-    #APRCV .content > .filter-section > .filter > .buttons {
-        display: flex;
-        gap: 5px;
-    }
-}
-
-@media only screen and  (max-width: 992px) {
-
-    #APRCV .content > .filter-section > .filter > .fields {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .content-header > .user-info > .user-details,
-    .content-header > .user-info > .account-setting {
-        display: none;
-    }
-
+    cursor: pointer;
 }

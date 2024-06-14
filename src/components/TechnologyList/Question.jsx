@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button,Input,Col } from "antd";
+import { Button, Input, Col } from "antd";
 
 
 const Question = () => {
@@ -7,6 +7,8 @@ const Question = () => {
     { id: 1, value: '' },
     { id: 2, value: '' },
     { id: 3, value: '' },
+    { id: 4, value: '' },
+    { id: 5, value: '' },
   ]);
 
   const handleAddQuestion = () => {
@@ -22,13 +24,28 @@ const Question = () => {
     );
   };
 
+  const handleDeleteQuestion = (id) => {
+    const updatedQuestions = questions.filter((question) => question.id !== id);
+    const renumberedQuestions = updatedQuestions.map((question, index) => ({
+      ...question,
+      id: index + 1,
+    }));
+    setQuestions(renumberedQuestions);
+  };
+
   return (
     <div className="tab-content">
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
         {questions.map((question) => (
-          <div key={question.id} style={{ marginBottom: '20px' , marginLeft:"20px",marginRight:"20px"}}>
+          <div key={question.id} style={{ marginBottom: '20px', marginLeft: "20px", marginRight: "20px" }}>
             <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
               Question {question.id}
+              <span
+                style={{ marginLeft: '10px', cursor: 'pointer', color: 'red' }}
+                onClick={() => handleDeleteQuestion(question.id)}
+              >
+                x
+              </span>
             </label>
             <Input
               style={{
@@ -43,10 +60,10 @@ const Question = () => {
         ))}
       </div>
 
-      <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' ,    marginLeft:"20px"}}>
+      <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px', marginLeft: "20px" }}>
         Add Question
       </label>
-      <Button
+      <StyledButton
         style={{
           width: '420px',
           height: '70px',
@@ -54,12 +71,13 @@ const Question = () => {
           fontSize: '20px',
           background: 'gray',
           opacity: '0.4',
-          marginLeft:"20px"
+          marginLeft: "20px",
+          color:"red"
         }}
         onClick={handleAddQuestion}
       >
         Click to add more questions
-      </Button>
+      </StyledButton>
     </div>
   );
 };

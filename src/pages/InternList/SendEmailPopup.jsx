@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Select, Input, Button, message } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import './SendEmailPopup.css';
+import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -11,19 +12,19 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
     const [emailContent, setEmailContent] = useState('');
     const [typeError, setTypeError] = useState('');
     const [contentError, setContentError] = useState('');
-
+    const {t} = useTranslation()
     const handleSend = () => {
         let valid = true;
 
         if (!emailType) {
-            setTypeError("You haven't chosen what type of email");
+            setTypeError(t("You haven't chosen what type of email"));
             valid = false;
         } else {
             setTypeError('');
         }
 
         if (!emailContent) {
-            setContentError("You haven't entered any content");
+            setContentError(t("You haven't entered any content"));
             valid = false;
         } else {
             setContentError('');
@@ -42,7 +43,7 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
 
     return (
         <Modal
-            title="Send Email"
+            title={t("Send Email")}
             open={openPopup}
             onCancel={onClose}
             footer={null}
@@ -50,7 +51,7 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
         >
             <div className="send-email-popup-content">
                 <div className="send-email-popup-row">
-                    <label>Choose type of Email</label>
+                    <label>{t("Choose types of Email")}</label>
                     <Select
                         value={emailType}
                         onChange={setEmailType}
@@ -58,18 +59,18 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
                         style={{ width: '100%' }}
                         status={typeError ? 'error' : ''}
                     >
-                        <Option value="Email interview">Email interview</Option>
-                        <Option value="Email result">Email result</Option>
-                        <Option value="Internship information">Internship information</Option>
-                        <Option value="Additional Profile">Additional Profile</Option>
-                        <Option value="Return Profile">Return Profile</Option>
+                        <Option value="Email interview">{t("Email interview")}</Option>
+                        <Option value="Email result">{t("Email result")}</Option>
+                        <Option value="Internship information">{t("Internship information")}</Option>
+                        <Option value="Additional Profile">{t("Additional Profile")}</Option>
+                        <Option value="Return Profile">{t("Return Profile")}</Option>
                     </Select>
                     {typeError && <div className="error-message">{typeError}</div>}
                 </div>
                 <div className="send-email-popup-row">
                     <TextArea
                         rows={4}
-                        placeholder="Enter your mail..."
+                        placeholder={t("Enter your mail...")}
                         value={emailContent}
                         onChange={(e) => setEmailContent(e.target.value)}
                         status={contentError ? 'error' : ''}
@@ -79,7 +80,7 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
             </div>
             <div className="send-email-popup-footer">
                 <Button type="primary" icon={<MailOutlined />} onClick={handleSend}>
-                    Send Email
+                    {t("Send Email")}
                 </Button>
             </div>
         </Modal>
