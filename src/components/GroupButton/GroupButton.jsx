@@ -62,7 +62,7 @@ const GroupButton = ({
         <div className="group-button">
             {/* map button group from prop passed from InternList via Navigation */}
             {groupButton.map((prop) => (
-                <Button
+                <Button className="common-btn"
                     key={prop.name}
                     onClick={() => handleButtonClick(prop.name)}
                     style={{
