@@ -26,10 +26,12 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
         console.log("Received values:", values);
         // Handle form submission
         onClose();
+        message.success("Send successfully!")
         form.resetFields();
       })
       .catch((info) => {
         console.log("Validate Failed:", info);
+        message.error("Please fill full input!")
       });
   };
 

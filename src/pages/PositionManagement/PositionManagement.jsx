@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import MainLayout from "../../MainLayout/MainLayout";
 import User_Img from "../../assets/user_image.png";
-import Navigation from "../../components/Navigation/Navigation";
 import {
   Table,
   Checkbox,
@@ -23,11 +22,11 @@ import {
   EditOutlined,
   DeleteOutlined,
   FolderAddOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
 import "../PositionManagement/PositionManagement.css";
 import useViewport from "../../hooks/useViewport";
-import AccountSetting from "../../components/AccountSetting/AccountSetting";
 import GroupButton from "../../components/GroupButton/GroupButton";
 import { useTranslation } from "react-i18next";
 
@@ -244,25 +243,37 @@ const PositionManagement = () => {
     },
   ];
 
+  function UserInfo({ name, role, avatarSrc }) {
+    return (
+        <div className="user-info">
+            <div className="avatar-section">
+                <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+                <div className="user-details">
+                    <p className="username">{name}</p>
+                    <p className="role">{role}</p>
+                </div>
+            </div>
+            <SettingOutlined className="setting-icon" />
+        </div>
+    );
+}
+
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
-          <header className="content-header">
-            <h1 className="content-title">
-              <b>{t("Position Management")}</b>
-            </h1>
-
-            {!isMobile ? (
-              <div className="user-info-box">
-                <AccountSetting />
-              </div>
-            ) : (
-              <div className="user-info-box-mobile">
-                <AccountSetting />
-              </div>
-            )}
-          </header>
+            <header className="header-position">
+                <h1 className="header-title">{t("Position Management")}</h1>
+                {isMobile ? (
+                    <SettingOutlined className="setting-icon" />
+                ) : (
+                    <UserInfo
+                        name="Natalie Brogan"
+                        role="Admin"
+                        avatarSrc={User_Img}
+                    />
+                )}
+            </header>
 
           <div className="button-group-position">
             <div className="row-btn-grp-pos">
