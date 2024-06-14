@@ -24,6 +24,8 @@ import {
   DeleteOutlined,
   CopyOutlined,
   DownCircleOutlined,
+  ExportOutlined,
+  FolderAddOutlined
 } from "@ant-design/icons";
 import "./ProjectMan.css";
 import NewProjectModal from "./NewProjectModal.jsx";
@@ -31,6 +33,7 @@ import MainLayout from "../../MainLayout/MainLayout.jsx";
 import projectData from "../../data/ProjectMana.json";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import Navigation from "../../components/Navigation/Navigation.jsx"
 
 const { Header, Content } = Layout;
 
@@ -239,40 +242,38 @@ function ProjectManagement() {
     }));
   };
 
+  const groupButton = [
+    {
+      color: "#41B137",
+      name: t("Export Excel"),
+      icon: <FileExcelOutlined />,
+  },
+  {
+      color: "#FB8632",
+      name: t("Edit"),
+      icon: <EditOutlined />,
+  },
+  {
+      color: "#FF3A2E",
+      name: t("Delete"),
+      icon: <DeleteOutlined />,
+  },
+  {
+      color: "#4889E9",
+      name: t("Add New Intern"),
+      icon: <PlusOutlined />,
+  },
+]
+
   return (
     <Layout className="project-management-section">
-      <header className="header-section">
-        <h1 className="header-title">{t("Project Management")}</h1>
-        <UserInfo
-          name="Natalie Brogan"
-          role="Admin"
-          avatarSrc="user-avatar-url"
+      <div>
+        <Navigation
+          titleName={t("Project Management")}
+          groupButton={groupButton}
+          onCreateIntern={handleOpenModal}
         />
-      </header>
-      <section className="content-section">
-        <h2 className="section-title">{t("Search for Information")}</h2>
-        <div className="button-group">
-          <button className="button button-export">
-            <FileExcelOutlined alt="Export Icon" className="button-icon" />
-            <span>{t("Export Excel")}</span>
-          </button>
-          <button className="button button-edit">
-            <EditOutlined alt="Edit Icon" className="button-icon" />
-            <span>{t("Edit")}</span>
-          </button>
-          <button className="button button-delete">
-            <DeleteOutlined alt="Delete Icon" className="button-icon" />
-            <span>{t("Delete")}</span>
-          </button>
-          <button
-            className="button button-add-intern"
-            onClick={handleOpenModal}
-          >
-            <PlusOutlined alt="Add Intern Icon" className="button-icon" />
-            <span>{t("Add New Project")}</span>
-          </button>
-        </div>
-      </section>
+      </div>
       <main className="main-grid">
         <Form className="search-form" layout="inline">
           <Row gutter={[16, 16]} className="filter-box">

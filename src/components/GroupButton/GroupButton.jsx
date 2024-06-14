@@ -53,7 +53,7 @@ const GroupButton = ({
             handleDeleteClick();
         } else if (name === "Add New Intern") {
             handleAddNewInternClick();
-        } else if (name === "Schedule Interview") {
+        } else if (name === "Schedule interview") {
             handleScheduleInterview();
         }
     };

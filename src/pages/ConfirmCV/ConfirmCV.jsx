@@ -781,7 +781,7 @@ const ConfirmCV = () => {
 
   const handleCloseEmailPopup = () => {
     setEmailPopupVisible(false);
-    form.resetFields();
+    // form.resetFields();
   };
   const handleDropdownVisibleChange = (visible) => {
     setOpen(visible);

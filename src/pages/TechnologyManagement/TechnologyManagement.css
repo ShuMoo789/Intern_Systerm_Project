@@ -23,10 +23,10 @@
 }
 
 .content-navigation-technology-management {
-    max-width: 92%;
+    max-width: 100%;
     right: 0;
     top: 0;
-    margin: 20px auto;
+    /* margin: 20px; */
 }
 
 .content-navigation-technology-management .header-navigation-technology-management {

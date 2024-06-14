@@ -58,7 +58,7 @@ const optionsEmailType = [
   { value: "Internship information", label: t("Internship information") },
 ];
 
-const Sheldule = () => {
+const Sheldule = ({ onClose, openPopup }) => {
   const { t } = useTranslation();
   const [timeDuration, setTimeDuration] = useState(optionsDuration[0]);
   const [interviewType, setInterviewType] = useState(optionsInterviewType[0]);
@@ -68,19 +68,14 @@ const Sheldule = () => {
   const [position, setPosition] = useState(optionsPositions[0]);
 
   const [loadings, setLoadings] = useState([false]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
 
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
       console.log("Received values:", values);
       // Handle form submission
-      setIsModalOpen(false);
+      onClose();
       form.resetFields();
       message.success("Send Mail Success");
     } catch (error) {
@@ -89,7 +84,7 @@ const Sheldule = () => {
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    onClose();
     form.resetFields();
   };
 
@@ -120,18 +115,9 @@ const Sheldule = () => {
   };
   return (
     <>
-      <Button
-        type="primary"
-        onClick={showModal}
-        style={{ background: "#7d3c98" }}
-      >
-        <ClockCircleOutlined />
-        {t("Schedule interview")}
-      </Button>
-
       <Modal
         title={t("Schedule interview for Intern's ID: xxxx")}
-        open={isModalOpen}
+        open={openPopup}
         onCancel={handleCancel}
         okButtonProps={{
           disabled:
