@@ -1,5 +1,6 @@
+// SendEmailPopup.jsx
 import React, { useState } from 'react';
-import { Modal, Select, Input, Button, message } from 'antd';
+import { Modal, Select, Input, Button } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import './SendEmailPopup.css';
 
@@ -9,35 +10,13 @@ const { TextArea } = Input;
 const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
     const [emailType, setEmailType] = useState('');
     const [emailContent, setEmailContent] = useState('');
-    const [typeError, setTypeError] = useState('');
-    const [contentError, setContentError] = useState('');
 
     const handleSend = () => {
-        let valid = true;
-
-        if (!emailType) {
-            setTypeError("You haven't chosen what type of email");
-            valid = false;
-        } else {
-            setTypeError('');
-        }
-
-        if (!emailContent) {
-            setContentError("You haven't entered any content");
-            valid = false;
-        } else {
-            setContentError('');
-        }
-
-        if (valid) {
-            const emailData = {
-                type: emailType,
-                content: emailContent,
-            };
-            onSend(emailData);
-            message.success('Saved');
-            onClose();
-        }
+        const emailData = {
+            type: emailType,
+            content: emailContent
+        };
+        onSend(emailData);
     };
 
     return (
@@ -50,13 +29,12 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
         >
             <div className="send-email-popup-content">
                 <div className="send-email-popup-row">
-                    <label>Choose type of Email</label>
+                    <label>Choose types of Email</label>
                     <Select
                         value={emailType}
                         onChange={setEmailType}
-                        placeholder="Type of Email"
+                        placeholder="Types of Email"
                         style={{ width: '100%' }}
-                        status={typeError ? 'error' : ''}
                     >
                         <Option value="Email interview">Email interview</Option>
                         <Option value="Email result">Email result</Option>
@@ -64,7 +42,6 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
                         <Option value="Additional Profile">Additional Profile</Option>
                         <Option value="Return Profile">Return Profile</Option>
                     </Select>
-                    {typeError && <div className="error-message">{typeError}</div>}
                 </div>
                 <div className="send-email-popup-row">
                     <TextArea
@@ -72,9 +49,7 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
                         placeholder="Enter your mail..."
                         value={emailContent}
                         onChange={(e) => setEmailContent(e.target.value)}
-                        status={contentError ? 'error' : ''}
                     />
-                    {contentError && <div className="error-message">{contentError}</div>}
                 </div>
             </div>
             <div className="send-email-popup-footer">

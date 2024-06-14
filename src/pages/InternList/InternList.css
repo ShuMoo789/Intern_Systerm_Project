@@ -42,3 +42,26 @@
 .search-button-internlist {
     padding: 10px;
 }
+
+.filter-group-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.view {
+    background: white;
+    color: blue;
+    border: 1px solid blue;
+    border-radius: 15px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    cursor: pointer;
+}
+
+.view:hover {
+    background: rgb(66, 66, 243);
+    color: white;
+
+}

@@ -38,12 +38,3 @@
 .send-email-popup-footer .ant-btn .anticon {
     margin-right: 8px;
 }
-
-.send-email-popup-modal .error {
-    border: 1px solid red;
-}
-
-.error-message {
-    color: red;
-    margin-top: 4px;
-}
