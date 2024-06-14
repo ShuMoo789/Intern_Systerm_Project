@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster, toast } from "react-hot-toast";
 import { Tag, Dropdown, Menu } from "antd";
 import {
   MailOutlined,
@@ -13,12 +13,12 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { Table, Select, Button, Input, Col, Row } from "antd";
-import DataInternList from "../../data/InternList.json";  // data of table intern list
+import DataInternList from "../../data/InternList.json"; // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
 import SendEmailPopup from "./SendEmailPopup";
 import ReportProcessModal from "./ReportProcessPopup";
 import ViewButton from "./ViewButton";
-import './InternList.css';
+import "./InternList.css";
 import MainLayout from "../../MainLayout/MainLayout";
 import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
@@ -65,7 +65,6 @@ const optionSelect = [
   {
     value: "out",
     label: "Out",
-
   },
 ];
 
@@ -74,8 +73,6 @@ const optionsInternID = DataInternList.map((item) => ({
   value: item.internID,
   label: item.internID,
 }));
-
-
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
   const existingValue = options.find((option) => option.value === item.role);
@@ -155,15 +152,13 @@ const rowSelection = {
   }),
 };
 
-
 const InternList = () => {
-
   const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [updatedData, setUpdatedData] = useState(DataInternList);
-  const [dataTable, setDataTable] = useState(DataInternList)
-  const viewPort = useViewport()
-  const isMobile = viewPort.width <= 1024
+  const [dataTable, setDataTable] = useState(DataInternList);
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
   const handleChangeStatus = (key, record) => {
     const updatedRecord = { ...record, status: key };
     const updatedData2 = updatedData.map((item) =>
@@ -171,9 +166,9 @@ const InternList = () => {
     );
     setUpdatedData(updatedData2);
   };
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const commentText = t("comment");
-  const commentsText = t("comments")
+  const commentsText = t("comments");
   const groupButton = [
     {
       color: "#6537B1",
@@ -201,8 +196,7 @@ const InternList = () => {
       icon: <FolderAddOutlined />,
     },
   ];
-  
-  
+
   // option of status column
   const optionSelect = [
     {
@@ -218,13 +212,13 @@ const InternList = () => {
       label: t("Out"),
     },
   ];
-  
+
   // option of intern ID from file InternList.json
   const optionsInternID = DataInternList.map((item) => ({
     value: item.internID,
     label: t(item.internID),
   }));
-  
+
   // option of intern phone number from file InternList.json
   const optionsInternPhoneNumber = DataInternList.map((item) => ({
     value: item.phoneNumber,
@@ -300,10 +294,10 @@ const InternList = () => {
       // }
     },
     {
-      title:t("School"),
+      title: t("School"),
       dataIndex: "school",
       width: "auto",
-      render: (text) => t(text)
+      render: (text) => t(text),
       // filteredValue: [filter.school],
       // onFilter: (value, record) => {
       //     return record.school.includes(value)
@@ -313,7 +307,7 @@ const InternList = () => {
       title: t("Address"),
       dataIndex: "address",
       width: "auto",
-      render: (text) => t(text)
+      render: (text) => t(text),
       // filteredValue: [filter.address],
       // onFilter: (value, record) => {
       //     return record.address.includes(value)
@@ -389,9 +383,18 @@ const InternList = () => {
       width: 170,
       render: (text, record) => {
         const statusColor = {
-          "In process": { backgroundColor: "rgb(255, 239, 230)", color: "rgb(255, 93, 2)" },
-          "Completed OJT": { backgroundColor: "rgb(239, 249, 241)", color: "#3A7D34" },
-          "Out": { backgroundColor: "rgb(248, 231, 238)", color: "rgb(183, 13, 82)" },
+          "In process": {
+            backgroundColor: "rgb(255, 239, 230)",
+            color: "rgb(255, 93, 2)",
+          },
+          "Completed OJT": {
+            backgroundColor: "rgb(239, 249, 241)",
+            color: "#3A7D34",
+          },
+          Out: {
+            backgroundColor: "rgb(248, 231, 238)",
+            color: "rgb(183, 13, 82)",
+          },
         };
 
         return (
@@ -418,7 +421,8 @@ const InternList = () => {
                 fontSize: "12px",
               }}
             >
-              {text}<DownOutlined />
+              {text}
+              <DownOutlined />
             </Button>
           </Dropdown>
         );
@@ -601,7 +605,6 @@ const InternList = () => {
         <div className="content-intern-list">
           {/* Pass props to Navigation */}
           <Navigation
-
             titleName={t("INTERN LIST")}
             groupButton={groupButton}
             onSendEmail={handleOpenEmailPopup}
@@ -643,7 +646,6 @@ const InternList = () => {
                     value={filter.phoneNumber || null}
                   />
                   <Select
-
                     size="large"
                     showSearch
                     style={{
@@ -688,7 +690,6 @@ const InternList = () => {
                     value={filter.fullName || null}
                   />
                   <Select
-
                     size="large"
                     showSearch
                     style={{
@@ -698,7 +699,6 @@ const InternList = () => {
                       fontSize: 5,
                     }}
                     placeholder={t("Enter intern's Address")}
-
                     options={optionsInternAddress}
                     onChange={handleChangeFilterAddress}
                     value={filter.address || null}
@@ -741,7 +741,6 @@ const InternList = () => {
                       marginTop: 5,
                     }}
                     placeholder={t("Enter intern's D.O.B")}
-
                     value={filter.dateOfBirth}
                     onChange={(e) => handleChangeFilterDOB(e.target.value)}
                   />
@@ -770,7 +769,6 @@ const InternList = () => {
                   <Input
                     size="large"
                     style={{
-
                       width: "100%",
                       height: "20%",
                       marginTop: 5,
@@ -830,13 +828,12 @@ const InternList = () => {
                         marginTop: 5,
                         fontSize: 5,
                       }}
-                      placeholder={t("Enter intern's Phone number")
+                      placeholder={t("Enter intern's Phone number")}
                       options={optionsInternPhoneNumber}
                       onChange={handleChangeFilterPhoneNumber}
                       value={filter.phoneNumber || null}
                     />
                     <Select
-
                       size="large"
                       showSearch
                       style={{
@@ -869,7 +866,6 @@ const InternList = () => {
                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                   <div className="filter-group">
                     <Select
-
                       size="large"
                       showSearch
                       style={{
@@ -943,7 +939,6 @@ const InternList = () => {
                     <Input
                       size="large"
                       style={{
-
                         width: "100%",
                         height: "20%",
                         marginTop: 5,
@@ -981,12 +976,12 @@ const InternList = () => {
                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                   <div className="filter-group">
                     <div className="filter-button">
-
                       <Button
                         onClick={handleCleanFilterButton}
                         style={{ width: "100%" }}
                       >
-                        {isMobile ? "" : <FilterOutlined />} {t("Clean Filters")}
+                        {isMobile ? "" : <FilterOutlined />}{" "}
+                        {t("Clean Filters")}
                       </Button>
                     </div>
                     <div className="search-button-internlist">
@@ -1030,7 +1025,6 @@ const InternList = () => {
         />
       </MainLayout>
       <Toaster />
-
     </div>
   );
 };
