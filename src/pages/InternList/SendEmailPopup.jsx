@@ -1,5 +1,6 @@
+// SendEmailPopup.jsx
 import React, { useState } from 'react';
-import { Modal, Select, Input, Button, message } from 'antd';
+import { Modal, Select, Input, Button } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import './SendEmailPopup.css';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +11,7 @@ const { TextArea } = Input;
 const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
     const [emailType, setEmailType] = useState('');
     const [emailContent, setEmailContent] = useState('');
+
     const [typeError, setTypeError] = useState('');
     const [contentError, setContentError] = useState('');
     const {t} = useTranslation()
@@ -39,6 +41,7 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
             message.success('Saved');
             onClose();
         }
+
     };
 
     return (
@@ -55,9 +58,8 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
                     <Select
                         value={emailType}
                         onChange={setEmailType}
-                        placeholder="Type of Email"
+                        placeholder="Types of Email"
                         style={{ width: '100%' }}
-                        status={typeError ? 'error' : ''}
                     >
                         <Option value="Email interview">{t("Email interview")}</Option>
                         <Option value="Email result">{t("Email result")}</Option>
@@ -65,7 +67,6 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
                         <Option value="Additional Profile">{t("Additional Profile")}</Option>
                         <Option value="Return Profile">{t("Return Profile")}</Option>
                     </Select>
-                    {typeError && <div className="error-message">{typeError}</div>}
                 </div>
                 <div className="send-email-popup-row">
                     <TextArea
@@ -73,9 +74,7 @@ const SendEmailPopup = ({ onClose, onSend, openPopup }) => {
                         placeholder={t("Enter your mail...")}
                         value={emailContent}
                         onChange={(e) => setEmailContent(e.target.value)}
-                        status={contentError ? 'error' : ''}
                     />
-                    {contentError && <div className="error-message">{contentError}</div>}
                 </div>
             </div>
             <div className="send-email-popup-footer">

@@ -1,0 +1,15 @@
+/* InternList.module.css */
+:global(.ant-select-focused.ant-select-status-process) .ant-select-selector {
+    background-color: yellow !important;
+    /* Màu nền khi chọn "inProcess" */
+}
+
+:global(.ant-select-focused.ant-select-status-success) .ant-select-selector {
+    background-color: green !important;
+    /* Màu nền khi chọn "completedOJT" */
+}
+
+:global(.ant-select-focused.ant-select-status-error) .ant-select-selector {
+    background-color: red !important;
+    /* Màu nền khi chọn "out" */
+}

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Toaster, toast } from 'react-hot-toast';
+import { Tag, Dropdown, Menu } from "antd";
 import {
   MailOutlined,
+  DownOutlined,
   ExportOutlined,
   EditOutlined,
   DeleteOutlined,
@@ -10,17 +13,68 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { Table, Select, Button, Input, Col, Row } from "antd";
-import DataInternList from "../../data/InternList.json"; // data of table intern list
+import DataInternList from "../../data/InternList.json";  // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
 import SendEmailPopup from "./SendEmailPopup";
 import ReportProcessModal from "./ReportProcessPopup";
 import ViewButton from "./ViewButton";
-import "./InternList.css";
+import './InternList.css';
 import MainLayout from "../../MainLayout/MainLayout";
 import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
 
 // props GroupButton
+const groupButton = [
+  {
+    color: "#6537B1",
+    name: "Send Email",
+    icon: <MailOutlined />,
+  },
+  {
+    color: "#41B137",
+    name: "Export Excel",
+    icon: <ExportOutlined />,
+  },
+  {
+    color: "#FB8632",
+    name: "Edit",
+    icon: <EditOutlined />,
+  },
+  {
+    color: "#FF3A2E",
+    name: "Delete",
+    icon: <DeleteOutlined />,
+  },
+  {
+    color: "#4889E9",
+    name: "Add New Intern",
+    icon: <FolderAddOutlined />,
+  },
+];
+
+// option of status column
+const optionSelect = [
+  {
+    value: "inProcess",
+    label: "In process",
+  },
+  {
+    value: "completedOJT",
+    label: "Completed OJT",
+  },
+  {
+    value: "out",
+    label: "Out",
+
+  },
+];
+
+// option of intern ID from file InternList.json
+const optionsInternID = DataInternList.map((item) => ({
+  value: item.internID,
+  label: item.internID,
+}));
+
 
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
@@ -103,14 +157,23 @@ const rowSelection = {
 
 
 const InternList = () => {
+
+  const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
+  const [selectedIntern, setSelectedIntern] = useState(null);
+  const [updatedData, setUpdatedData] = useState(DataInternList);
+  const [dataTable, setDataTable] = useState(DataInternList)
+  const viewPort = useViewport()
+  const isMobile = viewPort.width <= 1024
+  const handleChangeStatus = (key, record) => {
+    const updatedRecord = { ...record, status: key };
+    const updatedData2 = updatedData.map((item) =>
+      item.key === record.key ? updatedRecord : item
+    );
+    setUpdatedData(updatedData2);
+  };
   const {t} = useTranslation()
   const commentText = t("comment");
   const commentsText = t("comments")
-  const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
-  const [selectedIntern, setSelectedIntern] = useState(null);
-  const [dataTable, setDataTable] = useState(DataInternList);
-  const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
   const groupButton = [
     {
       color: "#6537B1",
@@ -188,22 +251,22 @@ const InternList = () => {
     {
       title: t("Intern ID"),
       dataIndex: "internID",
-      width: 120,
+      width: "auto",
     },
     {
       title: t("Start Date"),
       dataIndex: "startDate",
-      width: 120,
+      width: "auto",
     },
     {
       title: t("Finish Date"),
       dataIndex: "finishDate",
-      width: 120,
+      width: "auto",
     },
     {
       title: t("Full Name"),
       dataIndex: "fullName",
-      width: 130,
+      width: "auto",
       // filteredValue: [filter.fullName],
       // onFilter: (value, record) => {
       //     return record.fullName.includes(value)
@@ -212,7 +275,7 @@ const InternList = () => {
     {
       title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
-      width: 110,
+      width: "auto",
       // filteredValue: [filter.dateOfBirth],
       // onFilter: (value, record) => {
       //     return record.dateOfBirth.includes(value)
@@ -221,7 +284,7 @@ const InternList = () => {
     {
       title: t("Phone Number"),
       dataIndex: "phoneNumber",
-      width: 120,
+      width: "auto",
       // filteredValue: [filter.phoneNumber],
       // onFilter: (value, record) => {
       //     return record.phoneNumber.includes(value)
@@ -230,7 +293,7 @@ const InternList = () => {
     {
       title: t("Position"),
       dataIndex: "position",
-      width: 120,
+      width: "auto",
       // filteredValue: [filter.position],
       // onFilter: (value, record) => {
       //     return record.position.includes(value)
@@ -239,7 +302,7 @@ const InternList = () => {
     {
       title:t("School"),
       dataIndex: "school",
-      width: 160,
+      width: "auto",
       render: (text) => t(text)
       // filteredValue: [filter.school],
       // onFilter: (value, record) => {
@@ -249,7 +312,7 @@ const InternList = () => {
     {
       title: t("Address"),
       dataIndex: "address",
-      width: 120,
+      width: "auto",
       render: (text) => t(text)
       // filteredValue: [filter.address],
       // onFilter: (value, record) => {
@@ -259,7 +322,7 @@ const InternList = () => {
     {
       title: t("Email"),
       dataIndex: "email",
-      width: 180,
+      width: "auto",
       // filteredValue: [filter.email],
       // onFilter: (value, record) => {
       //     return record.email.includes(value)
@@ -268,15 +331,15 @@ const InternList = () => {
     {
       title: "CV",
       dataIndex: "cv",
-      width: 120,
+      width: 100,
       render: (text) => (
-        <a style={{ color: "#000000", textDecoration: "underline" }}>{text}</a>
+        <a style={{ color: "blue", textDecoration: "underline" }}>{text}</a>
       ),
     },
     {
       title: t("Comments"),
       dataIndex: "comments",
-      width: 150,
+      width: 160,
       render: (text) => (
         <Button>
           2 {commentsText}
@@ -287,7 +350,7 @@ const InternList = () => {
     {
       title: t("Role"),
       dataIndex: "role",
-      width: 120,
+      width: 130,
       // filteredValue: [filter.role],
       // onFilter: (value, record) => {
       //     return record.role.includes(value)
@@ -296,7 +359,7 @@ const InternList = () => {
     {
       title: t("Project"),
       dataIndex: "project",
-      width: 130,
+      width: "auto",
       // filteredValue: [filter.project],
       // onFilter: (value, record) => {
       //     return record.project.includes(value)
@@ -305,7 +368,7 @@ const InternList = () => {
     {
       title: t("Group Zalo"),
       dataIndex: "groupZalo",
-      width: 160,
+      width: "auto",
       // filteredValue: [filter.groupZalo],
       // onFilter: (value, record) => {
       //     return record.groupZalo.includes(value)
@@ -314,7 +377,7 @@ const InternList = () => {
     {
       title: t("Mentor"),
       dataIndex: "mentor",
-      width: 130,
+      width: "auto",
       // filteredValue: [filter.mentor],
       // onFilter: (value, record) => {
       //     return record.mentor.includes(value)
@@ -323,16 +386,41 @@ const InternList = () => {
     {
       title: t("Status"),
       dataIndex: "status",
-      width: 160,
-      render: (text) => {
+      width: 170,
+      render: (text, record) => {
+        const statusColor = {
+          "In process": { backgroundColor: "rgb(255, 239, 230)", color: "rgb(255, 93, 2)" },
+          "Completed OJT": { backgroundColor: "rgb(239, 249, 241)", color: "#3A7D34" },
+          "Out": { backgroundColor: "rgb(248, 231, 238)", color: "rgb(183, 13, 82)" },
+        };
+
         return (
-          <Select
-            defaultValue={text}
-            style={{
-              width: 140,
-            }}
-            options={optionSelect}
-          />
+          <Dropdown
+            overlay={
+              <Menu onClick={({ key }) => handleChangeStatus(key, record)}>
+                <Menu.Item key="In process">
+                  <span>In process</span>
+                </Menu.Item>
+                <Menu.Item key="Completed OJT">
+                  <span>Completed OJT</span>
+                </Menu.Item>
+                <Menu.Item key="Out">
+                  <span>Out</span>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button
+              style={{
+                width: "auto",
+                ...statusColor[text],
+                borderRadius: "100px",
+                fontSize: "12px",
+              }}
+            >
+              {text}<DownOutlined />
+            </Button>
+          </Dropdown>
         );
       },
     },
@@ -354,7 +442,7 @@ const InternList = () => {
     {
       title: t("Button"),
       dataIndex: "button",
-      width: 120,
+      width: "auto",
       render: (text) => <ViewButton>{text}</ViewButton>,
     },
   ];
@@ -513,6 +601,7 @@ const InternList = () => {
         <div className="content-intern-list">
           {/* Pass props to Navigation */}
           <Navigation
+
             titleName={t("INTERN LIST")}
             groupButton={groupButton}
             onSendEmail={handleOpenEmailPopup}
@@ -520,6 +609,7 @@ const InternList = () => {
           {/* Group of filter and table */}
           <div className="group-filter-table">
             {/* Filter */}
+
             {!isMobile ? (
               <div className="filter">
                 <div className="filter-group">
@@ -553,6 +643,7 @@ const InternList = () => {
                     value={filter.phoneNumber || null}
                   />
                   <Select
+
                     size="large"
                     showSearch
                     style={{
@@ -597,6 +688,7 @@ const InternList = () => {
                     value={filter.fullName || null}
                   />
                   <Select
+
                     size="large"
                     showSearch
                     style={{
@@ -606,6 +698,7 @@ const InternList = () => {
                       fontSize: 5,
                     }}
                     placeholder={t("Enter intern's Address")}
+
                     options={optionsInternAddress}
                     onChange={handleChangeFilterAddress}
                     value={filter.address || null}
@@ -648,6 +741,7 @@ const InternList = () => {
                       marginTop: 5,
                     }}
                     placeholder={t("Enter intern's D.O.B")}
+
                     value={filter.dateOfBirth}
                     onChange={(e) => handleChangeFilterDOB(e.target.value)}
                   />
@@ -676,6 +770,7 @@ const InternList = () => {
                   <Input
                     size="large"
                     style={{
+
                       width: "100%",
                       height: "20%",
                       marginTop: 5,
@@ -735,12 +830,13 @@ const InternList = () => {
                         marginTop: 5,
                         fontSize: 5,
                       }}
-                      placeholder={t("Enter intern's Phone number")}
+                      placeholder={t("Enter intern's Phone number")
                       options={optionsInternPhoneNumber}
                       onChange={handleChangeFilterPhoneNumber}
                       value={filter.phoneNumber || null}
                     />
                     <Select
+
                       size="large"
                       showSearch
                       style={{
@@ -773,6 +869,7 @@ const InternList = () => {
                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                   <div className="filter-group">
                     <Select
+
                       size="large"
                       showSearch
                       style={{
@@ -846,6 +943,7 @@ const InternList = () => {
                     <Input
                       size="large"
                       style={{
+
                         width: "100%",
                         height: "20%",
                         marginTop: 5,
@@ -883,6 +981,7 @@ const InternList = () => {
                 <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
                   <div className="filter-group">
                     <div className="filter-button">
+
                       <Button
                         onClick={handleCleanFilterButton}
                         style={{ width: "100%" }}
@@ -930,6 +1029,8 @@ const InternList = () => {
           openPopup={isEmailPopupVisible}
         />
       </MainLayout>
+      <Toaster />
+
     </div>
   );
 };

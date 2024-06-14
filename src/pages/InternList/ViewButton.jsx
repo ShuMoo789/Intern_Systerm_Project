@@ -1,15 +1,19 @@
+
 import React, { useState } from "react";
 import { DatePicker, TimePicker, Button, Modal } from "antd";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+
 
 const ViewButton = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
+
   const [timeDuration, setTimeDuration] = useState("15 minutes");
   const {t} = useTranslation()
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
@@ -43,6 +47,7 @@ const ViewButton = () => {
 
   return (
     <>
+
       <Button
         type="primary"
         onClick={showModal}
@@ -56,13 +61,16 @@ const ViewButton = () => {
         {t("View")}
       </Button>
 
+
       <Modal
         open={open}
         title={t("Schedule interview for Intern's ID: xxxx")}
         onOk={handleOk}
         onCancel={handleCancel}
         width={1125}
-        footer={[]}
+        footer={[
+
+        ]}
       >
         <form onSubmit={handleSubmit}>
           <div
@@ -87,21 +95,23 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 #12345128
               </div>
+
+
             </div>
 
             <div style={{ marginBottom: "20px" }}>
@@ -119,17 +129,17 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 Ester Eden
@@ -150,24 +160,23 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 25/11/2003
               </div>
             </div>
           </div>
-
           <div
             style={{
               display: "flex",
@@ -190,17 +199,17 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 -378792628
@@ -222,17 +231,17 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 {t("Back-End")}
@@ -253,17 +262,17 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 {t("FPT University")}
@@ -293,82 +302,68 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 {t("District 9")}
               </div>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
-              <label
-                style={{
-                  display: "block",
-                  fontWeight: "bold",
-                  marginBottom: "5px",
-                }}
-              >
-                Email
-              </label>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Email</label>
               <div
                 type="text"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
               >
                 abc@example.com
               </div>
             </div>
-            <div style={{ marginBottom: "20px" }}>
-              <label
-                style={{
-                  display: "block",
-                  fontWeight: "bold",
-                  marginBottom: "5px",
-                }}
-              >
-                Link CV
-              </label>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Lin CV</label>
               <div
                 type="text"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
-                  height: "57px",
-                  padding: "20px",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  boxSizing: "border-box",
-                  fontSize: "14px",
-                  display: "flex", // Use flexbox
-                  alignItems: "center", // Center vertically
-                  justifyContent: "flex-start", // Align text to the left
-                  textAlign: "left", // Ensure text alignment is left
+                  width: '260px',
+                  height: '57px',
+                  padding: '20px',
+                  border: '1px solid #ccc',
+                  borderRadius: '10px',
+                  boxSizing: 'border-box',
+                  fontSize: '14px',
+                  display: 'flex', // Use flexbox
+                  alignItems: 'center', // Center vertically
+                  justifyContent: 'flex-start', // Align text to the left
+                  textAlign: 'left', // Ensure text alignment is left
                 }}
-              ></div>
+              >
+
+              </div>
             </div>
           </div>
           <div style={{ marginBottom: "20px" }}>
@@ -386,22 +381,29 @@ const ViewButton = () => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               style={{
-                width: "260px",
-                height: "57px",
-                padding: "20px",
-                border: "1px solid #ccc",
-                borderRadius: "10px",
-                boxSizing: "border-box",
-                fontSize: "14px",
-                display: "flex", // Use flexbox
-                alignItems: "center", // Center vertically
-                justifyContent: "flex-start", // Align text to the left
-                textAlign: "left", // Ensure text alignment is left
+                width: '260px',
+                height: '57px',
+                padding: '20px',
+                border: '1px solid #ccc',
+                borderRadius: '10px',
+                boxSizing: 'border-box',
+                fontSize: '14px',
+                display: 'flex', // Use flexbox
+                alignItems: 'center', // Center vertically
+                justifyContent: 'flex-start', // Align text to the left
+                textAlign: 'left', // Ensure text alignment is left
               }}
             >
               {t("Intern")}
             </div>
           </div>
+
+
+
+
+
+
+
         </form>
       </Modal>
     </>
