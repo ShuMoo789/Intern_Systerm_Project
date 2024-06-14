@@ -10,8 +10,9 @@ import {
   Space,
   Select,
   Modal,
-  Form,
   message,
+  Dropdown,
+  Menu,
 } from "antd";
 
 import {
@@ -22,6 +23,7 @@ import {
   FolderAddOutlined,
   FilterOutlined,
   SearchOutlined,
+  DownOutlined,
 } from "@ant-design/icons";
 
 import jsonData from "../../data/GroupList.json";
@@ -38,7 +40,7 @@ const GroupList = () => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
   const [visible, setVisible] = useState(false);
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [filters, setFilters] = useState({
     InternId: "",
     FullName: "",
@@ -104,17 +106,17 @@ const GroupList = () => {
     setFilteredData(data);
   };
 
-  const handleStatusChange = (value, record) => {
+  const handleStatusChange = (key, record) => {
     const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, Status: value } : item
+      item.key === record.key ? { ...item, Status: key } : item
     );
     setData(updatedData);
     setFilteredData(updatedData);
   };
 
-  const handleContractChange = (value, record) => {
+  const handleContractChange = (key, record) => {
     const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, InternshipContract: value } : item
+      item.key === record.key ? { ...item, InternshipContract: key } : item
     );
     setData(updatedData);
     setFilteredData(updatedData);
@@ -130,6 +132,11 @@ const GroupList = () => {
     { label: t("Interviewed"), value: "Interviewed", color: "orange" },
   ];
 
+  const contractOptions = [
+    { label: t("Signed"), value: "Signed", color: "green" },
+    { label: t("Pending"), value: "Pending", color: "red" },
+  ];
+
   const inputFields = [
     { title: "Intern ID", placeholder: "#12345128" },
     { title: "Full name", placeholder: "Esther Eden" },
@@ -143,11 +150,6 @@ const GroupList = () => {
     { title: "Project", placeholder: "Intern System" },
     { title: "Group Zalo", placeholder: "FE Intern System" },
     { title: "Role", placeholder: "Leader" },
-  ];
-
-  const contractOptions = [
-    { label: t("Signed"), value: "Signed", color: "green" },
-    { label: t("Pending"), value: "Pending", color: "red" },
   ];
 
   const groupButton = [
@@ -180,6 +182,34 @@ const GroupList = () => {
 
   const handleCreateIntern = () => {
     setVisible(true);
+  };
+
+  const getBackgroundColor = (status) => {
+    switch (status) {
+      case "Accepted":
+      case "Signed":
+        return "#EFF9F1";
+      case "Pending":
+        return "#F8E7EE";
+      case "Interviewed":
+        return "#FFEFE6";
+      default:
+        return "#FFFFFF";
+    }
+  };
+
+  const getColor = (status) => {
+    switch (status) {
+      case "Accepted":
+      case "Signed":
+        return "#449E3C";
+      case "Pending":
+        return "#B70D52";
+      case "Interviewed":
+        return "#FF5D02";
+      default:
+        return "#000000";
+    }
   };
 
   const columns = [
@@ -293,25 +323,30 @@ const GroupList = () => {
       dataIndex: "Status",
       key: "Status",
       width: "auto",
-
       render: (text, record) => (
-        <Select
-          value={text}
-          onChange={(value) => handleStatusChange(value, record)}
-          style={{ width: 120 }}
+        <Dropdown
+          overlay={
+            <Menu onClick={({ key }) => handleStatusChange(key, record)}>
+              {statusOptions.map((option) => (
+                <Menu.Item key={option.value}>
+                  <span>{option.label}</span>
+                </Menu.Item>
+              ))}
+            </Menu>
+          }
         >
-          {statusOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              <div
-                style={{
-                  color: option.color,
-                }}
-              >
-                {option.label}
-              </div>
-            </Option>
-          ))}
-        </Select>
+          <Button
+            style={{
+              width: 120,
+              backgroundColor: getBackgroundColor(record.Status),
+              color: getColor(record.Status),
+              borderRadius: "100px",
+              fontSize: "12px",
+            }}
+          >
+            {text} <DownOutlined />
+          </Button>
+        </Dropdown>
       ),
     },
     {
@@ -319,19 +354,30 @@ const GroupList = () => {
       dataIndex: "InternshipContract",
       key: "InternshipContract",
       width: "auto",
-
       render: (text, record) => (
-        <Select
-          value={text}
-          onChange={(value) => handleContractChange(value, record)}
-          style={{ width: 120 }}
+        <Dropdown
+          overlay={
+            <Menu onClick={({ key }) => handleContractChange(key, record)}>
+              {contractOptions.map((option) => (
+                <Menu.Item key={option.value}>
+                  <span>{option.label}</span>
+                </Menu.Item>
+              ))}
+            </Menu>
+          }
         >
-          {contractOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              <div style={{ color: option.color }}>{option.label}</div>
-            </Option>
-          ))}
-        </Select>
+          <Button
+            style={{
+              width: 120,
+              backgroundColor: getBackgroundColor(record.InternshipContract),
+              color: getColor(record.InternshipContract),
+              borderRadius: "100px",
+              fontSize: "12px",
+            }}
+          >
+            {text} <DownOutlined />
+          </Button>
+        </Dropdown>
       ),
     },
     {
@@ -512,7 +558,7 @@ const GroupList = () => {
         <MainLayout>
           <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
             <Navigation
-              titleName= {t("GROUP LIST")}
+              titleName={t("GROUP LIST")}
               groupButton={groupButton}
               onSendEmail={showModal}
               onCreateIntern={handleCreateIntern}
@@ -643,7 +689,7 @@ const GroupList = () => {
                       {t("Clean Filter")}
                     </Button>
                     <Button
-                    className="search-filter-button"
+                      className="search-filter-button"
                       style={{
                         backgroundColor: "#4889E9",
                         color: "white",
@@ -735,7 +781,6 @@ const GroupList = () => {
           <Row justify="center">
             <Col span={8}>
               <div style={{ width: "95%", alignContent: "center" }}>
-                {/* Project */}
                 <p>
                   <b>{t("Role")}</b>
                 </p>
@@ -759,26 +804,21 @@ const GroupList = () => {
               </div>
 
               <div style={{ width: "95%", alignContent: "center" }}>
-                {/* Group zalo */}
                 <p>
                   <b>{t("Mentor")}</b>
                 </p>
-
                 <Input
                   style={{ width: "100%" }}
                   placeholder="Mentor name"
                   value={mentor}
                   onChange={(e) => setMentor(e.target.value)}
                 />
-                {errors.mentor && (
-                  <p style={{ color: "red" }}>{errors.mentor}</p>
-                )}
+                {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
               </div>
             </Col>
 
             <Col span={8}>
               <div style={{ width: "95%", alignContent: "center" }}>
-                {/* Project */}
                 <p>
                   <b>{t("Project")}</b>
                 </p>
@@ -792,15 +832,12 @@ const GroupList = () => {
                   options={[{ value: "Project 1", label: "Project 1" }]}
                   value={project}
                 />
-                {errors.project && (
-                  <p style={{ color: "red" }}>{errors.project}</p>
-                )}
+                {errors.project && <p style={{ color: "red" }}>{errors.project}</p>}
               </div>
             </Col>
 
             <Col span={8}>
               <div style={{ width: "100%", alignContent: "center" }}>
-                {/* Group zalo */}
                 <p>
                   <b>{t("Group Zalo")}</b>
                 </p>
@@ -810,11 +847,9 @@ const GroupList = () => {
                   value={groupZalo}
                   onChange={(e) => setGroupZalo(e.target.value)}
                 />
-                {errors.groupZalo && (
-                  <p style={{ color: "red", width: "120%" }}>
+                {errors.groupZalo && <p style={{ color: "red", width: "120%" }}>
                     {errors.groupZalo}
-                  </p>
-                )}
+                  </p>}
               </div>
             </Col>
           </Row>
