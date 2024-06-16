@@ -11,6 +11,8 @@ import {
   Modal,
   Form,
   message,
+  Dropdown,
+  Menu,
 } from "antd";
 
 import {
@@ -21,12 +23,14 @@ import {
   FolderAddOutlined,
   FilterOutlined,
   SearchOutlined,
+  DownOutlined
 } from "@ant-design/icons";
 
 import jsonData from "../../data/GroupList.json";
 import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
+import "./GroupList.css"
 
 const { Option } = Select;
 
@@ -102,20 +106,18 @@ const GroupList = () => {
     setFilteredData(data);
   };
 
-  const handleStatusChange = (value, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, Status: value } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
+  const handleStatusChange = (value, recordToUpdate) => {
+    // Update the status of the record
+    recordToUpdate.Status = value;
+    // Trigger re-render by updating state or forceUpdate
+    setData([...data]); // Assuming data is an array of records
   };
 
-  const handleContractChange = (value, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, InternshipContract: value } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
+  const handleContractChange = (value, recordToUpdate) => {
+    // Update the status of the record
+    recordToUpdate.InternshipContract = value;
+    // Trigger re-render by updating state or forceUpdate
+    setData([...data]); // Assuming data is an array of records
   };
 
   const handleCancel = () => {
@@ -250,8 +252,16 @@ const GroupList = () => {
     {
       title: "CV",
       dataIndex: "CV",
-      key: "CV",
-      width: 140,
+      // key: "CV",
+      // width: 140,
+      render: (text) => (
+        <a
+          href={text}
+          style={{ color: "#0000FF", textDecoration: "underline" }}
+        >
+          Link
+        </a>
+      ),
     },
     {
       title: "Comments",
@@ -290,23 +300,43 @@ const GroupList = () => {
       width: 140,
 
       render: (text, record) => (
-        <Select
-          value={text}
-          onChange={(value) => handleStatusChange(value, record)}
-          style={{ width: 120 }}
-        >
-          {statusOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              <div
-                style={{
-                  color: option.color,
-                }}
-              >
-                {option.label}
-              </div>
-            </Option>
-          ))}
-        </Select>
+        <div style={{ width: 126 }}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item value="Accepted" onClick={() => handleStatusChange("Accepted", record)}>
+                  <span>Accepted</span>
+                </Menu.Item>
+                <Menu.Item value="Pending" onClick={() => handleStatusChange("Pending", record)}>
+                  <span>Pending</span>
+                </Menu.Item>
+                <Menu.Item value="Interviewed" onClick={() => handleStatusChange("Interviewed", record)}>
+                  <span>Interviewed</span>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button
+              style={{
+                backgroundColor:
+                  record.Status === "Accepted" ? "#EFF9F1" :
+                    record.Status === "Pending" ? "#F8E7EE" :
+                      record.Status === "Interviewed" ? "#E8F4FD" : "FFFFFF",
+                color:
+                  record.Status === "Accepted" ? "#449E3C": 
+                    record.Status === "Pending" ? "#B70D52": 
+                      record.Status === "Interviewed" ? "#106BA3" : "#333333",
+                borderRadius: "50px", // Đặt bo tròn thành hình tròn
+                marginLeft: "-8px",
+                width: "100%",
+                fontSize: "12px",
+              }}
+            >
+              {record.Status}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       ),
     },
     {
@@ -316,45 +346,53 @@ const GroupList = () => {
       width: 160,
 
       render: (text, record) => (
-        <Select
-          value={text}
-          onChange={(value) => handleContractChange(value, record)}
-          style={{ width: 120 }}
-        >
-          {contractOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              <div style={{ color: option.color }}>{option.label}</div>
-            </Option>
-          ))}
-        </Select>
+        <div style={{ width: 126 }}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item value="Signed" onClick={() => handleContractChange("Signed", record)}>
+                  <span>Signed</span>
+                </Menu.Item>
+                <Menu.Item value="Pending" onClick={() => handleContractChange("Pending", record)}>
+                  <span>Pending</span>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button
+              style={{
+                backgroundColor:
+                  record.InternshipContract === "Signed" ? "#EFF9F1": 
+                    record.InternshipContract === "Pending" ? "#F8E7EE": "FFFFFF",
+                color:
+                  record.InternshipContract === "Signed" ? "#449E3C" :
+                    record.InternshipContract === "Pending" ? "#B70D52": "#333333",
+                borderRadius: "50px", // Đặt bo tròn thành hình tròn
+                marginLeft: "-8px",
+                width: "100%",
+                fontSize: "12px",
+              }}
+            >
+              {record.InternshipContract}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       ),
     },
     {
       title: "Button",
       key: "Button",
-      width: 200,
-
+      // width: 200,
       render: (_, record) => (
-        <Space>
-          <Button
-            shape="round"
-            style={{
-              color: "#3498db",
-              borderColor: "#3498db",
-            }}
-          >
-            View
-          </Button>
-          <Button
-            shape="round"
-            style={{
-              color: "#3498db",
-              borderColor: "#3498db",
-            }}
-          >
-            Upload File
-          </Button>
-        </Space>
+        <div className="grouplist-btns">
+          <div className="view">
+            {("View")}
+          </div>
+          <div className="feedbacks">
+            {("Upload file")}
+          </div>
+        </div>
       ),
     },
   ];

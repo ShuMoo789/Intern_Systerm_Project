@@ -1,3 +1,46 @@
 .space-bg {
     text-align: center;
 }
+
+div.grouplist-btns {
+    display: flex;
+}
+
+div.grouplist-btns>div.view,
+div.grouplist-btns {
+    display: flex;
+}
+
+div.grouplist-btns>div.view {
+    margin-right: 5px;
+    padding: 5px 10px;
+    color: #b22222;
+    background-color: #ffffff;
+    border: 1px solid #b22222;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+div.grouplist-btns>div.feedbacks {
+    margin-right: 5px;
+    padding: 5px 10px;
+    color: #4889E9;
+    background-color: #ffffff;
+    border: 1px solid #4889E9;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 70px;
+}
+
+
+div.grouplist-btns>div.view:hover {
+    color: #ffffff;
+    background-color: #b22222;
+    border: 1px solid #b22222;
+}
+
+div.grouplist-btns>div.feedbacks:hover {
+    color: #ffffff;
+    background-color: #4889E9;
+    border: 1px solid #4889E9;
+}
