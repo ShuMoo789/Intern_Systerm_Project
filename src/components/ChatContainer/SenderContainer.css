@@ -1,0 +1,54 @@
+.sender-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message-content {
+  position: relative;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  max-width: 60%;
+  margin-left: 10px;
+  font-size: 20px;
+  word-wrap: break-word;
+}
+
+.reaction {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  font-size: 20px;
+}
+
+.reaction-icon {
+  position: absolute;
+  bottom: -10px;
+  right: -30px;
+  cursor: pointer;
+}
+/* SenderContainer.css */
+/* SenderContainer.css */
+.icon-selector {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+}
+
+.selected-emoji {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 20px;
+
+}

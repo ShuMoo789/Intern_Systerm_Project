@@ -17,7 +17,7 @@ function ResetPasswordForm() {
 
     // Regular expression to validate email format
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email(t('Invalid email address')).required(t('Email is required'))
+        email: Yup.string().email(t('Invalid email address')).required(t("Email is required"))
     });
 
     // Function to generate a random OTP code

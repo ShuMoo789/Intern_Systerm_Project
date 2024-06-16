@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DatePicker, TimePicker, Button, Modal } from "antd";
 import { ClockCircleOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const ViewButton = () => {
   const [open, setOpen] = useState(false);
@@ -8,7 +9,7 @@ const ViewButton = () => {
   const [date, setDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [timeDuration, setTimeDuration] = useState("15 minutes");
-
+  const {t} = useTranslation()
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
@@ -52,12 +53,12 @@ const ViewButton = () => {
           borderRadius: "15px",
         }}
       >
-        View
+        {t("View")}
       </Button>
 
       <Modal
         open={open}
-        title="Schedule interview for Intern's ID: xxxx"
+        title={t("Schedule interview for Intern's ID: xxxx")}
         onOk={handleOk}
         onCancel={handleCancel}
         width={1125}
@@ -79,7 +80,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                Intern ID
+                {t("Intern ID")}
               </label>
               <div
                 type="text"
@@ -111,7 +112,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                Full Name
+                {t("Full Name")}
               </label>
               <div
                 type="text"
@@ -142,7 +143,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                Date Of Birth
+                {t("Date Of Birth")}
               </label>
               <div
                 type="text"
@@ -182,7 +183,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                Phone Number
+                {t("Phone Number")}
               </label>
               <div
                 type="text"
@@ -214,7 +215,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                Position
+                {t("Position")}
               </label>
               <div
                 type="text"
@@ -234,7 +235,7 @@ const ViewButton = () => {
                   textAlign: "left", // Ensure text alignment is left
                 }}
               >
-                Back-End
+                {t("Back-End")}
               </div>
             </div>
             <div style={{ marginBottom: "20px" }}>
@@ -245,7 +246,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                School
+                {t("School")}
               </label>
               <div
                 type="text"
@@ -265,7 +266,7 @@ const ViewButton = () => {
                   textAlign: "left", // Ensure text alignment is left
                 }}
               >
-                FPT UNIVERISY
+                {t("FPT University")}
               </div>
             </div>
           </div>
@@ -285,7 +286,7 @@ const ViewButton = () => {
                   marginBottom: "5px",
                 }}
               >
-                Adress
+                {t("Adress")}
               </label>
               <div
                 type="text"
@@ -305,7 +306,7 @@ const ViewButton = () => {
                   textAlign: "left", // Ensure text alignment is left
                 }}
               >
-                District 9
+                {t("District 9")}
               </div>
             </div>
 
@@ -378,7 +379,7 @@ const ViewButton = () => {
                 marginBottom: "5px",
               }}
             >
-              Rank
+              {t("Rank")}
             </label>
             <div
               type="text"
@@ -398,7 +399,7 @@ const ViewButton = () => {
                 textAlign: "left", // Ensure text alignment is left
               }}
             >
-              Intern
+              {t("Intern")}
             </div>
           </div>
         </form>
