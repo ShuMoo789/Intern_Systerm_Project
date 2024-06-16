@@ -1,7 +1,7 @@
 [
     {
         "key": 1,
-        "internID" : "#12345128",
+        "internID": "#12345128",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -17,13 +17,13 @@
         "project": "Intern System",
         "groupZalo": "FE Intern System",
         "mentor": "Esther Eden",
-        "status": "In process",
+        "status": "Out",
         "reportProcess": "2 reports",
         "button": "View"
     },
     {
         "key": 2,
-        "internID" : "#12345345",
+        "internID": "#12345345",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -45,7 +45,7 @@
     },
     {
         "key": 3,
-        "internID" : "#12345645",
+        "internID": "#12345645",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -67,7 +67,7 @@
     },
     {
         "key": 4,
-        "internID" : "#12345690",
+        "internID": "#12345690",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -89,7 +89,7 @@
     },
     {
         "key": 5,
-        "internID" : "#12645128",
+        "internID": "#12645128",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -105,13 +105,13 @@
         "project": "Intern System",
         "groupZalo": "FE Intern System",
         "mentor": "Esther Eden",
-        "status": "In process",
+        "status": "Completed OJT",
         "reportProcess": "2 reports",
         "button": "View"
     },
     {
         "key": 6,
-        "internID" : "#12347028",
+        "internID": "#12347028",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -133,7 +133,7 @@
     },
     {
         "key": 7,
-        "internID" : "#12205128",
+        "internID": "#12205128",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -155,7 +155,7 @@
     },
     {
         "key": 8,
-        "internID" : "#12845128",
+        "internID": "#12845128",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -177,7 +177,7 @@
     },
     {
         "key": 9,
-        "internID" : "#12345328",
+        "internID": "#12345328",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",
@@ -199,7 +199,7 @@
     },
     {
         "key": 10,
-        "internID" : "#12300028",
+        "internID": "#12300028",
         "startDate": "2 Jan 2023",
         "finishDate": "2 Apr 2023",
         "fullName": "Esther Eden",

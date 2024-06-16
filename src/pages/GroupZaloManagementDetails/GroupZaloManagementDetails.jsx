@@ -180,6 +180,7 @@ const GroupZaloManagementDetails = () => {
 <<<<<<< Nguyen-Tien-Dat
                 placeholder="Type a message"
                 className="chat-input chat-input-bottom"
+<<<<<<< HEAD
 =======
                 placeholder={t("Type a message")}
                 style={{
@@ -195,6 +196,9 @@ const GroupZaloManagementDetails = () => {
                   paddingLeft: "25px",
                 }}
 >>>>>>> main
+=======
+
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                 bordered={false}
                 suffix={
                   <div style={{ display: "flex", gap: "10px", alignItems: 'center' }}>

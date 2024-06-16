@@ -23,11 +23,18 @@ import {
   EditOutlined,
   DeleteOutlined,
   FolderAddOutlined,
+<<<<<<< HEAD
+=======
+  UserOutlined
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
 import "../PositionManagement/PositionManagement.css";
 import useViewport from "../../hooks/useViewport";
+<<<<<<< HEAD
 import AccountSetting from "../../components/AccountSetting/AccountSetting";
+=======
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 import GroupButton from "../../components/GroupButton/GroupButton";
 import { useTranslation } from "react-i18next";
 
@@ -36,7 +43,11 @@ const { Meta } = Card;
 
 
 const PositionManagement = () => {
+<<<<<<< HEAD
   const {t} = useTranslation()
+=======
+  const { t } = useTranslation();
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedInterns, setSelectedInterns] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
@@ -66,7 +77,11 @@ const PositionManagement = () => {
       icon: <FolderAddOutlined />,
     },
   ];
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // JSON data
   const internsData = [
     {
@@ -246,10 +261,26 @@ const PositionManagement = () => {
     },
   ];
 
+  function UserInfo({ name, role, avatarSrc }) {
+    return (
+        <div className="user-info">
+            <div className="avatar-section">
+                <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+                <div className="user-details">
+                    <p className="username">{name}</p>
+                    <p className="role">{role}</p>
+                </div>
+            </div>
+            <SettingOutlined className="setting-icon" />
+        </div>
+    );
+}
+
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
+<<<<<<< HEAD
           <header className="content-header">
             <h1 className="content-title">
               <b>{t("Position Management")}</b>
@@ -265,6 +296,20 @@ const PositionManagement = () => {
               </div>
             )}
           </header>
+=======
+            <header className="header-position">
+                <h1 className="header-title">{t("Position Management")}</h1>
+                {isMobile ? (
+                    <SettingOutlined className="setting-icon" />
+                ) : (
+                    <UserInfo
+                        name="Natalie Brogan"
+                        role="Admin"
+                        avatarSrc={User_Img}
+                    />
+                )}
+            </header>
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 
           <div className="button-group-position">
             <div className="row-btn-grp-pos">
@@ -291,8 +336,13 @@ const PositionManagement = () => {
                     <strong>{t("Technology")}:</strong> .NET, Java, ...
                   </p>
                   <p>
+<<<<<<< HEAD
                     <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
+=======
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
+                    Middle, Senior
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                   </p>
                   <p>
                     <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
@@ -387,8 +437,13 @@ const PositionManagement = () => {
                     <strong>{t("Technology")}:</strong> ReactJS,...
                   </p>
                   <p>
+<<<<<<< HEAD
                     <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
+=======
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
+                    Middle, Senior
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                   </p>
                   <p>
                     <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
@@ -487,8 +542,13 @@ const PositionManagement = () => {
                     <strong>{t("Technology")}:</strong> Trello,...
                   </p>
                   <p>
+<<<<<<< HEAD
                     <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
+=======
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
+                    Middle, Senior
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                   </p>
                   <p>
                     <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
@@ -591,8 +651,13 @@ const PositionManagement = () => {
                     <strong>{t("Technology")}:</strong> Excel, Word,...
                   </p>
                   <p>
+<<<<<<< HEAD
                     <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
+=======
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
+                    Middle, Senior
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                   </p>
                   <p>
                     <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
@@ -691,8 +756,13 @@ const PositionManagement = () => {
                     <strong>{t("Technology")}:</strong> ReactJS,...
                   </p>
                   <p>
+<<<<<<< HEAD
                     <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
+=======
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
+                    Middle, Senior
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                   </p>
                   <p>
                     <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
@@ -791,8 +861,13 @@ const PositionManagement = () => {
                     <strong>{t("Technology")}:</strong> Trello,...
                   </p>
                   <p>
+<<<<<<< HEAD
                     <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
                     Senior
+=======
+                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
+                    Middle, Senior
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                   </p>
                   <p>
                     <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>

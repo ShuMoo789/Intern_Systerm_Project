@@ -1,11 +1,15 @@
 .group-button {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 100%;
+    width: 98%;
     height: 100%;
     /* position: absolute;
     right: 30px;
     top: 0; */
     font-family: Quicksan !important;
+}
+
+.common-btn {
+    height: 65%;
 }

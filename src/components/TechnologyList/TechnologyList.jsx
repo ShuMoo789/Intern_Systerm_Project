@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./TechnologyList.css";
-
+import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import { TiFolderDelete } from "react-icons/ti";
 import { Modal } from "antd";
-import { Tabs, Card } from "antd";
+import { Tabs } from "antd";
 import Question from "./Question";
 
 const onChange = (key) => {

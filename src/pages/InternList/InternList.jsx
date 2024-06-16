@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import { Tag, Dropdown, Menu } from "antd";
 import {
   MailOutlined,
+  DownOutlined,
   ExportOutlined,
   EditOutlined,
   DeleteOutlined,
@@ -22,6 +25,30 @@ import { useTranslation } from "react-i18next";
 
 // props GroupButton
 
+<<<<<<< HEAD
+=======
+// option of status column
+const optionSelect = [
+  {
+    value: "inProcess",
+    label: "In process",
+  },
+  {
+    value: "completedOJT",
+    label: "Completed OJT",
+  },
+  {
+    value: "out",
+    label: "Out",
+  },
+];
+
+// option of intern ID from file InternList.json
+const optionsInternID = DataInternList.map((item) => ({
+  value: item.internID,
+  label: item.internID,
+}));
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
   const existingValue = options.find((option) => option.value === item.role);
@@ -108,9 +135,23 @@ const InternList = () => {
   const commentsText = t("comments")
   const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
+  const [updatedData, setUpdatedData] = useState(DataInternList);
   const [dataTable, setDataTable] = useState(DataInternList);
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
+<<<<<<< HEAD
+=======
+  const handleChangeStatus = (key, record) => {
+    const updatedRecord = { ...record, status: key };
+    const updatedData2 = updatedData.map((item) =>
+      item.key === record.key ? updatedRecord : item
+    );
+    setUpdatedData(updatedData2);
+  };
+  const { t } = useTranslation();
+  const commentText = t("comment");
+  const commentsText = t("comments");
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   const groupButton = [
     {
       color: "#6537B1",
@@ -138,8 +179,12 @@ const InternList = () => {
       icon: <FolderAddOutlined />,
     },
   ];
+<<<<<<< HEAD
   
   
+=======
+
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // option of status column
   const optionSelect = [
     {
@@ -155,13 +200,21 @@ const InternList = () => {
       label: t("Out"),
     },
   ];
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // option of intern ID from file InternList.json
   const optionsInternID = DataInternList.map((item) => ({
     value: item.internID,
     label: t(item.internID),
   }));
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // option of intern phone number from file InternList.json
   const optionsInternPhoneNumber = DataInternList.map((item) => ({
     value: item.phoneNumber,
@@ -188,22 +241,22 @@ const InternList = () => {
     {
       title: t("Intern ID"),
       dataIndex: "internID",
-      width: 120,
+      width: "auto",
     },
     {
       title: t("Start Date"),
       dataIndex: "startDate",
-      width: 120,
+      width: "auto",
     },
     {
       title: t("Finish Date"),
       dataIndex: "finishDate",
-      width: 120,
+      width: "auto",
     },
     {
       title: t("Full Name"),
       dataIndex: "fullName",
-      width: 130,
+      width: "auto",
       // filteredValue: [filter.fullName],
       // onFilter: (value, record) => {
       //     return record.fullName.includes(value)
@@ -212,7 +265,7 @@ const InternList = () => {
     {
       title: t("Date Of Birth"),
       dataIndex: "dateOfBirth",
-      width: 110,
+      width: "auto",
       // filteredValue: [filter.dateOfBirth],
       // onFilter: (value, record) => {
       //     return record.dateOfBirth.includes(value)
@@ -221,7 +274,7 @@ const InternList = () => {
     {
       title: t("Phone Number"),
       dataIndex: "phoneNumber",
-      width: 120,
+      width: "auto",
       // filteredValue: [filter.phoneNumber],
       // onFilter: (value, record) => {
       //     return record.phoneNumber.includes(value)
@@ -230,17 +283,24 @@ const InternList = () => {
     {
       title: t("Position"),
       dataIndex: "position",
-      width: 120,
+      width: "auto",
       // filteredValue: [filter.position],
       // onFilter: (value, record) => {
       //     return record.position.includes(value)
       // }
     },
     {
+<<<<<<< HEAD
       title:t("School"),
       dataIndex: "school",
       width: 160,
       render: (text) => t(text)
+=======
+      title: t("School"),
+      dataIndex: "school",
+      width: "auto",
+      render: (text) => t(text),
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
       // filteredValue: [filter.school],
       // onFilter: (value, record) => {
       //     return record.school.includes(value)
@@ -249,8 +309,13 @@ const InternList = () => {
     {
       title: t("Address"),
       dataIndex: "address",
+<<<<<<< HEAD
       width: 120,
       render: (text) => t(text)
+=======
+      width: "auto",
+      render: (text) => t(text),
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
       // filteredValue: [filter.address],
       // onFilter: (value, record) => {
       //     return record.address.includes(value)
@@ -259,7 +324,7 @@ const InternList = () => {
     {
       title: t("Email"),
       dataIndex: "email",
-      width: 180,
+      width: "auto",
       // filteredValue: [filter.email],
       // onFilter: (value, record) => {
       //     return record.email.includes(value)
@@ -268,15 +333,15 @@ const InternList = () => {
     {
       title: "CV",
       dataIndex: "cv",
-      width: 120,
+      width: 100,
       render: (text) => (
-        <a style={{ color: "#000000", textDecoration: "underline" }}>{text}</a>
+        <a style={{ color: "blue", textDecoration: "underline" }}>{text}</a>
       ),
     },
     {
       title: t("Comments"),
       dataIndex: "comments",
-      width: 150,
+      width: 160,
       render: (text) => (
         <Button>
           2 {commentsText}
@@ -287,7 +352,7 @@ const InternList = () => {
     {
       title: t("Role"),
       dataIndex: "role",
-      width: 120,
+      width: 130,
       // filteredValue: [filter.role],
       // onFilter: (value, record) => {
       //     return record.role.includes(value)
@@ -296,7 +361,7 @@ const InternList = () => {
     {
       title: t("Project"),
       dataIndex: "project",
-      width: 130,
+      width: "auto",
       // filteredValue: [filter.project],
       // onFilter: (value, record) => {
       //     return record.project.includes(value)
@@ -305,7 +370,7 @@ const InternList = () => {
     {
       title: t("Group Zalo"),
       dataIndex: "groupZalo",
-      width: 160,
+      width: "auto",
       // filteredValue: [filter.groupZalo],
       // onFilter: (value, record) => {
       //     return record.groupZalo.includes(value)
@@ -314,7 +379,7 @@ const InternList = () => {
     {
       title: t("Mentor"),
       dataIndex: "mentor",
-      width: 130,
+      width: "auto",
       // filteredValue: [filter.mentor],
       // onFilter: (value, record) => {
       //     return record.mentor.includes(value)
@@ -323,16 +388,51 @@ const InternList = () => {
     {
       title: t("Status"),
       dataIndex: "status",
-      width: 160,
-      render: (text) => {
+      width: 170,
+      render: (text, record) => {
+        const statusColor = {
+          "In process": {
+            backgroundColor: "rgb(255, 239, 230)",
+            color: "rgb(255, 93, 2)",
+          },
+          "Completed OJT": {
+            backgroundColor: "rgb(239, 249, 241)",
+            color: "#3A7D34",
+          },
+          Out: {
+            backgroundColor: "rgb(248, 231, 238)",
+            color: "rgb(183, 13, 82)",
+          },
+        };
+
         return (
-          <Select
-            defaultValue={text}
-            style={{
-              width: 140,
-            }}
-            options={optionSelect}
-          />
+          <Dropdown
+            overlay={
+              <Menu onClick={({ key }) => handleChangeStatus(key, record)}>
+                <Menu.Item key="In process">
+                  <span>In process</span>
+                </Menu.Item>
+                <Menu.Item key="Completed OJT">
+                  <span>Completed OJT</span>
+                </Menu.Item>
+                <Menu.Item key="Out">
+                  <span>Out</span>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button
+              style={{
+                width: "auto",
+                ...statusColor[text],
+                borderRadius: "100px",
+                fontSize: "12px",
+              }}
+            >
+              {text}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
         );
       },
     },
@@ -354,7 +454,7 @@ const InternList = () => {
     {
       title: t("Button"),
       dataIndex: "button",
-      width: 120,
+      width: "auto",
       render: (text) => <ViewButton>{text}</ViewButton>,
     },
   ];
@@ -520,6 +620,7 @@ const InternList = () => {
           {/* Group of filter and table */}
           <div className="group-filter-table">
             {/* Filter */}
+
             {!isMobile ? (
               <div className="filter">
                 <div className="filter-group">
@@ -887,7 +988,12 @@ const InternList = () => {
                         onClick={handleCleanFilterButton}
                         style={{ width: "100%" }}
                       >
+<<<<<<< HEAD
                         {isMobile ? "" : <FilterOutlined />} {t("Clean Filters")}
+=======
+                        {isMobile ? "" : <FilterOutlined />}{" "}
+                        {t("Clean Filters")}
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                       </Button>
                     </div>
                     <div className="search-button-internlist">
@@ -930,6 +1036,7 @@ const InternList = () => {
           openPopup={isEmailPopupVisible}
         />
       </MainLayout>
+      <Toaster />
     </div>
   );
 };

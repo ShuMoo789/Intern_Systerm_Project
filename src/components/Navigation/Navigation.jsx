@@ -8,6 +8,7 @@ import { UserOutlined, BellOutlined, SettingOutlined } from "@ant-design/icons";
 import userImage from "../../assets/user_image.png";
 
 function UserInfo({ name, role, avatarSrc }) {
+<<<<<<< HEAD
   return (
     <div className="user-info">
       <div className="avatar-section">
@@ -33,6 +34,33 @@ const Navigation = (props) => {
     <>
       <div className="content-navigation">
         {/* <div className="header-navigation">
+=======
+    return (
+        <div className="user-info">
+            <div className="avatar-section">
+                <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+                <div className="user-details">
+                    <p className="username">{name}</p>
+                    <p className="role">{role}</p>
+                </div>
+            </div>
+            <SettingOutlined className="setting-icon" />
+        </div>
+    );
+}
+
+const Navigation = (props) => {
+    {
+        /*Project-Management*/
+    }
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 1024;
+
+    return (
+        <>
+            <div className="content-navigation">
+                {/* <div className="header-navigation">
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
           <div className="title-name">
               {props.titleName}
           </div>
@@ -44,6 +72,7 @@ const Navigation = (props) => {
               </div>)}           
           </div>
       </div>  */}
+<<<<<<< HEAD
         <header className="header-section">
           <h1 className="header-title">{props.titleName}</h1>
           {isMobile ? (
@@ -75,6 +104,42 @@ const Navigation = (props) => {
       </div>
     </>
   );
+=======
+                <header className="header-section">
+                    <h1 className="header-title">{props.titleName}</h1>
+                    {isMobile ? (
+                        <SettingOutlined className="setting-icon" />
+                    ) : (
+                        <UserInfo
+                            name="Natalie Brogan"
+                            role="Admin"
+                            avatarSrc={userImage}
+                        />
+                    )}
+                </header>
+                <div className="navigation">
+                    <div className="search-navigation">
+                        {/* {isMobile ? 'Search' : 'Search for Information'} */}
+                        <Input
+                            placeholder={
+                                isMobile ? "Search" : "Search for Information"
+                            }
+                            variant="filled"
+                        />
+                    </div>
+                    {/* Pass props to GroupButton from InternList */}
+                    <div className="group-button-navigation">
+                        <GroupButton
+                            groupButton={props.groupButton}
+                            onSendEmail={props.onSendEmail}
+                            onCreateIntern={props.onCreateIntern}
+                            onScheduleInterview={props.onScheduleInterview}
+                        />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 };
-
 export default Navigation;

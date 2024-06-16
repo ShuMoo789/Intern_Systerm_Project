@@ -4,7 +4,7 @@ import "./ApproveCV.css";
 import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
 import User_Img from "../../assets/user_image.png";
 import CommentPopup from "./CommentPopup.jsx";
-import Sheldule from "./Schedule.jsx";
+import ScheduleInterview from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
 import MainLayout from "../../MainLayout/MainLayout.jsx";
 import Header from "../../components/header/Header.jsx";
@@ -17,6 +17,10 @@ import {
   ArrowLeftOutlined,
   SearchOutlined,
   DeleteOutlined,
+  ClockCircleOutlined,
+  ExportOutlined,
+  EditOutlined,
+  FolderAddOutlined
 } from "@ant-design/icons";
 import { Input } from "antd";
 import {
@@ -34,6 +38,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
 import { Typography } from "antd";
 import useViewport from "../../hooks/useViewport.jsx";
+import Navigation from "../../components/Navigation/Navigation.jsx"
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
@@ -615,10 +620,48 @@ function ApproveCV() {
     value: item.value,
     label: t(item.label),
   }));
+
+  const groupButton = [
+    {
+        color: "#6537B1",
+        name: t("Schedule interview"),
+        icon: <ClockCircleOutlined />,
+    },
+    {
+        color: "#41B137",
+        name: t("Export Excel"),
+        icon: <ExportOutlined />,
+    },
+    {
+        color: "#FB8632",
+        name: t("Edit"),
+        icon: <EditOutlined />,
+    },
+    {
+        color: "#FF3A2E",
+        name: t("Delete"),
+        icon: <DeleteOutlined />,
+    },
+    {
+        color: "#4889E9",
+        name: t("Add New Intern"),
+        icon: <FolderAddOutlined />,
+    },
+];
+
+const [isSchedulePopupVisible, setSchedulePopupVisible] = useState(false);
+const handleOpenScheduleInterView = () => {
+    setSchedulePopupVisible(true);
+};
+
+const handleCloseScheduleInterView = () => {
+    setSchedulePopupVisible(false);
+};
   return (
     <div id="APRCV">
       <MainLayout>
         <main className="content">
+<<<<<<< HEAD
           <header className="content-header">
             <h1 className="content-title">{t("Approve CV")}</h1>
             
@@ -679,6 +722,15 @@ function ApproveCV() {
               </button>
             </div>
           </section>
+=======
+          <div>
+            <Navigation
+                titleName={t("Approve CV")}
+                groupButton={groupButton}
+                onScheduleInterview={handleOpenScheduleInterView}
+            />            
+          </div>
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 
           <section className="filter-section">
             <div className="filter">
@@ -836,6 +888,11 @@ function ApproveCV() {
           initialPage={initialPage}
           onSave={handleSaveComment}
         />
+
+        <ScheduleInterview
+          onClose={handleCloseScheduleInterView}
+          openPopup={isSchedulePopupVisible}
+        /> 
       </MainLayout>
     </div>
   );

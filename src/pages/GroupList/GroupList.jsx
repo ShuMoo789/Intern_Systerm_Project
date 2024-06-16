@@ -10,7 +10,6 @@ import {
   Space,
   Select,
   Modal,
-  Form,
   message,
   Dropdown,
   Menu,
@@ -24,14 +23,21 @@ import {
   FolderAddOutlined,
   FilterOutlined,
   SearchOutlined,
+<<<<<<< HEAD
   DownOutlined
+=======
+  DownOutlined,
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 } from "@ant-design/icons";
 
 import jsonData from "../../data/GroupList.json";
 import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
+<<<<<<< HEAD
 import "./GroupList.css"
+=======
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
@@ -42,7 +48,11 @@ const GroupList = () => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
   const [visible, setVisible] = useState(false);
+<<<<<<< HEAD
   const {t} = useTranslation()
+=======
+  const { t } = useTranslation();
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   const [filters, setFilters] = useState({
     InternId: "",
     FullName: "",
@@ -108,6 +118,7 @@ const GroupList = () => {
     setFilteredData(data);
   };
 
+<<<<<<< HEAD
   const handleStatusChange = (value, recordToUpdate) => {
     // Update the status of the record
     recordToUpdate.Status = value;
@@ -120,6 +131,22 @@ const GroupList = () => {
     recordToUpdate.InternshipContract = value;
     // Trigger re-render by updating state or forceUpdate
     setData([...data]); // Assuming data is an array of records
+=======
+  const handleStatusChange = (key, record) => {
+    const updatedData = data.map((item) =>
+      item.key === record.key ? { ...item, Status: key } : item
+    );
+    setData(updatedData);
+    setFilteredData(updatedData);
+  };
+
+  const handleContractChange = (key, record) => {
+    const updatedData = data.map((item) =>
+      item.key === record.key ? { ...item, InternshipContract: key } : item
+    );
+    setData(updatedData);
+    setFilteredData(updatedData);
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   };
 
   const handleCancel = () => {
@@ -130,6 +157,14 @@ const GroupList = () => {
     { label: t("Accepted"), value: "Accepted", color: "green" },
     { label: t("Pending"), value: "Pending", color: "red" },
     { label: t("Interviewed"), value: "Interviewed", color: "orange" },
+<<<<<<< HEAD
+=======
+  ];
+
+  const contractOptions = [
+    { label: t("Signed"), value: "Signed", color: "green" },
+    { label: t("Pending"), value: "Pending", color: "red" },
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   ];
 
   const inputFields = [
@@ -147,11 +182,14 @@ const GroupList = () => {
     { title: "Role", placeholder: "Leader" },
   ];
 
+<<<<<<< HEAD
   const contractOptions = [
     { label: t("Signed"), value: "Signed", color: "green" },
     { label: t("Pending"), value: "Pending", color: "red" },
   ];
 
+=======
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   const groupButton = [
     {
       color: "#6537B1",
@@ -182,6 +220,34 @@ const GroupList = () => {
 
   const handleCreateIntern = () => {
     setVisible(true);
+  };
+
+  const getBackgroundColor = (status) => {
+    switch (status) {
+      case "Accepted":
+      case "Signed":
+        return "#EFF9F1";
+      case "Pending":
+        return "#F8E7EE";
+      case "Interviewed":
+        return "#FFEFE6";
+      default:
+        return "#FFFFFF";
+    }
+  };
+
+  const getColor = (status) => {
+    switch (status) {
+      case "Accepted":
+      case "Signed":
+        return "#449E3C";
+      case "Pending":
+        return "#B70D52";
+      case "Interviewed":
+        return "#FF5D02";
+      default:
+        return "#000000";
+    }
   };
 
   const columns = [
@@ -305,6 +371,7 @@ const GroupList = () => {
       dataIndex: "Status",
       key: "Status",
       width: "auto",
+<<<<<<< HEAD
 
       render: (text, record) => (
         <div style={{ width: 126 }}>
@@ -344,6 +411,32 @@ const GroupList = () => {
             </Button>
           </Dropdown>
         </div>
+=======
+      render: (text, record) => (
+        <Dropdown
+          overlay={
+            <Menu onClick={({ key }) => handleStatusChange(key, record)}>
+              {statusOptions.map((option) => (
+                <Menu.Item key={option.value}>
+                  <span>{option.label}</span>
+                </Menu.Item>
+              ))}
+            </Menu>
+          }
+        >
+          <Button
+            style={{
+              width: 120,
+              backgroundColor: getBackgroundColor(record.Status),
+              color: getColor(record.Status),
+              borderRadius: "100px",
+              fontSize: "12px",
+            }}
+          >
+            {text} <DownOutlined />
+          </Button>
+        </Dropdown>
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
       ),
     },
     {
@@ -351,6 +444,7 @@ const GroupList = () => {
       dataIndex: "InternshipContract",
       key: "InternshipContract",
       width: "auto",
+<<<<<<< HEAD
 
       render: (text, record) => (
         <div style={{ width: 126 }}>
@@ -385,6 +479,32 @@ const GroupList = () => {
             </Button>
           </Dropdown>
         </div>
+=======
+      render: (text, record) => (
+        <Dropdown
+          overlay={
+            <Menu onClick={({ key }) => handleContractChange(key, record)}>
+              {contractOptions.map((option) => (
+                <Menu.Item key={option.value}>
+                  <span>{option.label}</span>
+                </Menu.Item>
+              ))}
+            </Menu>
+          }
+        >
+          <Button
+            style={{
+              width: 120,
+              backgroundColor: getBackgroundColor(record.InternshipContract),
+              color: getColor(record.InternshipContract),
+              borderRadius: "100px",
+              fontSize: "12px",
+            }}
+          >
+            {text} <DownOutlined />
+          </Button>
+        </Dropdown>
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
       ),
     },
     {
@@ -564,7 +684,11 @@ const GroupList = () => {
         <MainLayout>
           <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
             <Navigation
+<<<<<<< HEAD
               titleName= {t("GROUP LIST")}
+=======
+              titleName={t("GROUP LIST")}
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
               groupButton={groupButton}
               onSendEmail={showModal}
               onCreateIntern={handleCreateIntern}
@@ -695,7 +819,11 @@ const GroupList = () => {
                       {t("Clean Filter")}
                     </Button>
                     <Button
+<<<<<<< HEAD
                     className="search-filter-button"
+=======
+                      className="search-filter-button"
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                       style={{
                         backgroundColor: "#4889E9",
                         color: "white",
@@ -787,7 +915,6 @@ const GroupList = () => {
           <Row justify="center">
             <Col span={8}>
               <div style={{ width: "95%", alignContent: "center" }}>
-                {/* Project */}
                 <p>
                   <b>{t("Role")}</b>
                 </p>
@@ -811,26 +938,21 @@ const GroupList = () => {
               </div>
 
               <div style={{ width: "95%", alignContent: "center" }}>
-                {/* Group zalo */}
                 <p>
                   <b>{t("Mentor")}</b>
                 </p>
-
                 <Input
                   style={{ width: "100%" }}
                   placeholder="Mentor name"
                   value={mentor}
                   onChange={(e) => setMentor(e.target.value)}
                 />
-                {errors.mentor && (
-                  <p style={{ color: "red" }}>{errors.mentor}</p>
-                )}
+                {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
               </div>
             </Col>
 
             <Col span={8}>
               <div style={{ width: "95%", alignContent: "center" }}>
-                {/* Project */}
                 <p>
                   <b>{t("Project")}</b>
                 </p>
@@ -844,15 +966,12 @@ const GroupList = () => {
                   options={[{ value: "Project 1", label: "Project 1" }]}
                   value={project}
                 />
-                {errors.project && (
-                  <p style={{ color: "red" }}>{errors.project}</p>
-                )}
+                {errors.project && <p style={{ color: "red" }}>{errors.project}</p>}
               </div>
             </Col>
 
             <Col span={8}>
               <div style={{ width: "100%", alignContent: "center" }}>
-                {/* Group zalo */}
                 <p>
                   <b>{t("Group Zalo")}</b>
                 </p>
@@ -862,11 +981,9 @@ const GroupList = () => {
                   value={groupZalo}
                   onChange={(e) => setGroupZalo(e.target.value)}
                 />
-                {errors.groupZalo && (
-                  <p style={{ color: "red", width: "120%" }}>
+                {errors.groupZalo && <p style={{ color: "red", width: "120%" }}>
                     {errors.groupZalo}
-                  </p>
-                )}
+                  </p>}
               </div>
             </Col>
           </Row>

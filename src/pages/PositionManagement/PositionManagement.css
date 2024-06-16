@@ -14,15 +14,18 @@
 
 .button-group-position {
     display: flex;
+    margin: 0 20px 20px;
     align-items: center;
-    margin-bottom: 20px;
     background: #fff;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .button-group-position .row-btn-grp-pos {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
     width: 40%;
     display: flex;
     padding: 20px;
@@ -75,6 +78,7 @@
     border-radius: 20px;
     justify-content: center;
     padding: 20px 5px 50px;
+    margin: 0 20px;
 }
 
 .bodyposi {
@@ -151,4 +155,29 @@
     padding-left: 30px;
     top: 17px;
     left: -20px;
+}
+
+.header-position {
+        margin: 20px 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 24px ;
+        background-color: white; /* Set header background to white */
+        border-bottom: 1px solid #e8e8e8;
+        border-radius: 10px; /* Rounded corners */
+        margin-bottom: 16px; /* Optional: Add margin to separate from the top and sides */
+}
+    
+.header-position > .header-title {
+    font-size: 24px;
+    color: #2c3e50;
+    font-family: Quicksand;
+    font-weight: 700;
+}
+
+.header-position > .setting-icon {
+    font-size: 20px;
+    color: #db0d4b;
+    margin-right: 30px;
 }
