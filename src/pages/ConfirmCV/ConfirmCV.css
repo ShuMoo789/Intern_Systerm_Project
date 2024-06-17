@@ -19,7 +19,6 @@
         /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
     }
 
-
     /* Tùy chỉnh các đặc tính khi màn hình thu nhỏ hơn 768px */
     @media (max-width: 768px) {
         .tbl-wrapper {
@@ -70,7 +69,7 @@
     .fields-confirm .ant-picker {
         width: 300px;
         padding: 7px 11px;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     

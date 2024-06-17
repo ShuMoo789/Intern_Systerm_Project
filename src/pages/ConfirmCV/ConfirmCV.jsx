@@ -976,7 +976,7 @@ const ConfirmCV = () => {
                 columns={columns}
                 dataSource={filteredInterns}
                 rowKey="internId"
-                pagination={{ pageSize: 6 }}
+                pagination={{ pageSize: 8 }}
                 scroll={{ x: "max-content" }}
               />
             </div>
