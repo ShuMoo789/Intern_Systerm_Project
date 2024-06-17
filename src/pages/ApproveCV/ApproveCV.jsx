@@ -1,44 +1,31 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import "./ApproveCV.css";
-import MenuNavigate from "../../components/Menu/MenuNavigate.jsx";
-import User_Img from "../../assets/user_image.png";
+
 import CommentPopup from "./CommentPopup.jsx";
 import ScheduleInterview from "./Schedule.jsx";
 import DataApproveList from "../../data/ApproveCV.json";
-import MainLayout from "../../MainLayout/MainLayout.jsx";
-import Header from "../../components/header/Header.jsx";
+
 import {
   DownOutlined,
   EyeOutlined,
   PlusOutlined,
-  SettingOutlined,
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
   SearchOutlined,
   DeleteOutlined,
   ClockCircleOutlined,
   ExportOutlined,
   EditOutlined,
-  FolderAddOutlined
+  FolderAddOutlined,
 } from "@ant-design/icons";
 import { Input } from "antd";
-import {
-  DatePicker,
-  Dropdown,
-  Button,
-  Select,
-  Table,
-  Menu,
-  Row,
-  Col,
-} from "antd";
+import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
 import { Typography } from "antd";
 import useViewport from "../../hooks/useViewport.jsx";
-import Navigation from "../../components/Navigation/Navigation.jsx"
+import Navigation from "../../components/Navigation/Navigation.jsx";
+import { Toaster } from "react-hot-toast";
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
@@ -282,7 +269,7 @@ function ApproveCV() {
    */
   const handleSaveComment = (updatedIntern) => {
     // Update the interns state with the updated intern object
-    setInterns((prevInterns) =>
+    setIntern((prevInterns) =>
       prevInterns.map((intern) =>
         intern.internID === updatedIntern.internID ? updatedIntern : intern
       )
@@ -394,7 +381,7 @@ function ApproveCV() {
     setViewPopupVisible(false); // Hide the view popup
   };
 
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [optionChoose, setOptionChoose] = useState([]);
   const commentText = t("comment");
   const commentsText = t("comments");
@@ -447,7 +434,7 @@ function ApproveCV() {
     {
       title: t("Full Name"),
       dataIndex: "fullName",
-      
+
       filteredValue: [selectedFilters.fullName],
       // onFilter: (value, record) => {
       //     return record.fullName.includes(value)
@@ -542,43 +529,43 @@ function ApproveCV() {
       // width: 100,
       render: (text, record) => (
         <Dropdown
-        overlay={
-          <Menu onClick={({ key }) => handleChangestatus(key, record)}>
-            <Menu.Item key="Pending">
-              <span>{t("Pending")}</span>
-            </Menu.Item>
-            <Menu.Item key="Failed">
-              <span>{t("Failed")}</span>
-            </Menu.Item>
-            <Menu.Item key="Passed">
-              <span>{t("Passed")}</span>
-            </Menu.Item>
-          </Menu>
-        }
-      >
-        <Button
-          style={{
-            width: 120,
-            backgroundColor:
-              record.status === "Failed"
-                ? "#F8E7EE"
-                : record.status === "Passed"
-                ? "#EFF9F1"
-                : "#FFEFE6",
-            color:
-              record.status === "Failed"
-                ? "#B70D52"
-                : record.status === "Passed"
-                ? "#449E3C"
-                : "#FF5D02",
-            borderRadius: "100px",
-            fontSize: "12px",
-          }}
+          overlay={
+            <Menu onClick={({ key }) => handleChangestatus(key, record)}>
+              <Menu.Item key="Pending">
+                <span>{t("Pending")}</span>
+              </Menu.Item>
+              <Menu.Item key="Failed">
+                <span>{t("Failed")}</span>
+              </Menu.Item>
+              <Menu.Item key="Passed">
+                <span>{t("Passed")}</span>
+              </Menu.Item>
+            </Menu>
+          }
         >
-          {t(record.status)} <DownOutlined />
-        </Button>
-      </Dropdown>
-    ),
+          <Button
+            style={{
+              width: 120,
+              backgroundColor:
+                record.status === "Failed"
+                  ? "#F8E7EE"
+                  : record.status === "Passed"
+                  ? "#EFF9F1"
+                  : "#FFEFE6",
+              color:
+                record.status === "Failed"
+                  ? "#B70D52"
+                  : record.status === "Passed"
+                  ? "#449E3C"
+                  : "#FF5D02",
+              borderRadius: "100px",
+              fontSize: "12px",
+            }}
+          >
+            {t(record.status)} <DownOutlined />
+          </Button>
+        </Dropdown>
+      ),
     },
     {
       title: "Button",
@@ -601,7 +588,7 @@ function ApproveCV() {
     record.status = key;
     setSelectedOption(key);
   };
-  const [selectedOption, setSelectedOption] = useState("");  
+  const [selectedOption, setSelectedOption] = useState("");
   const optionSelect = [
     {
       value: "passed",
@@ -623,214 +610,208 @@ function ApproveCV() {
 
   const groupButton = [
     {
-        color: "#6537B1",
-        name: t("Schedule interview"),
-        icon: <ClockCircleOutlined />,
+      color: "#6537B1",
+      name: t("Schedule interview"),
+      icon: <ClockCircleOutlined />,
     },
     {
-        color: "#41B137",
-        name: t("Export Excel"),
-        icon: <ExportOutlined />,
+      color: "#41B137",
+      name: t("Export Excel"),
+      icon: <ExportOutlined />,
     },
     {
-        color: "#FB8632",
-        name: t("Edit"),
-        icon: <EditOutlined />,
+      color: "#FB8632",
+      name: t("Edit"),
+      icon: <EditOutlined />,
     },
     {
-        color: "#FF3A2E",
-        name: t("Delete"),
-        icon: <DeleteOutlined />,
+      color: "#FF3A2E",
+      name: t("Delete"),
+      icon: <DeleteOutlined />,
     },
     {
-        color: "#4889E9",
-        name: t("Add New Intern"),
-        icon: <FolderAddOutlined />,
+      color: "#4889E9",
+      name: t("Add New Intern"),
+      icon: <FolderAddOutlined />,
     },
-];
+  ];
 
-const [isSchedulePopupVisible, setSchedulePopupVisible] = useState(false);
-const handleOpenScheduleInterView = () => {
+  const [isSchedulePopupVisible, setSchedulePopupVisible] = useState(false);
+  const handleOpenScheduleInterView = () => {
     setSchedulePopupVisible(true);
-};
+  };
 
-const handleCloseScheduleInterView = () => {
+  const handleCloseScheduleInterView = () => {
     setSchedulePopupVisible(false);
-};
+  };
   return (
     <div id="APRCV">
-      <MainLayout>
-        <main className="content">
-          <div>
-            <Navigation
-                titleName={t("Approve CV")}
-                groupButton={groupButton}
-                onScheduleInterview={handleOpenScheduleInterView}
-            />            
-          </div>
+      <main className="content">
+        <div>
+          <Navigation
+            titleName={t("Approve CV")}
+            groupButton={groupButton}
+            onScheduleInterview={handleOpenScheduleInterView}
+          />
+        </div>
 
-          <section className="filter-section">
-            <div className="filter">
-              <div className="fields">
-                <Input
-                  style={inputStyle}
-                  size="large"
-                  placeholder={t("Enter intern's ID")}
-                  value={selectedFilters.internID}
-                  onChange={(e) =>
-                    handleInputChange("internID", e.target.value)
-                  }
-                />
+        <section className="filter-section">
+          <div className="filter">
+            <div className="fields">
+              <Input
+                style={inputStyle}
+                size="large"
+                placeholder={t("Enter intern's ID")}
+                value={selectedFilters.internID}
+                onChange={(e) => handleInputChange("internID", e.target.value)}
+              />
+              <Input
+                style={inputStyle}
+                size="large"
+                placeholder={t("Enter intern's Full name")}
+                value={selectedFilters.fullName}
+                onChange={(e) => handleInputChange("fullName", e.target.value)}
+              />
 
-                <Input
-                  style={inputStyle}
-                  size="large"
-                  placeholder={t("Enter intern's Full name")}
-                  value={selectedFilters.fullName}
-                  onChange={(e) =>
-                    handleInputChange("fullName", e.target.value)
-                  }
-                />
+              <DatePicker
+                format={dateFormat}
+                placeholder={t("Enter intern's D.O.B")}
+                style={{ padding: "7px 11px", fontSize: "15px" }}
+                onChange={(date) => handleDateChange("dateOfBirth", date)}
+              />
 
-                <DatePicker
-                  format={dateFormat}
-                  placeholder={t("Enter intern's D.O.B")}
-                  style={{ padding: "7px 11px", fontSize: "15px" }}
-                  onChange={(date) => handleDateChange("dateOfBirth", date)}
-                />
+              <Input
+                style={inputStyle}
+                size="large"
+                placeholder={t("Enter intern's Phone number")}
+                value={selectedFilters.phoneNumber}
+                onChange={(e) =>
+                  handleInputChange("phoneNumber", e.target.value)
+                }
+              />
 
-                <Input
-                  style={inputStyle}
-                  size="large"
-                  placeholder={t("Enter intern's Phone number")}
-                  value={selectedFilters.phoneNumber}
-                  onChange={(e) =>
-                    handleInputChange("phoneNumber", e.target.value)
-                  }
-                />
-
-                <Dropdown
-                  overlay={createMenu("school", schoolNames)}
-                  trigger={["click"]}
-                  style={inputStyle}
+              <Dropdown
+                overlay={createMenu("school", schoolNames)}
+                trigger={["click"]}
+                style={inputStyle}
+              >
+                <Button
+                  style={{
+                    padding: "7px 11px",
+                    fontSize: "15px",
+                    textAlign: "left",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
                 >
-                  <Button
+                  {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                  <div
                     style={{
-                      padding: "7px 11px",
-                      fontSize: "15px",
-                      textAlign: "left",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      height: "100%",
+                      color: selectedFilters.school ? "#000000" : "#C7BFBF",
                     }}
                   >
-                    {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
-                    <div
-                      style={{
-                        color: selectedFilters.school ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.school || t("Enter intern's School")}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+                    {selectedFilters.school || t("Enter intern's School")}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Input
-                  style={inputStyle}
-                  size="large"
-                  placeholder={t("Enter intern's Email")}
-                  value={selectedFilters.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                />
+              <Input
+                style={inputStyle}
+                size="large"
+                placeholder={t("Enter intern's Email")}
+                value={selectedFilters.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+              />
 
-                <Dropdown
-                  overlay={createMenu("position", positionNames)}
-                  trigger={["click"]}
+              <Dropdown
+                overlay={createMenu("position", positionNames)}
+                trigger={["click"]}
+              >
+                <Button
+                  style={{
+                    padding: "7px 11px",
+                    fontSize: "15px",
+                    textAlign: "left",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
                 >
-                  <Button
+                  <div
                     style={{
-                      padding: "7px 11px",
-                      fontSize: "15px",
-                      textAlign: "left",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      height: "100%",
+                      color: selectedFilters.position ? "#000000" : "#C7BFBF",
                     }}
                   >
-                    <div
-                      style={{
-                        color: selectedFilters.position ? "#000000" : "#C7BFBF",
-                      }}
-                    >
-                      {selectedFilters.position || t("Enter intern's Position")}
-                    </div>
-                    <DownOutlined />
-                  </Button>
-                </Dropdown>
+                    {selectedFilters.position || t("Enter intern's Position")}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
 
-                <Input
-                  style={inputStyle}
-                  size="large"
-                  placeholder={t("Enter intern's Address")}
-                  value={selectedFilters.address}
-                  onChange={(e) => handleInputChange("address", e.target.value)}
-                />
+              <Input
+                style={inputStyle}
+                size="large"
+                placeholder={t("Enter intern's Address")}
+                value={selectedFilters.address}
+                onChange={(e) => handleInputChange("address", e.target.value)}
+              />
 
-                <DatePicker
-                  format={dateFormat}
-                  placeholder={t("Enter intern's Date Submitted Form")}
-                  style={{ padding: "7px 11px", fontSize: "15px" }}
-                  onChange={(date) => handleDateChange("dateSub", date)}
-                />
-              </div>
-              <div className="buttons">
-                <div className="cln-btn btn" onClick={handleClearFilters}>
-                  <DeleteOutlined style={{ marginRight: "10px" }} />
-                  {t("Clean Filter")}
-                </div>
-                <br />
-                <div className="srch-btn btn" onClick={handleSearch}>
-                  <SearchOutlined style={{ marginRight: "10px" }} />
-                  {t("Search")}
-                </div>
-              </div>
-            </div>
-            <div className="list">
-              <Table
-                rowSelection={{
-                  type: "checkbox",
-                  ...rowSelection,
-                }}
-                columns={columns}
-                dataSource={filteredInterns}
-                scroll={{ x: "max-content" }}
-                style={{
-                  tableLayout: "auto",
-                  width: isMobile ? "96%" : "100%",
-                }}
-                pagination={{
-                  pageSize: 8,
-                }}
+              <DatePicker
+                format={dateFormat}
+                placeholder={t("Enter intern's Date Submitted Form")}
+                style={{ padding: "7px 11px", fontSize: "15px" }}
+                onChange={(date) => handleDateChange("dateSub", date)}
               />
             </div>
-          </section>
-        </main>
-        <CommentPopup
-          isVisible={commentPopupVisible}
-          onClose={handleCloseCommentPopup}
-          intern={selectedIntern}
-          initialPage={initialPage}
-          onSave={handleSaveComment}
-        />
+            <div className="buttons">
+              <Button className="cln-btn btn" onClick={handleClearFilters}>
+                <DeleteOutlined style={{ marginRight: "10px" }} />
+                {t("Clean Filter")}
+              </Button>
+              <br />
+              <Button className="srch-btn btn" onClick={handleSearch}>
+                <SearchOutlined style={{ marginRight: "10px" }} />
+                {t("Search")}
+              </Button>
+            </div>
+          </div>
+          <div className="list">
+            <Table
+              rowSelection={{
+                type: "checkbox",
+                ...rowSelection,
+              }}
+              columns={columns}
+              dataSource={filteredInterns}
+              scroll={{ x: "max-content" }}
+              style={{
+                tableLayout: "auto",
+                width: isMobile ? "96%" : "100%",
+              }}
+              pagination={{
+                pageSize: 8,
+              }}
+            />
+          </div>
+        </section>
+      </main>
+      <CommentPopup
+        isVisible={commentPopupVisible}
+        onClose={handleCloseCommentPopup}
+        intern={selectedIntern}
+        initialPage={initialPage}
+        onSave={handleSaveComment}
+      />
 
-        <ScheduleInterview
-          onClose={handleCloseScheduleInterView}
-          openPopup={isSchedulePopupVisible}
-        /> 
-      </MainLayout>
+      <ScheduleInterview
+        onClose={handleCloseScheduleInterView}
+        openPopup={isSchedulePopupVisible}
+      />
+      <Toaster />
     </div>
   );
 }

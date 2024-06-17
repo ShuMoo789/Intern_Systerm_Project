@@ -9,7 +9,6 @@
 .content-navigation .header-navigation {
     width: 104%;
     height: 60px;
-    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,6 +56,13 @@
     padding: 15px 20px;
     align-items: center;
     color: #92929d;
+}
+.navigation .search-navigation-input{
+    border: 1px solid #D9D9D9; 
+    background-color: white;
+}
+.navigation .search-navigation-input:hover{
+    border: 1px solid aqua;
 }
 
 .navigation .group-button-navigation {

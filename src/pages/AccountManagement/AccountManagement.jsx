@@ -43,50 +43,47 @@ const data = [
 // AccountManagement functional component
 const AccountManagement = () => {
   return (
-    
-      <MainLayout>
-        {/* Main content container */}
-        <div className="content-account-management">
-          <div className="user-detail">
-            {/* User image */}
-            <img src={userImage} alt="user image" className="ava-image" />
-            {/* Welcome message */}
-            <div className="welcome">Hello Natalie Brogan!</div>
-            {/* User email */}
-            <div className="user-gmail">nataliebrogan@gmail.com</div>
-          </div>
-          {/* First group of RectangleContent components */}
-          <div className="rectangle-content-group">
-            <RectangleContent
-              title={data[0].title}
-              content={data[0].content}
-              instruction={data[0].instruction}
-            />
-            <RectangleContent
-              title={data[1].title}
-              content={data[1].content}
-              instruction={data[1].instruction}
-            />
-          </div>
-          {/* Second group of RectangleContent components */}
-          <div className="rectangle-content-group">
-            <RectangleContent
-              title={data[2].title}
-              content={data[2].content}
-              instruction={data[2].instruction}
-            />
-          </div>
-          {/* Third group of RectangleContent components */}
-          <div className="rectangle-content-group">
-            <RectangleContent
-              title={data[3].title}
-              content={data[3].content}
-              instruction={data[3].instruction}
-            />
-          </div>
+    <>
+      <div className="content-account-management">
+        <div className="user-detail">
+          {/* User image */}
+          <img src={userImage} alt="user image" className="ava-image" />
+          {/* Welcome message */}
+          <div className="welcome">Hello Natalie Brogan!</div>
+          {/* User email */}
+          <div className="user-gmail">nataliebrogan@gmail.com</div>
         </div>
-      </MainLayout>
-    
+        {/* First group of RectangleContent components */}
+        <div className="rectangle-content-group">
+          <RectangleContent
+            title={data[0].title}
+            content={data[0].content}
+            instruction={data[0].instruction}
+          />
+          <RectangleContent
+            title={data[1].title}
+            content={data[1].content}
+            instruction={data[1].instruction}
+          />
+        </div>
+        {/* Second group of RectangleContent components */}
+        <div className="rectangle-content-group">
+          <RectangleContent
+            title={data[2].title}
+            content={data[2].content}
+            instruction={data[2].instruction}
+          />
+        </div>
+        {/* Third group of RectangleContent components */}
+        <div className="rectangle-content-group">
+          <RectangleContent
+            title={data[3].title}
+            content={data[3].content}
+            instruction={data[3].instruction}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

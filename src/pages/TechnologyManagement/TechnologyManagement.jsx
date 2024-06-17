@@ -70,7 +70,6 @@ const groupButton = [
 }
 
   return (
-    <MainLayout>
       <div className="content-technology-management">
         <div className="content-navigation-technology-management">
             <header className="header-position">
@@ -105,7 +104,6 @@ const groupButton = [
           </div>
         </div>
       </div>
-    </MainLayout>
   );
 };
 

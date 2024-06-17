@@ -180,7 +180,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                   style={{
                     width: "330px",
                     height: "57px",
-                    borderRadius: "15px",
                     padding: "8px",
                     border: "1px solid #ccc",
                     boxSizing: "border-box",
@@ -219,7 +218,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                     height: "57px",
                     padding: "8px",
                     border: "1px solid #ccc",
-                    borderRadius: "15px",
                   }}
                   use12Hours
                   onChange={onChange}
@@ -261,8 +259,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                   style={{
                     width: "330px",
                     height: "57px", // ...
-
-                    opacity: 0.5,
                     font: "bold",
                   }}
                 />
@@ -403,7 +399,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                   style={{
                     width: "330px",
                     height: "57px",
-                    borderRadius: "15px",
                   }}
                 />
               </Form.Item>
@@ -533,7 +528,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                     height: "57px",
                     padding: "8px",
                     border: "1px solid #ccc",
-                    borderRadius: "15px",
                   }}
                 />
               </Form.Item>
@@ -576,7 +570,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                     height: "57px",
                     padding: "8px",
                     border: "1px solid #ccc",
-                    borderRadius: "15px",
                   }}
                 />
               </Form.Item>
@@ -642,7 +635,6 @@ const Sheldule = ({ onClose, openPopup }) => {
                   style={{
                     width: "759px",
                     height: "196px",
-                    borderRadius: "15px",
                   }}
                 />
               </Form.Item>

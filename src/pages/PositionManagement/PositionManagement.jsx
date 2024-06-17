@@ -260,7 +260,6 @@ const PositionManagement = () => {
 
   return (
     <div id="APRCV">
-      <MainLayout>
         <main className="content">
             <header className="header-position">
                 <h1 className="header-title">{t("Position Management")}</h1>
@@ -931,7 +930,6 @@ const PositionManagement = () => {
             />
           </Modal>
         </main>
-      </MainLayout>
     </div>
   );
 };

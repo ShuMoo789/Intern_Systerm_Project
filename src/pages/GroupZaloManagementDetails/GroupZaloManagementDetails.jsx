@@ -91,13 +91,12 @@ const GroupZaloManagementDetails = () => {
 
   return (
     <>
-      <MainLayout>
         <Navigation
           titleName={t("Group Zalo Management")}
           groupButton={groupButton}
           onSendEmail={handleOpenCreateGroup}
         />
-        <Row>
+        <Row >
           <Col span={1}></Col>
           <Col
             style={{
@@ -215,7 +214,6 @@ const GroupZaloManagementDetails = () => {
             </form>
           </Col>
         </Row>
-      </MainLayout>
     </>
   );
 };
