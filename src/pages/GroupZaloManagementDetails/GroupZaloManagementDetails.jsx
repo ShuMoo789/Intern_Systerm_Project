@@ -18,7 +18,7 @@ import {
   LikeOutlined,
   
 } from "@ant-design/icons";
-import { Col, Row, Input, Flex, Typography, Popover } from "antd";
+import { Col, Row, Input, Flex, Typography, Popover,Button } from "antd";
 const { Title } = Typography;
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
@@ -88,7 +88,13 @@ const GroupZaloManagementDetails = () => {
   const addEmoji = (emoji) => {
     setInputValue(inputValue + emoji.native);
   };
+  const handleBackToGroupZalo = () => {
+    // Add logic for "View Group Zalo" button here
+  };
 
+  const handleBackTo = () => {
+    // Add logic for "Back To" button here
+  };
   return (
     <>
         <Navigation
@@ -97,7 +103,16 @@ const GroupZaloManagementDetails = () => {
           onSendEmail={handleOpenCreateGroup}
         />
         <Row >
-          <Col span={1}></Col>
+          <Col className="viewZaloback" style={ {maxHeight: "100px"}} span={1}>
+            <Row span ={12} className="viewZalo-hide viewZalo-hover" onClick={handleBackToGroupZalo}>
+              <p className="viewZalo no-select">View Group Zalo</p>
+            </Row>
+
+            <Row span ={12} className= "backTo-hide backTo-hover" onClick={handleBackTo}>
+              <p className=" viewZalo no-select">Back To</p>
+            </Row>
+
+          </Col>
           <Col
             style={{
               display: "flex",
