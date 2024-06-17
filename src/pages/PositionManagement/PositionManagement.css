@@ -22,10 +22,10 @@
 }
 
 .button-group-position .row-btn-grp-pos {
-    width: 40%;
-    display: flex;
-    padding: 20px;
-    margin-left: 55%;
+    width: 50%;
+    margin-left: 47%;
+    height: 60px;
+    position: relative;
 }
 
 .button {
@@ -154,17 +154,17 @@
 }
 
 .header-position {
-        margin: 20px 20px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 24px ;
-        background-color: white; /* Set header background to white */
-        border-bottom: 1px solid #e8e8e8;
-        border-radius: 10px; /* Rounded corners */
-        margin-bottom: 16px; /* Optional: Add margin to separate from the top and sides */
+    margin: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+    background-color: white; /* Set header background to white */
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 16px; /* Optional: Add margin to separate from the top and sides */
 }
-    
+
 .header-position > .header-title {
     font-size: 24px;
     color: #2c3e50;

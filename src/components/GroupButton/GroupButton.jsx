@@ -2,6 +2,7 @@ import React from "react";
 import "./GroupButton.css";
 import { Button } from "antd";
 import useViewport from "../../hooks/useViewport";
+import { useTranslation } from "react-i18next";
 
 const GroupButton = ({
     groupButton,
@@ -10,7 +11,7 @@ const GroupButton = ({
     onCreateIntern,
 }) => {
     const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1024;
+    const isMobile = viewPort.width <= 1350;
 
     // function handle Send Mail when click button Send Mail
     const handleSendMailClick = () => {
@@ -41,19 +42,21 @@ const GroupButton = ({
         onScheduleInterview();
     };
 
+    const { t } = useTranslation();
+
     // function branches to handle functions by button name
     const handleButtonClick = (name) => {
-        if (name === "Send Email" || name === "Create Group") {
+        if (name === t("Send Email") || name === t("Create Group")) {
             handleSendMailClick();
-        } else if (name === "Export Excel") {
+        } else if (name === t("Export Excel")) {
             handleExportExcelClick();
-        } else if (name === "Edit") {
+        } else if (name === t("Edit")) {
             handleEditClick();
-        } else if (name === "Delete") {
+        } else if (name === t("Delete")) {
             handleDeleteClick();
-        } else if (name === "Add New Intern") {
+        } else if (name === t("Add New Intern") || (name === t("Add New Project"))) {
             handleAddNewInternClick();
-        } else if (name === "Schedule interview") {
+        } else if (name === t("Schedule interview")) {
             handleScheduleInterview();
         }
     };
@@ -62,7 +65,8 @@ const GroupButton = ({
         <div className="group-button">
             {/* map button group from prop passed from InternList via Navigation */}
             {groupButton.map((prop) => (
-                <Button className="common-btn"
+                <Button
+                    className="common-btn"
                     key={prop.name}
                     onClick={() => handleButtonClick(prop.name)}
                     style={{
