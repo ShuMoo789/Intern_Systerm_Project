@@ -600,7 +600,6 @@ const InternList = () => {
 
   return (
     <div>
-      <MainLayout>
         {/* Content of InternList right */}
         <div className="content-intern-list">
           {/* Pass props to Navigation */}
@@ -1023,7 +1022,6 @@ const InternList = () => {
           // intern={selectedIntern}
           openPopup={isEmailPopupVisible}
         />
-      </MainLayout>
       <Toaster />
     </div>
   );

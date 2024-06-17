@@ -27,7 +27,6 @@ import {
 } from "@ant-design/icons";
 
 import jsonData from "../../data/GroupList.json";
-import MainLayout from "../../MainLayout/MainLayout";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
 import "./GroupList.css"
@@ -588,7 +587,6 @@ const GroupList = () => {
   return (
     <>
       <div>
-        <MainLayout>
           <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
             <Navigation
               titleName={t("GROUP LIST")}
@@ -751,7 +749,6 @@ const GroupList = () => {
               </Col>
             </Row>
           </div>
-        </MainLayout>
 
         <Modal
           title={<span style={{ fontSize: "25px" }}>{t("Add New Intern")}</span>}

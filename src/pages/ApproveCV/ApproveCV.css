@@ -95,7 +95,7 @@ body {
 #APRCV .content > .filter-section {
     background-color: #ffffff;
     padding: 20px 20px 0px 20px;
-    margin-bottom: 20px;
+    margin: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-x: hidden;
@@ -214,8 +214,8 @@ div.approve-btns > div.view{
     cursor: pointer;
 }
 div.approve-btns > div.feedbacks {
-    margin-right: 5px;
-    padding: 5px 10px;
+    margin-right: 9px;
+    padding: 10px 10px 0px 10px;
     color: #4889E9;
     background-color: #ffffff;
     border: 1px solid #4889E9;
@@ -247,6 +247,7 @@ div.approve-btns > div.feedbacks:hover{
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
+    margin-bottom: 10px;
 }
 
 
@@ -272,6 +273,10 @@ div.approve-btns > div.feedbacks:hover{
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
     border: 1px solid #CBD2DC;
+    height: auto;
+    width: 150px;
+    margin: 9px 0px;
+    cursor: pointer;
 }
 
 
@@ -284,6 +289,9 @@ div.approve-btns > div.feedbacks:hover{
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
     background-color: #4889E9;
+    width: 150px;
+    height: auto;
+    cursor: pointer;
 }
 
 

@@ -419,8 +419,6 @@ function ProjectManagement() {
 
 export default function MyComponent() {
   return (
-    <MainLayout>
       <ProjectManagement />
-    </MainLayout>
   );
 }

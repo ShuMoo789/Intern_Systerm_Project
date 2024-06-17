@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 // Importing necessary components and pages for the application routing
 import AccountManagement from "./pages/AccountManagement/AccountManagement.jsx";
@@ -20,78 +20,52 @@ import TechnologyManagement from "./pages/TechnologyManagement/TechnologyManagem
 import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx";
 import GroupZaloManagementDetails from "./pages/GroupZaloManagementDetails/GroupZaloManagementDetails.jsx";
 import GroupZaloManagement from "./pages/GroupZaloManagement/GroupZaloManagement/GroupZaloManagement.jsx";
+import MainLayout from "./MainLayout/MainLayout.jsx";
 
-// Define the main App component
 function App() {
-  // useState hook to manage a count state, although it isn't used in the current implementation
-  const [count, setCount] = useState(0);
+  /*const location = useLocation();
 
-  // Return the JSX that defines the routing structure of the application
+    // useEffect hook to change the URL to '/' after every route change
+  useEffect(() => {
+    // Replace the current URL with '/'
+    if (location.pathname !== "/") {
+      window.history.replaceState(null, null, "/");
+    }
+  }, [location]);*/
   return (
     <>
-      {/* Routes component is used to define all the routes in the application */}
       <Routes>
-        {/* Each Route component defines a path and the corresponding component to render */}
         <Route path="/" element={<FirstPage />} />
-        {/* Route to the home page, rendering the First_Page component */}
-
         <Route path="/SignIn" element={<SignInPage />} />
-        {/* Route to the SignInPage, rendering the SignIn_Page component */}
-
         <Route path="/SignUp" element={<SignUpPage />} />
-        {/* Route to the SignUpPage, rendering the SignUp_Page component */}
-
-        <Route path="/Profile" element={<AccountManagement />} />
-        {/* Route to the account management page, rendering the AccountManagement component 
-            Note: There seems to be a typo in the path "/Profie". It should likely be "/Profile". */}
-
         <Route path="/PasswordReset" element={<PasswordReset />} />
-        {/* Route to the password reset page, rendering the PasswordReset component */}
-
-        <Route path="/OTPVerify" element={<OTPVerify />} />
-        {/* Route to the OTP verification page, rendering the OTPVerify component */}
-
         <Route path="/EnterNewPass" element={<EnterNewPass />} />
-        {/* Route to the page for entering a new password, rendering the EnterNewPass component */}
-
-        <Route path="/register" element={<SignUp />} />
-        {/* Route to the sign-up page, rendering the SignUp component */}
-
-        <Route path="/ApproveCV" element={<ApproveCV />} />
-        {/* Route to the CV approval page, rendering the ApproveCV component */}
-
-        <Route path="/Dashboard" element={<Dashboard />} />
-        {/* Route to the CV approval page, rendering the Dashboard component */}
-
-        <Route path="/GroupList" element={<GroupList />} />
-        {/* Route to the CV approval page, rendering the GroupList component */}
-
-        <Route path="/InternList" element={<InternList />} />
-        {/* Route to the CV approval page, rendering the GroupList component */}
-        <Route
-          path="/TechnologyManagement"
-          element={<TechnologyManagement />}
-        />
-        {/* Route to the CV approval page, rendering the InternList component */}
-
-        {/* Route to the CV approval page, rendering the GroupList component */}
-
-        <Route path="/positionManagement" element={<PositionManagement />} />
-
-        <Route path="/projectManagement" element={<ProjectMan />} />
-        <Route path="/confirmCV" element={<ConfirmCV />} />
-        <Route path="/GroupZaloManagement" element={<GroupZaloManagement />} />
-        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagement component */}
-
-        <Route
-          path="/GroupZaloManagementDetails"
-          element={<GroupZaloManagementDetails />}
-        />
-        {/* Route to the Zalo Group Management page, rendering the GroupZaloManagementDetails component */}
+        <Route path="/OTPVerify" element={<OTPVerify />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route path="profile" element={<AccountManagement />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="approveCV" element={<ApproveCV />} />
+          <Route path="confirmCV" element={<ConfirmCV />} />
+          <Route path="internList" element={<InternList />} />
+          <Route path="groupList" element={<GroupList />} />
+          <Route path="/projectManagement" element={<ProjectMan />} />
+          <Route path="/positionManagement" element={<PositionManagement />} />
+          <Route
+            path="/TechnologyManagement"
+            element={<TechnologyManagement />}
+          />
+          <Route
+            path="/GroupZaloManagement"
+            element={<GroupZaloManagement />}
+          />
+          <Route
+            path="/GroupZaloManagementDetails"
+            element={<GroupZaloManagementDetails />}
+          />
+        </Route>
       </Routes>
     </>
   );
 }
 
-// Export the App component as the default export
 export default App;
