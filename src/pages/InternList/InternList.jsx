@@ -24,9 +24,34 @@ import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
 
 // props GroupButton
+const groupButton = [
+  {
+    color: "#6537B1",
+    name: "Send Email",
+    icon: <MailOutlined />,
+  },
+  {
+    color: "#41B137",
+    name: "Export Excel",
+    icon: <ExportOutlined />,
+  },
+  {
+    color: "#FB8632",
+    name: "Edit",
+    icon: <EditOutlined />,
+  },
+  {
+    color: "#FF3A2E",
+    name: "Delete",
+    icon: <DeleteOutlined />,
+  },
+  {
+    color: "#4889E9",
+    name: "Add New Intern",
+    icon: <FolderAddOutlined />,
+  },
+];
 
-<<<<<<< HEAD
-=======
 // option of status column
 const optionSelect = [
   {
@@ -48,7 +73,6 @@ const optionsInternID = DataInternList.map((item) => ({
   value: item.internID,
   label: item.internID,
 }));
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
   const existingValue = options.find((option) => option.value === item.role);
@@ -128,19 +152,13 @@ const rowSelection = {
   }),
 };
 
-
 const InternList = () => {
-  const {t} = useTranslation()
-  const commentText = t("comment");
-  const commentsText = t("comments")
   const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [updatedData, setUpdatedData] = useState(DataInternList);
   const [dataTable, setDataTable] = useState(DataInternList);
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
-<<<<<<< HEAD
-=======
   const handleChangeStatus = (key, record) => {
     const updatedRecord = { ...record, status: key };
     const updatedData2 = updatedData.map((item) =>
@@ -151,7 +169,6 @@ const InternList = () => {
   const { t } = useTranslation();
   const commentText = t("comment");
   const commentsText = t("comments");
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   const groupButton = [
     {
       color: "#6537B1",
@@ -179,12 +196,7 @@ const InternList = () => {
       icon: <FolderAddOutlined />,
     },
   ];
-<<<<<<< HEAD
-  
-  
-=======
 
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // option of status column
   const optionSelect = [
     {
@@ -200,21 +212,13 @@ const InternList = () => {
       label: t("Out"),
     },
   ];
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // option of intern ID from file InternList.json
   const optionsInternID = DataInternList.map((item) => ({
     value: item.internID,
     label: t(item.internID),
   }));
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // option of intern phone number from file InternList.json
   const optionsInternPhoneNumber = DataInternList.map((item) => ({
     value: item.phoneNumber,
@@ -290,17 +294,10 @@ const InternList = () => {
       // }
     },
     {
-<<<<<<< HEAD
-      title:t("School"),
-      dataIndex: "school",
-      width: 160,
-      render: (text) => t(text)
-=======
       title: t("School"),
       dataIndex: "school",
       width: "auto",
       render: (text) => t(text),
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
       // filteredValue: [filter.school],
       // onFilter: (value, record) => {
       //     return record.school.includes(value)
@@ -309,13 +306,8 @@ const InternList = () => {
     {
       title: t("Address"),
       dataIndex: "address",
-<<<<<<< HEAD
-      width: 120,
-      render: (text) => t(text)
-=======
       width: "auto",
       render: (text) => t(text),
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
       // filteredValue: [filter.address],
       // onFilter: (value, record) => {
       //     return record.address.includes(value)
@@ -988,12 +980,8 @@ const InternList = () => {
                         onClick={handleCleanFilterButton}
                         style={{ width: "100%" }}
                       >
-<<<<<<< HEAD
-                        {isMobile ? "" : <FilterOutlined />} {t("Clean Filters")}
-=======
                         {isMobile ? "" : <FilterOutlined />}{" "}
                         {t("Clean Filters")}
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                       </Button>
                     </div>
                     <div className="search-button-internlist">

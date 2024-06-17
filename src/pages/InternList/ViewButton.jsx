@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { DatePicker, TimePicker, Button, Modal } from "antd";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-<<<<<<< HEAD
-=======
 
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
 
 const ViewButton = () => {
   const [open, setOpen] = useState(false);
@@ -15,11 +12,8 @@ const ViewButton = () => {
   const [startTime, setStartTime] = useState(null);
 
   const [timeDuration, setTimeDuration] = useState("15 minutes");
-  const {t} = useTranslation()
-<<<<<<< HEAD
-=======
-
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
+  const { t } = useTranslation()
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
