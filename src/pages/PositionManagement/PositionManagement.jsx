@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import MainLayout from "../../MainLayout/MainLayout";
 import User_Img from "../../assets/user_image.png";
+import Navigation from "../../components/Navigation/Navigation";
 import {
     Table,
     Checkbox,
