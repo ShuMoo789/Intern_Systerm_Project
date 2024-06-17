@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./ConfirmCV.css";
-import { Table, Checkbox, Button, Select, Modal, Row, Col } from "antd"; // Import Select from antd
-import MainLayout from "../../MainLayout/MainLayout";
-import User_Img from "../../assets/user_image.png";
+import { Table, Button, Select, Modal, Row, Col } from "antd"; // Import Select from antd
 import SendMailButton from "../../components/SendMailButton/SendMailButton";
-import ViewButton from "../../components/ViewButton(ConfirmCV)/ViewButton";
+import { useTranslation } from "react-i18next";
+
 import MailOutlined from "@ant-design/icons/MailOutlined";
+
 import {
   DownOutlined,
   EyeOutlined,
   PlusOutlined,
-  SettingOutlined,
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
   SearchOutlined,
   DeleteOutlined,
-  ClockCircleOutlined,
   ExportOutlined,
   EditOutlined,
   FolderAddOutlined,
@@ -45,6 +41,7 @@ function IconTextBlock({ iconSrc, altText, text }) {
 const interns = [];
 const dateFormat = "YYYY/MM/DD";
 const ConfirmCV = () => {
+  const { t } = useTranslation();
   // Number of interns per page
   const internsPerPage = 6;
 
@@ -774,6 +771,11 @@ const ConfirmCV = () => {
     setOpen(visible);
   };
   const [selectedItems, setSelectedItems] = useState([]);
+  const email_types = [
+    t("Email interview"),
+    t("Email result"),
+    t("Internship Information"),
+  ];
   return (
     <div id="APRCV">
       <main className="content">
@@ -785,6 +787,7 @@ const ConfirmCV = () => {
           />
         </div>
         <SendMailButton
+          typesEmail={email_types}
           onClose={handleCloseEmailPopup}
           openPopup={isEmailPopupVisible}
         />
@@ -953,12 +956,12 @@ const ConfirmCV = () => {
             </div>
             <div className="buttons-confirm">
               <Button className="cln-btn-confirm" onClick={handleClearFilters}>
-                <DeleteOutlined />
+                <DeleteOutlined style={{ marginRight: "10px" }} />
                 Clean Filter
               </Button>
               <br />
               <Button className="srch-btn btn-confirm" onClick={handleSearch}>
-                <SearchOutlined />
+                <SearchOutlined style={{ marginRight: "10px" }} />
                 Search
               </Button>
             </div>
@@ -973,7 +976,7 @@ const ConfirmCV = () => {
                 columns={columns}
                 dataSource={filteredInterns}
                 rowKey="internId"
-                pagination={{ pageSize: 6 }}
+                pagination={{ pageSize: 8 }}
                 scroll={{ x: "max-content" }}
               />
             </div>
