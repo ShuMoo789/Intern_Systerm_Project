@@ -30,6 +30,7 @@ import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
 import "./GroupList.css"
+import ViewPopup from "./ViewPopup";
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
@@ -338,13 +339,13 @@ const GroupList = () => {
             overlay={
               <Menu>
                 <Menu.Item value="Accepted" onClick={() => handleStatusChange("Accepted", record)}>
-                  <span>Accepted</span>
+                  <span>{t("Accepted")}</span>
                 </Menu.Item>
                 <Menu.Item value="Pending" onClick={() => handleStatusChange("Pending", record)}>
-                  <span>Pending</span>
+                  <span>{t("Pending")}</span>
                 </Menu.Item>
                 <Menu.Item value="Interviewed" onClick={() => handleStatusChange("Interviewed", record)}>
-                  <span>Interviewed</span>
+                  <span>{t("Interviewed")}</span>
                 </Menu.Item>
               </Menu>
             }
@@ -365,7 +366,7 @@ const GroupList = () => {
                 fontSize: "12px",
               }}
             >
-              {record.Status}
+              {t(record.Status)}
               <DownOutlined />
             </Button>
           </Dropdown>
@@ -384,10 +385,10 @@ const GroupList = () => {
             overlay={
               <Menu>
                 <Menu.Item value="Signed" onClick={() => handleContractChange("Signed", record)}>
-                  <span>Signed</span>
+                  <span>{t("Signed")}</span>
                 </Menu.Item>
                 <Menu.Item value="Pending" onClick={() => handleContractChange("Pending", record)}>
-                  <span>Pending</span>
+                  <span>{t("Pending")}</span>
                 </Menu.Item>
               </Menu>
             }
@@ -406,7 +407,7 @@ const GroupList = () => {
                 fontSize: "12px",
               }}
             >
-              {record.InternshipContract}
+              {t(record.InternshipContract)}
               <DownOutlined />
             </Button>
           </Dropdown>
@@ -419,16 +420,7 @@ const GroupList = () => {
       // width: 200,
       render: (_, record) => (
         <Space>
-          <Button
-            className="view-button"
-            shape="round"
-            style={{
-              color: "#B22222",
-              borderColor: "#B22222",
-            }}
-          >
-            {t("View")}
-          </Button>
+          <ViewPopup></ViewPopup>
           <Button
             className="upload-file-button"
             shape="round"
