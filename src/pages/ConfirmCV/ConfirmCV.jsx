@@ -953,12 +953,12 @@ const ConfirmCV = () => {
             </div>
             <div className="buttons-confirm">
               <Button className="cln-btn-confirm" onClick={handleClearFilters}>
-                <DeleteOutlined />
+                <DeleteOutlined style={{marginRight: "10px"}} />
                 Clean Filter
               </Button>
               <br />
               <Button className="srch-btn btn-confirm" onClick={handleSearch}>
-                <SearchOutlined />
+                <SearchOutlined style={{marginRight: "10px"}} />
                 Search
               </Button>
             </div>
