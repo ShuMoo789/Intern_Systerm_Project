@@ -10,7 +10,7 @@ const GroupButton = ({
     onCreateIntern,
 }) => {
     const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1024;
+    const isMobile = viewPort.width <= 1350;
 
     // function handle Send Mail when click button Send Mail
     const handleSendMailClick = () => {
@@ -62,7 +62,8 @@ const GroupButton = ({
         <div className="group-button">
             {/* map button group from prop passed from InternList via Navigation */}
             {groupButton.map((prop) => (
-                <Button className="common-btn"
+                <Button
+                    className="common-btn"
                     key={prop.name}
                     onClick={() => handleButtonClick(prop.name)}
                     style={{
