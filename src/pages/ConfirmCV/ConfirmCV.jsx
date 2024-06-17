@@ -173,40 +173,6 @@ const ConfirmCV = () => {
                 ? { backgroundColor: "#B7EACB", color: "#3A7D34" }
                 : {}
             }
-<<<<<<< HEAD
-        }
-        if (selectedFilters.email) {
-            if (selectedFilters.email) {
-                const searchText = selectedFilters.email.toLowerCase();
-                results = results.filter((intern) =>
-                    intern.email.toLowerCase().includes(searchText)
-                );
-            }
-        }
-        if (selectedFilters.dateOfBirth) {
-            results = results.filter((intern) =>
-                moment(intern.dateOfBirth).isSame(
-                    selectedFilters.dateOfBirth,
-                    "day"
-                )
-            );
-          }
-    }
-    if (selectedFilters.email) {
-        if (selectedFilters.email) {
-            const searchText = selectedFilters.email.toLowerCase();
-            results = results.filter((intern) =>
-              intern.email.toLowerCase().includes(searchText)
-            );
-          }
-    }
-    if (selectedFilters.dateOfBirth) {
-      results = results.filter((intern) =>
-        moment(intern.dateOfBirth).isSame(selectedFilters.dateOfBirth, "day")
-      );
-    }
-    setFilteredInterns(results);
-=======
           >
             {intern.status}
             <DownOutlined />
@@ -232,7 +198,6 @@ const ConfirmCV = () => {
         </td>
       </tr>
     ));
->>>>>>> e8376e71f3f93f7664f16ac45f654de75dd0485e
   };
 
   // Extract unique school names from the filteredInterns array
@@ -240,17 +205,6 @@ const ConfirmCV = () => {
     ...new Set(filteredInterns.map((intern) => intern.school)),
   ];
 
-<<<<<<< HEAD
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setSelectedIntern(null);
-    setCommentPopupVisible(false);
-    setIsModalVisible(false);
-  };
-=======
   // Extract unique position names from the filteredInterns array
   const positionNames = [
     ...new Set(filteredInterns.map((intern) => intern.position)),
@@ -259,7 +213,6 @@ const ConfirmCV = () => {
   const internIDChoice = [
     ...new Set(filteredInterns.map((intern) => intern.internID)),
   ];
->>>>>>> e8376e71f3f93f7664f16ac45f654de75dd0485e
 
   const phoneNumberChoice = [
     ...new Set(filteredInterns.map((intern) => intern.phoneNumber)),
