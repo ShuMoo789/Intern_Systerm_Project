@@ -37,7 +37,7 @@ const GroupList = () => {
   const [data, setData] = useState(jsonData);
   const [filteredData, setFilteredData] = useState(jsonData);
   const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
+  const isMobile = viewPort.width <= 1300;
   const [visible, setVisible] = useState(false);
   const { t } = useTranslation();
   const [filters, setFilters] = useState({
@@ -56,7 +56,9 @@ const GroupList = () => {
   });
 
   const inputStyle = {
-    width: isMobile ? "92%" : "300px",
+    width: isMobile ? "100%" : "300px",
+    height: 40,
+    fontSize: "16px"
   };
 
   useEffect(() => {
@@ -154,7 +156,7 @@ const GroupList = () => {
   const groupButton = [
     {
       color: "#6537B1",
-      name: "Create Group",
+      name: t("Create Group"),
       icon: <UsergroupAddOutlined />,
     },
     {
@@ -545,6 +547,8 @@ const GroupList = () => {
       (value) => value.trim() !== ""
     );
     if (allFieldsFilled) {
+      setFormValues(inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {}));
+      message.success("Intern added successfully");
       handleCancel();
     } else {
       message.error("Please fill all fields");
@@ -563,24 +567,23 @@ const GroupList = () => {
             />
           </div>
           <div>
-            <Row>
-              <Col span={1}></Col>
-              <Col span={23}>
+            <Row style={{margin: 20}}>
+              <Col>
                 <div
                   style={{
                     backgroundColor: "white",
                     borderRadius: "25px",
-                    width: "96%",
+                    width: "100%",
                   }}
                 >
                   <Space
                     style={{
-                      margin: "20px 0 30px 30px ",
-                      width: isMobile ? "93%" : "960px",
+                      margin: isMobile ? "20px" : "20px 0 24px 20px",
+                      width: isMobile ? "96%" : "920px",
                       flexDirection: isMobile ? "column" : "row",
                       alignItems: "unset",
                     }}
-                    size={[8, 8]}
+                    size={[5, 5]}
                     wrap
                   >
                     <Input
@@ -673,12 +676,13 @@ const GroupList = () => {
                     style={{
                       width: isMobile ? "96%" : "0",
                       marginBottom: isMobile ? "30px" : 0,
-                      margin: isMobile ? "0 10px" : "0",
+                      margin: isMobile ? "0 20px" : "0",
                     }}
                   >
                     <Button
                       className="clear-filter-button"
                       style={{
+                        transform: isMobile ? "" : "translate(0, 70%)",
                         width: isMobile ? "100%" : 140,
                       }}
                       icon={<FilterOutlined />}
@@ -691,7 +695,9 @@ const GroupList = () => {
                       style={{
                         backgroundColor: "#4889E9",
                         color: "white",
+                        transform: isMobile ? "" : "translate(0, 70%)", 
                         width: isMobile ? "100%" : 140,
+                        marginBottom: isMobile ? "10px" : 0,
                       }}
                       icon={<SearchOutlined />}
                       onClick={handleSearch}
@@ -706,6 +712,8 @@ const GroupList = () => {
                     }}
                   >
                     <Table
+                      className="grouplist-table"
+                      style={{margin: "0 20px"}}
                       columns={columns}
                       dataSource={filteredData}
                       scroll={{ x: 3300 }}
@@ -718,7 +726,8 @@ const GroupList = () => {
           </div>
 
         <Modal
-          title={<span style={{ fontSize: "25px" }}>{t("Add New Intern")}</span>}
+          className="add-new-intern-modal"
+          title={<span style={{ fontSize: "25px", fontWeight: "bold", marginLeft: 10 }}>{t("Add New Intern")}</span>}
           open={visible}
           onCancel={handleCancel}
           footer={[
@@ -726,7 +735,7 @@ const GroupList = () => {
               key="addNewIntern"
               type="primary"
               onClick={handleSubmit}
-              style={{ margin: "20px 20px 0 0" }}
+              style={{ margin: "10px 10px 0 0", height: "50px", borderRadius: 10 }}
             >
               {t("Add New Intern")}
             </Button>,
@@ -734,10 +743,9 @@ const GroupList = () => {
           width={modalWidth}
         >
           <Space
-            size={[80, 50]}
+            size={[30, 30]}
             wrap
             style={{
-              marginTop: "20px",
               justifyContent: "center",
               width: "100%",
             }}
@@ -749,15 +757,15 @@ const GroupList = () => {
                 size="small"
                 style={{ width: "300px" }}
               >
-                <label style={{ fontWeight: "bold" }}>{field.title}</label>
+                <label style={{ fontWeight: 600 }}>{field.title}</label>
                 <Input
                   placeholder={field.placeholder}
                   value={formValues[field.title]}
                   onChange={(e) => handleInputChange(e, field.title)}
                   style={{
                     width: "100%",
-                    height: "60px",
-                    borderRadius: "15px",
+                    height: "40px",
+                    borderRadius: "10px",
                   }}
                 />
               </Space>
