@@ -359,7 +359,7 @@ const PositionManagement = () => {
                                     </p>
                                     <p>
                                         <strong>{t("Group Zalo")}:</strong>{" "}
-                                        <a href="#">Link</a>
+                                        <a href="#" style={{textDecoration: "underline"}}>Link</a>
                                     </p>
                                     <div className="avatars">
                                         <Avatar.Group>

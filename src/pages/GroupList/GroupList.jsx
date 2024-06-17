@@ -30,6 +30,7 @@ import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
+import ViewPopup from "./ViewPopup";
 
 const { Option } = Select;
 
@@ -58,7 +59,7 @@ const GroupList = () => {
   const inputStyle = {
     width: isMobile ? "100%" : "300px",
     height: 40,
-    fontSize: "16px"
+    fontSize: "16px",
   };
 
   useEffect(() => {
@@ -547,7 +548,9 @@ const GroupList = () => {
       (value) => value.trim() !== ""
     );
     if (allFieldsFilled) {
-      setFormValues(inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {}));
+      setFormValues(
+        inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+      );
       message.success("Intern added successfully");
       handleCancel();
     } else {
@@ -567,22 +570,23 @@ const GroupList = () => {
           />
         </div>
         <div>
-          <Row>
+          <Row style={{ margin: 20 }}>
+            <Col>
               <div
                 style={{
                   backgroundColor: "white",
                   borderRadius: "25px",
-                  width: "96%",
+                  width: "100%",
                 }}
               >
                 <Space
                   style={{
-                    margin: "20px 0 30px 30px ",
-                    width: isMobile ? "93%" : "960px",
+                    margin: isMobile ? "20px" : "20px 0 24px 20px",
+                    width: isMobile ? "96%" : "920px",
                     flexDirection: isMobile ? "column" : "row",
                     alignItems: "unset",
                   }}
-                  size={[8, 8]}
+                  size={[5, 5]}
                   wrap
                 >
                   <Input
@@ -675,62 +679,49 @@ const GroupList = () => {
                   style={{
                     width: isMobile ? "96%" : "0",
                     marginBottom: isMobile ? "30px" : 0,
-                    margin: isMobile ? "0 10px" : "0",
+                    margin: isMobile ? "0 20px" : "0",
                   }}
                 >
                   <Button
                     className="clear-filter-button"
                     style={{
+                      transform: isMobile ? "" : "translate(0, 70%)",
                       width: isMobile ? "100%" : 140,
                     }}
                     icon={<FilterOutlined />}
                     onClick={handleClearFilters}
                   >
-                    <Button
-                      className="clear-filter-button"
-                      style={{
-                        transform: isMobile ? "" : "translate(0, 70%)",
-                        width: isMobile ? "100%" : 140,
-                      }}
-                      icon={<FilterOutlined />}
-                      onClick={handleClearFilters}
-                    >
-                      {t("Clean Filter")}
-                    </Button>
-                    <Button
-                      className="search-filter-button"
-                      style={{
-                        backgroundColor: "#4889E9",
-                        color: "white",
-                        transform: isMobile ? "" : "translate(0, 70%)", 
-                        width: isMobile ? "100%" : 140,
-                        marginBottom: isMobile ? "10px" : 0,
-                      }}
-                      icon={<SearchOutlined />}
-                      onClick={handleSearch}
-                    >
-                      {t("Search")}
-                    </Button>
-                  </Space>
-                  <div
+                    {t("Clean Filter")}
+                  </Button>
+                  <Button
+                    className="search-filter-button"
                     style={{
                       backgroundColor: "#4889E9",
                       color: "white",
+                      transform: isMobile ? "" : "translate(0, 70%)",
                       width: isMobile ? "100%" : 140,
+                      marginBottom: isMobile ? "10px" : 0,
                     }}
                     icon={<SearchOutlined />}
                     onClick={handleSearch}
                   >
-                    <Table
-                      className="grouplist-table"
-                      style={{margin: "0 20px"}}
-                      columns={columns}
-                      dataSource={filteredData}
-                      scroll={{ x: 3300 }}
-                      pagination={{ pageSize: 7 }}
-                    />
-                  </div>
-
+                    {t("Search")}
+                  </Button>
+                </Space>
+                <div
+                  style={{
+                    overflowX: "auto",
+                    width: isMobile ? "100%" : "100%",
+                  }}
+                >
+                  <Table
+                    className="grouplist-table"
+                    style={{ margin: "0 20px" }}
+                    columns={columns}
+                    dataSource={filteredData}
+                    scroll={{ x: 3300 }}
+                    pagination={{ pageSize: 7 }}
+                  />
                 </div>
               </div>
             </Col>
@@ -739,8 +730,13 @@ const GroupList = () => {
 
         <Modal
           className="add-new-intern-modal"
-          title={<span style={{ fontSize: "25px", fontWeight: "bold", marginLeft: 10 }}>{t("Add New Intern")}</span>}
-
+          title={
+            <span
+              style={{ fontSize: "25px", fontWeight: "bold", marginLeft: 10 }}
+            >
+              {t("Add New Intern")}
+            </span>
+          }
           open={visible}
           onCancel={handleCancel}
           footer={[
@@ -748,7 +744,11 @@ const GroupList = () => {
               key="addNewIntern"
               type="primary"
               onClick={handleSubmit}
-              style={{ margin: "10px 10px 0 0", height: "50px", borderRadius: 10 }}
+              style={{
+                margin: "10px 10px 0 0",
+                height: "50px",
+                borderRadius: 10,
+              }}
             >
               {t("Add New Intern")}
             </Button>,
