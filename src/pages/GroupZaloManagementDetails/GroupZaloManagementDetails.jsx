@@ -105,11 +105,11 @@ const GroupZaloManagementDetails = () => {
         <Row >
           <Col className="viewZaloback" style={ {maxHeight: "100px"}} span={1}>
             <Row span ={12} className="viewZalo-hide viewZalo-hover" onClick={handleBackToGroupZalo}>
-              <p className="viewZalo no-select">View Group Zalo</p>
+              <p className="viewZalo no-select">{t("View in Zalo")}</p>
             </Row>
 
             <Row span ={12} className= "backTo-hide backTo-hover" onClick={handleBackTo}>
-              <p className=" viewZalo no-select">Back To</p>
+              <p className=" viewZalo no-select">{t("Back to")}</p>
             </Row>
 
           </Col>
