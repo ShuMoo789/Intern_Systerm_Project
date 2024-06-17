@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const { Option } = Select;
 const { TextArea } = Input;
 
-const SendEmailPopup = ({ onClose, openPopup }) => {
+const SendEmailPopup = ({ onClose, openPopup, typesEmail }) => {
   const { t } = useTranslation();
   const [emailType, setEmailType] = useState("");
   const [emailContent, setEmailContent] = useState("");
@@ -31,7 +31,7 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
       })
       .catch((info) => {
         console.log("Validate Failed:", info);
-        message.error("Please fill full input!")
+        message.error(t("Please fill full input!"))
       });
   };
 
@@ -61,11 +61,7 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
     setOpen(visible);
   };
 
-  const email_types = [
-    t("Email interview"),
-    t("Email result"),
-    t("Internship Information"),
-  ];
+  const email_types = typesEmail;
 
   return (
     <Modal
@@ -107,7 +103,7 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
             <Form.Item
               name="select"
               rules={[
-                { required: true, message: t("Please select type of Email!") },
+                { required: true, message: t("Please select an email type") },
               ]}
             >
               <Select
@@ -129,7 +125,7 @@ const SendEmailPopup = ({ onClose, openPopup }) => {
           <Form form={form} layout="vertical" name="text-form">
             <Form.Item
               name="text-email"
-              rules={[{ required: true, message: "Please enter your mail!" }]}
+              rules={[{ required: true, message: "Please enter your email content" }]}
             >
               <TextArea
                 className="textarea"
