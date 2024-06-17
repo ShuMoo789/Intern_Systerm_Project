@@ -160,13 +160,13 @@ const InternList = () => {
       label: t("Out"),
     },
   ];
-
+  
   // option of intern ID from file InternList.json
   const optionsInternID = DataInternList.map((item) => ({
     value: item.internID,
     label: t(item.internID),
   }));
-
+  
   // option of intern phone number from file InternList.json
   const optionsInternPhoneNumber = DataInternList.map((item) => ({
     value: item.phoneNumber,

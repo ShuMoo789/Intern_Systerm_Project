@@ -29,6 +29,8 @@ import {
 import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
+import "./GroupList.css"
+import ViewPopup from "./ViewPopup";
 import { useTranslation } from "react-i18next";
 import ViewPopup from "./ViewPopup";
 
@@ -108,20 +110,18 @@ const GroupList = () => {
     setFilteredData(data);
   };
 
-  const handleStatusChange = (key, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, Status: key } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
+  const handleStatusChange = (value, recordToUpdate) => {
+    // Update the status of the record
+    recordToUpdate.Status = value;
+    // Trigger re-render by updating state or forceUpdate
+    setData([...data]); // Assuming data is an array of records
   };
 
-  const handleContractChange = (key, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, InternshipContract: key } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
+  const handleContractChange = (value, recordToUpdate) => {
+    // Update the status of the record
+    recordToUpdate.InternshipContract = value;
+    // Trigger re-render by updating state or forceUpdate
+    setData([...data]); // Assuming data is an array of records
   };
 
   const handleCancel = () => {
@@ -284,6 +284,16 @@ const GroupList = () => {
     {
       title: "CV",
       dataIndex: "CV",
+      // key: "CV",
+      // width: 140,
+      render: (text) => (
+        <a
+          href={text}
+          style={{ color: "#0000FF", textDecoration: "underline" }}
+        >
+          Link
+        </a>
+      ),
       key: "CV",
       width: "auto",
     },
@@ -325,30 +335,45 @@ const GroupList = () => {
       dataIndex: "Status",
       key: "Status",
       width: "auto",
+
       render: (text, record) => (
-        <Dropdown
-          overlay={
-            <Menu onClick={({ key }) => handleStatusChange(key, record)}>
-              {statusOptions.map((option) => (
-                <Menu.Item key={option.value}>
-                  <span>{option.label}</span>
+        <div style={{ width: 126 }}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item value="Accepted" onClick={() => handleStatusChange("Accepted", record)}>
+                  <span>{t("Accepted")}</span>
                 </Menu.Item>
-              ))}
-            </Menu>
-          }
-        >
-          <Button
-            style={{
-              width: 120,
-              backgroundColor: getBackgroundColor(record.Status),
-              color: getColor(record.Status),
-              borderRadius: "100px",
-              fontSize: "12px",
-            }}
+                <Menu.Item value="Pending" onClick={() => handleStatusChange("Pending", record)}>
+                  <span>{t("Pending")}</span>
+                </Menu.Item>
+                <Menu.Item value="Interviewed" onClick={() => handleStatusChange("Interviewed", record)}>
+                  <span>{t("Interviewed")}</span>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            {text} <DownOutlined />
-          </Button>
-        </Dropdown>
+            <Button
+              style={{
+                backgroundColor:
+                  record.Status === "Accepted" ? "#EFF9F1" :
+                    record.Status === "Pending" ? "#F8E7EE" :
+                      record.Status === "Interviewed" ? "#E8F4FD" : "FFFFFF",
+                color:
+                  record.Status === "Accepted" ? "#449E3C": 
+                    record.Status === "Pending" ? "#B70D52": 
+                      record.Status === "Interviewed" ? "#106BA3" : "#333333",
+                borderRadius: "50px", // Đặt bo tròn thành hình tròn
+                marginLeft: "-8px",
+                width: "100%",
+                fontSize: "12px",
+              }}
+            >
+              {t(record.Status)}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       ),
     },
     {
@@ -356,49 +381,49 @@ const GroupList = () => {
       dataIndex: "InternshipContract",
       key: "InternshipContract",
       width: "auto",
+
       render: (text, record) => (
-        <Dropdown
-          overlay={
-            <Menu onClick={({ key }) => handleContractChange(key, record)}>
-              {contractOptions.map((option) => (
-                <Menu.Item key={option.value}>
-                  <span>{option.label}</span>
+        <div style={{ width: 126 }}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item value="Signed" onClick={() => handleContractChange("Signed", record)}>
+                  <span>{t("Signed")}</span>
                 </Menu.Item>
-              ))}
-            </Menu>
-          }
-        >
-          <Button
-            style={{
-              width: 120,
-              backgroundColor: getBackgroundColor(record.InternshipContract),
-              color: getColor(record.InternshipContract),
-              borderRadius: "100px",
-              fontSize: "12px",
-            }}
+                <Menu.Item value="Pending" onClick={() => handleContractChange("Pending", record)}>
+                  <span>{t("Pending")}</span>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            {text} <DownOutlined />
-          </Button>
-        </Dropdown>
+            <Button
+              style={{
+                backgroundColor:
+                  record.InternshipContract === "Signed" ? "#EFF9F1": 
+                    record.InternshipContract === "Pending" ? "#F8E7EE": "FFFFFF",
+                color:
+                  record.InternshipContract === "Signed" ? "#449E3C" :
+                    record.InternshipContract === "Pending" ? "#B70D52": "#333333",
+                borderRadius: "50px", // Đặt bo tròn thành hình tròn
+                marginLeft: "-8px",
+                width: "100%",
+                fontSize: "12px",
+              }}
+            >
+              {t(record.InternshipContract)}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       ),
     },
     {
       title: t("Button"),
       key: "Button",
-      width: 200,
-
+      // width: 200,
       render: (_, record) => (
         <Space>
-          <Button
-            className="view-button"
-            shape="round"
-            style={{
-              color: "#B22222",
-              borderColor: "#B22222",
-            }}
-          >
-            {t("View")}
-          </Button>
+          <ViewPopup></ViewPopup>
           <Button
             className="upload-file-button"
             shape="round"
