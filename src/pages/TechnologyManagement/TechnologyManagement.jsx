@@ -49,14 +49,6 @@ const groupButton = [
   },
 ];
 
-<<<<<<< HEAD
-const TechnologyManagement = () => {
-  const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
-  const [activeTab, setActiveTab] = useState("Back-End");
-
-=======
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
   // Hàm xử lý khi chuyển tab
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -81,23 +73,6 @@ const TechnologyManagement = () => {
     <MainLayout>
       <div className="content-technology-management">
         <div className="content-navigation-technology-management">
-<<<<<<< HEAD
-          <div className="header-navigation-technology-management">
-            <div className="title-name-technology-management">
-              TECHNOLOGY MANAGEMENT
-            </div>
-            {/* if mobile, width of AccountSetting will change */}
-            {!isMobile ? (
-              <div className="account-setting-technology-management">
-                <AccountSetting />
-              </div>
-            ) : (
-              <div className="account-setting-technology-management-mobile">
-                <AccountSetting />
-              </div>
-            )}
-          </div>
-=======
             <header className="header-position">
                 <h1 className="header-title">{t("Technology Management")}</h1>
                 {isMobile ? (
@@ -110,7 +85,6 @@ const TechnologyManagement = () => {
                     />
                 )}
             </header>
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
           <div className="navigation-technology-management">
             <div className="nav-container" style={{ paddingLeft: 30 }}>
               <TechNavigation
