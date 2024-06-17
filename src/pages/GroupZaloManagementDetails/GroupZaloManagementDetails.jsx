@@ -177,28 +177,9 @@ const GroupZaloManagementDetails = () => {
               <Input
                 value={inputValue}
                 onChange={handleInputChange}
-<<<<<<< Nguyen-Tien-Dat
                 placeholder="Type a message"
                 className="chat-input chat-input-bottom"
-<<<<<<< HEAD
-=======
-                placeholder={t("Type a message")}
-                style={{
-                  flex: 1,
-                  marginBottom: "40px",
-                  backgroundColor: "#dad6d6",
-                  borderRadius: 0,
-                  height: "60px",
-                  borderTop: "0",
-                  borderRight: "1px solid black",
-                  borderBottom: "1px solid black",
-                  borderLeft: "1px solid black",
-                  paddingLeft: "25px",
-                }}
->>>>>>> main
-=======
 
->>>>>>> 80a15b9332c36ae233adb487b4b67b4278f140e8
                 bordered={false}
                 suffix={
                   <div style={{ display: "flex", gap: "10px", alignItems: 'center' }}>
