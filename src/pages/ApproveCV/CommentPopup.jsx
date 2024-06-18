@@ -183,6 +183,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
               }
               target="_blank"
               rel="noopener noreferrer"
+              style={{ color: "Blue" }}
             >
               Link
             </a>
