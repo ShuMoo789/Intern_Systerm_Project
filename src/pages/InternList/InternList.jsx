@@ -15,64 +15,12 @@ import {
 import { Table, Select, Button, Input, Col, Row } from "antd";
 import DataInternList from "../../data/InternList.json"; // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
-import SendEmailPopup from "./SendEmailPopup";
+import SendMailButton from "../../components/SendMailButton/SendMailButton";
 import ReportProcessModal from "./ReportProcessPopup";
 import ViewButton from "./ViewButton";
 import "./InternList.css";
-import MainLayout from "../../MainLayout/MainLayout";
 import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
-
-// props GroupButton
-const groupButton = [
-  {
-    color: "#6537B1",
-    name: "Send Email",
-    icon: <MailOutlined />,
-  },
-  {
-    color: "#41B137",
-    name: "Export Excel",
-    icon: <ExportOutlined />,
-  },
-  {
-    color: "#FB8632",
-    name: "Edit",
-    icon: <EditOutlined />,
-  },
-  {
-    color: "#FF3A2E",
-    name: "Delete",
-    icon: <DeleteOutlined />,
-  },
-  {
-    color: "#4889E9",
-    name: "Add New Intern",
-    icon: <FolderAddOutlined />,
-  },
-];
-
-// option of status column
-const optionSelect = [
-  {
-    value: "inProcess",
-    label: "In process",
-  },
-  {
-    value: "completedOJT",
-    label: "Completed OJT",
-  },
-  {
-    value: "out",
-    label: "Out",
-  },
-];
-
-// option of intern ID from file InternList.json
-const optionsInternID = DataInternList.map((item) => ({
-  value: item.internID,
-  label: item.internID,
-}));
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
   const existingValue = options.find((option) => option.value === item.role);
@@ -167,12 +115,12 @@ const InternList = () => {
     setUpdatedData(updatedData2);
   };
   const { t } = useTranslation();
-  const commentText = t("comment");
   const commentsText = t("comments");
+  // props GroupButton
   const groupButton = [
     {
       color: "#6537B1",
-      name: "Send Email",
+      name: t("Send Email"),
       icon: <MailOutlined />,
     },
     {
@@ -212,13 +160,13 @@ const InternList = () => {
       label: t("Out"),
     },
   ];
-
+  
   // option of intern ID from file InternList.json
   const optionsInternID = DataInternList.map((item) => ({
     value: item.internID,
     label: t(item.internID),
   }));
-
+  
   // option of intern phone number from file InternList.json
   const optionsInternPhoneNumber = DataInternList.map((item) => ({
     value: item.phoneNumber,
@@ -597,6 +545,14 @@ const InternList = () => {
       groupZalo: value,
     }));
   };
+
+  const email_types = [
+    t("Email interview"),
+    t("Email result"),
+    t("Internship Information"),
+    t("Additional Profile"),
+    t("Return Profile")
+  ];
 
   return (
     <div>
@@ -1016,11 +972,10 @@ const InternList = () => {
           </div>
         </div>
         {/*Render Email Popup */}
-        <SendEmailPopup
+        <SendMailButton
           onClose={handleCloseEmailPopup}
-          onSendEmail={handleSendEmail}
-          // intern={selectedIntern}
           openPopup={isEmailPopupVisible}
+          typesEmail={email_types}
         />
       <Toaster />
     </div>

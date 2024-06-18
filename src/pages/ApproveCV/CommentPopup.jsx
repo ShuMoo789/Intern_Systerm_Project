@@ -183,7 +183,8 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 "https://youtu.be/dQw4w9WgXcQ?si=xqVazvMo-5hva6i8"
               }
               target="_blank"
-              rel="noopener noreferrer" 
+              rel="noopener noreferrer"
+              style={{ color: "Blue" }}
             >
               Link
             </a>

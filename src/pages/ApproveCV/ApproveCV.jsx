@@ -503,7 +503,7 @@ function ApproveCV() {
       render: (text) => (
         <a
           href={text}
-          style={{ color: "#0000FF", textDecoration: "underline" }}
+          style={{ color: "Blue", textDecoration: "underline"}}
         >
           Link
         </a>
@@ -570,7 +570,7 @@ function ApproveCV() {
     {
       title: "Button",
       // width: 120,
-      render: () => (
+      render: (intern) => (
         <div className="approve-btns">
           <div className="view" onClick={() => handleViewClick(intern)}>
             {t("View")}

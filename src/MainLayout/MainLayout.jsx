@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "antd";
 import MenuNavigate from "../components/Menu/MenuNavigate";
 import { useState } from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const MainLayout = ({ children }) => {
   const [spanLayout, setSpanLayout] = useState([3, 21]);

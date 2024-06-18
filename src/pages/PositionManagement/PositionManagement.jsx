@@ -22,7 +22,7 @@ import {
   EditOutlined,
   DeleteOutlined,
   FolderAddOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
 import "../PositionManagement/PositionManagement.css";
@@ -63,6 +63,20 @@ const PositionManagement = () => {
       icon: <FolderAddOutlined />,
     },
   ];
+  function getRankClass(text) {
+    switch (text) {
+      case "Intern":
+        return "intern-rank";
+      case "Fresher":
+        return "fresher-rank";
+      case "Junior":
+        return "junior-rank";
+      case "Middle":
+        return "middle-rank";
+      default:
+        return "default-rank";
+    }
+  }
 
   // JSON data
   const internsData = [
@@ -228,12 +242,12 @@ const PositionManagement = () => {
       title: t("Rank"),
       dataIndex: "rank",
       key: "rank",
-      width: 80,
+      width: 110,
       render: (text, record) => (
         <Dropdown
           overlay={rankMenu(record)}
           trigger={["click"]}
-          className="dropdown-menu"
+          className={`dropdown-menu ${getRankClass(text)}`}
         >
           <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
             {text} <DownOutlined />
@@ -245,67 +259,160 @@ const PositionManagement = () => {
 
   function UserInfo({ name, role, avatarSrc }) {
     return (
-        <div className="user-info">
-            <div className="avatar-section">
-                <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
-                <div className="user-details">
-                    <p className="username">{name}</p>
-                    <p className="role">{role}</p>
-                </div>
-            </div>
-            <SettingOutlined className="setting-icon" />
+      <div className="user-info">
+        <div className="avatar-section">
+          <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+          <div className="user-details">
+            <p className="username">{name}</p>
+            <p className="role">{role}</p>
+          </div>
         </div>
+        <SettingOutlined className="setting-icon" />
+      </div>
     );
-}
+  }
 
   return (
     <div id="APRCV">
-        <main className="content">
-            <header className="header-position">
-                <h1 className="header-title">{t("Position Management")}</h1>
-                {isMobile ? (
-                    <SettingOutlined className="setting-icon" />
-                ) : (
-                    <UserInfo
-                        name="Natalie Brogan"
-                        role="Admin"
-                        avatarSrc={User_Img}
-                    />
-                )}
-            </header>
+      <main className="content">
+        <header className="header-position">
+          <h1 className="header-title">{t("Position Management")}</h1>
+          {isMobile ? (
+            <SettingOutlined className="setting-icon" />
+          ) : (
+            <UserInfo name="Natalie Brogan" role="Admin" avatarSrc={User_Img} />
+          )}
+        </header>
 
-          <div className="button-group-position">
-            <div className="row-btn-grp-pos">
-              <GroupButton groupButton={groupButton} />
-            </div>
+        <div className="button-group-position">
+          <div className="row-btn-grp-pos">
+            <GroupButton groupButton={groupButton} />
           </div>
+        </div>
 
-          <section>
-            <div className="bodyposition">
-              <div className="bodyposi">
-                <Card
-                  className="card-pos"
-                  title="Back-End"
-                  extra={
-                    <>
-                      <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 {t("people")}
-                      </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
-                    </>
-                  }
-                >
-                  <p>
-                    <strong>{t("Technology")}:</strong> .NET, Java, ...
-                  </p>
-                  <p>
-                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
-                    Middle, Senior
-                  </p>
-                  <p>
-                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
-                  </p>
-                  <div className="avatars">
+        <section>
+          <div className="bodyposition">
+            <div className="bodyposi">
+              <Card
+                className="card-pos"
+                title="Back-End"
+                extra={
+                  <>
+                    <Tag color="blue" style={{ borderRadius: "20px" }}>
+                      100 {t("people")}
+                    </Tag>
+                    <Checkbox style={{ marginLeft: "10px" }} />
+                  </>
+                }
+              >
+                <p>
+                  <strong>{t("Technology")}:</strong> .NET, Java, ...
+                </p>
+                <p>
+                  <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
+                  Senior
+                </p>
+                <p>
+                  <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
+                </p>
+                <div className="avatars">
+                  <Avatar.Group>
+                    <Tooltip title="Ant User" placement="top">
+                      <Avatar
+                        src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                        style={{
+                          backgroundColor: "#FDD145",
+                          width: "38px",
+                          height: "38px",
+                        }}
+                      />
+                    </Tooltip>
+
+                    <Tooltip title="Ant User" placement="top">
+                      <Avatar
+                        src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                        style={{
+                          backgroundColor: "#FDD145",
+                          marginLeft: "-10%",
+                          width: "38px",
+                          height: "38px",
+                        }}
+                      />
+                    </Tooltip>
+                    <Tooltip title="Ant User" placement="top">
+                      <Avatar
+                        src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                        style={{
+                          backgroundColor: "#91CADF",
+                          width: "38px",
+                          height: "38px",
+                          marginLeft: "-10%",
+                        }}
+                      />
+                    </Tooltip>
+                    <Tooltip title="Ant User" placement="top">
+                      <Avatar
+                        src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                        style={{
+                          backgroundColor: "#5C5967",
+                          width: "38px",
+                          height: "38px",
+                          marginLeft: "-10%",
+                        }}
+                      />
+                    </Tooltip>
+                    <Avatar
+                      style={{
+                        backgroundColor: "#F4D7DA",
+                        width: "38px",
+                        height: "38px",
+                        marginLeft: "-10%",
+                        color: "#D25B68",
+                      }}
+                    >
+                      +2
+                    </Avatar>
+                  </Avatar.Group>
+                </div>
+                <div className="buttons">
+                  <Button
+                    type="link"
+                    className="button-main"
+                    onClick={() =>
+                      showModal(t("View Back-End Detail"), "Back-End")
+                    }
+                  >
+                    {t("View Details")}
+                    <FolderOutlined className="iconfolder" />
+                  </Button>
+                </div>
+              </Card>
+            </div>
+            <div className="bodyposi">
+              <Card
+                className="card-pos"
+                title="Front-End"
+                extra={
+                  <>
+                    <Tag color="blue" style={{ borderRadius: "20px" }}>
+                      100 {t("people")}
+                    </Tag>
+                    <Checkbox style={{ marginLeft: "10px" }} />
+                  </>
+                }
+              >
+                <p>
+                  <strong>{t("Technology")}:</strong> ReactJS,...
+                </p>
+                <p>
+                  <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
+                  Senior
+                </p>
+                <p>
+                  <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
+                </p>
+                <div className="avatars">
+                  <>
                     <Avatar.Group>
                       <Tooltip title="Ant User" placement="top">
                         <Avatar
@@ -315,7 +422,7 @@ const PositionManagement = () => {
                             width: "38px",
                             height: "38px",
                           }}
-                        />
+                        ></Avatar>
                       </Tooltip>
 
                       <Tooltip title="Ant User" placement="top">
@@ -327,7 +434,7 @@ const PositionManagement = () => {
                             width: "38px",
                             height: "38px",
                           }}
-                        />
+                        ></Avatar>
                       </Tooltip>
                       <Tooltip title="Ant User" placement="top">
                         <Avatar
@@ -338,6 +445,7 @@ const PositionManagement = () => {
                             height: "38px",
                             marginLeft: "-10%",
                           }}
+                          // icon={<UserOutlined />}
                         />
                       </Tooltip>
                       <Tooltip title="Ant User" placement="top">
@@ -349,6 +457,7 @@ const PositionManagement = () => {
                             height: "38px",
                             marginLeft: "-10%",
                           }}
+                          // icon={<UserOutlined />}
                         />
                       </Tooltip>
                       <Avatar
@@ -359,577 +468,478 @@ const PositionManagement = () => {
                           marginLeft: "-10%",
                           color: "#D25B68",
                         }}
+                        // icon={<UserOutlined />}
                       >
                         +2
                       </Avatar>
                     </Avatar.Group>
-                  </div>
-                  <div className="buttons">
-                    <Button
-                      type="link"
-                      className="button-main"
-                      onClick={() =>
-                        showModal(t("View Back-End Detail"), "Back-End")
-                      }
-                    >
-                      {t("View Details")}
-                      <FolderOutlined className="iconfolder" />
-                    </Button>
-                  </div>
-                </Card>
-              </div>
-              <div className="bodyposi">
-                <Card
-                  className="card-pos"
-                  title="Front-End"
-                  extra={
-                    <>
-                      <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 {t("people")}
-                      </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
-                    </>
-                  }
-                >
-                  <p>
-                    <strong>{t("Technology")}:</strong> ReactJS,...
-                  </p>
-                  <p>
-                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
-                    Middle, Senior
-                  </p>
-                  <p>
-                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
-                  </p>
-                  <div className="avatars">
-                    <>
-                      <Avatar.Group>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              marginLeft: "-10%",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#91CADF",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#5C5967",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Avatar
-                          style={{
-                            backgroundColor: "#F4D7DA",
-                            width: "38px",
-                            height: "38px",
-                            marginLeft: "-10%",
-                            color: "#D25B68",
-                          }}
-                          // icon={<UserOutlined />}
-                        >
-                          +2
-                        </Avatar>
-                      </Avatar.Group>
-                    </>
-                  </div>
-                  <Button
-                    type="link"
-                    className="button-main"
-                    onClick={() =>
-                      showModal(t("View Front-End Detail"), "Front-End")
-                    }
-                  >
-                    {t("View Details")}
-                    <FolderOutlined className="iconfolder" />
-                  </Button>
-                </Card>
-              </div>
-
-              <div className="bodyposi">
-                <Card
-                  className="card-pos"
-                  title="Business Analyst"
-                  extra={
-                    <>
-                      <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 {t("people")}
-                      </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
-                    </>
-                  }
-                >
-                  <p>
-                    <strong>{t("Technology")}:</strong> Trello,...
-                  </p>
-                  <p>
-                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
-                    Middle, Senior
-                  </p>
-                  <p>
-                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
-                  </p>
-                  <div className="avatars">
-                    <>
-                      <Avatar.Group>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              marginLeft: "-10%",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#91CADF",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#5C5967",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Avatar
-                          style={{
-                            backgroundColor: "#F4D7DA",
-                            width: "38px",
-                            height: "38px",
-                            marginLeft: "-10%",
-                            color: "#D25B68",
-                          }}
-                          // icon={<UserOutlined />}
-                        >
-                          +2
-                        </Avatar>
-                      </Avatar.Group>
-                    </>
-                  </div>
-
-                  <Button
-                    type="link"
-                    className="button-main"
-                    onClick={() =>
-                      showModal(
-                        t("View Business Analyst Detail"),
-                        "Business Analyst"
-                      )
-                    }
-                  >
-                    {t("View Details")}
-                    <FolderOutlined className="iconfolder" />
-                  </Button>
-                </Card>
-              </div>
-
-              <div className="bodyposi">
-                <Card
-                  className="card-pos"
-                  title="Marketing"
-                  extra={
-                    <>
-                      <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 {t("people")}
-                      </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
-                    </>
-                  }
-                >
-                  <p>
-                    <strong>{t("Technology")}:</strong> Excel, Word,...
-                  </p>
-                  <p>
-                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
-                    Middle, Senior
-                  </p>
-                  <p>
-                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
-                  </p>
-                  <div className="avatars">
-                    <>
-                      <Avatar.Group>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              marginLeft: "-10%",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#91CADF",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#5C5967",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Avatar
-                          style={{
-                            backgroundColor: "#F4D7DA",
-                            width: "38px",
-                            height: "38px",
-                            marginLeft: "-10%",
-                            color: "#D25B68",
-                          }}
-                          // icon={<UserOutlined />}
-                        >
-                          +2
-                        </Avatar>
-                      </Avatar.Group>
-                    </>
-                  </div>
-                  <Button
-                    type="link"
-                    className="button-main"
-                    onClick={() =>
-                      showModal(t("View Marketing Detail"), "Marketing")
-                    }
-                  >
-                    {t("View Details")}
-                    <FolderOutlined className="iconfolder" />
-                  </Button>
-                </Card>
-              </div>
-
-              <div className="bodyposi">
-                <Card
-                  className="card-pos"
-                  title="Designer"
-                  extra={
-                    <>
-                      <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 {t("people")}
-                      </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
-                    </>
-                  }
-                >
-                  <p>
-                    <strong>{t("Technology")}:</strong> ReactJS,...
-                  </p>
-                  <p>
-                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
-                    Middle, Senior
-                  </p>
-                  <p>
-                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
-                  </p>
-                  <div className="avatars">
-                    <>
-                      <Avatar.Group>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              marginLeft: "-10%",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#91CADF",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#5C5967",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Avatar
-                          style={{
-                            backgroundColor: "#F4D7DA",
-                            width: "38px",
-                            height: "38px",
-                            marginLeft: "-10%",
-                            color: "#D25B68",
-                          }}
-                          // icon={<UserOutlined />}
-                        >
-                          +2
-                        </Avatar>
-                      </Avatar.Group>
-                    </>
-                  </div>
-                  <Button
-                    type="link"
-                    className="button-main"
-                    onClick={() =>
-                      showModal(t("View Designer Detail"), "Designer")
-                    }
-                  >
-                    {t("View Details")}
-                    <FolderOutlined className="iconfolder" />
-                  </Button>
-                </Card>
-              </div>
-
-              <div className="bodyposi">
-                <Card
-                  className="card-pos"
-                  title="Sales Executive"
-                  extra={
-                    <>
-                      <Tag color="blue" style={{ borderRadius: "20px" }}>
-                        100 {t("people")}
-                      </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
-                    </>
-                  }
-                >
-                  <p>
-                    <strong>{t("Technology")}:</strong> Trello,...
-                  </p>
-                  <p>
-                    <strong>{t("Rank")}:</strong> Intern, Fresher, Junior,
-                    Middle, Senior
-                  </p>
-                  <p>
-                    <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
-                  </p>
-                  <div className="avatars">
-                    <>
-                      <Avatar.Group>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#FDD145",
-                              marginLeft: "-10%",
-                              width: "38px",
-                              height: "38px",
-                            }}
-                          ></Avatar>
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#91CADF",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Tooltip title="Ant User" placement="top">
-                          <Avatar
-                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
-                            style={{
-                              backgroundColor: "#5C5967",
-                              width: "38px",
-                              height: "38px",
-                              marginLeft: "-10%",
-                            }}
-                            // icon={<UserOutlined />}
-                          />
-                        </Tooltip>
-                        <Avatar
-                          style={{
-                            backgroundColor: "#F4D7DA",
-                            width: "38px",
-                            height: "38px",
-                            marginLeft: "-10%",
-                            color: "#D25B68",
-                          }}
-                          // icon={<UserOutlined />}
-                        >
-                          +2
-                        </Avatar>
-                      </Avatar.Group>
-                    </>
-                  </div>
-                  <Button
-                    type="link"
-                    className="button-main"
-                    onClick={() =>
-                      showModal(
-                        t("View Sales Executive Detail"),
-                        "Sales Executive"
-                      )
-                    }
-                  >
-                    {t("View Details")}
-                    <FolderOutlined className="iconfolder" />
-                  </Button>
-                </Card>
-              </div>
-              <div style={{ position: "relative" }}>
-                <div
-                  style={{
-                    position: "relative",
-                    top: "30px",
-                    bottom: 0,
-                    width: "calc(82vw - 46px)",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <Pagination
-                    defaultCurrent={1}
-                    total={10} // Total number of pages
-                    pageSize={3} // Number of items per page
-                  />
+                  </>
                 </div>
+                <Button
+                  type="link"
+                  className="button-main"
+                  onClick={() =>
+                    showModal(t("View Front-End Detail"), "Front-End")
+                  }
+                >
+                  {t("View Details")}
+                  <FolderOutlined className="iconfolder" />
+                </Button>
+              </Card>
+            </div>
+
+            <div className="bodyposi">
+              <Card
+                className="card-pos"
+                title="Business Analyst"
+                extra={
+                  <>
+                    <Tag color="blue" style={{ borderRadius: "20px" }}>
+                      100 {t("people")}
+                    </Tag>
+                    <Checkbox style={{ marginLeft: "10px" }} />
+                  </>
+                }
+              >
+                <p>
+                  <strong>{t("Technology")}:</strong> Trello,...
+                </p>
+                <p>
+                  <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
+                  Senior
+                </p>
+                <p>
+                  <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
+                </p>
+                <div className="avatars">
+                  <>
+                    <Avatar.Group>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            marginLeft: "-10%",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#91CADF",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#5C5967",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Avatar
+                        style={{
+                          backgroundColor: "#F4D7DA",
+                          width: "38px",
+                          height: "38px",
+                          marginLeft: "-10%",
+                          color: "#D25B68",
+                        }}
+                        // icon={<UserOutlined />}
+                      >
+                        +2
+                      </Avatar>
+                    </Avatar.Group>
+                  </>
+                </div>
+
+                <Button
+                  type="link"
+                  className="button-main"
+                  onClick={() =>
+                    showModal(
+                      t("View Business Analyst Detail"),
+                      "Business Analyst"
+                    )
+                  }
+                >
+                  {t("View Details")}
+                  <FolderOutlined className="iconfolder" />
+                </Button>
+              </Card>
+            </div>
+
+            <div className="bodyposi">
+              <Card
+                className="card-pos"
+                title="Marketing"
+                extra={
+                  <>
+                    <Tag color="blue" style={{ borderRadius: "20px" }}>
+                      100 {t("people")}
+                    </Tag>
+                    <Checkbox style={{ marginLeft: "10px" }} />
+                  </>
+                }
+              >
+                <p>
+                  <strong>{t("Technology")}:</strong> Excel, Word,...
+                </p>
+                <p>
+                  <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
+                  Senior
+                </p>
+                <p>
+                  <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
+                </p>
+                <div className="avatars">
+                  <>
+                    <Avatar.Group>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            marginLeft: "-10%",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#91CADF",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#5C5967",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Avatar
+                        style={{
+                          backgroundColor: "#F4D7DA",
+                          width: "38px",
+                          height: "38px",
+                          marginLeft: "-10%",
+                          color: "#D25B68",
+                        }}
+                        // icon={<UserOutlined />}
+                      >
+                        +2
+                      </Avatar>
+                    </Avatar.Group>
+                  </>
+                </div>
+                <Button
+                  type="link"
+                  className="button-main"
+                  onClick={() =>
+                    showModal(t("View Marketing Detail"), "Marketing")
+                  }
+                >
+                  {t("View Details")}
+                  <FolderOutlined className="iconfolder" />
+                </Button>
+              </Card>
+            </div>
+
+            <div className="bodyposi">
+              <Card
+                className="card-pos"
+                title="Designer"
+                extra={
+                  <>
+                    <Tag color="blue" style={{ borderRadius: "20px" }}>
+                      100 {t("people")}
+                    </Tag>
+                    <Checkbox style={{ marginLeft: "10px" }} />
+                  </>
+                }
+              >
+                <p>
+                  <strong>{t("Technology")}:</strong> ReactJS,...
+                </p>
+                <p>
+                  <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
+                  Senior
+                </p>
+                <p>
+                  <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
+                </p>
+                <div className="avatars">
+                  <>
+                    <Avatar.Group>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            marginLeft: "-10%",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#91CADF",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#5C5967",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Avatar
+                        style={{
+                          backgroundColor: "#F4D7DA",
+                          width: "38px",
+                          height: "38px",
+                          marginLeft: "-10%",
+                          color: "#D25B68",
+                        }}
+                        // icon={<UserOutlined />}
+                      >
+                        +2
+                      </Avatar>
+                    </Avatar.Group>
+                  </>
+                </div>
+                <Button
+                  type="link"
+                  className="button-main"
+                  onClick={() =>
+                    showModal(t("View Designer Detail"), "Designer")
+                  }
+                >
+                  {t("View Details")}
+                  <FolderOutlined className="iconfolder" />
+                </Button>
+              </Card>
+            </div>
+
+            <div className="bodyposi">
+              <Card
+                className="card-pos"
+                title="Sales Executive"
+                extra={
+                  <>
+                    <Tag color="blue" style={{ borderRadius: "20px" }}>
+                      100 {t("people")}
+                    </Tag>
+                    <Checkbox style={{ marginLeft: "10px" }} />
+                  </>
+                }
+              >
+                <p>
+                  <strong>{t("Technology")}:</strong> Trello,...
+                </p>
+                <p>
+                  <strong>{t("Rank")}:</strong> Intern, Fresher, Junior, Middle,
+                  Senior
+                </p>
+                <p>
+                  <strong>{t("Group Zalo")}:</strong> <a href="#">Link</a>
+                </p>
+                <div className="avatars">
+                  <>
+                    <Avatar.Group>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#FDD145",
+                            marginLeft: "-10%",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        ></Avatar>
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#91CADF",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Ant User" placement="top">
+                        <Avatar
+                          src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"
+                          style={{
+                            backgroundColor: "#5C5967",
+                            width: "38px",
+                            height: "38px",
+                            marginLeft: "-10%",
+                          }}
+                          // icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                      <Avatar
+                        style={{
+                          backgroundColor: "#F4D7DA",
+                          width: "38px",
+                          height: "38px",
+                          marginLeft: "-10%",
+                          color: "#D25B68",
+                        }}
+                        // icon={<UserOutlined />}
+                      >
+                        +2
+                      </Avatar>
+                    </Avatar.Group>
+                  </>
+                </div>
+                <Button
+                  type="link"
+                  className="button-main"
+                  onClick={() =>
+                    showModal(
+                      t("View Sales Executive Detail"),
+                      "Sales Executive"
+                    )
+                  }
+                >
+                  {t("View Details")}
+                  <FolderOutlined className="iconfolder" />
+                </Button>
+              </Card>
+            </div>
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  position: "relative",
+                  top: "30px",
+                  bottom: 0,
+                  width: "calc(82vw - 46px)",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginBottom: "20px",
+                }}
+              >
+                <Pagination
+                  defaultCurrent={1}
+                  total={10} // Total number of pages
+                  pageSize={3} // Number of items per page
+                />
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <Modal
-            title={modalTitle}
-            visible={isModalVisible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-            width={1100}
-            footer={[
-              <Button
-                key="submit"
-                type="primary"
-                onClick={handleOk}
-                style={{ width: "7%", borderRadius: "10px", padding: "1px" }}
-              >
-                {t("OK")}
-              </Button>,
-            ]}
-          >
-            <Table
-              columns={columns}
-              dataSource={selectedInterns}
-              pagination={false}
-            />
-          </Modal>
-        </main>
+        <Modal
+          title={modalTitle}
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          width={1100}
+          footer={[
+            <Button
+              key="submit"
+              type="primary"
+              onClick={handleOk}
+              style={{ width: "7%", borderRadius: "10px", padding: "1px" }}
+            >
+              {t("OK")}
+            </Button>,
+          ]}
+        >
+          <Table
+            columns={columns}
+            dataSource={selectedInterns}
+            pagination={false}
+          />
+        </Modal>
+      </main>
     </div>
   );
 };

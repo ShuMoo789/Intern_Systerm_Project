@@ -29,6 +29,8 @@ import {
 import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
+import "./GroupList.css";
+import ViewPopup from "./ViewPopup";
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
@@ -37,7 +39,7 @@ const GroupList = () => {
   const [data, setData] = useState(jsonData);
   const [filteredData, setFilteredData] = useState(jsonData);
   const viewPort = useViewport();
-  const isMobile = viewPort.width <= 1024;
+  const isMobile = viewPort.width <= 1300;
   const [visible, setVisible] = useState(false);
   const { t } = useTranslation();
   const [filters, setFilters] = useState({
@@ -56,7 +58,9 @@ const GroupList = () => {
   });
 
   const inputStyle = {
-    width: isMobile ? "92%" : "300px",
+    width: isMobile ? "100%" : "300px",
+    height: 40,
+    fontSize: "16px",
   };
 
   useEffect(() => {
@@ -105,20 +109,18 @@ const GroupList = () => {
     setFilteredData(data);
   };
 
-  const handleStatusChange = (key, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, Status: key } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
+  const handleStatusChange = (value, recordToUpdate) => {
+    // Update the status of the record
+    recordToUpdate.Status = value;
+    // Trigger re-render by updating state or forceUpdate
+    setData([...data]); // Assuming data is an array of records
   };
 
-  const handleContractChange = (key, record) => {
-    const updatedData = data.map((item) =>
-      item.key === record.key ? { ...item, InternshipContract: key } : item
-    );
-    setData(updatedData);
-    setFilteredData(updatedData);
+  const handleContractChange = (value, recordToUpdate) => {
+    // Update the status of the record
+    recordToUpdate.InternshipContract = value;
+    // Trigger re-render by updating state or forceUpdate
+    setData([...data]); // Assuming data is an array of records
   };
 
   const handleCancel = () => {
@@ -154,7 +156,7 @@ const GroupList = () => {
   const groupButton = [
     {
       color: "#6537B1",
-      name: "Create Group",
+      name: t("Create Group"),
       icon: <UsergroupAddOutlined />,
     },
     {
@@ -281,6 +283,16 @@ const GroupList = () => {
     {
       title: "CV",
       dataIndex: "CV",
+      // key: "CV",
+      // width: 140,
+      render: (text) => (
+        <a
+          href={text}
+          style={{ color: "#0000FF", textDecoration: "underline" }}
+        >
+          Link
+        </a>
+      ),
       key: "CV",
       width: "auto",
     },
@@ -289,7 +301,7 @@ const GroupList = () => {
       dataIndex: "Comments",
       key: "Comments",
       width: "auto",
-      render: (text) => t(text)
+      render: (text) => t(text),
     },
     {
       title: t("Role"),
@@ -302,14 +314,14 @@ const GroupList = () => {
       dataIndex: "Project",
       key: "Project",
       width: "auto",
-      render: (text) => t(text)
+      render: (text) => t(text),
     },
     {
       title: t("Group Zalo"),
       dataIndex: "GroupZalo",
       key: "GroupZalo",
       width: "auto",
-      render: (text) => t(text)
+      render: (text) => t(text),
     },
     {
       title: t("Mentor"),
@@ -322,30 +334,62 @@ const GroupList = () => {
       dataIndex: "Status",
       key: "Status",
       width: "auto",
+
       render: (text, record) => (
-        <Dropdown
-          overlay={
-            <Menu onClick={({ key }) => handleStatusChange(key, record)}>
-              {statusOptions.map((option) => (
-                <Menu.Item key={option.value}>
-                  <span>{option.label}</span>
+        <div style={{ width: 126 }}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item
+                  value="Accepted"
+                  onClick={() => handleStatusChange("Accepted", record)}
+                >
+                  <span>{t("Accepted")}</span>
                 </Menu.Item>
-              ))}
-            </Menu>
-          }
-        >
-          <Button
-            style={{
-              width: 120,
-              backgroundColor: getBackgroundColor(record.Status),
-              color: getColor(record.Status),
-              borderRadius: "100px",
-              fontSize: "12px",
-            }}
+                <Menu.Item
+                  value="Pending"
+                  onClick={() => handleStatusChange("Pending", record)}
+                >
+                  <span>{t("Pending")}</span>
+                </Menu.Item>
+                <Menu.Item
+                  value="Interviewed"
+                  onClick={() => handleStatusChange("Interviewed", record)}
+                >
+                  <span>{t("Interviewed")}</span>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            {text} <DownOutlined />
-          </Button>
-        </Dropdown>
+            <Button
+              style={{
+                backgroundColor:
+                  record.Status === "Accepted"
+                    ? "#EFF9F1"
+                    : record.Status === "Pending"
+                    ? "#F8E7EE"
+                    : record.Status === "Interviewed"
+                    ? "#E8F4FD"
+                    : "FFFFFF",
+                color:
+                  record.Status === "Accepted"
+                    ? "#449E3C"
+                    : record.Status === "Pending"
+                    ? "#B70D52"
+                    : record.Status === "Interviewed"
+                    ? "#106BA3"
+                    : "#333333",
+                borderRadius: "50px", // Đặt bo tròn thành hình tròn
+                marginLeft: "-8px",
+                width: "100%",
+                fontSize: "12px",
+              }}
+            >
+              {t(record.Status)}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       ),
     },
     {
@@ -353,49 +397,61 @@ const GroupList = () => {
       dataIndex: "InternshipContract",
       key: "InternshipContract",
       width: "auto",
+
       render: (text, record) => (
-        <Dropdown
-          overlay={
-            <Menu onClick={({ key }) => handleContractChange(key, record)}>
-              {contractOptions.map((option) => (
-                <Menu.Item key={option.value}>
-                  <span>{option.label}</span>
+        <div style={{ width: 126 }}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item
+                  value="Signed"
+                  onClick={() => handleContractChange("Signed", record)}
+                >
+                  <span>{t("Signed")}</span>
                 </Menu.Item>
-              ))}
-            </Menu>
-          }
-        >
-          <Button
-            style={{
-              width: 120,
-              backgroundColor: getBackgroundColor(record.InternshipContract),
-              color: getColor(record.InternshipContract),
-              borderRadius: "100px",
-              fontSize: "12px",
-            }}
+                <Menu.Item
+                  value="Pending"
+                  onClick={() => handleContractChange("Pending", record)}
+                >
+                  <span>{t("Pending")}</span>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            {text} <DownOutlined />
-          </Button>
-        </Dropdown>
+            <Button
+              style={{
+                backgroundColor:
+                  record.InternshipContract === "Signed"
+                    ? "#EFF9F1"
+                    : record.InternshipContract === "Pending"
+                    ? "#F8E7EE"
+                    : "FFFFFF",
+                color:
+                  record.InternshipContract === "Signed"
+                    ? "#449E3C"
+                    : record.InternshipContract === "Pending"
+                    ? "#B70D52"
+                    : "#333333",
+                borderRadius: "50px", // Đặt bo tròn thành hình tròn
+                marginLeft: "-8px",
+                width: "100%",
+                fontSize: "12px",
+              }}
+            >
+              {t(record.InternshipContract)}
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       ),
     },
     {
       title: t("Button"),
       key: "Button",
-      width: 200,
-
+      // width: 200,
       render: (_, record) => (
         <Space>
-          <Button
-            className="view-button"
-            shape="round"
-            style={{
-              color: "#B22222",
-              borderColor: "#B22222",
-            }}
-          >
-            {t("View")}
-          </Button>
+          <ViewPopup></ViewPopup>
           <Button
             className="upload-file-button"
             shape="round"
@@ -532,193 +588,218 @@ const GroupList = () => {
     };
   }, []);
 
-  const [formValues, setFormValues] = useState(
-    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
-  );
-
   const handleInputChange = (e, title) => {
     setFormValues({ ...formValues, [title]: e.target.value });
   };
 
+  const [formValues, setFormValues] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
+  const [formErrors, setFormErrors] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
   const handleSubmit = () => {
-    const allFieldsFilled = Object.values(formValues).every(
-      (value) => value.trim() !== ""
-    );
-    if (allFieldsFilled) {
-      handleCancel();
+    const newErrors = inputFields.reduce((acc, field) => {
+      if (!formValues[field.title].trim()) {
+        acc[field.title] = `${field.title} is required`;
+      }
+      return acc;
+    }, {});
+
+    if (Object.keys(newErrors).length > 0) {
+      setFormErrors(newErrors);
+      message.error("Please fill in all fields");
     } else {
-      message.error("Please fill all fields");
+      setFormValues(
+        inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+      );
+      setFormErrors(
+        inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+      );
+      message.success("Intern added successfully");
+      handleCancel();
     }
   };
 
   return (
     <>
       <div>
-          <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
-            <Navigation
-              titleName={t("GROUP LIST")}
-              groupButton={groupButton}
-              onSendEmail={showModal}
-              onCreateIntern={handleCreateIntern}
-            />
-          </div>
-          <div>
-            <Row>
-              <Col span={1}></Col>
-              <Col span={23}>
-                <div
+        <div style={{ marginBottom: isMobile ? "20px" : 0 }}>
+          <Navigation
+            titleName={t("GROUP LIST")}
+            groupButton={groupButton}
+            onSendEmail={showModal}
+            onCreateIntern={handleCreateIntern}
+          />
+        </div>
+        <div>
+          <Row style={{ margin: 20 }}>
+            <Col>
+              <div
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "25px",
+                  width: "100%",
+                }}
+              >
+                <Space
                   style={{
-                    backgroundColor: "white",
-                    borderRadius: "25px",
-                    width: "96%",
+                    margin: isMobile ? "20px" : "20px 0 24px 20px",
+                    width: isMobile ? "96%" : "920px",
+                    flexDirection: isMobile ? "column" : "row",
+                    alignItems: "unset",
+                  }}
+                  size={[5, 5]}
+                  wrap
+                >
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's ID")}
+                    name="InternId"
+                    value={filters.InternId}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Full name")}
+                    name="FullName"
+                    value={filters.FullName}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's D.O.B")}
+                    name="DOB"
+                    value={filters.DOB}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Phone number")}
+                    name="PhoneNumber"
+                    value={filters.PhoneNumber}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Address")}
+                    name="Address"
+                    value={filters.Address}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Email")}
+                    name="Email"
+                    value={filters.Email}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Major")}
+                    name="Major"
+                    value={filters.Major}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Position")}
+                    name="Position"
+                    value={filters.Position}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's School")}
+                    name="School"
+                    value={filters.School}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Title")}
+                    name="Title"
+                    value={filters.Title}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Project")}
+                    name="Project"
+                    value={filters.Project}
+                    onChange={handleFilterChange}
+                  />
+                  <Input
+                    style={inputStyle}
+                    placeholder={t("Enter intern's Group Zalo")}
+                    name="GroupZalo"
+                    value={filters.GroupZalo}
+                    onChange={handleFilterChange}
+                  />
+                </Space>
+                <Space
+                  direction="vertical"
+                  style={{
+                    width: isMobile ? "96%" : "0",
+                    marginBottom: isMobile ? "30px" : 0,
+                    margin: isMobile ? "0 20px" : "0",
                   }}
                 >
-                  <Space
+                  <Button
+                    className="clear-filter-button"
                     style={{
-                      margin: "20px 0 30px 30px ",
-                      width: isMobile ? "93%" : "960px",
-                      flexDirection: isMobile ? "column" : "row",
-                      alignItems: "unset",
+                      transform: isMobile ? "" : "translate(0, 70%)",
+                      width: isMobile ? "100%" : 140,
                     }}
-                    size={[8, 8]}
-                    wrap
+                    icon={<FilterOutlined />}
+                    onClick={handleClearFilters}
                   >
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's ID")}
-                      name="InternId"
-                      value={filters.InternId}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Full name")}
-                      name="FullName"
-                      value={filters.FullName}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's D.O.B")}
-                      name="DOB"
-                      value={filters.DOB}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Phone number")}
-                      name="PhoneNumber"
-                      value={filters.PhoneNumber}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Address")}
-                      name="Address"
-                      value={filters.Address}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Email")}
-                      name="Email"
-                      value={filters.Email}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Major")}
-                      name="Major"
-                      value={filters.Major}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Position")}
-                      name="Position"
-                      value={filters.Position}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's School")}
-                      name="School"
-                      value={filters.School}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Title")}
-                      name="Title"
-                      value={filters.Title}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Project")}
-                      name="Project"
-                      value={filters.Project}
-                      onChange={handleFilterChange}
-                    />
-                    <Input
-                      style={inputStyle}
-                      placeholder={t("Enter intern's Group Zalo")}
-                      name="GroupZalo"
-                      value={filters.GroupZalo}
-                      onChange={handleFilterChange}
-                    />
-                  </Space>
-                  <Space
-                    direction="vertical"
+                    {t("Clean Filter")}
+                  </Button>
+                  <Button
+                    className="search-filter-button"
                     style={{
-                      width: isMobile ? "96%" : "0",
-                      marginBottom: isMobile ? "30px" : 0,
-                      margin: isMobile ? "0 10px" : "0",
+                      backgroundColor: "#4889E9",
+                      color: "white",
+                      transform: isMobile ? "" : "translate(0, 70%)",
+                      width: isMobile ? "100%" : 140,
+                      marginBottom: isMobile ? "10px" : 0,
                     }}
+                    icon={<SearchOutlined />}
+                    onClick={handleSearch}
                   >
-                    <Button
-                      className="clear-filter-button"
-                      style={{
-                        width: isMobile ? "100%" : 140,
-                      }}
-                      icon={<FilterOutlined />}
-                      onClick={handleClearFilters}
-                    >
-                      {t("Clean Filter")}
-                    </Button>
-                    <Button
-                      className="search-filter-button"
-                      style={{
-                        backgroundColor: "#4889E9",
-                        color: "white",
-                        width: isMobile ? "100%" : 140,
-                      }}
-                      icon={<SearchOutlined />}
-                      onClick={handleSearch}
-                    >
-                      {t("Search")}
-                    </Button>
-                  </Space>
-                  <div
-                    style={{
-                      overflowX: "auto",
-                      width: isMobile ? "100%" : "100%",
-                    }}
-                  >
-                    <Table
-                      columns={columns}
-                      dataSource={filteredData}
-                      scroll={{ x: 3300 }}
-                      pagination={{ pageSize: 7 }}
-                    />
-                  </div>
+                    {t("Search")}
+                  </Button>
+                </Space>
+                <div
+                  style={{
+                    overflowX: "auto",
+                    width: isMobile ? "100%" : "100%",
+                  }}
+                >
+                  <Table
+                    className="grouplist-table"
+                    style={{ margin: "0 20px" }}
+                    columns={columns}
+                    dataSource={filteredData}
+                    scroll={{ x: 3300 }}
+                    pagination={{ pageSize: 7 }}
+                  />
                 </div>
-              </Col>
-            </Row>
-          </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
 
         <Modal
-          title={<span style={{ fontSize: "25px" }}>{t("Add New Intern")}</span>}
+          className="add-new-intern-modal"
+          title={
+            <span
+              style={{ fontSize: "25px", fontWeight: "bold", marginLeft: 10 }}
+            >
+              {t("Add New Intern")}
+            </span>
+          }
           open={visible}
           onCancel={handleCancel}
           footer={[
@@ -726,43 +807,45 @@ const GroupList = () => {
               key="addNewIntern"
               type="primary"
               onClick={handleSubmit}
-              style={{ margin: "20px 20px 0 0" }}
+              style={{
+                margin: "10px 10px 0 0",
+                height: "50px",
+                borderRadius: 10,
+              }}
             >
               {t("Add New Intern")}
             </Button>,
           ]}
           width={modalWidth}
         >
-          <Space
-            size={[80, 50]}
-            wrap
-            style={{
-              marginTop: "20px",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
+          <Row gutter={[16, 16]}>
             {inputFields.map((field, index) => (
-              <Space
-                key={index}
-                direction="vertical"
-                size="small"
-                style={{ width: "300px" }}
-              >
-                <label style={{ fontWeight: "bold" }}>{field.title}</label>
-                <Input
-                  placeholder={field.placeholder}
-                  value={formValues[field.title]}
-                  onChange={(e) => handleInputChange(e, field.title)}
-                  style={{
-                    width: "100%",
-                    height: "60px",
-                    borderRadius: "15px",
-                  }}
-                />
-              </Space>
+              <Col span={8} key={index}>
+                <Space
+                  direction="vertical"
+                  size="small"
+                  style={{ width: "100%" }}
+                >
+                  <label style={{ fontWeight: 600 }}>{field.title}</label>
+                  <Input
+                    placeholder={field.placeholder}
+                    value={formValues[field.title]}
+                    onChange={(e) => handleInputChange(e, field.title)}
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      borderRadius: "10px",
+                    }}
+                  />
+                  {formErrors[field.title] && (
+                    <span style={{ color: "red" }}>
+                      {formErrors[field.title]}
+                    </span>
+                  )}
+                </Space>
+              </Col>
             ))}
-          </Space>
+          </Row>
         </Modal>
 
         <Modal
@@ -810,7 +893,9 @@ const GroupList = () => {
                   value={mentor}
                   onChange={(e) => setMentor(e.target.value)}
                 />
-                {errors.mentor && <p style={{ color: "red" }}>{errors.mentor}</p>}
+                {errors.mentor && (
+                  <p style={{ color: "red" }}>{errors.mentor}</p>
+                )}
               </div>
             </Col>
 
@@ -829,7 +914,9 @@ const GroupList = () => {
                   options={[{ value: "Project 1", label: "Project 1" }]}
                   value={project}
                 />
-                {errors.project && <p style={{ color: "red" }}>{errors.project}</p>}
+                {errors.project && (
+                  <p style={{ color: "red" }}>{errors.project}</p>
+                )}
               </div>
             </Col>
 
@@ -844,9 +931,11 @@ const GroupList = () => {
                   value={groupZalo}
                   onChange={(e) => setGroupZalo(e.target.value)}
                 />
-                {errors.groupZalo && <p style={{ color: "red", width: "120%" }}>
+                {errors.groupZalo && (
+                  <p style={{ color: "red", width: "120%" }}>
                     {errors.groupZalo}
-                  </p>}
+                  </p>
+                )}
               </div>
             </Col>
           </Row>

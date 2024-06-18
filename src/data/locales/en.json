@@ -252,7 +252,7 @@
         "comment": "comment",
         "comments": "comments",
         "Highly motivated and eager to learn.": "Highly motivated and eager to learn.",
-        "Previous experience in social media marketing.": "Có kinh nghiệm trước đây về tiếp thị truyền thông xã hội.",
+        "Previous experience in social media marketing.": "Previous experience in social media marketing.",
         "Excellent analytical skills.": "Excellent analytical skills.",
         "Strong leadership skills.": "Strong leadership skills.",
         "Creative and detail-oriented.": "Creative and detail-oriented.",
@@ -330,5 +330,6 @@
         "View Marketing Detail": "View Marketing Detail",
         "View Sales Executive": "View Sales Executive",
         "people": "people",
-        "Add New Position": "Add New Position"
+        "Add New Position": "Add New Position",
+        "Back to": "Back to"
 }
