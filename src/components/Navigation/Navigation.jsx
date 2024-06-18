@@ -6,6 +6,7 @@ import { Input, Avatar } from "antd";
 import { UserOutlined, BellOutlined, SettingOutlined } from "@ant-design/icons";
 import userImage from "../../assets/user_image.png";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function UserInfo({ name, role, avatarSrc }) {
   return (
@@ -34,6 +35,7 @@ const Navigation = (props) => {
   {
     /*Project-Management*/
   }
+  const {t} = useTranslation()
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
 
@@ -56,7 +58,7 @@ const Navigation = (props) => {
           <div className="search-navigation">
             <Input
               className="search-navigation-input"
-              placeholder={isMobile ? "Search" : "Search for Information"}
+              placeholder={isMobile ? t("Search") : t("Search for Information")}
               variant="filled"
             />
           </div>

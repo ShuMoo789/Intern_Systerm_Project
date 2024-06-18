@@ -17,7 +17,7 @@ import {
   EditOutlined,
   FolderAddOutlined,
 } from "@ant-design/icons";
-import { Input } from "antd";
+import { Col, Input, Row } from "antd";
 import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -388,7 +388,11 @@ function ApproveCV() {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
   const { Text } = Typography;
-  const inputStyle = { width: isMobile ? "100%" : "300px" };
+  const inputStyle = {
+    width: isMobile ? "100%" : "300px",
+    height: 40,
+    fontSize: "16px",
+  };
   // checkbox table Ant Design
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -656,17 +660,17 @@ function ApproveCV() {
         </div>
 
         <section className="filter-section">
+          {!isMobile ? (
           <div className="filter">
             <div className="fields">
               <Input
-                style={inputStyle}
                 size="large"
                 placeholder={t("Enter intern's ID")}
                 value={selectedFilters.internID}
                 onChange={(e) => handleInputChange("internID", e.target.value)}
               />
               <Input
-                style={inputStyle}
+                
                 size="large"
                 placeholder={t("Enter intern's Full name")}
                 value={selectedFilters.fullName}
@@ -681,7 +685,7 @@ function ApproveCV() {
               />
 
               <Input
-                style={inputStyle}
+                
                 size="large"
                 placeholder={t("Enter intern's Phone number")}
                 value={selectedFilters.phoneNumber}
@@ -693,7 +697,7 @@ function ApproveCV() {
               <Dropdown
                 overlay={createMenu("school", schoolNames)}
                 trigger={["click"]}
-                style={inputStyle}
+                
               >
                 <Button
                   style={{
@@ -719,7 +723,7 @@ function ApproveCV() {
               </Dropdown>
 
               <Input
-                style={inputStyle}
+                
                 size="large"
                 placeholder={t("Enter intern's Email")}
                 value={selectedFilters.email}
@@ -753,7 +757,7 @@ function ApproveCV() {
               </Dropdown>
 
               <Input
-                style={inputStyle}
+                
                 size="large"
                 placeholder={t("Enter intern's Address")}
                 value={selectedFilters.address}
@@ -779,6 +783,146 @@ function ApproveCV() {
               </Button>
             </div>
           </div>
+          ) : ( 
+          <Row>
+            <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+            <div className="fields">
+              <Input
+                size="large"
+                placeholder={t("Enter intern's ID")}
+                value={selectedFilters.internID}
+                onChange={(e) => handleInputChange("internID", e.target.value)}
+              />
+              <Input
+                
+                size="large"
+                placeholder={t("Enter intern's Full name")}
+                value={selectedFilters.fullName}
+                onChange={(e) => handleInputChange("fullName", e.target.value)}
+              />
+
+              <DatePicker
+                format={dateFormat}
+                placeholder={t("Enter intern's D.O.B")}
+                // style={{ padding: "7px 11px", fontSize: "15px" }}
+                onChange={(date) => handleDateChange("dateOfBirth", date)}
+                style={{width: "100%"}}
+              />
+
+              <Input
+                
+                size="large"
+                placeholder={t("Enter intern's Phone number")}
+                value={selectedFilters.phoneNumber}
+                onChange={(e) =>
+                  handleInputChange("phoneNumber", e.target.value)
+                }
+              />
+              </div>
+              </Col>
+              
+              <Col  xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+              <div className="fields">
+              <Dropdown
+                overlay={createMenu("school", schoolNames)}
+                trigger={["click"]}
+                
+              >
+                <Button
+                  style={{
+                    padding: "7px 11px",
+                    fontSize: "15px",
+                    textAlign: "left",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    height: "100%",
+                    width:"100%"
+                  }}
+                >
+                  {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
+                  <div
+                    style={{
+                      color: selectedFilters.school ? "#000000" : "#C7BFBF",
+                    }}
+                  >
+                    {selectedFilters.school || t("Enter intern's School")}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
+
+              <Input
+                
+                size="large"
+                placeholder={t("Enter intern's Email")}
+                value={selectedFilters.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+              />
+
+              <Dropdown
+                overlay={createMenu("position", positionNames)}
+                trigger={["click"]}
+              >
+                <Button
+                  style={{
+                    padding: "7px 11px",
+                    fontSize: "15px",
+                    textAlign: "left",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    height: "100%",
+                    width:"100%"
+                  }}
+                >
+                  <div
+                    style={{
+                      color: selectedFilters.position ? "#000000" : "#C7BFBF",
+                    }}
+                  >
+                    {selectedFilters.position || t("Enter intern's Position")}
+                  </div>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
+
+              <Input
+                
+                size="large"
+                placeholder={t("Enter intern's Address")}
+                value={selectedFilters.address}
+                onChange={(e) => handleInputChange("address", e.target.value)}
+              />
+
+              <DatePicker
+                format={dateFormat}
+                placeholder={t("Enter intern's Date Submitted Form")}
+                style={{ padding: "7px 11px", fontSize: "15px", width:"100%" }}
+                onChange={(date) => handleDateChange("dateSub", date)}
+              />
+              
+              </div>
+                
+              </Col>
+              
+              
+              <Col xs={22} sm={22} md={22} lg={6} xl={6} offset={1}>
+              <div className="filter">
+                <div className="buttons">
+                <Button className="cln-btn btn" onClick={handleClearFilters} style={{width: "100%", color:"black", backgroundColor:"white",}}>
+                {isMobile ? "" : <DeleteOutlined />} {t("Clean Filters")}
+              
+                </Button>
+                <br />
+                <Button className="srch-btn btn" onClick={handleSearch} style={{width: "100%", color:"white", backgroundColor:"#4889E9"}}>
+                {isMobile ? "" : <SearchOutlined />} {t("Search")}
+                </Button>
+               </div>
+            </div>
+            </Col>
+          </Row>
+          )}
           <div className="list">
             <Table
               rowSelection={{

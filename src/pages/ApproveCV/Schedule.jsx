@@ -289,7 +289,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   marginBottom: "5px",
                 }}
               >
-                Types of Interviews
+                {t("Types of Interviews")}
               </label>
 
               <Form.Item

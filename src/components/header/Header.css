@@ -6,6 +6,7 @@
   gap: 20px;
   font-size: 10px;
   color: #000;
+  background-color: white;
 }
 
 @media (max-width: 991px) {

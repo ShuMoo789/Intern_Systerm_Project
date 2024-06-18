@@ -945,7 +945,7 @@ const InternList = () => {
                         onClick={handleSearch}
                         style={{ width: "100%" }}
                       >
-                        {isMobile ? "" : <SearchOutlined />} Search
+                        {isMobile ? "" : <SearchOutlined />} {t("Search")}
                       </Button>
                     </div>
                   </div>

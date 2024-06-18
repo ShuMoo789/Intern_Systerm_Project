@@ -14,6 +14,9 @@ body {
 .content {
     height: 100vh;
     overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
 .content-header {
