@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 const { TextArea } = Input;
 const { Option } = Select;
 
+
 // CommentPopup component
 const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
   const [form] = Form.useForm();
@@ -182,7 +183,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 "https://youtu.be/dQw4w9WgXcQ?si=xqVazvMo-5hva6i8"
               }
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer" 
             >
               Link
             </a>
@@ -200,80 +201,129 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
         </div>
       )}
       {state.selectedOption === 1 && (
-        <div className="comment-section">
+        <Form form={form} className="comment-section">
           {/* Section for comments of intern */}
           <div className="comment-popup-content">
             <div className="comment-popup-row">
               <label>
                 <h4>{t("Major")}</h4>
               </label>
-              <Input
-                value={state.major}
-                onChange={(e) => updateField("major", e.target.value)}
-              />
+              <Form.Item
+                name="major"
+                rules={[
+                  { required: true, message: t("Please input the major!") },
+                ]}
+                initialValue={state.major}
+              >
+                <Input
+                  value={state.major}
+                  onChange={(e) => updateField("major", e.target.value)}
+                />
+              </Form.Item>
             </div>
             <div className="comment-popup-row">
               <label>
                 <h4>{t("Programming language")}</h4>
               </label>
-              <Input
-                value={state.programmingLanguage}
-                onChange={(e) =>
-                  updateField("programmingLanguage", e.target.value)
-                }
-              />
+              <Form.Item
+                name="programmingLanguage"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please input the programming language!"),
+                  },
+                ]}
+                initialValue={state.programmingLanguage}
+              >
+                <Input
+                  value={state.programmingLanguage}
+                  onChange={(e) =>
+                    updateField("programmingLanguage", e.target.value)
+                  }
+                />
+              </Form.Item>
             </div>
             <div className="comment-popup-row">
               <label>
                 <h4>{t("Project on GitHub")}</h4>
               </label>
-              <Input
-                value={state.projectOnGitHub}
-                onChange={(e) => updateField("projectOnGitHub", e.target.value)}
-              />
+              <Form.Item
+                name="projectOnGitHub"
+                rules={[
+                  {
+                    required: true,
+                    message: t("Please input the project on GitHub!"),
+                  },
+                ]}
+                initialValue={state.projectOnGitHub}
+              >
+                <Input
+                  value={state.projectOnGitHub}
+                  onChange={(e) =>
+                    updateField("projectOnGitHub", e.target.value)
+                  }
+                />
+              </Form.Item>
             </div>
             <div className="comment-popup-row">
               <label>
                 <h4>{t("Position")}</h4>
               </label>
-              <Input
-                value={state.position}
-                onChange={(e) => updateField("position", e.target.value)}
-              />
-            </div>
-            <div className="comment-popup-row">
-              <label>
-                <h4>{t("Rank")}</h4>
-              </label>
-              <Select
-                value={state.rank}
-                onChange={(value) => updateField("rank", value)}
+              <Form.Item
+                name="position"
+                rules={[
+                  { required: true, message: t("Please input the position!") },
+                ]}
+                initialValue={state.position}
               >
-                <Option value="Intern">Intern</Option>
-                <Option value="Senior">Senior</Option>
-                <Option value="Junior">Junior</Option>
-              </Select>
+                <Input
+                  value={state.position}
+                  onChange={(e) => updateField("position", e.target.value)}
+                />
+              </Form.Item>
             </div>
             <div className="comment-popup-row">
-              <label>
+            <label>
+              <h4>{t("Rank")}</h4>
+            </label>
+            <Form.Item
+              name="rank"
+              rules={[
+                { required: true, message: t("Please select the rank!") },
+              ]}
+            >
+              <Select defaultValue="" style={{ width: "100%",height:"50px" }}>
+                    <Option value="Intern">{t("Intern")}</Option>
+                    <Option value="Junior">{t("Junior")}</Option>
+                    <Option value="Senior">{t("Senior")}</Option>
+                  </Select>
+            </Form.Item>
+          </div>
+            <div className="comment-popup-row">
+            <label>
                 <h4>{t("Add Comment")}</h4>
               </label>
-              <TextArea
-                rows={2}
-                value={state.comment}
-                onChange={(e) => updateField("comment", e.target.value)}
-                placeholder="Click to add more comment"
-              />
+              <Form.Item
+                name="comment"
+                rules={[
+                  { required: true, message: t("Please add a comment!") },
+                ]}
+                initialValue={state.comment}
+              >
+                <TextArea
+                  value={state.comment}
+                  onChange={(e) => updateField("comment", e.target.value)}
+                  rows={4}
+                />
+              </Form.Item>
             </div>
           </div>
           <div className="comment-popup-footer">
-            {/* Footer buttons to cancel or save comments */}
-            <Button onClick={onClose}>{t("Cancel")}</Button>
             <Button type="primary" onClick={handleSave}>
               {t("Save Comments")}
             </Button>
           </div>
-        </div>
+        </Form>
       )}
       {state.selectedOption === 2 && (
         <Form form={form} className="result-popup-section">
