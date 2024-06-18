@@ -48,8 +48,8 @@ function App() {
           <Route path="confirmCV" element={<ConfirmCV />} />
           <Route path="internList" element={<InternList />} />
           <Route path="groupList" element={<GroupList />} />
-          <Route path="/projectManagement" element={<ProjectMan />} />
-          <Route path="/positionManagement" element={<PositionManagement />} />
+          <Route path="projectManagement" element={<ProjectMan />} />
+          <Route path="positionManagement" element={<PositionManagement />} />
           <Route
             path="/TechnologyManagement"
             element={<TechnologyManagement />}

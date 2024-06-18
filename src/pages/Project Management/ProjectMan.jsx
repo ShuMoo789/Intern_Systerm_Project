@@ -260,7 +260,7 @@ function ProjectManagement() {
   },
   {
       color: "#4889E9",
-      name: t("Add New Intern"),
+      name: t("Add New Project"),
       icon: <PlusOutlined />,
   },
 ]

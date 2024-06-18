@@ -110,7 +110,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
     <Modal
       title={
         <h3 style={{ margin: "0", fontFamily: "'Quicksand', sans-serif" }}>
-          Add New Project
+          {t("Add New Project")}
         </h3>
       }
       open={open}
@@ -145,7 +145,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
               ]}
             >
               <label>
-                <h4>{t("Project title")}</h4>
+                <h4>{t("Project Title")}</h4>
                 <Input type="text" />
               </label>
             </Form.Item>
@@ -298,7 +298,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             htmlType="submit"
             className="create-project-btn"
           >
-            {t("Add Project")}
+            {t("Add New Project")}
           </Button>
         </div>
       </Form>
