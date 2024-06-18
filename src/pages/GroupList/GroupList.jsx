@@ -29,10 +29,9 @@ import {
 import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
-import "./GroupList.css"
+import "./GroupList.css";
 import ViewPopup from "./ViewPopup";
 import { useTranslation } from "react-i18next";
-import ViewPopup from "./ViewPopup";
 
 const { Option } = Select;
 
@@ -341,13 +340,22 @@ const GroupList = () => {
           <Dropdown
             overlay={
               <Menu>
-                <Menu.Item value="Accepted" onClick={() => handleStatusChange("Accepted", record)}>
+                <Menu.Item
+                  value="Accepted"
+                  onClick={() => handleStatusChange("Accepted", record)}
+                >
                   <span>{t("Accepted")}</span>
                 </Menu.Item>
-                <Menu.Item value="Pending" onClick={() => handleStatusChange("Pending", record)}>
+                <Menu.Item
+                  value="Pending"
+                  onClick={() => handleStatusChange("Pending", record)}
+                >
                   <span>{t("Pending")}</span>
                 </Menu.Item>
-                <Menu.Item value="Interviewed" onClick={() => handleStatusChange("Interviewed", record)}>
+                <Menu.Item
+                  value="Interviewed"
+                  onClick={() => handleStatusChange("Interviewed", record)}
+                >
                   <span>{t("Interviewed")}</span>
                 </Menu.Item>
               </Menu>
@@ -356,13 +364,21 @@ const GroupList = () => {
             <Button
               style={{
                 backgroundColor:
-                  record.Status === "Accepted" ? "#EFF9F1" :
-                    record.Status === "Pending" ? "#F8E7EE" :
-                      record.Status === "Interviewed" ? "#E8F4FD" : "FFFFFF",
+                  record.Status === "Accepted"
+                    ? "#EFF9F1"
+                    : record.Status === "Pending"
+                    ? "#F8E7EE"
+                    : record.Status === "Interviewed"
+                    ? "#E8F4FD"
+                    : "FFFFFF",
                 color:
-                  record.Status === "Accepted" ? "#449E3C": 
-                    record.Status === "Pending" ? "#B70D52": 
-                      record.Status === "Interviewed" ? "#106BA3" : "#333333",
+                  record.Status === "Accepted"
+                    ? "#449E3C"
+                    : record.Status === "Pending"
+                    ? "#B70D52"
+                    : record.Status === "Interviewed"
+                    ? "#106BA3"
+                    : "#333333",
                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                 marginLeft: "-8px",
                 width: "100%",
@@ -387,10 +403,16 @@ const GroupList = () => {
           <Dropdown
             overlay={
               <Menu>
-                <Menu.Item value="Signed" onClick={() => handleContractChange("Signed", record)}>
+                <Menu.Item
+                  value="Signed"
+                  onClick={() => handleContractChange("Signed", record)}
+                >
                   <span>{t("Signed")}</span>
                 </Menu.Item>
-                <Menu.Item value="Pending" onClick={() => handleContractChange("Pending", record)}>
+                <Menu.Item
+                  value="Pending"
+                  onClick={() => handleContractChange("Pending", record)}
+                >
                   <span>{t("Pending")}</span>
                 </Menu.Item>
               </Menu>
@@ -399,11 +421,17 @@ const GroupList = () => {
             <Button
               style={{
                 backgroundColor:
-                  record.InternshipContract === "Signed" ? "#EFF9F1": 
-                    record.InternshipContract === "Pending" ? "#F8E7EE": "FFFFFF",
+                  record.InternshipContract === "Signed"
+                    ? "#EFF9F1"
+                    : record.InternshipContract === "Pending"
+                    ? "#F8E7EE"
+                    : "FFFFFF",
                 color:
-                  record.InternshipContract === "Signed" ? "#449E3C" :
-                    record.InternshipContract === "Pending" ? "#B70D52": "#333333",
+                  record.InternshipContract === "Signed"
+                    ? "#449E3C"
+                    : record.InternshipContract === "Pending"
+                    ? "#B70D52"
+                    : "#333333",
                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                 marginLeft: "-8px",
                 width: "100%",
