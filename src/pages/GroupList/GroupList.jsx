@@ -588,26 +588,36 @@ const GroupList = () => {
     };
   }, []);
 
-  const [formValues, setFormValues] = useState(
-    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
-  );
-
   const handleInputChange = (e, title) => {
     setFormValues({ ...formValues, [title]: e.target.value });
   };
 
+  const [formValues, setFormValues] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
+  const [formErrors, setFormErrors] = useState(
+    inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+  );
   const handleSubmit = () => {
-    const allFieldsFilled = Object.values(formValues).every(
-      (value) => value.trim() !== ""
-    );
-    if (allFieldsFilled) {
+    const newErrors = inputFields.reduce((acc, field) => {
+      if (!formValues[field.title].trim()) {
+        acc[field.title] = `${field.title} is required`;
+      }
+      return acc;
+    }, {});
+
+    if (Object.keys(newErrors).length > 0) {
+      setFormErrors(newErrors);
+      message.error("Please fill in all fields");
+    } else {
       setFormValues(
+        inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
+      );
+      setFormErrors(
         inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
       );
       message.success("Intern added successfully");
       handleCancel();
-    } else {
-      message.error("Please fill all fields");
     }
   };
 
@@ -808,35 +818,34 @@ const GroupList = () => {
           ]}
           width={modalWidth}
         >
-          <Space
-            size={[30, 30]}
-            wrap
-            style={{
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
+          <Row gutter={[16, 16]}>
             {inputFields.map((field, index) => (
-              <Space
-                key={index}
-                direction="vertical"
-                size="small"
-                style={{ width: "300px" }}
-              >
-                <label style={{ fontWeight: 600 }}>{field.title}</label>
-                <Input
-                  placeholder={field.placeholder}
-                  value={formValues[field.title]}
-                  onChange={(e) => handleInputChange(e, field.title)}
-                  style={{
-                    width: "100%",
-                    height: "40px",
-                    borderRadius: "10px",
-                  }}
-                />
-              </Space>
+              <Col span={8} key={index}>
+                <Space
+                  direction="vertical"
+                  size="small"
+                  style={{ width: "100%" }}
+                >
+                  <label style={{ fontWeight: 600 }}>{field.title}</label>
+                  <Input
+                    placeholder={field.placeholder}
+                    value={formValues[field.title]}
+                    onChange={(e) => handleInputChange(e, field.title)}
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      borderRadius: "10px",
+                    }}
+                  />
+                  {formErrors[field.title] && (
+                    <span style={{ color: "red" }}>
+                      {formErrors[field.title]}
+                    </span>
+                  )}
+                </Space>
+              </Col>
             ))}
-          </Space>
+          </Row>
         </Modal>
 
         <Modal
