@@ -33,7 +33,55 @@ import { useTranslation } from "react-i18next";
 
 const { Meta } = Card;
 
-const positionGroup = [
+const PositionManagement = () => {
+  const { t } = useTranslation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedInterns, setSelectedInterns] = useState([]);
+  const [modalTitle, setModalTitle] = useState("");
+  const [originalSelectedInterns, setOriginalSelectedInterns] = useState([]);
+  const viewPort = useViewport();
+  const isMobile = viewPort.width <= 1024;
+
+  const groupButton = [
+    {
+      color: "#41B137",
+      name: t("Export Excel"),
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: t("Edit"),
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: t("Delete"),
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: t("Add New Position"),
+      icon: <FolderAddOutlined />,
+    },
+  ];
+  function getRankClass(text) {
+    switch (text) {
+      case "Intern":
+        return "intern-rank";
+      case "Fresher":
+        return "fresher-rank";
+      case "Junior":
+        return "junior-rank";
+      case "Middle":
+        return "middle-rank";
+      default:
+        return "default-rank";
+    }
+  }
+  
+  // JSON data
+  const internsData = [
+
     {
         title: "Back-End",
         valueUser: 100,
@@ -197,11 +245,70 @@ const PositionManagement = () => {
         setIsModalVisible(false);
     };
 
-    // Function to handle Cancel button
-    const handleCancel = () => {
-        setSelectedInterns(originalSelectedInterns); // Reset selected interns to original values
-        setIsModalVisible(false); // Close modal
-    };
+  const columns = [
+    {
+      title: t("Intern ID"),
+      dataIndex: "internID",
+      key: "internID",
+    },
+    {
+      title: t("Full Name"),
+      dataIndex: "fullName",
+      key: "fullName",
+    },
+    {
+      title: t("Phone Number"),
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+    },
+    {
+      title: t("Position"),
+      dataIndex: "position",
+      key: "position",
+    },
+    {
+      title: t("School"),
+      dataIndex: "school",
+      key: "school",
+    },
+    {
+      title: t("Email"),
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "CV Link",
+      dataIndex: "cvLink",
+      key: "cvLink",
+      render: (text) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          Link
+        </a>
+      ),
+    },
+    {
+      title: t("Technology"),
+      dataIndex: "technology",
+      key: "technology",
+    },
+    {
+      title: t("Rank"),
+      dataIndex: "rank",
+      key: "rank",
+      width: 110,
+      render: (text, record) => (
+        <Dropdown
+          overlay={rankMenu(record)}
+          trigger={["click"]}
+          className={`dropdown-menu ${getRankClass(text)}`}
+        >
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            {text} <DownOutlined />
+          </a>
+        </Dropdown>
+      ),
+    },
+  ];
 
     const rankMenu = (record) => (
         <Menu onClick={(e) => handleRankChange(e, record)}>
