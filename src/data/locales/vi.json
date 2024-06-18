@@ -350,6 +350,8 @@
         "Please select the release date!": "Vui lòng chọn ngày hoàn thành!",
         "Release date must be after start date!": "Ngày hoàn thành phải sau ngày bắt đầu!",
         "Project created successfully": "Dự án được tạo thành công",
-        "Send successfully!": "Gửi mail thành công!"
+        "Send successfully!": "Gửi mail thành công!",
+        "In Process": "Đang tiến hành",
+        "Done": "Đã hoàn thành"
 
 }

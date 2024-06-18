@@ -41,11 +41,6 @@ const NewProjectModal = ({ open, onClose, create }) => {
     });
   };
 
-  // option of status column
-  const optionSelect = [
-    t("Done"),
-    t("In Process"),
-  ];
 
   const [projectInfo, setProjectInfo] = useState({
     title: "",
@@ -299,7 +294,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
                 style={{ width: "100%", height: "3.4em" }}
               >
                 <Select.Option value="done">{t("Done")}</Select.Option>
-                <Select.Option value="in process">{t("In Procecss")}</Select.Option>
+                <Select.Option value="in process">{t("In Process")}</Select.Option>
               </Select>
             </Form.Item>
           </div>

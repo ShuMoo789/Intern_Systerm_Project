@@ -341,5 +341,7 @@
         "Please select the release date!": "Please select the release date!",
         "Release date must be after start date!": "Release date must be after start date!",
         "Project created successfully": "Project created successfully",
-        "Send successfully!": "Send successfully!"
+        "Send successfully!": "Send successfully!",
+        "In Process": "In Process",
+        "Done": "Done"
 }
