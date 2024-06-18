@@ -26,12 +26,11 @@ const SendEmailPopup = ({ onClose, openPopup, typesEmail }) => {
         console.log("Received values:", values);
         // Handle form submission
         onClose();
-        message.success("Send successfully!")
+        message.success(t("Send successfully!"))
         form.resetFields();
       })
       .catch((info) => {
         console.log("Validate Failed:", info);
-        message.error(t("Please fill full input!"))
       });
   };
 
@@ -125,7 +124,7 @@ const SendEmailPopup = ({ onClose, openPopup, typesEmail }) => {
           <Form form={form} layout="vertical" name="text-form">
             <Form.Item
               name="text-email"
-              rules={[{ required: true, message: "Please enter your email content" }]}
+              rules={[{ required: true, message: t("Please enter your email content") }]}
             >
               <TextArea
                 className="textarea"

@@ -13,7 +13,7 @@
     height: 3.5em;
     font-family: 'Quicksand', sans-serif;
     padding: 0 20px 0 20px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 .create-new-project-modal > .form-info-container .field .ant-select-selector{
@@ -27,14 +27,13 @@
     margin-top: 20px; /* Optional: Adds some spacing from the form */
 }
 
-.create-new-project-modal > .button-container > .create-project-btn {
+.create-project-btn {
     width: fit-content;
     font-family: 'Quicksand', sans-serif;
     background-color: #4889E9;
     color: #fff;
 }
 
-
-.create-new-project-modal > .button-container > .create-project-btn:hover {
+.create-project-btn:hover {
     background-color: #4889E9;
 }

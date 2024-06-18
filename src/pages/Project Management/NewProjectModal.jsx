@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Input, DatePicker, Select, Button, message, Form } from "antd";
+import { Modal, Input, DatePicker, Select, Button, message, Form, Menu, Dropdown, Table } from "antd";
 import dayjs from "dayjs";
 import "./NewProjectModal.css";
 import { useTranslation } from "react-i18next";
+import {DownOutlined} from "@ant-design/icons"
 
 // Mock API call to create a project
 const mockCreateProjectApi = (projectInfo) => {
@@ -17,11 +18,12 @@ const mockCreateProjectApi = (projectInfo) => {
 const NewProjectModal = ({ open, onClose, create }) => {
   const { t } = useTranslation();
   const [messageApi, contextHolder] = message.useMessage();
+  const [form] = Form.useForm();
 
   const success = () => {
     messageApi.open({
       type: "success",
-      content: "Project created successfully",
+      content: t("Project created successfully"),
     });
   };
 
@@ -41,16 +43,9 @@ const NewProjectModal = ({ open, onClose, create }) => {
 
   // option of status column
   const optionSelect = [
-    {
-      value: "inProcessed",
-      label: "In processed",
-    },
+    t("Done"),
+    t("In Process"),
   ];
-
-  const translatedOption = optionSelect.map((item) => ({
-    value: item.value,
-    label: t(item.label),
-  }));
 
   const [projectInfo, setProjectInfo] = useState({
     title: "",
@@ -68,43 +63,62 @@ const NewProjectModal = ({ open, onClose, create }) => {
   // Date format for date inputs
   const dateFormat = "YYYY/MM/DD";
 
-  const handleInputChange = (key, value) => {
-    setProjectInfo((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-    console.log(projectInfo);
-  };
+  // const handleInputChange = (key, value) => {
+  //   setProjectInfo((prev) => ({
+  //     ...prev,
+  //     [key]: value,
+  //   }));
+  //   console.log(projectInfo);
+  // };
 
-  const handleDateChange = (type, date) => {
-    setProjectInfo((prev) => ({
-      ...prev,
-      [type]: date,
-    }));
-    console.log(projectInfo);
-  };
+  // const handleDateChange = (type, date) => {
+  //   setProjectInfo((prev) => ({
+  //     ...prev,
+  //     [type]: date,
+  //   }));
+  //   console.log(projectInfo);
+  // };
 
-  const createProject = async (projectData) => {
-    try {
-      const response = await mockCreateProjectApi(projectData);
-      if (response.success) {
-        success();
-        create(response.data);
-        onClose();
-      } else {
-        error("Failed to create project");
-      }
-    } catch (err) {
-      error("Error creating project");
-    }
+  // // const createProject = async (projectData) => {
+  // //   try {
+  // //     const response = await mockCreateProjectApi(projectData);
+  // //     if (response.success) {
+  // //       success();
+  // //       create(response.data);
+  // //       onClose();
+  // //     } else {
+  // //       error("Failed to create project");
+  // //     }
+  // //   } catch (err) {
+  // //     error("Error creating project");
+  // //   }
+  // // };
+
+  const handleCancel = () => {
+    onClose();
+    form.resetFields();
   };
 
   const handleSubmit = async (values) => {
-    console.log("Submitting project info:", values);
-    // await createProject(values); // Assuming `create` is the function to create a project
-    success();
-    onClose(); // Close the modal after submission
+    form
+      .validateFields()
+      .then((values) => {
+        console.log("Received values:", values);
+        // Handle form submission
+        onClose();
+        success();
+        form.resetFields();
+      })
+      .catch((info) => {
+        console.log("Validate Failed:", info);
+      });
   };
+
+  const handleChangestatus = (key, record) => {
+    record.status = key;
+    setSelectedOption(key);
+  };
+  const [selectedOption, setSelectedOption] = useState("");
 
   return (
     <Modal
@@ -115,22 +129,21 @@ const NewProjectModal = ({ open, onClose, create }) => {
       }
       open={open}
       width={1200}
-      footer={null}
-      onCancel={onClose}
+      footer={<Button
+            type="primary"
+            htmlType="submit"
+            className="create-project-btn"
+            onClick={handleSubmit}
+            style={{height: "3.0em"}}
+          >
+            {t("Add New Project")}
+          </Button>}
+      onCancel={handleCancel}
       centered
     >
       {contextHolder}
       <Form
-        onFinish={handleSubmit}
-        initialValues={{
-          ...projectInfo,
-          startDate: projectInfo.startDate
-            ? dayjs(projectInfo.startDate)
-            : null,
-          releaseDate: projectInfo.releaseDate
-            ? dayjs(projectInfo.releaseDate)
-            : null,
-        }}
+        form={form}
         className="create-new-project-modal"
       >
         <div className="form-info-container">
@@ -154,7 +167,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             <Form.Item
               name="position"
               rules={[
-                { required: false, message: t("Please input the position!") },
+                { required: true, message: t("Please input the position!") },
               ]}
             >
               <label>
@@ -167,7 +180,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             <Form.Item
               name="technology"
               rules={[
-                { required: false, message: t("Please input the technology!") },
+                { required: true, message: t("Please input the technology!") },
               ]}
             >
               <label>
@@ -180,7 +193,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             <Form.Item
               name="leader"
               rules={[
-                { required: false, message: t("Please input the leader!") },
+                { required: true, message: t("Please input the leader!") },
               ]}
             >
               <label>
@@ -193,7 +206,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             <Form.Item
               name="subLeader"
               rules={[
-                { required: false, message: t("Please input the sub leader!") },
+                { required: true, message: t("Please input the sub leader!") },
               ]}
             >
               <label>
@@ -206,7 +219,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             <Form.Item
               name="mentor"
               rules={[
-                { required: false, message: t("Please input the mentor!") },
+                { required: true, message: t("Please input the mentor!") },
               ]}
             >
               <label>
@@ -216,52 +229,56 @@ const NewProjectModal = ({ open, onClose, create }) => {
             </Form.Item>
           </div>
           <div className="field">
+            <h4>{t("Start Date")}</h4>
             <Form.Item
               name="startDate"
-              getValueProps={(i) => ({ value: dayjs(i) })}
               rules={[
                 {
-                  type: "object",
-                  required: false,
-                  message: t("Please input the start date!"),
+                  type: 'object',
+                  required: true,
+                  message: t('Please select the start date!'),
                 },
               ]}
             >
-              <label>
-                <h4>{t("Start Date")}</h4>
-                <DatePicker
-                  format={dateFormat}
-                  style={{ width: "100%", height: "3.4em" }}
-                />
-              </label>
+              <DatePicker 
+                format={dateFormat}
+                style={{ width: "100%", height: "3.4em" }}
+              />
             </Form.Item>
           </div>
           <div className="field">
+            <h4>{t("Release Date")}</h4>
             <Form.Item
               name="releaseDate"
-              getValueProps={(i) => ({ value: dayjs(i) })}
+              dependencies={['startDate']}
               rules={[
                 {
-                  type: "object",
-                  required: false,
-                  message: t("Please input the release date!"),
+                  type: 'object',
+                  required: true,
+                  message: t('Please select the release date!'),
                 },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    const startDate = getFieldValue('startDate');
+                    if (!value || (startDate && value.isAfter(startDate))) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error(t('Release date must be after start date!')));
+                  },
+                }),
               ]}
             >
-              <label>
-                <h4>{t("Release Date")}</h4>
-                <DatePicker
-                  format={dateFormat}
-                  style={{ width: "100%", height: "3.4em" }}
-                />
-              </label>
+              <DatePicker 
+                format={dateFormat}
+                style={{ width: "100%", height: "3.4em" }}
+              />
             </Form.Item>
           </div>
           <div className="field">
             <Form.Item
               name="groupZalo"
               rules={[
-                { required: false, message: t("Please input the group Zalo!") },
+                { required: true, message: t("Please input the Group Zalo!") },
               ]}
             >
               <label>
@@ -271,36 +288,23 @@ const NewProjectModal = ({ open, onClose, create }) => {
             </Form.Item>
           </div>
           <div className="field">
+            <h4>{t("Status")}</h4>
             <Form.Item
               name="status"
               rules={[
-                { required: false, message: t("Please select the status!") },
+                { required: true, message: t("Please select the status!") },
               ]}
             >
-              <label>
-                <h4>{t("Status")}</h4>
-                <Select
-                  options={translatedOption}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    margin: "7px 0",
-                  }}
-                />
-              </label>
+              <Select
+                style={{ width: "100%", height: "3.4em" }}
+              >
+                <Select.Option value="done">{t("Done")}</Select.Option>
+                <Select.Option value="in process">{t("In Procecss")}</Select.Option>
+              </Select>
             </Form.Item>
           </div>
         </div>
-        <div className="button-container">
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="create-project-btn"
-          >
-            {t("Add New Project")}
-          </Button>
-        </div>
+
       </Form>
     </Modal>
   );

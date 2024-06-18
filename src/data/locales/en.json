@@ -331,5 +331,15 @@
         "View Sales Executive": "View Sales Executive",
         "people": "people",
         "Add New Position": "Add New Position",
-        "Back to": "Back to"
+        "Back to": "Back to",
+        "Please select the status!": "Please select the status!",
+        "Please input the project title!": "Please input the project title!",
+        "Please input the technology!": "Please input the technology!",
+        "Please input the leader!": "Please input the leader!",
+        "Please input the sub leader!": "Please input the sub leader!",
+        "Please select the start date!": "Please select the start date!",
+        "Please select the release date!": "Please select the release date!",
+        "Release date must be after start date!": "Release date must be after start date!",
+        "Project created successfully": "Project created successfully",
+        "Send successfully!": "Send successfully!"
 }
