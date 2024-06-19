@@ -8,10 +8,10 @@
 }
 
 .content-intern-list .group-filter-table {
-    max-width: 96%;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0 20px;
     background-color: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -52,7 +52,7 @@
 }
 
 .search-button-internlist {
-    margin-left: 10px;
+    margin-left: 4px;
 
 }
 
