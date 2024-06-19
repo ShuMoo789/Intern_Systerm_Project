@@ -229,7 +229,6 @@ const TechnologyList = ({ activeTab }) => {
                       border: "1px solid blue",
                       borderRadius: "15px",
                       borderColor: "white",
-                      color: "black",
                       opacity: "0.7",
                     }}
                   >
