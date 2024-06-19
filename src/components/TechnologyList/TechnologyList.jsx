@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./TechnologyList.css";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { TiFolderDelete } from "react-icons/ti";
-import { Modal } from "antd";
+import { Modal, Pagination, Button } from "antd";
 import { Tabs } from "antd";
 import Question from "./Question";
 
@@ -86,7 +86,8 @@ const items = [
 
 const TechnologyList = ({ activeTab }) => {
   const [open, setOpen] = useState(false);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(6);
   const showModal = () => {
     setOpen(true);
   };
@@ -114,6 +115,50 @@ const TechnologyList = ({ activeTab }) => {
         title: "C#",
         imageUrl:
           "https://caodang.fpt.edu.vn/wp-content/uploads/2024/04/FPT-Polytechnic_HN_ngon_ngu_lap_trinh_c.webp",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
+      },
+      {
+        title: "NodeJS",
+        imageUrl: "https://www.svgrepo.com/show/376337/node-js.svg",
       },
       {
         title: "NodeJS",
@@ -150,37 +195,72 @@ const TechnologyList = ({ activeTab }) => {
     ],
   };
 
+  const filteredTechnologies = technologies[activeTab];
+  const totalItems = filteredTechnologies.length;
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedTechnologies = filteredTechnologies.slice(
+    startIndex,
+    endIndex
+  );
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div className="technology-list">
-      {technologies[activeTab].map((tech) => (
-        <div key={tech.title} className="technology-item">
-          <Card className="card-custom" style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={tech.imageUrl} />
-            <Card.Body>
-              <TiFolderDelete style={{ marginTop: 5, marginRight: 5 }} />
-              <Link
-                className="link1"
-                style={{ paddingRight: 10, color: "black" }}
-                variant="primary"
-                onClick={showModal}
-              >
-                Show questions
-              </Link>
-            </Card.Body>
-          </Card>
+    <div className="technology-list-container">
+      <div className="technology-list-content">
+        <div className="technology-list">
+          {paginatedTechnologies.map((tech, index) => (
+            <div
+              key={`${tech.title}-${startIndex + index}`}
+              className="technology-item"
+            >
+              <Card className="card-custom" style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={tech.imageUrl} />
+                <Card.Body>
+                  <Button
+                    type="primary"
+                    onClick={showModal}
+                    style={{
+                      background: "white",
+                      color: "blue",
+                      border: "1px solid blue",
+                      borderRadius: "15px",
+                      borderColor: "white",
+                      color: "black",
+                      opacity: "0.7",
+                    }}
+                  >
+                    <TiFolderDelete style={{ marginTop: 5, marginRight: 5 }} />{" "}
+                    Show Question
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+          {/* Modal Show Question */}
+          <Modal
+            open={open}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            width={1448}
+            height={447}
+            footer={[]}
+          >
+            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+          </Modal>
         </div>
-      ))}
-      {/* Modal Show Question */}
-      <Modal
-        open={open}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width={1448}
-        height={447}
-        footer={[]}
-      >
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-      </Modal>
+      </div>
+      <div className="pagination-container">
+        <Pagination
+          current={currentPage}
+          total={totalItems}
+          pageSize={pageSize}
+          onChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

@@ -89,7 +89,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -121,7 +121,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -152,7 +152,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -191,7 +191,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -204,7 +204,7 @@ const ViewButton = () => {
                   textAlign: "left", // Ensure text alignment is left
                 }}
               >
-                -378792628
+                0978792628
               </div>
             </div>
 
@@ -223,7 +223,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -254,7 +254,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -294,7 +294,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -326,7 +326,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -357,7 +357,7 @@ const ViewButton = () => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 style={{
-                  width: "260px",
+                  width: "340px",
                   height: "57px",
                   padding: "20px",
                   border: "1px solid #ccc",
@@ -391,7 +391,7 @@ const ViewButton = () => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               style={{
-                width: "260px",
+                width: "340px",
                 height: "57px",
                 padding: "20px",
                 border: "1px solid #ccc",
