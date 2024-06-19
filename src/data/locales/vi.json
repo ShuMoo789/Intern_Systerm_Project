@@ -340,5 +340,18 @@
         "You haven't entered any content": "Bạn chưa nhập nội dung",
         "Enter new password": "Nhập mật khẩu mới",
         "You have not entered any password": "Bạn chưa nhập mật khẩu gì hết",
-        "Back to": "Quay về"
+        "Back to": "Quay về",
+        "Please select the status!": "Vui lòng chọn trạng thái!",
+        "Please input the project title!": "Vui lòng điền tiêu đề dự án!",
+        "Please input the technology!": "Vui lòng điền công nghệ!",
+        "Please input the leader!": "Vui lòng nhập người trưởng nhóm!",
+        "Please input the sub leader!": "Vui lòng nhập người phó trưởng nhóm!",
+        "Please select the start date!": "Vui lòng chọn ngày bắt đầu!",
+        "Please select the release date!": "Vui lòng chọn ngày hoàn thành!",
+        "Release date must be after start date!": "Ngày hoàn thành phải sau ngày bắt đầu!",
+        "Project created successfully": "Dự án được tạo thành công",
+        "Send successfully!": "Gửi mail thành công!",
+        "In Process": "Đang tiến hành",
+        "Done": "Đã hoàn thành"
+
 }
