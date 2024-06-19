@@ -31,8 +31,21 @@ import useViewport from "../../hooks/useViewport";
 import GroupButton from "../../components/GroupButton/GroupButton";
 import { useTranslation } from "react-i18next";
 
+function getRankClass(text) {
+  switch (text) {
+    case "Intern":
+      return "intern-rank";
+    case "Fresher":
+      return "fresher-rank";
+    case "Junior":
+      return "junior-rank";
+    case "Middle":
+      return "middle-rank";
+    default:
+      return "default-rank";
+  }
+}
 const { Meta } = Card;
-
 const positionGroup = [
   {
     title: "Back-End",
@@ -274,12 +287,12 @@ const PositionManagement = () => {
       title: t("Rank"),
       dataIndex: "rank",
       key: "rank",
-      width: 80,
+      width: 110,
       render: (text, record) => (
         <Dropdown
           overlay={rankMenu(record)}
           trigger={["click"]}
-          className="dropdown-menu"
+          className={`dropdown-menu ${getRankClass(text)}`}
         >
           <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
             {text} <DownOutlined />
