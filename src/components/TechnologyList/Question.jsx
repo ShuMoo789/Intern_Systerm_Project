@@ -96,10 +96,10 @@ const Question = () => {
           height: "70px",
           borderRadius: "20px",
           fontSize: "20px",
-          background: "gray",
+          background: "blue",
           opacity: "0.4",
           marginLeft: "20px",
-          color: "red",
+          color: "white",
         }}
         onClick={handleAddQuestion}
       >
