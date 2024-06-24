@@ -13,6 +13,8 @@ import MainLayout from "../../../MainLayout/MainLayout";
 import Navigation from "../../../components/Navigation/Navigation";
 import MyComponent from "../../SelectFilter/SelectFilter";
 import { useTranslation } from "react-i18next";
+import DeletePopup from "../../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 const GroupZaloManagement = () => {
   const { t } = useTranslation();
   const groupButton = [
@@ -38,18 +40,46 @@ const GroupZaloManagement = () => {
     },
     {
       color: "#4889E9",
-      name: t("Add New Intern"),
+      name: t("Add New Group"),
       icon: <FolderAddOutlined />,
     },
   ];
 
-  const handleOpenCreateGroup = () => {};
+  const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+  const handleOpenDelete = () => {
+      setDeletePopupVisible(true);
+  };
+
+  const handleCloseDeletePopup = () => {
+      setDeletePopupVisible(false);
+  };
+
+  const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+  const handleOpenExportExcel = () => {
+      setExportExcelVisible(true);
+  };
+
+  const handleCloseExportExcel = () => {
+      setExportExcelVisible(false);
+  };
+
   return (
     <>
       <Navigation
         titleName={t("Group Zalo Management")}
         groupButton={groupButton}
-        onSendEmail={handleOpenCreateGroup}
+        onDelete={handleOpenDelete}
+        onExportExcel={handleOpenExportExcel}
+      />
+      {/*Render Delete Popup */}
+      <DeletePopup
+        onClose={handleCloseDeletePopup}
+        openPopup={isDeletePopupVisible}
+      />
+      {/*Render ExportExcel Popup */}
+      <ExportExcel
+        onClose={handleCloseExportExcel}
+        openPopup={isExportExcelVisible}
       />
       <Row style={{ margin:"0px 20px"}}>
           <MyComponent />

@@ -1,0 +1,29 @@
+.delete-btn{
+    background-color: #f44336;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    height: 40px;
+    width: 100px;
+}
+
+.cancel-delete{
+    font-size: 15px;
+    height: 40px;
+    width: 100px;
+}
+
+.warning-modal-delete{
+    text-align: center;
+    padding: 20px;
+}
+
+.icon-warning-delete{
+    color: #ff9966;
+    font-size: 50px;
+}
+
+.warning-delete{
+    font-size: 30px;
+    font-family: Quicksand;
+    font-weight: bold;
+}

@@ -83,13 +83,14 @@ body {
 }
 
 .ant-table-container {
-    font-family: 'Quicksand', sans-serif;
+
+    font-family: "Quicksand", sans-serif;
 }
 
 .section-title {
     font-size: 20px;
     /* margin-bottom: 10px; */
-    color: #92929D;
+    color: #92929d;
 }
 
 #APRCV .content>.filter-section {
@@ -190,7 +191,6 @@ td {
     border: 1px solid #fff;
     padding: 8px;
     text-align: left;
-
 }
 
 th {
@@ -207,6 +207,7 @@ div.approve-btns {
 }
 
 div.approve-btns>div.view {
+
     margin-right: 5px;
     padding: 5px 10px;
     color: #b22222;
@@ -219,56 +220,61 @@ div.approve-btns>div.view {
 div.approve-btns>div.feedbacks {
     margin-right: 9px;
     padding: 10px 10px 0px 10px;
-    color: #4889E9;
+    color: #4889e9;
     background-color: #ffffff;
-    border: 1px solid #4889E9;
+    border: 1px solid #4889e9;
     border-radius: 20px;
     cursor: pointer;
 }
 
-
-div.approve-btns>div.view:hover {
+div.approve-btns > div.view:hover {
     color: #ffffff;
     background-color: #b22222;
     border: 1px solid #b22222;
 }
 
-div.approve-btns>div.feedbacks:hover {
+div.approve-btns > div.feedbacks:hover {
+
     color: #ffffff;
-    background-color: #4889E9;
-    border: 1px solid #4889E9;
+    background-color: #4889e9;
+    border: 1px solid #4889e9;
 }
 
 #APRCV .content>.filter-section>.filter {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 1em;
     margin-bottom: 1em;
 }
 
 
-#APRCV .content>.filter-section>.filter>.fields {
+#APRCV .content > .filter-section > .filter > .fields {
+    width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     gap: 5px;
     margin-bottom: 10px;
 }
 
+#APRCV .content > .filter-section > .filter > .fields > input {
 
-#APRCV .content>.filter-section>.filter>.fields>input {
     width: 20em;
     background-color: #fff;
 }
 
 
-#APRCV .content>.filter-section>.filter>.buttons {
+#APRCV .content > .filter-section > .filter > .buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
     gap: 5px;
     margin-left: 10px;
 
 }
 
 
-#APRCV .content>.filter-section>.filter>.buttons>.btn {
+#APRCV .content > .filter-section > .filter > .buttons > .btn {
     padding: 15px 20px;
     text-align: center;
     border-radius: 15px;
@@ -276,14 +282,13 @@ div.approve-btns>div.feedbacks:hover {
 }
 
 
-#APRCV .content>.filter-section>.filter>.buttons>.cln-btn {
+#APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
-    border: 1px solid #CBD2DC;
+    border: 1px solid #cbd2dc;
     height: auto;
     width: 150px;
     margin-bottom: 5px;
     cursor: pointer;
-}
 
 
 #APRCV .content>.filter-section>.filter>.buttons>.cln-btn:hover {
@@ -292,49 +297,23 @@ div.approve-btns>div.feedbacks:hover {
 }
 
 
-#APRCV .content>.filter-section>.filter>.buttons>.srch-btn {
+#APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
-    background-color: #4889E9;
+    background-color: #4889e9;
     width: 150px;
     height: auto;
     cursor: pointer;
 }
 
-
-#APRCV .content>.filter-section>.filter>.buttons>.srch-btn:hover {
-    border: 1px solid #4889E9;
-    color: #4889E9;
+#APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
+    border: 1px solid #4889e9;
+    color: #4889e9;
     background-color: #fff;
     cursor: pointer;
 }
 
 
-
-/* .input-field.ant-input,
-.input-field.ant-picker,
-.input-field.ant-btn {
-    width: 300px !important;
-    height: 32px !important;
-    padding: 0 11px !important;
+.custom-placeholder .ant-picker-input input::placeholder {
+    font-size: 15px; /* Change this to your desired font size */
 }
 
-@media (max-width: 1160px) {
-
-    .input-field.ant-input,
-    .input-field.ant-picker,
-    .input-field.ant-btn {
-        width: 100% !important;
-    }
-}
-
-.ant-picker-input>input {
-    height: 32px !important;
-}
-
-.ant-select-selector {
-    height: 32px !important;
-}
-
-.ant-select-selection-item {
-    line-height: 32px !important;
-} */
