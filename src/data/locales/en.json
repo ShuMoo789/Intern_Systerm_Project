@@ -343,5 +343,9 @@
         "Project created successfully": "Project created successfully",
         "Send successfully!": "Send successfully!",
         "In Process": "In Process",
-        "Done": "Done"
+        "Done": "Done",
+        "Sub Leader": "Sub Leader",
+        "Star Date": "Star Date",
+        "Details": "Details",
+        "Issues": "Issues"
 }

@@ -13,6 +13,7 @@ import {
     Select,
     DatePicker,
     Tooltip,
+    Modal,
 } from "antd";
 import {
     UserOutlined,
@@ -23,6 +24,7 @@ import {
     EditOutlined,
     DeleteOutlined,
     CopyOutlined,
+    InfoCircleOutlined,
 } from "@ant-design/icons";
 import "./ProjectMan.css";
 import NewProjectModal from "./NewProjectModal.jsx";
@@ -71,10 +73,18 @@ function ProjectCard({
 
     const formatDate = (date) => dayjs(date).format("DD MMM YYYY");
 
+    const [isDetailsModalOpen, setIsDeatailsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsDeatailsModalOpen(true);
+    };
+    const handleCancel = () => {
+        setIsDeatailsModalOpen(false);
+    };
+
     return (
         <Card
             className="project-card"
-            title={title}
+            title={t(title)}
             extra={
                 <span className="status">
                     <Select defaultValue={status} options={optionSelect} />
@@ -151,6 +161,182 @@ function ProjectCard({
                 <div className="issues">
                     <CopyOutlined style={{ color: "#5C5967" }} />
                     {issues} {t("issues")}
+                    <Button 
+                    type="text" 
+                    onClick={showModal}
+                    style={{ color: "#5C5967" }}
+                    >
+                        <InfoCircleOutlined/>
+                        {t("Details")}
+                    </Button>
+                    <Modal 
+                    className="view-modal"
+                    title={t(title)} 
+                    open={isDetailsModalOpen} 
+                    onCancel={handleCancel}
+                    width={900}
+                    footer={null}
+                    >
+                        <Row gutter={[16, 0]}>
+                            <Col span={8}>
+                                <p className="mb-0">
+                                    <strong>{t("Position")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {position}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mb-0">
+                                    <strong>{t("Technology")}</strong>
+                                </p>
+                                <p 
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {technology}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mb-0">
+                                    <strong>{t("Leader")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {" "}
+                                    <a
+                                        href="#"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Link
+                                    </a>
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Sub Leader")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {subLeader.name}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Mentor")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {mentor.name}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Group Zalo")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {position}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Star Date")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {startDate}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Release Date")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {releaseDate}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Issues")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {issues}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Team Members")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {teamMembers.length}
+                                </p>
+                            </Col>
+                        </Row>
+                    </Modal>
                 </div>
             </div>
         </Card>
