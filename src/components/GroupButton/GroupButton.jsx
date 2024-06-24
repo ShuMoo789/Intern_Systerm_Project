@@ -9,6 +9,9 @@ const GroupButton = ({
     onSendEmail,
     onScheduleInterview,
     onCreateIntern,
+    onEdit,
+    onDelete,
+    onExportExcel,
 }) => {
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 1350;
@@ -20,17 +23,17 @@ const GroupButton = ({
 
     // function handle Export Excel when click button Export Excel
     const handleExportExcelClick = () => {
-        console.log("export excel");
+        onExportExcel();
     };
 
     // function handle Edit when click button Edit
     const handleEditClick = () => {
-        console.log("edit");
+        onEdit();
     };
 
     // function handle Delete when click button Delete
     const handleDeleteClick = () => {
-        console.log("delete");
+        onDelete();
     };
 
     // function handle Add New Intern when click button Add New Intern

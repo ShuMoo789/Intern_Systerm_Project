@@ -1,0 +1,16 @@
+.table-fill-edit{
+    border: 2px solid #12345129;
+    padding: 4px 11px;
+    border-radius: 10px;
+}
+
+.save-btn-edit{
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    height: 40px;
+    width: 130px;
+}
+
+.btn-upload{
+    width: 100%;
+}

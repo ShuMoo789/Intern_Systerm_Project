@@ -6,6 +6,10 @@ import { useTranslation } from "react-i18next";
 import useViewport from "../../hooks/useViewport.jsx";
 
 import MailOutlined from "@ant-design/icons/MailOutlined";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 
 import {
     DownOutlined,
@@ -778,9 +782,6 @@ const ConfirmCV = () => {
         },
     ];
 
-    const handleOpenCreateGroup = () => {
-        setIsModalVisible(true);
-    };
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const handleOpenEmailPopup = () => {
         setEmailPopupVisible(true);
@@ -792,7 +793,7 @@ const ConfirmCV = () => {
     const handleDropdownVisibleChange = (visible) => {
         setOpen(visible);
     };
-    const [selectedItems, setSelectedItems] = useState([]);
+
     const email_types = [
         t("Email interview"),
         t("Email result"),
@@ -800,6 +801,43 @@ const ConfirmCV = () => {
     ];
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 1024;
+
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
+
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
+    };
+
     return (
         <div id="APRCV">
             <main className="content">
@@ -808,13 +846,39 @@ const ConfirmCV = () => {
                         titleName={t("Confirm CV")}
                         groupButton={groupButton}
                         onSendEmail={handleOpenEmailPopup}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
                     />
                 </div>
+                {/*Render Send Email Popup */}
                 <SendMailButton
                     typesEmail={email_types}
                     onClose={handleCloseEmailPopup}
                     openPopup={isEmailPopupVisible}
                 />
+                {/*Render Edit Popup */}
+                <EditPopup
+                    onClose={handleCloseEditPopup}
+                    openPopup={isEditPopupVisible}
+                />
+                {/*Render Delete Popup */}
+                <DeletePopup
+                    onClose={handleCloseDeletePopup}
+                    openPopup={isDeletePopupVisible}
+                />
+                {/*Render ExportExcel Popup */}
+                <ExportExcel
+                    onClose={handleCloseExportExcel}
+                    openPopup={isExportExcelVisible}
+                />
+                {/*Render Add New Intern Popup */}
+                <AddNewIntern
+                    onClose={handleCloseAddNewIntern}
+                    openPopup={isAddNewInternVisible}
+                />
+
                 <section className="filter-section">
                     {!isMobile ? (
                         <div className="filter">

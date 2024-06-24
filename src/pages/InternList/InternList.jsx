@@ -21,6 +21,10 @@ import ViewButton from "./ViewButton";
 import "./InternList.css";
 import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
     const existingValue = options.find((option) => option.value === item.role);
@@ -420,12 +424,6 @@ const InternList = () => {
         setEmailPopupVisible(false);
     };
 
-    const handleSendEmail = (emailData) => {
-        console.log("Email Data:", emailData);
-        // Handle email sending logic here
-        handleCloseEmailPopup();
-    };
-
     // Handle Clean Filter Button by set state filter to ''
     const handleCleanFilterButton = () => {
         setFilter({
@@ -566,6 +564,42 @@ const InternList = () => {
         t("Return Profile"),
     ];
 
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
+
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
+    };
+
     return (
         <div id="APRCV">
             {/* Content of InternList right */}
@@ -576,6 +610,10 @@ const InternList = () => {
                         titleName={t("INTERN LIST")}
                         groupButton={groupButton}
                         onSendEmail={handleOpenEmailPopup}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
                     />
                 </div>
                 {/* Group of filter and table */}
@@ -1007,6 +1045,26 @@ const InternList = () => {
                 onClose={handleCloseEmailPopup}
                 openPopup={isEmailPopupVisible}
                 typesEmail={email_types}
+            />
+            {/*Render Edit Popup */}
+            <EditPopup
+                onClose={handleCloseEditPopup}
+                openPopup={isEditPopupVisible}
+            />
+            {/*Render Delete Popup */}
+            <DeletePopup
+                onClose={handleCloseDeletePopup}
+                openPopup={isDeletePopupVisible}
+            />
+            {/*Render Export Excel Popup */}
+            <ExportExcel
+                onClose={handleCloseExportExcel}
+                openPopup={isExportExcelVisible}
+            />
+            {/*Render Add New Intern Popup */}
+            <AddNewIntern
+                onClose={handleCloseAddNewIntern}
+                openPopup={isAddNewInternVisible}
             />
             <Toaster />
         </div>

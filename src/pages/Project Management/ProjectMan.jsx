@@ -34,6 +34,8 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import Navigation from "../../components/Navigation/Navigation.jsx";
 import useViewport from "../../hooks/useViewport";
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 
 const { Header, Content } = Layout;
 
@@ -467,6 +469,24 @@ function ProjectManagement() {
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 1024;
 
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
     return (
         <div id="APRCV">
             <main className="content">
@@ -475,6 +495,8 @@ function ProjectManagement() {
                         titleName={t("Project Management")}
                         groupButton={groupButton}
                         onCreateIntern={handleOpenModal}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
                     />
                 </div>
                 <section className="filter-section">
@@ -844,7 +866,20 @@ function ProjectManagement() {
                     />
                 </section>
             </main>
-            <NewProjectModal open={openModal} onClose={handleCloseModal} />
+            <NewProjectModal 
+                open={openModal} 
+                onClose={handleCloseModal} 
+            />
+            {/*Render Delete Popup */}
+            <DeletePopup
+                onClose={handleCloseDeletePopup}
+                openPopup={isDeletePopupVisible}
+            />
+            {/*Render ExportExcel Popup */}
+            <ExportExcel
+                onClose={handleCloseExportExcel}
+                openPopup={isExportExcelVisible}
+            />
         </div>
     );
 }
