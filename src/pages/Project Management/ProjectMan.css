@@ -271,3 +271,11 @@
         justify-content: center;
     }
 }
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}

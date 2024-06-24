@@ -352,6 +352,9 @@
         "Project created successfully": "Dự án được tạo thành công",
         "Send successfully!": "Gửi mail thành công!",
         "In Process": "Đang tiến hành",
-        "Done": "Đã hoàn thành"
-
+        "Done": "Đã hoàn thành",
+        "Sub Leader": "Phó Nhóm",
+        "Star Date": "Ngày bắt đầu",
+        "Details": "Chi tiết",
+        "Issues": "Lỗi"
 }
