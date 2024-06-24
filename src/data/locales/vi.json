@@ -352,6 +352,10 @@
         "Project created successfully": "Dự án được tạo thành công",
         "Send successfully!": "Gửi mail thành công!",
         "In Process": "Đang tiến hành",
-        "Done": "Đã hoàn thành"
+        "Done": "Đã hoàn thành",
+        "Account": "Tài khoản",
+        "Logout": "Đăng xuất",
+        "English": "Tiếng Anh",
+        "Vietnamese": "Tiếng Việt"
 
 }

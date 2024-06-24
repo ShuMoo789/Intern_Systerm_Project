@@ -1,3 +1,5 @@
+/* Navigation.css */
+
 .content-navigation {
     max-width: 100%;
     right: 0;
@@ -77,9 +79,6 @@
 .user-info {
     display: flex;
     align-items: center;
-    /* margin-top: auto; */
-    /* padding: 20px; */
-    /* background: #e8e9eb; */
     width: fit-content;
 }
 
@@ -133,4 +132,12 @@
     font-size: 20px;
     color: #db0d4b;
     margin-right: 30px;
+}
+
+.setting-icon {
+    transition: transform 0.3s;
+}
+  
+.setting-icon.rotate {
+    transform: rotate(45deg);
 }
