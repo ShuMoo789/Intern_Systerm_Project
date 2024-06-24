@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 const { Option } = Select;
 
 const GroupList = () => {
+
     const [data, setData] = useState(jsonData);
     const [filteredData, setFilteredData] = useState(jsonData);
     const viewPort = useViewport();
@@ -442,6 +443,7 @@ const GroupList = () => {
             if (!response.ok) {
                 throw new Error("Failed to fetch groups");
             }
+
             const data = await response.json();
             setGroups(data);
         } catch (error) {

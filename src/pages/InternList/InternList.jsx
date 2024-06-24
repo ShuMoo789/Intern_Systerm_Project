@@ -11,8 +11,9 @@ import {
     EyeOutlined,
     FilterOutlined,
     SearchOutlined,
+    SaveOutlined
 } from "@ant-design/icons";
-import { Table, Select, Button, Input, Col, Row } from "antd";
+import { Table, Select, Button, Input, Col, Row, Modal, Form } from "antd";
 import DataInternList from "../../data/InternList.json"; // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
 import SendMailButton from "../../components/SendMailButton/SendMailButton";
@@ -112,6 +113,8 @@ const rowSelection = {
 
 const InternList = () => {
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
+    const [isCommentsModalVisible, setIsCommentsModalVisible] = useState(false);//comments modal
+    const [form] = Form.useForm();
     const [selectedIntern, setSelectedIntern] = useState(null);
     const [updatedData, setUpdatedData] = useState(DataInternList);
     const [dataTable, setDataTable] = useState(DataInternList);
@@ -124,6 +127,30 @@ const InternList = () => {
         );
         setUpdatedData(updatedData2);
     };
+    const showCommentsModal = () => {
+        setIsCommentsModalVisible(true);
+    };
+
+    const handleCommentsModalCancel = () => {
+        setIsCommentsModalVisible(false);
+    };
+
+    const handleSaveComment = async () => {
+        try {
+            const values = await form.validateFields();
+            console.log('Success:', values);
+
+            // Here you would typically send the data to your backend
+            // For now, we'll just simulate a successful save
+            toast.success('Comment saved successfully');
+            setIsCommentsModalVisible(false);
+            form.resetFields();
+        } catch (errorInfo) {
+            console.log('Failed:', errorInfo);
+            toast.error('Failed to save comment. Please check the form and try again.');
+        }
+    };
+
     const { t } = useTranslation();
     const commentsText = t("comments");
     // props GroupButton
@@ -295,7 +322,7 @@ const InternList = () => {
             dataIndex: "comments",
             width: 160,
             render: (text) => (
-                <Button>
+                <Button onClick={showCommentsModal}>
                     2 {commentsText}
                     <EyeOutlined />
                 </Button>
@@ -627,6 +654,7 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
                                     }}
                                     className="select-placeholder"
@@ -641,6 +669,7 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
                                     }}
                                     className="select-placeholder"
@@ -656,6 +685,7 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
                                     }}
                                     className="select-placeholder"
@@ -669,7 +699,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="select-placeholder"
                                     showSearch
@@ -683,7 +715,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="select-placeholder"
                                     showSearch
@@ -696,7 +730,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="select-placeholder"
                                     showSearch
@@ -709,7 +745,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="select-placeholder"
                                     showSearch
@@ -722,7 +760,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="select-placeholder"
                                     showSearch
@@ -737,7 +777,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="select-placeholder"
                                     value={filter.dateOfBirth}
@@ -750,7 +792,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="custom-placeholder"
                                     value={filter.email}
@@ -763,7 +807,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="custom-placeholder"
                                     value={filter.school}
@@ -776,7 +822,9 @@ const InternList = () => {
                                     style={{
                                         height: "32px",
                                         width: "100%",
+
                                         fontSize: "15px",
+
                                     }}
                                     className="custom-placeholder"
                                     value={filter.groupZalo}
@@ -815,7 +863,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         defaultValue=""
@@ -829,7 +879,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t(
@@ -844,7 +896,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t("Enter intern's Role")}
@@ -857,7 +911,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t("Enter intern's Mentor")}
@@ -871,7 +927,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t(
@@ -886,7 +944,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t(
@@ -901,7 +961,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t(
@@ -916,7 +978,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="select-placeholder"
                                         placeholder={t(
@@ -931,7 +995,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="custom-placeholder"
                                         placeholder={t("Enter intern's D.O.B")}
@@ -946,7 +1012,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="custom-placeholder"
                                         placeholder={t("Enter intern's Email")}
@@ -961,7 +1029,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="custom-placeholder"
                                         placeholder={t("Enter intern's School")}
@@ -976,7 +1046,9 @@ const InternList = () => {
                                         style={{
                                             height: "32px",
                                             width: "100%",
+
                                             fontSize: "15px",
+
                                         }}
                                         className="custom-placeholder"
                                         placeholder={t(
@@ -1046,6 +1118,83 @@ const InternList = () => {
                 openPopup={isEmailPopupVisible}
                 typesEmail={email_types}
             />
+            <Modal
+                title="Comments"
+                visible={isCommentsModalVisible}
+                onCancel={handleCommentsModalCancel}
+                footer={[
+                    <Button key="cancel" onClick={handleCommentsModalCancel}>
+                        Cancel
+                    </Button>,
+                    <Button key="save" type="primary" icon={<SaveOutlined />} onClick={handleSaveComment}>
+                        Save Comment
+                    </Button>
+                ]}
+            >
+                <Form form={form} layout="vertical">
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field1"
+                                label="Field 1"
+                                rules={[{ required: true, message: 'Please enter field 1' }]}
+                            >
+                                <Input placeholder="Enter field 1" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field2"
+                                label="Field 2"
+                                rules={[{ required: true, message: 'Please enter field 2' }]}
+                            >
+                                <Input placeholder="Enter field 2" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field3"
+                                label="Field 3"
+                                rules={[{ required: true, message: 'Please enter field 3' }]}
+                            >
+                                <Input placeholder="Enter field 3" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field4"
+                                label="Field 4"
+                                rules={[{ required: true, message: 'Please enter field 4' }]}
+                            >
+                                <Input placeholder="Enter field 4" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field5"
+                                label="Field 5"
+                                rules={[{ required: true, message: 'Please enter field 5' }]}
+                            >
+                                <Input placeholder="Enter field 5" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field6"
+                                label="Field 6"
+                                rules={[{ required: true, message: 'Please enter field 6' }]}
+                            >
+                                <Input placeholder="Enter field 6" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+            </Modal>
+
             {/*Render Edit Popup */}
             <EditPopup
                 onClose={handleCloseEditPopup}
@@ -1066,6 +1215,7 @@ const InternList = () => {
                 onClose={handleCloseAddNewIntern}
                 openPopup={isAddNewInternVisible}
             />
+
             <Toaster />
         </div>
     );

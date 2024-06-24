@@ -150,15 +150,15 @@ const ConfirmCV = () => {
                             style={
                                 intern.confirmEmail === "No"
                                     ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
+                                        backgroundColor: "#F5A3B7",
+                                        color: "#7D0022",
+                                    }
                                     : intern.confirmEmail === "Yes"
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#B7EACB",
+                                            color: "#3A7D34",
+                                        }
+                                        : {}
                             }
                         >
                             {intern.status}
@@ -173,20 +173,20 @@ const ConfirmCV = () => {
                             style={
                                 intern.status === t("Pending")
                                     ? {
-                                          backgroundColor: "#FFB596",
-                                          color: "#E5731C",
-                                      }
+                                        backgroundColor: "#FFB596",
+                                        color: "#E5731C",
+                                    }
                                     : intern.status === t("Failed")
-                                    ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
-                                    : intern.status === t("Passed")
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#F5A3B7",
+                                            color: "#7D0022",
+                                        }
+                                        : intern.status === t("Passed")
+                                            ? {
+                                                backgroundColor: "#B7EACB",
+                                                color: "#3A7D34",
+                                            }
+                                            : {}
                             }
                         >
                             {t(intern.status)}
@@ -713,14 +713,14 @@ const ConfirmCV = () => {
                                 record.status === "Failed"
                                     ? "#F8E7EE"
                                     : record.status === "Passed"
-                                    ? "#EFF9F1"
-                                    : "#FFEFE6",
+                                        ? "#EFF9F1"
+                                        : "#FFEFE6",
                             color:
                                 record.status === "Failed"
                                     ? "#B70D52"
                                     : record.status === "Passed"
-                                    ? "#449E3C"
-                                    : "#FF5D02",
+                                        ? "#449E3C"
+                                        : "#FF5D02",
                             borderRadius: "100px",
                             fontSize: "12px",
                         }}
@@ -800,6 +800,7 @@ const ConfirmCV = () => {
         t("Internship Information"),
     ];
     const viewPort = useViewport();
+
     const isMobile = viewPort.width <= 1024;
 
     const [isEditPopupVisible, setEditPopupVisible] = useState(false);
@@ -837,7 +838,6 @@ const ConfirmCV = () => {
     const handleCloseAddNewIntern = () => {
         setAddNewInternVisible(false);
     };
-
     return (
         <div id="APRCV">
             <main className="content">
@@ -903,11 +903,13 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
+
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
                                         }}
                                     >
                                         <div
@@ -938,11 +940,13 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
+
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
                                         }}
                                     >
                                         <div
@@ -961,12 +965,14 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <DatePicker
+                                    format="DD/MM/YYYY"
                                     placeholder={t(["Enter intern's D.O.B"])}
                                     className="custom-placeholder"
                                     style={{
                                         height: "32px",
                                         width: "100%",
                                         fontSize: "15px",
+                                        height: "32px",
                                     }}
                                     onChange={(date) =>
                                         handleDateChange("dateOfBirth", date)
@@ -992,6 +998,7 @@ const ConfirmCV = () => {
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
                                         }}
                                     >
                                         <div
@@ -1029,6 +1036,7 @@ const ConfirmCV = () => {
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
                                         }}
                                     >
                                         <div
@@ -1046,6 +1054,7 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Input
+
                                     style={{
                                         height: "32px",
                                         width: "100%",
@@ -1054,6 +1063,7 @@ const ConfirmCV = () => {
                                     placeholder={t("Enter intern's Email")}
                                     value={selectedFilters.email}
                                     onChange={handleInputChange}
+
                                 />
 
                                 <Dropdown
@@ -1075,6 +1085,8 @@ const ConfirmCV = () => {
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
+
                                         }}
                                     >
                                         <div
@@ -1092,11 +1104,13 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Input
+
                                     style={{
                                         height: "32px",
                                         width: "100%",
                                         fontSize: "15px",
                                     }}
+
                                     placeholder={t("Enter intern's School")}
                                     className="custom-placeholder"
                                     value={selectedFilters.school}
@@ -1127,6 +1141,8 @@ const ConfirmCV = () => {
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
+
                                         }}
                                     >
                                         <div
@@ -1163,6 +1179,7 @@ const ConfirmCV = () => {
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
+
                                         }}
                                     >
                                         <div
@@ -1209,6 +1226,7 @@ const ConfirmCV = () => {
                                         }}
                                     >
                                         <Dropdown
+
                                             overlay={createMenu(
                                                 "internID",
                                                 internIDChoice
@@ -1233,7 +1251,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1265,7 +1283,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1286,12 +1304,15 @@ const ConfirmCV = () => {
                                         </Dropdown>
 
                                         <DatePicker
+                                            format="DD/MM/YYYY"
                                             placeholder={t([
                                                 "Enter intern's D.O.B",
                                             ])}
                                             style={{
                                                 height: "32px",
+
                                                 width: "100%",
+
                                                 fontSize: "15px",
                                             }}
                                             className="custom-placeholder"
@@ -1318,7 +1339,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1356,7 +1377,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1376,17 +1397,20 @@ const ConfirmCV = () => {
                                         </Dropdown>
 
                                         <Input
+
                                             style={{
                                                 height: "32px",
                                                 width: "100%",
                                                 fontSize: "15px",
                                             }}
                                             className="custom-placeholder"
+
                                             placeholder={t(
                                                 "Enter intern's Email"
                                             )}
                                             value={selectedFilters.email}
                                             onChange={handleInputChange}
+
                                         />
 
                                         <Dropdown
@@ -1404,7 +1428,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1424,12 +1448,14 @@ const ConfirmCV = () => {
                                         </Dropdown>
 
                                         <Input
+
                                             style={{
                                                 height: "32px",
                                                 width: "100%",
                                                 fontSize: "15px",
                                             }}
                                             className="custom-placeholder"
+
                                             placeholder={t(
                                                 "Enter intern's School"
                                             )}
@@ -1440,6 +1466,7 @@ const ConfirmCV = () => {
                                                     e.target.value
                                                 )
                                             }
+
                                         />
 
                                         <Dropdown
@@ -1457,7 +1484,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1492,7 +1519,7 @@ const ConfirmCV = () => {
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1607,7 +1634,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1621,7 +1648,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1636,7 +1663,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1651,7 +1678,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1666,7 +1693,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1681,7 +1708,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1696,7 +1723,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1711,7 +1738,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1725,7 +1752,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1740,7 +1767,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1757,7 +1784,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1778,7 +1805,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
