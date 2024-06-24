@@ -26,6 +26,10 @@ import { Typography, Row, Col } from "antd";
 import useViewport from "../../hooks/useViewport.jsx";
 import Navigation from "../../components/Navigation/Navigation.jsx";
 import { Toaster } from "react-hot-toast";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
@@ -668,6 +672,43 @@ function ApproveCV() {
     const handleCloseScheduleInterView = () => {
         setSchedulePopupVisible(false);
     };
+
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
+
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
+    };
+
     return (
         <div id="APRCV">
             <main className="content">
@@ -676,6 +717,10 @@ function ApproveCV() {
                         titleName={t("Approve CV")}
                         groupButton={groupButton}
                         onScheduleInterview={handleOpenScheduleInterView}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
                     />
                 </div>
 
@@ -1142,11 +1187,32 @@ function ApproveCV() {
                 initialPage={initialPage}
                 onSave={handleSaveComment}
             />
-
+            {/*Render ScheduleInterView Popup */}
             <ScheduleInterview
                 onClose={handleCloseScheduleInterView}
                 openPopup={isSchedulePopupVisible}
             />
+            {/*Render Edit Popup */}
+            <EditPopup
+                onClose={handleCloseEditPopup}
+                openPopup={isEditPopupVisible}
+            />
+            {/*Render Delete Popup */}
+            <DeletePopup
+                onClose={handleCloseDeletePopup}
+                openPopup={isDeletePopupVisible}
+            />
+            {/*Render ExportExcel Popup */}
+            <ExportExcel
+                onClose={handleCloseExportExcel}
+                openPopup={isExportExcelVisible}
+            />
+            {/*Render Add New Intern Popup */}
+            <AddNewIntern
+                onClose={handleCloseAddNewIntern}
+                openPopup={isAddNewInternVisible}
+            />
+
             <Toaster />
         </div>
     );

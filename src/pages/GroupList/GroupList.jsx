@@ -31,6 +31,10 @@ import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
 import "./GroupList.css";
 import ViewPopup from "./ViewPopup";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
@@ -117,36 +121,6 @@ const GroupList = () => {
         setData([...data]); // Assuming data is an array of records
     };
 
-    const handleCancel = () => {
-        setVisible(false);
-    };
-
-    const statusOptions = [
-        { label: t("Accepted"), value: "Accepted", color: "green" },
-        { label: t("Pending"), value: "Pending", color: "red" },
-        { label: t("Interviewed"), value: "Interviewed", color: "orange" },
-    ];
-
-    const contractOptions = [
-        { label: t("Signed"), value: "Signed", color: "green" },
-        { label: t("Pending"), value: "Pending", color: "red" },
-    ];
-
-    const inputFields = [
-        { title: "Intern ID", placeholder: "#12345128" },
-        { title: "Full name", placeholder: "Esther Eden" },
-        { title: "Phone number ", placeholder: "090759355" },
-        { title: "Position", placeholder: "Back-end" },
-        { title: "School", placeholder: "FPT University" },
-        { title: "Address", placeholder: "District 9" },
-        { title: "Email", placeholder: "abc@gmail.com" },
-        { title: "Link CV", placeholder: "Link" },
-        { title: "Mentor", placeholder: "Ajmal Abdul" },
-        { title: "Project", placeholder: "Intern System" },
-        { title: "Group Zalo", placeholder: "FE Intern System" },
-        { title: "Role", placeholder: "Leader" },
-    ];
-
     const groupButton = [
         {
             color: "#6537B1",
@@ -177,34 +151,6 @@ const GroupList = () => {
 
     const handleCreateIntern = () => {
         setVisible(true);
-    };
-
-    const getBackgroundColor = (status) => {
-        switch (status) {
-            case "Accepted":
-            case "Signed":
-                return "#EFF9F1";
-            case "Pending":
-                return "#F8E7EE";
-            case "Interviewed":
-                return "#FFEFE6";
-            default:
-                return "#FFFFFF";
-        }
-    };
-
-    const getColor = (status) => {
-        switch (status) {
-            case "Accepted":
-            case "Signed":
-                return "#449E3C";
-            case "Pending":
-                return "#B70D52";
-            case "Interviewed":
-                return "#FF5D02";
-            default:
-                return "#000000";
-        }
     };
 
     const columns = [
@@ -576,64 +522,40 @@ const GroupList = () => {
     const filterOption = (input, option) =>
         (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-    const [modalWidth, setModalWidth] = useState("64%");
-
-    useEffect(() => {
-        const updateModalWidth = () => {
-            if (window.innerWidth <= 600) {
-                setModalWidth("90%");
-            } else if (window.innerWidth <= 1024) {
-                setModalWidth("75%");
-            } else {
-                setModalWidth("64%");
-            }
-        };
-
-        updateModalWidth();
-        window.addEventListener("resize", updateModalWidth);
-
-        return () => {
-            window.removeEventListener("resize", updateModalWidth);
-        };
-    }, []);
-
-    const handleInputChange = (e, title) => {
-        setFormValues({ ...formValues, [title]: e.target.value });
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
     };
 
-    const [formValues, setFormValues] = useState(
-        inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
-    );
-    const [formErrors, setFormErrors] = useState(
-        inputFields.reduce((acc, field) => ({ ...acc, [field.title]: "" }), {})
-    );
-    const handleSubmit = () => {
-        const newErrors = inputFields.reduce((acc, field) => {
-            if (!formValues[field.title].trim()) {
-                acc[field.title] = `${field.title} is required`;
-            }
-            return acc;
-        }, {});
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
 
-        if (Object.keys(newErrors).length > 0) {
-            setFormErrors(newErrors);
-            message.error("Please fill in all fields");
-        } else {
-            setFormValues(
-                inputFields.reduce(
-                    (acc, field) => ({ ...acc, [field.title]: "" }),
-                    {}
-                )
-            );
-            setFormErrors(
-                inputFields.reduce(
-                    (acc, field) => ({ ...acc, [field.title]: "" }),
-                    {}
-                )
-            );
-            message.success("Intern added successfully");
-            handleCancel();
-        }
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
     };
 
     return (
@@ -644,9 +566,32 @@ const GroupList = () => {
                         titleName={t("GROUP LIST")}
                         groupButton={groupButton}
                         onSendEmail={showModal}
-                        onCreateIntern={handleCreateIntern}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
                     />
                 </div>
+                {/*Render Edit Popup */}
+                <EditPopup
+                    onClose={handleCloseEditPopup}
+                    openPopup={isEditPopupVisible}
+                />
+                {/*Render Delete Popup */}
+                <DeletePopup
+                    onClose={handleCloseDeletePopup}
+                    openPopup={isDeletePopupVisible}
+                />
+                {/*Render ExportExcel Popup */}
+                <ExportExcel
+                    onClose={handleCloseExportExcel}
+                    openPopup={isExportExcelVisible}
+                />
+                {/*Render Add New Intern Popup */}
+                <AddNewIntern
+                    onClose={handleCloseAddNewIntern}
+                    openPopup={isAddNewInternVisible}
+                />
                 <section className="filter-section">
                     {!isMobile ? (
                         <div className="filter">
@@ -1027,71 +972,6 @@ const GroupList = () => {
                         />
                     </div>
                 </section>
-
-                <Modal
-                    className="add-new-intern-modal"
-                    title={
-                        <span
-                            style={{
-                                fontSize: "25px",
-                                fontWeight: "bold",
-                                marginLeft: 10,
-                            }}
-                        >
-                            {t("Add New Intern")}
-                        </span>
-                    }
-                    open={visible}
-                    onCancel={handleCancel}
-                    footer={[
-                        <Button
-                            key="addNewIntern"
-                            type="primary"
-                            onClick={handleSubmit}
-                            style={{
-                                margin: "10px 10px 0 0",
-                                height: "50px",
-                                borderRadius: 10,
-                            }}
-                        >
-                            {t("Add New Intern")}
-                        </Button>,
-                    ]}
-                    width={modalWidth}
-                >
-                    <Row gutter={[16, 16]}>
-                        {inputFields.map((field, index) => (
-                            <Col span={8} key={index}>
-                                <Space
-                                    direction="vertical"
-                                    size="small"
-                                    style={{ width: "100%" }}
-                                >
-                                    <label style={{ fontWeight: 600 }}>
-                                        {field.title}
-                                    </label>
-                                    <Input
-                                        placeholder={field.placeholder}
-                                        value={formValues[field.title]}
-                                        onChange={(e) =>
-                                            handleInputChange(e, field.title)
-                                        }
-                                        style={{
-                                            width: "100%",
-                                            height: "40px",
-                                            borderRadius: "10px",
-                                        }}
-                                    />
-                                    {formErrors[field.title] && (
-                                        <span style={{ color: "red" }}>
-                                            {formErrors[field.title]}
-                                        </span>
-                                    )}
-                                </Space>
-                            </Col>
-                        ))}
-                    </Row>
-                </Modal>
 
                 <Modal
                     title={<h2>{t("Create Group")}</h2>}
