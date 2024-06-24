@@ -146,15 +146,15 @@ const ConfirmCV = () => {
                             style={
                                 intern.confirmEmail === "No"
                                     ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
+                                        backgroundColor: "#F5A3B7",
+                                        color: "#7D0022",
+                                    }
                                     : intern.confirmEmail === "Yes"
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#B7EACB",
+                                            color: "#3A7D34",
+                                        }
+                                        : {}
                             }
                         >
                             {intern.status}
@@ -169,20 +169,20 @@ const ConfirmCV = () => {
                             style={
                                 intern.status === t("Pending")
                                     ? {
-                                          backgroundColor: "#FFB596",
-                                          color: "#E5731C",
-                                      }
+                                        backgroundColor: "#FFB596",
+                                        color: "#E5731C",
+                                    }
                                     : intern.status === t("Failed")
-                                    ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
-                                    : intern.status === t("Passed")
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#F5A3B7",
+                                            color: "#7D0022",
+                                        }
+                                        : intern.status === t("Passed")
+                                            ? {
+                                                backgroundColor: "#B7EACB",
+                                                color: "#3A7D34",
+                                            }
+                                            : {}
                             }
                         >
                             {t(intern.status)}
@@ -539,64 +539,76 @@ const ConfirmCV = () => {
             dataIndex: "internID",
             key: "internID",
             filteredValue: [selectedFilters.internID],
+            align: "center"
         },
         {
             title: t("Date Interview"),
             dataIndex: "dateInterView",
             key: "dateInterView",
             filteredValue: [selectedFilters.dateInterView],
+            align: "center"
         },
         {
             title: t("Time Interview"),
             dataIndex: "timeinterview",
             key: "timeinterview",
             filteredValue: [selectedFilters.timeInterView],
+            align: "center"
         },
         {
             title: t("Full Name"),
             dataIndex: "fullName",
             key: "fullName",
             filteredValue: [selectedFilters.fullName],
+            align: "center"
         },
         {
             title: t("Date Of Birth"),
             dataIndex: "dateOfBirth",
             key: "dateOfBirth",
             filteredValue: [selectedFilters.dateOfBirth],
+            align: "center"
         },
         {
             title: t("Phone Number"),
             dataIndex: "phoneNumber",
             key: "phoneNumber",
             filteredValue: [selectedFilters.phoneNumber],
+            align: "center"
         },
         {
             title: t("Position"),
             dataIndex: "position",
             key: "position",
             filteredValue: [selectedFilters.position],
+            align: "center"
         },
         {
             title: t("School"),
             dataIndex: "school",
             key: "school",
             filteredValue: [selectedFilters.school],
+            align: "center"
         },
         {
             title: t("Address"),
             dataIndex: "address",
             key: "address",
             filteredValue: [selectedFilters.address],
+            align: "center"
         },
         {
             title: "Email",
             dataIndex: "email",
             key: "email",
             filteredValue: [selectedFilters.email],
+            align: "center",
+            width: "8%"
         },
         {
             title: "CV",
             dataIndex: "cvLink",
+            align: "center",
             key: "cvLink",
             render: () => (
                 <a
@@ -610,6 +622,7 @@ const ConfirmCV = () => {
         {
             title: t("Comments"),
             dataIndex: "commentsCV",
+            align: "center",
             key: "commentsCV",
             render: (text, record) => (
                 <span>
@@ -627,6 +640,7 @@ const ConfirmCV = () => {
         {
             title: t("Confirm Email"),
             dataIndex: "confirmEmail",
+            align: "center",
             key: "confirmEmail",
             render: (text, record) => (
                 <div key={record.key} style={{ width: 126 }}>
@@ -675,11 +689,13 @@ const ConfirmCV = () => {
         {
             title: t("Interviewer"),
             dataIndex: "interviewer",
+            align: "center",
             key: "interviewer",
             filteredValue: [selectedFilters.dateInterView],
         },
         {
             title: t("Status"),
+            align: "center",
             dataIndex: "status",
             key: "status",
             render: (text, record) => (
@@ -709,14 +725,14 @@ const ConfirmCV = () => {
                                 record.status === "Failed"
                                     ? "#F8E7EE"
                                     : record.status === "Passed"
-                                    ? "#EFF9F1"
-                                    : "#FFEFE6",
+                                        ? "#EFF9F1"
+                                        : "#FFEFE6",
                             color:
                                 record.status === "Failed"
                                     ? "#B70D52"
                                     : record.status === "Passed"
-                                    ? "#449E3C"
-                                    : "#FF5D02",
+                                        ? "#449E3C"
+                                        : "#FF5D02",
                             borderRadius: "100px",
                             fontSize: "12px",
                         }}
@@ -730,6 +746,7 @@ const ConfirmCV = () => {
         {
             title: "Button",
             dataIndex: "button",
+            align: "center",
             key: "button",
             render: (text, record) => (
                 <Button
@@ -1467,7 +1484,8 @@ const ConfirmCV = () => {
                                 dataSource={filteredInterns}
                                 rowKey="internId"
                                 pagination={{ pageSize: 8 }}
-                                scroll={{ x: "max-content" }}
+                                scroll={{ x: "120vw", y: "334px" }}
+                                style={{ maxWidth: "100%", minHeight: "100%" }}
                             />
                         </div>
                     </div>

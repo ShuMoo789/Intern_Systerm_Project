@@ -435,6 +435,7 @@ function ApproveCV() {
             dataIndex: "internID",
             // width: 80,
             filteredValue: [selectedFilters.internID],
+            align: "center"
             // onFilter: (value, record) => {
             //     return record.internID.includes(value)
             // }
@@ -443,6 +444,7 @@ function ApproveCV() {
             title: t("Date Submitted Form"),
             dataIndex: "dateSubmittedForm",
             // width: 140,
+            align: "center"
         },
         {
             title: t("Full Name"),
@@ -452,6 +454,7 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.fullName.includes(value)
             // }
+            align: "center"
         },
         {
             title: t("Date Of Birth"),
@@ -461,6 +464,7 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.dateOfBirth.includes(value)
             // }
+            align: "center"
         },
         {
             title: t("Phone Number"),
@@ -470,6 +474,7 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.phoneNumber.includes(value)
             // }
+            align: "center"
         },
         {
             title: t("Position"),
@@ -479,6 +484,7 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.position.includes(value)
             // }
+            align: "center"
         },
         {
             title: t("School"),
@@ -489,6 +495,7 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.school.includes(value)
             // }
+            align: "center"
         },
         {
             title: t("Address"),
@@ -499,6 +506,7 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.address.includes(value)
             // }
+            align: "center"
         },
         {
             title: "Email",
@@ -508,10 +516,12 @@ function ApproveCV() {
             // onFilter: (value, record) => {
             //     return record.email.includes(value)
             // }
+            align: "center"
         },
         {
             title: "CV",
             dataIndex: "cvLink",
+            align: "center",
             // width: 60,
             render: (text) => (
                 <a
@@ -525,6 +535,7 @@ function ApproveCV() {
         {
             title: t("Comments"),
             dataIndex: "commentsCV",
+            align: "center",
             // width: 130,
             render: (text) => (
                 <Button
@@ -541,6 +552,7 @@ function ApproveCV() {
         {
             title: t("Status"),
             dataIndex: "status",
+            align: "center",
             // width: 100,
             render: (text, record) => (
                 <Dropdown
@@ -588,6 +600,7 @@ function ApproveCV() {
         },
         {
             title: "Button",
+            align: "center",
             // width: 120,
             render: (intern) => (
                 <div className="approve-btns">
@@ -1083,7 +1096,8 @@ function ApproveCV() {
                             }}
                             columns={columns}
                             dataSource={filteredInterns}
-                            scroll={{ x: "max-content" }}
+                            scroll={{ x: "140vw", y: "384px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
                                 pageSize: 8,
                             }}

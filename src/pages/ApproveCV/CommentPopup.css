@@ -41,9 +41,12 @@
 
 .view-popup-row .view-popup-link {
     display: flex;
-    margin: 30px 20px 10px;
+    /* margin: 30px 20px 10px; */
     color: #333333;
     text-decoration: underline;
+    border: 1px solid #d9d9d9;
+    padding: 12px;
+    border-radius: 10px;
 }
 
 .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {

@@ -200,21 +200,25 @@ const InternList = () => {
             title: t("Intern ID"),
             dataIndex: "internID",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Start Date"),
             dataIndex: "startDate",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Finish Date"),
             dataIndex: "finishDate",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Full Name"),
             dataIndex: "fullName",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.fullName],
             // onFilter: (value, record) => {
             //     return record.fullName.includes(value)
@@ -224,6 +228,7 @@ const InternList = () => {
             title: t("Date Of Birth"),
             dataIndex: "dateOfBirth",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.dateOfBirth],
             // onFilter: (value, record) => {
             //     return record.dateOfBirth.includes(value)
@@ -232,7 +237,8 @@ const InternList = () => {
         {
             title: t("Phone Number"),
             dataIndex: "phoneNumber",
-            width: "auto",
+            width: "6%",
+            align: "center"
             // filteredValue: [filter.phoneNumber],
             // onFilter: (value, record) => {
             //     return record.phoneNumber.includes(value)
@@ -242,6 +248,7 @@ const InternList = () => {
             title: t("Position"),
             dataIndex: "position",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.position],
             // onFilter: (value, record) => {
             //     return record.position.includes(value)
@@ -251,6 +258,7 @@ const InternList = () => {
             title: t("School"),
             dataIndex: "school",
             width: "auto",
+            align: "center",
             render: (text) => t(text),
             // filteredValue: [filter.school],
             // onFilter: (value, record) => {
@@ -261,6 +269,7 @@ const InternList = () => {
             title: t("Address"),
             dataIndex: "address",
             width: "auto",
+            align: "center",
             render: (text) => t(text),
             // filteredValue: [filter.address],
             // onFilter: (value, record) => {
@@ -271,6 +280,7 @@ const InternList = () => {
             title: t("Email"),
             dataIndex: "email",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.email],
             // onFilter: (value, record) => {
             //     return record.email.includes(value)
@@ -280,6 +290,7 @@ const InternList = () => {
             title: "CV",
             dataIndex: "cv",
             width: 100,
+            align: "center",
             render: (text) => (
                 <a style={{ color: "blue", textDecoration: "underline" }}>
                     {text}
@@ -290,6 +301,7 @@ const InternList = () => {
             title: t("Comments"),
             dataIndex: "comments",
             width: 160,
+            align: "center",
             render: (text) => (
                 <Button>
                     2 {commentsText}
@@ -301,6 +313,7 @@ const InternList = () => {
             title: t("Role"),
             dataIndex: "role",
             width: 130,
+            align: "center"
             // filteredValue: [filter.role],
             // onFilter: (value, record) => {
             //     return record.role.includes(value)
@@ -310,6 +323,7 @@ const InternList = () => {
             title: t("Project"),
             dataIndex: "project",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.project],
             // onFilter: (value, record) => {
             //     return record.project.includes(value)
@@ -319,6 +333,7 @@ const InternList = () => {
             title: t("Group Zalo"),
             dataIndex: "groupZalo",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.groupZalo],
             // onFilter: (value, record) => {
             //     return record.groupZalo.includes(value)
@@ -328,6 +343,7 @@ const InternList = () => {
             title: t("Mentor"),
             dataIndex: "mentor",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.mentor],
             // onFilter: (value, record) => {
             //     return record.mentor.includes(value)
@@ -337,6 +353,7 @@ const InternList = () => {
             title: t("Status"),
             dataIndex: "status",
             width: 170,
+            align: "center",
             render: (text, record) => {
                 const statusColor = {
                     "In process": {
@@ -392,6 +409,7 @@ const InternList = () => {
             title: t("Report Process"),
             dataIndex: "reportProcess",
             width: 170,
+            align: "center",
             render: (text, record) => (
                 <ReportProcessModal>
                     {({ showModal }) => (
@@ -407,6 +425,7 @@ const InternList = () => {
             title: t("Button"),
             dataIndex: "button",
             width: "auto",
+            align: "center",
             render: (text) => <ViewButton>{text}</ViewButton>,
         },
     ];
@@ -1031,7 +1050,7 @@ const InternList = () => {
                             }}
                             columns={columns}
                             dataSource={dataTable}
-                            scroll={{ x: "2200px", y: "360px" }}
+                            scroll={{ x: "150vw", y: "384px" }}
                             style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
                                 pageSize: 7,

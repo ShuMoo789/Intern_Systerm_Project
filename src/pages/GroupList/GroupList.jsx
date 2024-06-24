@@ -218,71 +218,82 @@ const GroupList = () => {
       title: "",
       dataIndex: "select",
       render: (_, record) => <Checkbox />,
-      width: "auto",
+      width: "2%",
     },
     {
       title: t("Intern ID"),
       dataIndex: "InternId",
       key: "InternId",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Date of Interview"),
       dataIndex: "DateInterview",
       key: "DateInterview",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Time of Interview"),
       dataIndex: "TimeInterview",
       key: "TimeInterview",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Full Name"),
       dataIndex: "FullName",
       key: "FullName",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Date of Birth"),
       dataIndex: "DateOfBirth",
       key: "DateOfBirth",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Phone Number"),
       dataIndex: "PhoneNumber",
       key: "PhoneNumber",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Position"),
       dataIndex: "Position",
       key: "Position",
       width: "auto",
+      align: "center"
     },
     {
       title: t("School"),
       dataIndex: "School",
       key: "School",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Address"),
       dataIndex: "Address",
       key: "Address",
       width: "auto",
+      align: "center"
     },
     {
       title: "Email",
       dataIndex: "Email",
       key: "Email",
       width: "auto",
+      align: "center"
     },
     {
       title: "CV",
       dataIndex: "CV",
+      align: "center",
       // key: "CV",
       // width: 140,
       render: (text) => (
@@ -301,6 +312,7 @@ const GroupList = () => {
       dataIndex: "Comments",
       key: "Comments",
       width: "auto",
+      align: "center",
       render: (text) => t(text),
     },
     {
@@ -308,12 +320,14 @@ const GroupList = () => {
       dataIndex: "Role",
       key: "Role",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Project"),
       dataIndex: "Project",
       key: "Project",
       width: "auto",
+      align: "center",
       render: (text) => t(text),
     },
     {
@@ -321,6 +335,7 @@ const GroupList = () => {
       dataIndex: "GroupZalo",
       key: "GroupZalo",
       width: "auto",
+      align: "center",
       render: (text) => t(text),
     },
     {
@@ -328,11 +343,13 @@ const GroupList = () => {
       dataIndex: "Mentor",
       key: "Mentor",
       width: "auto",
+      align: "center"
     },
     {
       title: t("Status"),
       dataIndex: "Status",
       key: "Status",
+      align: "center",
       width: "auto",
 
       render: (text, record) => (
@@ -396,6 +413,7 @@ const GroupList = () => {
       title: t("Internship Contract"),
       dataIndex: "InternshipContract",
       key: "InternshipContract",
+      align: "center",
       width: "auto",
 
       render: (text, record) => (
@@ -448,11 +466,12 @@ const GroupList = () => {
     {
       title: t("Button"),
       key: "Button",
+      align: "center",
       // width: 200,
       render: (_, record) => (
         <Space>
           <ViewPopup></ViewPopup>
-          <Button
+          {/* <Button
             className="upload-file-button"
             shape="round"
             style={{
@@ -461,7 +480,7 @@ const GroupList = () => {
             }}
           >
             {t("Upload File")}
-          </Button>
+          </Button> */}
         </Space>
       ),
     },
@@ -773,16 +792,16 @@ const GroupList = () => {
                 </Space>
                 <div
                   style={{
-                    overflowX: "auto",
+                    // overflowX: "auto",
                     width: isMobile ? "100%" : "100%",
                   }}
                 >
                   <Table
                     className="grouplist-table"
-                    style={{ margin: "0 20px" }}
                     columns={columns}
+                    style={{ margin: "0 20px", height: "51vh" }}
                     dataSource={filteredData}
-                    scroll={{ x: 3300 }}
+                    scroll={{ x: 3300, y: 350 }}
                     pagination={{ pageSize: 7 }}
                   />
                 </div>
