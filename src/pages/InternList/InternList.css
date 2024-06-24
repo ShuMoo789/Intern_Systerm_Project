@@ -47,14 +47,9 @@
 
 
 .filter-button {
-    margin-left: 4px;
     margin-bottom: 15px;
 }
 
-.search-button-internlist {
-    margin-left: 4px;
-
-}
 
 .cln-btn {
     border: 1px solid #CBD2DC !important;
@@ -94,4 +89,8 @@
     background: rgb(66, 66, 243);
     color: white;
 
+}
+
+.select-placeholder .ant-select-selection-placeholder {
+    font-size: 15px; /* Change this to your desired font size */
 }

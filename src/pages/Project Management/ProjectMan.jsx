@@ -13,6 +13,7 @@ import {
     Select,
     DatePicker,
     Tooltip,
+    Modal,
 } from "antd";
 import {
     UserOutlined,
@@ -23,6 +24,7 @@ import {
     EditOutlined,
     DeleteOutlined,
     CopyOutlined,
+    InfoCircleOutlined,
 } from "@ant-design/icons";
 import "./ProjectMan.css";
 import NewProjectModal from "./NewProjectModal.jsx";
@@ -71,10 +73,18 @@ function ProjectCard({
 
     const formatDate = (date) => dayjs(date).format("DD MMM YYYY");
 
+    const [isDetailsModalOpen, setIsDeatailsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsDeatailsModalOpen(true);
+    };
+    const handleCancel = () => {
+        setIsDeatailsModalOpen(false);
+    };
+
     return (
         <Card
             className="project-card"
-            title={title}
+            title={t(title)}
             extra={
                 <span className="status">
                     <Select defaultValue={status} options={optionSelect} />
@@ -151,6 +161,182 @@ function ProjectCard({
                 <div className="issues">
                     <CopyOutlined style={{ color: "#5C5967" }} />
                     {issues} {t("issues")}
+                    <Button 
+                    type="text" 
+                    onClick={showModal}
+                    style={{ color: "#5C5967" }}
+                    >
+                        <InfoCircleOutlined/>
+                        {t("Details")}
+                    </Button>
+                    <Modal 
+                    className="view-modal"
+                    title={t(title)} 
+                    open={isDetailsModalOpen} 
+                    onCancel={handleCancel}
+                    width={900}
+                    footer={null}
+                    >
+                        <Row gutter={[16, 0]}>
+                            <Col span={8}>
+                                <p className="mb-0">
+                                    <strong>{t("Position")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {position}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mb-0">
+                                    <strong>{t("Technology")}</strong>
+                                </p>
+                                <p 
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {technology}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mb-0">
+                                    <strong>{t("Leader")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {" "}
+                                    <a
+                                        href="#"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Link
+                                    </a>
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Sub Leader")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {subLeader.name}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Mentor")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {mentor.name}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Group Zalo")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {position}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Star Date")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {startDate}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Release Date")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {releaseDate}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Issues")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {issues}
+                                </p>
+                            </Col>
+                            <Col span={8}>
+                                <p className="mt-0 mb-0">
+                                    <strong>{t("Team Members")}</strong>
+                                </p>
+                                <p
+                                    className="mt-0"
+                                    style={{
+                                        border: "2px solid #12345129",
+                                        padding: "4px 11px",
+                                        borderRadius: "10px",
+                                    }}  
+                                >
+                                    {teamMembers.length}
+                                </p>
+                            </Col>
+                        </Row>
+                    </Modal>
                 </div>
             </div>
         </Card>
@@ -282,254 +468,177 @@ function ProjectManagement() {
     const isMobile = viewPort.width <= 1024;
 
     return (
-        <Layout className="project-management-section">
-            <div>
-                <Navigation
-                    titleName={t("Project Management")}
-                    groupButton={groupButton}
-                    onCreateIntern={handleOpenModal}
-                />
-            </div>
-            <main className="main-grid">
-                <Form className="search-form" layout="inline">
+        <div id="APRCV">
+            <main className="content">
+                <div>
+                    <Navigation
+                        titleName={t("Project Management")}
+                        groupButton={groupButton}
+                        onCreateIntern={handleOpenModal}
+                    />
+                </div>
+                <section className="filter-section">
                     {!isMobile ? (
-                        <Row gutter={[16, 24]}>
-                            <Col span={20}>
-                                <Row gutter={[16, 16]}>
-                                    <Col span={8}>
-                                        <Select
-                                            showSearch
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t(
-                                                "Enter Name of Project"
-                                            )}
-                                            value={
-                                                selectedFilters.title ||
-                                                undefined
-                                            }
-                                            onChange={(value) =>
-                                                handleFilterChange(
-                                                    "title",
-                                                    value
-                                                )
-                                            }
-                                            options={projects.map(
-                                                (project) => ({
-                                                    value: project.title,
-                                                    label: project.title,
-                                                })
-                                            )}
-                                        />
-                                    </Col>
+                        <div className="filter">
+                            <div className="fields">
+                                <Select
+                                    showSearch
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Name of Project")}
+                                    value={selectedFilters.title || undefined}
+                                    onChange={(value) =>
+                                        handleFilterChange("title", value)
+                                    }
+                                    options={projects.map((project) => ({
+                                        value: project.title,
+                                        label: project.title,
+                                    }))}
+                                />
 
-                                    <Col span={8}>
-                                        <Select
-                                            showSearch
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t("Enter Position")}
-                                            value={
-                                                selectedFilters.position ||
-                                                undefined
-                                            }
-                                            onChange={(value) =>
-                                                handleFilterChange(
-                                                    "position",
-                                                    value
-                                                )
-                                            }
-                                            options={projects.map(
-                                                (project) => ({
-                                                    value: project.position,
-                                                    label: project.position,
-                                                })
-                                            )}
-                                        />
-                                    </Col>
+                                <Select
+                                    showSearch
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Position")}
+                                    value={
+                                        selectedFilters.position || undefined
+                                    }
+                                    onChange={(value) =>
+                                        handleFilterChange("position", value)
+                                    }
+                                    options={projects.map((project) => ({
+                                        value: project.position,
+                                        label: project.position,
+                                    }))}
+                                />
 
-                                    <Col span={8}>
-                                        <Select
-                                            showSearch
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t("Enter Technology")}
-                                            value={
-                                                selectedFilters.technology ||
-                                                undefined
-                                            }
-                                            onChange={(value) =>
-                                                handleFilterChange(
-                                                    "technology",
-                                                    value
-                                                )
-                                            }
-                                            options={projects.map(
-                                                (project) => ({
-                                                    value: project.technology,
-                                                    label: project.technology,
-                                                })
-                                            )}
-                                        />
-                                    </Col>
+                                <Select
+                                    showSearch
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Technology")}
+                                    value={
+                                        selectedFilters.technology || undefined
+                                    }
+                                    onChange={(value) =>
+                                        handleFilterChange("technology", value)
+                                    }
+                                    options={projects.map((project) => ({
+                                        value: project.technology,
+                                        label: project.technology,
+                                    }))}
+                                />
 
-                                    <Col span={8}>
-                                        <Select
-                                            showSearch
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t("Enter Leader")}
-                                            value={
-                                                selectedFilters.leader ||
-                                                undefined
-                                            }
-                                            onChange={(value) =>
-                                                handleFilterChange(
-                                                    "leader",
-                                                    value
-                                                )
-                                            }
-                                            options={projects.map(
-                                                (project) => ({
-                                                    value: project.leader.name,
-                                                    label: project.leader.name,
-                                                })
-                                            )}
-                                        />
-                                    </Col>
+                                <Select
+                                    showSearch
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Leader")}
+                                    value={selectedFilters.leader || undefined}
+                                    onChange={(value) =>
+                                        handleFilterChange("leader", value)
+                                    }
+                                    options={projects.map((project) => ({
+                                        value: project.leader.name,
+                                        label: project.leader.name,
+                                    }))}
+                                />
 
-                                    <Col span={8}>
-                                        <Select
-                                            showSearch
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t("Enter Sub Leader")}
-                                            value={
-                                                selectedFilters.subLeader ||
-                                                undefined
-                                            }
-                                            onChange={(value) =>
-                                                handleFilterChange(
-                                                    "subLeader",
-                                                    value
-                                                )
-                                            }
-                                            options={projects.map(
-                                                (project) => ({
-                                                    value: project.subLeader
-                                                        .name,
-                                                    label: project.subLeader
-                                                        .name,
-                                                })
-                                            )}
-                                        />
-                                    </Col>
+                                <Select
+                                    showSearch
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Sub Leader")}
+                                    value={
+                                        selectedFilters.subLeader || undefined
+                                    }
+                                    onChange={(value) =>
+                                        handleFilterChange("subLeader", value)
+                                    }
+                                    options={projects.map((project) => ({
+                                        value: project.subLeader.name,
+                                        label: project.subLeader.name,
+                                    }))}
+                                />
 
-                                    <Col span={8}>
-                                        <Select
-                                            showSearch
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t("Enter Mentor")}
-                                            value={
-                                                selectedFilters.mentor ||
-                                                undefined
-                                            }
-                                            onChange={(value) =>
-                                                handleFilterChange(
-                                                    "mentor",
-                                                    value
-                                                )
-                                            }
-                                            options={projects.map(
-                                                (project) => ({
-                                                    value: project.mentor.name,
-                                                    label: project.mentor.name,
-                                                })
-                                            )}
-                                        />
-                                    </Col>
+                                <Select
+                                    showSearch
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Mentor")}
+                                    value={selectedFilters.mentor || undefined}
+                                    onChange={(value) =>
+                                        handleFilterChange("mentor", value)
+                                    }
+                                    options={projects.map((project) => ({
+                                        value: project.mentor.name,
+                                        label: project.mentor.name,
+                                    }))}
+                                />
 
-                                    <Col span={8}>
-                                        <DatePicker
-                                            style={{
-                                                width: "100%",
-                                                height: "40px",
-                                            }}
-                                            placeholder={t(
-                                                "Enter Release Date"
-                                            )}
-                                            value={selectedFilters.releaseDate}
-                                            onChange={(date) =>
-                                                handleFilterChange(
-                                                    "releaseDate",
-                                                    date
-                                                )
-                                            }
-                                        />
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col span={4}>
-                                <Row>
-                                    <Col
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            gap: "15px",
-                                        }}
-                                    >
-                                        <Button
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                minWidth: "150px",
-                                                height: "50px",
-                                                borderRadius: "15px",
-                                            }}
-                                            type="primary"
-                                            icon={<DeleteOutlined />}
-                                            className="clean-filters-button"
-                                            onClick={handleClearFilters}
-                                        >
-                                            {t("Clean Filter")}
-                                        </Button>
+                                <DatePicker
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
+                                    placeholder={t("Enter Release Date")}
+                                    value={selectedFilters.releaseDate}
+                                    onChange={(date) =>
+                                        handleFilterChange("releaseDate", date)
+                                    }
+                                />
+                            </div>
 
-                                        <Button
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                minWidth: "150px",
-                                                height: "50px",
-                                                borderRadius: "15px",
-                                            }}
-                                            type="primary"
-                                            icon={<SearchOutlined />}
-                                            onClick={handleSearch}
-                                        >
-                                            {t("Search")}
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
+                            <div className="buttons">
+                                <Button
+                                    className="cln-btn btn"
+                                    onClick={handleClearFilters}
+                                >
+                                    {" "}
+                                    <DeleteOutlined />
+                                    {t("Clean Filter")}
+                                </Button>
+
+                                <Button
+                                    className="srch-btn btn"
+                                    onClick={handleSearch}
+                                >
+                                    <SearchOutlined />
+                                    {t("Search")}
+                                </Button>
+                            </div>
+                        </div>
                     ) : (
-                        <Row gutter={[16, 24]}>
+                        <Row>
                             <Col>
-                                <div>
+                                <Row gutter={[5, 5]}>
                                     <Select
                                         showSearch
                                         placeholder={t("Enter Name of Project")}
@@ -544,11 +653,11 @@ function ProjectManagement() {
                                             label: project.title,
                                         }))}
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
 
                                     <Select
@@ -569,11 +678,11 @@ function ProjectManagement() {
                                             label: project.position,
                                         }))}
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
 
                                     <Select
@@ -594,11 +703,11 @@ function ProjectManagement() {
                                             label: project.technology,
                                         }))}
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
 
                                     <Select
@@ -615,11 +724,11 @@ function ProjectManagement() {
                                             label: project.leader.name,
                                         }))}
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
 
                                     <Select
@@ -640,11 +749,11 @@ function ProjectManagement() {
                                             label: project.subLeader.name,
                                         }))}
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
 
                                     <Select
@@ -661,11 +770,11 @@ function ProjectManagement() {
                                             label: project.mentor.name,
                                         }))}
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
 
                                     <DatePicker
@@ -678,30 +787,27 @@ function ProjectManagement() {
                                             )
                                         }
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "40px",
-                                            marginTop: 15,
-                                            fontSize: 5,
+                                            fontSize: "15px",
                                         }}
+                                        className="custom-placeholder"
                                     />
-                                </div>
+                                </Row>
                             </Col>
-                            <Col style={{ width: "100%" }}>
-                                <div>
+                            <Row style={{ width: "100%", marginTop: "15px" }}>
+                                <Col style={{ width: "100%" }}>
                                     <Button
                                         style={{
                                             width: "100%",
                                             height: "50px",
                                             borderRadius: "15px",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            marginBottom: "15px",
+                                            marginBottom: "10px",
                                         }}
-                                        type="primary"
-                                        icon={<DeleteOutlined />}
-                                        className="clean-filters-button"
+                                        className="cln-btn btn"
                                         onClick={handleClearFilters}
                                     >
+                                        <DeleteOutlined />
                                         {t("Clean Filter")}
                                     </Button>
 
@@ -710,40 +816,36 @@ function ProjectManagement() {
                                             width: "100%",
                                             height: "50px",
                                             borderRadius: "15px",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
                                         }}
                                         type="primary"
-                                        icon={<SearchOutlined />}
                                         onClick={handleSearch}
                                     >
+                                        <SearchOutlined />
                                         {t("Search")}
                                     </Button>
-                                </div>
-                            </Col>
+                                </Col>
+                            </Row>
                         </Row>
                     )}
-                </Form>
+                    <Row gutter={[16, 16]} className="project-list">
+                        {filteredProjects.map((project, index) => (
+                            <Col key={index} style={{ minWidth: "33.33%" }}>
+                                <ProjectCard {...project} />
+                            </Col>
+                        ))}
+                    </Row>
 
-                <Row gutter={[16, 16]} className="project-list">
-                    {filteredProjects.map((project, index) => (
-                        <Col key={index} style={{ minWidth: "500px" }}>
-                            <ProjectCard {...project} />
-                        </Col>
-                    ))}
-                </Row>
-
-                <Pagination
-                    className="pagination"
-                    total={filteredProjects.length}
-                    showTotal={(total) =>
-                        `1 - ${filteredProjects.length} of ${total}`
-                    }
-                />
+                    <Pagination
+                        className="pagination"
+                        total={filteredProjects.length}
+                        showTotal={(total) =>
+                            `1 - ${filteredProjects.length} of ${total}`
+                        }
+                    />
+                </section>
             </main>
             <NewProjectModal open={openModal} onClose={handleCloseModal} />
-        </Layout>
+        </div>
     );
 }
 
