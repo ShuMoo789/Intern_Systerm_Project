@@ -214,12 +214,12 @@ const GroupList = () => {
   };
 
   const columns = [
-    {
-      title: "",
-      dataIndex: "select",
-      render: (_, record) => <Checkbox />,
-      width: "2%",
-    },
+    // {
+    //   title: "",
+    //   dataIndex: "select",
+    //   render: (_, record) => <Checkbox />,
+    //   width: "2%",
+    // },
     {
       title: t("Intern ID"),
       dataIndex: "InternId",
@@ -384,18 +384,18 @@ const GroupList = () => {
                   record.Status === "Accepted"
                     ? "#EFF9F1"
                     : record.Status === "Pending"
-                    ? "#F8E7EE"
-                    : record.Status === "Interviewed"
-                    ? "#E8F4FD"
-                    : "FFFFFF",
+                      ? "#F8E7EE"
+                      : record.Status === "Interviewed"
+                        ? "#E8F4FD"
+                        : "FFFFFF",
                 color:
                   record.Status === "Accepted"
                     ? "#449E3C"
                     : record.Status === "Pending"
-                    ? "#B70D52"
-                    : record.Status === "Interviewed"
-                    ? "#106BA3"
-                    : "#333333",
+                      ? "#B70D52"
+                      : record.Status === "Interviewed"
+                        ? "#106BA3"
+                        : "#333333",
                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                 marginLeft: "-8px",
                 width: "100%",
@@ -442,14 +442,14 @@ const GroupList = () => {
                   record.InternshipContract === "Signed"
                     ? "#EFF9F1"
                     : record.InternshipContract === "Pending"
-                    ? "#F8E7EE"
-                    : "FFFFFF",
+                      ? "#F8E7EE"
+                      : "FFFFFF",
                 color:
                   record.InternshipContract === "Signed"
                     ? "#449E3C"
                     : record.InternshipContract === "Pending"
-                    ? "#B70D52"
-                    : "#333333",
+                      ? "#B70D52"
+                      : "#333333",
                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                 marginLeft: "-8px",
                 width: "100%",
@@ -639,7 +639,10 @@ const GroupList = () => {
       handleCancel();
     }
   };
-
+  const [pageSize, setPageSize] = useState(8);
+  const handleChangePageSize = (value) => {
+    setPageSize(value);
+  };
   return (
     <>
       <div>
@@ -659,6 +662,7 @@ const GroupList = () => {
                   backgroundColor: "white",
                   borderRadius: "25px",
                   width: "100%",
+                  borderRadius: "10px"
                 }}
               >
                 <Space
@@ -790,20 +794,31 @@ const GroupList = () => {
                     {t("Search")}
                   </Button>
                 </Space>
-                <div
-                  style={{
-                    // overflowX: "auto",
-                    width: isMobile ? "100%" : "100%",
-                  }}
-                >
+                <div className="list" style={{ display: 'flex', flexDirection: 'column' }}>
                   <Table
-                    className="grouplist-table"
+                    rowSelection={{
+                      type: "checkbox",
+                    }}
                     columns={columns}
-                    style={{ margin: "0 20px", height: "51vh" }}
                     dataSource={filteredData}
-                    scroll={{ x: 3300, y: 350 }}
-                    pagination={{ pageSize: 7 }}
+                    scroll={{ x: "140vw", y: "318px" }}
+                    style={{ maxWidth: "100%", minHeight: "100%" }}
+                    pagination={{
+                      pageSize: pageSize,
+                      style: { marginRight: '100px', marginTop: "28px" }
+                    }}
                   />
+                  <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                    <Select value={pageSize} onChange={handleChangePageSize} style={{ width: 80, marginRight: '10px' }}>
+                      <Option value={8}>8</Option>
+                      <Option value={10}>10</Option>
+                      <Option value={20}>20</Option>
+                      <Option value={50}>50</Option>
+                      <Option value={100}>100</Option>
+                      {/* Thêm các tùy chọn khác tùy theo nhu cầu */}
+                    </Select>
+                    {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
+                  </div>
                 </div>
               </div>
             </Col>

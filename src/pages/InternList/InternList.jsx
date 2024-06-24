@@ -279,7 +279,7 @@ const InternList = () => {
         {
             title: t("Email"),
             dataIndex: "email",
-            width: "auto",
+            width: "6%",
             align: "center"
             // filteredValue: [filter.email],
             // onFilter: (value, record) => {
@@ -584,6 +584,12 @@ const InternList = () => {
         t("Additional Profile"),
         t("Return Profile"),
     ];
+
+    const [pageSize, setPageSize] = useState(8); // Số lượng bản ghi mỗi trang mặc định là 8
+
+    const handleChangePageSize = (value) => {
+        setPageSize(value);
+    };
 
     return (
         <div>
@@ -1041,21 +1047,32 @@ const InternList = () => {
                         </Row>
                     )}
 
-                    <div className="table-intern-list">
+                    <div className="table-intern-list" style={{ display: 'flex', flexDirection: 'column' }}>
                         {/* use table of Ant Design */}
                         <Table
                             rowSelection={{
                                 type: "checkbox",
-                                ...rowSelection,
                             }}
                             columns={columns}
                             dataSource={dataTable}
-                            scroll={{ x: "150vw", y: "384px" }}
+                            scroll={{ x: "140vw", y: "374px" }}
                             style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
-                                pageSize: 7,
+                                pageSize: pageSize,
+                                style: { marginRight: '120px', marginTop: "28px" }
                             }}
                         />
+                        <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Select value={pageSize} onChange={handleChangePageSize} style={{ width: 80, marginRight: '30px' }}>
+                                <Option value={8}>8</Option>
+                                <Option value={10}>10</Option>
+                                <Option value={20}>20</Option>
+                                <Option value={50}>50</Option>
+                                <Option value={100}>100</Option>
+                                {/* Thêm các tùy chọn khác tùy theo nhu cầu */}
+                            </Select>
+                            {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
+                        </div>
                     </div>
                 </div>
             </div>

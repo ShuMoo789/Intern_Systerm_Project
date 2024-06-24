@@ -817,6 +817,11 @@ const ConfirmCV = () => {
     ];
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 1360;
+    const [pageSize, setPageSize] = useState(8); // Số lượng bản ghi mỗi trang mặc định là 8
+
+    const handleChangePageSize = (value) => {
+        setPageSize(value);
+    };
     return (
         <div id="APRCV">
             <main className="content">
@@ -1473,8 +1478,8 @@ const ConfirmCV = () => {
                         </div>
                     )}
 
-                    <div className="list">
-                        <div className="tbl-wrapper">
+                    <div className="tbl-wrapper" style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ flex: '1 0 auto', display: 'flex', flexDirection: 'column' }}>
                             <Table
                                 rowSelection={{
                                     type: selectionType,
@@ -1483,12 +1488,29 @@ const ConfirmCV = () => {
                                 columns={columns}
                                 dataSource={filteredInterns}
                                 rowKey="internId"
-                                pagination={{ pageSize: 8 }}
+                                pagination={{
+                                    pageSize: pageSize,
+                                    style: { marginRight: '100px', marginTop: "28px" } 
+                                }}
                                 scroll={{ x: "120vw", y: "334px" }}
                                 style={{ maxWidth: "100%", minHeight: "100%" }}
                             />
                         </div>
+                        <div style={{ marginTop: '-47px', marginBottom: "22px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Select value={pageSize} onChange={handleChangePageSize} style={{ width: 80, marginRight: '10px' }}>
+                                <Option value={8}>8</Option>
+                                <Option value={10}>10</Option>
+                                <Option value={20}>20</Option>
+                                <Option value={50}>50</Option>
+                                <Option value={100}>100</Option>
+                                {/* Thêm các tùy chọn khác tùy theo nhu cầu */}
+                            </Select>
+                            {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
+                        </div>
                     </div>
+
+
+
 
                     {/* <div className="pagination">
                             <button

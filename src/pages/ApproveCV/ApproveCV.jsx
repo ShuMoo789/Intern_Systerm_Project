@@ -18,7 +18,7 @@ import {
     FolderAddOutlined,
 } from "@ant-design/icons";
 import { Input } from "antd";
-import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
+import { DatePicker, Dropdown, Button, Table, Menu, Select } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
@@ -173,20 +173,20 @@ function ApproveCV() {
                             style={
                                 intern.status === t("Pending")
                                     ? {
-                                          backgroundColor: "#FFB596",
-                                          color: "#E5731C",
-                                      }
+                                        backgroundColor: "#FFB596",
+                                        color: "#E5731C",
+                                    }
                                     : intern.status === t("Failed")
-                                    ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
-                                    : intern.status === t("Passed")
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#F5A3B7",
+                                            color: "#7D0022",
+                                        }
+                                        : intern.status === t("Passed")
+                                            ? {
+                                                backgroundColor: "#B7EACB",
+                                                color: "#3A7D34",
+                                            }
+                                            : {}
                             }
                         >
                             {intern.status}
@@ -581,14 +581,14 @@ function ApproveCV() {
                                 record.status === "Failed"
                                     ? "#F8E7EE"
                                     : record.status === "Passed"
-                                    ? "#EFF9F1"
-                                    : "#FFEFE6",
+                                        ? "#EFF9F1"
+                                        : "#FFEFE6",
                             color:
                                 record.status === "Failed"
                                     ? "#B70D52"
                                     : record.status === "Passed"
-                                    ? "#449E3C"
-                                    : "#FF5D02",
+                                        ? "#449E3C"
+                                        : "#FF5D02",
                             borderRadius: "100px",
                             fontSize: "12px",
                         }}
@@ -681,6 +681,10 @@ function ApproveCV() {
 
     const handleCloseScheduleInterView = () => {
         setSchedulePopupVisible(false);
+    };
+    const [pageSize, setPageSize] = useState(8);
+    const handleChangePageSize = (value) => {
+        setPageSize(value);
     };
     return (
         <div id="APRCV">
@@ -1088,21 +1092,33 @@ function ApproveCV() {
                             </Row>
                         </div>
                     )}
-                    <div className="list">
+                    <div className="list" style={{ display: 'flex', flexDirection: 'column' }}>
                         <Table
                             rowSelection={{
                                 type: "checkbox",
-                                ...rowSelection,
                             }}
                             columns={columns}
                             dataSource={filteredInterns}
                             scroll={{ x: "140vw", y: "384px" }}
                             style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
-                                pageSize: 8,
+                                pageSize: pageSize,
+                                style: { marginRight: '100px', marginTop: "28px" } 
                             }}
                         />
+                        <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Select value={pageSize} onChange={handleChangePageSize} style={{ width: 80, marginRight: '10px' }}>
+                                <Option value={8}>8</Option>
+                                <Option value={10}>10</Option>
+                                <Option value={20}>20</Option>
+                                <Option value={50}>50</Option>
+                                <Option value={100}>100</Option>
+                                {/* Thêm các tùy chọn khác tùy theo nhu cầu */}
+                            </Select>
+                            {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
+                        </div>
                     </div>
+
                 </section>
             </main>
             <CommentPopup
