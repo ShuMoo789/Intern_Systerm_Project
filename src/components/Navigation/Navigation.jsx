@@ -57,6 +57,7 @@ const Navigation = (props) => {
         <div className="navigation">
           <div className="search-navigation">
             <Input
+              style={{ height: "32px" }}
               className="search-navigation-input"
               placeholder={isMobile ? t("Search") : t("Search for Information")}
               variant="filled"

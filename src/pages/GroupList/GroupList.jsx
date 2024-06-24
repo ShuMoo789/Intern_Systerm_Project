@@ -59,7 +59,7 @@ const GroupList = () => {
 
   const inputStyle = {
     width: isMobile ? "100%" : "300px",
-    height: 40,
+    height: 32,
     fontSize: "16px",
   };
 
@@ -367,18 +367,18 @@ const GroupList = () => {
                   record.Status === "Accepted"
                     ? "#EFF9F1"
                     : record.Status === "Pending"
-                    ? "#F8E7EE"
-                    : record.Status === "Interviewed"
-                    ? "#E8F4FD"
-                    : "FFFFFF",
+                      ? "#F8E7EE"
+                      : record.Status === "Interviewed"
+                        ? "#E8F4FD"
+                        : "FFFFFF",
                 color:
                   record.Status === "Accepted"
                     ? "#449E3C"
                     : record.Status === "Pending"
-                    ? "#B70D52"
-                    : record.Status === "Interviewed"
-                    ? "#106BA3"
-                    : "#333333",
+                      ? "#B70D52"
+                      : record.Status === "Interviewed"
+                        ? "#106BA3"
+                        : "#333333",
                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                 marginLeft: "-8px",
                 width: "100%",
@@ -424,14 +424,14 @@ const GroupList = () => {
                   record.InternshipContract === "Signed"
                     ? "#EFF9F1"
                     : record.InternshipContract === "Pending"
-                    ? "#F8E7EE"
-                    : "FFFFFF",
+                      ? "#F8E7EE"
+                      : "FFFFFF",
                 color:
                   record.InternshipContract === "Signed"
                     ? "#449E3C"
                     : record.InternshipContract === "Pending"
-                    ? "#B70D52"
-                    : "#333333",
+                      ? "#B70D52"
+                      : "#333333",
                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                 marginLeft: "-8px",
                 width: "100%",
@@ -452,16 +452,6 @@ const GroupList = () => {
       render: (_, record) => (
         <Space>
           <ViewPopup></ViewPopup>
-          <Button
-            className="upload-file-button"
-            shape="round"
-            style={{
-              color: "#3498db",
-              borderColor: "#3498db",
-            }}
-          >
-            {t("Upload File")}
-          </Button>
         </Space>
       ),
     },

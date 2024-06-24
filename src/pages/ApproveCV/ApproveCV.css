@@ -39,13 +39,13 @@ body {
     cursor: pointer;
 }
 
-#APRCV .content > .content-header > .user-info > .account-setting {
+#APRCV .content>.content-header>.user-info>.account-setting {
     display: flex;
     justify-content: center;
     transition: 0.3s ease;
 }
 
-#APRCV .content > .content-header > .user-info > .account-setting:hover {
+#APRCV .content>.content-header>.user-info>.account-setting:hover {
     rotate: 90deg;
 }
 
@@ -82,7 +82,7 @@ body {
     margin-bottom: 20px;
 }
 
-.ant-table-container{
+.ant-table-container {
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -92,7 +92,7 @@ body {
     color: #92929D;
 }
 
-#APRCV .content > .filter-section {
+#APRCV .content>.filter-section {
     background-color: #ffffff;
     padding: 20px 20px 0px 20px;
     margin: 20px;
@@ -106,7 +106,8 @@ body {
     gap: 1.2em;
     flex-wrap: wrap;
 }
-.filter-search{
+
+.filter-search {
     display: inline;
 }
 
@@ -172,7 +173,7 @@ body {
     background-color: #2980b9;
 }
 
-#APRCV > .content > .filter-section > .list {
+#APRCV>.content>.filter-section>.list {
     font-family: Quicksand, sans-serif;
     width: 100%;
     margin-bottom: 20px;
@@ -184,7 +185,8 @@ table {
     color: black;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #fff;
     padding: 8px;
     text-align: left;
@@ -199,12 +201,12 @@ div.approve-btns {
     display: flex;
 }
 
-div.approve-btns > div.view,
+div.approve-btns>div.view,
 div.approve-btns {
     display: flex;
 }
 
-div.approve-btns > div.view{
+div.approve-btns>div.view {
     margin-right: 5px;
     padding: 5px 10px;
     color: #b22222;
@@ -213,7 +215,8 @@ div.approve-btns > div.view{
     border-radius: 20px;
     cursor: pointer;
 }
-div.approve-btns > div.feedbacks {
+
+div.approve-btns>div.feedbacks {
     margin-right: 9px;
     padding: 10px 10px 0px 10px;
     color: #4889E9;
@@ -224,18 +227,19 @@ div.approve-btns > div.feedbacks {
 }
 
 
-div.approve-btns > div.view:hover{
+div.approve-btns>div.view:hover {
     color: #ffffff;
     background-color: #b22222;
     border: 1px solid #b22222;
 }
-div.approve-btns > div.feedbacks:hover{
+
+div.approve-btns>div.feedbacks:hover {
     color: #ffffff;
     background-color: #4889E9;
     border: 1px solid #4889E9;
 }
 
-#APRCV .content > .filter-section > .filter {
+#APRCV .content>.filter-section>.filter {
     display: flex;
     gap: 10px;
     margin-bottom: 1em;
@@ -243,7 +247,7 @@ div.approve-btns > div.feedbacks:hover{
 }
 
 
-#APRCV .content > .filter-section > .filter > .fields {
+#APRCV .content>.filter-section>.filter>.fields {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
@@ -251,18 +255,20 @@ div.approve-btns > div.feedbacks:hover{
 }
 
 
-#APRCV .content > .filter-section > .filter > .fields > input {
+#APRCV .content>.filter-section>.filter>.fields>input {
     width: 20em;
     background-color: #fff;
 }
 
 
-#APRCV .content > .filter-section > .filter > .buttons {
+#APRCV .content>.filter-section>.filter>.buttons {
     gap: 5px;
+    margin-left: 10px;
+
 }
 
 
-#APRCV .content > .filter-section > .filter > .buttons > .btn {
+#APRCV .content>.filter-section>.filter>.buttons>.btn {
     padding: 15px 20px;
     text-align: center;
     border-radius: 15px;
@@ -270,23 +276,23 @@ div.approve-btns > div.feedbacks:hover{
 }
 
 
-#APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
+#APRCV .content>.filter-section>.filter>.buttons>.cln-btn {
     color: #000;
     border: 1px solid #CBD2DC;
     height: auto;
     width: 150px;
-    margin: 9px 0px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
 
-#APRCV .content > .filter-section > .filter > .buttons > .cln-btn:hover {
+#APRCV .content>.filter-section>.filter>.buttons>.cln-btn:hover {
     color: #fff;
     background-color: #6d6d6d;
 }
 
 
-#APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
+#APRCV .content>.filter-section>.filter>.buttons>.srch-btn {
     color: #fff;
     background-color: #4889E9;
     width: 150px;
@@ -295,9 +301,40 @@ div.approve-btns > div.feedbacks:hover{
 }
 
 
-#APRCV .content > .filter-section > .filter > .buttons > .srch-btn:hover {
+#APRCV .content>.filter-section>.filter>.buttons>.srch-btn:hover {
     border: 1px solid #4889E9;
     color: #4889E9;
     background-color: #fff;
     cursor: pointer;
 }
+
+
+
+/* .input-field.ant-input,
+.input-field.ant-picker,
+.input-field.ant-btn {
+    width: 300px !important;
+    height: 32px !important;
+    padding: 0 11px !important;
+}
+
+@media (max-width: 1160px) {
+
+    .input-field.ant-input,
+    .input-field.ant-picker,
+    .input-field.ant-btn {
+        width: 100% !important;
+    }
+}
+
+.ant-picker-input>input {
+    height: 32px !important;
+}
+
+.ant-select-selector {
+    height: 32px !important;
+}
+
+.ant-select-selection-item {
+    line-height: 32px !important;
+} */
