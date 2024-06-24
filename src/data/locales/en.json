@@ -344,6 +344,12 @@
         "Send successfully!": "Send successfully!",
         "In Process": "In Process",
         "Done": "Done",
+        "Account": "Account",
+        "Setting": "Setting",
+        "Profile": "Profile",
+        "Logout": "Logout",
+        "English": "English",
+        "Vietnamese": "Vietnamese"
         "Sub Leader": "Sub Leader",
         "Star Date": "Star Date",
         "Details": "Details",

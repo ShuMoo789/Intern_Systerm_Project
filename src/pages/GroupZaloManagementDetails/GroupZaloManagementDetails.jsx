@@ -134,7 +134,7 @@ const GroupZaloManagementDetails = () => {
             overflowY: "auto",
           }}
         >
-          <div style={{ flex: "1 1 auto" }}>
+          <div style={{ }}>
             <Flex
               justify="space-between"
               style={{
@@ -156,12 +156,7 @@ const GroupZaloManagementDetails = () => {
                   50 {t("members")}
                 </Title>
               </div>
-              <div style={{ flex: "0 0 auto" }}>
-                <SearchOutlined />
-                <a href="" style={{ marginRight: "20px" }}>
-                  {t("View in Zalo")}
-                </a>
-              </div>
+              
             </Flex>
 
             <SenderContainer

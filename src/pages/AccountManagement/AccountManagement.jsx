@@ -1,88 +1,158 @@
-import React from "react";
-import { SearchOutlined } from "@ant-design/icons";
+import React, { useState, useEffect, useRef } from "react";
 import "./AccountManagement.css";
-import RectangleContent from "../../components/RectangleContent/RectangleContent";
-import MainLayout from "../../MainLayout/MainLayout";
 import userImage from "../../assets/user_image.png";
+import coverImage from "../../assets/Cover-image.png";
+import { Row, Button, Tooltip } from "antd";
+import {
+  EditOutlined,
 
-// Data array containing information to be displayed in the RectangleContent components
-const data = [
-  {
-    title: "Privacy & personalisation",
-    content: [
-      "See the data in your Intern System Account and choose what activity is saved, to personalise your experience",
+} from '@ant-design/icons';
+
+// Dữ liệu mô phỏng từ backend
+const database = {
+  user: {
+    name: "Natalie Brogan",
+    nickname: "🖥️Aleam🖥️  ",
+    email: "email@example.com",
+    phone: "0123456789",
+    address: "123 Đường ABC, Thành phố XYZ",
+    experience: [
+      "Công ty ABC - Kỹ sư phần mềm (2018-2021)",
+      "Công ty XYZ - Chuyên gia phân tích dữ liệu (2021-nay)"
     ],
-    instruction: "Privacy & personalisation",
-  },
-  {
-    title: "Security Recommendations",
-    content: ["Recommended actions found in the Security Check-Up"],
-    instruction: "Protect your account",
-  },
-  {
-    title: "Privacy Check-Up",
-    content: [
-      "Choose the privacy settings that are right for you with this step-by-step guide",
+    skills: [
+      "Lập trình JavaScript, Python",
+      "Phân tích dữ liệu, Machine Learning",
+      "Quản lý dự án Agile"
     ],
-    instruction: "Take Privacy Check-Up",
-  },
-  {
-    title: "What are you looking for? ",
-    content: [
-      <div>
-        {" "}
-        <SearchOutlined /> Search Intern System Account
-      </div>,
-      "See Help Options",
-      "Send Feedback",
-    ],
-    instruction: "",
-  },
-];
+    projects: [
+      "Hệ thống quản lý khách hàng CRM",
+      "Ứng dụng di động quản lý công việc",
+      "Dự án phân tích dữ liệu tài chính"
+    ]
+  }
+};
 
 // AccountManagement functional component
 const AccountManagement = () => {
+  const [gradientColor, setGradientColor] = useState("rgba(255, 255, 255, 0.2)");
+  const coverImageRef = useRef(null);
+
+  useEffect(() => {
+    const img = coverImageRef.current;
+    if (img.complete) {
+      getColorFromImage();
+    } else {
+      img.addEventListener("load", getColorFromImage);
+      return () => img.removeEventListener("load", getColorFromImage);
+    }
+  }, []);
+
+  const getColorFromImage = () => {
+    const img = coverImageRef.current;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+
+    const imageData = ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight);
+    const data = imageData.data;
+
+    let r = 0, g = 0, b = 0;
+    const length = data.length / 4;
+
+    for (let i = 0; i < length; i++) {
+      r += data[i * 4];
+      g += data[i * 4 + 1];
+      b += data[i * 4 + 2];
+    }
+
+    r = Math.floor(r / length);
+    g = Math.floor(g / length);
+    b = Math.floor(b / length);
+
+    setGradientColor(`rgba(${r}, ${g}, ${b}, 0.5)`);
+  };
+
+  const { user } = database;
+
   return (
     <>
-      <div className="content-account-management">
-        <div className="user-detail">
-          {/* User image */}
-          <img src={userImage} alt="user image" className="ava-image" />
-          {/* Welcome message */}
-          <div className="welcome">Hello Natalie Brogan!</div>
-          {/* User email */}
-          <div className="user-gmail">nataliebrogan@gmail.com</div>
+      <Row className="header">
+
+        <div
+          className="cover-container"
+          style={{
+            background: `linear-gradient(to bottom, ${gradientColor}, rgba(0, 0, 0, 0.8))`
+          }}
+        >
+          <div className="cover-container2">
+            <img
+              src={coverImage}
+              alt="cover image"
+              className="coverImage"
+              ref={coverImageRef}
+            />
+          </div>
         </div>
-        {/* First group of RectangleContent components */}
-        <div className="rectangle-content-group">
-          <RectangleContent
-            title={data[0].title}
-            content={data[0].content}
-            instruction={data[0].instruction}
-          />
-          <RectangleContent
-            title={data[1].title}
-            content={data[1].content}
-            instruction={data[1].instruction}
-          />
+        <Row className="avatar-info-container">
+          <div className="avatar-container">
+            <img src={userImage} alt="user image" className="avatarImage" />
+          </div>
+          <div className="info">
+            <div className="user-name2">{user.name}</div>
+            <div className="user-nickname">({user.nickname})</div>
+          </div>
+          <Button  className="btnEditPro" icon={<EditOutlined />}  > Edit</Button>
+
+          
+        </Row>
+      </Row>
+      {/* <Row className="avatar-info-container">
+        <div className="avatar-container">
+          <img src={userImage} alt="user image" className="avatarImage" />
         </div>
-        {/* Second group of RectangleContent components */}
-        <div className="rectangle-content-group">
-          <RectangleContent
-            title={data[2].title}
-            content={data[2].content}
-            instruction={data[2].instruction}
-          />
+        <div className="info">
+          <div className="user-name2">{user.name}</div>
+          <div className="user-nickname">{user.nickname}</div>
         </div>
-        {/* Third group of RectangleContent components */}
-        <div className="rectangle-content-group">
-          <RectangleContent
-            title={data[3].title}
-            content={data[3].content}
-            instruction={data[3].instruction}
-          />
+      </Row> */}
+      <Row className="profile-sections">
+        <div id="section1" className="section no-select">
+          <div className="section-content">
+            <h2>Kinh Nghiệm</h2>
+            {user.experience.map((exp, index) => (
+              <p key={index}>• {exp}</p>
+            ))}
+          </div>
         </div>
-      </div>
+        <div id="section2" className="section no-select">
+          <div className="section-content">
+            <h2>Chuyên Môn</h2>
+            {user.skills.map((skill, index) => (
+              <p key={index}>• {skill}</p>
+            ))}
+          </div>
+        </div>
+        <div id="section3" className="section no-select">
+          <div className="section-content">
+            <h2>Project Từng Làm</h2>
+            {user.projects.map((project, index) => (
+              <p key={index}>• {project}</p>
+            ))}
+          </div>
+        </div>
+        <div id="section4" className="section no-select">
+          <div className="section-content">
+            <h2>Thông Tin Liên Hệ</h2>
+            <p>• Email: {user.email}</p>
+            <p>• Số điện thoại: {user.phone}</p>
+            <p>• Địa chỉ: {user.address}</p>
+            
+          </div>
+        </div>
+      </Row>
     </>
   );
 };
