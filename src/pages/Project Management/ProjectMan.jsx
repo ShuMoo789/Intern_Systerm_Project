@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+
     Layout,
     Avatar,
     Button,
@@ -40,33 +41,34 @@ import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 const { Header, Content } = Layout;
 
 function UserInfo({ name, role, avatarSrc }) {
-    return (
-        <div className="user-info">
-            <div className="avatar-section">
-                <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
-                <div className="user-details">
-                    <p className="username">{name}</p>
-                    <p className="role">{role}</p>
-                </div>
-            </div>
-            <BellOutlined className="notification-icon" />
+  return (
+    <div className="user-info">
+      <div className="avatar-section">
+        <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+        <div className="user-details">
+          <p className="username">{name}</p>
+          <p className="role">{role}</p>
         </div>
-    );
+      </div>
+      <BellOutlined className="notification-icon" />
+    </div>
+  );
 }
 
 function ProjectCard({
-    title,
-    status,
-    position,
-    technology,
-    leader,
-    subLeader,
-    mentor,
-    startDate,
-    releaseDate,
-    issues,
-    teamMembers,
+  title,
+  status,
+  position,
+  technology,
+  leader,
+  subLeader,
+  mentor,
+  startDate,
+  releaseDate,
+  issues,
+  teamMembers,
 }) {
+
     const { t } = useTranslation();
     const optionSelect = [
         { value: "inProcessed", label: t("In process") },
@@ -346,20 +348,89 @@ function ProjectCard({
 }
 
 function ProjectManagement() {
-    const { t } = useTranslation();
-    const [openModal, setOpenModal] = useState(false);
-    const [projects, setProjects] = useState([]);
-    const [filteredProjects, setFilteredProjects] = useState([]);
-    const [selectedFilters, setSelectedFilters] = useState({
-        title: "",
-        status: "",
-        position: "",
-        technology: "",
-        leader: "",
-        subLeader: "",
-        mentor: "",
-        releaseDate: null,
+  const { t } = useTranslation();
+  const [openModal, setOpenModal] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState({
+    title: "",
+    status: "",
+    position: "",
+    technology: "",
+    leader: "",
+    subLeader: "",
+    mentor: "",
+    releaseDate: null,
+  });
+
+  useEffect(() => {
+    setProjects(projectData.projects);
+    setFilteredProjects(projectData.projects);
+  }, []);
+
+  const handleSearch = () => {
+    console.log("Selected Filters:", selectedFilters);
+
+    let results = projects;
+
+    if (selectedFilters.title) {
+      results = results.filter((project) =>
+        project.title.includes(selectedFilters.title)
+      );
+    }
+    if (selectedFilters.status) {
+      results = results.filter(
+        (project) => project.status === selectedFilters.status
+      );
+    }
+    if (selectedFilters.position) {
+      results = results.filter((project) =>
+        project.position.includes(selectedFilters.position)
+      );
+    }
+    if (selectedFilters.technology) {
+      results = results.filter((project) =>
+        project.technology.includes(selectedFilters.technology)
+      );
+    }
+    if (selectedFilters.leader) {
+      results = results.filter((project) =>
+        project.leader.name.includes(selectedFilters.leader)
+      );
+    }
+    if (selectedFilters.subLeader) {
+      results = results.filter((project) =>
+        project.subLeader.name.includes(selectedFilters.subLeader)
+      );
+    }
+    if (selectedFilters.mentor) {
+      results = results.filter((project) =>
+        project.mentor.name.includes(selectedFilters.mentor)
+      );
+    }
+    if (selectedFilters.releaseDate) {
+      results = results.filter((project) =>
+        dayjs(project.releaseDate).isSame(selectedFilters.releaseDate, "day")
+      );
+    }
+
+    console.log("Filtered Results:", results);
+    setFilteredProjects(results);
+  };
+
+  const handleClearFilters = () => {
+    setFilteredProjects(projects);
+    setSelectedFilters({
+      title: "",
+      status: "",
+      position: "",
+      technology: "",
+      leader: "",
+      subLeader: "",
+      mentor: "",
+      releaseDate: null,
     });
+
 
     useEffect(() => {
         setProjects(projectData.projects);
@@ -885,5 +956,7 @@ function ProjectManagement() {
 }
 
 export default function MyComponent() {
-    return <ProjectManagement />;
+  return (
+      <ProjectManagement />
+  );
 }

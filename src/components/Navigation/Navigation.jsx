@@ -33,6 +33,8 @@ function UserInfo({ name, role, avatarSrc }) {
 
 const Navigation = (props) => {
   const { t } = useTranslation();
+  
+  
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
 

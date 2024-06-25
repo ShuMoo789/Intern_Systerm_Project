@@ -29,7 +29,7 @@ import {
 import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
-import "./GroupList.css";
+import "./GroupList.css"
 import ViewPopup from "./ViewPopup";
 import EditPopup from "../../components/EditPopup/EditPopup.jsx"
 import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
@@ -520,6 +520,7 @@ const GroupList = () => {
     const onChangeProject = (value) => {
         setProject(value);
     };
+
 
     const filterOption = (input, option) =>
         (option?.label ?? "").toLowerCase().includes(input.toLowerCase());

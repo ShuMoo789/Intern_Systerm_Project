@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 const { TextArea } = Input;
 const { Option } = Select;
 
-
 // CommentPopup component
 const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
   const [form] = Form.useForm();
@@ -185,7 +184,6 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
               }
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "Blue" }}
             >
               Link
             </a>
@@ -204,13 +202,14 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
         </div>
       )}
       {state.selectedOption === 1 && (
-        <Form form={form} className="comment-section">
+        <div className="comment-section">
           {/* Section for comments of intern */}
           <div className="comment-popup-content">
             <div className="comment-popup-row">
               <label>
                 <h4>{t("Major")}</h4>
               </label>
+
               <Form.Item
                 name="major"
                 rules={[
@@ -270,6 +269,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   }
                 />
               </Form.Item>
+
             </div>
             <div className="comment-popup-row">
               <label>
@@ -327,11 +327,13 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
             </div>
           </div>
           <div className="comment-popup-footer">
+            {/* Footer buttons to cancel or save comments */}
+            <Button onClick={onClose}>{t("Cancel")}</Button>
             <Button type="primary" onClick={handleSave}>
               {t("Save Comments")}
             </Button>
           </div>
-        </Form>
+        </div>
       )}
       {state.selectedOption === 2 && (
         <Form form={form} className="result-popup-section">
