@@ -80,3 +80,8 @@
     margin-top: 20px;
     width: 100%;
 }
+
+.card-custom > .card-img-top:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
