@@ -36,7 +36,7 @@ const Navigation = (props) => {
   {
     /*Project-Management*/
   }
-  const {t} = useTranslation()
+  
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
 

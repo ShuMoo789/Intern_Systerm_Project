@@ -22,7 +22,7 @@ import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
-import { Typography, Row, Col } from "antd";
+import { Typography } from "antd";
 import useViewport from "../../hooks/useViewport.jsx";
 import Navigation from "../../components/Navigation/Navigation.jsx";
 import { Toaster } from "react-hot-toast";

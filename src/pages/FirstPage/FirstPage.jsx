@@ -45,7 +45,6 @@ const First_Page = ({ Accounts }) => {
   return (
     <>
       <div className="header">
-      <Header/>
       </div>   
       <Row className="container-background">
         <Col span={9}></Col>

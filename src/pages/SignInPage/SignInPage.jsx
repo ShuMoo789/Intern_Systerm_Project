@@ -2,7 +2,7 @@ import { Col, Row, Tabs } from "antd";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import SignInForm from "../../components/SignInForm/LoginForm";
-
+import "./SignInPage.css";
 import { useTranslation } from "react-i18next";
 
 const { TabPane } = Tabs;
@@ -35,9 +35,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: "white", minHeight: "100vh", padding: "0 65px" }}>
-        <Header />
-        <Row style={{ margin: "50px 30px 20px 30px" }}>
+      <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
+        <Row style={{ margin: "0px 30px 20px 30px" }}>
           <Col xs={24} md={1}></Col>
           <Col xs={24} md={8}>
             <div>
@@ -97,8 +96,8 @@ const LoginPage = () => {
             style={isMobile ? hiddenImageStyle : responsiveImageStyle}
           >
             <img
+              className="image-signin"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/769194cc6b501f03568e57e28b6c0656e834e905ae2d3de0cdbbcf291c9e53b3?apiKey=41832340d6f545c2a0509736ad9e1693&"
-              style={{ height: "100%", width: "100%" }}
               alt="Login illustration"
             />
           </Col>
