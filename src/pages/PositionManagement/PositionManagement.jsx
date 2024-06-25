@@ -30,6 +30,8 @@ import "../PositionManagement/PositionManagement.css";
 import useViewport from "../../hooks/useViewport";
 import GroupButton from "../../components/GroupButton/GroupButton";
 import { useTranslation } from "react-i18next";
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 
 function getRankClass(text) {
   switch (text) {
@@ -302,20 +304,38 @@ const PositionManagement = () => {
     },
   ];
 
-    function UserInfo({ name, role, avatarSrc }) {
-        return (
-            <div className="user-info">
-                <div className="avatar-section">
-                    <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
-                    <div className="user-details">
-                        <p className="username">{name}</p>
-                        <p className="role">{role}</p>
-                    </div>
-                </div>
-                <SettingOutlined className="setting-icon" />
-            </div>
-        );
-    }
+  const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+  const handleOpenDelete = () => {
+      setDeletePopupVisible(true);
+  };
+
+  const handleCloseDeletePopup = () => {
+      setDeletePopupVisible(false);
+  };
+
+  const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+  const handleOpenExportExcel = () => {
+      setExportExcelVisible(true);
+  };
+
+  const handleCloseExportExcel = () => {
+      setExportExcelVisible(false);
+  };
+
+  function UserInfo({ name, role, avatarSrc }) {
+    return (
+      <div className="user-info">
+        <div className="avatar-section">
+          <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+          <div className="user-details">
+            <p className="username">{name}</p>
+            <p className="role">{role}</p>
+          </div>
+        </div>
+        <SettingOutlined className="setting-icon" />
+      </div>
+    );
+  }
 
     return (
         <div id="APRCV">
@@ -333,11 +353,25 @@ const PositionManagement = () => {
                     )}
                 </header>
 
-                <div className="button-group-position">
-                    <div className="row-btn-grp-pos">
-                        <GroupButton groupButton={groupButton} />
-                    </div>
-                </div>
+        <div className="button-group-position">
+          <div className="row-btn-grp-pos">
+            <GroupButton 
+              groupButton={groupButton} 
+              onDelete={handleOpenDelete}
+              onExportExcel={handleOpenExportExcel}
+            />
+            {/*Render Delete Popup */}               
+            <DeletePopup
+              onClose={handleCloseDeletePopup}
+              openPopup={isDeletePopupVisible}
+            />
+            {/*Render ExportExcel Popup */}
+            <ExportExcel
+              onClose={handleCloseExportExcel}
+              openPopup={isExportExcelVisible}
+            />
+          </div>
+        </div>
 
                 <section>
                     <div className="bodyposition">

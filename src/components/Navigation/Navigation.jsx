@@ -3,10 +3,11 @@ import "./Navigation.css";
 import GroupButton from "../GroupButton/GroupButton";
 import useViewport from "../../hooks/useViewport";
 import { Input, Avatar } from "antd";
-import { UserOutlined, BellOutlined, SettingOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import userImage from "../../assets/user_image.png";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import DropdownMenu from "../DropdownMenu/DropdownMenu";
 
 function UserInfo({ name, role, avatarSrc }) {
   return (
@@ -25,17 +26,14 @@ function UserInfo({ name, role, avatarSrc }) {
           <p className="role">{role}</p>
         </div>
       </div>
-
-      <SettingOutlined className="setting-icon" />
+      <DropdownMenu />
     </div>
   );
 }
 
 const Navigation = (props) => {
   const { t } = useTranslation();
-  {
-    /*Project-Management*/
-  }
+  
   
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
@@ -46,7 +44,7 @@ const Navigation = (props) => {
         <header className="header-section">
           <h1 className="header-title">{props.titleName}</h1>
           {isMobile ? (
-            <SettingOutlined className="setting-icon" />
+            <DropdownMenu />
           ) : (
             <UserInfo
               name="Natalie Brogan"
@@ -58,6 +56,7 @@ const Navigation = (props) => {
         <div className="navigation">
           <div className="search-navigation">
             <Input
+              style={{ height: "32px" }}
               className="search-navigation-input"
               placeholder={isMobile ? t("Search") : t("Search for Information")}
               variant="filled"
@@ -70,6 +69,9 @@ const Navigation = (props) => {
               onSendEmail={props.onSendEmail}
               onCreateIntern={props.onCreateIntern}
               onScheduleInterview={props.onScheduleInterview}
+              onEdit={props.onEdit}
+              onDelete={props.onDelete}
+              onExportExcel={props.onExportExcel}
             />
           </div>
         </div>
@@ -77,4 +79,5 @@ const Navigation = (props) => {
     </>
   );
 };
+
 export default Navigation;

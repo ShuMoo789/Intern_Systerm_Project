@@ -17,6 +17,8 @@ import {Avatar} from "antd";
 import useViewport from "../../hooks/useViewport";
 import User_Img from "../../assets/user_image.png";
 import { useTranslation } from "react-i18next";
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 
 const TechnologyManagement = () => {
   const viewPort = useViewport();
@@ -69,6 +71,24 @@ const groupButton = [
     );
 }
 
+  const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+  const handleOpenDelete = () => {
+      setDeletePopupVisible(true);
+  };
+
+  const handleCloseDeletePopup = () => {
+      setDeletePopupVisible(false);
+  };
+
+  const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+  const handleOpenExportExcel = () => {
+      setExportExcelVisible(true);
+  };
+
+  const handleCloseExportExcel = () => {
+      setExportExcelVisible(false);
+  };
+
   return (
       <div className="content-technology-management">
         <div className="content-navigation-technology-management">
@@ -96,7 +116,21 @@ const groupButton = [
 
         <div className="sub-content-technology-management">
           <div className="group-button-technology-management">
-            <GroupButton groupButton={groupButton} />
+            <GroupButton 
+              groupButton={groupButton} 
+              onDelete={handleOpenDelete}
+              onExportExcel={handleOpenExportExcel}
+            />
+            {/*Render Delete Popup */}
+            <DeletePopup
+                onClose={handleCloseDeletePopup}
+                openPopup={isDeletePopupVisible}
+            />
+            {/*Render ExportExcel Popup */}
+            <ExportExcel
+                onClose={handleCloseExportExcel}
+                openPopup={isExportExcelVisible}
+            />
           </div>
 
           <div className="technology-list-container">

@@ -155,11 +155,13 @@
     height: 100vh;
 }
 
-/* .project-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-} */
+
+.project-list {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
 .project-card {
     background: #fff;
@@ -275,4 +277,12 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
 }

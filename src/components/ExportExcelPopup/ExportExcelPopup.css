@@ -1,0 +1,29 @@
+.warning-modal-export{
+    text-align: center;
+    padding: 20px;
+}
+
+.icon-warning-export{
+    color: #ff9966;
+    font-size: 50px;
+}
+
+.warning-export{
+    font-size: 30px;
+    font-family: Quicksand;
+    font-weight: bold;
+}
+
+.export-btn{
+    background-color: rgb(65, 177, 55);
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    height: 40px;
+    width: 140px;
+}
+
+.cancel-export{
+    font-size: 15px;
+    height: 40px;
+    width: 100px;
+}
