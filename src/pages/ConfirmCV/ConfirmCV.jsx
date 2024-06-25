@@ -972,7 +972,6 @@ const ConfirmCV = () => {
                                         height: "32px",
                                         width: "100%",
                                         fontSize: "15px",
-                                        height: "32px",
                                     }}
                                     onChange={(date) =>
                                         handleDateChange("dateOfBirth", date)
