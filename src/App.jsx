@@ -23,15 +23,15 @@ import GroupZaloManagement from "./pages/GroupZaloManagement/GroupZaloManagement
 import MainLayout from "./MainLayout/MainLayout.jsx";
 
 function App() {
-  /*const location = useLocation();
+  const location = useLocation();
 
-    // useEffect hook to change the URL to '/' after every route change
+  // useEffect hook to change the URL to '/' after every route change
   useEffect(() => {
     // Replace the current URL with '/'
     if (location.pathname !== "/") {
       window.history.replaceState(null, null, "/");
     }
-  }, [location]);*/
+  }, [location]);
   return (
     <>
       <Routes>

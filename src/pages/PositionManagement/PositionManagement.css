@@ -177,3 +177,124 @@
     color: #db0d4b;
     margin-right: 30px;
 }
+
+.rank-intern .ant-dropdown-link {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+.rank-fresher .ant-dropdown-link {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.rank-junior .ant-dropdown-link {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.rank-middle .ant-dropdown-link {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+/* Thêm các kiểu CSS cho dropdown nếu cần */
+.dropdown-menu .ant-dropdown-link {
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+/* styles.css */
+.rank-intern .ant-dropdown-link {
+    background-color: #e0f7fa;
+    color: #00796b;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  
+  .rank-fresher .ant-dropdown-link {
+    background-color: #fff3e0;
+    color: #f57c00;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  
+  .rank-junior .ant-dropdown-link {
+    background-color: #e8f5e9;
+    color: #388e3c;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  
+  .rank-middle .ant-dropdown-link {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  
+  .dropdown-menu .ant-dropdown-link {
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .intern-rank {
+    background-color:rgb(248, 231, 238);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(183, 13, 82);
+  }
+  .fresher-rank {
+    background-color:rgb(193, 243, 192);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(13, 183, 41);
+  }
+  
+  .junior-rank {
+    background-color:rgb(255, 243, 132);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(245, 147, 0);
+  }
+  
+  .middle-rank {
+    background-color:rgb(52, 248, 248);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(33, 13, 183);
+  }
+.intern-rank {
+    background-color:rgb(248, 231, 238);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(183, 13, 82);
+  }
+  .fresher-rank {
+    background-color:rgb(193, 243, 192);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(13, 183, 41);
+  }
+  
+  .junior-rank {
+    background-color:rgb(255, 243, 132);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(245, 147, 0);
+  }
+  
+  .middle-rank {
+    background-color:rgb(52, 248, 248);
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 20px; 
+    color: rgb(33, 13, 183);
+  }

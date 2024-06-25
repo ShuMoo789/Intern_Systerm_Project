@@ -32,6 +32,7 @@ function UserInfo({ name, role, avatarSrc }) {
 }
 
 const Navigation = (props) => {
+  const { t } = useTranslation();
   {
     /*Project-Management*/
   }

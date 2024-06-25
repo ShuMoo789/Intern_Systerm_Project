@@ -31,8 +31,21 @@ import useViewport from "../../hooks/useViewport";
 import GroupButton from "../../components/GroupButton/GroupButton";
 import { useTranslation } from "react-i18next";
 
+function getRankClass(text) {
+  switch (text) {
+    case "Intern":
+      return "intern-rank";
+    case "Fresher":
+      return "fresher-rank";
+    case "Junior":
+      return "junior-rank";
+    case "Middle":
+      return "middle-rank";
+    default:
+      return "default-rank";
+  }
+}
 const { Meta } = Card;
-
 const positionGroup = [
     {
         title: "Back-End",
@@ -224,73 +237,70 @@ const PositionManagement = () => {
         setSelectedInterns(updatedInterns);
     };
 
-    const columns = [
-        {
-            title: t("Intern ID"),
-            dataIndex: "internID",
-            key: "internID",
-        },
-        {
-            title: t("Full Name"),
-            dataIndex: "fullName",
-            key: "fullName",
-        },
-        {
-            title: t("Phone Number"),
-            dataIndex: "phoneNumber",
-            key: "phoneNumber",
-        },
-        {
-            title: t("Position"),
-            dataIndex: "position",
-            key: "position",
-        },
-        {
-            title: t("School"),
-            dataIndex: "school",
-            key: "school",
-        },
-        {
-            title: t("Email"),
-            dataIndex: "email",
-            key: "email",
-        },
-        {
-            title: "CV Link",
-            dataIndex: "cvLink",
-            key: "cvLink",
-            render: (text) => (
-                <a href={text} target="_blank" rel="noopener noreferrer">
-                    Link
-                </a>
-            ),
-        },
-        {
-            title: t("Technology"),
-            dataIndex: "technology",
-            key: "technology",
-        },
-        {
-            title: t("Rank"),
-            dataIndex: "rank",
-            key: "rank",
-            width: 80,
-            render: (text, record) => (
-                <Dropdown
-                    overlay={rankMenu(record)}
-                    trigger={["click"]}
-                    className="dropdown-menu"
-                >
-                    <a
-                        className="ant-dropdown-link"
-                        onClick={(e) => e.preventDefault()}
-                    >
-                        {text} <DownOutlined />
-                    </a>
-                </Dropdown>
-            ),
-        },
-    ];
+  const columns = [
+    {
+      title: t("Intern ID"),
+      dataIndex: "internID",
+      key: "internID",
+    },
+    {
+      title: t("Full Name"),
+      dataIndex: "fullName",
+      key: "fullName",
+    },
+    {
+      title: t("Phone Number"),
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+    },
+    {
+      title: t("Position"),
+      dataIndex: "position",
+      key: "position",
+    },
+    {
+      title: t("School"),
+      dataIndex: "school",
+      key: "school",
+    },
+    {
+      title: t("Email"),
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "CV Link",
+      dataIndex: "cvLink",
+      key: "cvLink",
+      render: (text) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          Link
+        </a>
+      ),
+    },
+    {
+      title: t("Technology"),
+      dataIndex: "technology",
+      key: "technology",
+    },
+    {
+      title: t("Rank"),
+      dataIndex: "rank",
+      key: "rank",
+      width: 110,
+      render: (text, record) => (
+        <Dropdown
+          overlay={rankMenu(record)}
+          trigger={["click"]}
+          className={`dropdown-menu ${getRankClass(text)}`}
+        >
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            {text} <DownOutlined />
+          </a>
+        </Dropdown>
+      ),
+    },
+  ];
 
     function UserInfo({ name, role, avatarSrc }) {
         return (

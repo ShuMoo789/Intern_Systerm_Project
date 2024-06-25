@@ -67,8 +67,16 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-  }
-  .ant-tabs-tab {
+}
+
+.ant-tabs-tab {
     width: 50%;
     justify-content: center;
-  }
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
