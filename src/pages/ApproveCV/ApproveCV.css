@@ -39,13 +39,13 @@ body {
     cursor: pointer;
 }
 
-#APRCV .content>.content-header>.user-info>.account-setting {
+#APRCV .content > .content-header > .user-info > .account-setting {
     display: flex;
     justify-content: center;
     transition: 0.3s ease;
 }
 
-#APRCV .content>.content-header>.user-info>.account-setting:hover {
+#APRCV .content > .content-header > .user-info > .account-setting:hover {
     rotate: 90deg;
 }
 
@@ -83,7 +83,6 @@ body {
 }
 
 .ant-table-container {
-
     font-family: "Quicksand", sans-serif;
 }
 
@@ -93,7 +92,7 @@ body {
     color: #92929d;
 }
 
-#APRCV .content>.filter-section {
+#APRCV .content > .filter-section {
     background-color: #ffffff;
     padding: 20px 20px 0px 20px;
     margin: 20px;
@@ -174,7 +173,7 @@ body {
     background-color: #2980b9;
 }
 
-#APRCV>.content>.filter-section>.list {
+#APRCV > .content > .filter-section > .list {
     font-family: Quicksand, sans-serif;
     width: 100%;
     margin-bottom: 20px;
@@ -201,13 +200,12 @@ div.approve-btns {
     display: flex;
 }
 
-div.approve-btns>div.view,
+div.approve-btns > div.view,
 div.approve-btns {
     display: flex;
 }
 
-div.approve-btns>div.view {
-
+div.approve-btns > div.view {
     margin-right: 5px;
     padding: 5px 10px;
     color: #b22222;
@@ -217,7 +215,7 @@ div.approve-btns>div.view {
     cursor: pointer;
 }
 
-div.approve-btns>div.feedbacks {
+div.approve-btns > div.feedbacks {
     margin-right: 9px;
     padding: 10px 10px 0px 10px;
     color: #4889e9;
@@ -234,20 +232,18 @@ div.approve-btns > div.view:hover {
 }
 
 div.approve-btns > div.feedbacks:hover {
-
     color: #ffffff;
     background-color: #4889e9;
     border: 1px solid #4889e9;
 }
 
-#APRCV .content>.filter-section>.filter {
+#APRCV .content > .filter-section > .filter {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 1em;
     margin-bottom: 1em;
 }
-
 
 #APRCV .content > .filter-section > .filter > .fields {
     width: 100%;
@@ -258,21 +254,16 @@ div.approve-btns > div.feedbacks:hover {
 }
 
 #APRCV .content > .filter-section > .filter > .fields > input {
-
     width: 20em;
     background-color: #fff;
 }
-
 
 #APRCV .content > .filter-section > .filter > .buttons {
     display: flex;
     justify-content: flex-end;
     width: 100%;
     gap: 5px;
-    margin-left: 10px;
-
 }
-
 
 #APRCV .content > .filter-section > .filter > .buttons > .btn {
     padding: 15px 20px;
@@ -281,21 +272,18 @@ div.approve-btns > div.feedbacks:hover {
     cursor: pointer;
 }
 
-
 #APRCV .content > .filter-section > .filter > .buttons > .cln-btn {
     color: #000;
     border: 1px solid #cbd2dc;
     height: auto;
     width: 150px;
-    margin-bottom: 5px;
     cursor: pointer;
+}
 
-
-#APRCV .content>.filter-section>.filter>.buttons>.cln-btn:hover {
+#APRCV .content > .filter-section > .filter > .buttons > .cln-btn:hover {
     color: #fff;
     background-color: #6d6d6d;
 }
-
 
 #APRCV .content > .filter-section > .filter > .buttons > .srch-btn {
     color: #fff;
@@ -312,8 +300,6 @@ div.approve-btns > div.feedbacks:hover {
     cursor: pointer;
 }
 
-
 .custom-placeholder .ant-picker-input input::placeholder {
     font-size: 15px; /* Change this to your desired font size */
 }
-
