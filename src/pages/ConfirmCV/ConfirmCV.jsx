@@ -837,7 +837,7 @@ const ConfirmCV = () => {
                     onClose={handleCloseEmailPopup}
                     openPopup={isEmailPopupVisible}
                 />
-                <section className="filter-section">
+                <section className="filter-section" style={{height: "75vh", overflowY: "hidden"}}>
                     {!isMobile ? (
                         <div className="filter">
                             <div className="fields">
@@ -1485,7 +1485,7 @@ const ConfirmCV = () => {
                             }}
                             columns={columns}
                             dataSource={filteredInterns}
-                            scroll={{ x: "140vw", y: "374px" }}
+                            scroll={{ x: "140vw", y: "334px" }}
                             style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
                                 pageSize: pageSize,
