@@ -73,7 +73,7 @@ function Header() {
     );
     return (
         <header className="header">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/06fef8db57203c153c3c74e48930f491ad41ebc2dc7c06a9bab2ea38540e008e?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Company Logo" className="logo" />
+            <img style={{marginLeft: "75px"}} src="https://cdn.builder.io/api/v1/image/assets/TEMP/06fef8db57203c153c3c74e48930f491ad41ebc2dc7c06a9bab2ea38540e008e?apiKey=41832340d6f545c2a0509736ad9e1693&" alt="Company Logo" className="logo" />
             <Dropdown
       overlay={menu}
       dropdownRender={(menu) => (
@@ -86,9 +86,9 @@ function Header() {
     >
       <a onClick={(e) => e.preventDefault()}>
         <Space>
-          <GlobalOutlined style={{ fontSize: '24px', color: "black" }} />
+          <GlobalOutlined style={{ fontSize: '24px', color: "black"}} />
           <span style={{color:"black"}}>{selectedLanguage === 'vi' ? 'VI' : 'EN'}</span>
-          <DownOutlined style={{color:"black"}}/>
+          <DownOutlined style={{color:"black", marginRight:"75px"}}/>
         </Space>
       </a>
     </Dropdown>

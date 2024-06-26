@@ -17,12 +17,12 @@ import {
     EditOutlined,
     FolderAddOutlined,
 } from "@ant-design/icons";
-import { Input } from "antd";
+import { Col, Input, Row } from "antd";
 import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
-import { Typography, Row, Col } from "antd";
+import { Typography } from "antd";
 import useViewport from "../../hooks/useViewport.jsx";
 import Navigation from "../../components/Navigation/Navigation.jsx";
 import { Toaster } from "react-hot-toast";
@@ -406,6 +406,7 @@ function ApproveCV() {
     const isMobile = viewPort.width <= 1024;
     const { Text } = Typography;
     // checkbox table Ant Design
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             console.log(
@@ -413,6 +414,7 @@ function ApproveCV() {
                 "selectedRows: ",
                 selectedRows
             );
+            setSelectedRowKeys(selectedRowKeys);
         },
         getCheckboxProps: (record) => ({
             name: record.name,
@@ -717,6 +719,8 @@ function ApproveCV() {
                         titleName={t("Approve CV")}
                         groupButton={groupButton}
                         onScheduleInterview={handleOpenScheduleInterView}
+
+                        checkedCount={selectedRowKeys.length}
                         onEdit={handleOpenEdit}
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}

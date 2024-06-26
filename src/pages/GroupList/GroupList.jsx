@@ -29,7 +29,7 @@ import {
 import jsonData from "../../data/GroupList.json";
 import Navigation from "../../components/Navigation/Navigation";
 import useViewport from "../../hooks/useViewport";
-import "./GroupList.css";
+import "./GroupList.css"
 import ViewPopup from "./ViewPopup";
 import EditPopup from "../../components/EditPopup/EditPopup.jsx"
 import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
@@ -41,6 +41,8 @@ const { Option } = Select;
 
 const GroupList = () => {
 
+
+const [checkedCount, setCheckedCount] = useState(0);
     const [data, setData] = useState(jsonData);
     const [filteredData, setFilteredData] = useState(jsonData);
     const viewPort = useViewport();
@@ -153,14 +155,23 @@ const GroupList = () => {
     const handleCreateIntern = () => {
         setVisible(true);
     };
-
+const handleCheckboxChange = (e) => {
+    if (e.target.checked) {
+      setCheckedCount(checkedCount + 1);
+    } else {
+      setCheckedCount(checkedCount - 1);
+    }
+    console.log("Checked count:", checkedCount);
+  };
     const columns = [
-        {
-            title: "",
-            dataIndex: "select",
-            render: (_, record) => <Checkbox />,
-            width: "auto",
-        },
+    {
+      title: "",
+      dataIndex: "select",
+      render: (_, record) => (
+        <Checkbox onChange={handleCheckboxChange} />
+      ),
+      width: "auto",
+    },
         {
             title: t("Intern ID"),
             dataIndex: "InternId",
@@ -521,6 +532,10 @@ const GroupList = () => {
         setProject(value);
     };
 
+  
+        
+
+
     const filterOption = (input, option) =>
         (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
@@ -572,6 +587,7 @@ const GroupList = () => {
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
                         onCreateIntern={handleOpenAddNewIntern}
+ checkedCount={checkedCount}
                     />
                 </div>
                 {/*Render Edit Popup */}

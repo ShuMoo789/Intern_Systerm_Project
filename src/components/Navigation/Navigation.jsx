@@ -33,6 +33,8 @@ function UserInfo({ name, role, avatarSrc }) {
 
 const Navigation = (props) => {
   const { t } = useTranslation();
+  
+  
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
 
@@ -67,9 +69,13 @@ const Navigation = (props) => {
               onSendEmail={props.onSendEmail}
               onCreateIntern={props.onCreateIntern}
               onScheduleInterview={props.onScheduleInterview}
+
+              checkedCount={props.checkedCount}
+
               onEdit={props.onEdit}
               onDelete={props.onDelete}
               onExportExcel={props.onExportExcel}
+
             />
           </div>
         </div>

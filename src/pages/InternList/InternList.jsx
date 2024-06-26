@@ -98,20 +98,24 @@ const optionsInternProject = DataInternList.reduce((options, item) => {
 }, []);
 
 // checkbox table Ant Design
-const rowSelection = {
+
+
+const InternList = () => {
+    //add selectedRowKeys to count
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+    const rowSelection = {   
     onChange: (selectedRowKeys, selectedRows) => {
         console.log(
             `selectedRowKeys: ${selectedRowKeys}`,
             "selectedRows: ",
             selectedRows
         );
+        setSelectedRowKeys(selectedRowKeys);
     },
     getCheckboxProps: (record) => ({
         name: record.name,
     }),
 };
-
-const InternList = () => {
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const [isCommentsModalVisible, setIsCommentsModalVisible] = useState(false);//comments modal
     const [form] = Form.useForm();
@@ -632,6 +636,7 @@ const InternList = () => {
             {/* Content of InternList right */}
             <main className="content">
                 {/* Pass props to Navigation */}
+
                 <div>
                     <Navigation
                         titleName={t("INTERN LIST")}
@@ -641,6 +646,7 @@ const InternList = () => {
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
                         onCreateIntern={handleOpenAddNewIntern}
+checkedCount={selectedRowKeys.length}
                     />
                 </div>
                 {/* Group of filter and table */}

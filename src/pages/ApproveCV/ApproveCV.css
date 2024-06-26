@@ -14,6 +14,9 @@ body {
 .content {
     height: 100vh;
     overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
 .content-header {
@@ -217,7 +220,8 @@ div.approve-btns>div.view {
     cursor: pointer;
 }
 
-div.approve-btns>div.feedbacks {
+
+div.approve-btns > div.feedbacks {
     margin-right: 9px;
     padding: 10px 10px 0px 10px;
     color: #4889e9;
