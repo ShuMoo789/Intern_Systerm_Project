@@ -512,6 +512,7 @@ const ConfirmCV = () => {
     const handleModalCancel = () => {
         setModalVisible(false);
     };
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             console.log(
@@ -519,6 +520,7 @@ const ConfirmCV = () => {
                 "selectedRows: ",
                 selectedRows
             );
+            setSelectedRowKeys(selectedRowKeys);
         },
     };
     const [allChecked, setAllChecked] = useState(false);
@@ -846,10 +848,14 @@ const ConfirmCV = () => {
                         titleName={t("Confirm CV")}
                         groupButton={groupButton}
                         onSendEmail={handleOpenEmailPopup}
+
+                        checkedCount={selectedRowKeys.length}
+
                         onEdit={handleOpenEdit}
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
                         onCreateIntern={handleOpenAddNewIntern}
+
                     />
                 </div>
                 {/*Render Send Email Popup */}

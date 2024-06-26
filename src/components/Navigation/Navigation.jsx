@@ -69,9 +69,13 @@ const Navigation = (props) => {
               onSendEmail={props.onSendEmail}
               onCreateIntern={props.onCreateIntern}
               onScheduleInterview={props.onScheduleInterview}
+
+              checkedCount={props.checkedCount}
+
               onEdit={props.onEdit}
               onDelete={props.onDelete}
               onExportExcel={props.onExportExcel}
+
             />
           </div>
         </div>
