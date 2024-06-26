@@ -163,28 +163,6 @@ const MenuNavigate = ({ buttonClick }) => {
             label: t('Group Zalo Management'),
             icon: <ZaloIcon />,
         },
-        {
-            key: 'settings',
-            label: t('Settings'),
-            icon: <SettingOutlined />,
-        },
-        {
-            key: 'language',
-            label: languageLabel ,
-            icon: <GlobalOutlined />,
-            children: [
-                {
-                    key: 'vi',
-                    label: 'Tiếng Việt',
-                    
-                },
-                {
-                    key: 'en',
-                    label: 'English',
-                    
-                },
-            ],
-        }
     ];
 
     return (
