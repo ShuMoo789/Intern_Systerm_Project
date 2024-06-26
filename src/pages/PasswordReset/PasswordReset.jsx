@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./PasswordReset.css";  // Import the CSS file for styling
 import Header from "../../components/header/Header.jsx";  // Import the Header component
 import { useTranslation } from 'react-i18next';  // Import the useTranslation hook for internationalization
@@ -52,6 +52,8 @@ function ResetPasswordForm() {
         validationSchema: validationSchema,
         onSubmit: handleSubmit,
     });
+    
+
 
     return (
         <div>
@@ -102,15 +104,36 @@ function ResetPasswordForm() {
 }
 
 function MyComponent() {
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= 990);
+        };
+    
+        window.addEventListener("resize", handleResize);
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []);
+
+    const hiddenImageStyle =  {
+        display: "none"
+    }
+
+    const responsiveImageStyle = {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      };
     return (
         <div className="password-reset">
-            <Header />  {/* Header component */}
             <main className="main-content">
                 <div className="content-wrapper">
                     <div className="form-column">
                         <ResetPasswordForm />  {/* ResetPasswordForm component */}
                     </div>
-                    <div className="image-column">
+                    <div className="image-column" style={isMobile ? hiddenImageStyle : responsiveImageStyle}>
                         <img src="https://i.postimg.cc/D0c1FsvT/image-7-x4.png" alt="Reset Password Illustration" className="illustration" />
                     </div>
                 </div>

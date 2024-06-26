@@ -5,11 +5,14 @@ import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
 
 const GroupButton = ({
-  groupButton,
-  onSendEmail,
-  onScheduleInterview,
-  onCreateIntern,
-  checkedCount,
+
+    groupButton,
+    onSendEmail,
+    onScheduleInterview,
+    onCreateIntern,
+    onEdit,
+    onDelete,
+    onExportExcel,
 }) => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1350;
@@ -20,20 +23,21 @@ const GroupButton = ({
     onSendEmail();
   };
 
-  // function handle Export Excel when click button Export Excel
-  const handleExportExcelClick = () => {
-    console.log("export excel");
-  };
 
-  // function handle Edit when click button Edit
-  const handleEditClick = () => {
-    console.log("edit");
-  };
+    // function handle Export Excel when click button Export Excel
+    const handleExportExcelClick = () => {
+        onExportExcel();
+    };
 
-  // function handle Delete when click button Delete
-  const handleDeleteClick = () => {
-    console.log("delete");
-  };
+    // function handle Edit when click button Edit
+    const handleEditClick = () => {
+        onEdit();
+    };
+
+    // function handle Delete when click button Delete
+    const handleDeleteClick = () => {
+        onDelete();
+    };
 
   // function handle Add New Intern when click button Add New Intern
   const handleAddNewInternClick = () => {

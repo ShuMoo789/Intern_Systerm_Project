@@ -6,6 +6,10 @@ import { useTranslation } from "react-i18next";
 import useViewport from "../../hooks/useViewport.jsx";
 
 import MailOutlined from "@ant-design/icons/MailOutlined";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 
 import {
     DownOutlined,
@@ -146,15 +150,15 @@ const ConfirmCV = () => {
                             style={
                                 intern.confirmEmail === "No"
                                     ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
+                                        backgroundColor: "#F5A3B7",
+                                        color: "#7D0022",
+                                    }
                                     : intern.confirmEmail === "Yes"
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#B7EACB",
+                                            color: "#3A7D34",
+                                        }
+                                        : {}
                             }
                         >
                             {intern.status}
@@ -169,20 +173,20 @@ const ConfirmCV = () => {
                             style={
                                 intern.status === t("Pending")
                                     ? {
-                                          backgroundColor: "#FFB596",
-                                          color: "#E5731C",
-                                      }
+                                        backgroundColor: "#FFB596",
+                                        color: "#E5731C",
+                                    }
                                     : intern.status === t("Failed")
-                                    ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
-                                    : intern.status === t("Passed")
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#F5A3B7",
+                                            color: "#7D0022",
+                                        }
+                                        : intern.status === t("Passed")
+                                            ? {
+                                                backgroundColor: "#B7EACB",
+                                                color: "#3A7D34",
+                                            }
+                                            : {}
                             }
                         >
                             {t(intern.status)}
@@ -711,14 +715,14 @@ const ConfirmCV = () => {
                                 record.status === "Failed"
                                     ? "#F8E7EE"
                                     : record.status === "Passed"
-                                    ? "#EFF9F1"
-                                    : "#FFEFE6",
+                                        ? "#EFF9F1"
+                                        : "#FFEFE6",
                             color:
                                 record.status === "Failed"
                                     ? "#B70D52"
                                     : record.status === "Passed"
-                                    ? "#449E3C"
-                                    : "#FF5D02",
+                                        ? "#449E3C"
+                                        : "#FF5D02",
                             borderRadius: "100px",
                             fontSize: "12px",
                         }}
@@ -780,9 +784,6 @@ const ConfirmCV = () => {
         },
     ];
 
-    const handleOpenCreateGroup = () => {
-        setIsModalVisible(true);
-    };
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const handleOpenEmailPopup = () => {
         setEmailPopupVisible(true);
@@ -794,14 +795,51 @@ const ConfirmCV = () => {
     const handleDropdownVisibleChange = (visible) => {
         setOpen(visible);
     };
-    const [selectedItems, setSelectedItems] = useState([]);
+
     const email_types = [
         t("Email interview"),
         t("Email result"),
         t("Internship Information"),
     ];
     const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1360;
+
+    const isMobile = viewPort.width <= 1024;
+
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
+
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
+    };
     return (
         <div id="APRCV">
             <main className="content">
@@ -810,19 +848,53 @@ const ConfirmCV = () => {
                         titleName={t("Confirm CV")}
                         groupButton={groupButton}
                         onSendEmail={handleOpenEmailPopup}
+
                         checkedCount={selectedRowKeys.length}
+
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
+
                     />
                 </div>
+                {/*Render Send Email Popup */}
                 <SendMailButton
                     typesEmail={email_types}
                     onClose={handleCloseEmailPopup}
                     openPopup={isEmailPopupVisible}
                 />
+                {/*Render Edit Popup */}
+                <EditPopup
+                    onClose={handleCloseEditPopup}
+                    openPopup={isEditPopupVisible}
+                />
+                {/*Render Delete Popup */}
+                <DeletePopup
+                    onClose={handleCloseDeletePopup}
+                    openPopup={isDeletePopupVisible}
+                />
+                {/*Render ExportExcel Popup */}
+                <ExportExcel
+                    onClose={handleCloseExportExcel}
+                    openPopup={isExportExcelVisible}
+                />
+                {/*Render Add New Intern Popup */}
+                <AddNewIntern
+                    onClose={handleCloseAddNewIntern}
+                    openPopup={isAddNewInternVisible}
+                />
+
                 <section className="filter-section">
                     {!isMobile ? (
                         <div className="filter">
                             <div className="fields">
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu(
                                         "internID",
                                         internIDChoice
@@ -837,14 +909,13 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
+
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
-                                            width: "287px",
+
                                         }}
                                     >
                                         <div
@@ -862,6 +933,11 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu(
                                         "fullName",
                                         fullNameChoice
@@ -870,13 +946,13 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
+
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
+
                                         }}
                                     >
                                         <div
@@ -895,9 +971,12 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <DatePicker
+                                    format="DD/MM/YYYY"
                                     placeholder={t(["Enter intern's D.O.B"])}
+                                    className="custom-placeholder"
                                     style={{
-                                        padding: "7px 11px",
+                                        height: "32px",
+                                        width: "100%",
                                         fontSize: "15px",
                                     }}
                                     onChange={(date) =>
@@ -906,6 +985,11 @@ const ConfirmCV = () => {
                                 />
 
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu(
                                         "phoneNumber",
                                         phoneNumberChoice
@@ -914,13 +998,12 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
+
                                         }}
                                     >
                                         <div
@@ -943,18 +1026,22 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu("address", addressName)}
                                     trigger={["click"]}
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
+
                                         }}
                                     >
                                         <div
@@ -972,14 +1059,24 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Input
-                                    size="large"
+
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     placeholder={t("Enter intern's Email")}
                                     value={selectedFilters.email}
                                     onChange={handleInputChange}
-                                    className="filter-input"
+
                                 />
 
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu(
                                         "position",
                                         positionNames
@@ -988,13 +1085,13 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
+
+
                                         }}
                                     >
                                         <div
@@ -1012,8 +1109,15 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Input
-                                    size="large"
+
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+
                                     placeholder={t("Enter intern's School")}
+                                    className="custom-placeholder"
                                     value={selectedFilters.school}
                                     onChange={(e) =>
                                         handleInputChange(
@@ -1021,10 +1125,14 @@ const ConfirmCV = () => {
                                             e.target.value
                                         )
                                     }
-                                    className="filter-input"
                                 />
 
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu(
                                         "dateInterView",
                                         dateInterviewChoice
@@ -1033,13 +1141,13 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
+
+
                                         }}
                                     >
                                         <div
@@ -1058,6 +1166,11 @@ const ConfirmCV = () => {
                                 </Dropdown>
 
                                 <Dropdown
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                     overlay={createMenu(
                                         "timeInterView",
                                         timeInterviewChoice
@@ -1066,13 +1179,12 @@ const ConfirmCV = () => {
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
+
                                         }}
                                     >
                                         <div
@@ -1094,35 +1206,32 @@ const ConfirmCV = () => {
                                     className="cln-btn btn"
                                     onClick={handleClearFilters}
                                 >
-                                    <DeleteOutlined
-                                        style={{ marginRight: "10px" }}
-                                    />
+                                    <DeleteOutlined />
                                     {t("Clean Filter")}
                                 </Button>
-                                <br />
+
                                 <Button
                                     className="srch-btn btn"
                                     onClick={handleSearch}
                                 >
-                                    <SearchOutlined
-                                        style={{ marginRight: "10px" }}
-                                    />
+                                    <SearchOutlined />
                                     {t("Search")}
                                 </Button>
                             </div>
                         </div>
                     ) : (
                         <div className="filter">
-                            <Row gutter={[16, 16]} style={{ width: "100%" }}>
+                            <Row>
                                 <Col style={{ width: "100%" }}>
                                     <Row
-                                        gutter={[16, 10]}
+                                        gutter={[5, 5]}
                                         style={{
                                             display: "flex",
                                             flexDirection: "column",
                                         }}
                                     >
                                         <Dropdown
+
                                             overlay={createMenu(
                                                 "internID",
                                                 internIDChoice
@@ -1141,14 +1250,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1174,14 +1282,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1202,13 +1309,18 @@ const ConfirmCV = () => {
                                         </Dropdown>
 
                                         <DatePicker
+                                            format="DD/MM/YYYY"
                                             placeholder={t([
                                                 "Enter intern's D.O.B",
                                             ])}
                                             style={{
-                                                padding: "7px 11px",
+                                                height: "32px",
+
+                                                width: "100%",
+
                                                 fontSize: "15px",
                                             }}
+                                            className="custom-placeholder"
                                             onChange={(date) =>
                                                 handleDateChange(
                                                     "dateOfBirth",
@@ -1226,14 +1338,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1265,14 +1376,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1292,13 +1402,20 @@ const ConfirmCV = () => {
                                         </Dropdown>
 
                                         <Input
-                                            size="large"
+
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
+                                            className="custom-placeholder"
+
                                             placeholder={t(
                                                 "Enter intern's Email"
                                             )}
                                             value={selectedFilters.email}
                                             onChange={handleInputChange}
-                                            className="filter-input"
+
                                         />
 
                                         <Dropdown
@@ -1310,14 +1427,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1337,7 +1453,14 @@ const ConfirmCV = () => {
                                         </Dropdown>
 
                                         <Input
-                                            size="large"
+
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
+                                            className="custom-placeholder"
+
                                             placeholder={t(
                                                 "Enter intern's School"
                                             )}
@@ -1348,7 +1471,7 @@ const ConfirmCV = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="filter-input"
+
                                         />
 
                                         <Dropdown
@@ -1360,14 +1483,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1396,14 +1518,13 @@ const ConfirmCV = () => {
                                         >
                                             <Button
                                                 style={{
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
+                                                    height: "32px",
                                                 }}
                                             >
                                                 <div
@@ -1423,13 +1544,16 @@ const ConfirmCV = () => {
                                         </Dropdown>
                                     </Row>
                                 </Col>
-                                <Col style={{ width: "100%" }}>
-                                    <Row gutter={[16, 10]}>
+                                <Col
+                                    style={{ width: "100%", marginTop: "15px" }}
+                                >
+                                    <Row>
                                         <Button
                                             style={{
                                                 width: "100%",
                                                 height: "50px",
                                                 borderRadius: "15px",
+                                                marginBottom: "10px",
                                             }}
                                             onClick={handleClearFilters}
                                         >
@@ -1515,7 +1639,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1529,7 +1653,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1544,7 +1668,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1559,7 +1683,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1574,7 +1698,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1589,7 +1713,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1604,7 +1728,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1619,7 +1743,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1633,7 +1757,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1648,7 +1772,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1665,7 +1789,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >
@@ -1686,7 +1810,7 @@ const ConfirmCV = () => {
                                 <p
                                     style={{
                                         border: "2px solid #12345129",
-                                        padding: "10px",
+                                        padding: "5px",
                                         borderRadius: "10px",
                                     }}
                                 >

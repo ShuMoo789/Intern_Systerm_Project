@@ -74,7 +74,7 @@ const ViewButton = () => {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -90,8 +90,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -106,7 +106,7 @@ const ViewButton = () => {
               </div>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -122,8 +122,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -137,7 +137,7 @@ const ViewButton = () => {
                 Ester Eden
               </div>
             </div>
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -153,8 +153,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -165,7 +165,7 @@ const ViewButton = () => {
                   textAlign: "left", // Ensure text alignment is left
                 }}
               >
-                25/11/2003
+                25/11/1503
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ const ViewButton = () => {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -192,8 +192,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -208,7 +208,7 @@ const ViewButton = () => {
               </div>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -224,8 +224,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -239,7 +239,7 @@ const ViewButton = () => {
                 {t("Back-End")}
               </div>
             </div>
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -255,8 +255,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -279,7 +279,7 @@ const ViewButton = () => {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -295,8 +295,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -311,7 +311,7 @@ const ViewButton = () => {
               </div>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -327,8 +327,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -342,7 +342,7 @@ const ViewButton = () => {
                 abc@example.com
               </div>
             </div>
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "15px" }}>
               <label
                 style={{
                   display: "block",
@@ -358,8 +358,8 @@ const ViewButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 style={{
                   width: "340px",
-                  height: "57px",
-                  padding: "20px",
+                  height: "32px",
+                  padding: "15px",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
                   boxSizing: "border-box",
@@ -376,7 +376,7 @@ const ViewButton = () => {
               </div>
             </div>
           </div>
-          <div style={{ marginBottom: "20px" }}>
+          <div style={{ marginBottom: "15px" }}>
             <label
               style={{
                 display: "block",
@@ -392,8 +392,8 @@ const ViewButton = () => {
               onChange={(e) => setDate(e.target.value)}
               style={{
                 width: "340px",
-                height: "57px",
-                padding: "20px",
+                height: "32px",
+                padding: "15px",
                 border: "1px solid #ccc",
                 borderRadius: "10px",
                 boxSizing: "border-box",

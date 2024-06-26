@@ -11,8 +11,9 @@ import {
     EyeOutlined,
     FilterOutlined,
     SearchOutlined,
+    SaveOutlined
 } from "@ant-design/icons";
-import { Table, Select, Button, Input, Col, Row } from "antd";
+import { Table, Select, Button, Input, Col, Row, Modal, Form } from "antd";
 import DataInternList from "../../data/InternList.json"; // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
 import SendMailButton from "../../components/SendMailButton/SendMailButton";
@@ -21,6 +22,10 @@ import ViewButton from "./ViewButton";
 import "./InternList.css";
 import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 
 const optionsInternRole = DataInternList.reduce((options, item) => {
     const existingValue = options.find((option) => option.value === item.role);
@@ -112,11 +117,13 @@ const InternList = () => {
     }),
 };
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
+    const [isCommentsModalVisible, setIsCommentsModalVisible] = useState(false);//comments modal
+    const [form] = Form.useForm();
     const [selectedIntern, setSelectedIntern] = useState(null);
     const [updatedData, setUpdatedData] = useState(DataInternList);
     const [dataTable, setDataTable] = useState(DataInternList);
     const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1150;
+    const isMobile = viewPort.width <= 1024;
     const handleChangeStatus = (key, record) => {
         const updatedRecord = { ...record, status: key };
         const updatedData2 = updatedData.map((item) =>
@@ -124,6 +131,30 @@ const InternList = () => {
         );
         setUpdatedData(updatedData2);
     };
+    const showCommentsModal = () => {
+        setIsCommentsModalVisible(true);
+    };
+
+    const handleCommentsModalCancel = () => {
+        setIsCommentsModalVisible(false);
+    };
+
+    const handleSaveComment = async () => {
+        try {
+            const values = await form.validateFields();
+            console.log('Success:', values);
+
+            // Here you would typically send the data to your backend
+            // For now, we'll just simulate a successful save
+            toast.success('Comment saved successfully');
+            setIsCommentsModalVisible(false);
+            form.resetFields();
+        } catch (errorInfo) {
+            console.log('Failed:', errorInfo);
+            toast.error('Failed to save comment. Please check the form and try again.');
+        }
+    };
+
     const { t } = useTranslation();
     const commentsText = t("comments");
     // props GroupButton
@@ -295,7 +326,7 @@ const InternList = () => {
             dataIndex: "comments",
             width: 160,
             render: (text) => (
-                <Button>
+                <Button onClick={showCommentsModal}>
                     2 {commentsText}
                     <EyeOutlined />
                 </Button>
@@ -422,12 +453,6 @@ const InternList = () => {
 
     const handleCloseEmailPopup = () => {
         setEmailPopupVisible(false);
-    };
-
-    const handleSendEmail = (emailData) => {
-        console.log("Email Data:", emailData);
-        // Handle email sending logic here
-        handleCloseEmailPopup();
     };
 
     // Handle Clean Filter Button by set state filter to ''
@@ -570,34 +595,76 @@ const InternList = () => {
         t("Return Profile"),
     ];
 
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
+
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
+    };
+
     return (
-        <div>
+        <div id="APRCV">
             {/* Content of InternList right */}
-            <div className="content-intern-list">
+            <main className="content">
                 {/* Pass props to Navigation */}
-                <Navigation
-                    titleName={t("INTERN LIST")}
-                    groupButton={groupButton}
-                    onSendEmail={handleOpenEmailPopup}
-                    //add checkCount
-                    checkedCount={selectedRowKeys.length}
-                />
+
+                <div>
+                    <Navigation
+                        titleName={t("INTERN LIST")}
+                        groupButton={groupButton}
+                        onSendEmail={handleOpenEmailPopup}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
+checkedCount={selectedRowKeys.length}
+                    />
+                </div>
                 {/* Group of filter and table */}
-                <div className="group-filter-table">
+                <section className="filter-section">
                     {/* Filter */}
 
                     {!isMobile ? (
                         <div className="filter">
-                            <div className="filter-group">
+                            <div className="fields">
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     defaultValue=""
                                     placeholder={t("Enter intern's ID")}
                                     options={optionsInternID}
@@ -605,14 +672,14 @@ const InternList = () => {
                                     value={filter.internID || null}
                                 />
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t(
                                         "Enter intern's Phone number"
                                     )}
@@ -621,140 +688,151 @@ const InternList = () => {
                                     value={filter.phoneNumber || null}
                                 />
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t("Enter intern's Role")}
                                     options={optionsInternRole}
                                     onChange={handleChangeFilterRole}
                                     value={filter.role || null}
                                 />
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
+
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t("Enter intern's Mentor")}
                                     options={optionsInternMentor}
                                     onChange={handleChangeFilterMentor}
                                     value={filter.mentor || null}
                                 />
-                            </div>
-                            <div className="filter-group">
+
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
+
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t("Enter intern's Full name")}
                                     options={optionsInternFullName}
                                     onChange={handleChangeFilterFullName}
                                     value={filter.fullName || null}
                                 />
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
+
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t("Enter intern's Address")}
                                     options={optionsInternAddress}
                                     onChange={handleChangeFilterAddress}
                                     value={filter.address || null}
                                 />
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
+
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t("Enter intern's Position")}
                                     options={optionsInternPosition}
                                     onChange={handleChangeFilterPosition}
                                     value={filter.position || null}
                                 />
                                 <Select
-                                    size="large"
-                                    showSearch
                                     style={{
+                                        height: "32px",
                                         width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                        fontSize: 5,
+
+                                        fontSize: "15px",
+
                                     }}
+                                    className="select-placeholder"
+                                    showSearch
                                     placeholder={t("Enter intern's Project")}
                                     options={optionsInternProject}
                                     onChange={handleChangeFilterProject}
                                     value={filter.project || null}
                                 />
-                            </div>
-                            <div className="filter-group">
+
                                 <Input
-                                    size="large"
-                                    style={{
-                                        width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                    }}
                                     placeholder={t("Enter intern's D.O.B")}
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+
+                                        fontSize: "15px",
+
+                                    }}
+                                    className="select-placeholder"
                                     value={filter.dateOfBirth}
                                     onChange={(e) =>
                                         handleChangeFilterDOB(e.target.value)
                                     }
                                 />
                                 <Input
-                                    size="large"
-                                    style={{
-                                        width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                    }}
                                     placeholder={t("Enter intern's Email")}
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+
+                                        fontSize: "15px",
+
+                                    }}
+                                    className="custom-placeholder"
                                     value={filter.email}
                                     onChange={(e) =>
                                         handleChangeFilterEmail(e.target.value)
                                     }
                                 />
                                 <Input
-                                    size="large"
-                                    style={{
-                                        width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                    }}
                                     placeholder={t("Enter intern's School")}
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+
+                                        fontSize: "15px",
+
+                                    }}
+                                    className="custom-placeholder"
                                     value={filter.school}
                                     onChange={(e) =>
                                         handleChangeFilterSchool(e.target.value)
                                     }
                                 />
                                 <Input
-                                    size="large"
-                                    style={{
-                                        width: "100%",
-                                        height: "20%",
-                                        marginTop: 5,
-                                    }}
                                     placeholder={t("Enter intern's Group Zalo")}
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+
+                                        fontSize: "15px",
+
+                                    }}
+                                    className="custom-placeholder"
                                     value={filter.groupZalo}
                                     onChange={(e) =>
                                         handleChangeFilterGroupZalo(
@@ -763,51 +841,39 @@ const InternList = () => {
                                     }
                                 />
                             </div>
-                            <div className="filter-group-2">
-                                <div className="filter-button">
-                                    <Button
-                                        className="cln-btn"
-                                        onClick={handleCleanFilterButton}
-                                        style={{
-                                            width: "150px",
-                                            height: 50,
-                                            borderRadius: 15,
-                                        }}
-                                    >
-                                        <FilterOutlined />{" "}
-                                        {isMobile ? "" : t("Clean Filters")}
-                                    </Button>
-                                </div>
-                                <div className="search-button-internlist">
-                                    <Button
-                                        className="search-btn"
-                                        type="primary"
-                                        onClick={handleSearch}
-                                        style={{
-                                            width: "150px",
-                                            height: 50,
-                                            borderRadius: 15,
-                                        }}
-                                    >
-                                        <SearchOutlined />{" "}
-                                        {isMobile ? "" : "Search"}
-                                    </Button>
-                                </div>
+
+                            <div className="buttons">
+                                <Button
+                                    className="cln-btn btn"
+                                    onClick={handleCleanFilterButton}
+                                >
+                                    <DeleteOutlined />
+                                    {t("Clean Filter")}
+                                </Button>
+                                <Button
+                                    className="srch-btn btn"
+                                    type="primary"
+                                    onClick={handleSearch}
+                                >
+                                    <SearchOutlined />
+                                    {t("Search")}
+                                </Button>
                             </div>
                         </div>
                     ) : (
-                        <Row style={{ padding: "5px 20px" }}>
+                        <Row>
                             <Col style={{ width: "100%" }}>
-                                <Row className="filter-group">
+                                <Row gutter={[5, 5]}>
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 15,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         defaultValue=""
                                         placeholder={t("Enter intern's ID")}
                                         options={optionsInternID}
@@ -815,14 +881,15 @@ const InternList = () => {
                                         value={filter.internID || null}
                                     />
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t(
                                             "Enter intern's Phone number"
                                         )}
@@ -831,46 +898,46 @@ const InternList = () => {
                                         value={filter.phoneNumber || null}
                                     />
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t("Enter intern's Role")}
                                         options={optionsInternRole}
                                         onChange={handleChangeFilterRole}
                                         value={filter.role || null}
                                     />
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t("Enter intern's Mentor")}
                                         options={optionsInternMentor}
                                         onChange={handleChangeFilterMentor}
                                         value={filter.mentor || null}
                                     />
-                                </Row>
-                            </Col>
-                            <Col style={{ width: "100%" }}>
-                                <div className="filter-group">
+
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t(
                                             "Enter intern's Fullname"
                                         )}
@@ -879,14 +946,15 @@ const InternList = () => {
                                         value={filter.fullName || null}
                                     />
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t(
                                             "Enter intern's Address"
                                         )}
@@ -895,14 +963,15 @@ const InternList = () => {
                                         value={filter.address || null}
                                     />
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t(
                                             "Enter intern's Position"
                                         )}
@@ -911,14 +980,15 @@ const InternList = () => {
                                         value={filter.position || null}
                                     />
                                     <Select
-                                        size="large"
                                         showSearch
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
-                                            fontSize: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="select-placeholder"
                                         placeholder={t(
                                             "Enter intern's Project"
                                         )}
@@ -926,17 +996,16 @@ const InternList = () => {
                                         onChange={handleChangeFilterProject}
                                         value={filter.project || null}
                                     />
-                                </div>
-                            </Col>
-                            <Col style={{ width: "100%" }}>
-                                <div className="filter-group">
+
                                     <Input
-                                        size="large"
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="custom-placeholder"
                                         placeholder={t("Enter intern's D.O.B")}
                                         value={filter.dateOfBirth}
                                         onChange={(e) =>
@@ -946,12 +1015,14 @@ const InternList = () => {
                                         }
                                     />
                                     <Input
-                                        size="large"
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="custom-placeholder"
                                         placeholder={t("Enter intern's Email")}
                                         value={filter.email}
                                         onChange={(e) =>
@@ -961,12 +1032,14 @@ const InternList = () => {
                                         }
                                     />
                                     <Input
-                                        size="large"
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="custom-placeholder"
                                         placeholder={t("Enter intern's School")}
                                         value={filter.school}
                                         onChange={(e) =>
@@ -976,12 +1049,14 @@ const InternList = () => {
                                         }
                                     />
                                     <Input
-                                        size="large"
                                         style={{
+                                            height: "32px",
                                             width: "100%",
-                                            height: "20%",
-                                            marginTop: 5,
+
+                                            fontSize: "15px",
+
                                         }}
+                                        className="custom-placeholder"
                                         placeholder={t(
                                             "Enter intern's Group Zalo"
                                         )}
@@ -992,37 +1067,34 @@ const InternList = () => {
                                             )
                                         }
                                     />
-                                </div>
+                                </Row>
                             </Col>
-                            <Col style={{ width: "100%", marginTop: "20px" }}>
+                            <Col style={{ width: "100%", marginTop: "15px" }}>
                                 <div className="filter-group">
-                                    <div className="filter-button">
-                                        <Button
-                                            onClick={handleCleanFilterButton}
-                                            style={{
-                                                width: "100%",
-                                                height: "50px",
-                                                borderRadius: "15px",
-                                            }}
-                                        >
-                                            {isMobile ? "" : <FilterOutlined />}{" "}
-                                            {t("Clean Filters")}
-                                        </Button>
-                                    </div>
-                                    <div className="search-button-internlist">
-                                        <Button
-                                            type="primary"
-                                            onClick={handleSearch}
-                                            style={{
-                                                width: "100%",
-                                                height: "50px",
-                                                borderRadius: "15px",
-                                            }}
-                                        >
-                                            {isMobile ? "" : <SearchOutlined />}{" "}
-                                            Search
-                                        </Button>
-                                    </div>
+                                    <Button
+                                        onClick={handleCleanFilterButton}
+                                        style={{
+                                            width: "100%",
+                                            height: "50px",
+                                            borderRadius: "15px",
+                                            marginBottom: "10px",
+                                        }}
+                                    >
+                                        <FilterOutlined />
+                                        {t("Clean Filters")}
+                                    </Button>
+
+                                    <Button
+                                        type="primary"
+                                        onClick={handleSearch}
+                                        style={{
+                                            width: "100%",
+                                            height: "50px",
+                                            borderRadius: "15px",
+                                        }}
+                                    >
+                                        <SearchOutlined /> Search
+                                    </Button>
                                 </div>
                             </Col>
                         </Row>
@@ -1044,14 +1116,112 @@ const InternList = () => {
                             }}
                         />
                     </div>
-                </div>
-            </div>
+                </section>
+            </main>
             {/*Render Email Popup */}
             <SendMailButton
                 onClose={handleCloseEmailPopup}
                 openPopup={isEmailPopupVisible}
                 typesEmail={email_types}
             />
+            <Modal
+                title="Comments"
+                visible={isCommentsModalVisible}
+                onCancel={handleCommentsModalCancel}
+                footer={[
+                    <Button key="cancel" onClick={handleCommentsModalCancel}>
+                        Cancel
+                    </Button>,
+                    <Button key="save" type="primary" icon={<SaveOutlined />} onClick={handleSaveComment}>
+                        Save Comment
+                    </Button>
+                ]}
+            >
+                <Form form={form} layout="vertical">
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field1"
+                                label="Field 1"
+                                rules={[{ required: true, message: 'Please enter field 1' }]}
+                            >
+                                <Input placeholder="Enter field 1" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field2"
+                                label="Field 2"
+                                rules={[{ required: true, message: 'Please enter field 2' }]}
+                            >
+                                <Input placeholder="Enter field 2" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field3"
+                                label="Field 3"
+                                rules={[{ required: true, message: 'Please enter field 3' }]}
+                            >
+                                <Input placeholder="Enter field 3" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field4"
+                                label="Field 4"
+                                rules={[{ required: true, message: 'Please enter field 4' }]}
+                            >
+                                <Input placeholder="Enter field 4" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field5"
+                                label="Field 5"
+                                rules={[{ required: true, message: 'Please enter field 5' }]}
+                            >
+                                <Input placeholder="Enter field 5" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="field6"
+                                label="Field 6"
+                                rules={[{ required: true, message: 'Please enter field 6' }]}
+                            >
+                                <Input placeholder="Enter field 6" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+            </Modal>
+
+            {/*Render Edit Popup */}
+            <EditPopup
+                onClose={handleCloseEditPopup}
+                openPopup={isEditPopupVisible}
+            />
+            {/*Render Delete Popup */}
+            <DeletePopup
+                onClose={handleCloseDeletePopup}
+                openPopup={isDeletePopupVisible}
+            />
+            {/*Render Export Excel Popup */}
+            <ExportExcel
+                onClose={handleCloseExportExcel}
+                openPopup={isExportExcelVisible}
+            />
+            {/*Render Add New Intern Popup */}
+            <AddNewIntern
+                onClose={handleCloseAddNewIntern}
+                openPopup={isAddNewInternVisible}
+            />
+
             <Toaster />
         </div>
     );
