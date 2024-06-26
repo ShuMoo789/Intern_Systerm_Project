@@ -654,7 +654,7 @@ const GroupList = () => {
             onCreateIntern={handleCreateIntern}
           />
         </div>
-        <div>
+        <div >
           <Row style={{ margin: 20 }}>
             <Col>
               <div
@@ -662,7 +662,7 @@ const GroupList = () => {
                   backgroundColor: "white",
                   borderRadius: "25px",
                   width: "100%",
-                  borderRadius: "10px"
+                  borderRadius: "10px",
                 }}
               >
                 <Space
@@ -794,14 +794,14 @@ const GroupList = () => {
                     {t("Search")}
                   </Button>
                 </Space>
-                <div className="list" style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className="list" style={{ display: 'flex', flexDirection: 'column', marginLeft: "16px", marginRight:"16px" }}>
                   <Table
                     rowSelection={{
                       type: "checkbox",
                     }}
                     columns={columns}
                     dataSource={filteredData}
-                    scroll={{ x: "140vw", y: "318px" }}
+                    scroll={{ x: "170vw", y: "340px" }}
                     style={{ maxWidth: "100%", minHeight: "100%" }}
                     pagination={{
                       pageSize: pageSize,
