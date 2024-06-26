@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Col } from "antd";
+import { Button, Input, message } from "antd";
 
 const Question = () => {
   const [questions, setQuestions] = useState([
@@ -30,6 +30,17 @@ const Question = () => {
       id: index + 1,
     }));
     setQuestions(renumberedQuestions);
+  };
+
+  const handleConfirmAddQuestion = () => {
+    const allFieldsFilled = questions.every((question) => question.value.trim() !== "");
+
+    if (allFieldsFilled) {
+      // Submit the form or perform any action you need
+      message.success("All fields are filled. Form submitted successfully!");
+    } else {
+      message.error("Please fill out all fields before submitting.");
+    }
   };
 
   return (
@@ -68,8 +79,8 @@ const Question = () => {
             <Input
               style={{
                 width: "420px",
-                height: "70px",
-                borderRadius: "20px",
+                height: "32px",
+                borderRadius: "6px",
               }}
               value={question.value}
               onChange={(e) =>
@@ -93,9 +104,9 @@ const Question = () => {
       <Button
         style={{
           width: "420px",
-          height: "70px",
-          borderRadius: "20px",
-          fontSize: "20px",
+          height: "32px",
+          borderRadius: "6px",
+          fontSize: "13px",
           background: "blue",
           opacity: "0.4",
           marginLeft: "20px",
@@ -104,6 +115,32 @@ const Question = () => {
         onClick={handleAddQuestion}
       >
         Click to add more questions
+      </Button>
+
+      <label
+        style={{
+          display: "block",
+          fontWeight: "bold",
+          marginBottom: "5px",
+          marginLeft: "20px",
+        }}
+      >
+        Confirm Submission
+      </label>
+      <Button
+        style={{
+          width: "420px",
+          height: "32px",
+          borderRadius: "6px",
+          fontSize: "13px",
+          background: "green",
+          opacity: "0.4",
+          marginLeft: "20px",
+          color: "white",
+        }}
+        onClick={handleConfirmAddQuestion}
+      >
+        CONFIRM ADD QUESTION
       </Button>
     </div>
   );
