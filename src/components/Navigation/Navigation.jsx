@@ -69,6 +69,7 @@ const Navigation = (props) => {
               onSendEmail={props.onSendEmail}
               onCreateIntern={props.onCreateIntern}
               onScheduleInterview={props.onScheduleInterview}
+              checkedCount={props.checkedCount}
             />
           </div>
         </div>

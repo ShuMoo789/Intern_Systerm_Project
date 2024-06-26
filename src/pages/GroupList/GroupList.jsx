@@ -36,6 +36,7 @@ import { useTranslation } from "react-i18next";
 const { Option } = Select;
 
 const GroupList = () => {
+  const [checkedCount, setCheckedCount] = useState(0);
   const [data, setData] = useState(jsonData);
   const [filteredData, setFilteredData] = useState(jsonData);
   const viewPort = useViewport();
@@ -212,12 +213,21 @@ const GroupList = () => {
         return "#000000";
     }
   };
-
+  const handleCheckboxChange = (e) => {
+    if (e.target.checked) {
+      setCheckedCount(checkedCount + 1);
+    } else {
+      setCheckedCount(checkedCount - 1);
+    }
+    console.log("Checked count:", checkedCount);
+  };
   const columns = [
     {
       title: "",
       dataIndex: "select",
-      render: (_, record) => <Checkbox />,
+      render: (_, record) => (
+        <Checkbox onChange={handleCheckboxChange} />
+      ),
       width: "auto",
     },
     {
@@ -630,6 +640,7 @@ const GroupList = () => {
             groupButton={groupButton}
             onSendEmail={showModal}
             onCreateIntern={handleCreateIntern}
+            checkedCount={checkedCount}
           />
         </div>
         <div>

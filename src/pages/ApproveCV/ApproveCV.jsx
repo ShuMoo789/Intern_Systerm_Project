@@ -403,6 +403,7 @@ function ApproveCV() {
     const { Text } = Typography;
     const inputStyle = { width: isMobile ? "100%" : "300px" };
     // checkbox table Ant Design
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             console.log(
@@ -410,6 +411,7 @@ function ApproveCV() {
                 "selectedRows: ",
                 selectedRows
             );
+            setSelectedRowKeys(selectedRowKeys);
         },
         getCheckboxProps: (record) => ({
             name: record.name,
@@ -677,6 +679,7 @@ function ApproveCV() {
                         titleName={t("Approve CV")}
                         groupButton={groupButton}
                         onScheduleInterview={handleOpenScheduleInterView}
+                        checkedCount={selectedRowKeys.length}
                     />
                 </div>
 
