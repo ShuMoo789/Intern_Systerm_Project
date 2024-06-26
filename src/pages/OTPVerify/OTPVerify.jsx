@@ -98,9 +98,31 @@ const OTPVerify = () => {
         return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
     };
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= 990);
+        };
+    
+        window.addEventListener("resize", handleResize);
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []);
+
+    const hiddenImageStyle =  {
+        display: "none"
+    }
+
+    const responsiveImageStyle = {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      };
+
     return (
         <div className="otp-verification-page">
-            <Header />  {/* Header component */}
             <main className="main-content">
                 <div className="content-wrapper">
                     <section className="verification-section">
@@ -146,6 +168,7 @@ const OTPVerify = () => {
                     </section>
                     <section className="image-section">
                         <img
+                            style={isMobile ? hiddenImageStyle : responsiveImageStyle}
                             loading="lazy"
                             src="https://i.postimg.cc/D0c1FsvT/image-7-x4.png"
                             className="verification-image"

@@ -27,6 +27,8 @@ import SenderContainer from "../../components/ChatContainer/SenderContainer";
 import ReceiverContainer from "../../components/ChatContainer/ReceiverContainer";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 
 const GroupZaloManagementDetails = () => {
   const { t } = useTranslation();
@@ -53,12 +55,10 @@ const GroupZaloManagementDetails = () => {
     },
     {
       color: "#4889E9",
-      name: t("Add New Intern"),
+      name: t("Add New Group"),
       icon: <FolderAddOutlined />,
     },
   ];
-
-  const handleOpenCreateGroup = () => {};
 
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -95,13 +95,45 @@ const GroupZaloManagementDetails = () => {
   const handleBackTo = () => {
     // Add logic for "Back To" button here
   };
+
+  const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+  const handleOpenDelete = () => {
+      setDeletePopupVisible(true);
+  };
+
+  const handleCloseDeletePopup = () => {
+      setDeletePopupVisible(false);
+  };
+
+  const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+  const handleOpenExportExcel = () => {
+      setExportExcelVisible(true);
+  };
+
+  const handleCloseExportExcel = () => {
+      setExportExcelVisible(false);
+  };
+
   return (
     <>
-      <Navigation
-        titleName={t("Group Zalo Management")}
-        groupButton={groupButton}
-        onSendEmail={handleOpenCreateGroup}
-      />
+      <div>
+        <Navigation
+          titleName={t("Group Zalo Management")}
+          groupButton={groupButton}
+          onDelete={handleOpenDelete}
+          onExportExcel={handleOpenExportExcel}
+        />
+        {/*Render Delete Popup */}
+        <DeletePopup
+          onClose={handleCloseDeletePopup}
+          openPopup={isDeletePopupVisible}
+        />
+        {/*Render ExportExcel Popup */}
+        <ExportExcel
+            onClose={handleCloseExportExcel}
+            openPopup={isExportExcelVisible}
+        />
+      </div>
       <Row>
         <Col className="viewZaloback" style={{ maxHeight: "100px" }} span={1}>
           <Row
@@ -134,7 +166,7 @@ const GroupZaloManagementDetails = () => {
             overflowY: "auto",
           }}
         >
-          <div style={{ flex: "1 1 auto" }}>
+          <div style={{ }}>
             <Flex
               justify="space-between"
               style={{
@@ -156,12 +188,7 @@ const GroupZaloManagementDetails = () => {
                   50 {t("members")}
                 </Title>
               </div>
-              <div style={{ flex: "0 0 auto" }}>
-                <SearchOutlined />
-                <a href="" style={{ marginRight: "20px" }}>
-                  {t("View in Zalo")}
-                </a>
-              </div>
+              
             </Flex>
 
             <SenderContainer

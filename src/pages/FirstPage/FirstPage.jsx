@@ -9,6 +9,8 @@ import {
   CloseOutlined,
 } from "@ant-design/icons"; // Import the icons from Ant Design
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Header from "../../components/header/Header";
 
 const accounts = [
   {
@@ -30,7 +32,7 @@ const accounts = [
 
 const First_Page = ({ Accounts }) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true); // Initialize state for menu collapse
-
+  const {t} = useTranslation()
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -42,12 +44,16 @@ const First_Page = ({ Accounts }) => {
 
   return (
     <>
+      <div className="header">
+      </div>   
       <Row className="container-background">
         <Col span={9}></Col>
+        
         <Col span={4.5}>
           <Row>
+          
             <div className="avatar" style={{ paddingLeft: "55px" }}>
-              <Avatar
+            <Avatar
                 className="AvaCurent"
                 shape="square"
                 size={200}
@@ -60,14 +66,14 @@ const First_Page = ({ Accounts }) => {
           </Row>
           <h3 className="UsernameCurent">Natalie Brogan</h3>
           <Link to="/Profile">
-            <Button className="ManageAccount">Manage Your Account</Button>
+            <Button className="ManageAccount">{t("Manage Your Account")}</Button>
           </Link>
 
           <div className="container-cover">
             <div className="container-1">
               <Button type="text" className="btn-hide-acc" onClick={toggleMenu}>
                 <span className="btn-text showandhide">
-                  {isCollapsed ? "Show accounts" : "Hide accounts"}
+                  {isCollapsed ? t("Show accounts") : t("Hide accounts")}
                 </span>
                 <span className="btn-icon icon-large">
                   {isCollapsed ? <DownOutlined /> : <UpOutlined />}
@@ -86,8 +92,8 @@ const First_Page = ({ Accounts }) => {
                       style={{ width: 60, height: 60, margin: 10 }}
                     />
                     <div>
-                      <div className="account-name">{account.name}</div>
-                      <div className="account-email">{account.email}</div>
+                      <div className="account-name">{t(account.name)}</div>
+                      <div className="account-email">{t(account.email)}</div>
                     </div>
                   </div>
                 ))}
@@ -103,7 +109,7 @@ const First_Page = ({ Accounts }) => {
                     }
                     icon={<PlusOutlined />}
                   >
-                    Add account
+                    {t("Add account")}
                   </Button>
                 </Link>
                 <Button
@@ -113,7 +119,7 @@ const First_Page = ({ Accounts }) => {
                   }
                   icon={<PlusOutlined />}
                 >
-                  Sign out
+                  {t("Sign out")}
                 </Button>
               </div>
             </div>

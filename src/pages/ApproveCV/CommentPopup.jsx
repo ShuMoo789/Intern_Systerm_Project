@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 const { TextArea } = Input;
 const { Option } = Select;
 
-
 // CommentPopup component
 const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
   const [form] = Form.useForm();
@@ -124,31 +123,32 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
             <label>
               <h4>{t("Intern ID")}</h4>
             </label>
-            <Input type="text" value={intern?.internID || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.internID || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
               <h4>{t("Full Name")}</h4>
             </label>
-            <Input type="text" value={intern?.fullName || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.fullName || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
               <h4>{t("Date Of Birth")}</h4>
             </label>
-            <Input type="text" value={intern?.dateOfBirth || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.dateOfBirth || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
               <h4>{t("Phone Number")}</h4>
             </label>
-            <Input type="text" value={intern?.phoneNumber || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.phoneNumber || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
               <h4>{t("Position")}</h4>
             </label>
             <Input
+              style={{ height: "32px" }}
               type="text"
               value={intern?.position}
               onChange={(e) => updateField("position", e.target.value)}
@@ -158,19 +158,19 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
             <label>
               <h4>{t("School")}</h4>
             </label>
-            <Input type="text" value={intern?.school || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.school || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
               <h4>{t("Address")}</h4>
             </label>
-            <Input type="text" value={intern?.address || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.address || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
               <h4>{t("Email")}</h4>
             </label>
-            <Input type="text" value={intern?.email || ""} readOnly />
+            <Input style={{ height: "32px" }} type="text" value={intern?.email || ""} readOnly />
           </div>
           <div className="view-popup-row">
             <label>
@@ -184,7 +184,6 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
               }
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "Blue" }}
             >
               Link
             </a>
@@ -194,6 +193,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
               <h4>{t("Rank")}</h4>
             </label>
             <Input
+              style={{ height: "32px" }}
               type="text"
               value={state.rank}
               onChange={(e) => updateField("rank", e.target.value)}
@@ -202,13 +202,14 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
         </div>
       )}
       {state.selectedOption === 1 && (
-        <Form form={form} className="comment-section">
+        <div className="comment-section">
           {/* Section for comments of intern */}
           <div className="comment-popup-content">
             <div className="comment-popup-row">
               <label>
                 <h4>{t("Major")}</h4>
               </label>
+
               <Form.Item
                 name="major"
                 rules={[
@@ -217,6 +218,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 initialValue={state.major}
               >
                 <Input
+                  style={{ height: "32px" }}
                   value={state.major}
                   onChange={(e) => updateField("major", e.target.value)}
                 />
@@ -237,6 +239,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 initialValue={state.programmingLanguage}
               >
                 <Input
+                  style={{ height: "32px" }}
                   value={state.programmingLanguage}
                   onChange={(e) =>
                     updateField("programmingLanguage", e.target.value)
@@ -259,12 +262,14 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 initialValue={state.projectOnGitHub}
               >
                 <Input
+                  style={{ height: "32px" }}
                   value={state.projectOnGitHub}
                   onChange={(e) =>
                     updateField("projectOnGitHub", e.target.value)
                   }
                 />
               </Form.Item>
+
             </div>
             <div className="comment-popup-row">
               <label>
@@ -278,30 +283,31 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 initialValue={state.position}
               >
                 <Input
+                  style={{ height: "32px" }}
                   value={state.position}
                   onChange={(e) => updateField("position", e.target.value)}
                 />
               </Form.Item>
             </div>
             <div className="comment-popup-row">
-            <label>
-              <h4>{t("Rank")}</h4>
-            </label>
-            <Form.Item
-              name="rank"
-              rules={[
-                { required: true, message: t("Please select the rank!") },
-              ]}
-            >
-              <Select defaultValue="" style={{ width: "100%",height:"50px" }}>
-                    <Option value="Intern">{t("Intern")}</Option>
-                    <Option value="Junior">{t("Junior")}</Option>
-                    <Option value="Senior">{t("Senior")}</Option>
-                  </Select>
-            </Form.Item>
-          </div>
+              <label>
+                <h4>{t("Rank")}</h4>
+              </label>
+              <Form.Item
+                name="rank"
+                rules={[
+                  { required: true, message: t("Please select the rank!") },
+                ]}
+              >
+                <Select defaultValue="" style={{ width: "100%", height: "32px" }}>
+                  <Option value="Intern">{t("Intern")}</Option>
+                  <Option value="Junior">{t("Junior")}</Option>
+                  <Option value="Senior">{t("Senior")}</Option>
+                </Select>
+              </Form.Item>
+            </div>
             <div className="comment-popup-row">
-            <label>
+              <label>
                 <h4>{t("Add Comment")}</h4>
               </label>
               <Form.Item
@@ -312,6 +318,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                 initialValue={state.comment}
               >
                 <TextArea
+                  style={{ height: "32px" }}
                   value={state.comment}
                   onChange={(e) => updateField("comment", e.target.value)}
                   rows={4}
@@ -320,11 +327,13 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
             </div>
           </div>
           <div className="comment-popup-footer">
+            {/* Footer buttons to cancel or save comments */}
+            <Button onClick={onClose}>{t("Cancel")}</Button>
             <Button type="primary" onClick={handleSave}>
               {t("Save Comments")}
             </Button>
           </div>
-        </Form>
+        </div>
       )}
       {state.selectedOption === 2 && (
         <Form form={form} className="result-popup-section">
@@ -343,7 +352,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -356,7 +365,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     { required: true, message: t("Please input the major!") },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -369,7 +378,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     { required: true, message: t("Please select your year!") },
                   ]}
                 >
-                  <Select style={{ width: "100%", height: "49px" }}>
+                  <Select style={{ width: "100%", height: "32px" }}>
                     <Option value="Sophomore">{t("Sophomore")}</Option>
                     <Option value="Not Sophomore">{t("Not Sophomore")}</Option>
                   </Select>
@@ -388,7 +397,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -406,7 +415,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -424,7 +433,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -442,7 +451,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Select style={{ width: "100%", height: "49px" }}>
+                  <Select style={{ width: "100%", height: "32px" }}>
                     <Option value="Yes">{t("Yes")}</Option>
                     <Option value="No">{t("No")}</Option>
                   </Select>
@@ -467,7 +476,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Select style={{ width: "100%", height: "49px" }}>
+                  <Select style={{ width: "100%", height: "32px" }}>
                     <Option value="Yes">{t("Yes")}</Option>
                     <Option value="No">{t("No")}</Option>
                   </Select>
@@ -490,7 +499,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -508,7 +517,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Select style={{ width: "100%", height: "49px" }}>
+                  <Select style={{ width: "100%", height: "32px" }}>
                     <Option value="Online">Online</Option>
                     <Option value="Offline">Offline</Option>
                   </Select>
@@ -529,7 +538,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="info">
@@ -545,7 +554,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
             </div>
@@ -564,7 +573,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input placeholder={t("Enter intern's answer")} />
+                  <Input style={{ height: "32px" }} placeholder={t("Enter intern's answer")} />
                 </Form.Item>
               </div>
               <div className="question">
@@ -580,7 +589,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="question">
@@ -596,7 +605,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
             </div>
@@ -615,7 +624,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input placeholder={t("Enter intern's answer")} />
+                  <Input style={{ height: "32px" }} placeholder={t("Enter intern's answer")} />
                 </Form.Item>
               </div>
               <div className="pass">
@@ -631,7 +640,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
               <div className="pass">
@@ -647,7 +656,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
             </div>
@@ -663,7 +672,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                     },
                   ]}
                 >
-                  <Select defaultValue="Passed" style={{ width: "30%" }}>
+                  <Select defaultValue="Passed" style={{ width: "30%", height: "32px" }}>
                     <Option value="Passed">{t("Passed")}</Option>
                     <Option value="Failed">{t("Failed")}</Option>
                   </Select>

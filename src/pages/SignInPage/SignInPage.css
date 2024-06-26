@@ -1,0 +1,13 @@
+.image-signin {
+    width: 100%;
+    flex-grow: 1;
+    aspect-ratio: 1.47;
+    object-fit: contain;
+}
+
+@media (max-width: 991px) {
+    .image-signin {
+        /* max-width: 100%; */
+        margin-top: 36px;
+    }
+}

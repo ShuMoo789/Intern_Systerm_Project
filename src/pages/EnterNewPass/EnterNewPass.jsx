@@ -121,16 +121,43 @@ function ChangePasswordForm() {
 
 // Main component for the "Enter New Password" page
 function MyPass() {
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= 990);
+        };
+    
+        window.addEventListener("resize", handleResize);
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []);
+
+    const hiddenImageStyle =  {
+        display: "none"
+    }
+
+    const responsiveImageStyle = {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      };
     return (
         <div className="enter-new-pass">
-            <Header />  {/* Header component */}
             <main className="main-content">
                 <div className="content-wrapper">
                     <div className="newpassbox">
                         <ChangePasswordForm />  {/* ChangePasswordForm component */}
                     </div>
                     <div className="image-column">
-                        <img loading="lazy" src="https://i.postimg.cc/D0c1FsvT/image-7-x4.png" alt="Decorative illustration" className="illustration" />
+                        <img
+                            style={isMobile ? hiddenImageStyle : responsiveImageStyle} 
+                            loading="lazy" 
+                            src="https://i.postimg.cc/D0c1FsvT/image-7-x4.png" 
+                            alt="Decorative illustration" 
+                            className="illustration" 
+                        />
                         {/* Illustration image */}
                     </div>
                 </div>

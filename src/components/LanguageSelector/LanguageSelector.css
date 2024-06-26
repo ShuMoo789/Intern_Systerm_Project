@@ -1,0 +1,71 @@
+.setting-icon {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.setting-icon.rotate {
+  transform: rotate(45deg);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-size: x-large;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: -15px;
+  border-radius: 10px;
+
+
+}
+
+.dropdown-item:hover {
+  background-color: #c1c1c1;
+  border-radius: 10px;
+}
+
+.dropdown-item a {
+  font-size:smaller;
+  padding-left:50px ;
+  padding: 5px 10px;
+  margin-left: 10px;
+  color: inherit;
+  text-decoration: none;
+  
+}
+
+/* .dropdown-item a:hover {
+  text-decoration: underline;
+} */
+.icon-menu{
+    font-size: smaller;
+    
+    margin-left: 10px;
+}
+.icon-menu2{
+    font-size:small;
+    
+    margin-left:30%;
+}
+.iconBack{
+    font-size:small;
+    margin-left: -20px;
+    padding-right:10px ;
+}
+.setting{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 120px 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: smaller;
+}

@@ -21,6 +21,7 @@ import ConfirmCV from "./pages/ConfirmCV/ConfirmCV.jsx";
 import GroupZaloManagementDetails from "./pages/GroupZaloManagementDetails/GroupZaloManagementDetails.jsx";
 import GroupZaloManagement from "./pages/GroupZaloManagement/GroupZaloManagement/GroupZaloManagement.jsx";
 import MainLayout from "./MainLayout/MainLayout.jsx";
+import AuthLayout from "./AuthLayout/AuthLayout.jsx";
 
 function App() {
   const location = useLocation();
@@ -35,12 +36,14 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<FirstPage />} />
-        <Route path="/SignIn" element={<SignInPage />} />
-        <Route path="/SignUp" element={<SignUpPage />} />
-        <Route path="/PasswordReset" element={<PasswordReset />} />
-        <Route path="/EnterNewPass" element={<EnterNewPass />} />
-        <Route path="/OTPVerify" element={<OTPVerify />} />
+        <Route element={<AuthLayout/>}>
+          <Route path="/" element={<FirstPage />}/>
+          <Route path="SignIn" element={<SignInPage />} />
+          <Route path="SignUp" element={<SignUpPage />} />
+          <Route path="PasswordReset" element={<PasswordReset />} />
+          <Route path="EnterNewPass" element={<EnterNewPass />} />
+          <Route path="OTPVerify" element={<OTPVerify />} />
+        </Route>
         <Route path="/" element={<MainLayout />}>
           <Route path="profile" element={<AccountManagement />} />
           <Route path="dashboard" element={<Dashboard />} />

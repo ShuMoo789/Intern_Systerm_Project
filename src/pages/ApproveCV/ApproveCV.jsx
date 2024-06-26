@@ -17,15 +17,19 @@ import {
     EditOutlined,
     FolderAddOutlined,
 } from "@ant-design/icons";
-import { Input } from "antd";
+import { Col, Input, Row } from "antd";
 import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
-import { Typography, Row, Col } from "antd";
+import { Typography } from "antd";
 import useViewport from "../../hooks/useViewport.jsx";
 import Navigation from "../../components/Navigation/Navigation.jsx";
 import { Toaster } from "react-hot-toast";
+import EditPopup from "../../components/EditPopup/EditPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import AddNewIntern from "../../components/AddNewIntern/AddNewIntern.jsx"
 // Importing dayjs library and extending it with customParseFormat plugin
 dayjs.extend(customParseFormat);
 
@@ -53,7 +57,7 @@ function IconTextBlock({ iconSrc, altText, text }) {
 
 function ApproveCV() {
     // Date format for date inputs
-    const dateFormat = "YYYY/MM/DD";
+    const dateFormat = "DD/MM/YYYY";
 
     // Number of interns per page
     const internsPerPage = 6;
@@ -173,20 +177,20 @@ function ApproveCV() {
                             style={
                                 intern.status === t("Pending")
                                     ? {
-                                          backgroundColor: "#FFB596",
-                                          color: "#E5731C",
-                                      }
+                                        backgroundColor: "#FFB596",
+                                        color: "#E5731C",
+                                    }
                                     : intern.status === t("Failed")
-                                    ? {
-                                          backgroundColor: "#F5A3B7",
-                                          color: "#7D0022",
-                                      }
-                                    : intern.status === t("Passed")
-                                    ? {
-                                          backgroundColor: "#B7EACB",
-                                          color: "#3A7D34",
-                                      }
-                                    : {}
+                                        ? {
+                                            backgroundColor: "#F5A3B7",
+                                            color: "#7D0022",
+                                        }
+                                        : intern.status === t("Passed")
+                                            ? {
+                                                backgroundColor: "#B7EACB",
+                                                color: "#3A7D34",
+                                            }
+                                            : {}
                             }
                         >
                             {intern.status}
@@ -399,10 +403,10 @@ function ApproveCV() {
     const commentText = t("comment");
     const commentsText = t("comments");
     const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1340;
+    const isMobile = viewPort.width <= 1024;
     const { Text } = Typography;
-    const inputStyle = { width: isMobile ? "100%" : "300px" };
     // checkbox table Ant Design
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             console.log(
@@ -410,6 +414,7 @@ function ApproveCV() {
                 "selectedRows: ",
                 selectedRows
             );
+            setSelectedRowKeys(selectedRowKeys);
         },
         getCheckboxProps: (record) => ({
             name: record.name,
@@ -569,14 +574,14 @@ function ApproveCV() {
                                 record.status === "Failed"
                                     ? "#F8E7EE"
                                     : record.status === "Passed"
-                                    ? "#EFF9F1"
-                                    : "#FFEFE6",
+                                        ? "#EFF9F1"
+                                        : "#FFEFE6",
                             color:
                                 record.status === "Failed"
                                     ? "#B70D52"
                                     : record.status === "Passed"
-                                    ? "#449E3C"
-                                    : "#FF5D02",
+                                        ? "#449E3C"
+                                        : "#FF5D02",
                             borderRadius: "100px",
                             fontSize: "12px",
                         }}
@@ -669,6 +674,43 @@ function ApproveCV() {
     const handleCloseScheduleInterView = () => {
         setSchedulePopupVisible(false);
     };
+
+    const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+    const handleOpenEdit = () => {
+        setEditPopupVisible(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setEditPopupVisible(false);
+    };
+
+    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+    const handleOpenDelete = () => {
+        setDeletePopupVisible(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeletePopupVisible(false);
+    };
+
+    const [isExportExcelVisible, setExportExcelVisible] = useState(false);
+    const handleOpenExportExcel = () => {
+        setExportExcelVisible(true);
+    };
+
+    const handleCloseExportExcel = () => {
+        setExportExcelVisible(false);
+    };
+
+    const [isAddNewInternVisible, setAddNewInternVisible] = useState(false);
+    const handleOpenAddNewIntern = () => {
+        setAddNewInternVisible(true);
+    };
+
+    const handleCloseAddNewIntern = () => {
+        setAddNewInternVisible(false);
+    };
+
     return (
         <div id="APRCV">
             <main className="content">
@@ -677,6 +719,12 @@ function ApproveCV() {
                         titleName={t("Approve CV")}
                         groupButton={groupButton}
                         onScheduleInterview={handleOpenScheduleInterView}
+
+                        checkedCount={selectedRowKeys.length}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                        onExportExcel={handleOpenExportExcel}
+                        onCreateIntern={handleOpenAddNewIntern}
                     />
                 </div>
 
@@ -685,8 +733,12 @@ function ApproveCV() {
                         <div className="filter">
                             <div className="fields">
                                 <Input
-                                    style={inputStyle}
-                                    size="large"
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
                                     placeholder={t("Enter intern's ID")}
                                     value={selectedFilters.internID}
                                     onChange={(e) =>
@@ -697,8 +749,12 @@ function ApproveCV() {
                                     }
                                 />
                                 <Input
-                                    style={inputStyle}
-                                    size="large"
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
                                     placeholder={t("Enter intern's Full name")}
                                     value={selectedFilters.fullName}
                                     onChange={(e) =>
@@ -710,20 +766,27 @@ function ApproveCV() {
                                 />
 
                                 <DatePicker
-                                    format={dateFormat}
-                                    placeholder={t("Enter intern's D.O.B")}
+
                                     style={{
-                                        padding: "7px 11px",
+                                        height: "32px",
+                                        width: "100%",
                                         fontSize: "15px",
                                     }}
+                                    className="custom-placeholder"
+                                    format={dateFormat}
+                                    placeholder={t("Enter intern's D.O.B")}
                                     onChange={(date) =>
                                         handleDateChange("dateOfBirth", date)
                                     }
                                 />
 
                                 <Input
-                                    style={inputStyle}
-                                    size="large"
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
                                     placeholder={t(
                                         "Enter intern's Phone number"
                                     )}
@@ -739,17 +802,20 @@ function ApproveCV() {
                                 <Dropdown
                                     overlay={createMenu("school", schoolNames)}
                                     trigger={["click"]}
-                                    style={inputStyle}
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
+
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
                                         }}
                                     >
                                         {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
@@ -768,8 +834,12 @@ function ApproveCV() {
                                 </Dropdown>
 
                                 <Input
-                                    style={inputStyle}
-                                    size="large"
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
                                     placeholder={t("Enter intern's Email")}
                                     value={selectedFilters.email}
                                     onChange={(e) =>
@@ -786,16 +856,20 @@ function ApproveCV() {
                                         positionNames
                                     )}
                                     trigger={["click"]}
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
                                 >
                                     <Button
                                         style={{
-                                            padding: "7px 11px",
+
                                             fontSize: "15px",
                                             textAlign: "left",
                                             display: "flex",
                                             justifyContent: "space-between",
                                             alignItems: "center",
-                                            height: "100%",
                                         }}
                                     >
                                         <div
@@ -813,8 +887,12 @@ function ApproveCV() {
                                 </Dropdown>
 
                                 <Input
-                                    style={inputStyle}
-                                    size="large"
+                                    style={{
+                                        height: "32px",
+                                        width: "100%",
+                                        fontSize: "15px",
+                                    }}
+                                    className="custom-placeholder"
                                     placeholder={t("Enter intern's Address")}
                                     value={selectedFilters.address}
                                     onChange={(e) =>
@@ -831,9 +909,12 @@ function ApproveCV() {
                                         "Enter intern's Date Submitted Form"
                                     )}
                                     style={{
-                                        padding: "7px 11px",
+                                        height: "32px",
+
+                                        width: "100%",
                                         fontSize: "15px",
                                     }}
+                                    className="custom-placeholder"
                                     onChange={(date) =>
                                         handleDateChange("dateSub", date)
                                     }
@@ -844,19 +925,14 @@ function ApproveCV() {
                                     className="cln-btn btn"
                                     onClick={handleClearFilters}
                                 >
-                                    <DeleteOutlined
-                                        style={{ marginRight: "10px" }}
-                                    />
+                                    <DeleteOutlined />
                                     {t("Clean Filter")}
                                 </Button>
-                                <br />
                                 <Button
                                     className="srch-btn btn"
                                     onClick={handleSearch}
                                 >
-                                    <SearchOutlined
-                                        style={{ marginRight: "10px" }}
-                                    />
+                                    <SearchOutlined />
                                     {t("Search")}
                                 </Button>
                             </div>
@@ -865,9 +941,13 @@ function ApproveCV() {
                         <div className="filter">
                             <Row gutter={[16, 16]}>
                                 <Col>
-                                    <Row gutter={[16, 10]}>
+                                    <Row gutter={[5, 5]}>
                                         <Input
-                                            size="large"
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
                                             placeholder={t("Enter intern's ID")}
                                             value={selectedFilters.internID}
                                             onChange={(e) =>
@@ -878,7 +958,11 @@ function ApproveCV() {
                                             }
                                         />
                                         <Input
-                                            size="large"
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
                                             placeholder={t(
                                                 "Enter intern's Full name"
                                             )}
@@ -892,7 +976,12 @@ function ApproveCV() {
                                         />
 
                                         <DatePicker
-                                            style={{ width: "100%" }}
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
+                                            className="custom-placeholder"
                                             format={dateFormat}
                                             placeholder={t(
                                                 "Enter intern's D.O.B"
@@ -906,7 +995,11 @@ function ApproveCV() {
                                         />
 
                                         <Input
-                                            size="large"
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
                                             placeholder={t(
                                                 "Enter intern's Phone number"
                                             )}
@@ -929,14 +1022,12 @@ function ApproveCV() {
                                             <Button
                                                 style={{
                                                     width: "100%",
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
                                                 }}
                                             >
                                                 {/* <div style={{color: "#C7BFBF"}}>Enter intern's School</div> */}
@@ -957,8 +1048,11 @@ function ApproveCV() {
                                         </Dropdown>
 
                                         <Input
-                                            style={inputStyle}
-                                            size="large"
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
                                             placeholder={t(
                                                 "Enter intern's Email"
                                             )}
@@ -981,14 +1075,12 @@ function ApproveCV() {
                                             <Button
                                                 style={{
                                                     width: "100%",
-                                                    padding: "7px 11px",
                                                     fontSize: "15px",
                                                     textAlign: "left",
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
                                                     alignItems: "center",
-                                                    height: "100%",
                                                 }}
                                             >
                                                 <div
@@ -1008,7 +1100,11 @@ function ApproveCV() {
                                         </Dropdown>
 
                                         <Input
-                                            size="large"
+                                            style={{
+                                                height: "32px",
+                                                width: "100%",
+                                                fontSize: "15px",
+                                            }}
                                             placeholder={t(
                                                 "Enter intern's Address"
                                             )}
@@ -1027,10 +1123,11 @@ function ApproveCV() {
                                                 "Enter intern's Date Submitted Form"
                                             )}
                                             style={{
+                                                height: "32px",
                                                 width: "100%",
-                                                padding: "7px 11px",
                                                 fontSize: "15px",
                                             }}
+                                            className="custom-placeholder"
                                             onChange={(date) =>
                                                 handleDateChange(
                                                     "dateSub",
@@ -1098,13 +1195,34 @@ function ApproveCV() {
                 initialPage={initialPage}
                 onSave={handleSaveComment}
             />
-
+            {/*Render ScheduleInterView Popup */}
             <ScheduleInterview
                 onClose={handleCloseScheduleInterView}
                 openPopup={isSchedulePopupVisible}
             />
+            {/*Render Edit Popup */}
+            <EditPopup
+                onClose={handleCloseEditPopup}
+                openPopup={isEditPopupVisible}
+            />
+            {/*Render Delete Popup */}
+            <DeletePopup
+                onClose={handleCloseDeletePopup}
+                openPopup={isDeletePopupVisible}
+            />
+            {/*Render ExportExcel Popup */}
+            <ExportExcel
+                onClose={handleCloseExportExcel}
+                openPopup={isExportExcelVisible}
+            />
+            {/*Render Add New Intern Popup */}
+            <AddNewIntern
+                onClose={handleCloseAddNewIntern}
+                openPopup={isAddNewInternVisible}
+            />
+
             <Toaster />
-        </div>
+        </div >
     );
 }
 

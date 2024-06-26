@@ -174,12 +174,12 @@ const Sheldule = ({ onClose, openPopup }) => {
               >
                 <DatePicker
                   format={{
-                    format: "YYYY-MM-DD",
+                    format: "DD/MM/YYYY",
                     type: "mask",
                   }}
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                     padding: "8px",
                     border: "1px solid #ccc",
                     boxSizing: "border-box",
@@ -215,7 +215,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                 <TimePicker
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                     padding: "8px",
                     border: "1px solid #ccc",
                   }}
@@ -258,7 +258,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   options={optionsDuration}
                   style={{
                     width: "330px",
-                    height: "57px", // ...
+                    height: "32px", // ...
                     font: "bold",
                   }}
                 />
@@ -289,7 +289,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   marginBottom: "5px",
                 }}
               >
-                Types of Interviews
+                {t("Types of Interviews")}
               </label>
 
               <Form.Item
@@ -307,7 +307,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   options={optionsInterviewType}
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                   }}
                 />
               </Form.Item>
@@ -336,7 +336,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                 style={{
                   position: "absolute",
                   width: "122px",
-                  height: "57px",
+                  height: "32px",
                   textAlign: "center",
                   textAlignLast: "center",
                   zIndex: 2,
@@ -361,7 +361,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   options={optionsInterviewer}
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                     textAlign: "right",
                     textAlignLast: "right",
                   }}
@@ -398,7 +398,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                 <Input
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                   }}
                 />
               </Form.Item>
@@ -442,7 +442,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   options={optionsEmailType}
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                   }}
                 />
               </Form.Item>
@@ -475,7 +475,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   options={optionsRank}
                   style={{
                     width: "330px",
-                    height: "57px",
+                    height: "32px",
                   }}
                 />
               </Form.Item>
@@ -525,7 +525,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   type="email"
                   style={{
                     width: "510px",
-                    height: "57px",
+                    height: "32px",
                     padding: "8px",
                     border: "1px solid #ccc",
                   }}
@@ -567,7 +567,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                   type="email"
                   style={{
                     width: "510px",
-                    height: "57px",
+                    height: "32px",
                     padding: "8px",
                     border: "1px solid #ccc",
                   }}
@@ -612,7 +612,7 @@ const Sheldule = ({ onClose, openPopup }) => {
                     options={optionsEmailType}
                     style={{
                       width: "300px",
-                      height: "57px",
+                      height: "32px",
                     }}
                   />
                 </Form.Item>
