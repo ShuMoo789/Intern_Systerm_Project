@@ -105,7 +105,7 @@ const AccountManagement = () => {
             <div className="user-name2">{user.name}</div>
             <div className="user-nickname">({user.nickname})</div>
           </div>
-          <Button  className="btnEditPro" icon={<EditOutlined />}  > Edit</Button>
+          <Button  className="btnEditPro" icon={<EditOutlined />}  > {t("Edit")}</Button>
 
           
         </Row>
