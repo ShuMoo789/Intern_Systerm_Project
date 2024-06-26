@@ -13,12 +13,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import GroupButton from "../../components/GroupButton/GroupButton";
-import { Avatar, Button, message, Popconfirm } from "antd";
+import { Avatar } from "antd";
 import useViewport from "../../hooks/useViewport";
 import User_Img from "../../assets/user_image.png";
 import { useTranslation } from "react-i18next";
-import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
-import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx";
+import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx";
 
 const TechnologyManagement = () => {
   const viewPort = useViewport();
@@ -28,37 +28,28 @@ const TechnologyManagement = () => {
   const { t } = useTranslation();
 
   // props GroupButton
-  // const groupButton = [
-  //   {
-  //     color: "#41B137",
-  //     name: t("Export Excel"),
-  //     icon: <ExportOutlined />,
-  //   },
-  //   {
-  //     color: "#FB8632",
-  //     name: t("Edit"),
-  //     icon: <EditOutlined />,
-  //   },
-  //   {
-  //     color: "#FF3A2E",
-  //     name: t("Delete"),
-  //     icon: <DeleteOutlined />,
-  //   },
-  //   {
-  //     color: "#4889E9",
-  //     name: t("Add New Technology"),
-  //     icon: <FolderAddOutlined />,
-  //   },
-  // ];
-
-  // const confirm = (e) => {
-  //   console.log(e);
-  //   message.success("Click on Yes");
-  // };
-  // const cancel = (e) => {
-  //   console.log(e);
-  //   message.error("Click on No");
-  // };
+  const groupButton = [
+    {
+      color: "#41B137",
+      name: t("Export Excel"),
+      icon: <ExportOutlined />,
+    },
+    {
+      color: "#FB8632",
+      name: t("Edit"),
+      icon: <EditOutlined />,
+    },
+    {
+      color: "#FF3A2E",
+      name: t("Delete"),
+      icon: <DeleteOutlined />,
+    },
+    {
+      color: "#4889E9",
+      name: t("Add New Technology"),
+      icon: <FolderAddOutlined />,
+    },
+  ];
 
   // Hàm xử lý khi chuyển tab
   const handleTabClick = (tab) => {
@@ -82,20 +73,20 @@ const TechnologyManagement = () => {
 
   const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
   const handleOpenDelete = () => {
-      setDeletePopupVisible(true);
+    setDeletePopupVisible(true);
   };
 
   const handleCloseDeletePopup = () => {
-      setDeletePopupVisible(false);
+    setDeletePopupVisible(false);
   };
 
   const [isExportExcelVisible, setExportExcelVisible] = useState(false);
   const handleOpenExportExcel = () => {
-      setExportExcelVisible(true);
+    setExportExcelVisible(true);
   };
 
   const handleCloseExportExcel = () => {
-      setExportExcelVisible(false);
+    setExportExcelVisible(false);
   };
 
   return (
@@ -116,69 +107,23 @@ const TechnologyManagement = () => {
         </div>
       </div>
 
-
-        <div className="sub-content-technology-management">
-          <div className="group-button-technology-management">
-            <GroupButton 
-              groupButton={groupButton} 
-              onDelete={handleOpenDelete}
-              onExportExcel={handleOpenExportExcel}
-            />
-            {/*Render Delete Popup */}
-            <DeletePopup
-                onClose={handleCloseDeletePopup}
-                openPopup={isDeletePopupVisible}
-            />
-            {/*Render ExportExcel Popup */}
-            <ExportExcel
-                onClose={handleCloseExportExcel}
-                openPopup={isExportExcelVisible}
-            />
-          </div>
-
-{/* Button with functionality */}
-          {/* <Popconfirm
-            title="Export folder"
-            description="Are you sure to Export this file?"
-            onConfirm={confirm}
-            onCancel={cancel}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button  type="primary"  style={{ backgroundColor: 'green', borderColor: 'green' }} > <ExportOutlined /> Export Excel</Button>
-          </Popconfirm>
-          <Popconfirm
-            title="Export folder"
-            description="Are you sure to Export this file?"
-            onConfirm={confirm}
-            onCancel={cancel}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button type="primary" style={{ backgroundColor: 'orange', borderColor: 'orange' }}>  <EditOutlined /> Edit</Button>
-          </Popconfirm>
-          <Popconfirm
-            title="Export folder"
-            description="Are you sure to Export this file?"
-            onConfirm={confirm}
-            onCancel={cancel}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button type="primary" danger><DeleteOutlined /> Delete</Button>
-          </Popconfirm>
-          <Popconfirm
-            title="Export folder"
-            description="Are you sure to Export this file?"
-            onConfirm={confirm}
-            onCancel={cancel}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button type="primary"><FolderAddOutlined /> Add new Technology</Button>
-          </Popconfirm> */}
-          {/* this is originnal button list  */}
-          {/* <GroupButton groupButton={groupButton} /> */}
+      <div className="sub-content-technology-management">
+        <div className="group-button-technology-management">
+          <GroupButton
+            groupButton={groupButton}
+            onDelete={handleOpenDelete}
+            onExportExcel={handleOpenExportExcel}
+          />
+          {/*Render Delete Popup */}
+          <DeletePopup
+            onClose={handleCloseDeletePopup}
+            openPopup={isDeletePopupVisible}
+          />
+          {/*Render ExportExcel Popup */}
+          <ExportExcel
+            onClose={handleCloseExportExcel}
+            openPopup={isExportExcelVisible}
+          />
         </div>
 
         <div className="technology-list-container">
