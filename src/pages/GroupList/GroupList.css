@@ -31,3 +31,7 @@
 .add-new-intern-modal {
     width: 57% !important;
 }
+
+body {
+    overflow-y: hidden;
+}
