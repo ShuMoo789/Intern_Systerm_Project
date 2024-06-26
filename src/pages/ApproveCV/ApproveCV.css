@@ -273,7 +273,6 @@ div.approve-btns > div.feedbacks:hover {
     justify-content: flex-end;
     width: 100%;
     gap: 5px;
-    margin-left: 10px;
 
 }
 
@@ -291,9 +290,8 @@ div.approve-btns > div.feedbacks:hover {
     border: 1px solid #cbd2dc;
     height: auto;
     width: 150px;
-    margin-bottom: 5px;
     cursor: pointer;
-
+}
 
 #APRCV .content>.filter-section>.filter>.buttons>.cln-btn:hover {
     color: #fff;
