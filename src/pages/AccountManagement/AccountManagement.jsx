@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./AccountManagement.css";
 import userImage from "../../assets/user_image.png";
 import coverImage from "../../assets/Cover-image.png";
+import { useTranslation } from "react-i18next";
 import { Row, Button, Tooltip } from "antd";
 import {
   EditOutlined,
@@ -76,7 +77,7 @@ const AccountManagement = () => {
   };
 
   const { user } = database;
-
+  const { t } = useTranslation();
   return (
     <>
       <Row className="header">
@@ -121,7 +122,7 @@ const AccountManagement = () => {
       <Row className="profile-sections">
         <div id="section1" className="section no-select">
           <div className="section-content">
-            <h2>Kinh Nghiệm</h2>
+            <h2>{t("Experience")}</h2>
             {user.experience.map((exp, index) => (
               <p key={index}>• {exp}</p>
             ))}
@@ -129,7 +130,7 @@ const AccountManagement = () => {
         </div>
         <div id="section2" className="section no-select">
           <div className="section-content">
-            <h2>Chuyên Môn</h2>
+            <h2>{t("Specialty")}</h2>
             {user.skills.map((skill, index) => (
               <p key={index}>• {skill}</p>
             ))}
@@ -137,7 +138,7 @@ const AccountManagement = () => {
         </div>
         <div id="section3" className="section no-select">
           <div className="section-content">
-            <h2>Project Từng Làm</h2>
+            <h2>{t("Previous Projects")}</h2>
             {user.projects.map((project, index) => (
               <p key={index}>• {project}</p>
             ))}
@@ -145,10 +146,10 @@ const AccountManagement = () => {
         </div>
         <div id="section4" className="section no-select">
           <div className="section-content">
-            <h2>Thông Tin Liên Hệ</h2>
+            <h2>{t("Contact")}</h2>
             <p>• Email: {user.email}</p>
-            <p>• Số điện thoại: {user.phone}</p>
-            <p>• Địa chỉ: {user.address}</p>
+            <p>• {t("Number Phone")}: {user.phone}</p>
+            <p>• {t("Address")}: {user.address}</p>
             
           </div>
         </div>
