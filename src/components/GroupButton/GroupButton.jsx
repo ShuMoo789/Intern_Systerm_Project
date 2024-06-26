@@ -9,6 +9,7 @@ const GroupButton = ({
     groupButton,
     onSendEmail,
     onScheduleInterview,
+    checkedCount,
     onCreateIntern,
     onEdit,
     onDelete,
