@@ -1,109 +1,51 @@
 import React, { useState } from "react";
 import "./TechnologyList.css";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
 import { TiFolderDelete } from "react-icons/ti";
-import { Modal, Pagination, Button } from "antd";
+import { Modal, Pagination, Button, Checkbox, message, Popconfirm, Form, Input } from "antd";
 import { Tabs } from "antd";
+
+import {
+  ExportOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  FolderAddOutlined,
+} from "@ant-design/icons";
+
 import Question from "./Question";
 import Detail from "./Detail";
 import { useTranslation } from "react-i18next";
 
-const onChange = (key) => {
-  console.log(key);
-};
+// Placeholder for Question component
+const Question = () => <div>Question Component Placeholder</div>;
 
+// Tab items configuration
 const items = [
-  {
-    key: "1",
-    label: "Intern",
-    children: <Question />,
-  },
-  {
-    key: "2",
-    label: "Fresher",
-    children: <Question />,
-  },
-  {
-    key: "3",
-    label: "Junior",
-    children: <Question />,
-  },
-  {
-    key: "4",
-    label: "Middle",
-    children: <Question />,
-  },
-  {
-    key: "5",
-    label: "Senior",
-    children: (
-      <Question />
-
-      // <div className="tab-content">
-      //     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-      //     <div style={{ marginBottom: '20px' }}>
-      //     <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Question 1</label>
-      //     <Input
-      //           style={{
-      //             width: "420px",
-      //             height: "70px",
-      //             borderRadius: "20px",
-      //           }}
-      //         />
-      //     </div>
-
-      //     <div style={{ marginBottom: '20px' }}>
-      //     <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Question 2</label>
-      //     <Input
-      //           style={{
-      //             width: "420px",
-      //             height: "70px",
-      //             borderRadius: "20px",
-      //           }}
-      //         />
-      //     </div>
-
-      //     <div style={{ marginBottom: '20px' }}>
-      //     <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Question 3</label>
-      //     <Input
-      //           style={{
-      //             width: "420px",
-      //             height: "70px",
-      //             borderRadius: "20px",
-      //           }}
-      //         />
-      //     </div>
-
-      //     </div>
-
-      //     <div>
-      //       Add Question
-
-      //     </div>
-      // </div>
-    ),
-  },
+  { key: "1", label: "Intern", children: <Question /> },
+  { key: "2", label: "Fresher", children: <Question /> },
+  { key: "3", label: "Junior", children: <Question /> },
+  { key: "4", label: "Middle", children: <Question /> },
+  { key: "5", label: "Senior", children: <Question /> },
 ];
 
 const TechnologyList = ({ activeTab }) => {
+
+  // State hooks
+
   const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedTech, setSelectedTech] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(6);
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-    }, 3000);
-  };
+  const [checkedItems, setCheckedItems] = useState({});
+  const [isExactlyOneChecked, setIsExactlyOneChecked] = useState(false);
+  const [addModalVisible, setAddModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editingTechnology, setEditingTechnology] = useState(null);
+  const [form] = Form.useForm();
+  const [editForm] = Form.useForm();
 
   const handleCancel = () => {
     setOpen(false);
@@ -118,7 +60,8 @@ const TechnologyList = ({ activeTab }) => {
     setOpenDetail(false);
   }
 
-  const technologies = {
+  const [technologies, setTechnologies] = useState({
+
     "Back-End": [
       {
         title: "Java",
@@ -221,22 +164,76 @@ const TechnologyList = ({ activeTab }) => {
         description: "Figma is a cloud-based design tool used for creating user interfaces and user experiences. It allows designers to collaborate in real-time, making it ideal for team projects. Figma supports vector graphics editing, prototyping, and design system management. Its web-based nature ensures that it is accessible from any device with an internet connection, enhancing flexibility and collaboration in the design process."
       },
     ],
+  });
+
+  // Handle checkbox changes
+  const handleCheckboxChange = (title, isChecked) => {
+    const newCheckedItems = isChecked ? { [title]: true } : {};
+    setCheckedItems(newCheckedItems);
+    setIsExactlyOneChecked(isChecked);
   };
 
-  const filteredTechnologies = technologies[activeTab];
+  // Delete technology function
+  const deleteTechnology = (title) => {
+    setTechnologies((prevTechnologies) => ({
+      ...prevTechnologies,
+      [activeTab]: prevTechnologies[activeTab].filter((tech) => tech.title !== title),
+    }));
+    message.success("Technology deleted successfully!");
+  };
+
+  // Function to handle adding a new technology
+  const handleAddTechnology = (values) => {
+    setTechnologies((prevTechnologies) => ({
+      ...prevTechnologies,
+      [activeTab]: [...prevTechnologies[activeTab], values],
+    }));
+    setAddModalVisible(false);
+    form.resetFields();
+    message.success("New technology added successfully!");
+  };
+
+  // Function to handle editing a technology
+  const handleEditTechnology = (values) => {
+    setTechnologies((prevTechnologies) => ({
+      ...prevTechnologies,
+      [activeTab]: prevTechnologies[activeTab].map((tech) =>
+        tech.title === editingTechnology.title ? { ...tech, ...values } : tech
+      ),
+    }));
+    setEditModalVisible(false);
+    setEditingTechnology(null);
+    editForm.resetFields();
+    message.success("Technology updated successfully!");
+  };
+
+  // Function to open edit modal
+  const showEditModal = () => {
+    const selectedTechnology = technologies[activeTab].find(
+      (tech) => checkedItems[tech.title]
+    );
+    if (selectedTechnology) {
+      setEditingTechnology(selectedTechnology);
+      editForm.setFieldsValue(selectedTechnology);
+      setEditModalVisible(true);
+    }
+  };
+
+  // Modal control functions
+  const showModal = () => setOpen(true);
+  const handleCancel = () => setOpen(false);
+
+  // Pagination logic
+  const filteredTechnologies = technologies[activeTab] || [];
   const totalItems = filteredTechnologies.length;
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const paginatedTechnologies = filteredTechnologies.slice(
-    startIndex,
-    endIndex
-  );
+  const paginatedTechnologies = filteredTechnologies.slice(startIndex, endIndex);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  const handlePageChange = (page) => setCurrentPage(page);
 
   return (
+
     <div className="technology-list-container">
       <div className="technology-list-content">
         <div className="technology-list">
@@ -279,18 +276,97 @@ const TechnologyList = ({ activeTab }) => {
             height={447}
             footer={[]}
           >
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-          </Modal>
+            <EditOutlined /> Edit
+          </Button>
+       
+
+        {/* Delete button */}
+        <Popconfirm
+          title="Delete technology"
+          description="Are you sure you want to delete this technology?"
+          onConfirm={() => {
+            const checkedTechnology = Object.keys(checkedItems).find(key => checkedItems[key]);
+            if (checkedTechnology) {
+              deleteTechnology(checkedTechnology);
+              setCheckedItems({});
+            } else {
+              message.error("Please select a technology to delete");
+            }
+          }}
+          onCancel={() => {}}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button type="primary" danger disabled={!isExactlyOneChecked}>
+            <DeleteOutlined /> Delete
+          </Button>
+        </Popconfirm>
+
+        {/* Add new technology button */}
+        <Button type="primary"  style={{ backgroundColor: 'orange', borderColor: 'orange' }} onClick={() => setAddModalVisible(true)}>
+          <FolderAddOutlined /> Add new Technology
+        </Button>
+      </div>
+    
+      <div className="technology-list-container">
+        <div className="technology-list-content">
+          <div className="technology-list">
+            {paginatedTechnologies.map((tech, index) => (
+              <div
+                key={`${tech.title}-${startIndex + index}`}
+                className="technology-item"
+              >
+                <Card className="card-custom" style={{ width: "18rem" }}>
+                  <Card.Img variant="top" src={tech.imageUrl} />
+                  <Card.Body>
+                    <Checkbox 
+                      style={{ marginRight: "110px" }}  
+                      onChange={(e) => handleCheckboxChange(tech.title, e.target.checked)}
+                      checked={checkedItems[tech.title]}
+                    />
+                    <Button
+                      type="primary"
+                      onClick={showModal}
+                      style={{
+                        background: "white",
+                        color: "blue",
+                        border: "1px solid blue",
+                        borderRadius: "15px",
+                        borderColor: "white",
+                        opacity: "0.7",
+                      }}
+                    >
+                      <TiFolderDelete style={{ marginTop: 5, marginRight: 5 }} />{" "}
+                      Show Question
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+            {/* Modal for showing questions */}
+            <Modal
+              open={open}
+              onOk={() => setOpen(false)}
+              onCancel={handleCancel}
+              width={1448}
+              height={447}
+              footer={[]}
+            >
+              <Tabs defaultActiveKey="1" items={items} onChange={(key) => console.log(key)} />
+            </Modal>
+          </div>
+        </div>
+        {/* Pagination */}
+        <div className="pagination-container">
+          <Pagination
+            current={currentPage}
+            total={totalItems}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+          />
         </div>
       </div>
-      <div className="pagination-container">
-        <Pagination
-          current={currentPage}
-          total={totalItems}
-          pageSize={pageSize}
-          onChange={handlePageChange}
-        />
-      </div>
+
       {/* Modal component for showing technology details */}
       {selectedTech && (
         <Detail
