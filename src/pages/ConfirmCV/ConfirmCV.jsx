@@ -1477,41 +1477,30 @@ const ConfirmCV = () => {
                             </Row>
                         </div>
                     )}
-
                     <div className="tbl-wrapper" style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div style={{ flex: '1 0 auto', display: 'flex', flexDirection: 'column' }}>
-                            <Table
-                                rowSelection={{
-                                    type: selectionType,
-                                    ...rowSelection,
-                                }}
-                                columns={columns}
-                                dataSource={filteredInterns}
-                                rowKey="internId"
-                                pagination={{
-                                    pageSize: pageSize,
-                                    style: { marginRight: '100px', marginTop: "28px" } 
-                                }}
-                                scroll={{ x: "120vw", y: "334px" }}
-                                style={{ maxWidth: "100%", minHeight: "100%" }}
+                        {/* use table of Ant Design */}
+                        <Table
+                            rowSelection={{
+                                type: "checkbox",
+                            }}
+                            columns={columns}
+                            dataSource={filteredInterns}
+                            scroll={{ x: "140vw", y: "374px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%" }}
+                            pagination={{
+                                pageSize: pageSize,
+                                style: { marginRight: '120px', marginTop: "28px" }
+                            }}
+                        />
+                        <div style={{marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
+                            <Input
+                                value={pageSize}
+                                onChange={(e) => handleChangePageSize(e.target.value)}
+                                style={{ width: 80, marginRight: '10px', marginTop: "-66px" }}
+                                placeholder="Page Size"
                             />
                         </div>
-                        <div style={{ marginTop: '-47px', marginBottom: "22px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <Select value={pageSize} onChange={handleChangePageSize} style={{ width: 80, marginRight: '10px' }}>
-                                <Option value={8}>8</Option>
-                                <Option value={10}>10</Option>
-                                <Option value={20}>20</Option>
-                                <Option value={50}>50</Option>
-                                <Option value={100}>100</Option>
-                                {/* Thêm các tùy chọn khác tùy theo nhu cầu */}
-                            </Select>
-                            {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
-                        </div>
                     </div>
-
-
-
-
                     {/* <div className="pagination">
                             <button
                                 className="pagination-button"

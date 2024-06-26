@@ -1103,18 +1103,16 @@ function ApproveCV() {
                             style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
                                 pageSize: pageSize,
-                                style: { marginRight: '100px', marginTop: "28px" } 
+                                style: { marginRight: '100px', marginTop: "28px" }
                             }}
                         />
                         <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <Select value={pageSize} onChange={handleChangePageSize} style={{ width: 80, marginRight: '10px' }}>
-                                <Option value={8}>8</Option>
-                                <Option value={10}>10</Option>
-                                <Option value={20}>20</Option>
-                                <Option value={50}>50</Option>
-                                <Option value={100}>100</Option>
-                                {/* Thêm các tùy chọn khác tùy theo nhu cầu */}
-                            </Select>
+                            <Input
+                                value={pageSize}
+                                onChange={(e) => handleChangePageSize(e.target.value)}
+                                style={{ width: 80, marginRight: '10px' }}
+                                placeholder="Page Size"
+                            />
                             {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
                         </div>
                     </div>
