@@ -137,20 +137,15 @@
     color: black;
 }
 .dropdown-menu {
-    position: absolute;
-    padding-left: 30px;
-    top: 17px;
-    left: -20px;
+  position: absolute;
+  padding-left: 30px;
+  top: -3px;
+  left: -20px;
+  width: 70px;
 }
 
 .ant-dropdown-link {
     color: black;
-}
-.dropdown-menu {
-    position: absolute;
-    padding-left: 30px;
-    top: 17px;
-    left: -20px;
 }
 
 .header-position {
@@ -239,36 +234,6 @@
     display: inline-block;
   }
   .intern-rank {
-    background-color:rgb(248, 231, 238);
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin-left: 20px; 
-    color: rgb(183, 13, 82);
-  }
-  .fresher-rank {
-    background-color:rgb(193, 243, 192);
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin-left: 20px; 
-    color: rgb(13, 183, 41);
-  }
-  
-  .junior-rank {
-    background-color:rgb(255, 243, 132);
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin-left: 20px; 
-    color: rgb(245, 147, 0);
-  }
-  
-  .middle-rank {
-    background-color:rgb(52, 248, 248);
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin-left: 20px; 
-    color: rgb(33, 13, 183);
-  }
-.intern-rank {
     background-color:rgb(248, 231, 238);
     border-radius: 25px;
     padding: 10px 20px;
