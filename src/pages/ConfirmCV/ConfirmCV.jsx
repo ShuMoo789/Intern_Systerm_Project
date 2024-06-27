@@ -539,70 +539,96 @@ const ConfirmCV = () => {
     };
 
     const [selectedOption, setSelectedOption] = useState("");
+    const [pageSize, setPageSize] = useState("6");
+    const handleChangePageSize = (value) => {
+        setPageSize(value);
+    };
     const columns = [
         {
             title: t("Intern ID"),
             dataIndex: "internID",
             key: "internID",
             filteredValue: [selectedFilters.internID],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Date Interview"),
             dataIndex: "dateInterView",
             key: "dateInterView",
             filteredValue: [selectedFilters.dateInterView],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Time Interview"),
             dataIndex: "timeinterview",
             key: "timeinterview",
             filteredValue: [selectedFilters.timeInterView],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Full Name"),
             dataIndex: "fullName",
             key: "fullName",
             filteredValue: [selectedFilters.fullName],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Date Of Birth"),
             dataIndex: "dateOfBirth",
             key: "dateOfBirth",
             filteredValue: [selectedFilters.dateOfBirth],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Phone Number"),
             dataIndex: "phoneNumber",
             key: "phoneNumber",
             filteredValue: [selectedFilters.phoneNumber],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Position"),
             dataIndex: "position",
             key: "position",
             filteredValue: [selectedFilters.position],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("School"),
             dataIndex: "school",
             key: "school",
             filteredValue: [selectedFilters.school],
+            align: "center",
+            width: "auto",
         },
         {
             title: t("Address"),
             dataIndex: "address",
             key: "address",
             filteredValue: [selectedFilters.address],
+            align: "center",
+            width: "auto",
         },
         {
             title: "Email",
             dataIndex: "email",
             key: "email",
             filteredValue: [selectedFilters.email],
+            align: "center",
+            width: "auto",
         },
         {
             title: "CV",
             dataIndex: "cvLink",
+            align: "center",
+            width: "auto",
             key: "cvLink",
             render: () => (
                 <a
@@ -616,6 +642,8 @@ const ConfirmCV = () => {
         {
             title: t("Comments"),
             dataIndex: "commentsCV",
+            align: "center",
+            width: "auto",
             key: "commentsCV",
             render: (text, record) => (
                 <span>
@@ -634,6 +662,8 @@ const ConfirmCV = () => {
             title: t("Confirm Email"),
             dataIndex: "confirmEmail",
             key: "confirmEmail",
+            align: "center",
+            width: "auto",
             render: (text, record) => (
                 <div key={record.key} style={{ width: 126 }}>
                     <Dropdown
@@ -681,12 +711,16 @@ const ConfirmCV = () => {
         {
             title: t("Interviewer"),
             dataIndex: "interviewer",
+            align: "center",
+            width: "auto",
             key: "interviewer",
             filteredValue: [selectedFilters.dateInterView],
         },
         {
             title: t("Status"),
             dataIndex: "status",
+            align: "center",
+            width: "auto",
             key: "status",
             render: (text, record) => (
                 <Dropdown
@@ -736,6 +770,8 @@ const ConfirmCV = () => {
         {
             title: "Button",
             dataIndex: "button",
+            align: "center",
+            width: "auto",
             key: "button",
             render: (text, record) => (
                 <Button
@@ -1583,18 +1619,27 @@ const ConfirmCV = () => {
                         </div>
                     )}
 
-                    <div className="list">
-                        <div className="tbl-wrapper">
-                            <Table
-                                rowSelection={{
-                                    type: selectionType,
-                                    ...rowSelection,
-                                }}
-                                columns={columns}
-                                dataSource={filteredInterns}
-                                rowKey="internId"
-                                pagination={{ pageSize: 8 }}
-                                scroll={{ x: "max-content" }}
+                    <div className="tbl-wrapper" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {/* use table of Ant Design */}
+                        <Table
+                            rowSelection={{
+                                type: "checkbox",
+                            }}
+                            columns={columns}
+                            dataSource={filteredInterns}
+                            scroll={{ x: "142vw", y: "350px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%" }}
+                            pagination={{
+                                pageSize: pageSize,
+                                style: { marginRight: '120px', marginTop: "28px" }
+                            }}
+                        />
+                        <div style={{ marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Input
+                                value={pageSize}
+                                onChange={(e) => handleChangePageSize(e.target.value)}
+                                style={{ width: 80, marginRight: '10px', marginTop: "-66px" }}
+                                placeholder="Page Size"
                             />
                         </div>
                     </div>
