@@ -37,7 +37,7 @@
 .detail-popup-comment {
     display: grid;
     grid-template-columns: auto auto auto;
-    gap: 25px 20px;
+    gap: 0px 20px;
     margin: 0 10px 30px 0;
 }
 
@@ -82,7 +82,7 @@
 .comment-popup-content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px 20px;
+    gap: 0px 20px;
 }
 
 .comment-popup-row .ant-input {
@@ -102,7 +102,7 @@
 .result-popup-section>.result-section>.field {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px 20px;
+    gap: 0px 20px;
 }
 
 .result-popup-section label {

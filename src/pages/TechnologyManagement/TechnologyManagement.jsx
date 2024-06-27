@@ -115,23 +115,7 @@ const TechnologyManagement = () => {
       </div>
 
       <div className="sub-content-technology-management">
-        <div className="group-button-technology-management">
-          <GroupButton
-            groupButton={groupButton}
-            onDelete={handleOpenDelete}
-            onExportExcel={handleOpenExportExcel}
-          />
-          {/*Render Delete Popup */}
-          <DeletePopup
-            onClose={handleCloseDeletePopup}
-            openPopup={isDeletePopupVisible}
-          />
-          {/*Render ExportExcel Popup */}
-          <ExportExcel
-            onClose={handleCloseExportExcel}
-            openPopup={isExportExcelVisible}
-          />
-        </div>
+       
 
         <div className="technology-list-container">
           <TechnologyList activeTab={activeTab} />
