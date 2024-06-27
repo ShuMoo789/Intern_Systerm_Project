@@ -36,8 +36,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route element={<AuthLayout/>}>
-          <Route path="/" element={<FirstPage />}/>
+        <Route path="/" element={<FirstPage />} />
+        <Route element={<AuthLayout />}>
           <Route path="SignIn" element={<SignInPage />} />
           <Route path="SignUp" element={<SignUpPage />} />
           <Route path="PasswordReset" element={<PasswordReset />} />
