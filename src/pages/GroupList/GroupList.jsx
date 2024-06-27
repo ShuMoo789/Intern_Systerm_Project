@@ -218,28 +218,28 @@ const GroupList = () => {
             title: t("Position"),
             dataIndex: "Position",
             key: "Position",
-            width: "auto",
+            width: "6%",
             align: "center"
         },
         {
             title: t("School"),
             dataIndex: "School",
             key: "School",
-            width: "auto",
+            width: "6%",
             align: "center"
         },
         {
             title: t("Address"),
             dataIndex: "Address",
             key: "Address",
-            width: "auto",
+            width: "8%",
             align: "center"
         },
         {
             title: "Email",
             dataIndex: "Email",
             key: "Email",
-            width: "auto",
+            width: "6%",
             align: "center"
         },
         {
@@ -263,7 +263,7 @@ const GroupList = () => {
             title: t("Comments"),
             dataIndex: "Comments",
             key: "Comments",
-            width: "auto",
+            width: "12%",
             align: "center",
             render: (text) => t(text),
         },
@@ -1004,7 +1004,7 @@ const GroupList = () => {
                             }}
                             columns={columns}
                             dataSource={filteredData}
-                            scroll={{ x: "170vw", y: "340px" }}
+                            scroll={{ x: "210vw", y: "340px" }}
                             style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
                                 pageSize: pageSize,
