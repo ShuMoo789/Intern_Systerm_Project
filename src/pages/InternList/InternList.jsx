@@ -1132,7 +1132,7 @@ const InternList = () => {
                             columns={columns}
                             dataSource={dataTable}
                             scroll={{ x: "200vw", y: "360px" }}
-                            style={{ maxWidth: "100%", minHeight: "100%", marginRight: "16px", marginLeft: "16px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%"}}
                             pagination={{
                                 pageSize: pageSize,
                                 style: { marginRight: '120px', marginTop: "28px" }

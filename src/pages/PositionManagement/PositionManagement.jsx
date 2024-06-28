@@ -364,6 +364,7 @@ const PositionManagement = () => {
           <Navigation
             titleName={t("Position Management")}
             groupButton={groupButton}
+            hideSearch={true}
             onCreatePosition={handleOpenModal}
             onDelete={handleOpenDelete}
             onExportExcel={handleOpenExportExcel}

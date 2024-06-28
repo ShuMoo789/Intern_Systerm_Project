@@ -619,7 +619,7 @@ function ApproveCV() {
             ),
         },
         {
-            title: "Button",
+            title: t("Button"),
             align: "center",
             width: "auto",
             // width: 120,
@@ -970,7 +970,7 @@ function ApproveCV() {
                         <div className="filter">
                             <Row gutter={[16, 16]}>
                                 <Col>
-                                    <Row gutter={[5, 5]}>
+                                    <Row gutter={[5, 5]} >
                                         <Input
                                             style={{
                                                 height: "32px",
