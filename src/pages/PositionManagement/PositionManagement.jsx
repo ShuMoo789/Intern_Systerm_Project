@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import MainLayout from "../../MainLayout/MainLayout";
 import User_Img from "../../assets/user_image.png";
-import Navigation from "../../components/Navigation/Navigation";
+import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
+import { Link } from "react-router-dom";
 import {
     Table,
     Checkbox,
@@ -340,13 +340,20 @@ const [isNewPositionModalVisible, setNewPositionModalVisible] = useState(false);
     return (
       <div className="user-info">
         <div className="avatar-section">
-          <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+          <Link to="/Profile">
+            <Avatar
+              style={{ border: "1px solid #67A943" }}
+              size={54}
+              src={avatarSrc}
+              icon={<UserOutlined />}
+            />
+          </Link>
           <div className="user-details">
             <p className="username">{name}</p>
             <p className="role">{role}</p>
           </div>
         </div>
-        <SettingOutlined className="setting-icon" />
+        <DropdownMenu />
       </div>
     );
   }
@@ -363,6 +370,7 @@ const [isNewPositionModalVisible, setNewPositionModalVisible] = useState(false);
             onExportExcel={handleOpenExportExcel}
           />
         </div> 
+
                 <section>
                     <div className="bodyposition">
                         {positionGroup.map((item) => (

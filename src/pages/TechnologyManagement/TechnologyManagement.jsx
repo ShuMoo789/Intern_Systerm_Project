@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./TechnologyManagement.css";
-import MainLayout from "../../MainLayout/MainLayout";
-import Navigation from "../../components/Navigation/Navigation";
 import TechNavigation from "../../components/TechNavigation/TechNavigation";
 import TechnologyList from "../../components/TechnologyList/TechnologyList";
+import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
+import { Link } from "react-router-dom";
 import {
   ExportOutlined,
   EditOutlined,
@@ -60,13 +60,20 @@ const TechnologyManagement = () => {
     return (
       <div className="user-info">
         <div className="avatar-section">
-          <Avatar size={54} src={avatarSrc} icon={<UserOutlined />} />
+          <Link to="/Profile">
+            <Avatar
+              style={{ border: "1px solid #67A943" }}
+              size={54}
+              src={avatarSrc}
+              icon={<UserOutlined />}
+            />
+          </Link>
           <div className="user-details">
             <p className="username">{name}</p>
             <p className="role">{role}</p>
           </div>
         </div>
-        <SettingOutlined className="setting-icon" />
+        <DropdownMenu />
       </div>
     );
   }
@@ -95,7 +102,7 @@ const TechnologyManagement = () => {
         <header className="header-position">
           <h1 className="header-title">{t("Technology Management")}</h1>
           {isMobile ? (
-            <SettingOutlined className="setting-icon" />
+            <DropdownMenu />
           ) : (
             <UserInfo name="Natalie Brogan" role="Admin" avatarSrc={User_Img} />
           )}
@@ -108,23 +115,7 @@ const TechnologyManagement = () => {
       </div>
 
       <div className="sub-content-technology-management">
-        <div className="group-button-technology-management">
-          <GroupButton
-            groupButton={groupButton}
-            onDelete={handleOpenDelete}
-            onExportExcel={handleOpenExportExcel}
-          />
-          {/*Render Delete Popup */}
-          <DeletePopup
-            onClose={handleCloseDeletePopup}
-            openPopup={isDeletePopupVisible}
-          />
-          {/*Render ExportExcel Popup */}
-          <ExportExcel
-            onClose={handleCloseExportExcel}
-            openPopup={isExportExcelVisible}
-          />
-        </div>
+       
 
         <div className="technology-list-container">
           <TechnologyList activeTab={activeTab} />

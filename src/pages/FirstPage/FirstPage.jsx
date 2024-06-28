@@ -10,7 +10,6 @@ import {
 } from "@ant-design/icons"; // Import the icons from Ant Design
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Header from "../../components/header/Header";
 
 const accounts = [
   {
@@ -32,7 +31,7 @@ const accounts = [
 
 const First_Page = ({ Accounts }) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true); // Initialize state for menu collapse
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -45,15 +44,15 @@ const First_Page = ({ Accounts }) => {
   return (
     <>
       <div className="header">
-      </div>   
+      </div>
       <Row className="container-background">
         <Col span={9}></Col>
-        
+
         <Col span={4.5}>
           <Row>
-          
+
             <div className="avatar" style={{ paddingLeft: "55px" }}>
-            <Avatar
+              <Avatar
                 className="AvaCurent"
                 shape="square"
                 size={200}

@@ -80,7 +80,7 @@ const AccountManagement = () => {
   const { t } = useTranslation();
   return (
     <>
-      <Row className="header">
+      <Row className="header-profile">
 
         <div
           className="cover-container"

@@ -103,19 +103,19 @@ const optionsInternProject = DataInternList.reduce((options, item) => {
 const InternList = () => {
     //add selectedRowKeys to count
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const rowSelection = {   
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(
-            `selectedRowKeys: ${selectedRowKeys}`,
-            "selectedRows: ",
-            selectedRows
-        );
-        setSelectedRowKeys(selectedRowKeys);
-    },
-    getCheckboxProps: (record) => ({
-        name: record.name,
-    }),
-};
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(
+                `selectedRowKeys: ${selectedRowKeys}`,
+                "selectedRows: ",
+                selectedRows
+            );
+            setSelectedRowKeys(selectedRowKeys);
+        },
+        getCheckboxProps: (record) => ({
+            name: record.name,
+        }),
+    };
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const [isCommentsModalVisible, setIsCommentsModalVisible] = useState(false);//comments modal
     const [form] = Form.useForm();
@@ -235,21 +235,25 @@ const InternList = () => {
             title: t("Intern ID"),
             dataIndex: "internID",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Start Date"),
             dataIndex: "startDate",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Finish Date"),
             dataIndex: "finishDate",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Full Name"),
             dataIndex: "fullName",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.fullName],
             // onFilter: (value, record) => {
             //     return record.fullName.includes(value)
@@ -259,6 +263,7 @@ const InternList = () => {
             title: t("Date Of Birth"),
             dataIndex: "dateOfBirth",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.dateOfBirth],
             // onFilter: (value, record) => {
             //     return record.dateOfBirth.includes(value)
@@ -268,6 +273,7 @@ const InternList = () => {
             title: t("Phone Number"),
             dataIndex: "phoneNumber",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.phoneNumber],
             // onFilter: (value, record) => {
             //     return record.phoneNumber.includes(value)
@@ -277,6 +283,7 @@ const InternList = () => {
             title: t("Position"),
             dataIndex: "position",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.position],
             // onFilter: (value, record) => {
             //     return record.position.includes(value)
@@ -286,6 +293,7 @@ const InternList = () => {
             title: t("School"),
             dataIndex: "school",
             width: "auto",
+            align: "center",
             render: (text) => t(text),
             // filteredValue: [filter.school],
             // onFilter: (value, record) => {
@@ -295,6 +303,7 @@ const InternList = () => {
         {
             title: t("Address"),
             dataIndex: "address",
+            align: "center",
             width: "auto",
             render: (text) => t(text),
             // filteredValue: [filter.address],
@@ -305,6 +314,7 @@ const InternList = () => {
         {
             title: t("Email"),
             dataIndex: "email",
+            align: "center",
             width: "auto",
             // filteredValue: [filter.email],
             // onFilter: (value, record) => {
@@ -314,7 +324,8 @@ const InternList = () => {
         {
             title: "CV",
             dataIndex: "cv",
-            width: 100,
+            align: "center",
+            width: "auto",
             render: (text) => (
                 <a style={{ color: "blue", textDecoration: "underline" }}>
                     {text}
@@ -324,7 +335,8 @@ const InternList = () => {
         {
             title: t("Comments"),
             dataIndex: "comments",
-            width: 160,
+            align: "center",
+            width: "auto",
             render: (text) => (
                 <Button onClick={showCommentsModal}>
                     2 {commentsText}
@@ -335,7 +347,8 @@ const InternList = () => {
         {
             title: t("Role"),
             dataIndex: "role",
-            width: 130,
+            align: "center",
+            width: "auto",
             // filteredValue: [filter.role],
             // onFilter: (value, record) => {
             //     return record.role.includes(value)
@@ -345,6 +358,7 @@ const InternList = () => {
             title: t("Project"),
             dataIndex: "project",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.project],
             // onFilter: (value, record) => {
             //     return record.project.includes(value)
@@ -354,6 +368,7 @@ const InternList = () => {
             title: t("Group Zalo"),
             dataIndex: "groupZalo",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.groupZalo],
             // onFilter: (value, record) => {
             //     return record.groupZalo.includes(value)
@@ -363,6 +378,7 @@ const InternList = () => {
             title: t("Mentor"),
             dataIndex: "mentor",
             width: "auto",
+            align: "center"
             // filteredValue: [filter.mentor],
             // onFilter: (value, record) => {
             //     return record.mentor.includes(value)
@@ -371,7 +387,8 @@ const InternList = () => {
         {
             title: t("Status"),
             dataIndex: "status",
-            width: 170,
+            width: "auto",
+            align: "center",
             render: (text, record) => {
                 const statusColor = {
                     "In process": {
@@ -426,7 +443,8 @@ const InternList = () => {
         {
             title: t("Report Process"),
             dataIndex: "reportProcess",
-            width: 170,
+            width: "auto",
+            align: "center",
             render: (text, record) => (
                 <ReportProcessModal>
                     {({ showModal }) => (
@@ -442,6 +460,7 @@ const InternList = () => {
             title: t("Button"),
             dataIndex: "button",
             width: "auto",
+            align: "center",
             render: (text) => <ViewButton>{text}</ViewButton>,
         },
     ];
@@ -630,6 +649,10 @@ const InternList = () => {
     const handleCloseAddNewIntern = () => {
         setAddNewInternVisible(false);
     };
+    const [pageSize, setPageSize] = useState("6");
+    const handleChangePageSize = (value) => {
+        setPageSize(value);
+    };
 
     return (
         <div id="APRCV">
@@ -646,7 +669,7 @@ const InternList = () => {
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
                         onCreateIntern={handleOpenAddNewIntern}
-checkedCount={selectedRowKeys.length}
+                        checkedCount={selectedRowKeys.length}
                     />
                 </div>
                 {/* Group of filter and table */}
@@ -1100,21 +1123,29 @@ checkedCount={selectedRowKeys.length}
                         </Row>
                     )}
 
-                    <div className="table-intern-list">
+                    <div className="table-intern-list" style={{ display: 'flex', flexDirection: 'column' }}>
                         {/* use table of Ant Design */}
                         <Table
                             rowSelection={{
                                 type: "checkbox",
-                                ...rowSelection,
                             }}
                             columns={columns}
                             dataSource={dataTable}
-                            scroll={{ x: "2200px", y: "360px" }}
-                            style={{ maxWidth: "100%", minHeight: "100%" }}
+                            scroll={{ x: "200vw", y: "360px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%", marginRight: "16px", marginLeft: "16px" }}
                             pagination={{
-                                pageSize: 7,
+                                pageSize: pageSize,
+                                style: { marginRight: '120px', marginTop: "28px" }
                             }}
                         />
+                        <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Input
+                                value={pageSize}
+                                onChange={(e) => handleChangePageSize(e.target.value)}
+                                style={{ width: 80, marginRight: '10px' }}
+                                placeholder="Page Size"
+                            />
+                        </div>
                     </div>
                 </section>
             </main>

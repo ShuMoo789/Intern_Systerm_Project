@@ -37,11 +37,11 @@ const DropdownMenu = () => {
         onClick={handleMenuClick}
       />
       {menuOpen && (
-        <div className={`dropdown-menu ${showLanguageSelector ? 'slide-left' : ''}`}>
+        <div className={`dropdown-menu-setting ${showLanguageSelector ? 'slide-left' : ''}`}>
           {!showLanguageSelector ? (
             <>
               <div className=" setting">
-                { t("Setting")}
+                { t("Settings")}
               </div>
               <div className="dropdown-item">
                 <UserOutlined className="icon-menu"/>
@@ -50,7 +50,7 @@ const DropdownMenu = () => {
               <div className="dropdown-item" onClick={() => setShowLanguageSelector(true)}>
                 <GlobalOutlined className="icon-menu"/>
                 <Link>{t("Language")}</Link> 
-                <RightOutlined className="icon-menu2"/>
+                <RightOutlined className="icon-menu-2"/>
               </div>
               <div className="dropdown-item">
                 <LogoutOutlined className="icon-menu"/>
