@@ -747,7 +747,7 @@ const ConfirmCV = () => {
     },
 
     {
-      title: "Button",
+      title: t("Button"),
       dataIndex: "button",
       align: "center",
       width: "auto",
