@@ -14,6 +14,7 @@ const GroupButton = ({
     onEdit,
     onDelete,
     onExportExcel,
+    onCreatePosition,
 }) => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1350;
@@ -48,7 +49,9 @@ const GroupButton = ({
   const handleScheduleInterview = () => {
     onScheduleInterview();
   };
-
+  const handleCreatePosition = () => {
+    onCreatePosition();
+  };
   // function to handle click on Edit button
   const handleEditButtonClick = () => {
     if (checkedCount >= 1) {
@@ -74,10 +77,12 @@ const GroupButton = ({
       handleEditButtonClick();
     } else if (name === t("Delete")) {
       handleDeleteButtonClick();
-    } else if (name === t("Add New Intern") || name === t("Add New Project")) {
+    } else if (name === t("Add New Intern") || name === t("Add New Project") ) {
       handleAddNewInternClick();
     } else if (name === t("Schedule interview")) {
       handleScheduleInterview();
+    }else if (name === t("Add New Position")) {
+      handleCreatePosition();
     }
   };
 

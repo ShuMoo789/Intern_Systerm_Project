@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Modal, Input, DatePicker, Select, Button, message, Form, Menu, Dropdown, Table } from "antd";
 import dayjs from "dayjs";
-import "./NewProjectModal.css";
+import "./NewPositionModal.css";
 import { useTranslation } from "react-i18next";
-import {DownOutlined} from "@ant-design/icons"
+import {DownOutlined} from "@ant-design/icons";
 
 // Mock API call to create a project
 const mockCreateProjectApi = (projectInfo) => {
@@ -15,7 +15,7 @@ const mockCreateProjectApi = (projectInfo) => {
   });
 };
 
-const NewProjectModal = ({ open, onClose, create }) => {
+const NewPositionModal = ({ open, onClose, create }) => {
   const { t } = useTranslation();
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
@@ -23,7 +23,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
   const success = () => {
     messageApi.open({
       type: "success",
-      content: t("Project created successfully"),
+      content: t("Position created successfully"),
     });
   };
 
@@ -42,7 +42,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
   };
 
 
-  const [projectInfo, setProjectInfo] = useState({
+  const [PositionInfo, setPositionInfo] = useState({
     title: "",
     position: "",
     technology: "",
@@ -57,37 +57,6 @@ const NewProjectModal = ({ open, onClose, create }) => {
 
   // Date format for date inputs
   const dateFormat = "DD MMM YYYY";
-
-  // const handleInputChange = (key, value) => {
-  //   setProjectInfo((prev) => ({
-  //     ...prev,
-  //     [key]: value,
-  //   }));
-  //   console.log(projectInfo);
-  // };
-
-  // const handleDateChange = (type, date) => {
-  //   setProjectInfo((prev) => ({
-  //     ...prev,
-  //     [type]: date,
-  //   }));
-  //   console.log(projectInfo);
-  // };
-
-  // // const createProject = async (projectData) => {
-  // //   try {
-  // //     const response = await mockCreateProjectApi(projectData);
-  // //     if (response.success) {
-  // //       success();
-  // //       create(response.data);
-  // //       onClose();
-  // //     } else {
-  // //       error("Failed to create project");
-  // //     }
-  // //   } catch (err) {
-  // //     error("Error creating project");
-  // //   }
-  // // };
 
   const handleCancel = () => {
     onClose();
@@ -119,7 +88,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
     <Modal
       title={
         <h3 style={{ margin: "0", fontFamily: "'Quicksand', sans-serif" }}>
-          {t("Add New Project")}
+          {t("Add New Position")}
         </h3>
       }
       open={open}
@@ -131,7 +100,7 @@ const NewProjectModal = ({ open, onClose, create }) => {
             onClick={handleSubmit}
             style={{height: "3.0em"}}
           >
-            {t("Add New Project")}
+            {t("Add New Position")}
           </Button>}
       onCancel={handleCancel}
       centered
@@ -305,4 +274,4 @@ const NewProjectModal = ({ open, onClose, create }) => {
   );
 };
 
-export default NewProjectModal;
+export default NewPositionModal;
