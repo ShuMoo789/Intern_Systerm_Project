@@ -1,0 +1,39 @@
+.create-new-project-modal{
+    font-family: 'Quicksand', sans-serif;
+}
+
+.create-new-project-modal > .form-info-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 20px;
+}
+
+.create-new-project-modal > .form-info-container .field .ant-input {
+    width: 100%;
+    height: 3.5em;
+    font-family: 'Quicksand', sans-serif;
+    padding: 0 20px 0 20px;
+    /* border-radius: 10px; */
+}
+
+.create-new-project-modal > .form-info-container .field .ant-select-selector{
+    height: 3.5em;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.create-new-project-modal > .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px; /* Optional: Adds some spacing from the form */
+}
+
+.create-project-btn {
+    width: fit-content;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #4889E9;
+    color: #fff;
+}
+
+.create-project-btn:hover {
+    background-color: #4889E9;
+}

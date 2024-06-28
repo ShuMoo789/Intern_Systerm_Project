@@ -22,7 +22,7 @@ import {
     ExportOutlined,
     EditOutlined,
     DeleteOutlined,
-    FolderAddOutlined,
+    PlusOutlined,
     UserOutlined,
 } from "@ant-design/icons";
 import { SettingOutlined, FolderOutlined } from "@ant-design/icons";
@@ -32,6 +32,7 @@ import GroupButton from "../../components/GroupButton/GroupButton";
 import { useTranslation } from "react-i18next";
 import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx"
 import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
+import NewPositionModal from "./NewPositionModal.jsx";
 
 function getRankClass(text) {
   switch (text) {
@@ -101,7 +102,9 @@ const PositionManagement = () => {
     const [originalSelectedInterns, setOriginalSelectedInterns] = useState([]);
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 1024;
-
+    const [openModal, setOpenModal] = useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
     const groupButton = [
         {
             color: "#41B137",
@@ -121,7 +124,8 @@ const PositionManagement = () => {
         {
             color: "#4889E9",
             name: t("Add New Position"),
-            icon: <FolderAddOutlined />,
+            icon: <PlusOutlined/>,
+            
         },
     ];
 
@@ -193,7 +197,8 @@ const PositionManagement = () => {
         {
             color: "#4889E9",
             name: "Add New Position",
-            icon: <FolderAddOutlined />,
+            icon: <PlusOutlined/>,
+            
         },
     ];
 
@@ -217,6 +222,7 @@ const PositionManagement = () => {
         setSelectedInterns(originalSelectedInterns); // Reset selected interns to original values
         setIsModalVisible(false); // Close modal
     };
+    
 
     const rankMenu = (record) => (
         <Menu onClick={(e) => handleRankChange(e, record)}>
@@ -322,6 +328,14 @@ const PositionManagement = () => {
       setExportExcelVisible(false);
   };
 
+const [isNewPositionModalVisible, setNewPositionModalVisible] = useState(false);
+  const handleOpenNewPositionModal = () => {
+    setNewPositionModalVisible(true);
+};
+    const handleCloseNewPositionModal = () => {
+    setNewPositionModalVisible(false);
+};
+
   function UserInfo({ name, role, avatarSrc }) {
     return (
       <div className="user-info">
@@ -340,39 +354,15 @@ const PositionManagement = () => {
     return (
         <div id="APRCV">
             <main className="content">
-                <header className="header-position">
-                    <h1 className="header-title">{t("Position Management")}</h1>
-                    {isMobile ? (
-                        <SettingOutlined className="setting-icon" />
-                    ) : (
-                        <UserInfo
-                            name="Natalie Brogan"
-                            role="Admin"
-                            avatarSrc={User_Img}
-                        />
-                    )}
-                </header>
-
-        <div className="button-group-position">
-          <div className="row-btn-grp-pos">
-            <GroupButton 
-              groupButton={groupButton} 
-              onDelete={handleOpenDelete}
-              onExportExcel={handleOpenExportExcel}
-            />
-            {/*Render Delete Popup */}               
-            <DeletePopup
-              onClose={handleCloseDeletePopup}
-              openPopup={isDeletePopupVisible}
-            />
-            {/*Render ExportExcel Popup */}
-            <ExportExcel
-              onClose={handleCloseExportExcel}
-              openPopup={isExportExcelVisible}
-            />
-          </div>
-        </div>
-
+            <div>
+          <Navigation
+            titleName={t("Position Management")}
+            groupButton={groupButton}
+            onCreatePosition={handleOpenModal}
+            onDelete={handleOpenDelete}
+            onExportExcel={handleOpenExportExcel}
+          />
+        </div> 
                 <section>
                     <div className="bodyposition">
                         {positionGroup.map((item) => (
@@ -550,6 +540,11 @@ const PositionManagement = () => {
                     />
                 </Modal>
             </main>
+            <NewPositionModal open={openModal} onClose={handleCloseModal} />
+            <ExportExcel
+        onClose={handleCloseExportExcel}
+        openPopup={isExportExcelVisible}
+      />
         </div>
     );
 };
