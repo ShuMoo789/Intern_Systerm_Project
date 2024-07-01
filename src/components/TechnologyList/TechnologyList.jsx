@@ -81,7 +81,9 @@ const TechnologyList = ({ activeTab }) => {
   const handleCheckboxChange = (title, isChecked) => {
     const newCheckedItems = { ...checkedItems, [title]: isChecked };
     setCheckedItems(newCheckedItems);
-    setIsExactlyOneChecked(Object.values(newCheckedItems).filter(Boolean).length === 1);
+
+    const checkedCount = Object.values(newCheckedItems).filter(Boolean).length;
+    setIsExactlyOneChecked(checkedCount === 1);
   };
 
   const deleteTechnology = (title) => {
@@ -89,7 +91,6 @@ const TechnologyList = ({ activeTab }) => {
       ...prevTechnologies,
       [activeTab]: prevTechnologies[activeTab].filter((tech) => tech.title !== title),
     }));
-    message.success("Technology deleted successfully!");
   };
 
   const handleAddTechnology = (values) => {
@@ -146,7 +147,8 @@ const TechnologyList = ({ activeTab }) => {
 
   return (
     <>
-      <div>
+      <div style={{marginTop:"25px", marginLeft:"15px"}}>
+
         <Popconfirm
           title="Export folder"
           description="Are you sure to Export this file?"
@@ -155,37 +157,37 @@ const TechnologyList = ({ activeTab }) => {
           okText="Yes"
           cancelText="No"
         >
-          <Button type="primary" style={{ backgroundColor: "green", borderColor: "green" }}>
+          <Button type="primary" style={{ backgroundColor: "green", borderColor: "green",marginRight:"10px"}}>
             <ExportOutlined /> Export Excel
           </Button>
         </Popconfirm>
+        <Button type="primary" onClick={showEditModal} disabled={!isExactlyOneChecked} style={{marginRight:"10px"}}>
+  <EditOutlined /> Edit
+</Button>
 
-        <Button type="primary" onClick={showEditModal} disabled={!isExactlyOneChecked}>
-          <EditOutlined /> Edit
-        </Button>
+<Popconfirm
+  title="Delete technology"
+  description="Are you sure you want to delete the selected technology/technologies?"
+  onConfirm={() => {
+    const technologiesToDelete = Object.keys(checkedItems).filter(key => checkedItems[key]);
+    if (technologiesToDelete.length > 0) {
+      technologiesToDelete.forEach(title => deleteTechnology(title));
+      setCheckedItems({});
+      message.success("Selected technologies deleted successfully!");
+    } else {
+      message.error("Please select at least one technology to delete");
+    }
+  }}
+  onCancel={() => {}}
+  okText="Yes"
+  cancelText="No"
+>
+  <Button type="primary" danger disabled={Object.values(checkedItems).filter(Boolean).length === 0} style={{marginRight:"10px"}}>
+    <DeleteOutlined /> Delete
+  </Button>
+</Popconfirm>
 
-        <Popconfirm
-          title="Delete technology"
-          description="Are you sure you want to delete this technology?"
-          onConfirm={() => {
-            const checkedTechnology = Object.keys(checkedItems).find(key => checkedItems[key]);
-            if (checkedTechnology) {
-              deleteTechnology(checkedTechnology);
-              setCheckedItems({});
-            } else {
-              message.error("Please select a technology to delete");
-            }
-          }}
-          onCancel={() => {}}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Button type="primary" danger disabled={!isExactlyOneChecked}>
-            <DeleteOutlined /> Delete
-          </Button>
-        </Popconfirm>
-
-        <Button type="primary" style={{ backgroundColor: "orange", borderColor: "orange" }} onClick={() => setAddModalVisible(true)}>
+        <Button type="primary" style={{ backgroundColor: "orange", borderColor: "orange" ,marginRight:"10px" }} onClick={() => setAddModalVisible(true)}>
           <FolderAddOutlined /> Add new Technology
         </Button>
       </div>
@@ -259,76 +261,88 @@ const TechnologyList = ({ activeTab }) => {
   
 
       <Modal
-        title="Add New Technology"
-        visible={addModalVisible}
-        onCancel={() => setAddModalVisible(false)}
-        footer={null}
-      >
-        <Form form={form} onFinish={handleAddTechnology}>
-          <Form.Item
-            name="title"
-            label="Technology Title"
-            rules={[{ required: true, message: "Please enter the technology title" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="imageUrl"
-            label="Image URL"
-            rules={[{ required: true, message: "Please enter the image URL" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="description"
-            label="Description"
-            rules={[{ required: true, message: "Please enter the description" }]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Add Technology
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
 
-      <Modal
-        title="Edit Technology"
-        visible={editModalVisible}
-        onCancel={() => setEditModalVisible(false)}
-        footer={null}
-      >
-        <Form form={editForm} onFinish={handleEditTechnology}>
-          <Form.Item
-            name="title"
-            label="Technology Title"
-            rules={[{ required: true, message: "Please enter the technology title" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="imageUrl"
-            label="Image URL"
-            rules={[{ required: true, message: "Please enter the image URL" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="description"
-            label="Description"
-            rules={[{ required: true, message: "Please enter the description" }]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Update Technology
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+  title="Add New Technology"
+  visible={addModalVisible}
+  onCancel={() => setAddModalVisible(false)}
+  footer={null}
+  width={400}
+>
+  <Form 
+    form={form} 
+    onFinish={handleAddTechnology}
+    layout="vertical"
+    style={{ width: '100%' }}
+  >
+    <Form.Item
+      name="title"
+      label="Technology Title"
+      rules={[{ required: true, message: "Please enter the technology title" }]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      name="imageUrl"
+      label="Image URL"
+      rules={[{ required: true, message: "Please enter the image URL" }]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      name="description"
+      label="Description"
+      rules={[{ required: true, message: "Please enter the description" }]}
+    >
+      <Input.TextArea rows={4} />
+    </Form.Item>
+    <Form.Item>
+      <Button type="primary" htmlType="submit" block>
+        Add Technology
+      </Button>
+    </Form.Item>
+  </Form>
+</Modal>
+<Modal
+  title="Edit Technology"
+  visible={editModalVisible}
+  onCancel={() => setEditModalVisible(false)}
+  footer={null}
+  width={400}
+>
+  <Form 
+    form={editForm} 
+    onFinish={handleEditTechnology}
+    layout="vertical"
+    style={{ width: '100%' }}
+  >
+    <Form.Item
+      name="title"
+      label="Technology Title"
+      rules={[{ required: true, message: "Please enter the technology title" }]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      name="imageUrl"
+      label="Image URL"
+      rules={[{ required: true, message: "Please enter the image URL" }]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      name="description"
+      label="Description"
+      rules={[{ required: true, message: "Please enter the description" }]}
+    >
+      <Input.TextArea rows={4} />
+    </Form.Item>
+    <Form.Item>
+      <Button type="primary" htmlType="submit" block>
+        Update Technology
+      </Button>
+    </Form.Item>
+  </Form>
+</Modal>
     </>
   );
 };
