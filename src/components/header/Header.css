@@ -1,4 +1,4 @@
-.header {
+.header-master {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,11 +10,12 @@
 }
 
 @media (max-width: 991px) {
-  .header {
+  .header-master {
     flex-wrap: wrap;
     padding-right: 20px;
   }
 }
+
 .language-switcher {
   position: relative;
   display: inline-block;
@@ -27,11 +28,13 @@
   color: #333;
   font-size: 16px;
   cursor: pointer;
-  padding-right: 25px; /* Thêm khoảng cách cho mũi tên */
+  padding-right: 25px;
+  /* Thêm khoảng cách cho mũi tên */
 }
 
 .language-switcher button:hover {
-  color: #ff6600; /* Màu khi di chuột qua */
+  color: #ff6600;
+  /* Màu khi di chuột qua */
 }
 
 .language-switcher button::after {
@@ -44,10 +47,12 @@
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #333; /* Màu của mũi tên */
+  border-top: 5px solid #333;
+  /* Màu của mũi tên */
 }
 
 .language-switcher button.open::after {
   border-top: none;
-  border-bottom: 5px solid #333; /* Màu của mũi tên khi nút mở */
+  border-bottom: 5px solid #333;
+  /* Màu của mũi tên khi nút mở */
 }

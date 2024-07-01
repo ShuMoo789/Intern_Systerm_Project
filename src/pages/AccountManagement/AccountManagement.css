@@ -30,7 +30,7 @@ body {
   color: #888;
 }
 
-.header {
+.header-profile {
   
   /* margin-left: 20px; */
   margin-top: 15px;
@@ -97,7 +97,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-top: -235px;
+  margin-top: -212px;
   margin-left: 0px;
   position: relative;
   z-index: 2;
@@ -145,7 +145,6 @@ body {
   align-items: stretch; /* Ensure all children stretch to the same height */
   gap: 20px;
   padding: 20px;
-  margin-top: 40px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -217,7 +216,7 @@ body {
 }
 
 @media (max-width: 1100px) {
-  .header{
+  .header-profile{
     margin-left: 20px;
   }
   .avatar-info-container {
@@ -252,7 +251,8 @@ body {
   }
 
   .profile-sections {
-    padding: 0px;
+    gap: 5px;
+    padding: 30px 40px;
     flex-direction: column;
     align-items: center;
   }

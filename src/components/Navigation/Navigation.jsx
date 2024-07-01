@@ -53,32 +53,33 @@ const Navigation = (props) => {
             />
           )}
         </header>
-        <div className="navigation">
-          <div className="search-navigation">
-            <Input
-              style={{ height: "32px" }}
-              className="search-navigation-input"
-              placeholder={isMobile ? t("Search") : t("Search for Information")}
-              variant="filled"
-            />
+        {!props.hideNavigation && (
+          <div className="navigation">
+            {!props.hideSearch && (
+            <div className="search-navigation">
+              <Input
+                style={{ height: "32px" }}
+                className="search-navigation-input"
+                placeholder={isMobile ? t("Search") : t("Search for Information")}
+                variant="filled"
+              />
+            </div>)}
+            {/* Pass props to GroupButton from InternList */}
+            <div className="group-button-navigation">
+              <GroupButton
+                groupButton={props.groupButton}
+                onSendEmail={props.onSendEmail}
+                onCreateIntern={props.onCreateIntern}
+                onScheduleInterview={props.onScheduleInterview}
+                onCreatePosition={props.onCreatePosition}
+                checkedCount={props.checkedCount}
+                onEdit={props.onEdit}
+                onDelete={props.onDelete}
+                onExportExcel={props.onExportExcel}
+              />
+            </div>
           </div>
-          {/* Pass props to GroupButton from InternList */}
-          <div className="group-button-navigation">
-            <GroupButton
-              groupButton={props.groupButton}
-              onSendEmail={props.onSendEmail}
-              onCreateIntern={props.onCreateIntern}
-              onScheduleInterview={props.onScheduleInterview}
-
-              checkedCount={props.checkedCount}
-
-              onEdit={props.onEdit}
-              onDelete={props.onDelete}
-              onExportExcel={props.onExportExcel}
-
-            />
-          </div>
-        </div>
+        )}
       </div>
     </>
   );

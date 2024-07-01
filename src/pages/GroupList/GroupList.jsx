@@ -40,9 +40,7 @@ import { useTranslation } from "react-i18next";
 const { Option } = Select;
 
 const GroupList = () => {
-
-
-const [checkedCount, setCheckedCount] = useState(0);
+    const [checkedCount, setCheckedCount] = useState(0);
     const [data, setData] = useState(jsonData);
     const [filteredData, setFilteredData] = useState(jsonData);
     const viewPort = useViewport();
@@ -155,86 +153,97 @@ const [checkedCount, setCheckedCount] = useState(0);
     const handleCreateIntern = () => {
         setVisible(true);
     };
-const handleCheckboxChange = (e) => {
-    if (e.target.checked) {
-      setCheckedCount(checkedCount + 1);
-    } else {
-      setCheckedCount(checkedCount - 1);
-    }
-    console.log("Checked count:", checkedCount);
-  };
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            setCheckedCount(checkedCount + 1);
+        } else {
+            setCheckedCount(checkedCount - 1);
+        }
+        console.log("Checked count:", checkedCount);
+    };
     const columns = [
-    {
-      title: "",
-      dataIndex: "select",
-      render: (_, record) => (
-        <Checkbox onChange={handleCheckboxChange} />
-      ),
-      width: "auto",
-    },
+        {
+            title: "",
+            dataIndex: "select",
+            render: (_, record) => (
+                <Checkbox onChange={handleCheckboxChange} />
+            ),
+            width: "40px",
+        },
         {
             title: t("Intern ID"),
             dataIndex: "InternId",
             key: "InternId",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Date of Interview"),
             dataIndex: "DateInterview",
             key: "DateInterview",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Time of Interview"),
             dataIndex: "TimeInterview",
             key: "TimeInterview",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Full Name"),
             dataIndex: "FullName",
             key: "FullName",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Date of Birth"),
             dataIndex: "DateOfBirth",
             key: "DateOfBirth",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Phone Number"),
             dataIndex: "PhoneNumber",
             key: "PhoneNumber",
             width: "auto",
+            align: "center"
         },
         {
             title: t("Position"),
             dataIndex: "Position",
             key: "Position",
-            width: "auto",
+            width: "6%",
+            align: "center"
         },
         {
             title: t("School"),
             dataIndex: "School",
             key: "School",
-            width: "auto",
+            width: "6%",
+            align: "center"
         },
         {
             title: t("Address"),
             dataIndex: "Address",
             key: "Address",
-            width: "auto",
+            width: "8%",
+            align: "center"
         },
         {
             title: "Email",
             dataIndex: "Email",
             key: "Email",
-            width: "auto",
+            width: "6%",
+            align: "center"
         },
         {
             title: "CV",
             dataIndex: "CV",
+            align: "center",
             // key: "CV",
             // width: 140,
             render: (text) => (
@@ -252,7 +261,8 @@ const handleCheckboxChange = (e) => {
             title: t("Comments"),
             dataIndex: "Comments",
             key: "Comments",
-            width: "auto",
+            width: "12%",
+            align: "center",
             render: (text) => t(text),
         },
         {
@@ -260,12 +270,14 @@ const handleCheckboxChange = (e) => {
             dataIndex: "Role",
             key: "Role",
             width: "auto",
+            align: "center",
         },
         {
             title: t("Project"),
             dataIndex: "Project",
             key: "Project",
             width: "auto",
+            align: "center",
             render: (text) => t(text),
         },
         {
@@ -273,6 +285,7 @@ const handleCheckboxChange = (e) => {
             dataIndex: "GroupZalo",
             key: "GroupZalo",
             width: "auto",
+            align: "center",
             render: (text) => t(text),
         },
         {
@@ -280,13 +293,14 @@ const handleCheckboxChange = (e) => {
             dataIndex: "Mentor",
             key: "Mentor",
             width: "auto",
+            align: "center",
         },
         {
             title: t("Status"),
             dataIndex: "Status",
             key: "Status",
             width: "auto",
-
+            align: "center",
             render: (text, record) => (
                 <div style={{ width: 126 }}>
                     <Dropdown
@@ -328,18 +342,18 @@ const handleCheckboxChange = (e) => {
                                     record.Status === "Accepted"
                                         ? "#EFF9F1"
                                         : record.Status === "Pending"
-                                        ? "#F8E7EE"
-                                        : record.Status === "Interviewed"
-                                        ? "#E8F4FD"
-                                        : "FFFFFF",
+                                            ? "#F8E7EE"
+                                            : record.Status === "Interviewed"
+                                                ? "#E8F4FD"
+                                                : "FFFFFF",
                                 color:
                                     record.Status === "Accepted"
                                         ? "#449E3C"
                                         : record.Status === "Pending"
-                                        ? "#B70D52"
-                                        : record.Status === "Interviewed"
-                                        ? "#106BA3"
-                                        : "#333333",
+                                            ? "#B70D52"
+                                            : record.Status === "Interviewed"
+                                                ? "#106BA3"
+                                                : "#333333",
                                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                                 marginLeft: "-8px",
                                 width: "100%",
@@ -358,7 +372,7 @@ const handleCheckboxChange = (e) => {
             dataIndex: "InternshipContract",
             key: "InternshipContract",
             width: "auto",
-
+            align: "center",
             render: (text, record) => (
                 <div style={{ width: 126 }}>
                     <Dropdown
@@ -389,16 +403,16 @@ const handleCheckboxChange = (e) => {
                                     record.InternshipContract === "Signed"
                                         ? "#EFF9F1"
                                         : record.InternshipContract ===
-                                          "Pending"
-                                        ? "#F8E7EE"
-                                        : "FFFFFF",
+                                            "Pending"
+                                            ? "#F8E7EE"
+                                            : "FFFFFF",
                                 color:
                                     record.InternshipContract === "Signed"
                                         ? "#449E3C"
                                         : record.InternshipContract ===
-                                          "Pending"
-                                        ? "#B70D52"
-                                        : "#333333",
+                                            "Pending"
+                                            ? "#B70D52"
+                                            : "#333333",
                                 borderRadius: "50px", // Đặt bo tròn thành hình tròn
                                 marginLeft: "-8px",
                                 width: "100%",
@@ -415,11 +429,12 @@ const handleCheckboxChange = (e) => {
         {
             title: t("Button"),
             key: "Button",
-            // width: 200,
+            align: "center",
+            width: "auto",
             render: (_, record) => (
                 <Space>
                     <ViewPopup></ViewPopup>
-                    <Button
+                    {/* <Button
                         className="upload-file-button"
                         shape="round"
                         style={{
@@ -428,7 +443,7 @@ const handleCheckboxChange = (e) => {
                         }}
                     >
                         {t("Upload File")}
-                    </Button>
+                    </Button> */}
                 </Space>
             ),
         },
@@ -532,8 +547,8 @@ const handleCheckboxChange = (e) => {
         setProject(value);
     };
 
-  
-        
+
+
 
 
     const filterOption = (input, option) =>
@@ -574,7 +589,10 @@ const handleCheckboxChange = (e) => {
     const handleCloseAddNewIntern = () => {
         setAddNewInternVisible(false);
     };
-
+    const [pageSize, setPageSize] = useState("6");
+    const handleChangePageSize = (value) => {
+      setPageSize(value);
+    };
     return (
         <div id="APRCV">
             <main className="content">
@@ -587,7 +605,7 @@ const handleCheckboxChange = (e) => {
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
                         onCreateIntern={handleOpenAddNewIntern}
- checkedCount={checkedCount}
+                        checkedCount={checkedCount}
                     />
                 </div>
                 {/*Render Edit Popup */}
@@ -977,17 +995,27 @@ const handleCheckboxChange = (e) => {
                         </Row>
                     )}
 
-                    <div>
+                    <div className="list" style={{ display: 'flex', flexDirection: 'column', marginLeft: "2px", marginRight: "16px" }}>
                         <Table
-                            style={{
-                                maxWidth: "100%",
-                                minHeight: "100%",
-                            }}
+                            
                             columns={columns}
                             dataSource={filteredData}
-                            scroll={{ x: 3300 }}
-                            pagination={{ pageSize: 7 }}
+                            scroll={{ x: "210vw", y: "340px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%" }}
+                            pagination={{
+                                pageSize: pageSize,
+                                style: { marginRight: '100px', marginTop: "28px" }
+                            }}
                         />
+                        <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Input
+                                value={pageSize}
+                                onChange={(e) => handleChangePageSize(e.target.value)}
+                                style={{ width: 80, marginRight: '10px' }}
+                                placeholder="Page Size"
+                            />
+                            {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
+                        </div>
                     </div>
                 </section>
 

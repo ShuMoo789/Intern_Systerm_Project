@@ -141,6 +141,7 @@ const Dashboard = () => {
         titleName={t("Dashboard")}
         groupButton={groupButton}
         onSendEmail={handleOpenCreateGroup}
+        hideNavigation={true} // Pass the new prop to hide the navigation section
       />
       <Row style={{ marginTop: "20px", marginBottom: "40px" }}>
         <Col xs={0} sm={2}></Col>

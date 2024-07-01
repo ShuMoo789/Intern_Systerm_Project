@@ -339,7 +339,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
         <Form form={form} className="result-popup-section">
           <div className="result-section">
             <div className="field details">
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Programming language")}</h4>
                 </label>
@@ -355,7 +355,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Major")}</h4>
                 </label>
@@ -368,7 +368,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Which year you are in?")}</h4>
                 </label>
@@ -384,7 +384,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   </Select>
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Why choose this major?")}</h4>
                 </label>
@@ -400,7 +400,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Why choose to intern at Amazing Tech?")}</h4>
                 </label>
@@ -418,7 +418,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("How do you know about Amazing Tech?")}</h4>
                 </label>
@@ -436,7 +436,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Do you know the office address?")}</h4>
                 </label>
@@ -457,7 +457,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   </Select>
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>
                     {t("Do you know about")}{" "}
@@ -482,7 +482,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   </Select>
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>
                     {t("What are your desire when interning at Amazing Tech?")}
@@ -502,7 +502,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Work online or offline?")}</h4>
                 </label>
@@ -523,7 +523,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   </Select>
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Are you busy with anything else?")}</h4>
                 </label>
@@ -541,7 +541,7 @@ const CommentPopup = ({ isVisible, onClose, intern, onSave, initialPage }) => {
                   <Input style={{ height: "32px" }} />
                 </Form.Item>
               </div>
-              <div className="info">
+              <div className="info-2">
                 <label>
                   <h4>{t("Communication skill")}</h4>
                 </label>

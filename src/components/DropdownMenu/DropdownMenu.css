@@ -16,24 +16,25 @@
   font-size: x-large;
 }
 
-.dropdown-menu {
-  margin-left: -230px;
+.dropdown-menu-setting {
+  top: 42px;
+  right: 0;
+  position: absolute;
   padding: 15px;
-  margin-top: 20px;
-  width: 950%;
   height: auto;
-  background-color: rgb(243, 243, 243);
+  background-color: #fff;
   border-radius: 10px;
   z-index: 1000;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -4px 32px #0003;
 }
 
 .dropdown-item {
   display: flex;
   align-items: center;
+  padding: 5px 2px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-left: -15px;
+  margin-left: 0;
   border-radius: 10px;
 
 
@@ -45,6 +46,7 @@
 }
 
 .dropdown-item a {
+  text-wrap: nowrap;
   font-size:smaller;
   padding-left:50px ;
   padding: 5px 10px;
@@ -60,16 +62,16 @@
 .icon-menu{
     font-size: smaller;
     
-    margin-left: 10px;
 }
-.icon-menu2{
+.icon-menu-2{
     font-size:small;
-    
-    margin-left:30%;
+    padding-right: 10px;
 }
 .setting{
+  display: flex;
+  justify-content: center;
   cursor: pointer;
-  padding: 10px 0px;
+  padding: 0;
   border-bottom: 1px solid #ccc;
   margin-bottom: 10px;
   font-size: smaller;

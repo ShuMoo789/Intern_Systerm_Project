@@ -18,7 +18,7 @@ import {
     FolderAddOutlined,
 } from "@ant-design/icons";
 import { Col, Input, Row } from "antd";
-import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
+import { DatePicker, Dropdown, Button, Table, Menu, Checkbox } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
@@ -397,7 +397,7 @@ function ApproveCV() {
     const handleViewClose = () => {
         setViewPopupVisible(false); // Hide the view popup
     };
-
+    const [checkedCount, setCheckedCount] = useState(0);
     const { t, i18n } = useTranslation();
     const [optionChoose, setOptionChoose] = useState([]);
     const commentText = t("comment");
@@ -421,6 +421,11 @@ function ApproveCV() {
         }),
     };
 
+    const [pageSize, setPageSize] = useState("6");
+    const handleChangePageSize = (value) => {
+        setPageSize(value);
+    };
+
     const getStatusColor = (status) => {
         switch (status) {
             case "Passed":
@@ -433,13 +438,30 @@ function ApproveCV() {
                 return "black";
         }
     };
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            setCheckedCount(checkedCount + 1);
+        } else {
+            setCheckedCount(checkedCount - 1);
+        }
+        console.log("Checked count:", checkedCount);
+    };
     // title of apprve list table
     const columns = [
         {
+            title: "",
+            dataIndex: "select",
+            render: (_, record) => (
+                <Checkbox onChange={handleCheckboxChange} />
+            ),
+            width: "40px",
+        },
+        {
             title: t("Intern ID"),
             dataIndex: "internID",
-            // width: 80,
+            width: "auto",
             filteredValue: [selectedFilters.internID],
+            align: "center"
             // onFilter: (value, record) => {
             //     return record.internID.includes(value)
             // }
@@ -447,12 +469,14 @@ function ApproveCV() {
         {
             title: t("Date Submitted Form"),
             dataIndex: "dateSubmittedForm",
-            // width: 140,
+            width: "auto",
+            align: "center",
         },
         {
             title: t("Full Name"),
             dataIndex: "fullName",
-
+            align: "center",
+            width: "auto",
             filteredValue: [selectedFilters.fullName],
             // onFilter: (value, record) => {
             //     return record.fullName.includes(value)
@@ -461,6 +485,9 @@ function ApproveCV() {
         {
             title: t("Date Of Birth"),
             dataIndex: "dateOfBirth",
+            align: "center",
+            width: "auto",
+
             // width: 110,
             // filteredValue: [selectedFilters.dateOfBirth],
             // onFilter: (value, record) => {
@@ -470,6 +497,8 @@ function ApproveCV() {
         {
             title: t("Phone Number"),
             dataIndex: "phoneNumber",
+            align: "center",
+            width: "auto",
             // width: 120,
             // filteredValue: [selectedFilters.phoneNumber],
             // onFilter: (value, record) => {
@@ -479,6 +508,8 @@ function ApproveCV() {
         {
             title: t("Position"),
             dataIndex: "position",
+            align: "center",
+            width: "auto",
             // width: 120,
             // filteredValue: [selectedFilters.position],
             // onFilter: (value, record) => {
@@ -488,6 +519,8 @@ function ApproveCV() {
         {
             title: t("School"),
             dataIndex: "school",
+            align: "center",
+            width: "auto",
             // width: 160,
             render: (text) => t(text),
             // filteredValue: [selectedFilters.school],
@@ -498,6 +531,8 @@ function ApproveCV() {
         {
             title: t("Address"),
             dataIndex: "address",
+            align: "center",
+            width: "auto",
             // width: 120,
             filteredValue: [selectedFilters.address],
             render: (text) => t(text),
@@ -508,6 +543,8 @@ function ApproveCV() {
         {
             title: "Email",
             dataIndex: "email",
+            align: "center",
+            width: "auto",
             // width: 180,
             // filteredValue: [selectedFilters.email],
             // onFilter: (value, record) => {
@@ -517,6 +554,8 @@ function ApproveCV() {
         {
             title: "CV",
             dataIndex: "cvLink",
+            align: "center",
+            width: "auto",
             // width: 60,
             render: (text) => (
                 <a
@@ -530,6 +569,8 @@ function ApproveCV() {
         {
             title: t("Comments"),
             dataIndex: "commentsCV",
+            align: "center",
+            width: "auto",
             // width: 130,
             render: (text) => (
                 <Button
@@ -546,6 +587,8 @@ function ApproveCV() {
         {
             title: t("Status"),
             dataIndex: "status",
+            align: "center",
+            width: "auto",
             // width: 100,
             render: (text, record) => (
                 <Dropdown
@@ -592,7 +635,9 @@ function ApproveCV() {
             ),
         },
         {
-            title: "Button",
+            title: t("Button"),
+            align: "center",
+            width: "auto",
             // width: 120,
             render: (intern) => (
                 <div className="approve-btns">
@@ -719,8 +764,7 @@ function ApproveCV() {
                         titleName={t("Approve CV")}
                         groupButton={groupButton}
                         onScheduleInterview={handleOpenScheduleInterView}
-
-                        checkedCount={selectedRowKeys.length}
+                        checkedCount={checkedCount}
                         onEdit={handleOpenEdit}
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
@@ -941,7 +985,7 @@ function ApproveCV() {
                         <div className="filter">
                             <Row gutter={[16, 16]}>
                                 <Col>
-                                    <Row gutter={[5, 5]}>
+                                    <Row gutter={[5, 5]} >
                                         <Input
                                             style={{
                                                 height: "32px",
@@ -1172,19 +1216,27 @@ function ApproveCV() {
                             </Row>
                         </div>
                     )}
-                    <div className="list">
+                    <div className="list" style={{ display: 'flex', flexDirection: 'column' }}>
                         <Table
-                            rowSelection={{
-                                type: "checkbox",
-                                ...rowSelection,
-                            }}
+                            
                             columns={columns}
                             dataSource={filteredInterns}
-                            scroll={{ x: "max-content" }}
+                            scroll={{ x: "140vw", y: "342px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%" }}
                             pagination={{
-                                pageSize: 8,
+                                pageSize: pageSize,
+                                style: { marginRight: '100px', marginTop: "28px" }
                             }}
                         />
+                        <div style={{ marginTop: '-47px', marginBottom: "10px", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Input
+                                value={pageSize}
+                                onChange={(e) => handleChangePageSize(e.target.value)}
+                                style={{ width: 80, marginRight: '10px' }}
+                                placeholder="Page Size"
+                            />
+                            {/* Nếu cần thêm nút Refresh hoặc các phần tử khác, bạn có thể thêm vào đây */}
+                        </div>
                     </div>
                 </section>
             </main>

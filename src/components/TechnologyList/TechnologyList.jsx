@@ -81,9 +81,11 @@ const TechnologyList = ({ activeTab }) => {
   const handleCheckboxChange = (title, isChecked) => {
     const newCheckedItems = { ...checkedItems, [title]: isChecked };
     setCheckedItems(newCheckedItems);
+
     const checkedCount = Object.values(newCheckedItems).filter(Boolean).length;
     setIsExactlyOneChecked(checkedCount === 1);
   };
+
   const deleteTechnology = (title) => {
     setTechnologies((prevTechnologies) => ({
       ...prevTechnologies,
@@ -146,6 +148,7 @@ const TechnologyList = ({ activeTab }) => {
   return (
     <>
       <div style={{marginTop:"25px", marginLeft:"15px"}}>
+
         <Popconfirm
           title="Export folder"
           description="Are you sure to Export this file?"
@@ -258,6 +261,7 @@ const TechnologyList = ({ activeTab }) => {
   
 
       <Modal
+
   title="Add New Technology"
   visible={addModalVisible}
   onCancel={() => setAddModalVisible(false)}
