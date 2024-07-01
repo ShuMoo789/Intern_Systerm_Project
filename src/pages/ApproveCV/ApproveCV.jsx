@@ -18,7 +18,7 @@ import {
     FolderAddOutlined,
 } from "@ant-design/icons";
 import { Col, Input, Row } from "antd";
-import { DatePicker, Dropdown, Button, Table, Menu } from "antd";
+import { DatePicker, Dropdown, Button, Table, Menu, Checkbox } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useTranslation } from "react-i18next";
@@ -397,7 +397,7 @@ function ApproveCV() {
     const handleViewClose = () => {
         setViewPopupVisible(false); // Hide the view popup
     };
-
+    const [checkedCount, setCheckedCount] = useState(0);
     const { t, i18n } = useTranslation();
     const [optionChoose, setOptionChoose] = useState([]);
     const commentText = t("comment");
@@ -438,8 +438,24 @@ function ApproveCV() {
                 return "black";
         }
     };
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            setCheckedCount(checkedCount + 1);
+        } else {
+            setCheckedCount(checkedCount - 1);
+        }
+        console.log("Checked count:", checkedCount);
+    };
     // title of apprve list table
     const columns = [
+        {
+            title: "",
+            dataIndex: "select",
+            render: (_, record) => (
+                <Checkbox onChange={handleCheckboxChange} />
+            ),
+            width: "40px",
+        },
         {
             title: t("Intern ID"),
             dataIndex: "internID",
@@ -748,8 +764,7 @@ function ApproveCV() {
                         titleName={t("Approve CV")}
                         groupButton={groupButton}
                         onScheduleInterview={handleOpenScheduleInterView}
-
-                        checkedCount={selectedRowKeys.length}
+                        checkedCount={checkedCount}
                         onEdit={handleOpenEdit}
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
@@ -1203,9 +1218,7 @@ function ApproveCV() {
                     )}
                     <div className="list" style={{ display: 'flex', flexDirection: 'column' }}>
                         <Table
-                            rowSelection={{
-                                type: "checkbox",
-                            }}
+                            
                             columns={columns}
                             dataSource={filteredInterns}
                             scroll={{ x: "140vw", y: "342px" }}
