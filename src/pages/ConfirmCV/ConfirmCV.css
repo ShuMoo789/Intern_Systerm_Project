@@ -18,3 +18,9 @@
     white-space: nowrap;
     /* Ngăn các nội dung bên trong phần tử từ việc bị ngắt dòng */
 }
+
+
+.row-view-details .ant-row {
+    row-gap: 0px !important;
+}
+

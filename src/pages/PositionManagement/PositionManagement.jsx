@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import User_Img from "../../assets/user_image.png";
 import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
@@ -16,6 +16,10 @@ import {
   Dropdown,
   Menu,
   message,
+  Input,
+  InputNumber,
+  Form,
+  Select
 } from "antd";
 import {
   DownOutlined,
@@ -50,52 +54,54 @@ function getRankClass(text) {
   }
 }
 const { Meta } = Card;
-const positionGroup = [
-  {
-    title: "Back-End",
-    valueUser: 100,
-    technology: ".NET, Java,",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupLink: "",
-  },
-  {
-    title: "Front-End",
-    valueUser: 100,
-    technology: "ReactJS,",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupLink: "",
-  },
-  {
-    title: "Business Analyst",
-    valueUser: 100,
-    technology: "Trello,",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupLink: "",
-  },
-  {
-    title: "Marketing",
-    valueUser: 100,
-    technology: "Excel, Word,",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupLink: "",
-  },
-  {
-    title: "Designer",
-    valueUser: 100,
-    technology: " ReactJS,",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupLink: "",
-  },
-  {
-    title: "Sales Executive",
-    valueUser: 100,
-    technology: "Trello,",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupLink: "",
-  },
-];
+
 
 const PositionManagement = () => {
+
+  const [positionGroup, setPositionGroup] = useState([
+    {
+      title: "Back-End",
+      valueUser: 100,
+      technology: ".NET, Java,",
+      rank: "Intern, Fresher, Junior, Middle, Senior",
+      groupLink: "",
+    },
+    {
+      title: "Front-End",
+      valueUser: 100,
+      technology: "ReactJS,",
+      rank: "Intern, Fresher, Junior, Middle, Senior",
+      groupLink: "",
+    },
+    {
+      title: "Business Analyst",
+      valueUser: 100,
+      technology: "Trello,",
+      rank: "Intern, Fresher, Junior, Middle, Senior",
+      groupLink: "",
+    },
+    {
+      title: "Marketing",
+      valueUser: 100,
+      technology: "Excel, Word,",
+      rank: "Intern, Fresher, Junior, Middle, Senior",
+      groupLink: "",
+    },
+    {
+      title: "Designer",
+      valueUser: 100,
+      technology: "ReactJS,",
+      rank: "Intern, Fresher, Junior, Middle, Senior",
+      groupLink: "",
+    },
+    {
+      title: "Sales Executive",
+      valueUser: 100,
+      technology: "Trello,",
+      rank: "Intern, Fresher, Junior, Middle, Senior",
+      groupLink: "",
+    },
+  ]);
   const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedInterns, setSelectedInterns] = useState([]);
@@ -106,6 +112,66 @@ const PositionManagement = () => {
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+  // State for selected positions
+  const [selectedPositions, setSelectedPositions] = useState([]);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [positionToEdit, setPositionToEdit] = useState(null);
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+
+  const handlePageChange = (page, pageSize) => {
+    setCurrentPage(page);
+    setPageSize(pageSize);
+  };
+
+  const paginatedPositions = positionGroup.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
+
+
+  const handlePositionSelect = (position) => {
+    setSelectedPositions(prev =>
+      prev.some(p => p.title === position.title)
+        ? prev.filter(p => p.title !== position.title)
+        : [...prev, position]
+    );
+  };
+
+  const handleEdit = () => {
+    if (selectedPositions.length === 1) {
+      setPositionToEdit(selectedPositions[0]);
+      setEditModalVisible(true);
+    }
+  };
+
+  const handleSaveEdit = (values) => {
+    setPositionGroup(prev => prev.map(p =>
+      p.title === positionToEdit.title ? { ...p, ...values } : p
+    ));
+    setSelectedPositions([]);
+    setEditModalVisible(false);
+    message.success('Position updated successfully');
+  };
+
+  const handleDelete = () => {
+    if (selectedPositions.length > 0) {
+      Modal.confirm({
+        title: 'Are you sure you want to delete the selected position(s)?',
+        content: `This will delete ${selectedPositions.length} position(s).`,
+        onOk() {
+          setPositionGroup(prev => prev.filter(p => !selectedPositions.some(sp => sp.title === p.title)));
+          setSelectedPositions([]);
+          message.success(`${selectedPositions.length} position(s) deleted successfully`);
+        },
+      });
+    } else {
+      message.warning('Please select at least one position to delete');
+    }
+  };
+
   const groupButton = [
     {
       color: "#41B137",
@@ -116,11 +182,14 @@ const PositionManagement = () => {
       color: "#FB8632",
       name: t("Edit"),
       icon: <EditOutlined />,
+      onClick: handleEdit,
+      disabled: selectedPositions.length !== 1
     },
     {
       color: "#FF3A2E",
       name: t("Delete"),
       icon: <DeleteOutlined />,
+      onClick: handleDelete,
     },
     {
       color: "#4889E9",
@@ -366,15 +435,17 @@ const PositionManagement = () => {
             groupButton={groupButton}
             hideSearch={true}
             onCreatePosition={handleOpenModal}
-            onDelete={handleOpenDelete}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
             onExportExcel={handleOpenExportExcel}
+            checkedCount={selectedPositions.length}
           />
         </div>
 
         <section>
           <div className="bodyposition">
-            {positionGroup.map((item) => (
-              <div className="bodyposi">
+            {paginatedPositions.map((item) => (
+              <div className="bodyposi" key={item.title}>
                 <Card
                   className="card-pos"
                   title={item.title}
@@ -383,7 +454,11 @@ const PositionManagement = () => {
                       <Tag color="blue" style={{ borderRadius: "20px" }}>
                         {item.valueUser} {t("people")}
                       </Tag>
-                      <Checkbox style={{ marginLeft: "10px" }} />
+                      <Checkbox
+                        style={{ marginLeft: "10px" }}
+                        checked={selectedPositions.some(p => p.title === item.title)}
+                        onChange={() => handlePositionSelect(item)}
+                      />
                     </>
                   }
                 >
@@ -483,13 +558,21 @@ const PositionManagement = () => {
                   marginBottom: "20px",
                 }}
               >
-                <Pagination
-                  defaultCurrent={1}
-                  total={10} // Total number of pages
-                  pageSize={3} // Number of items per page
-                />
+
               </div>
             </div>
+          </div>
+          <div style={{ marginTop: '20px', marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+            <Pagination
+              current={currentPage}
+              total={positionGroup.length}
+              pageSize={pageSize}
+              onChange={handlePageChange}
+              showSizeChanger
+              onShowSizeChange={handlePageChange}
+              showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+              pageSizeOptions={[2, 4, 6]}
+            />
           </div>
         </section>
 
@@ -526,8 +609,60 @@ const PositionManagement = () => {
         onClose={handleCloseExportExcel}
         openPopup={isExportExcelVisible}
       />
+      <EditPositionModal
+        visible={editModalVisible}
+        onCancel={() => setEditModalVisible(false)}
+        position={positionToEdit}
+        onSave={handleSaveEdit}
+      />
     </div>
   );
 };
+
+function EditPositionModal({ visible, onCancel, position, onSave }) {
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (position) {
+      form.setFieldsValue({
+        title: position.title,
+        valueUser: position.valueUser,
+        technology: position.technology,
+        rank: position.rank,
+      });
+    }
+  }, [position, form]);
+
+  const handleSave = () => {
+    form.validateFields().then(values => {
+      onSave(values);
+      onCancel();
+    });
+  };
+
+  return (
+    <Modal
+      visible={visible}
+      title="Edit Position"
+      onCancel={onCancel}
+      onOk={handleSave}
+    >
+      <Form form={form} layout="vertical">
+        <Form.Item name="title" label="Title" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="valueUser" label="Number of Users" rules={[{ required: true }]}>
+          <InputNumber />
+        </Form.Item>
+        <Form.Item name="technology" label="Technology" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="rank" label="Rank" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+}
 
 export default PositionManagement;

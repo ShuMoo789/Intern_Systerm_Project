@@ -29,6 +29,13 @@ const GroupButton = ({
     onExportExcel();
   };
 
+
+  // function handle Export Excel when click button Export Excel
+  const handleExportExcelClick = () => {
+    onExportExcel();
+  };
+
+
   // function handle Edit when click button Edit
   const handleEditClick = () => {
     onEdit();
@@ -54,6 +61,7 @@ const GroupButton = ({
   const handleEditButtonClick = () => {
     if (checkedCount === 1) {
       handleEditClick();
+
     }
   };
 
@@ -87,9 +95,10 @@ const GroupButton = ({
     <div className="group-button">
       {/* map button group from prop passed from InternList via Navigation */}
       {groupButton.map((prop) => {
-        const isDisabled =
-          (prop.name === t("Edit") && checkedCount !== 1) ||
-          (prop.name === t("Delete") && checkedCount < 1);
+        const isEditDisabled = prop.name === t("Edit") && checkedCount !== 1;
+        const isDeleteDisabled = prop.name === t("Delete") && checkedCount < 1;
+        const isDisabled = isEditDisabled || isDeleteDisabled;
+
         return (
           <Button
             className="common-btn"
@@ -102,11 +111,9 @@ const GroupButton = ({
               color: "#FFFFFF",
             }}
             //add disable
-            disabled={
-              (checkedCount < 1 &&
-                (prop.name === t("Edit") || prop.name === t("Delete"))) ||
-              (checkedCount != 1 && prop.name === t("Edit"))
-            }
+
+            disabled={isDisabled}
+
           >
             {isMobile ? (
               prop.icon
