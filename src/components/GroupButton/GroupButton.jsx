@@ -30,12 +30,6 @@ const GroupButton = ({
   };
 
 
-  // function handle Export Excel when click button Export Excel
-  const handleExportExcelClick = () => {
-    onExportExcel();
-  };
-
-
   // function handle Edit when click button Edit
   const handleEditClick = () => {
     onEdit();

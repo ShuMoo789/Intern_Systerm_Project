@@ -76,9 +76,9 @@ const Navigation = (props) => {
           {/* Pass props to GroupButton from InternList */}
           <div className="group-button-navigation">
             <GroupButton
-              groupButton={props.groupButton.map(button => ({
+              groupButton={props.groupButton.map((button) => ({
                 ...button,
-                disabled: button.disabled
+                disabled: button.disabled,
               }))}
               onSendEmail={props.onSendEmail}
               onCreateIntern={props.onCreateIntern}
@@ -88,11 +88,9 @@ const Navigation = (props) => {
               onEdit={handleEdit}
               onDelete={handleDelete}
               onExportExcel={props.onExportExcel}
-
             />
-
           </div>
-        )}
+        </div>
       </div>
     </>
   );
