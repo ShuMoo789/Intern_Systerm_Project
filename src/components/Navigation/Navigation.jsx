@@ -63,6 +63,7 @@ const Navigation = (props) => {
             />
           )}
         </header>
+
         <div className="navigation">
           <div className="search-navigation">
             <Input
@@ -89,8 +90,9 @@ const Navigation = (props) => {
               onExportExcel={props.onExportExcel}
 
             />
+
           </div>
-        </div>
+        )}
       </div>
     </>
   );

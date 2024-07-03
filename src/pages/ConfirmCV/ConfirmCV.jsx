@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ConfirmCV.css";
-import { Table, Button, Select, Modal, Row, Col } from "antd"; // Import Select from antd
+import { Table, Button, Select, Modal, Row, Col, Checkbox } from "antd"; // Import Select from antd
 import SendMailButton from "../../components/SendMailButton/SendMailButton";
 import { useTranslation } from "react-i18next";
 import useViewport from "../../hooks/useViewport.jsx";
@@ -503,17 +503,6 @@ const ConfirmCV = () => {
   const handleModalCancel = () => {
     setModalVisible(false);
   };
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-      setSelectedRowKeys(selectedRowKeys);
-    },
-  };
   const [allChecked, setAllChecked] = useState(false);
   const [confirmStatus, setConfirmStatus] = useState("");
   const handleConfirmEmail = (key, confirmStatus) => {
@@ -528,13 +517,29 @@ const ConfirmCV = () => {
     record.status = key;
     setSelectedOption(key);
   };
-
+  const [checkedCount, setCheckedCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [pageSize, setPageSize] = useState("6");
   const handleChangePageSize = (value) => {
     setPageSize(value);
   };
+  const handleCheckboxChange = (e) => {
+    if (e.target.checked) {
+        setCheckedCount(checkedCount + 1);
+    } else {
+        setCheckedCount(checkedCount - 1);
+    }
+    console.log("Checked count:", checkedCount);
+};
   const columns = [
+    {
+      title: "",
+      dataIndex: "select",
+      render: (_, record) => (
+          <Checkbox onChange={handleCheckboxChange} />
+      ),
+      width: "40px",
+  },
     {
       title: t("Intern ID"),
       dataIndex: "internID",
@@ -747,7 +752,7 @@ const ConfirmCV = () => {
     },
 
     {
-      title: "Button",
+      title: t("Button"),
       dataIndex: "button",
       align: "center",
       width: "auto",
@@ -863,7 +868,7 @@ const ConfirmCV = () => {
             titleName={t("Confirm CV")}
             groupButton={groupButton}
             onSendEmail={handleOpenEmailPopup}
-            checkedCount={selectedRowKeys.length}
+            checkedCount={checkedCount}
             onEdit={handleOpenEdit}
             onDelete={handleOpenDelete}
             onExportExcel={handleOpenExportExcel}
@@ -1461,9 +1466,7 @@ const ConfirmCV = () => {
           >
             {/* use table of Ant Design */}
             <Table
-              rowSelection={{
-                type: "checkbox",
-              }}
+              
               columns={columns}
               dataSource={filteredInterns}
               scroll={{ x: "142vw", y: "350px" }}

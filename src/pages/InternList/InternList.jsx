@@ -13,7 +13,7 @@ import {
     SearchOutlined,
     SaveOutlined
 } from "@ant-design/icons";
-import { Table, Select, Button, Input, Col, Row, Modal, Form } from "antd";
+import { Table, Select, Button, Input, Col, Row, Modal, Form, Checkbox } from "antd";
 import DataInternList from "../../data/InternList.json"; // data of table intern list
 import Navigation from "../../components/Navigation/Navigation";
 import SendMailButton from "../../components/SendMailButton/SendMailButton";
@@ -102,20 +102,8 @@ const optionsInternProject = DataInternList.reduce((options, item) => {
 
 const InternList = () => {
     //add selectedRowKeys to count
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(
-                `selectedRowKeys: ${selectedRowKeys}`,
-                "selectedRows: ",
-                selectedRows
-            );
-            setSelectedRowKeys(selectedRowKeys);
-        },
-        getCheckboxProps: (record) => ({
-            name: record.name,
-        }),
-    };
+    
+    const [checkedCount, setCheckedCount] = useState(0);
     const [isEmailPopupVisible, setEmailPopupVisible] = useState(false);
     const [isCommentsModalVisible, setIsCommentsModalVisible] = useState(false);//comments modal
     const [form] = Form.useForm();
@@ -228,9 +216,24 @@ const InternList = () => {
         school: "",
         groupZalo: "",
     });
-
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            setCheckedCount(checkedCount + 1);
+        } else {
+            setCheckedCount(checkedCount - 1);
+        }
+        console.log("Checked count:", checkedCount);
+    };
     // title of intern list table
     const columns = [
+        {
+            title: "",
+            dataIndex: "select",
+            render: (_, record) => (
+                <Checkbox onChange={handleCheckboxChange} />
+            ),
+            width: "40px",
+        },
         {
             title: t("Intern ID"),
             dataIndex: "internID",
@@ -669,7 +672,7 @@ const InternList = () => {
                         onDelete={handleOpenDelete}
                         onExportExcel={handleOpenExportExcel}
                         onCreateIntern={handleOpenAddNewIntern}
-                        checkedCount={selectedRowKeys.length}
+                        checkedCount={checkedCount}
                     />
                 </div>
                 {/* Group of filter and table */}
@@ -1126,13 +1129,11 @@ const InternList = () => {
                     <div className="table-intern-list" style={{ display: 'flex', flexDirection: 'column' }}>
                         {/* use table of Ant Design */}
                         <Table
-                            rowSelection={{
-                                type: "checkbox",
-                            }}
+                            
                             columns={columns}
                             dataSource={dataTable}
                             scroll={{ x: "200vw", y: "360px" }}
-                            style={{ maxWidth: "100%", minHeight: "100%", marginRight: "16px", marginLeft: "16px" }}
+                            style={{ maxWidth: "100%", minHeight: "100%"}}
                             pagination={{
                                 pageSize: pageSize,
                                 style: { marginRight: '120px', marginTop: "28px" }

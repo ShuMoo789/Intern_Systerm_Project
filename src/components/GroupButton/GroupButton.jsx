@@ -5,7 +5,6 @@ import useViewport from "../../hooks/useViewport";
 import { useTranslation } from "react-i18next";
 
 const GroupButton = ({
-
   groupButton,
   onSendEmail,
   onScheduleInterview,
@@ -25,11 +24,17 @@ const GroupButton = ({
     onSendEmail();
   };
 
+  // function handle Export Excel when click button Export Excel
+  const handleExportExcelClick = () => {
+    onExportExcel();
+  };
+
 
   // function handle Export Excel when click button Export Excel
   const handleExportExcelClick = () => {
     onExportExcel();
   };
+
 
   // function handle Edit when click button Edit
   const handleEditClick = () => {
@@ -54,7 +59,7 @@ const GroupButton = ({
   };
   // function to handle click on Edit button
   const handleEditButtonClick = () => {
-    if (checkedCount >= 1) {
+    if (checkedCount === 1) {
       handleEditClick();
 
     }
@@ -93,6 +98,7 @@ const GroupButton = ({
         const isEditDisabled = prop.name === t("Edit") && checkedCount !== 1;
         const isDeleteDisabled = prop.name === t("Delete") && checkedCount < 1;
         const isDisabled = isEditDisabled || isDeleteDisabled;
+
         return (
           <Button
             className="common-btn"
@@ -105,7 +111,9 @@ const GroupButton = ({
               color: "#FFFFFF",
             }}
             //add disable
+
             disabled={isDisabled}
+
           >
             {isMobile ? (
               prop.icon

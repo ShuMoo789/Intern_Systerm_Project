@@ -40,8 +40,6 @@ import { useTranslation } from "react-i18next";
 const { Option } = Select;
 
 const GroupList = () => {
-
-
     const [checkedCount, setCheckedCount] = useState(0);
     const [data, setData] = useState(jsonData);
     const [filteredData, setFilteredData] = useState(jsonData);
@@ -164,14 +162,14 @@ const GroupList = () => {
         console.log("Checked count:", checkedCount);
     };
     const columns = [
-        // {
-        //     title: "",
-        //     dataIndex: "select",
-        //     render: (_, record) => (
-        //         <Checkbox onChange={handleCheckboxChange} />
-        //     ),
-        //     width: "auto",
-        // },
+        {
+            title: "",
+            dataIndex: "select",
+            render: (_, record) => (
+                <Checkbox onChange={handleCheckboxChange} />
+            ),
+            width: "40px",
+        },
         {
             title: t("Intern ID"),
             dataIndex: "InternId",
@@ -999,9 +997,7 @@ const GroupList = () => {
 
                     <div className="list" style={{ display: 'flex', flexDirection: 'column', marginLeft: "2px", marginRight: "16px" }}>
                         <Table
-                            rowSelection={{
-                                type: "checkbox",
-                            }}
+                            
                             columns={columns}
                             dataSource={filteredData}
                             scroll={{ x: "210vw", y: "340px" }}
