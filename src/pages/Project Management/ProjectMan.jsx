@@ -14,6 +14,7 @@ import {
   DatePicker,
   Tooltip,
   Modal,
+  Checkbox,
 } from "antd";
 import {
   UserOutlined,
@@ -36,7 +37,7 @@ import Navigation from "../../components/Navigation/Navigation.jsx";
 import useViewport from "../../hooks/useViewport";
 import DeletePopup from "../../components/DeletePopup/DeletePopup.jsx";
 import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx";
-
+import { message } from "antd";
 const { Header, Content } = Layout;
 
 function UserInfo({ name, role, avatarSrc }) {
@@ -66,6 +67,8 @@ function ProjectCard({
   releaseDate,
   issues,
   teamMembers,
+  onSelect,
+  isSelected,
 }) {
   const { t } = useTranslation();
   const optionSelect = [
@@ -90,7 +93,7 @@ function ProjectCard({
       extra={
         <span className="status">
           <Select defaultValue={status} options={optionSelect} />
-          <input type="checkbox" />
+          <Checkbox checked={isSelected} onChange={() => onSelect({ title, position, technology, leader, subLeader, mentor, startDate, releaseDate, issues, teamMembers, status })} />
         </span>
       }
     >
@@ -325,6 +328,60 @@ function ProjectCard({
   );
 }
 
+function EditProjectModal({ visible, onCancel, project, onSave }) {
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (project) {
+      form.setFieldsValue({
+        title: project.title,
+        position: project.position,
+        technology: project.technology,
+        leader: project.leader.name,
+        subLeader: project.subLeader.name,
+        mentor: project.mentor.name,
+      });
+    }
+  }, [project, form]);
+
+  const handleSave = () => {
+    form.validateFields().then(values => {
+      onSave(values);
+      onCancel();
+    });
+  };
+
+  return (
+    <Modal
+      visible={visible}
+      title="Edit Project"
+      onCancel={onCancel}
+      onOk={handleSave}
+    >
+      <Form form={form} layout="vertical">
+        <Form.Item name="title" label="Title" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="position" label="Position" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="technology" label="Technology" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="leader" label="Leader" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="subLeader" label="Sub Leader" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="mentor" label="Mentor" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+}
+
 function ProjectManagement() {
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
@@ -340,6 +397,67 @@ function ProjectManagement() {
     mentor: "",
     releaseDate: null,
   });
+  const [selectedProjects, setSelectedProjects] = useState([]);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [projectToEdit, setProjectToEdit] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+
+
+  const handlePageChange = (page, pageSize) => {
+    setCurrentPage(page);
+    setPageSize(pageSize);
+  };
+
+  const paginatedProjects = filteredProjects.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
+  const handleProjectSelect = (project) => {
+    setSelectedProjects(prev =>
+      prev.some(p => p.title === project.title)
+        ? prev.filter(p => p.title !== project.title)
+        : [...prev, project]
+    );
+  };
+  const handleEdit = () => {
+    if (selectedProjects.length === 1) {
+      setProjectToEdit(selectedProjects[0]);
+      setEditModalVisible(true);
+    }
+  };
+
+  const handleSaveEdit = (values) => {
+    const updatedProjects = projects.map(p =>
+      p.title === projectToEdit.title ? { ...p, ...values } : p
+    );
+    setProjects(updatedProjects);
+    setFilteredProjects(updatedProjects);
+    setSelectedProjects([]);
+    setEditModalVisible(false);
+    message.success('Project updated successfully');
+  };
+
+
+  const handleDelete = () => {
+    if (selectedProjects.length > 0) {
+      Modal.confirm({
+        title: 'Are you sure you want to delete the selected project(s)?',
+        content: `This will delete ${selectedProjects.length} project(s).`,
+        onOk() {
+          // Update both filteredProjects and projects
+          setFilteredProjects(prev => prev.filter(p => !selectedProjects.some(sp => sp.title === p.title)));
+          setProjects(prev => prev.filter(p => !selectedProjects.some(sp => sp.title === p.title)));
+          setSelectedProjects([]);
+          message.success(`${selectedProjects.length} project(s) deleted successfully`);
+        },
+      });
+    } else {
+      message.warning('Please select at least one project to delete');
+    }
+  };
 
   useEffect(() => {
     setProjects(projectData.projects);
@@ -430,11 +548,14 @@ function ProjectManagement() {
       color: "#FB8632",
       name: t("Edit"),
       icon: <EditOutlined />,
+      onClick: handleEdit,
+      disabled: selectedProjects.length !== 1
     },
     {
       color: "#FF3A2E",
       name: t("Delete"),
       icon: <DeleteOutlined />,
+      onClick: handleDelete,
     },
     {
       color: "#4889E9",
@@ -472,8 +593,10 @@ function ProjectManagement() {
             titleName={t("Project Management")}
             groupButton={groupButton}
             onCreateIntern={handleOpenModal}
-            onDelete={handleOpenDelete}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
             onExportExcel={handleOpenExportExcel}
+            checkedCount={selectedProjects.length}
           />
         </div>
         <section className="filter-section">
@@ -762,18 +885,29 @@ function ProjectManagement() {
             </Row>
           )}
           <Row gutter={[16, 16]} className="project-list">
-            {filteredProjects.map((project, index) => (
+            {paginatedProjects.map((project, index) => (
               <Col key={index} style={{ minWidth: "33.33%" }}>
-                <ProjectCard {...project} />
+                <ProjectCard
+                  {...project}
+                  onSelect={handleProjectSelect}
+                  isSelected={selectedProjects.some(p => p.title === project.title)}
+                />
               </Col>
             ))}
           </Row>
 
-          <Pagination
-            className="pagination"
-            total={filteredProjects.length}
-            showTotal={(total) => `1 - ${filteredProjects.length} of ${total}`}
-          />
+          <div style={{ marginTop: '20px', marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+            <Pagination
+              current={currentPage}
+              total={filteredProjects.length}
+              pageSize={pageSize}
+              onChange={handlePageChange}
+              showSizeChanger
+              onShowSizeChange={handlePageChange}
+              showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+              pageSizeOptions={[3, 6, 9]}
+            />
+          </div>
         </section>
       </main>
       <NewProjectModal open={openModal} onClose={handleCloseModal} />
@@ -787,7 +921,14 @@ function ProjectManagement() {
         onClose={handleCloseExportExcel}
         openPopup={isExportExcelVisible}
       />
-    </div>
+      <EditProjectModal
+        visible={editModalVisible}
+        onCancel={() => setEditModalVisible(false)}
+        project={projectToEdit}
+        onSave={handleSaveEdit}
+      />
+
+    </div >
   );
 }
 

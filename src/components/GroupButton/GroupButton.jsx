@@ -6,15 +6,15 @@ import { useTranslation } from "react-i18next";
 
 const GroupButton = ({
 
-    groupButton,
-    onSendEmail,
-    onScheduleInterview,
-    checkedCount,
-    onCreateIntern,
-    onEdit,
-    onDelete,
-    onExportExcel,
-    onCreatePosition,
+  groupButton,
+  onSendEmail,
+  onScheduleInterview,
+  checkedCount,
+  onCreateIntern,
+  onEdit,
+  onDelete,
+  onExportExcel,
+  onCreatePosition,
 }) => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1350;
@@ -26,20 +26,20 @@ const GroupButton = ({
   };
 
 
-    // function handle Export Excel when click button Export Excel
-    const handleExportExcelClick = () => {
-        onExportExcel();
-    };
+  // function handle Export Excel when click button Export Excel
+  const handleExportExcelClick = () => {
+    onExportExcel();
+  };
 
-    // function handle Edit when click button Edit
-    const handleEditClick = () => {
-        onEdit();
-    };
+  // function handle Edit when click button Edit
+  const handleEditClick = () => {
+    onEdit();
+  };
 
-    // function handle Delete when click button Delete
-    const handleDeleteClick = () => {
-        onDelete();
-    };
+  // function handle Delete when click button Delete
+  const handleDeleteClick = () => {
+    onDelete();
+  };
 
   // function handle Add New Intern when click button Add New Intern
   const handleAddNewInternClick = () => {
@@ -56,7 +56,7 @@ const GroupButton = ({
   const handleEditButtonClick = () => {
     if (checkedCount >= 1) {
       handleEditClick();
-    
+
     }
   };
 
@@ -64,7 +64,7 @@ const GroupButton = ({
   const handleDeleteButtonClick = () => {
     if (checkedCount >= 1) {
       handleDeleteClick();
-    } 
+    }
   };
 
   // function branches to handle functions by button name
@@ -77,11 +77,11 @@ const GroupButton = ({
       handleEditButtonClick();
     } else if (name === t("Delete")) {
       handleDeleteButtonClick();
-    } else if (name === t("Add New Intern") || name === t("Add New Project") ) {
+    } else if (name === t("Add New Intern") || name === t("Add New Project")) {
       handleAddNewInternClick();
     } else if (name === t("Schedule interview")) {
       handleScheduleInterview();
-    }else if (name === t("Add New Position")) {
+    } else if (name === t("Add New Position")) {
       handleCreatePosition();
     }
   };
@@ -90,9 +90,9 @@ const GroupButton = ({
     <div className="group-button">
       {/* map button group from prop passed from InternList via Navigation */}
       {groupButton.map((prop) => {
-        const isDisabled =
-          checkedCount < 1 &&
-          (prop.name === t("Edit") || prop.name === t("Delete"));
+        const isEditDisabled = prop.name === t("Edit") && checkedCount !== 1;
+        const isDeleteDisabled = prop.name === t("Delete") && checkedCount < 1;
+        const isDisabled = isEditDisabled || isDeleteDisabled;
         return (
           <Button
             className="common-btn"
@@ -105,7 +105,7 @@ const GroupButton = ({
               color: "#FFFFFF",
             }}
             //add disable
-            disabled={checkedCount < 1 && (prop.name === t('Edit') || prop.name === t('Delete'))}
+            disabled={isDisabled}
           >
             {isMobile ? (
               prop.icon

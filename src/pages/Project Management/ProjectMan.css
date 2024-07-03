@@ -7,52 +7,55 @@
     width: fit-content;
 }
 
-.user-info > .avatar-section {
+.user-info>.avatar-section {
     display: flex;
     align-items: center;
     margin-right: 5px;
 }
 
-.user-info > .avatar-section > .user-details {
+.user-info>.avatar-section>.user-details {
     margin-left: 5px;
 }
 
-.user-info > .avatar-section > .user-details > .username {
+.user-info>.avatar-section>.user-details>.username {
     font-size: 18px;
     font-weight: 500;
     margin: 0;
 }
 
-.user-info > .avatar-section > .user-details > .role {
+.user-info>.avatar-section>.user-details>.role {
     font-size: 14px;
     color: #aaabaf;
     margin: 0;
 }
 
-.user-info > .notification-icon {
+.user-info>.notification-icon {
     font-size: 20px;
     color: #db0d4b;
     margin-left: 10px;
 }
 
-.project-management-section > .header-section {
+.project-management-section>.header-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 24px;
-    background-color: white; /* Set header background to white */
+    background-color: white;
+    /* Set header background to white */
     border-bottom: 1px solid #e8e8e8;
-    border-radius: 10px; /* Rounded corners */
-    margin-bottom: 16px; /* Optional: Add margin to separate from the top and sides */
+    border-radius: 10px;
+    /* Rounded corners */
+    margin-bottom: 16px;
+    /* Optional: Add margin to separate from the top and sides */
 }
 
-.project-management-section > .header-section > .header-title {
+.project-management-section>.header-section>.header-title {
     font-size: 36px;
     color: #280559;
     margin: 0;
 }
 
-.project-management-section > .main-grid {
+.project-management-section>.main-grid {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -60,7 +63,7 @@
     padding: 30px 40px;
 }
 
-.project-management-section > .main-grid > .search-form {
+.project-management-section>.main-grid>.search-form {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
@@ -115,6 +118,7 @@
 .filterbuttons {
     width: fit-content;
 }
+
 .action-buttons {
     display: flex;
     gap: 10px;
@@ -159,7 +163,7 @@
 .project-list {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
+
     flex-wrap: wrap;
 }
 
@@ -202,7 +206,7 @@
     gap: 10px;
 }
 
-.ant-card-extra > .status .ant-select-selector {
+.ant-card-extra>.status .ant-select-selector {
     width: 120px;
 }
 
@@ -256,6 +260,7 @@
 }
 
 @media (max-width: 991px) {
+
     .main-header,
     .sidebar,
     .main-grid,

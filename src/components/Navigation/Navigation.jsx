@@ -33,10 +33,20 @@ function UserInfo({ name, role, avatarSrc }) {
 
 const Navigation = (props) => {
   const { t } = useTranslation();
-  
-  
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
+
+  const handleEdit = () => {
+    if (props.onEdit) {
+      props.onEdit();
+    }
+  };
+
+  const handleDelete = () => {
+    if (props.onDelete) {
+      props.onDelete();
+    }
+  };
 
   return (
     <>
@@ -65,15 +75,17 @@ const Navigation = (props) => {
           {/* Pass props to GroupButton from InternList */}
           <div className="group-button-navigation">
             <GroupButton
-              groupButton={props.groupButton}
+              groupButton={props.groupButton.map(button => ({
+                ...button,
+                disabled: button.disabled
+              }))}
               onSendEmail={props.onSendEmail}
               onCreateIntern={props.onCreateIntern}
               onScheduleInterview={props.onScheduleInterview}
               onCreatePosition={props.onCreatePosition}
               checkedCount={props.checkedCount}
-
-              onEdit={props.onEdit}
-              onDelete={props.onDelete}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
               onExportExcel={props.onExportExcel}
 
             />
