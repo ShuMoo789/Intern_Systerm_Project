@@ -6,7 +6,6 @@ const { Title, Paragraph } = Typography;
 
 const Detail = ({ technology, visible, handleClose }) => {
     const { t } = useTranslation();
-
     return (
         <Modal
             visible={visible}
@@ -15,12 +14,12 @@ const Detail = ({ technology, visible, handleClose }) => {
             centered
         >
             <Card
-                cover={<img alt={technology.title} src={technology.imageUrl} />}
+                cover={<img alt={technology.ten} src={technology.urlImage} />}
                 bordered={false}
                 bodyStyle={{ padding: 0 }}
             >
                 <div style={{ textAlign: "center", marginTop: "15px" }}>
-                    <Title level={4}>{technology.title}</Title>
+                    <Title level={4}>{technology.ten}</Title>
                 </div>
                 <Paragraph style={{ textAlign: "justify", marginTop: "15px" }}>
                     {t(technology.description)}

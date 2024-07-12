@@ -23,7 +23,7 @@ import ExportExcel from "../../components/ExportExcelPopup/ExportExcelPopup.jsx"
 const TechnologyManagement = () => {
   const viewPort = useViewport();
   const isMobile = viewPort.width <= 1024;
-  const [activeTab, setActiveTab] = useState("Back-End");
+  const [activeTab, setActiveTab] = useState("1");
 
   const { t } = useTranslation();
 
